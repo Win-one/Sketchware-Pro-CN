@@ -4,13 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
-        android:background="#ffffffff"
+        app:cardBackgroundColor="?colorSurfaceContainerHigh"
         android:orientation="vertical"
-        app:cardCornerRadius="5dp"
+        app:cardCornerRadius="28dp"
         app:cardElevation="4dp">
 
         <ScrollView
@@ -31,7 +31,7 @@
                     android:layout_gravity="center"
                     android:focusable="false"
                     android:padding="8dp"
-                    android:text="New Listener"
+                    android:text="@string/new_listener"
                     android:textColor="#ff2196f3"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -123,8 +123,9 @@
                             android:focusable="false"
                             android:gravity="center"
                             android:padding="8dp"
-                            android:text="Cancel"
-                            android:textColor="#ff616161"
+                            android:background="@drawable/text_style"
+                            android:text="@string/common_word_cancel"
+                            android:textColor="#ffffff"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -143,13 +144,14 @@
                             android:focusable="false"
                             android:gravity="center"
                             android:padding="8dp"
-                            android:text="Save"
-                            android:textColor="#ff2196f3"
+                            android:background="@drawable/text_style"
+                            android:text="@string/common_word_save"
+                            android:textColor="#ffffff"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

@@ -8,12 +8,11 @@
         android:id="@+id/back"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffeeeeee"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar_improved" />
+        <include layout="@layout/toolbar" />
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -159,34 +158,30 @@
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/canc"
-                            style="@style/Widget.MaterialComponents.Button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="#ff008dcd"
                             android:gravity="center"
                             android:padding="8dp"
-                            android:text="cancel"
+                            android:text="@string/common_word_cancel"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                             android:textColor="#ffffffff"
                             android:textSize="11sp" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/save"
-                            style="@style/Widget.MaterialComponents.Button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
-                            android:background="#ff008dcd"
                             android:gravity="center"
                             android:padding="8dp"
-                            android:text="save"
+                            android:text="@string/common_word_save"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                             android:textColor="#ffffffff"
                             android:textSize="11sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -127,99 +127,88 @@ public class CodeEditorLayout extends LinearLayout implements TextWatcher {
         final PopupMenu popup = new PopupMenu(context, v);
         Menu menu = popup.getMenu();
 
-        menu.add("Font size")
+        menu.add(Menu.NONE, 1, Menu.NONE, R.string.font_size)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 
-        menu.add("Word wrap")
+        menu.add(Menu.NONE, 2, Menu.NONE, R.string.word_wrap)
                 .setCheckable(true)
                 .setChecked(word_wrap)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 
-        menu.add("Complete brackets")
+        menu.add(Menu.NONE, 3, Menu.NONE, R.string.complete_brackets)
                 .setCheckable(true)
                 .setChecked(complete_brackets)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 
-        menu.add("Dark theme")
+        menu.add(Menu.NONE, 4, Menu.NONE, R.string.dark_theme)
                 .setCheckable(true)
                 .setChecked(dark_theme)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 
-        menu.add("Pretty print")
+        menu.add(Menu.NONE, 5, Menu.NONE, R.string.pretty_print)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 
-        menu.add("Exit confirmation")
+        menu.add(Menu.NONE, 6, Menu.NONE, R.string.exit_confirmation)
                 .setCheckable(true)
                 .setChecked(exit_confirmation_dialog)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 
         popup.setOnMenuItemClickListener(item -> {
-            switch (item.getTitle().toString()) {
-                case "Font size":
+            switch (item.getItemId()) {
+                case 1 -> {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
                     final NumberPicker numPicker = new NumberPicker(context);
                     numPicker.setMinValue(5);
                     numPicker.setMaxValue(20);
                     numPicker.setValue((int) editText.getTextSize());
                     numPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-
                     builder.setView(numPicker)
-                            .setTitle("Select font size")
+                            .setTitle(R.string.select_font_size)
                             .setPositiveButton(R.string.common_word_save, (dialog, which) -> {
                                 setTextSize(numPicker.getValue());
                                 dialog.dismiss();
                             })
                             .setNegativeButton(R.string.common_word_cancel, null)
                             .show();
-                    break;
-
-                case "Word wrap":
+                }
+                case 2 -> {
                     item.setChecked(!item.isChecked());
                     setWordWrap(item.isChecked());
-                    break;
-
-                case "Complete brackets":
+                }
+                case 3 -> {
                     item.setChecked(!item.isChecked());
                     complete_brackets = item.isChecked();
                     setPreference("complete_brackets", complete_brackets);
-                    break;
-
-                case "Dark theme":
+                }
+                case 4 -> {
                     item.setChecked(!item.isChecked());
                     dark_theme = item.isChecked();
                     editText.removeTextChangedListener(this);
                     startHighlighting(type);
-                    break;
-
-                case "Pretty print":
+                }
+                case 5 -> {
                     StringBuilder string = new StringBuilder();
                     String[] lines = getText().split("\n");
-
                     for (String line : lines) {
                         String tmp = line;
                         tmp = (tmp + "X").trim();
                         string.append(tmp.substring(0, tmp.length() - 1));
                         string.append("\n");
                     }
-
                     String prettifiedString = string.toString();
-
                     try {
                         prettifiedString = Lx.j(Lx.j(prettifiedString, false), false);
                     } catch (Exception e) {
                         SketchwareUtil.toastError("Error: Your code contains incorrectly nested parentheses");
                         break;
                     }
-
                     setText(prettifiedString);
-                    break;
-
-                case "Exit confirmation":
+                }
+                case 6 -> {
                     exit_confirmation_dialog = !item.isChecked();
                     item.setChecked(exit_confirmation_dialog);
                     setPreference("exit_confirmation_dialog", exit_confirmation_dialog);
-                    break;
+                }
             }
             return true;
         });

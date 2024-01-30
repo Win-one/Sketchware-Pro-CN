@@ -3,7 +3,6 @@ package mod.hilal.saif.activities.android_manifest;
 import static mod.SketchwareUtil.getDip;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -12,6 +11,8 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -21,10 +22,14 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.cardview.widget.CardView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
@@ -45,12 +50,11 @@ import mod.hey.studios.code.SrcCodeEditorLegacy;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.activities.tools.ConfigActivity;
 import mod.hilal.saif.android_manifest.AndroidManifestInjector;
-import mod.hilal.saif.asd.DialogButtonGradientDrawable;
 import mod.jbk.code.CodeEditorColorSchemes;
 import mod.jbk.code.CodeEditorLanguages;
 
 @SuppressLint("SetTextI18n")
-public class AndroidManifestInjection extends Activity {
+public class AndroidManifestInjection extends AppCompatActivity {
 
     private final ArrayList<HashMap<String, Object>> list_map = new ArrayList<>();
     private ViewGroup base;
@@ -107,10 +111,10 @@ public class AndroidManifestInjection extends Activity {
     }
 
     private void setupViews() {
-        CardView application_card = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0);
+        MaterialCardView application_card = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0);
         LinearLayout application_skin = newLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0);
         application_card.addView(application_skin);
-        makeup(application_skin, R.drawable.icons8_app_attrs, "Application", "Default properties for the app");
+        makeup(application_skin, R.drawable.icons8_app_attrs, getString(R.string.application), getString(R.string.default_properties_for_the_app));
         base.addView(application_card);
         application_skin.setOnClickListener(v -> {
             Intent intent = new Intent();
@@ -122,10 +126,10 @@ public class AndroidManifestInjection extends Activity {
         });
 
         {
-            CardView permission_card = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0);
+            MaterialCardView permission_card = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0);
             LinearLayout permission_skin = newLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0);
             permission_card.addView(permission_skin);
-            makeup(permission_skin, R.drawable.event_on_signin_complete_48dp, "Permissions", "Add custom Permissions to the app");
+            makeup(permission_skin, R.drawable.event_on_signin_complete_48dp, getString(R.string.permissions), getString(R.string.add_custom_permissions_to_the_app));
             base.addView(permission_card);
             permission_skin.setOnClickListener(_view -> {
                 Intent inta = new Intent();
@@ -138,18 +142,18 @@ public class AndroidManifestInjection extends Activity {
         }
 
         {
-            CardView permission_card = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0);
+            MaterialCardView permission_card = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0);
             LinearLayout permission_skin = newLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0);
             permission_card.addView(permission_skin);
-            makeup(permission_skin, R.drawable.recycling_48, "Launcher Activity", "Change the default Launcher Activity");
+            makeup(permission_skin, R.drawable.recycling_48, getString(R.string.launcher_activity), getString(R.string.change_the_default_launcher_activity));
             base.addView(permission_card);
             permission_skin.setOnClickListener(v -> showLauncherActDialog(AndroidManifestInjector.getLauncherActivity(sc_id)));
         }
 
-        CardView allAct_card = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0);
+        MaterialCardView allAct_card = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0);
         LinearLayout allAct_skin = newLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0);
         allAct_card.addView(allAct_skin);
-        makeup(allAct_skin, R.drawable.icons8_all_activities_attrs, "All Activities", "Add attributes for all Activities");
+        makeup(allAct_skin, R.drawable.icons8_all_activities_attrs, getString(R.string.all_activities), getString(R.string.add_attributes_for_all_activities));
         base.addView(allAct_card);
         allAct_skin.setOnClickListener(v -> {
             Intent inta = new Intent();
@@ -160,10 +164,10 @@ public class AndroidManifestInjection extends Activity {
             startActivity(inta);
         });
 
-        CardView appCom_card = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0);
+        MaterialCardView appCom_card = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0);
         LinearLayout appCom_skin = newLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0);
         appCom_card.addView(appCom_skin);
-        makeup(appCom_skin, R.drawable.icons8_app_components, "App Components", "Add extra components");
+        makeup(appCom_skin, R.drawable.icons8_app_components, getString(R.string.app_components), getString(R.string.add_extra_components));
         base.addView(appCom_card);
         appCom_skin.setOnClickListener(v -> showAppComponentDialog());
 
@@ -179,7 +183,7 @@ public class AndroidManifestInjection extends Activity {
                 (int) getDip(8));
         sub_skin.setFocusable(false);
         sub_skin.setGravity(Gravity.CENTER_VERTICAL);
-        TextView sub = newText("Activities:", 16, false, Color.GRAY, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0);
+        TextView sub = newText(getString(R.string.activities), 16, false, Color.GRAY, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0);
         sub_skin.addView(sub);
         base.addView(sub_skin);
 
@@ -213,7 +217,7 @@ public class AndroidManifestInjection extends Activity {
                 (int) getDip(8),
                 (int) getDip(8),
                 (int) getDip(8));
-        addnew.setText("Add Activity");
+        addnew.setText(R.string.add_activity);
         addnew.setTextColor(Color.WHITE);
         addnew.setPadding(
                 (int) getDip(50),
@@ -221,10 +225,8 @@ public class AndroidManifestInjection extends Activity {
                 (int) getDip(50),
                 (int) getDip(8));
         addnew.setGravity(Gravity.CENTER);
-        addnew.setBackgroundColor(0xff008dcd);
         addnew.setTextSize(15);
-        addnew.setBackground(new DialogButtonGradientDrawable()
-                .getIns((int) getDip(4), 0, 0xff2196f3, 0xff2196f3));
+        addnew.setBackground(ContextCompat.getDrawable(this, R.drawable.text_style));
         addnew.setElevation((int) getDip(1));
         base.addView(addnew);
         addnew.setOnClickListener(v -> showAddActivityDialog());
@@ -262,14 +264,14 @@ public class AndroidManifestInjection extends Activity {
         inputAttr.setVisibility(View.GONE);
         final EditText inputValue = inflate.findViewById(R.id.dialog_input_value);
         final TextView textView = (TextView) ((ViewGroup) inputAttr.getParent()).getChildAt(0);
-        textView.setText("Launcher Activity (e.g. main)");
+        textView.setText(R.string.launcher_activity_e_g_main);
         inputValue.setText(actnamr);
-        inputValue.setHint("Activity name");
+        inputValue.setHint(R.string.activity_name);
 
         btnSave.setOnClickListener(v -> {
             create.dismiss();
             AndroidManifestInjector.setLauncherActivity(sc_id, inputValue.getText().toString());
-            SketchwareUtil.toast("Saved");
+            SketchwareUtil.toast(getString(R.string.common_word_save));
         });
 
         btnCancel.setOnClickListener(Helper.getDialogDismissListener(create));
@@ -290,15 +292,15 @@ public class AndroidManifestInjection extends Activity {
         inputAttr.setVisibility(View.GONE);
         final EditText inputValue = inflate.findViewById(R.id.dialog_input_value);
         final TextView textView = (TextView) ((ViewGroup) inputAttr.getParent()).getChildAt(0);
-        textView.setText("Activity name");
+        textView.setText(R.string.activity_name);
         inputValue.setText(activityName);
-        inputValue.setHint("Activity name");
+        inputValue.setHint(R.string.activity_name);
 
         btnSave.setOnClickListener(v -> {
             addNewActivity(inputValue.getText().toString());
 
             create.dismiss();
-            SketchwareUtil.toast("New Activity added");
+            SketchwareUtil.toast(getString(R.string.new_activity_added));
         });
 
         btnCancel.setOnClickListener(Helper.getDialogDismissListener(create));
@@ -414,7 +416,7 @@ public class AndroidManifestInjection extends Activity {
         FileUtil.writeFile(path, new Gson().toJson(data));
         refreshList();
         removeComponents(activity_name);
-        SketchwareUtil.toast("activity removed");
+        SketchwareUtil.toast(getString(R.string.activity_removed));
     }
 
     private void removeComponents(String str) {
@@ -434,8 +436,8 @@ public class AndroidManifestInjection extends Activity {
     }
 
     @SuppressWarnings("SameParameterValue")
-    private CardView newCard(int width, int height, float weight) {
-        CardView temp_card = new CardView(this);
+    private MaterialCardView newCard(int width, int height, float weight) {
+        MaterialCardView temp_card = new MaterialCardView(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(width, height, weight);
         lp.setMargins((int) getDip(4), (int) getDip(2), (int) getDip(4), (int) getDip(2));
         temp_card.setLayoutParams(lp);
@@ -475,30 +477,37 @@ public class AndroidManifestInjection extends Activity {
     }
 
     private void createToolbar(View v) {
-        View toolbar = getLayoutInflater().inflate(R.layout.toolbar_improved, null);
-
-        ImageView _back = toolbar.findViewById(R.id.ig_toolbar_back);
-        Helper.applyRippleToToolbarView(_back);
-        ImageView _quickSource = toolbar.findViewById(R.id.ig_toolbar_load_file);
-
-        TextView _title = toolbar.findViewById(R.id.tx_toolbar_title);
-        _title.setText("AndroidManifest Manager");
-        _back.setOnClickListener(Helper.getBackPressedClickListener(this));
-
-        _quickSource.setImageResource(R.drawable.code_white_48);
-        _quickSource.setVisibility(View.VISIBLE);
-        Helper.applyRippleToToolbarView(_quickSource);
-        _quickSource.setOnClickListener((v1 -> showQuickManifestSourceDialog()));
+        View toolbar = getLayoutInflater().inflate(R.layout.toolbar, null);
+        toolbar.findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
+        setSupportActionBar((Toolbar) toolbar);
+        getSupportActionBar().setTitle(R.string.androidmanifest_manager);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        ((Toolbar) toolbar).setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
 
         v.setPadding(0, 0, 0, 0);
         ((ViewGroup) v).addView(toolbar, 0);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(Menu.NONE, 1, Menu.NONE, "Source").setIcon(R.drawable.code_48).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == 1) {
+            showQuickManifestSourceDialog();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void showQuickManifestSourceDialog() {
         ProgressMsgBoxBinding loadingDialogBinding = ProgressMsgBoxBinding.inflate(getLayoutInflater());
-        loadingDialogBinding.tvProgress.setText("Generating source code...");
+        loadingDialogBinding.tvProgress.setText(R.string.generating_source_code);
         var loadingDialog = new MaterialAlertDialogBuilder(this)
-                .setTitle("Please wait")
+                .setTitle(R.string.please_wait)
                 .setCancelable(false)
                 .setView(loadingDialogBinding.getRoot())
                 .create();
@@ -509,7 +518,7 @@ public class AndroidManifestInjection extends Activity {
 
             var dialogBuilder = new MaterialAlertDialogBuilder(this)
                     .setTitle("AndroidManifest.xml")
-                    .setPositiveButton("Dismiss", null);
+                    .setPositiveButton(R.string.common_word_dismiss, null);
 
             runOnUiThread(() -> {
                 if (isFinishing()) return;

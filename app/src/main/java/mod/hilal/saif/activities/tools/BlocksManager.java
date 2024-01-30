@@ -14,6 +14,7 @@ import android.os.Parcelable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -24,8 +25,10 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -59,6 +62,7 @@ public class BlocksManager extends AppCompatActivity {
     private ListView listview1;
     private LinearLayout card2;
     private TextView card2_sub;
+    private Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle _savedInstanceState) {
@@ -78,56 +82,58 @@ public class BlocksManager extends AppCompatActivity {
     private void initialize() {
         FloatingActionButton _fab = findViewById(R.id.fab);
         listview1 = findViewById(R.id.list_pallete);
-        ImageView back = findViewById(R.id.ig_toolbar_back);
-        TextView title = findViewById(R.id.tx_toolbar_title);
-        ImageView settings = findViewById(R.id.ig_toolbar_load_file);
         card2 = findViewById(R.id.recycle_bin);
         card2_sub = findViewById(R.id.recycle_sub);
+        toolbar = findViewById(R.id.toolbar);
+        findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.block_manager);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        _fab.setOnClickListener(v -> showPaletteDialog(false, null, null, null, null));
+    }
 
-        back.setOnClickListener(Helper.getBackPressedClickListener(this));
-        Helper.applyRippleToToolbarView(back);
-        title.setText("Block manager");
-        settings.setVisibility(View.VISIBLE);
-        settings.setImageResource(R.drawable.settings_96_white);
-        Helper.applyRippleToToolbarView(settings);
-        settings.setOnClickListener(v -> {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0, 0, 0, R.string.common_word_settings).setIcon(R.drawable.settings_96).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == 0) {
             aB dialog = new aB(this);
             dialog.a(R.drawable.ic_folder_48dp);
-            dialog.b("Block configuration");
-
+            dialog.b(getString(R.string.block_configuration));
             LinearLayout.LayoutParams defaultParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             LinearLayout customView = new LinearLayout(this);
             customView.setLayoutParams(defaultParams);
             customView.setOrientation(LinearLayout.VERTICAL);
-
             TextInputLayout tilPalettesPath = new TextInputLayout(this);
             tilPalettesPath.setLayoutParams(defaultParams);
             tilPalettesPath.setOrientation(LinearLayout.VERTICAL);
             tilPalettesPath.setPadding(dpToPx(4), dpToPx(4), dpToPx(4), dpToPx(4));
-            tilPalettesPath.setHint("JSON file with palettes");
+            tilPalettesPath.setHint(R.string.json_file_with_palettes);
             customView.addView(tilPalettesPath);
-
             EditText palettesPath = new EditText(this);
             palettesPath.setLayoutParams(defaultParams);
             palettesPath.setPadding(dpToPx(8), dpToPx(8), dpToPx(8), dpToPx(8));
             palettesPath.setTextSize(14);
             palettesPath.setText(pallet_dir.replace(FileUtil.getExternalStorageDir(), ""));
             tilPalettesPath.addView(palettesPath);
-
             TextInputLayout tilBlocksPath = new TextInputLayout(this);
             tilBlocksPath.setLayoutParams(defaultParams);
             tilBlocksPath.setOrientation(LinearLayout.VERTICAL);
             tilBlocksPath.setPadding(dpToPx(4), dpToPx(4), dpToPx(4), dpToPx(4));
-            tilBlocksPath.setHint("JSON file with blocks");
+            tilBlocksPath.setHint(R.string.json_file_with_blocks);
             customView.addView(tilBlocksPath);
-
             EditText blocksPath = new EditText(this);
             blocksPath.setLayoutParams(defaultParams);
             blocksPath.setPadding(dpToPx(8), dpToPx(8), dpToPx(8), dpToPx(8));
             blocksPath.setTextSize(14);
             blocksPath.setText(blocks_dir.replace(FileUtil.getExternalStorageDir(), ""));
             tilBlocksPath.addView(blocksPath);
-
             dialog.a(customView);
             dialog.b(Helper.getResString(R.string.common_word_save), (d, which) -> {
                 ConfigActivity.setSetting(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH,
@@ -140,7 +146,7 @@ public class BlocksManager extends AppCompatActivity {
                 d.dismiss();
             });
             dialog.a(Helper.getResString(R.string.common_word_cancel), (d, which) -> Helper.getDialogDismissListener(d));
-            dialog.configureDefaultButton("Defaults", (d, which) -> {
+            dialog.configureDefaultButton(getString(R.string.common_word_defaults), (d, which) -> {
                 ConfigActivity.setSetting(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH,
                         ConfigActivity.getDefaultValue(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH));
                 ConfigActivity.setSetting(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_BLOCK_FILE_PATH,
@@ -151,9 +157,8 @@ public class BlocksManager extends AppCompatActivity {
                 d.dismiss();
             });
             dialog.show();
-        });
-
-        _fab.setOnClickListener(v -> showPaletteDialog(false, null, null, null, null));
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initializeLogic() {
@@ -267,10 +272,10 @@ public class BlocksManager extends AppCompatActivity {
         });
         card2.setOnLongClickListener(v -> {
             new AlertDialog.Builder(this)
-                    .setTitle("Recycle bin")
+                    .setTitle(R.string.common_word_recycle_bin)
                     .setMessage("Are you sure you want to empty the recycle bin? " +
                             "Blocks inside will be deleted PERMANENTLY, you CANNOT recover them!")
-                    .setPositiveButton("Empty", (dialog, which) -> _emptyRecyclebin())
+                    .setPositiveButton(R.string.common_word_empty, (dialog, which) -> _emptyRecyclebin())
                     .setNegativeButton(R.string.common_word_cancel, null)
                     .show();
             return true;
@@ -533,32 +538,28 @@ public class BlocksManager extends AppCompatActivity {
 
             _a(background);
             background.setOnLongClickListener(v -> {
-                final String moveUp = "Move up";
-                final String moveDown = "Move down";
-                final String edit = "Edit";
-                final String delete = "Delete";
-                final String insert = "Insert";
 
                 PopupMenu popup = new PopupMenu(BlocksManager.this, background);
                 Menu menu = popup.getMenu();
-                if (position != 0) menu.add(moveUp);
-                if (position != getCount() - 1) menu.add(moveDown);
-                menu.add(edit);
-                menu.add(delete);
-                menu.add(insert);
+                if (position != 0) menu.add(Menu.NONE, 1, Menu.NONE, R.string.move_up);
+                if (position != getCount() - 1)
+                    menu.add(Menu.NONE, 2, Menu.NONE, R.string.move_down);
+                menu.add(Menu.NONE, 3, Menu.NONE, R.string.common_word_edit);
+                menu.add(Menu.NONE, 4, Menu.NONE, R.string.common_word_delete);
+                menu.add(Menu.NONE, 5, Menu.NONE, R.string.insert);
                 popup.setOnMenuItemClickListener(item -> {
-                    switch (item.getTitle().toString()) {
-                        case edit:
+                    switch (item.getItemId()) {
+                        case 3:
                             showPaletteDialog(true, position,
                                     pallet_listmap.get(position).get("name").toString(),
                                     pallet_listmap.get(position).get("color").toString(), null);
                             break;
 
-                        case delete:
+                        case 4:
                             new AlertDialog.Builder(BlocksManager.this)
                                     .setTitle(pallet_listmap.get(position).get("name").toString())
-                                    .setMessage("Remove all blocks related to this palette?")
-                                    .setPositiveButton("Remove permanently", (dialog, which) -> {
+                                    .setMessage(R.string.remove_all_blocks)
+                                    .setPositiveButton(R.string.remove_permanently, (dialog, which) -> {
                                         pallet_listmap.remove(position);
                                         FileUtil.writeFile(pallet_dir, new Gson().toJson(pallet_listmap));
                                         _removeRelatedBlocks(position + 9);
@@ -566,7 +567,7 @@ public class BlocksManager extends AppCompatActivity {
                                         _refresh_list();
                                     })
                                     .setNegativeButton(R.string.common_word_cancel, null)
-                                    .setNeutralButton("Move to recycle bin", (dialog, which) -> {
+                                    .setNeutralButton(R.string.move_to_recycle_bin, (dialog, which) -> {
                                         _moveRelatedBlocksToRecycleBin(position + 9);
                                         pallet_listmap.remove(position);
                                         FileUtil.writeFile(pallet_dir, new Gson().toJson(pallet_listmap));
@@ -576,15 +577,15 @@ public class BlocksManager extends AppCompatActivity {
                                     }).show();
                             break;
 
-                        case moveUp:
+                        case 1:
                             _MoveUp(position);
                             break;
 
-                        case moveDown:
+                        case 2:
                             _moveDown(position);
                             break;
 
-                        case insert:
+                        case 5:
                             showPaletteDialog(false, null, null, null, position);
                             break;
 

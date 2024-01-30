@@ -10,14 +10,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
-
 import com.besome.sketch.beans.ProjectLibraryBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
+import com.google.android.material.card.MaterialCardView;
 import com.sketchware.remod.R;
-
-import java.util.Comparator;
-import java.util.HashMap;
 
 import a.a.a.GB;
 import a.a.a.aB;
@@ -29,7 +25,6 @@ import a.a.a.mB;
 import a.a.a.mv;
 import a.a.a.nv;
 import a.a.a.xB;
-import a.a.a.yB;
 import mod.hey.studios.util.Helper;
 import mod.jbk.editor.manage.library.LibrarySettingsImporter;
 
@@ -48,7 +43,7 @@ public class FirebaseActivity extends BaseAppCompatActivity implements View.OnCl
     private nv step;
     private ProjectLibraryBean firebaseSettings;
     private String sc_id;
-    private CardView openConsole;
+    private MaterialCardView openConsole;
     private TextView prev;
     private TextView title;
     private TextView next;

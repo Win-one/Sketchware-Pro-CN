@@ -16,11 +16,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.android.annotations.NonNull;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
@@ -37,7 +40,7 @@ import mod.agus.jcoderz.lib.FileUtil;
 import mod.hey.studios.util.Helper;
 import mod.jbk.util.LogUtil;
 
-public class ConfigActivity extends Activity {
+public class ConfigActivity extends AppCompatActivity {
 
     public static final File SETTINGS_FILE = new File(FileUtil.getExternalStorageDir(), ".sketchware/data/settings.json");
     public static final String SETTING_ALWAYS_SHOW_BLOCKS = "always-show-blocks";
@@ -268,19 +271,18 @@ public class ConfigActivity extends Activity {
         _base.setOrientation(LinearLayout.VERTICAL);
         _base.setLayoutParams(_lp);
 
-        View toolbar = getLayoutInflater().inflate(R.layout.toolbar_improved, root, false);
+        View toolbar = getLayoutInflater().inflate(R.layout.toolbar, root, false);
         _base.addView(toolbar);
         _base.addView(_scroll);
         _scroll.addView(root);
         setContentView(_base);
+        toolbar.findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
+        setSupportActionBar((Toolbar) toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle(R.string.mod_settings);
+        ((Toolbar) toolbar).setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
 
-        ImageView toolbar_back = toolbar.findViewById(R.id.ig_toolbar_back);
-        TextView toolbar_title = toolbar.findViewById(R.id.tx_toolbar_title);
-        toolbar_back.setClickable(true);
-        toolbar_back.setFocusable(true);
-        Helper.applyRippleToToolbarView(toolbar_back);
-        toolbar_back.setOnClickListener(Helper.getBackPressedClickListener(this));
-        toolbar_title.setText("Mod settings");
 
         addSwitchPreference("Built-in blocks",
                 "May slow down loading blocks in Logic Editor.",
@@ -494,7 +496,7 @@ public class ConfigActivity extends Activity {
         );
         preferenceRoot.addView(switchContainer);
 
-        Switch switchView = new Switch(this);
+        MaterialSwitch switchView = new MaterialSwitch(this);
         switchView.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT

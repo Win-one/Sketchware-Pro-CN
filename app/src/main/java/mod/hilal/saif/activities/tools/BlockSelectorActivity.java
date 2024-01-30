@@ -10,21 +10,22 @@ import android.os.Parcelable;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.github.angads25.filepicker.model.DialogConfigs;
 import com.github.angads25.filepicker.model.DialogProperties;
@@ -62,7 +63,6 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
     private ListView listview1;
     private HashMap<String, Object> map = new HashMap<>();
     private EditText name;
-    private ImageView options_menu;
     private Spinner spinner1;
     private EditText title;
     private EditText value;
@@ -78,7 +78,6 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
     private void initialize() {
         background = findViewById(R.id.back);
         bottom = findViewById(R.id.bottom);
-        ImageView back = findViewById(R.id.ig_toolbar_back);
         label = findViewById(R.id.label);
         container = findViewById(R.id.contai);
         spinner1 = findViewById(R.id.spinner);
@@ -93,7 +92,6 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         value = findViewById(R.id.val);
         LinearLayout add_value = findViewById(R.id.add_val);
         fixbug();
-        back.setOnClickListener(Helper.getBackPressedClickListener(this));
         add_value.setOnClickListener(this);
         delete.setOnClickListener(this);
         edit.setOnClickListener(this);
@@ -115,28 +113,30 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         listview1.setOnItemLongClickListener((parent, view, position, id) -> {
             if (current_item != 0) {
                 new AlertDialog.Builder(this).setTitle(contents.get(position))
-                        .setMessage("Delete this item?")
-                        .setPositiveButton("Delete", (dialog, which) -> {
+                        .setMessage(R.string.delete_this_item)
+                        .setPositiveButton(R.string.common_word_delete, (dialog, which) -> {
                             contents.remove(position);
                             map.put("data", contents);
                             _save_item();
                             _showItem(current_item);
                         })
-                        .setNegativeButton("Cancel", null)
-                        .setNeutralButton("Copy item", (dialog, which) -> {
+                        .setNegativeButton(R.string.common_word_cancel, null)
+                        .setNeutralButton(R.string.copy_item, (dialog, which) -> {
                             ((ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("clipboard", contents.get(position)));
-                            SketchwareUtil.toast("Copied to clipboard");
+                            SketchwareUtil.toast(getString(R.string.copied_to_clipboard));
                         })
                         .show();
             }
             return true;
         });
 
-        options_menu = findViewById(R.id.ig_toolbar_load_file);
-        options_menu.setVisibility(View.VISIBLE);
-        options_menu.setImageResource(R.drawable.ic_more_vert_white_24dp);
-        options_menu.setOnClickListener(v -> showOptionsMenu());
-        applyRippleToView(back, delete, edit, add, cancel, save, add_value, options_menu);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
+        getSupportActionBar().setTitle(R.string.block_selector_menu_manager);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
     }
 
     private void save() {
@@ -159,7 +159,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                 autoTransition.setDuration(200L);
                 TransitionManager.beginDelayedTransition(background, autoTransition);
                 container.setVisibility(View.GONE);
-                Helper.setViewsVisibility(false, options_menu, add, edit, delete);
+                Helper.setViewsVisibility(false, add, edit, delete);
                 spinner1.setEnabled(true);
                 listview1.setEnabled(true);
                 isNewGroup = false;
@@ -174,7 +174,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                 autoTransition2.setDuration(200L);
                 TransitionManager.beginDelayedTransition(background, autoTransition2);
                 container.setVisibility(View.GONE);
-                Helper.setViewsVisibility(false, options_menu, add, edit, delete);
+                Helper.setViewsVisibility(false, add, edit, delete);
                 spinner1.setEnabled(true);
                 listview1.setEnabled(true);
             }
@@ -182,36 +182,35 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private void showOptionsMenu() {
-        PopupMenu popupMenu = new PopupMenu(this, options_menu);
-        Menu menu = popupMenu.getMenu();
-        menu.add("Import block selector menus");
-        menu.add("Export current block selector menu");
-        menu.add("Export all block selector menus");
-        popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getTitle().toString()) {
-                case "Export current block selector menu":
-                    ArrayList<HashMap<String, Object>> arrayList = new ArrayList<>();
-                    arrayList.add(data.get(current_item));
-                    FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/.sketchware/resources/block/export/menu/") + data.get(current_item).get("name") + ".json", new Gson().toJson(arrayList));
-                    SketchwareUtil.toast("Successfully exported block menu to:\n/Internal storage/.sketchware/resources/block/export", Toast.LENGTH_LONG);
-                    break;
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(Menu.NONE, 1, Menu.NONE, R.string.import_block_selector_menus);
+        menu.add(Menu.NONE, 2, Menu.NONE, R.string.export_current_block_selector_menu);
+        menu.add(Menu.NONE, 3, Menu.NONE, R.string.export_all_block_selector_menus);
+        return true;
+    }
 
-                case "Import block selector menus":
-                    openFileExplorerImport();
-                    break;
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case 2:
+                ArrayList<HashMap<String, Object>> arrayList = new ArrayList<>();
+                arrayList.add(data.get(current_item));
+                FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/.sketchware/resources/block/export/menu/") + data.get(current_item).get("name") + ".json", new Gson().toJson(arrayList));
+                SketchwareUtil.toast("Successfully exported block menu to:\n/Internal storage/.sketchware/resources/block/export", Toast.LENGTH_LONG);
+                break;
 
-                case "Export all block selector menus":
-                    FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/.sketchware/resources/block/export/menu/") + "All_Menus.json", new Gson().toJson(data));
-                    SketchwareUtil.toast("Successfully exported block menus to:\n/Internal storage/.sketchware/resources/block/export", Toast.LENGTH_LONG);
-                    break;
+            case 1:
+                openFileExplorerImport();
+                break;
 
-                default:
-                    return false;
-            }
-            return true;
-        });
-        popupMenu.show();
+            case 3:
+                FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/.sketchware/resources/block/export/menu/") + "All_Menus.json", new Gson().toJson(data));
+                SketchwareUtil.toast("Successfully exported block menus to:\n/Internal storage/.sketchware/resources/block/export", Toast.LENGTH_LONG);
+                break;
+
+            default:
+                return false;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -226,7 +225,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
             name.setText("");
             title.setText("");
             isNewGroup = true;
-            Helper.setViewsVisibility(true, options_menu, add, edit);
+            Helper.setViewsVisibility(true, add, edit);
             Helper.setViewsVisibility(false, label, delete, container);
             spinner1.setEnabled(false);
             listview1.setEnabled(false);
@@ -247,7 +246,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         } else if (id == R.id.dele) {
             if (current_item != 0) {
                 new AlertDialog.Builder(this).setMessage("Remove this menu and its items?")
-                        .setPositiveButton("Remove", (dialog, which) -> {
+                        .setPositiveButton(R.string.common_word_remove, (dialog, which) -> {
                             data.remove(spinner1.getSelectedItemPosition());
                             _save_item();
                             _refresh_display();
@@ -255,7 +254,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                             isNewGroup = false;
                             spinner1.setSelection(0);
                         })
-                        .setNegativeButton("Cancel", null)
+                        .setNegativeButton(R.string.common_word_cancel, null)
                         .create().show();
             } else {
                 SketchwareUtil.toastError("This menu can't be deleted.");
@@ -267,7 +266,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                 title.setText(map.get("title").toString());
                 TransitionManager.beginDelayedTransition(background, autoTransition);
                 container.setVisibility(View.VISIBLE);
-                Helper.setViewsVisibility(true, options_menu, add, edit, delete);
+                Helper.setViewsVisibility(true, add, edit, delete);
                 spinner1.setEnabled(false);
                 listview1.setEnabled(false);
             } else {
@@ -278,7 +277,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         } else if (id == R.id.canc) {
             _fabVisibility(true);
             TransitionManager.beginDelayedTransition(background, autoTransition);
-            Helper.setViewsVisibility(false, options_menu, add, edit, delete);
+            Helper.setViewsVisibility(false, add, edit, delete);
             Helper.setViewsVisibility(true, container, label);
             spinner1.setEnabled(true);
             listview1.setEnabled(true);

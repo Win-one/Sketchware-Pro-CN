@@ -8,21 +8,24 @@ import android.os.Looper;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sketchware.remod.R;
@@ -54,7 +57,7 @@ import mod.jbk.util.LogUtil;
 public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity implements View.OnClickListener {
     private static final String TAG = "ExcludeBuiltInLibraries";
 
-    private Switch enabled;
+    private MaterialSwitch enabled;
     private TextView preview;
     private String sc_id;
     private boolean isExcludingEnabled;
@@ -75,16 +78,13 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity imple
             sc_id = savedInstanceState.getString("sc_id");
         }
 
-        TextView title = findViewById(R.id.tx_toolbar_title);
-        title.setText("Exclude built-in libraries");
-        ImageView back = findViewById(R.id.ig_toolbar_back);
-        back.setOnClickListener(Helper.getBackPressedClickListener(this));
-        Helper.applyRippleToToolbarView(back);
-        ImageView reset = findViewById(R.id.ig_toolbar_load_file);
-        reset.setImageResource(R.drawable.ic_restore_white);
-        reset.setVisibility(View.VISIBLE);
-        reset.setOnClickListener(this);
-        Helper.applyRippleToToolbarView(reset);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
+        getSupportActionBar().setTitle("Exclude built-in libraries");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        ((Toolbar) toolbar).setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
 
         TextView enable = findViewById(R.id.tv_enable);
         enable.setText(Helper.getResString(R.string.design_library_settings_title_enabled));
@@ -103,7 +103,23 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity imple
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add("Reset").setIcon(R.drawable.ic_restore_grey600_24dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getTitle().toString()) {
+            case "Reset":
+                showResetDialog();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onBackPressed() {
+        super.onBackPressed();
         k();
         try {
             new Handler(Looper.myLooper()).postDelayed(() ->
@@ -140,8 +156,6 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity imple
             showSelectBuiltInLibrariesDialog();
         } else if (id == R.id.layout_switch) {
             enabled.setChecked(!enabled.isChecked());
-        } else if (id == R.id.ig_toolbar_load_file) {
-            showResetDialog();
         }
     }
 

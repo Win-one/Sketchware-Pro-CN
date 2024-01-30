@@ -3,7 +3,6 @@ package mod.hey.studios.project;
 import static mod.SketchwareUtil.getDip;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,7 @@ public class ProjectSettingsDialog {
     public void show() {
         aB dialog = new aB(activity);
         dialog.a(R.drawable.services_48);
-        dialog.b("Project Configuration");
+        dialog.b(Helper.getResString(R.string.project_configuration));
 
         ScrollView preferenceScroller = new ScrollView(dialog.getContext());
         {

@@ -332,12 +332,10 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cancel"
-                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
-                    android:background="#ff008dcd"
                     android:gravity="center"
                     android:padding="8dp"
                     android:text="@string/common_word_cancel"
@@ -347,12 +345,10 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/save"
-                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
-                    android:background="#ff008dcd"
                     android:gravity="center"
                     android:padding="8dp"
                     android:text="@string/common_word_save"

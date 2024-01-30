@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.besome.sketch.beans.AdTestDeviceBean;
 import com.besome.sketch.beans.ProjectLibraryBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.sketchware.remod.R;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class ManageAdmobActivity extends BaseAppCompatActivity implements View.O
     private DB A = null;
     private TestDeviceAdapter testDeviceAdapter;
     private ArrayList<AdTestDeviceBean> testDeviceList = new ArrayList<>();
-    private Switch libSwitch;
+    private MaterialSwitch libSwitch;
     private TextView tvBannerName;
     private TextView tvBannerId;
     private TextView tvInterName;
@@ -139,6 +139,7 @@ public class ManageAdmobActivity extends BaseAppCompatActivity implements View.O
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case 236:

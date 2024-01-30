@@ -67,9 +67,8 @@ public class AsdDialog extends Dialog implements DialogInterface.OnDismissListen
             PopupMenu popupMenu = new PopupMenu(act, v);
             populateMenu(popupMenu.getMenu());
             popupMenu.setOnMenuItemClickListener(item -> {
-                String charSequence = item.getTitle().toString();
-                switch (charSequence) {
-                    case "Pretty print":
+                switch (item.getItemId()) {
+                    case 5 -> {
                         StringBuilder sb = new StringBuilder();
                         String[] split = codeEditor.getText().toString().split("\n");
                         for (String s : split) {
@@ -88,62 +87,50 @@ public class AsdDialog extends Dialog implements DialogInterface.OnDismissListen
                         if (!failed) {
                             codeEditor.setText(code);
                         }
-                        break;
-
-                    case "Switch language":
-                        SketchwareUtil.toast("Currently not supported, sorry!");
-                        break;
-
-                    case "Find & Replace":
+                    }
+                    case 6 -> SketchwareUtil.toast("Currently not supported, sorry!");
+                    case 3 -> {
                         codeEditor.getSearcher().stopSearch();
                         codeEditor.beginSearchMode();
-                        break;
-
-                    case "Switch theme":
-                        SrcCodeEditor.showSwitchThemeDialog(act, codeEditor, (dialog, which) -> {
-                            SrcCodeEditor.selectTheme(codeEditor, which);
-                            AsdDialog.pref.edit().putInt("dlg_theme", which).apply();
-                            if (isDark()) {
-                                lin.setBackgroundColor(0xff292929);
-                                save.setBackground(new DialogButtonGradientDrawable()
-                                        .getIns((int) getDip(4), 0, 0xff333333, 0xff333333));
-                                cancel.setBackground(new DialogButtonGradientDrawable()
-                                        .getIns((int) getDip(4), 0, 0xff333333, 0xff333333));
-                            } else {
-                                lin.setBackgroundColor(Color.WHITE);
-                                save.setBackground(new DialogButtonGradientDrawable()
-                                        .getIns((int) getDip(4), 0, 0xff2196f3, 0xff2196f3));
-                                cancel.setBackground(new DialogButtonGradientDrawable()
-                                        .getIns((int) getDip(4), 0, 0xff2196f3, 0xff2196f3));
-                            }
-                            dialog.dismiss();
-                        });
-                        break;
-
-                    case "Word wrap":
+                    }
+                    case 7 ->
+                            SrcCodeEditor.showSwitchThemeDialog(act, codeEditor, (dialog, which) -> {
+                                SrcCodeEditor.selectTheme(codeEditor, which);
+                                AsdDialog.pref.edit().putInt("dlg_theme", which).apply();
+                                if (isDark()) {
+                                    lin.setBackgroundColor(0xff292929);
+                                    save.setBackground(new DialogButtonGradientDrawable()
+                                            .getIns((int) getDip(4), 0, 0xff333333, 0xff333333));
+                                    cancel.setBackground(new DialogButtonGradientDrawable()
+                                            .getIns((int) getDip(4), 0, 0xff333333, 0xff333333));
+                                } else {
+                                    lin.setBackgroundColor(Color.WHITE);
+                                    save.setBackground(new DialogButtonGradientDrawable()
+                                            .getIns((int) getDip(4), 0, 0xff2196f3, 0xff2196f3));
+                                    cancel.setBackground(new DialogButtonGradientDrawable()
+                                            .getIns((int) getDip(4), 0, 0xff2196f3, 0xff2196f3));
+                                }
+                                dialog.dismiss();
+                            });
+                    case 4 -> {
                         item.setChecked(!item.isChecked());
                         codeEditor.setWordwrap(item.isChecked());
                         pref.edit().putBoolean("dlg_ww", item.isChecked()).apply();
-                        break;
-
-                    case "Auto complete symbol pair":
+                    }
+                    case 9 -> {
                         item.setChecked(!item.isChecked());
                         codeEditor.getProps().symbolPairAutoCompletion = item.isChecked();
                         pref.edit().putBoolean("dlg_acsp", item.isChecked()).apply();
-                        break;
-
-                    case "Auto complete":
+                    }
+                    case 8 -> {
                         item.setChecked(!item.isChecked());
                         codeEditor.getComponent(EditorAutoCompletion.class).setEnabled(item.isChecked());
                         pref.edit().putBoolean("dlg_ac", item.isChecked()).apply();
-                        break;
-
-                    case "Paste":
-                        codeEditor.pasteText();
-                        break;
-
-                    default:
+                    }
+                    case 0 -> codeEditor.pasteText();
+                    default -> {
                         return false;
+                    }
                 }
                 return true;
             });
@@ -174,17 +161,18 @@ public class AsdDialog extends Dialog implements DialogInterface.OnDismissListen
     }
 
     private void populateMenu(Menu menu) {
-        menu.add(0, 0, 0, "Paste");
-        menu.add(0, 4, 0, "Word wrap")
+        menu.add(0, 0, 0, R.string.paste);
+        menu.add(0, 3, 0, R.string.find_replace);
+        menu.add(0, 4, 0, R.string.word_wrap)
                 .setCheckable(true)
                 .setChecked(pref.getBoolean("dlg_ww", false));
-        menu.add(0, 5, 0, "Pretty print");
-        menu.add(0, 6, 0, "Switch language");
-        menu.add(0, 7, 0, "Switch theme");
-        menu.add(0, 8, 0, "Auto complete")
+        menu.add(0, 5, 0, R.string.pretty_print);
+        menu.add(0, 6, 0, R.string.switch_language);
+        menu.add(0, 7, 0, R.string.switch_theme);
+        menu.add(0, 8, 0, R.string.auto_complete)
                 .setCheckable(true)
                 .setChecked(pref.getBoolean("dlg_ac", true));
-        menu.add(0, 9, 0, "Auto complete symbol pair")
+        menu.add(0, 9, 0, R.string.auto_complete_symbol_pair)
                 .setCheckable(true)
                 .setChecked(pref.getBoolean("dlg_acsp", true));
     }

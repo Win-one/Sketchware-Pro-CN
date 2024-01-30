@@ -1,6 +1,5 @@
 package mod.hilal.saif.activities.tools;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -13,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -22,14 +22,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.cardview.widget.CardView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.github.angads25.filepicker.model.DialogProperties;
 import com.github.angads25.filepicker.view.FilePickerDialog;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
@@ -44,7 +46,7 @@ import mod.agus.jcoderz.lib.FileUtil;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.events.EventsHandler;
 
-public class EventsMaker extends Activity {
+public class EventsMaker extends AppCompatActivity {
 
     public static final File EVENT_EXPORT_LOCATION = new File(Environment.getExternalStorageDirectory(),
             ".sketchware/data/system/export/events/");
@@ -96,7 +98,7 @@ public class EventsMaker extends Activity {
         newLayout.addView(newText("Listeners:", 16.0f, false, 0xff888888,
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0));
         base.addView(newLayout, 1);
-        CardView newCard = newCard(
+        MaterialCardView newCard = newCard(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 0);
@@ -376,8 +378,8 @@ public class EventsMaker extends Activity {
         ((ViewGroup) view).addView(inflate);
     }
 
-    private CardView newCard(int width, int height, float weight) {
-        CardView cardView = new CardView(this);
+    private MaterialCardView newCard(int width, int height, float weight) {
+        MaterialCardView cardView = new MaterialCardView(this);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height, weight);
         layoutParams.setMargins(
                 (int) SketchwareUtil.getDip(4),
@@ -433,38 +435,36 @@ public class EventsMaker extends Activity {
     }
 
     private void setToolbar() {
-        ((TextView) findViewById(R.id.tx_toolbar_title)).setText("Event manager");
-        ImageView back_icon = findViewById(R.id.ig_toolbar_back);
-        back_icon.setOnClickListener(Helper.getBackPressedClickListener(this));
-        Helper.applyRippleToToolbarView(back_icon);
-        final ImageView more_icon = findViewById(R.id.ig_toolbar_load_file);
-        more_icon.setVisibility(View.VISIBLE);
-        more_icon.setImageResource(R.drawable.ic_more_vert_white_24dp);
-        more_icon.setOnClickListener(v -> {
-            PopupMenu popupMenu = new PopupMenu(this, more_icon);
-            final Menu menu = popupMenu.getMenu();
-            menu.add("Import events");
-            menu.add("Export events");
-            popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getTitle().toString()) {
-                    case "Import events":
-                        openFileExplorerImport();
-                        break;
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
+        getSupportActionBar().setTitle(R.string.event_manager);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+    }
 
-                    case "Export events":
-                        exportAll();
-                        SketchwareUtil.toast("Successfully exported events to:\n" +
-                                "/Internal storage/.sketchware/data/system/export/events", Toast.LENGTH_LONG);
-                        break;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(Menu.NONE, 3, Menu.NONE, R.string.import_events);
+        menu.add(Menu.NONE, 4, Menu.NONE, R.string.export_events);
+        return true;
+    }
 
-                    default:
-                        return false;
-                }
-                return true;
-            });
-            popupMenu.show();
-        });
-        Helper.applyRippleToToolbarView(more_icon);
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case 3 -> openFileExplorerImport();
+            case 4 -> {
+                exportAll();
+                SketchwareUtil.toast("Successfully exported events to:\n" +
+                        "/Internal storage/.sketchware/data/system/export/events", Toast.LENGTH_LONG);
+            }
+            default -> {
+                return false;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private class ListAdapter extends BaseAdapter {
@@ -512,7 +512,7 @@ public class EventsMaker extends Activity {
             linearLayout.setOnLongClickListener(v -> {
                 new AlertDialog.Builder(EventsMaker.this)
                         .setTitle(_data.get(position).get("name").toString())
-                        .setItems(new String[]{"Edit", "Export", "Delete"}, (dialog, which) -> {
+                        .setItems(new String[]{getString(R.string.common_word_edit), getString(R.string.common_word_export), getString(R.string.common_word_delete)}, (dialog, which) -> {
                             switch (which) {
                                 case 0:
                                     editItemDialog(position);

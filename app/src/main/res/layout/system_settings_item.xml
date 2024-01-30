@@ -25,7 +25,7 @@
         android:textColor="#ff606060"
         android:textSize="14sp" />
 
-    <Switch
+    <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/sw_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

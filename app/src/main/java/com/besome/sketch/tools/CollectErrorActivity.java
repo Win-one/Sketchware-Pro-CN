@@ -44,9 +44,9 @@ public class CollectErrorActivity extends Activity {
                     .setMessage("An error occurred while running Sketchware Pro. " +
                             "Do you want to report this error log so that we can fix it? " +
                             "No personal information will be included.")
-                    .setPositiveButton("Send", null)
-                    .setNegativeButton("Cancel", (dialogInterface, which) -> finish())
-                    .setNeutralButton("Show error", null) // null to set proper onClick listeners later without dismissing the AlertDialog
+                    .setPositiveButton(R.string.common_word_send, null)
+                    .setNegativeButton(R.string.common_word_cancel, (dialogInterface, which) -> finish())
+                    .setNeutralButton(R.string.show_error, null) // null to set proper onClick listeners later without dismissing the AlertDialog
                     .show();
 
             TextView messageView = dialog.findViewById(android.R.id.message);
@@ -113,7 +113,7 @@ public class CollectErrorActivity extends Activity {
                     } while (!stackTrace.isEmpty());
 
                     if (!listener.hasFailed()) {
-                        runOnUiThread(() -> SketchwareUtil.toast("Sending crash logs…", Toast.LENGTH_LONG));
+                        runOnUiThread(() -> SketchwareUtil.toast(getString(R.string.sending_crash_logs), Toast.LENGTH_LONG));
                     }
                 }).start();
             });
@@ -126,7 +126,7 @@ public class CollectErrorActivity extends Activity {
 
         @Override
         public void onResponse(String tag, String response, HashMap<String, Object> responseHeaders) {
-            SketchwareUtil.toast("Report sent!");
+            SketchwareUtil.toast(getString(R.string.report_sent));
             finish();
         }
 

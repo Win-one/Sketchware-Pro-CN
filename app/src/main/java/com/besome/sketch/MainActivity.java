@@ -218,7 +218,7 @@ public class MainActivity extends BasePermissionAppCompatActivity {
 
                             if (BackupFactory.zipContainsFile(path, "local_libs")) {
                                 new MaterialAlertDialogBuilder(MainActivity.this)
-                                        .setTitle("Warning")
+                                        .setTitle(R.string.common_word_warning)
                                         .setMessage(BackupRestoreManager.getRestoreIntegratedLocalLibrariesMessage(false, -1, -1, null))
                                         .setPositiveButton("Copy", (dialog, which) -> manager.doRestore(path, true))
                                         .setNegativeButton("Don't copy", (dialog, which) -> manager.doRestore(path, false))
@@ -243,14 +243,14 @@ public class MainActivity extends BasePermissionAppCompatActivity {
                     "and it's important to know them all if you want your projects to still work.\n" +
                     "You can view all changes whenever you want at the updated About Sketchware Pro screen.");
 
-            dialog.b("View", (d, which) -> {
+            dialog.b(getString(R.string.common_word_watch), (d, which) -> {
                 d.dismiss();
                 Intent launcher = new Intent(this, AboutModActivity.class);
                 launcher.putExtra("select", "majorChanges");
                 startActivity(launcher);
             });
-            dialog.a("Close", (d, which) -> Helper.getDialogDismissListener(d));
-            dialog.configureDefaultButton("Never show again", (d, which) -> {
+            dialog.a(getString(R.string.common_word_close), (d, which) -> Helper.getDialogDismissListener(d));
+            dialog.configureDefaultButton(getString(R.string.never_show_again), (d, which) -> {
                 ConfigActivity.setSetting(ConfigActivity.SETTING_SKIP_MAJOR_CHANGES_REMINDER, true);
                 d.dismiss();
             });
@@ -312,8 +312,8 @@ public class MainActivity extends BasePermissionAppCompatActivity {
                     FileUtil.requestAllFilesAccessPermission(this);
                     d.dismiss();
                 });
-                dialog.a("Skip", (d, which) -> Helper.getDialogDismissListener(d));
-                dialog.configureDefaultButton("Don't show anymore", (d, which) -> {
+                dialog.a(getString(R.string.common_word_skip), (d, which) -> Helper.getDialogDismissListener(d));
+                dialog.configureDefaultButton(getString(R.string.don_t_show_anymore), (d, which) -> {
                     try {
                         if (!optOutFile.createNewFile())
                             throw new IOException("Failed to create file " + optOutFile);

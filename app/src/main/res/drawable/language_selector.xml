@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <layer-list>
+            <item android:drawable="@drawable/baseline_check_on" android:width="30dp" android:height="30dp" />
+        </layer-list>
+    </item>
+
+    <item android:state_checked="false">
+        <layer-list>
+            <item android:drawable="@drawable/baseline_check_off" android:width="30dp" android:height="30dp" />
+        </layer-list>
+    </item>
+
+</selector>

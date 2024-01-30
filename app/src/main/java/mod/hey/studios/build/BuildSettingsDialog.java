@@ -44,10 +44,10 @@ public class BuildSettingsDialog {
                 addTogglePref(BuildSettings.SETTING_ENABLE_LOGCAT, true, "Enable debug logcat logs viewable in Logcat Reader. Not enabled in exported AABs/APKs.", contentView)
         };
         var builder = new MaterialAlertDialogBuilder(activity)
-                .setTitle("Build Settings")
+                .setTitle(R.string.build_settings)
                 .setIcon(R.drawable.ic_tune_24)
-                .setPositiveButton("Save", (dialogInterface, i) -> settings.setValues(viewArr))
-                .setNegativeButton("Cancel", null);
+                .setPositiveButton(R.string.common_word_save, (dialogInterface, i) -> settings.setValues(viewArr))
+                .setNegativeButton(R.string.common_word_cancel, null);
         builder.setView(inflate);
         builder.show();
     }

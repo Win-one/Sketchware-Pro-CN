@@ -33,6 +33,7 @@ public class SystemSettingActivity extends BaseAppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (saveSettings()) {
             setResult(Activity.RESULT_OK, new Intent());
             finish();

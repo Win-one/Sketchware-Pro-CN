@@ -33,7 +33,7 @@
                 android:textColor="@color/scolor_red_02"
                 android:textSize="14sp" />
 
-            <Switch
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/lib_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

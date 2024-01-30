@@ -4,13 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
 import com.besome.sketch.beans.ProjectLibraryBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.sketchware.remod.R;
 
 import a.a.a.aB;
@@ -18,7 +18,7 @@ import mod.hey.studios.util.Helper;
 
 public class ManageCompatActivity extends BaseAppCompatActivity implements View.OnClickListener {
 
-    private Switch libSwitch;
+    private MaterialSwitch libSwitch;
     private ProjectLibraryBean compatLibraryBean;
     private ProjectLibraryBean firebaseLibraryBean;
 

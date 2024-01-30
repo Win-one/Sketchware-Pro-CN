@@ -63,7 +63,7 @@ public class AddFontCollectionActivity extends BaseDialogActivity implements Vie
         if (projectResourceBean != null) {
             isEditMode = true;
         }
-        addToCollectionCheckBox = findViewById(R.id.add_to_collection_checkbox);
+        addToCollectionCheckBox = findViewById(R.id.chk_collection);
         addToCollectionCheckBox.setVisibility(View.GONE);
         inputEditText = findViewById(R.id.ed_input);
         inputLayout = findViewById(R.id.ti_input);

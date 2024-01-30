@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp">
@@ -48,7 +48,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@id/btn_sign_apk"
                         style="@style/AppTheme.Button.Indigo"
                         android:layout_width="wrap_content"
@@ -129,9 +129,9 @@
                             app:lottie_loop="true" />
                     </LinearLayout>
                 </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp">
@@ -160,7 +160,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@id/btn_export_src"
                         style="@style/AppTheme.Button.Indigo"
                         android:layout_width="wrap_content"
@@ -235,7 +235,7 @@
                             </HorizontalScrollView>
                         </LinearLayout>
 
-                        <Button
+                        <com.google.android.material.button.MaterialButton
                             android:id="@id/btn_send_src"
                             style="@style/AppTheme.Button.Green"
                             android:layout_width="wrap_content"
@@ -245,7 +245,7 @@
                             android:textSize="12sp" />
                     </LinearLayout>
                 </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

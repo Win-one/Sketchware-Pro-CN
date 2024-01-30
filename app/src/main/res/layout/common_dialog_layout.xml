@@ -4,7 +4,6 @@
     android:id="@+id/common_dialog_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#66000000"
     android:clipChildren="false"
     android:clipToPadding="false"
     android:paddingLeft="24dp"
@@ -91,7 +90,7 @@
                         android:paddingHorizontal="18dp"
                         android:paddingVertical="12dp"
                         android:textColor="?colorPrimary"
-                        tools:text="Default" />
+                        tools:text="@string/common_word_defaults" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -103,14 +102,14 @@
                             android:id="@+id/common_dialog_cancel_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:gravity="center"
                             android:minWidth="0dp"
                             android:paddingHorizontal="18dp"
-                            android:clickable="true"
-                            android:focusable="true"
                             android:paddingVertical="12dp"
                             android:textColor="?colorPrimary"
-                            tools:text="Cancel" />
+                            tools:text="@string/common_word_cancel" />
 
                         <TextView
                             android:id="@+id/common_dialog_ok_button"
@@ -122,7 +121,7 @@
                             android:paddingHorizontal="18dp"
                             android:paddingVertical="12dp"
                             android:textColor="?colorPrimary"
-                            tools:text="Okay" />
+                            tools:text="@string/common_word_okay" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

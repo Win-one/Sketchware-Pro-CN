@@ -23,10 +23,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.besome.sketch.lib.base.CollapsibleViewHolder;
 import com.besome.sketch.lib.ui.CollapsibleButton;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.elevation.SurfaceColors;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
+import com.sketchware.remod.databinding.ManageCustomComponentBinding;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -51,28 +54,20 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
 
     private static final String COMPONENT_EXPORT_DIR = wq.getExtraDataExport() + "/components/";
     private static final String COMPONENT_DIR = wq.getCustomComponent();
-
-    private TextView tv_guide;
-    private RecyclerView componentView;
-
+    private ManageCustomComponentBinding binding;
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
+        binding = ManageCustomComponentBinding.inflate(getLayoutInflater());
         super.onCreate(_savedInstanceState);
-        setContentView(R.layout.manage_custom_component);
+        setContentView(binding.getRoot());
         init();
     }
 
     private void init() {
-        MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-
-        tv_guide = findViewById(R.id.tv_guide);
-        componentView = findViewById(R.id.list);
-
-        findViewById(R.id.fab).setOnClickListener(_view ->
+        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        binding.collapsingToolbar.setStatusBarScrimColor(SurfaceColors.SURFACE_2.getColor(this));
+        binding.collapsingToolbar.setContentScrimColor(SurfaceColors.SURFACE_2.getColor(this));
+        binding.fab.setOnClickListener(_view ->
                 startActivity(new Intent(getApplicationContext(), AddCustomComponentActivity.class)));
     }
 
@@ -107,8 +102,8 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
         if (FileUtil.isExistFile(COMPONENT_DIR)) {
             readComponents(COMPONENT_DIR);
         } else {
-            tv_guide.setVisibility(View.VISIBLE);
-            componentView.setVisibility(View.GONE);
+            binding.noContentLayout.setVisibility(View.VISIBLE);
+            binding.list.setVisibility(View.GONE);
         }
     }
 
@@ -116,16 +111,16 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
         componentsList = new Gson().fromJson(FileUtil.readFile(_path), Helper.TYPE_MAP_LIST);
         if (componentsList != null && componentsList.size() > 0) {
             ComponentsAdapter adapter = new ComponentsAdapter(componentsList);
-            Parcelable state = componentView.getLayoutManager().onSaveInstanceState();
-            componentView.setAdapter(adapter);
-            componentView.getLayoutManager().onRestoreInstanceState(state);
+            Parcelable state = binding.list.getLayoutManager().onSaveInstanceState();
+            binding.list.setAdapter(adapter);
+            binding.list.getLayoutManager().onRestoreInstanceState(state);
             adapter.notifyDataSetChanged();
-            componentView.setVisibility(View.VISIBLE);
-            tv_guide.setVisibility(View.GONE);
+            binding.list.setVisibility(View.VISIBLE);
+            binding.noContentLayout.setVisibility(View.GONE);
             return;
         }
-        tv_guide.setVisibility(View.VISIBLE);
-        componentView.setVisibility(View.GONE);
+        binding.noContentLayout.setVisibility(View.VISIBLE);
+        binding.list.setVisibility(View.GONE);
     }
 
     private void showFilePickerDialog() {

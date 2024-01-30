@@ -46,6 +46,7 @@ public class ManageFontActivity extends BaseAppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (myCollectionFontsFragment.l) {
             myCollectionFontsFragment.a(false);
         } else {

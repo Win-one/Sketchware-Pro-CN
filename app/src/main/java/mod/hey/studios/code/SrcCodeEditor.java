@@ -230,7 +230,7 @@ public class SrcCodeEditor extends AppCompatActivity {
             super.onBackPressed();
         } else {
             new MaterialAlertDialogBuilder(this)
-                    .setTitle("Warning")
+                    .setTitle(R.string.common_word_warning)
                     .setMessage("You have unsaved changes. Are you sure you want to exit?")
                     .setPositiveButton(R.string.common_word_exit, (dialog, which) -> finish())
                     .setNegativeButton(R.string.common_word_cancel, null)
@@ -244,28 +244,28 @@ public class SrcCodeEditor extends AppCompatActivity {
 
         menu.clear();
 
-        menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Undo")
+        menu.add(Menu.NONE, 1, Menu.NONE, R.string.common_word_undo)
                 .setIcon(getDrawable(R.drawable.ic_undo_24))
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Redo")
+        menu.add(Menu.NONE, 2, Menu.NONE, R.string.common_word_redo)
                 .setIcon(getDrawable(R.drawable.ic_redo_24))
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Save")
+        menu.add(Menu.NONE, 3, Menu.NONE, R.string.common_word_save)
                 .setIcon(getDrawable(R.drawable.save_white_24))
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
-        menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Find & Replace");
-        menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Word wrap")
+        menu.add(Menu.NONE, 4, Menu.NONE, R.string.find_replace);
+        menu.add(Menu.NONE, 5, Menu.NONE, R.string.word_wrap)
                 .setCheckable(true)
                 .setChecked(local_pref.getBoolean("act_ww", false));
-        menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Pretty print");
-        menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Switch language");
-        menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Switch theme");
+        menu.add(Menu.NONE, 6, Menu.NONE, R.string.pretty_print);
+        menu.add(Menu.NONE, 7, Menu.NONE, R.string.switch_language);
+        menu.add(Menu.NONE, 8, Menu.NONE, R.string.switch_theme);
 
-        menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Auto complete")
+        menu.add(Menu.NONE, 9, Menu.NONE, R.string.auto_complete)
                 .setCheckable(true)
                 .setChecked(local_pref.getBoolean("act_ac", true));
-        menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Auto complete symbol pair")
+        menu.add(Menu.NONE, 10, Menu.NONE, R.string.auto_complete_symbol_pair)
                 .setCheckable(true)
                 .setChecked(local_pref.getBoolean("act_acsp", true));
 
@@ -274,21 +274,11 @@ public class SrcCodeEditor extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        String title = item.getTitle().toString();
-        switch (title) {
-            case "Undo":
-                editor.undo();
-                break;
-
-            case "Redo":
-                editor.redo();
-                break;
-
-            case "Save":
-                save();
-                break;
-
-            case "Pretty print":
+        switch (item.getItemId()) {
+            case 1 -> editor.undo();
+            case 2 -> editor.redo();
+            case 3 -> save();
+            case 6 -> {
                 if (getIntent().hasExtra("java")) {
                     StringBuilder b = new StringBuilder();
 
@@ -323,48 +313,35 @@ public class SrcCodeEditor extends AppCompatActivity {
                 } else {
                     SketchwareUtil.toast("Only Java and XML files can be formatted");
                 }
-                break;
-
-            case "Switch language":
-                SketchwareUtil.toast("Currently not supported, sorry!");
-                break;
-
-            case "Find & Replace":
+            }
+            case 7 -> SketchwareUtil.toast("Currently not supported, sorry!");
+            case 4 -> {
                 editor.getSearcher().stopSearch();
                 editor.beginSearchMode();
-                break;
-
-            case "Switch theme":
-                showSwitchThemeDialog(this, editor, (dialog, which) -> {
-                    selectTheme(editor, which);
-                    pref.edit().putInt("act_theme", which).apply();
-                    dialog.dismiss();
-                });
-                break;
-
-            case "Word wrap":
+            }
+            case 8 -> showSwitchThemeDialog(this, editor, (dialog, which) -> {
+                selectTheme(editor, which);
+                pref.edit().putInt("act_theme", which).apply();
+                dialog.dismiss();
+            });
+            case 5 -> {
                 item.setChecked(!item.isChecked());
                 editor.setWordwrap(item.isChecked());
-
                 pref.edit().putBoolean("act_ww", item.isChecked()).apply();
-                break;
-
-            case "Auto complete symbol pair":
+            }
+            case 10 -> {
                 item.setChecked(!item.isChecked());
                 editor.getProps().symbolPairAutoCompletion = item.isChecked();
-
                 pref.edit().putBoolean("act_acsp", item.isChecked()).apply();
-                break;
-
-            case "Auto complete":
+            }
+            case 9 -> {
                 item.setChecked(!item.isChecked());
-
                 editor.getComponent(EditorAutoCompletion.class).setEnabled(item.isChecked());
                 pref.edit().putBoolean("act_ac", item.isChecked()).apply();
-                break;
-
-            default:
+            }
+            default -> {
                 return false;
+            }
         }
 
         return true;
@@ -391,7 +368,7 @@ public class SrcCodeEditor extends AppCompatActivity {
                 .map(pair -> pair.first)
                 .toArray(String[]::new);
         new AlertDialog.Builder(activity)
-                .setTitle("Switch theme")
+                .setTitle(R.string.switch_theme)
                 .setSingleChoiceItems(themeItems, selectedThemeIndex, listener)
                 .setNegativeButton(R.string.common_word_cancel, null)
                 .show();

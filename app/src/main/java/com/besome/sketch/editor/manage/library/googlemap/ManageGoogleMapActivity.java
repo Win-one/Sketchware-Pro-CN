@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.besome.sketch.beans.ProjectLibraryBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.sketchware.remod.R;
 
 import a.a.a.GB;
@@ -27,7 +27,7 @@ import mod.jbk.editor.manage.library.LibrarySettingsImporter;
 
 public class ManageGoogleMapActivity extends BaseAppCompatActivity implements View.OnClickListener {
     private String sc_id;
-    private Switch libSwitch;
+    private MaterialSwitch libSwitch;
     private EditText editApiKey;
     private ProjectLibraryBean googleMapLibraryBean;
 

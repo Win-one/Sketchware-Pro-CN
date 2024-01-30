@@ -114,11 +114,11 @@ public class AboutAdapters {
                 int activeBackgroundColor;
                 int activeBackgroundTextColor;
                 if (isActiveBool) {
-                    holder.status.setText("Active");
+                    holder.status.setText(R.string.active);
                     activeBackgroundColor = MaterialColors.getColor(holder.status, R.attr.colorCoolGreenContainer);
                     activeBackgroundTextColor = MaterialColors.getColor(holder.status, R.attr.colorOnCoolGreenContainer);
                 } else {
-                    holder.status.setText("Inactive");
+                    holder.status.setText(R.string.inactive);
                     activeBackgroundColor = MaterialColors.getColor(holder.status, com.google.android.material.R.attr.colorSurfaceInverse);
                     activeBackgroundTextColor = MaterialColors.getColor(holder.status, com.google.android.material.R.attr.colorOnSurfaceInverse);
                 }

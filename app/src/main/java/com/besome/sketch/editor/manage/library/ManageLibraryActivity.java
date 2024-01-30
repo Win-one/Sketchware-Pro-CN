@@ -197,6 +197,7 @@ public class ManageLibraryActivity extends BaseAppCompatActivity implements View
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         k();
         try {
             new Handler().postDelayed(() -> new SaveLibraryTask(this).execute(), 500L);

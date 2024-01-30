@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -26,12 +24,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 import com.sketchware.remod.BuildConfig;
 import com.sketchware.remod.R;
 
@@ -76,7 +75,7 @@ import mod.jbk.util.TestkeySignBridge;
 public class ExportProjectActivity extends BaseAppCompatActivity {
 
     private final oB file_utility = new oB();
-    private Button btn_export_src;
+    private MaterialButton btn_export_src;
     private LottieAnimationView loading_export_src;
     private LinearLayout layout_export_src;
     private TextView tv_src_path;
@@ -96,7 +95,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
     private String sc_id;
     private HashMap<String, Object> sc_metadata = null;
     private yq project_metadata = null;
-    private Button btn_sign_apk;
+    private MaterialButton btn_sign_apk;
     private LottieAnimationView loading_sign_apk;
     private LinearLayout layout_apk_path;
     private TextView tv_apk_path;
@@ -235,7 +234,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
     }
 
     private void initializeAppBundleExportViews() {
-        CardView exportAppBundleRoot = new CardView(this);
+        MaterialCardView exportAppBundleRoot = new MaterialCardView(this);
         {
             FrameLayout.LayoutParams exportAppBundleRootParams = new FrameLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -290,7 +289,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
         }
         relativeLayout.addView(titleExportAppBundle);
 
-        Button btnExportAppBundle = new Button(this);
+        MaterialButton btnExportAppBundle = new MaterialButton(this);
         {
             RelativeLayout.LayoutParams btnExportAppBundleParams = (RelativeLayout.LayoutParams) btn_export_src.getLayoutParams();
             btnExportAppBundleParams.setMargins(
@@ -303,13 +302,6 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
             btnExportAppBundle.setAllCaps(false);
             btnExportAppBundle.setTextColor(Color.WHITE);
             btnExportAppBundle.setTextSize(14f);
-            {
-                GradientDrawable drawable = new GradientDrawable();
-                drawable.setColor(0xffff5955);
-                drawable.setCornerRadius(6);
-                btnExportAppBundle.setBackground(drawable);
-            }
-            btnExportAppBundle.setHighlightColor(0xffff8784);
         }
 
         relativeLayout.addView(btnExportAppBundle);
@@ -402,7 +394,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
 
         layoutExportAppBundle.addView(var3);
 
-        Button btnSendAppBundle;
+        MaterialButton btnSendAppBundle;
         {
             LinearLayout btnSendAppBundleContainer = new LinearLayout(this);
             {
@@ -414,7 +406,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
                 btnSendAppBundleContainer.setLayoutParams(btnSendAppBundleContainerParams);
             }
 
-            btnSendAppBundle = new Button(this);
+            btnSendAppBundle = new MaterialButton(this);
             {
                 LinearLayout.LayoutParams btnSendAppBundleParams = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
@@ -422,8 +414,6 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
                 btnSendAppBundle.setLayoutParams(btnSendAppBundleParams);
                 btnSendAppBundle.setTextColor(Color.WHITE);
                 btnSendAppBundle.setTextSize(12f);
-                btnSendAppBundle.setBackgroundColor(ContextCompat.getColor(this, R.color.scolor_green_normal));
-                btnSendAppBundle.setHighlightColor(ContextCompat.getColor(this, R.color.color_btn_green_highlight));
             }
             btnSendAppBundleContainer.addView(btnSendAppBundle);
 
@@ -494,7 +484,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
         layout_export_src = findViewById(R.id.layout_export_src);
         TextView title_src_path = findViewById(R.id.title_src_path);
         tv_src_path = findViewById(R.id.tv_src_path);
-        Button btn_send_src = findViewById(R.id.btn_send_src);
+        MaterialButton btn_send_src = findViewById(R.id.btn_send_src);
         title_export_src.setText(Helper.getResString(R.string.myprojects_export_project_title_export_src));
         btn_export_src.setText(Helper.getResString(R.string.myprojects_export_project_button_export_src));
         title_src_path.setText(Helper.getResString(R.string.myprojects_export_project_title_local_path));

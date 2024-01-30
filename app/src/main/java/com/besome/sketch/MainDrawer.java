@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.besome.sketch.help.ProgramInfoActivity;
 import com.besome.sketch.help.SystemSettingActivity;
+import com.besome.sketch.language.LanguageSettingsActivity;
 import com.besome.sketch.tools.NewKeyStoreActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.sketchware.remod.R;
@@ -80,6 +81,10 @@ public class MainDrawer extends FrameLayout {
             Intent intent = new Intent(activity, SystemSettingActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             activity.startActivityForResult(intent, 107);
+        } else if (id == R.id.language_settings) {
+            Intent intent = new Intent(activity, LanguageSettingsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            activity.startActivity(intent);
         } else if (id == R.id.program_info) {
             Intent intent = new Intent(activity, ProgramInfoActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
