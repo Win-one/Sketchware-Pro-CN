@@ -13,7 +13,6 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ff008dcd"
             android:gravity="center|left"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
@@ -27,7 +26,7 @@
                 android:layout_height="40dp"
                 android:padding="8dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/abc_vector_test" />
+                android:src="@drawable/abc_ic_ab_back_material" />
 
             <TextView
                 android:id="@+id/pagetitle"
@@ -36,8 +35,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_weight="1"
                 android:padding="8dp"
-                android:text="Blocks Manager"
-                android:textColor="#ffffffff"
+                android:text="@string/blocks_manager"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -47,7 +45,7 @@
                 android:layout_height="40dp"
                 android:padding="8dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_menu_white_24dp" />
+                android:src="@drawable/ic_menu_black_24dp" />
 
             <ImageView
                 android:id="@+id/import_export"
@@ -55,7 +53,7 @@
                 android:layout_height="40dp"
                 android:padding="8dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_more_vert_white_24dp" />
+                android:src="@drawable/abc_ic_menu_overflow_material" />
         </LinearLayout>
 
         <ListView

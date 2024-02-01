@@ -17,14 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.besome.sketch.lib.base.CollapsibleViewHolder;
 import com.besome.sketch.lib.ui.CollapsibleButton;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.elevation.SurfaceColors;
 import com.google.gson.Gson;
@@ -57,16 +56,18 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
     private ManageCustomComponentBinding binding;
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
+        EdgeToEdge.enable(this);
         binding = ManageCustomComponentBinding.inflate(getLayoutInflater());
         super.onCreate(_savedInstanceState);
         setContentView(binding.getRoot());
+
+        binding.collapsingToolbar.setStatusBarScrimColor(SurfaceColors.SURFACE_2.getColor(this));
+        binding.collapsingToolbar.setContentScrimColor(SurfaceColors.SURFACE_2.getColor(this));
         init();
     }
 
     private void init() {
         binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-        binding.collapsingToolbar.setStatusBarScrimColor(SurfaceColors.SURFACE_2.getColor(this));
-        binding.collapsingToolbar.setContentScrimColor(SurfaceColors.SURFACE_2.getColor(this));
         binding.fab.setOnClickListener(_view ->
                 startActivity(new Intent(getApplicationContext(), AddCustomComponentActivity.class)));
     }
@@ -79,7 +80,7 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, "Import");
+        menu.add(0, 0, 0, R.string.common_word_import);
         return super.onCreateOptionsMenu(menu);
     }
 

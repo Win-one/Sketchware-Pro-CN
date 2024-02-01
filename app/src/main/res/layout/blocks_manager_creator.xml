@@ -5,7 +5,7 @@
     android:background="#ffeeeeee"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar_improved" />
+    <include layout="@layout/toolbar" />
 
     <ScrollView
         android:id="@+id/scroll_view"

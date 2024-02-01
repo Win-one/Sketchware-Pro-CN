@@ -199,12 +199,12 @@ public class LogReaderActivity extends AppCompatActivity {
                 .setMessage("For multiple package names, separate them with a comma (,).")
                 .setIcon(R.drawable.ic_filter_24)
                 .setView(view)
-                .setPositiveButton("Apply", (dialog, which) -> {
+                .setPositiveButton(R.string.common_word_apply, (dialog, which) -> {
                     pkgFilter = dialogBinding.easyEdInput.getText().toString();
                     pkgFilterList = new ArrayList<>(Arrays.asList(pkgFilter.split(",")));
                     binding.searchInput.setText(binding.searchInput.getText().toString());
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(R.string.common_word_cancel, null)
                 .create();
 
         builder.show();

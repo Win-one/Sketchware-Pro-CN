@@ -1824,6 +1824,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (ia) {
             g(false);
             return;
@@ -2458,7 +2459,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
         codeEditor.getComponent(Magnifier.class).setWithinEditorForcibly(true);
 
         var dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle("Source code")
+                .setTitle(R.string.source_code)
                 .setPositiveButton(R.string.common_word_close, null)
                 .create();
 

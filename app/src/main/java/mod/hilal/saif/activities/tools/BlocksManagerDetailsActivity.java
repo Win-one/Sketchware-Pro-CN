@@ -83,15 +83,12 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
         import_export.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(this, import_export);
             final Menu menu = popupMenu.getMenu();
-            menu.add("Import blocks");
-            menu.add("Export blocks");
+            menu.add(Menu.NONE, 1, Menu.NONE, R.string.import_blocks);
+            menu.add(Menu.NONE, 2, Menu.NONE, R.string.export_blocks);
             popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getTitle().toString()) {
-                    case "Import blocks":
-                        openFileExplorerImport();
-                        break;
-
-                    case "Export blocks":
+                switch (item.getItemId()) {
+                    case 1 -> openFileExplorerImport();
+                    case 2 -> {
                         Object paletteName = pallet_list.get(palette - 9).get("name");
                         if (paletteName instanceof String) {
                             String exportTo = new File(BLOCK_EXPORT_PATH, paletteName + ".json").getAbsolutePath();
@@ -100,10 +97,10 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                         } else {
                             SketchwareUtil.toastError("Invalid name of palette #" + (palette - 9));
                         }
-                        break;
-
-                    default:
+                    }
+                    default -> {
                         return false;
+                    }
                 }
                 return true;
             });
@@ -188,6 +185,7 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (mode.equals("editor")) {
             swap.setImageResource(R.drawable.ic_menu_white_24dp);
             mode = "normal";
@@ -208,7 +206,7 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
         blocks_path = getIntent().getStringExtra("dirB");
         _refreshLists();
         if (palette == -1) {
-            page_title.setText("Recycle bin");
+            page_title.setText(R.string.common_word_recycle_bin);
             swap.setVisibility(View.GONE);
             import_export.setVisibility(View.GONE);
             _fab.setVisibility(View.GONE);
@@ -310,20 +308,15 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
         if (palette == -1) {
             PopupMenu popupMenu = new PopupMenu(this, view);
             Menu menu = popupMenu.getMenu();
-            menu.add("Delete permanently");
-            menu.add("Restore");
+            menu.add(Menu.NONE, 3, Menu.NONE, R.string.delete_permanently);
+            menu.add(Menu.NONE, 4, Menu.NONE, R.string.common_word_restore);
             popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getTitle().toString()) {
-                    case "Delete permanently":
-                        _deleteBlock(position);
-                        break;
-
-                    case "Restore":
-                        _changePallette(position);
-                        break;
-
-                    default:
+                switch (item.getItemId()) {
+                    case 3 -> _deleteBlock(position);
+                    case 4 -> _changePallette(position);
+                    default -> {
                         return false;
+                    }
                 }
                 return true;
             });
@@ -332,17 +325,17 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
         }
         PopupMenu popupMenu = new PopupMenu(this, view);
         Menu menu = popupMenu.getMenu();
-        menu.add("Insert above");
-        menu.add("Delete");
-        menu.add("Duplicate");
-        menu.add("Move to palette");
+        menu.add(Menu.NONE, 5, Menu.NONE, R.string.insert_above);
+        menu.add(Menu.NONE, 6, Menu.NONE, R.string.common_word_delete);
+        menu.add(Menu.NONE, 7, Menu.NONE, R.string.duplicate);
+        menu.add(Menu.NONE, 8, Menu.NONE, R.string.move_to_palette);
         popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getTitle().toString()) {
-                case "Duplicate":
+            switch (item.getItemId()) {
+                case 7:
                     _duplicateBlock(position);
                     break;
 
-                case "Insert above":
+                case 5:
                     Object paletteColor = pallet_list.get(palette - 9).get("color");
                     if (paletteColor instanceof String) {
                         Intent intent = new Intent(getApplicationContext(), BlocksManagerCreatorActivity.class);
@@ -356,11 +349,11 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                     }
                     break;
 
-                case "Move to palette":
+                case 8:
                     _changePallette(position);
                     break;
 
-                case "Delete":
+                case 6:
                     new AlertDialog.Builder(this)
                             .setTitle("Delete block?")
                             .setMessage("Are you sure you want to delete this block?")

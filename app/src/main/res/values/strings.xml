@@ -2821,6 +2821,15 @@ Please check the URL again."</string>
     <string name="building_apk_file">Building APK file...</string>
     <string name="merging_dex_files">Merging DEX files...</string>
     <string name="building_apk">Building APK...</string>
+    <string name="source_code">Source code</string>
+    <string name="block_type">Block type</string>
+    <string name="import_blocks">Import blocks</string>
+    <string name="export_blocks">Export blocks</string>
+    <string name="delete_permanently">Delete permanently</string>
+    <string name="insert_above">Insert above</string>
+    <string name="duplicate">Duplicate</string>
+    <string name="move_to_palette">Move to palette</string>
+    <string name="blocks_manager">Blocks Manager</string>
 
 
 </resources>
