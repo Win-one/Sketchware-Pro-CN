@@ -30,6 +30,7 @@ import com.github.angads25.filepicker.view.FilePickerDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.sketchware.remod.R;
 
 import java.io.File;
@@ -271,13 +272,9 @@ public class Tools extends AppCompatActivity {
         apkPathDialog.a(R.drawable.ic_apk_color_96dp);
         apkPathDialog.b(getString(R.string.input_apk));
 
-        View testkey_root = getLayoutInflater().inflate(R.layout.manage_font_add, null, false);
-        TextView font_preview_text = testkey_root.findViewById(R.id.font_preview_txt);
-        TextView font_preview = testkey_root.findViewById(R.id.font_preview);
-        TextInputEditText ed_input = testkey_root.findViewById(R.id.ed_input);
-        MaterialButton select_file = testkey_root.findViewById(R.id.select_file);
-        MaterialCardView font_preview_view = testkey_root.findViewById(R.id.font_preview_view);
-        CheckBox chk_collection = testkey_root.findViewById(R.id.chk_collection);
+        View testkey_root = getLayoutInflater().inflate(R.layout.sign_apk_file_dialog, null, false);
+        TextInputEditText ed_input = testkey_root.findViewById(R.id.edit_input);
+        MaterialButton select_file = testkey_root.findViewById(R.id.btn_select);
 
         select_file.setOnClickListener(view -> {
             DialogProperties properties = new DialogProperties();
@@ -290,13 +287,7 @@ public class Tools extends AppCompatActivity {
             dialog.show();
         });
 
-        font_preview_text.setText(R.string.path_of_apk_to_sign);
-        font_preview_text.setVisibility(View.VISIBLE);
-        font_preview_view.setVisibility(View.VISIBLE);
-        font_preview.setVisibility(View.GONE);
-        chk_collection.setVisibility(View.GONE);
         apkPathDialog.a(testkey_root);
-
         apkPathDialog.a(Helper.getResString(R.string.common_word_cancel),
                 (dialogInterface, whichDialog) -> Helper.getDialogDismissListener(dialogInterface));
         apkPathDialog.b(getString(R.string.common_word_next), (dialogInterface, whichDialog) -> {

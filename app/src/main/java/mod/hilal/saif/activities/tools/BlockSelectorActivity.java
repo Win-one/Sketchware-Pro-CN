@@ -86,7 +86,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         add = findViewById(R.id.add);
         name = findViewById(R.id.name);
         title = findViewById(R.id.title);
-        MaterialButton cancel = findViewById(R.id.canc);
+        MaterialButton cancel = findViewById(R.id.cancel);
         MaterialButton save = findViewById(R.id.save);
         listview1 = findViewById(R.id.listv);
         value = findViewById(R.id.val);
@@ -191,24 +191,20 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case 2:
+            case 2 -> {
                 ArrayList<HashMap<String, Object>> arrayList = new ArrayList<>();
                 arrayList.add(data.get(current_item));
                 FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/.sketchware/resources/block/export/menu/") + data.get(current_item).get("name") + ".json", new Gson().toJson(arrayList));
                 SketchwareUtil.toast("Successfully exported block menu to:\n/Internal storage/.sketchware/resources/block/export", Toast.LENGTH_LONG);
-                break;
-
-            case 1:
-                openFileExplorerImport();
-                break;
-
-            case 3:
+            }
+            case 1 -> openFileExplorerImport();
+            case 3 -> {
                 FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/.sketchware/resources/block/export/menu/") + "All_Menus.json", new Gson().toJson(data));
                 SketchwareUtil.toast("Successfully exported block menus to:\n/Internal storage/.sketchware/resources/block/export", Toast.LENGTH_LONG);
-                break;
-
-            default:
+            }
+            default -> {
                 return false;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -274,7 +270,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
             }
         } else if (id == R.id.save) {
             save();
-        } else if (id == R.id.canc) {
+        } else if (id == R.id.cancel) {
             _fabVisibility(true);
             TransitionManager.beginDelayedTransition(background, autoTransition);
             Helper.setViewsVisibility(false, add, edit, delete);

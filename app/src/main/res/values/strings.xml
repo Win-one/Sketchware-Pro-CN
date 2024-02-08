@@ -2796,7 +2796,7 @@ Please check the URL again."</string>
     <string name="inactive">Inactive</string>
     <string name="common_word_send">Send</string>
     <string name="show_error">Show error</string>
-    <string name="sending_crash_logs">Sending crash logs…</string>
+    <string name="sending_crash_logs">Sending crash logs...</string>
     <string name="report_sent">Report sent!</string>
     <string name="no_compile_logs_found">No compile logs found.</string>
     <string name="compile_logs_have_been_cleared">Compile logs have been cleared.</string>

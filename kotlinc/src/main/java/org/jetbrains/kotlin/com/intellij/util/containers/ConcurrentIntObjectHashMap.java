@@ -4,14 +4,6 @@ package org.jetbrains.kotlin.com.intellij.util.containers;
 
 import androidx.annotation.NonNull;
 
-import org.jetbrains.kotlin.com.intellij.util.ReflectionUtil;
-
-import java.lang.invoke.MethodHandle;
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodType;
-import java.lang.reflect.Field;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -32,7 +24,6 @@ import sun.misc.Unsafe;
  * - Null values are NOT allowed
  * @author Doug Lea
  * @param <V> the type of mapped values
- * @deprecated Use {@link ConcurrentCollectionFactory#createConcurrentIntObjectMap()} instead
  */
 @Deprecated
 public final class ConcurrentIntObjectHashMap<V> implements ConcurrentIntObjectMap<V> {
