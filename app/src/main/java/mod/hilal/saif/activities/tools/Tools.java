@@ -24,6 +24,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.besome.sketch.lib.ui.EasyDeleteEditText;
 import com.github.angads25.filepicker.model.DialogConfigs;
 import com.github.angads25.filepicker.model.DialogProperties;
 import com.github.angads25.filepicker.view.FilePickerDialog;
@@ -288,6 +289,7 @@ public class Tools extends AppCompatActivity {
         });
 
         apkPathDialog.a(testkey_root);
+
         apkPathDialog.a(Helper.getResString(R.string.common_word_cancel),
                 (dialogInterface, whichDialog) -> Helper.getDialogDismissListener(dialogInterface));
         apkPathDialog.b(getString(R.string.common_word_next), (dialogInterface, whichDialog) -> {

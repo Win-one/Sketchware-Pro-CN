@@ -116,9 +116,9 @@ public class ManagePermissionActivity extends AppCompatActivity {
         var scrollToTopButton = binding.scrollToTopButton;
         MaterialButton resetPermissions = findViewById(R.id.resetPermissions);
         resetPermissions.setOnClickListener(view -> new AlertDialog.Builder(ManagePermissionActivity.this)
-                .setTitle("Reset permissions")
-                .setMessage("Are you sure you want to reset all permissions? This cannot be undone!")
-                .setPositiveButton("Reset", (dialog, which) -> {
+                .setTitle(R.string.reset_permissions)
+                .setMessage(R.string.permissions_message)
+                .setPositiveButton(R.string.common_word_reset, (dialog, which) -> {
                     FileUtil.writeFile(new FilePathUtil().getPathPermission(numProj), "[]");
                     //As FileResConfig only refreshes permissions during <init>()V, this is required.
                     frc = new FileResConfig(numProj);

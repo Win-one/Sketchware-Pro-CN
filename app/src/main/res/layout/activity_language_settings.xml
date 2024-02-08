@@ -1,62 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/rg_language"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar" />
 
-    <RadioButton
-        android:id="@+id/rb_follow_system"
+    <RadioGroup
+        android:id="@+id/rg_language"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:button="@null"
-        android:drawableEnd="@drawable/language_selector"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="@string/follow_system"
-        android:textSize="16sp"
-        android:textColor="#ff757575" />
+        android:layout_height="match_parent">
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dip"
-        android:background="#ffc7c7c7" />
+        <RadioButton
+            android:id="@+id/rb_follow_system"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:button="@null"
+            android:drawableEnd="@drawable/language_selector"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/follow_system"
+            android:textColor="#ff757575"
+            android:textSize="16sp" />
 
-    <RadioButton
-        android:id="@+id/rb_chinese"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:button="@null"
-        android:drawableEnd="@drawable/language_selector"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="@string/chinese"
-        android:textSize="16sp"
-        android:textColor="#ff757575" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip"
+            android:background="#ffc7c7c7" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dip"
-        android:background="#ffc7c7c7" />
+        <RadioButton
+            android:id="@+id/rb_chinese"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:button="@null"
+            android:drawableEnd="@drawable/language_selector"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/chinese"
+            android:textColor="#ff757575"
+            android:textSize="16sp" />
 
-    <RadioButton
-        android:id="@+id/rb_english"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:button="@null"
-        android:drawableEnd="@drawable/language_selector"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="@string/english"
-        android:textSize="16sp"
-        android:textColor="#ff757575" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip"
+            android:background="#ffc7c7c7" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dip"
-        android:background="#ffc7c7c7" />
+        <RadioButton
+            android:id="@+id/rb_english"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:button="@null"
+            android:drawableEnd="@drawable/language_selector"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/english"
+            android:textColor="#ff757575"
+            android:textSize="16sp" />
 
-</RadioGroup>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip"
+            android:background="#ffc7c7c7" />
+
+    </RadioGroup>
+</LinearLayout>

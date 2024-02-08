@@ -3,7 +3,7 @@
     xmlns:support="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_save"
-        android:icon="@drawable/save_white_48"
+        android:icon="@drawable/save_tinted_48"
         android:orderInCategory="100"
         android:title="@string/common_word_save"
         support:showAsAction="always" />

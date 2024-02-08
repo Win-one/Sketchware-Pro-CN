@@ -124,10 +124,10 @@ public class ManageAssetsActivity extends AppCompatActivity {
 
         var dialog = new MaterialAlertDialogBuilder(this)
                 .setView(dialogBinding.getRoot())
-                .setTitle("Create new")
-                .setMessage("If you're creating a file, make sure to add an extension.")
-                .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
-                .setPositiveButton("Create", null)
+                .setTitle(R.string.create_new)
+                .setMessage(R.string.creating_message)
+                .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton(R.string.common_word_create, null)
                 .create();
 
         dialog.setOnShowListener(dialogInterface -> {
@@ -199,10 +199,10 @@ public class ManageAssetsActivity extends AppCompatActivity {
         var inputText = dialogBinding.inputText;
 
         var dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle("Rename " + assetsAdapter.getFileName(position))
+                .setTitle(R.string.common_word_rename + assetsAdapter.getFileName(position))
                 .setView(dialogBinding.getRoot())
-                .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
-                .setPositiveButton("Rename", (dialogInterface, i) -> {
+                .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton(R.string.common_word_rename, (dialogInterface, i) -> {
                     if (!inputText.getText().toString().isEmpty()) {
                         FileUtil.renameFile(assetsAdapter.getItem(position), new File(current_path, inputText.getText().toString()).getAbsolutePath());
                         refresh();
@@ -222,7 +222,7 @@ public class ManageAssetsActivity extends AppCompatActivity {
 
     private void showDeleteDialog(final int position) {
         new MaterialAlertDialogBuilder(this)
-                .setTitle("Delete " + assetsAdapter.getFileName(position) + "?")
+                .setTitle(R.string.common_word_delete + assetsAdapter.getFileName(position) + "?")
                 .setMessage("Are you sure you want to delete this " + (assetsAdapter.isFolder(position) ? "folder" : "file") + "? "
                         + "This action cannot be undone.")
                 .setPositiveButton(R.string.common_word_delete, (dialog, which) -> {
@@ -302,11 +302,11 @@ public class ManageAssetsActivity extends AppCompatActivity {
                 PopupMenu popupMenu = new PopupMenu(holder.itemView.getContext(), v);
 
                 if (!isFolder(position)) {
-                    popupMenu.getMenu().add(0, 0, 0, "Edit");
+                    popupMenu.getMenu().add(0, 0, 0, R.string.common_word_edit);
                 }
 
-                popupMenu.getMenu().add(0, 1, 0, "Rename");
-                popupMenu.getMenu().add(0, 2, 0, "Delete");
+                popupMenu.getMenu().add(0, 1, 0, R.string.common_word_rename);
+                popupMenu.getMenu().add(0, 2, 0, R.string.common_word_delete);
 
                 popupMenu.setOnMenuItemClickListener(itemMenu -> {
                     switch (itemMenu.getItemId()) {

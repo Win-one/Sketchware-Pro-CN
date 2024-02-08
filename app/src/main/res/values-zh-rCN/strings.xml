@@ -3935,5 +3935,11 @@
     <string name="duplicate">重复</string>
     <string name="move_to_palette">移至调色板</string>
     <string name="blocks_manager">块管理</string>
+    <string name="reset_permissions">重置权限</string>
+    <string name="permissions_message">是否确定要重置所有权限?这无法撤消!</string>
+    <string name="select_a_resource_file">选择资源文件</string>
+    <string name="common_word_deleted">已删除</string>
+    <string name="only_xml_files_can_be_edited">只能编辑XML文件</string>
+    <string name="creating_message">如果要创建文件,请确保添加扩展名.</string>
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

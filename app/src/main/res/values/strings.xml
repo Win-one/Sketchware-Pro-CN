@@ -2360,6 +2360,12 @@ Please try again later"</string>
     <string name="duplicate">Duplicate</string>
     <string name="move_to_palette">Move to palette</string>
     <string name="blocks_manager">Blocks Manager</string>
+    <string name="reset_permissions">Reset permissions</string>
+    <string name="permissions_message">Are you sure you want to reset all permissions? This cannot be undone!</string>
+    <string name="select_a_resource_file">Select a resource file</string>
+    <string name="common_word_deleted">Deleted</string>
+    <string name="only_xml_files_can_be_edited">Only XML files can be edited</string>
+    <string name="creating_message">If you\'re creating a file, make sure to add an extension.</string>
 
 
 </resources>

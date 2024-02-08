@@ -242,7 +242,7 @@ public class ManageResourceActivity extends AppCompatActivity {
         properties.offset = Environment.getExternalStorageDirectory();
         properties.extensions = null;
         dialog = new FilePickerDialog(this, properties);
-        dialog.setTitle("Select a resource file");
+        dialog.setTitle(getString(R.string.select_a_resource_file));
         dialog.setDialogSelectionListener(selections -> {
             for (String path : selections) {
                 try {
@@ -301,7 +301,7 @@ public class ManageResourceActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.common_word_delete, (dialog, which) -> {
                     FileUtil.deleteFile(frc.listFileResource.get(position));
                     handleAdapter(temp);
-                    SketchwareUtil.toast("Deleted");
+                    SketchwareUtil.toast(getString(R.string.common_word_deleted));
                 })
                 .setNegativeButton(R.string.common_word_cancel, null)
                 .create()
@@ -321,7 +321,7 @@ public class ManageResourceActivity extends AppCompatActivity {
             intent.putExtra("xml", "");
             startActivity(intent);
         } else {
-            SketchwareUtil.toast("Only XML files can be edited");
+            SketchwareUtil.toast(getString(R.string.only_xml_files_can_be_edited));
         }
     }
 
