@@ -5,19 +5,20 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
+    <!-- please set lift on scroll to false and elevation to 0 -->
+    <!-- when you implement search -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/collapsingToolbarLayoutMediumSize"
-            app:collapsedTitleTextAppearance="@style/MaterialToolbarTextCollapsedAppearance"
-            app:expandedTitleTextAppearance="@style/MaterialToolbarTextExpandedAppearance"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:titleCollapseMode="scale">
+            android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topAppBar"
@@ -27,20 +28,13 @@
                 app:navigationIcon="@drawable/abc_ic_ab_back_material"
                 app:title="@string/local_library_manager" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <LinearLayout
-        android:id="@+id/contentLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="false"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:visibility="gone">
@@ -51,7 +45,7 @@
                 android:id="@+id/searchInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:hint="Search for permissions"
                 android:importantForAutofill="noExcludeDescendants"
@@ -71,27 +65,29 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/resetPermissions"
+                style="?attr/materialIconButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="10dp"
                 android:insetBottom="0dp"
                 android:text="@string/common_word_reset"
-                android:textColor="?colorPrimary"
-                app:backgroundTint="?android:colorBackground"
                 app:icon="@drawable/ic_reset_24"
                 app:iconGravity="textStart"
-                app:iconSize="20dp"
-                app:iconTint="?colorPrimary"
-                app:strokeColor="#B5B5B5"
-                app:strokeWidth="1dp" />
+                app:iconSize="20dp" />
         </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
+    <LinearLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!-- add padding top 8dp when search is implemented -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/librariesList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="5dp"
-            android:layout_marginTop="14dp"
             android:clipToPadding="false"
             android:paddingBottom="120dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"

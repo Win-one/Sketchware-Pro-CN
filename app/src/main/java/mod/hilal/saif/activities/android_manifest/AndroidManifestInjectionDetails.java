@@ -35,6 +35,7 @@ import java.util.HashMap;
 import mod.agus.jcoderz.lib.FileUtil;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.android_manifest.ActComponentsDialog;
+import mod.remaker.view.CustomAttributeView;
 
 public class AndroidManifestInjectionDetails extends AppCompatActivity {
 
@@ -286,31 +287,21 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.custom_view_attribute, parent, false);
-            }
-
-            LinearLayout root = convertView.findViewById(R.id.cus_attr_layout);
-            TextView attribute = convertView.findViewById(R.id.cus_attr_text);
-            ImageView options = convertView.findViewById(R.id.cus_attr_btn);
-            options.setVisibility(View.GONE);
-            a(root, (int) getDip(4), (int) getDip(2));
+            CustomAttributeView attributeView = new CustomAttributeView(parent.getContext());
 
             try {
                 SpannableString spannableString = new SpannableString((String) _data.get(position).get("value"));
                 spannableString.setSpan(new ForegroundColorSpan(0xff7a2e8c), 0, ((String) _data.get(position).get("value")).indexOf(":"), 33);
                 spannableString.setSpan(new ForegroundColorSpan(0xff212121), ((String) _data.get(position).get("value")).indexOf(":"), ((String) _data.get(position).get("value")).indexOf("=") + 1, 33);
                 spannableString.setSpan(new ForegroundColorSpan(0xff45a245), ((String) _data.get(position).get("value")).indexOf("\""), ((String) _data.get(position).get("value")).length(), 33);
-                attribute.setText(spannableString);
+                attributeView.text.setText(spannableString);
             } catch (Exception e) {
-                attribute.setText((String) _data.get(position).get("value"));
+                attributeView.text.setText((String) _data.get(position).get("value"));
             }
-            attribute.setPadding((int) getDip(12), (int) getDip(12), (int) getDip(12), (int) getDip(12));
-            attribute.setTextSize(16);
-            root.setVisibility(View.VISIBLE);
 
-            root.setOnClickListener(v -> showDial(position));
-            root.setOnLongClickListener(v -> {
+            attributeView.icon.setVisibility(View.GONE);
+            attributeView.setOnClickListener(v -> showDial(position));
+            attributeView.setOnLongClickListener(v -> {
                 new AlertDialog.Builder(AndroidManifestInjectionDetails.this)
                         .setTitle("Delete this attribute?")
                         .setMessage("This action cannot be undone.")
@@ -324,7 +315,7 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
                 return true;
             });
 
-            return convertView;
+            return attributeView;
         }
     }
 }

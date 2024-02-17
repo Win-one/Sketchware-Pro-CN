@@ -1,20 +1,16 @@
 <resources>
-
-    <style name="Platform.V21.AppTheme" parent="Theme.Material3.Dark.NoActionBar">
+    <style name="Platform.V21.AppTheme" parent="Base.AppTheme">
         <item name="android:navigationBarColor">?android:attr/colorBackground</item>
         <item name="android:statusBarColor">?android:attr/colorBackground</item>
-        <item name="textInputStyle">@style/TextInputLayoutStyle</item>
-        <item name="chipStyle">@style/ChipStyle</item>
-        <item name="fontFamily">@font/gilroy</item>
-        <item name="android:fontFamily">@font/gilroy</item>
     </style>
 
     <style name="Platform.AppTheme" parent="Platform.V21.AppTheme" />
 
-    <style name="Base.AppTheme" parent="Platform.AppTheme">
+    <style name="Base.AppTheme" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/md_theme_dark_primary</item>
         <item name="colorPrimaryFixed">@color/md_theme_dark_primaryFixed</item>
         <item name="colorPrimaryFixedDim">@color/md_theme_dark_primaryFixedDim</item>
+        <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
         <item name="colorOnPrimary">@color/md_theme_dark_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_dark_primaryContainer</item>
         <item name="colorOnPrimaryContainer">@color/md_theme_dark_onPrimaryContainer</item>
@@ -27,8 +23,7 @@
         <item name="colorSecondaryContainer">@color/md_theme_dark_secondaryContainer</item>
         <item name="colorOnSecondaryContainer">@color/md_theme_dark_onSecondaryContainer</item>
         <item name="colorOnSecondaryFixed">@color/md_theme_dark_onSecondaryFixed</item>
-        <item name="colorOnSecondaryFixedVariant">@color/md_theme_dark_onSecondaryFixedVariant
-        </item>
+        <item name="colorOnSecondaryFixedVariant">@color/md_theme_dark_onSecondaryFixedVariant</item>
         <item name="colorTertiary">@color/md_theme_dark_tertiary</item>
         <item name="colorTertiaryFixed">@color/md_theme_dark_tertiaryFixed</item>
         <item name="colorTertiaryFixedDim">@color/md_theme_dark_tertiaryFixedDim</item>
@@ -55,11 +50,6 @@
         <item name="colorAmberContainer">#5b4300</item>
         <item name="colorOnAmberContainer">#ffdf9e</item>
         <item name="harmonizeAmber">true</item>
-        <item name="colorBlue">#8ecdff</item>
-        <item name="colorOnBlue">#00344f</item>
-        <item name="colorBlueContainer">#004b70</item>
-        <item name="colorOnBlueContainer">#cae6ff</item>
-        <item name="harmonizeBlue">true</item>
         <item name="colorCoolGreen">#5cde9c</item>
         <item name="colorOnCoolGreen">#003921</item>
         <item name="colorCoolGreenContainer">#005232</item>
@@ -70,32 +60,10 @@
         <item name="colorGreenContainer">#00504a</item>
         <item name="colorOnGreenContainer">#72f7e9</item>
         <item name="harmonizeGreen">true</item>
-        <item name="colorIndigo">#bac3ff</item>
-        <item name="colorOnIndigo">#08218a</item>
-        <item name="colorIndigoContainer">#293ca0</item>
-        <item name="colorOnIndigoContainer">#dee0ff</item>
-        <item name="harmonizeIndigo">true</item>
-        <item name="colorLightBlue">#7fd0ff</item>
-        <item name="colorOnLightBlue">#00344a</item>
-        <item name="colorLightBlueContainer">#004c6a</item>
-        <item name="colorOnLightBlueContainer">#c5e7ff</item>
-        <item name="harmonizeLightBlue">true</item>
-        <item name="colorLightOrange">#ffb86a</item>
-        <item name="colorOnLightOrange">#492900</item>
-        <item name="colorLightOrangeContainer">#683d00</item>
-        <item name="colorOnLightOrangeContainer">#ffdcbc</item>
-        <item name="harmonizeLightOrange">true</item>
-        <item name="colorPink">#ffb3ad</item>
-        <item name="colorOnPink">#68000a</item>
-        <item name="colorPinkContainer">#930013</item>
-        <item name="colorOnPinkContainer">#ffdad7</item>
-        <item name="harmonizePink">true</item>
-        <item name="colorOrange">#ffb86a</item>
-        <item name="colorOnOrange">#492900</item>
-        <item name="colorOrangeContainer">#683d00</item>
-        <item name="colorOnOrangeContainer">#ffdcbc</item>
-        <item name="harmonizeOrange">true</item>
-        <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
+        <item name="colorViolet">#f4aeff</item>
+        <item name="colorOnViolet">#550069</item>
+        <item name="colorVioletContainer">#6f2382</item>
+        <item name="colorOnVioletContainer">#fdd6ff</item>
+        <item name="harmonizeViolet">true</item>
     </style>
-
 </resources>

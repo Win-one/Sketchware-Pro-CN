@@ -8,11 +8,56 @@
         android:id="@+id/back"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#ffeeeeee"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ff008dcd"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="8dp">
 
-        <com.google.android.material.card.MaterialCardView
+            <ImageView
+                android:id="@+id/ig_toolbar_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/arrow_back_white_48dp" />
+
+            <TextView
+                android:id="@+id/tx_toolbar_title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:gravity="center|start"
+                android:paddingStart="10dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="6dp"
+                android:text="Title"
+                android:textColor="@color/tool_bar_text_color"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ig_toolbar_load_file"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="9dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/add_file_48"
+                android:visibility="gone" />
+        </LinearLayout>
+
+
+        <androidx.cardview.widget.CardView
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -157,31 +202,35 @@
                         android:orientation="horizontal">
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/cancel"
+                            android:id="@+id/canc"
+                            style="@style/Widget.MaterialComponents.Button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="#ff008dcd"
                             android:gravity="center"
                             android:padding="8dp"
-                            android:text="@string/common_word_cancel"
+                            android:text="cancel"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                             android:textColor="#ffffffff"
                             android:textSize="11sp" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/save"
+                            style="@style/Widget.MaterialComponents.Button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
+                            android:background="#ff008dcd"
                             android:gravity="center"
                             android:padding="8dp"
-                            android:text="@string/common_word_save"
+                            android:text="save"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                             android:textColor="#ffffffff"
                             android:textSize="11sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -203,7 +252,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -250,7 +299,7 @@
                             android:src="@drawable/plus_96" />
                     </LinearLayout>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

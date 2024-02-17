@@ -1,38 +1,29 @@
 package mod.hilal.saif.activities.tools;
 
+import static com.besome.sketch.editor.view.ViewEditor.shakeView;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.RippleDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Pair;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import com.besome.sketch.lib.ui.EasyDeleteEditText;
+import com.besome.sketch.editor.manage.library.LibraryItemView;
 import com.github.angads25.filepicker.model.DialogConfigs;
 import com.github.angads25.filepicker.model.DialogProperties;
 import com.github.angads25.filepicker.view.FilePickerDialog;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.sketchware.remod.R;
+import com.sketchware.remod.databinding.DialogSelectApkToSignBinding;
 
 import java.io.File;
 
@@ -42,12 +33,11 @@ import kellinwood.security.zipsigner.ZipSigner;
 import mod.SketchwareUtil;
 import mod.agus.jcoderz.lib.FileUtil;
 import mod.alucard.tn.apksigner.ApkSigner;
-import mod.hey.studios.code.SrcCodeEditor;
 import mod.hey.studios.code.SrcCodeEditorLegacy;
 import mod.hey.studios.util.Helper;
 import mod.khaled.logcat.LogReaderActivity;
 
-public class Tools extends AppCompatActivity {
+public class Tools extends Activity {
 
     private LinearLayout base;
 
@@ -72,63 +62,21 @@ public class Tools extends AppCompatActivity {
         setContentView(_base);
     }
 
-    private void makeup(View parent, int iconResourceId, String title, String subtitle) {
-        View inflate = getLayoutInflater().inflate(R.layout.manage_library_base_item, null);
-        ImageView icon = inflate.findViewById(R.id.lib_icon);
-        inflate.findViewById(R.id.tv_enable).setVisibility(View.GONE);
-        ((LinearLayout) icon.getParent()).setGravity(Gravity.CENTER);
-        icon.setImageResource(iconResourceId);
-        ((TextView) inflate.findViewById(R.id.lib_title)).setText(title);
-        ((TextView) inflate.findViewById(R.id.lib_desc)).setText(subtitle);
-        ((ViewGroup) parent).addView(inflate);
-    }
-
-    private MaterialCardView newCard(int width, int height, float weight) {
-        MaterialCardView cardView = new MaterialCardView(this);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height, weight);
-        layoutParams.setMargins(
-                (int) SketchwareUtil.getDip(4),
-                (int) SketchwareUtil.getDip(2),
-                (int) SketchwareUtil.getDip(4),
-                (int) SketchwareUtil.getDip(2)
-        );
-        cardView.setLayoutParams(layoutParams);
-        cardView.setPadding(
-                (int) SketchwareUtil.getDip(2),
-                (int) SketchwareUtil.getDip(2),
-                (int) SketchwareUtil.getDip(2),
-                (int) SketchwareUtil.getDip(2)
-        );
-        cardView.setCardBackgroundColor(Color.WHITE);
-        cardView.setRadius(SketchwareUtil.getDip(4));
-        return cardView;
-    }
-
-    private LinearLayout newLayout(int width, int height, float weight) {
-        LinearLayout linearLayout = new LinearLayout(this);
-        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(width, height, weight));
-        linearLayout.setPadding(
-                (int) SketchwareUtil.getDip(1),
-                (int) SketchwareUtil.getDip(1),
-                (int) SketchwareUtil.getDip(1),
-                (int) SketchwareUtil.getDip(1)
-        );
-        GradientDrawable gradientDrawable = new GradientDrawable();
-        gradientDrawable.setColor(Color.WHITE);
-        linearLayout.setBackground(new RippleDrawable(new ColorStateList(new int[][]{new int[0]}, new int[]{Color.parseColor("#64B5F6")}), gradientDrawable, null));
-        linearLayout.setClickable(true);
-        linearLayout.setFocusable(true);
-        return linearLayout;
+    private void makeup(LibraryItemView parent, int iconResourceId, String title, String description) {
+        parent.enabled.setVisibility(View.GONE);
+        parent.icon.setImageResource(iconResourceId);
+        parent.title.setText(title);
+        parent.description.setText(description);
     }
 
     private void newToolbar(View parent) {
-        View toolbar = getLayoutInflater().inflate(R.layout.toolbar, null);
-        toolbar.findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
-        setSupportActionBar((Toolbar) toolbar);
-        getSupportActionBar().setTitle(R.string.developer_tools);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        ((Toolbar) toolbar).setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        View toolbar = getLayoutInflater().inflate(R.layout.toolbar_improved, null);
+        ((TextView) toolbar.findViewById(R.id.tx_toolbar_title)).setText("Tools");
+        ImageView back = toolbar.findViewById(R.id.ig_toolbar_back);
+
+        back.setOnClickListener(Helper.getBackPressedClickListener(this));
+        Helper.applyRippleToToolbarView(back);
+
         parent.setPadding(0, 0, 0, 0);
         ((ViewGroup) parent).addView(toolbar, 0);
     }
@@ -141,15 +89,15 @@ public class Tools extends AppCompatActivity {
         properties.error_dir = getExternalCacheDir();
         properties.extensions = null;
         FilePickerDialog dialog = new FilePickerDialog(this, properties);
-        dialog.setTitle(getString(R.string.select_an_entry_to_modify));
+        dialog.setTitle("Select an entry to modify");
         dialog.setDialogSelectionListener(files -> {
             final boolean isDirectory = new File(files[0]).isDirectory();
             if (files.length > 1 || isDirectory) {
                 new AlertDialog.Builder(this)
-                        .setTitle(R.string.select_an_action)
-                        .setSingleChoiceItems(new String[]{getString(R.string.common_word_delete)}, -1, (actionDialog, which) -> {
+                        .setTitle("Select an action")
+                        .setSingleChoiceItems(new String[]{"Delete"}, -1, (actionDialog, which) -> {
                             new AlertDialog.Builder(this)
-                                    .setTitle(R.string.common_word_delete + (isDirectory ? "folder" : "file") + "?")
+                                    .setTitle("Delete " + (isDirectory ? "folder" : "file") + "?")
                                     .setMessage("Are you sure you want to delete this " + (isDirectory ? "folder" : "file") + " permanently? This cannot be undone.")
                                     .setPositiveButton(R.string.common_word_delete, (deleteConfirmationDialog, pressedButton) -> {
                                         for (String file : files) {
@@ -164,28 +112,25 @@ public class Tools extends AppCompatActivity {
                         .show();
             } else {
                 new AlertDialog.Builder(this)
-                        .setTitle(R.string.select_an_action)
-                        .setSingleChoiceItems(new String[]{getString(R.string.common_word_edit), getString(R.string.common_word_delete)}, -1, (actionDialog, which) -> {
+                        .setTitle("Select an action")
+                        .setSingleChoiceItems(new String[]{"Edit", "Delete"}, -1, (actionDialog, which) -> {
                             switch (which) {
-                                case 0:
+                                case 0 -> {
                                     Intent intent = new Intent(getApplicationContext(), ConfigActivity.isLegacyCeEnabled() ?
                                             SrcCodeEditorLegacy.class
-                                            : SrcCodeEditor.class);
+                                            : mod.hey.studios.code.SrcCodeEditor.class);
                                     intent.putExtra("title", Uri.parse(files[0]).getLastPathSegment());
                                     intent.putExtra("content", files[0]);
                                     intent.putExtra("xml", "");
                                     startActivity(intent);
-                                    break;
-
-                                case 1:
-                                    new AlertDialog.Builder(this)
-                                            .setTitle(R.string.delete_file)
-                                            .setMessage(R.string.delete_file_permanently)
-                                            .setPositiveButton(R.string.common_word_delete, (deleteDialog, pressedButton) ->
-                                                    FileUtil.deleteFile(files[0]))
-                                            .setNegativeButton(R.string.common_word_cancel, null)
-                                            .show();
-                                    break;
+                                }
+                                case 1 -> new AlertDialog.Builder(this)
+                                        .setTitle("Delete file?")
+                                        .setMessage("Are you sure you want to delete this file permanently? This cannot be undone.")
+                                        .setPositiveButton(R.string.common_word_delete, (deleteDialog, pressedButton) ->
+                                                FileUtil.deleteFile(files[0]))
+                                        .setNegativeButton(R.string.common_word_cancel, null)
+                                        .show();
                             }
                             actionDialog.dismiss();
                         })
@@ -196,106 +141,89 @@ public class Tools extends AppCompatActivity {
     }
 
     private void setupViews() {
-        MaterialCardView blockManager = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0f);
-        LinearLayout newLayout = newLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 0.0f);
-        blockManager.addView(newLayout);
-        makeup(newLayout, R.drawable.block_96_blue, getString(R.string.block_manager), getString(R.string.manage_your_own_blocks_to_use_in_logic_editor));
+        LibraryItemView blockManager = new LibraryItemView(this);
+        makeup(blockManager, R.drawable.block_96_blue, "Block manager", "Manage your own blocks to use in Logic Editor");
         base.addView(blockManager);
-        newLayout.setOnClickListener(new ActivityLauncher(
+        blockManager.setOnClickListener(new ActivityLauncher(
                 new Intent(getApplicationContext(), BlocksManager.class)));
 
-        MaterialCardView blockSelectorManager = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0f);
-        LinearLayout blockSelectorManagerLayout = newLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 0.0f);
-        blockSelectorManager.addView(blockSelectorManagerLayout);
-        makeup(blockSelectorManagerLayout, R.drawable.pull_down_48, getString(R.string.block_selector_menu_manager), getString(R.string.manage_your_own_block_selector_menus));
+        LibraryItemView blockSelectorManager = new LibraryItemView(this);
+        makeup(blockSelectorManager, R.drawable.pull_down_48, "Block selector menu manager", "Manage your own block selector menus");
         base.addView(blockSelectorManager);
-        blockSelectorManagerLayout.setOnClickListener(new ActivityLauncher(
+        blockSelectorManager.setOnClickListener(new ActivityLauncher(
                 new Intent(getApplicationContext(), BlockSelectorActivity.class)));
 
-        MaterialCardView componentManager = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0f);
-        LinearLayout componentManagerLayout = newLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 0.0f);
-        componentManager.addView(componentManagerLayout);
-        makeup(componentManagerLayout, R.drawable.collage_48, getString(R.string.component_manager), getString(R.string.manage_your_own_components));
+        LibraryItemView componentManager = new LibraryItemView(this);
+        makeup(componentManager, R.drawable.collage_48, "Component manager", "Manage your own components");
         base.addView(componentManager);
-        componentManagerLayout.setOnClickListener(new ActivityLauncher(
+        componentManager.setOnClickListener(new ActivityLauncher(
                 new Intent(getApplicationContext(), ManageCustomComponentActivity.class)));
 
-        MaterialCardView eventManager = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0f);
-        LinearLayout eventManagerLayout = newLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 0.0f);
-        eventManager.addView(eventManagerLayout);
-        makeup(eventManagerLayout, R.drawable.event_on_item_clicked_48dp, getString(R.string.event_manager), getString(R.string.manage_your_own_events));
+        LibraryItemView eventManager = new LibraryItemView(this);
+        makeup(eventManager, R.drawable.event_on_item_clicked_48dp, "Event manager", "Manage your own events");
         base.addView(eventManager);
-        eventManagerLayout.setOnClickListener(new ActivityLauncher(
+        eventManager.setOnClickListener(new ActivityLauncher(
                 new Intent(getApplicationContext(), EventsMaker.class)));
 
-        MaterialCardView localLibraryManager = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0f);
-        LinearLayout localLibraryManagerLayout = newLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 0.0f);
-        localLibraryManager.addView(localLibraryManagerLayout);
-        makeup(localLibraryManagerLayout, R.drawable.colored_box_96, getString(R.string.local_library_manager), getString(R.string.manage_and_download_local_libraries));
+        LibraryItemView localLibraryManager = new LibraryItemView(this);
+        makeup(localLibraryManager, R.drawable.colored_box_96, "Local library manager", "Manage and download local libraries");
         base.addView(localLibraryManager);
-        localLibraryManagerLayout.setOnClickListener(new ActivityLauncher(
+        localLibraryManager.setOnClickListener(new ActivityLauncher(
                 new Intent(getApplicationContext(), ManageLocalLibraryActivity.class),
                 new Pair<>("sc_id", "system")));
 
-        MaterialCardView modSettings = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0f);
-        LinearLayout modSettingsLayout = newLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 0.0f);
-        modSettings.addView(modSettingsLayout);
-        makeup(modSettingsLayout, R.drawable.engineering_48, getString(R.string.mod_settings), getString(R.string.change_general_mod_settings));
+        LibraryItemView modSettings = new LibraryItemView(this);
+        makeup(modSettings, R.drawable.engineering_48, "Mod settings", "Change general mod settings");
         base.addView(modSettings);
-        modSettingsLayout.setOnClickListener(new ActivityLauncher(
+        modSettings.setOnClickListener(new ActivityLauncher(
                 new Intent(getApplicationContext(), ConfigActivity.class)));
 
-        MaterialCardView openWorkingDirectory = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0f);
-        LinearLayout openWorkingDirectoryLayout = newLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 0.0f);
-        openWorkingDirectory.addView(openWorkingDirectoryLayout);
-        makeup(openWorkingDirectoryLayout, R.mipmap.ic_type_folder, getString(R.string.open_working_directory), getString(R.string.open_directory));
+        LibraryItemView openWorkingDirectory = new LibraryItemView(this);
+        makeup(openWorkingDirectory, R.mipmap.ic_type_folder, "Open working directory", "Open Sketchware Pro's directory and edit files in it");
         base.addView(openWorkingDirectory);
-        openWorkingDirectoryLayout.setOnClickListener(v -> openWorkingDirectory());
+        openWorkingDirectory.setOnClickListener(v -> openWorkingDirectory());
 
-        MaterialCardView signApkFile = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0f);
-        LinearLayout signApkFileLayout = newLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 0.0f);
-        signApkFile.addView(signApkFileLayout);
-        makeup(signApkFileLayout, R.drawable.ic_apk_color_96dp, getString(R.string.sign_an_apk_file_with_testkey), getString(R.string.sign_an_already_existing_apk_file));
+        LibraryItemView signApkFile = new LibraryItemView(this);
+        makeup(signApkFile, R.drawable.ic_apk_color_96dp, "Sign an APK file with testkey", "Sign an already existing APK file with testkey and signature schemes up to V4");
         base.addView(signApkFile);
-        signApkFileLayout.setOnClickListener(v -> signApkFileDialog());
+        signApkFile.setOnClickListener(v -> signApkFileDialog());
 
-        MaterialCardView openLogcatReader = newCard(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0f);
-        LinearLayout logcatReaderLayout = newLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 0.0f);
-        openLogcatReader.addView(logcatReaderLayout);
-        makeup(logcatReaderLayout, R.drawable.icons8_app_components, getString(R.string.design_drawer_menu_title_logcat_reader), getString(R.string.design_drawer_menu_subtitle_logcat_reader));
+        LibraryItemView openLogcatReader = new LibraryItemView(this);
+        makeup(openLogcatReader, R.drawable.icons8_app_components, getString(R.string.design_drawer_menu_title_logcat_reader), getString(R.string.design_drawer_menu_subtitle_logcat_reader));
         base.addView(openLogcatReader);
-        logcatReaderLayout.setOnClickListener(new ActivityLauncher(
+        openLogcatReader.setOnClickListener(new ActivityLauncher(
                 new Intent(getApplicationContext(), LogReaderActivity.class)));
     }
 
     private void signApkFileDialog() {
+        final boolean[] isAPKSelected = {false};
         aB apkPathDialog = new aB(this);
-        apkPathDialog.a(R.drawable.ic_apk_color_96dp);
-        apkPathDialog.b(getString(R.string.input_apk));
+        apkPathDialog.b("Sign APK with testkey");
 
-        View testkey_root = getLayoutInflater().inflate(R.layout.sign_apk_file_dialog, null, false);
-        TextInputEditText ed_input = testkey_root.findViewById(R.id.edit_input);
-        MaterialButton select_file = testkey_root.findViewById(R.id.btn_select);
+        DialogSelectApkToSignBinding binding = DialogSelectApkToSignBinding.inflate(getLayoutInflater());
+        View testkey_root = binding.getRoot();
+        TextView apk_path_txt = binding.apkPathTxt;
 
-        select_file.setOnClickListener(view -> {
+        binding.selectFile.setOnClickListener(v -> {
             DialogProperties properties = new DialogProperties();
             properties.selection_mode = DialogConfigs.SINGLE_MODE;
             properties.selection_type = DialogConfigs.FILE_SELECT;
             properties.extensions = new String[]{"apk"};
             FilePickerDialog dialog = new FilePickerDialog(this, properties);
-            dialog.setDialogSelectionListener(files -> ed_input.setText(files[0]));
-            dialog.setTitle(getString(R.string.select_the_apk_to_sign));
+            dialog.setDialogSelectionListener(files -> {
+                isAPKSelected[0] = true;
+                apk_path_txt.setText(files[0]);
+            });
             dialog.show();
         });
 
-        apkPathDialog.a(testkey_root);
-
-        apkPathDialog.a(Helper.getResString(R.string.common_word_cancel),
-                (dialogInterface, whichDialog) -> Helper.getDialogDismissListener(dialogInterface));
-        apkPathDialog.b(getString(R.string.common_word_next), (dialogInterface, whichDialog) -> {
-            dialogInterface.dismiss();
-
-            String input_apk_path = ed_input.getText().toString();
+        apkPathDialog.b("Continue", (dialogInterface, i) -> {
+            if(!isAPKSelected[0]) {
+                SketchwareUtil.toast("Please select an APK file to sign", Toast.LENGTH_SHORT);
+                shakeView(binding.selectFile);
+                return;
+            }
+            String input_apk_path = apk_path_txt.getText().toString();
             String output_apk_file_name = Uri.fromFile(new File(input_apk_path)).getLastPathSegment();
             String output_apk_path = new File(Environment.getExternalStorageDirectory(),
                     "sketchware/signed_apk/" + output_apk_file_name).getAbsolutePath();
@@ -304,8 +232,7 @@ public class Tools extends AppCompatActivity {
                 aB confirmOverwrite = new aB(this);
                 confirmOverwrite.a(R.drawable.color_save_as_new_96);
                 confirmOverwrite.b("File exists");
-                confirmOverwrite.a("An APK named " + output_apk_file_name + " already exists at " +
-                        "/Internal storage/sketchware/signed_apk/. Overwrite it?");
+                confirmOverwrite.a("An APK named " + output_apk_file_name + " already exists at /sketchware/signed_apk/.  Overwrite it?");
 
                 confirmOverwrite.a(Helper.getResString(R.string.common_word_cancel),
                         (d, which) -> Helper.getDialogDismissListener(d));
@@ -320,6 +247,11 @@ public class Tools extends AppCompatActivity {
                         null, null, null, null);
             }
         });
+
+        apkPathDialog.a(Helper.getResString(R.string.common_word_cancel), (dialogInterface, whichDialog) -> dialogInterface.dismiss());
+
+        apkPathDialog.a(testkey_root);
+        apkPathDialog.autoDismiss(false);
         apkPathDialog.show();
     }
 
@@ -335,7 +267,7 @@ public class Tools extends AppCompatActivity {
         scroll_view.addView(tv_log);
         layout_quiz.addView(scroll_view);
 
-        tv_progress.setText(R.string.signing_apk);
+        tv_progress.setText("Signing APK...");
 
         AlertDialog building_dialog = new AlertDialog.Builder(this)
                 .setView(building_root)

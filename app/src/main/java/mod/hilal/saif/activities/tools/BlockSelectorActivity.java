@@ -10,30 +10,24 @@ import android.os.Parcelable;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.Spinner;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.github.angads25.filepicker.model.DialogConfigs;
 import com.github.angads25.filepicker.model.DialogProperties;
 import com.github.angads25.filepicker.view.FilePickerDialog;
-import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.sketchware.remod.R;
+import com.sketchware.remod.databinding.MenuActivityBinding;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -49,57 +43,34 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
     private static final File BLOCK_SELECTOR_MENUS_FILE = new File(Environment.getExternalStorageDirectory(), ".sketchware/resources/block/My Block/menu.json");
 
     private final ArrayList<String> display = new ArrayList<>();
-    private LinearLayout add;
-    private LinearLayout background;
-    private LinearLayout bottom;
-    private LinearLayout container;
     private ArrayList<String> contents = new ArrayList<>();
-    private int current_item = 0;
+    private int current_item;
     private ArrayList<HashMap<String, Object>> data = new ArrayList<>();
-    private LinearLayout delete;
-    private LinearLayout edit;
-    private boolean isNewGroup = false;
-    private TextView label;
-    private ListView listview1;
+    private boolean isNewGroup;
     private HashMap<String, Object> map = new HashMap<>();
-    private EditText name;
-    private Spinner spinner1;
-    private EditText title;
-    private EditText value;
+
+    private MenuActivityBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_activity);
+        binding = MenuActivityBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         initialize();
         initializeLogic();
     }
 
     private void initialize() {
-        background = findViewById(R.id.back);
-        bottom = findViewById(R.id.bottom);
-        label = findViewById(R.id.label);
-        container = findViewById(R.id.contai);
-        spinner1 = findViewById(R.id.spinner);
-        delete = findViewById(R.id.dele);
-        edit = findViewById(R.id.edi);
-        add = findViewById(R.id.add);
-        name = findViewById(R.id.name);
-        title = findViewById(R.id.title);
-        MaterialButton cancel = findViewById(R.id.cancel);
-        MaterialButton save = findViewById(R.id.save);
-        listview1 = findViewById(R.id.listv);
-        value = findViewById(R.id.val);
-        LinearLayout add_value = findViewById(R.id.add_val);
         fixbug();
-        add_value.setOnClickListener(this);
-        delete.setOnClickListener(this);
-        edit.setOnClickListener(this);
-        add.setOnClickListener(this);
-        cancel.setOnClickListener(this);
-        save.setOnClickListener(this);
+        binding.igToolbarBack.setOnClickListener(Helper.getBackPressedClickListener(this));
+        binding.addVal.setOnClickListener(this);
+        binding.dele.setOnClickListener(this);
+        binding.edi.setOnClickListener(this);
+        binding.add.setOnClickListener(this);
+        binding.canc.setOnClickListener(this);
+        binding.save.setOnClickListener(this);
 
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 _showItem(position);
@@ -110,103 +81,105 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
             }
         });
 
-        listview1.setOnItemLongClickListener((parent, view, position, id) -> {
+        binding.listv.setOnItemLongClickListener((parent, view, position, id) -> {
             if (current_item != 0) {
                 new AlertDialog.Builder(this).setTitle(contents.get(position))
-                        .setMessage(R.string.delete_this_item)
-                        .setPositiveButton(R.string.common_word_delete, (dialog, which) -> {
+                        .setMessage("Delete this item?")
+                        .setPositiveButton("Delete", (dialog, which) -> {
                             contents.remove(position);
                             map.put("data", contents);
                             _save_item();
                             _showItem(current_item);
                         })
-                        .setNegativeButton(R.string.common_word_cancel, null)
-                        .setNeutralButton(R.string.copy_item, (dialog, which) -> {
+                        .setNegativeButton("Cancel", null)
+                        .setNeutralButton("Copy item", (dialog, which) -> {
                             ((ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("clipboard", contents.get(position)));
-                            SketchwareUtil.toast(getString(R.string.copied_to_clipboard));
+                            SketchwareUtil.toast("Copied to clipboard");
                         })
                         .show();
             }
             return true;
         });
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
-        getSupportActionBar().setTitle(R.string.block_selector_menu_manager);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        binding.igToolbarLoadFile.setVisibility(View.VISIBLE);
+        binding.igToolbarLoadFile.setImageResource(R.drawable.ic_more_vert_white_24dp);
+        binding.igToolbarLoadFile.setOnClickListener(v -> showOptionsMenu());
+        applyRippleToView(binding.igToolbarBack, binding.dele, binding.edi, binding.add, binding.canc, binding.save, binding.addVal, binding.igToolbarLoadFile);
     }
 
     private void save() {
-        if (name.getText().toString().isEmpty()) {
+        if (binding.name.getText().toString().isEmpty()) {
             SketchwareUtil.toast("Enter a name");
-        } else if (title.getText().toString().isEmpty()) {
+        } else if (binding.title.getText().toString().isEmpty()) {
             SketchwareUtil.toast("Enter a title");
         } else {
             if (isNewGroup) {
                 map = new HashMap<>();
-                map.put("name", name.getText().toString());
-                map.put("title", title.getText().toString());
+                map.put("name", binding.name.getText().toString());
+                map.put("title", binding.title.getText().toString());
                 map.put("data", new ArrayList<>());
                 data.add(map);
                 _save_item();
                 _refresh_display();
                 _fabVisibility(true);
-                spinner1.setSelection(data.size() - 1);
+                binding.spinner.setSelection(data.size() - 1);
                 AutoTransition autoTransition = new AutoTransition();
                 autoTransition.setDuration(200L);
-                TransitionManager.beginDelayedTransition(background, autoTransition);
-                container.setVisibility(View.GONE);
-                Helper.setViewsVisibility(false, add, edit, delete);
-                spinner1.setEnabled(true);
-                listview1.setEnabled(true);
+                TransitionManager.beginDelayedTransition(binding.back, autoTransition);
+                binding.contai.setVisibility(View.GONE);
+                Helper.setViewsVisibility(false, binding.igToolbarLoadFile, binding.add, binding.edi, binding.dele);
+                binding.spinner.setEnabled(true);
+                binding.listv.setEnabled(true);
                 isNewGroup = false;
             } else {
-                map.put("name", name.getText().toString());
-                map.put("title", title.getText().toString());
+                map.put("name", binding.name.getText().toString());
+                map.put("title", binding.title.getText().toString());
                 _save_item();
                 _refresh_display();
                 _fabVisibility(true);
-                spinner1.setSelection(current_item);
+                binding.spinner.setSelection(current_item);
                 AutoTransition autoTransition2 = new AutoTransition();
                 autoTransition2.setDuration(200L);
-                TransitionManager.beginDelayedTransition(background, autoTransition2);
-                container.setVisibility(View.GONE);
-                Helper.setViewsVisibility(false, add, edit, delete);
-                spinner1.setEnabled(true);
-                listview1.setEnabled(true);
+                TransitionManager.beginDelayedTransition(binding.back, autoTransition2);
+                binding.contai.setVisibility(View.GONE);
+                Helper.setViewsVisibility(false, binding.igToolbarLoadFile, binding.add, binding.edi, binding.dele);
+                binding.spinner.setEnabled(true);
+                binding.listv.setEnabled(true);
             }
-            label.setVisibility(View.GONE);
+            binding.label.setVisibility(View.GONE);
         }
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(Menu.NONE, 1, Menu.NONE, R.string.import_block_selector_menus);
-        menu.add(Menu.NONE, 2, Menu.NONE, R.string.export_current_block_selector_menu);
-        menu.add(Menu.NONE, 3, Menu.NONE, R.string.export_all_block_selector_menus);
-        return true;
-    }
+    private void showOptionsMenu() {
+        PopupMenu popupMenu = new PopupMenu(this, binding.igToolbarLoadFile);
+        Menu menu = popupMenu.getMenu();
+        menu.add("Import block selector menus");
+        menu.add("Export current block selector menu");
+        menu.add("Export all block selector menus");
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch (item.getTitle().toString()) {
+                case "Export current block selector menu":
+                    ArrayList<HashMap<String, Object>> arrayList = new ArrayList<>();
+                    arrayList.add(data.get(current_item));
+                    FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/.sketchware/resources/block/export/menu/") + data.get(current_item).get("name") + ".json", new Gson().toJson(arrayList));
+                    SketchwareUtil.toast("Successfully exported block menu to:\n/Internal storage/.sketchware/resources/block/export", Toast.LENGTH_LONG);
+                    break;
 
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case 2 -> {
-                ArrayList<HashMap<String, Object>> arrayList = new ArrayList<>();
-                arrayList.add(data.get(current_item));
-                FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/.sketchware/resources/block/export/menu/") + data.get(current_item).get("name") + ".json", new Gson().toJson(arrayList));
-                SketchwareUtil.toast("Successfully exported block menu to:\n/Internal storage/.sketchware/resources/block/export", Toast.LENGTH_LONG);
+                case "Import block selector menus":
+                    openFileExplorerImport();
+                    break;
+
+                case "Export all block selector menus":
+                    FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/.sketchware/resources/block/export/menu/") + "All_Menus.json", new Gson().toJson(data));
+                    SketchwareUtil.toast("Successfully exported block menus to:\n/Internal storage/.sketchware/resources/block/export", Toast.LENGTH_LONG);
+                    break;
+
+                default:
+                    return false;
             }
-            case 1 -> openFileExplorerImport();
-            case 3 -> {
-                FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/.sketchware/resources/block/export/menu/") + "All_Menus.json", new Gson().toJson(data));
-                SketchwareUtil.toast("Successfully exported block menus to:\n/Internal storage/.sketchware/resources/block/export", Toast.LENGTH_LONG);
-            }
-            default -> {
-                return false;
-            }
-        }
-        return super.onOptionsItemSelected(item);
+            return true;
+        });
+        popupMenu.show();
     }
 
     @Override
@@ -217,24 +190,24 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
 
         if (id == R.id.add) {
             _fabVisibility(false);
-            TransitionManager.beginDelayedTransition(background, autoTransition);
-            name.setText("");
-            title.setText("");
+            TransitionManager.beginDelayedTransition(binding.back, autoTransition);
+            binding.name.setText("");
+            binding.title.setText("");
             isNewGroup = true;
-            Helper.setViewsVisibility(true, add, edit);
-            Helper.setViewsVisibility(false, label, delete, container);
-            spinner1.setEnabled(false);
-            listview1.setEnabled(false);
+            Helper.setViewsVisibility(true, binding.igToolbarLoadFile, binding.add, binding.edi);
+            Helper.setViewsVisibility(false, binding.label, binding.dele, binding.contai);
+            binding.spinner.setEnabled(false);
+            binding.listv.setEnabled(false);
         } else if (id == R.id.add_val) {
             if (current_item != 0) {
-                if (value.getText().toString().isEmpty()) {
+                if (binding.val.getText().toString().isEmpty()) {
                     SketchwareUtil.toast("Enter a value");
                 } else {
-                    contents.add(value.getText().toString());
+                    contents.add(binding.val.getText().toString());
                     map.put("data", contents);
                     _save_item();
                     _showItem(current_item);
-                    value.setText("");
+                    binding.val.setText("");
                 }
             } else {
                 SketchwareUtil.toastError("This menu can't be modified.");
@@ -242,15 +215,15 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         } else if (id == R.id.dele) {
             if (current_item != 0) {
                 new AlertDialog.Builder(this).setMessage("Remove this menu and its items?")
-                        .setPositiveButton(R.string.common_word_remove, (dialog, which) -> {
-                            data.remove(spinner1.getSelectedItemPosition());
+                        .setPositiveButton("Remove", (dialog, which) -> {
+                            data.remove(binding.spinner.getSelectedItemPosition());
                             _save_item();
                             _refresh_display();
                             _fabVisibility(true);
                             isNewGroup = false;
-                            spinner1.setSelection(0);
+                            binding.spinner.setSelection(0);
                         })
-                        .setNegativeButton(R.string.common_word_cancel, null)
+                        .setNegativeButton("Cancel", null)
                         .create().show();
             } else {
                 SketchwareUtil.toastError("This menu can't be deleted.");
@@ -258,25 +231,25 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         } else if (id == R.id.edi) {
             if (current_item != 0) {
                 _fabVisibility(false);
-                name.setText(map.get("name").toString());
-                title.setText(map.get("title").toString());
-                TransitionManager.beginDelayedTransition(background, autoTransition);
-                container.setVisibility(View.VISIBLE);
-                Helper.setViewsVisibility(true, add, edit, delete);
-                spinner1.setEnabled(false);
-                listview1.setEnabled(false);
+                binding.name.setText(map.get("name").toString());
+                binding.title.setText(map.get("title").toString());
+                TransitionManager.beginDelayedTransition(binding.back, autoTransition);
+                binding.contai.setVisibility(View.VISIBLE);
+                Helper.setViewsVisibility(true, binding.igToolbarLoadFile, binding.add, binding.edi, binding.dele);
+                binding.spinner.setEnabled(false);
+                binding.listv.setEnabled(false);
             } else {
                 SketchwareUtil.toastError("This menu can't be modified.");
             }
         } else if (id == R.id.save) {
             save();
-        } else if (id == R.id.cancel) {
+        } else if (id == R.id.canc) {
             _fabVisibility(true);
-            TransitionManager.beginDelayedTransition(background, autoTransition);
-            Helper.setViewsVisibility(false, add, edit, delete);
-            Helper.setViewsVisibility(true, container, label);
-            spinner1.setEnabled(true);
-            listview1.setEnabled(true);
+            TransitionManager.beginDelayedTransition(binding.back, autoTransition);
+            Helper.setViewsVisibility(false, binding.igToolbarLoadFile, binding.add, binding.edi, binding.dele);
+            Helper.setViewsVisibility(true, binding.contai, binding.label);
+            binding.spinner.setEnabled(true);
+            binding.listv.setEnabled(true);
             isNewGroup = false;
         }
     }
@@ -294,7 +267,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
     }
 
     private void initializeLogic() {
-        Helper.setViewsVisibility(true, container, label);
+        Helper.setViewsVisibility(true, binding.contai, binding.label);
         _readFile();
         if (data.size() != 0) {
             _showItem(0);
@@ -366,42 +339,31 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                 return;
             }
         }
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("View");
-        arrayList.add("ViewGroup");
-        arrayList.add("LinearLayout");
-        arrayList.add("RelativeLayout");
-        arrayList.add("ScrollView");
-        arrayList.add("HorizontalScrollView");
-        arrayList.add("TextView");
-        arrayList.add("EditText");
-        arrayList.add("Button");
-        arrayList.add("RadioButton");
-        arrayList.add("CheckBox");
-        arrayList.add("Switch");
-        arrayList.add("ImageView");
-        arrayList.add("SeekBar");
-        arrayList.add("ListView");
-        arrayList.add("Spinner");
-        arrayList.add("WebView");
-        arrayList.add("MapView");
-        arrayList.add("ProgressBar");
         HashMap<String, Object> map = new HashMap<>();
         map.put("name", "typeview");
         map.put("title", "select type :");
-        map.put("data", arrayList);
+        map.put("data", new ArrayList<>(Helper.createStringList(
+                "View", "ViewGroup",
+                "LinearLayout", "RelativeLayout",
+                "ScrollView", "HorizontalScrollView",
+                "TextView", "EditText", "Button",
+                "RadioButton", "CheckBox", "Switch",
+                "ImageView", "SeekBar", "ListView",
+                "Spinner", "WebView", "MapView",
+                "ProgressBar"
+        )));
         data.add(0, map);
         _refresh_display();
     }
 
     private void fixbug() {
-        ViewGroup viewGroup = (ViewGroup) name.getParent().getParent().getParent();
-        viewGroup.removeView((ViewGroup) name.getParent().getParent());
-        viewGroup.removeView((ViewGroup) title.getParent().getParent());
-        ((ViewGroup) name.getParent()).removeView(name);
-        ((ViewGroup) title.getParent()).removeView(title);
-        viewGroup.addView(title, 0);
-        title.setHint("");
+        ViewGroup viewGroup = (ViewGroup) binding.name.getParent().getParent().getParent();
+        viewGroup.removeView((ViewGroup) binding.name.getParent().getParent());
+        viewGroup.removeView((ViewGroup) binding.title.getParent().getParent());
+        ((ViewGroup) binding.name.getParent()).removeView(binding.name);
+        ((ViewGroup) binding.title.getParent()).removeView(binding.title);
+        viewGroup.addView(binding.title, 0);
+        binding.title.setHint("");
         TextView textView = new TextView(this);
         textView.setTextColor(855638016);
         textView.setPadding((int) SketchwareUtil.getDip(8),
@@ -410,8 +372,8 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                 (int) SketchwareUtil.getDip(0));
         textView.setText("Title");
         viewGroup.addView(textView, 0);
-        viewGroup.addView(name, 0);
-        name.setHint("");
+        viewGroup.addView(binding.name, 0);
+        binding.name.setHint("");
         TextView textView2 = new TextView(this);
         textView2.setTextColor(855638016);
         textView2.setPadding((int) SketchwareUtil.getDip(8), (int) SketchwareUtil.getDip(4), (int) SketchwareUtil.getDip(8), (int) SketchwareUtil.getDip(0));
@@ -422,26 +384,26 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
     private void _showItem(int d) {
         current_item = d;
         map = data.get(d);
-        name.setText(map.get("name").toString());
-        title.setText(map.get("title").toString());
+        binding.name.setText(map.get("name").toString());
+        binding.title.setText(map.get("title").toString());
         contents = (ArrayList<String>) map.get("data");
-        Parcelable onSaveInstanceState = listview1.onSaveInstanceState();
-        listview1.setAdapter(new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, contents));
-        ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
-        listview1.onRestoreInstanceState(onSaveInstanceState);
+        Parcelable onSaveInstanceState = binding.listv.onSaveInstanceState();
+        binding.listv.setAdapter(new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_list_item_1, contents));
+        ((BaseAdapter) binding.listv.getAdapter()).notifyDataSetChanged();
+        binding.listv.onRestoreInstanceState(onSaveInstanceState);
     }
 
     private void _fabVisibility(boolean visible) {
         if (visible) {
             AutoTransition autoTransition = new AutoTransition();
             autoTransition.setDuration(200L);
-            TransitionManager.beginDelayedTransition(background, autoTransition);
-            bottom.setVisibility(View.VISIBLE);
+            TransitionManager.beginDelayedTransition(binding.back, autoTransition);
+            binding.bottom.setVisibility(View.VISIBLE);
         } else {
             AutoTransition autoTransition2 = new AutoTransition();
             autoTransition2.setDuration(200L);
-            TransitionManager.beginDelayedTransition(background, autoTransition2);
-            bottom.setVisibility(View.GONE);
+            TransitionManager.beginDelayedTransition(binding.back, autoTransition2);
+            binding.bottom.setVisibility(View.GONE);
         }
     }
 
@@ -454,7 +416,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         for (int i = 0; i < data.size(); i++) {
             display.add(data.get(i).get("name").toString());
         }
-        spinner1.setAdapter(new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_spinner_dropdown_item, display));
-        ((BaseAdapter) spinner1.getAdapter()).notifyDataSetChanged();
+        binding.spinner.setAdapter(new ArrayAdapter<>(getBaseContext(), android.R.layout.simple_spinner_dropdown_item, display));
+        ((BaseAdapter) binding.spinner.getAdapter()).notifyDataSetChanged();
     }
 }

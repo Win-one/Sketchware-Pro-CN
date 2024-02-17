@@ -1,5 +1,6 @@
 package mod.hilal.saif.activities.tools;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -12,29 +13,25 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import com.github.angads25.filepicker.model.DialogProperties;
 import com.github.angads25.filepicker.view.FilePickerDialog;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
+import com.sketchware.remod.databinding.AddCustomAttributeBinding;
+import com.sketchware.remod.databinding.AddNewListenerBinding;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -46,7 +43,7 @@ import mod.agus.jcoderz.lib.FileUtil;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.events.EventsHandler;
 
-public class EventsMaker extends AppCompatActivity {
+public class EventsMaker extends Activity {
 
     public static final File EVENT_EXPORT_LOCATION = new File(Environment.getExternalStorageDirectory(),
             ".sketchware/data/system/export/events/");
@@ -55,12 +52,14 @@ public class EventsMaker extends AppCompatActivity {
     public static final File LISTENERS_FILE = new File(Environment.getExternalStorageDirectory(),
             ".sketchware/data/system/listeners.json");
     private ArrayList<HashMap<String, Object>> listMap = new ArrayList<>();
-    private ListView listView;
+
+    private AddCustomAttributeBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_custom_attribute);
+        binding = AddCustomAttributeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         setToolbar();
         setupViews();
     }
@@ -80,8 +79,7 @@ public class EventsMaker extends AppCompatActivity {
 
     private void setupViews() {
         FloatingActionButton fab = findViewById(R.id.add_attr_fab);
-        listView = findViewById(R.id.add_attr_listview);
-        ViewGroup base = (ViewGroup) listView.getParent();
+        ViewGroup base = (ViewGroup) binding.addAttrListview.getParent();
         LinearLayout newLayout = newLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -98,7 +96,7 @@ public class EventsMaker extends AppCompatActivity {
         newLayout.addView(newText("Listeners:", 16.0f, false, 0xff888888,
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0));
         base.addView(newLayout, 1);
-        MaterialCardView newCard = newCard(
+        CardView newCard = newCard(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 0);
@@ -121,32 +119,26 @@ public class EventsMaker extends AppCompatActivity {
 
     private void showAddDial() {
         final AlertDialog create = new AlertDialog.Builder(this).create();
-        View inflate = getLayoutInflater().inflate(R.layout.add_new_listener, null);
-        create.setView(inflate);
+        AddNewListenerBinding listenerBinding = AddNewListenerBinding.inflate(getLayoutInflater());
+        create.setView(listenerBinding.getRoot());
         create.setCanceledOnTouchOutside(true);
         create.requestWindowFeature(Window.FEATURE_NO_TITLE);
         create.getWindow().setLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         create.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        TextView save = inflate.findViewById(R.id.save);
-        TextView cancel = inflate.findViewById(R.id.cancel);
-        final EditText customImport = inflate.findViewById(R.id.customimport);
-        final EditText code = inflate.findViewById(R.id.code);
-        final EditText name = inflate.findViewById(R.id.name);
-        final CheckBox separate = inflate.findViewById(R.id.separate);
-        save.setOnClickListener(v -> {
-            if (!name.getText().toString().equals("")) {
+        listenerBinding.save.setOnClickListener(v -> {
+            if (!listenerBinding.name.getText().toString().equals("")) {
                 HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put("name", name.getText().toString());
-                if (separate.isChecked()) {
-                    hashMap.put("code", "//" + name.getText().toString() + "\n" + code.getText().toString());
+                hashMap.put("name", listenerBinding.name.getText().toString());
+                if (listenerBinding.separate.isChecked()) {
+                    hashMap.put("code", "//" + listenerBinding.name.getText().toString() + "\n" + listenerBinding.code.getText().toString());
                     hashMap.put("s", "true");
                 } else {
-                    hashMap.put("code", code.getText().toString());
+                    hashMap.put("code", listenerBinding.code.getText().toString());
                     hashMap.put("s", "false");
                 }
-                hashMap.put("imports", customImport.getText().toString());
+                hashMap.put("imports", listenerBinding.customimport.getText().toString());
                 listMap.add(hashMap);
                 addItem();
                 create.dismiss();
@@ -154,7 +146,7 @@ public class EventsMaker extends AppCompatActivity {
             }
             SketchwareUtil.toastError("Invalid name!");
         });
-        cancel.setOnClickListener(Helper.getDialogDismissListener(create));
+        listenerBinding.cancel.setOnClickListener(Helper.getDialogDismissListener(create));
         create.show();
     }
 
@@ -186,27 +178,21 @@ public class EventsMaker extends AppCompatActivity {
 
     private void editItemDialog(final int position) {
         final AlertDialog create = new AlertDialog.Builder(this).create();
-        View inflate = getLayoutInflater().inflate(R.layout.add_new_listener, null);
-        create.setView(inflate);
+        AddNewListenerBinding listenerBinding = AddNewListenerBinding.inflate(getLayoutInflater());
+        create.setView(listenerBinding.getRoot());
         create.setCanceledOnTouchOutside(true);
         create.requestWindowFeature(Window.FEATURE_NO_TITLE);
         create.getWindow().setLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         create.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        TextView save = inflate.findViewById(R.id.save);
-        TextView cancel = inflate.findViewById(R.id.cancel);
-        final EditText customImport = inflate.findViewById(R.id.customimport);
-        final EditText code = inflate.findViewById(R.id.code);
-        final EditText name = inflate.findViewById(R.id.name);
-        final CheckBox separate = inflate.findViewById(R.id.separate);
-        name.setText(listMap.get(position).get("name").toString());
-        code.setText(listMap.get(position).get("code").toString());
-        customImport.setText(listMap.get(position).get("imports").toString());
+        listenerBinding.name.setText(listMap.get(position).get("name").toString());
+        listenerBinding.code.setText(listMap.get(position).get("code").toString());
+        listenerBinding.customimport.setText(listMap.get(position).get("imports").toString());
         if (listMap.get(position).containsKey("s") && listMap.get(position).get("s").toString().equals("true")) {
-            separate.setChecked(true);
+            listenerBinding.separate.setChecked(true);
             ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(listMap.get(position).get("code").toString().split("\n")));
-            if (arrayList.get(0).contains("//" + name.getText().toString())) {
+            if (arrayList.get(0).contains("//" + listenerBinding.name.getText().toString())) {
                 arrayList.remove(0);
             }
             String str = "";
@@ -217,21 +203,21 @@ public class EventsMaker extends AppCompatActivity {
                     str = str.concat("\n").concat(arrayList.get(i2));
                 }
             }
-            code.setText(str);
+            listenerBinding.code.setText(str);
         }
-        save.setOnClickListener(v -> {
-            if (!name.getText().toString().equals("")) {
+        listenerBinding.save.setOnClickListener(v -> {
+            if (!listenerBinding.name.getText().toString().equals("")) {
                 HashMap<String, Object> hashMap = listMap.get(position);
-                overrideEvents((String) hashMap.get("name"), name.getText().toString());
-                hashMap.put("name", name.getText().toString());
-                if (separate.isChecked()) {
-                    hashMap.put("code", "//" + name.getText().toString() + "\n" + code.getText().toString());
+                overrideEvents((String) hashMap.get("name"), listenerBinding.name.getText().toString());
+                hashMap.put("name", listenerBinding.name.getText().toString());
+                if (listenerBinding.separate.isChecked()) {
+                    hashMap.put("code", "//" + listenerBinding.name.getText().toString() + "\n" + listenerBinding.code.getText().toString());
                     hashMap.put("s", "true");
                 } else {
-                    hashMap.put("code", code.getText().toString());
+                    hashMap.put("code", listenerBinding.code.getText().toString());
                     hashMap.put("s", "false");
                 }
-                hashMap.put("imports", customImport.getText().toString());
+                hashMap.put("imports", listenerBinding.customimport.getText().toString());
                 FileUtil.writeFile(LISTENERS_FILE.getAbsolutePath(), new Gson().toJson(listMap));
                 refreshList();
                 create.dismiss();
@@ -239,7 +225,7 @@ public class EventsMaker extends AppCompatActivity {
             }
             SketchwareUtil.toastError("Invalid name!");
         });
-        cancel.setOnClickListener(Helper.getDialogDismissListener(create));
+        listenerBinding.cancel.setOnClickListener(Helper.getDialogDismissListener(create));
         create.show();
     }
 
@@ -247,8 +233,8 @@ public class EventsMaker extends AppCompatActivity {
         listMap.clear();
         if (FileUtil.isExistFile(LISTENERS_FILE.getAbsolutePath())) {
             listMap = new Gson().fromJson(FileUtil.readFile(LISTENERS_FILE.getAbsolutePath()), Helper.TYPE_MAP_LIST);
-            listView.setAdapter(new ListAdapter(listMap));
-            ((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+            binding.addAttrListview.setAdapter(new ListAdapter(listMap));
+            ((BaseAdapter) binding.addAttrListview.getAdapter()).notifyDataSetChanged();
         }
     }
 
@@ -378,8 +364,8 @@ public class EventsMaker extends AppCompatActivity {
         ((ViewGroup) view).addView(inflate);
     }
 
-    private MaterialCardView newCard(int width, int height, float weight) {
-        MaterialCardView cardView = new MaterialCardView(this);
+    private CardView newCard(int width, int height, float weight) {
+        CardView cardView = new CardView(this);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height, weight);
         layoutParams.setMargins(
                 (int) SketchwareUtil.getDip(4),
@@ -435,36 +421,36 @@ public class EventsMaker extends AppCompatActivity {
     }
 
     private void setToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
-        getSupportActionBar().setTitle(R.string.event_manager);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-    }
+        binding.txToolbarTitle.setText("Event manager");
+        binding.igToolbarBack.setOnClickListener(Helper.getBackPressedClickListener(this));
+        Helper.applyRippleToToolbarView(binding.igToolbarBack);
+        binding.igToolbarLoadFile.setVisibility(View.VISIBLE);
+        binding.igToolbarLoadFile.setImageResource(R.drawable.ic_more_vert_white_24dp);
+        binding.igToolbarLoadFile.setOnClickListener(v -> {
+            PopupMenu popupMenu = new PopupMenu(this, binding.igToolbarLoadFile);
+            final Menu menu = popupMenu.getMenu();
+            menu.add("Import events");
+            menu.add("Export events");
+            popupMenu.setOnMenuItemClickListener(item -> {
+                switch (item.getTitle().toString()) {
+                    case "Import events":
+                        openFileExplorerImport();
+                        break;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(Menu.NONE, 3, Menu.NONE, R.string.import_events);
-        menu.add(Menu.NONE, 4, Menu.NONE, R.string.export_events);
-        return true;
-    }
+                    case "Export events":
+                        exportAll();
+                        SketchwareUtil.toast("Successfully exported events to:\n" +
+                                "/Internal storage/.sketchware/data/system/export/events", Toast.LENGTH_LONG);
+                        break;
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case 3 -> openFileExplorerImport();
-            case 4 -> {
-                exportAll();
-                SketchwareUtil.toast("Successfully exported events to:\n" +
-                        "/Internal storage/.sketchware/data/system/export/events", Toast.LENGTH_LONG);
-            }
-            default -> {
-                return false;
-            }
-        }
-        return super.onOptionsItemSelected(item);
+                    default:
+                        return false;
+                }
+                return true;
+            });
+            popupMenu.show();
+        });
+        Helper.applyRippleToToolbarView(binding.igToolbarLoadFile);
     }
 
     private class ListAdapter extends BaseAdapter {
@@ -512,7 +498,7 @@ public class EventsMaker extends AppCompatActivity {
             linearLayout.setOnLongClickListener(v -> {
                 new AlertDialog.Builder(EventsMaker.this)
                         .setTitle(_data.get(position).get("name").toString())
-                        .setItems(new String[]{getString(R.string.common_word_edit), getString(R.string.common_word_export), getString(R.string.common_word_delete)}, (dialog, which) -> {
+                        .setItems(new String[]{"Edit", "Export", "Delete"}, (dialog, which) -> {
                             switch (which) {
                                 case 0:
                                     editItemDialog(position);
