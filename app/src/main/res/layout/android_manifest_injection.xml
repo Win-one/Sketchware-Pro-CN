@@ -34,7 +34,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="Activities"
+                    android:text="@string/activities"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?attr/colorPrimary" />
             </LinearLayout>
@@ -47,7 +47,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:onClick="showAddActivityDialog"
-                android:text="Add activity" />
+                android:text="@string/add_activity" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

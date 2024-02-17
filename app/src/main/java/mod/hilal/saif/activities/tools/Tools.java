@@ -71,7 +71,7 @@ public class Tools extends Activity {
 
     private void newToolbar(View parent) {
         View toolbar = getLayoutInflater().inflate(R.layout.toolbar_improved, null);
-        ((TextView) toolbar.findViewById(R.id.tx_toolbar_title)).setText("Tools");
+        ((TextView) toolbar.findViewById(R.id.tx_toolbar_title)).setText(R.string.developer_tools);
         ImageView back = toolbar.findViewById(R.id.ig_toolbar_back);
 
         back.setOnClickListener(Helper.getBackPressedClickListener(this));

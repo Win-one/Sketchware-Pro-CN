@@ -32,7 +32,7 @@
                     android:layout_gravity="center"
                     android:focusable="false"
                     android:padding="8.0dip"
-                    android:text="New Listener"
+                    android:text="@string/new_listener"
                     android:textColor="#ff2196f3"
                     android:textSize="18.0sp"
                     android:textStyle="bold" />
@@ -100,7 +100,7 @@
                     android:layout_height="fill_parent"
                     android:gravity="center"
                     android:padding="8.0dip"
-                    android:text="Independent class/method"
+                    android:text="@string/independent_class_method"
                     android:textColor="#ff616161"
                     android:textSize="16.0sp" />
 
@@ -124,7 +124,7 @@
                             android:focusable="false"
                             android:gravity="center"
                             android:padding="8.0dip"
-                            android:text="Cancel"
+                            android:text="@string/common_word_cancel"
                             android:textColor="#ff616161"
                             android:textSize="14.0sp"
                             android:textStyle="bold" />
@@ -144,7 +144,7 @@
                             android:focusable="false"
                             android:gravity="center"
                             android:padding="8.0dip"
-                            android:text="Save"
+                            android:text="@string/common_word_save"
                             android:textColor="#ff2196f3"
                             android:textSize="14.0sp"
                             android:textStyle="bold" />

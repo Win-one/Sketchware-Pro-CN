@@ -2366,6 +2366,7 @@ Please try again later"</string>
     <string name="common_word_deleted">Deleted</string>
     <string name="only_xml_files_can_be_edited">Only XML files can be edited</string>
     <string name="creating_message">If you\'re creating a file, make sure to add an extension.</string>
+    <string name="independent_class_method">Independent class/method</string>
 
 
 </resources>

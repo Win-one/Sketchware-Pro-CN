@@ -3941,5 +3941,6 @@
     <string name="common_word_deleted">已删除</string>
     <string name="only_xml_files_can_be_edited">只能编辑XML文件</string>
     <string name="creating_message">如果要创建文件,请确保添加扩展名.</string>
+    <string name="independent_class_method">Independent class/method</string>
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->
