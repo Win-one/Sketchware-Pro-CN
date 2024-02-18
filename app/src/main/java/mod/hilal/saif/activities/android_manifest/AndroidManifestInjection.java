@@ -11,6 +11,8 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -20,8 +22,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,6 +54,7 @@ import mod.hilal.saif.asd.DialogButtonGradientDrawable;
 import mod.jbk.code.CodeEditorColorSchemes;
 import mod.jbk.code.CodeEditorLanguages;
 import mod.remaker.view.CustomAttributeView;
+import shadow.bundletool.com.android.tools.r8.internal.Al;
 
 @SuppressLint("SetTextI18n")
 public class AndroidManifestInjection extends AppCompatActivity {
@@ -204,7 +209,7 @@ public class AndroidManifestInjection extends AppCompatActivity {
         btnSave.setOnClickListener(v -> {
             create.dismiss();
             AndroidManifestInjector.setLauncherActivity(sc_id, inputValue.getText().toString());
-            SketchwareUtil.toast("Saved");
+            SketchwareUtil.toast(getString(R.string.common_word_saved));
         });
 
         btnCancel.setOnClickListener(Helper.getDialogDismissListener(create));
@@ -357,25 +362,33 @@ public class AndroidManifestInjection extends AppCompatActivity {
     }
 
     private void setupCustomToolbar() {
-        ImageView _back = findViewById(R.id.ig_toolbar_back);
-        Helper.applyRippleToToolbarView(_back);
-        ImageView _quickSource = findViewById(R.id.ig_toolbar_load_file);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
+        getSupportActionBar().setTitle(R.string.androidmanifest_manager);
+        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+    }
 
-        TextView _title = findViewById(R.id.tx_toolbar_title);
-        _title.setText("AndroidManifest Manager");
-        _back.setOnClickListener(Helper.getBackPressedClickListener(this));
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(Menu.NONE,1,Menu.NONE,"quickSource").setIcon(R.drawable.code_white_48).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        return true;
+    }
 
-        _quickSource.setImageResource(R.drawable.code_white_48);
-        _quickSource.setVisibility(View.VISIBLE);
-        Helper.applyRippleToToolbarView(_quickSource);
-        _quickSource.setOnClickListener((v1 -> showQuickManifestSourceDialog()));
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == 1) {
+            showQuickManifestSourceDialog();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void showQuickManifestSourceDialog() {
         ProgressMsgBoxBinding loadingDialogBinding = ProgressMsgBoxBinding.inflate(getLayoutInflater());
-        loadingDialogBinding.tvProgress.setText("Generating source code...");
+        loadingDialogBinding.tvProgress.setText(R.string.generating_source_code);
         var loadingDialog = new MaterialAlertDialogBuilder(this)
-                .setTitle("Please wait")
+                .setTitle(R.string.please_wait)
                 .setCancelable(false)
                 .setView(loadingDialogBinding.getRoot())
                 .create();
@@ -386,7 +399,7 @@ public class AndroidManifestInjection extends AppCompatActivity {
 
             var dialogBuilder = new MaterialAlertDialogBuilder(this)
                     .setTitle("AndroidManifest.xml")
-                    .setPositiveButton("Dismiss", null);
+                    .setPositiveButton(R.string.common_word_dismiss, null);
 
             runOnUiThread(() -> {
                 if (isFinishing()) return;

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -23,6 +24,9 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import com.github.angads25.filepicker.model.DialogProperties;
@@ -43,7 +47,7 @@ import mod.agus.jcoderz.lib.FileUtil;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.events.EventsHandler;
 
-public class EventsMaker extends Activity {
+public class EventsMaker extends AppCompatActivity {
 
     public static final File EVENT_EXPORT_LOCATION = new File(Environment.getExternalStorageDirectory(),
             ".sketchware/data/system/export/events/");
@@ -93,7 +97,7 @@ public class EventsMaker extends Activity {
         );
         newLayout.setFocusable(false);
         newLayout.setGravity(16);
-        newLayout.addView(newText("Listeners:", 16.0f, false, 0xff888888,
+        newLayout.addView(newText(getString(R.string.listeners), 16.0f, false, 0xff888888,
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0));
         base.addView(newLayout, 1);
         CardView newCard = newCard(
@@ -105,7 +109,7 @@ public class EventsMaker extends Activity {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 0);
         newCard.addView(newLayout2);
-        makeup(newLayout2, 0x7f07043e, "Activity events", getNumOfEvents(""));
+        makeup(newLayout2, 0x7f07043e, getString(R.string.activity_events), getNumOfEvents(""));
         base.addView(newCard, 1);
         newLayout2.setOnClickListener(v -> {
             Intent intent = new Intent();
@@ -421,36 +425,33 @@ public class EventsMaker extends Activity {
     }
 
     private void setToolbar() {
-        binding.txToolbarTitle.setText("Event manager");
-        binding.igToolbarBack.setOnClickListener(Helper.getBackPressedClickListener(this));
-        Helper.applyRippleToToolbarView(binding.igToolbarBack);
-        binding.igToolbarLoadFile.setVisibility(View.VISIBLE);
-        binding.igToolbarLoadFile.setImageResource(R.drawable.ic_more_vert_white_24dp);
-        binding.igToolbarLoadFile.setOnClickListener(v -> {
-            PopupMenu popupMenu = new PopupMenu(this, binding.igToolbarLoadFile);
-            final Menu menu = popupMenu.getMenu();
-            menu.add("Import events");
-            menu.add("Export events");
-            popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getTitle().toString()) {
-                    case "Import events":
-                        openFileExplorerImport();
-                        break;
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.event_manager);
+        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+    }
 
-                    case "Export events":
-                        exportAll();
-                        SketchwareUtil.toast("Successfully exported events to:\n" +
-                                "/Internal storage/.sketchware/data/system/export/events", Toast.LENGTH_LONG);
-                        break;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(Menu.NONE,1,Menu.NONE,R.string.import_events);
+        menu.add(Menu.NONE,2,Menu.NONE,R.string.export_events);
+        return true;
+    }
 
-                    default:
-                        return false;
-                }
-                return true;
-            });
-            popupMenu.show();
-        });
-        Helper.applyRippleToToolbarView(binding.igToolbarLoadFile);
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case 1 -> openFileExplorerImport();
+            case 2 -> {
+                exportAll();
+                SketchwareUtil.toast("Successfully exported events to:\n" +
+                        "/Internal storage/.sketchware/data/system/export/events", Toast.LENGTH_LONG);
+            }
+            default -> {
+                return false;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private class ListAdapter extends BaseAdapter {

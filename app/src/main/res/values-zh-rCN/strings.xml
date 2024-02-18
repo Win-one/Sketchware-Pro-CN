@@ -13,7 +13,6 @@
     <string name="common_word_delete">删除</string>
     <string name="common_word_edit">编辑</string>
     <string name="common_word_exit">退出</string>
-    <string name="common_word_overwrite">覆盖</string>
     <string name="common_word_yes">是</string>
     <string name="common_word_no">否</string>
     <string name="common_word_modify">修改</string>
@@ -37,30 +36,24 @@
     <string name="common_word_contributor">贡献者</string>
     <string name="common_word_collection">收藏</string>
     <string name="common_word_create">创建</string>
-
     <string name="common_word_information">信息</string>
-
     <string name="common_word_decrypt">解码</string>
     <string name="common_word_import">导入</string>
     <string name="common_word_import_count">导入%s个项目</string>
     <string name="common_word_export">导出</string>
     <string name="common_word_finish">完成</string>
-
     <string name="common_word_remove">清除</string>
     <string name="common_word_run">运行</string>
     <string name="common_word_accept">保存</string>
     <string name="common_word_continue">继续</string>
     <string name="common_word_goback">返回</string>
-
     <string name="common_word_select">选择</string>
     <string name="common_word_see_more">查看更多</string>
     <string name="common_word_see_all">查看全部</string>
     <string name="common_word_settings">设置</string>
-
     <string name="common_word_share">分享</string>
     <string name="common_word_update">更新</string>
     <string name="common_word_upload">上传</string>
-
     <string name="common_word_preview">预览</string>
     <string name="common_word_review">评论</string>
     <string name="common_word_restore">恢复</string>
@@ -93,52 +86,25 @@
 
     <string name="common_message_insufficient_storage_space_title">存储空间不足</string>
     <string name="common_message_insufficient_storage_space">存储空间不足\n请腾出空间再试试</string>
-    <string name="common_message_not_enough_memory">内存不足</string>
     <string name="common_message_progress">进行中</string>
     <string name="common_message_loading">正在加载</string>
-    <string name="common_message_downloading">正在下载</string>
-    <string name="common_message_downloading_data">正在下载数据文件</string>
-    <string name="common_message_downloading_resources">下载资源中</string>
-    <string name="common_message_downloading_icon">下载图标中</string>
-    <string name="common_message_need_login">您需要登录才能使用此功能</string>
-    <string name="common_message_need_username">您需要创建一个用户名才能使用此功能</string>
     <string name="common_message_check_network">请检查您的互联网连接</string>
-    <string name="common_message_complete_copy_to_clipborad">复制到剪贴板</string>
-
-    <string name="common_message_permission_account">需要联系人权限才能在Sketchware中启用社交媒体登录. 请在下一步中提供访问权限</string>
-    <string name="common_message_permission_account1">没有权限.请点击"设置"以允许"联系人"权限.如果没有此权限,则无法使用Google帐户登录</string>
-
-    <string name="common_message_permission_account_for_purchase">为了管理购买历史记录,我们需要获得访问您的Google帐户的权限</string>
-    <string name="common_message_permission_account1_for_purchase">没有权限. 请点击"设置"以允许"联系人"的权限.\n未经其许可,我们无法管理购买历史记录</string>
-
     <string name="common_message_permission_title_storage">需要权限</string>
 
     <string name="common_message_permission_storage">要访问照片,媒体和文件,请在下一步中给予Sketchware权限</string>
     <string name="common_message_permission_storage1">没有权限.\n请点击"设置"以允许"存储".没有此权限,某些功能可能无法正常运行</string>
     <string name="common_message_permission_denied">没有权限</string>
     <string name="common_message_permission_need_load_project">我们需要您的许可才能保存和加载项目</string>
-    <string name="common_message_file_to_save_not_exist">要保存的文件不存在</string>
     <string name="common_message_name_unavailable">当前名称不可用</string>
     <string name="common_message_complete_save">保存成功</string>
     <string name="common_message_complete_reset">重置成功</string>
     <string name="common_message_complete_delete">删除成功</string>
-    <string name="common_message_complete_copy">复制成功</string>
-    <string name="common_message_complete_upload">上传成功</string>
-    <string name="common_message_complete_modify">修改成功</string>
-    <string name="common_message_complete_update">更新</string>
     <string name="common_message_confirm">你确定?</string>
-
     <string name="common_error_unknown">未知错误!请联系管理员</string>
-    <string name="common_error_failed_load_data">无法加载数据</string>
-    <string name="common_error_failed_to_initialize">无法初始化 </string>
     <string name="common_error_an_error_occurred">发生错误!</string>
     <string name="common_error_failed_to_save">无法保存</string>
     <string name="common_error_failed_to_connect_server">无法连接到服务器</string>
-    <string name="common_error_failed_to_load_ad">广告无法载入</string>
-    <string name="common_error_failed_save_server">无法保存在服务器中</string>
     <string name="common_error_activity_not_found">未找到活动</string>
-    <string name="common_error_failed_download_from_server">无法从服务器下载</string>
-    <string name="common_error_access_denied">拒绝访问</string>
     <!-- ************************************************************************************************************************* -->
     <!-- *************************************************        Common  End    *********************************************** -->
     <!-- ************************************************************************************************************************* -->
@@ -191,105 +157,36 @@
     <!-- ************************************************************************************************************************* -->
 
     <string name="myprojects_confirm_project_delete">你确定要删除这个项目吗?</string>
-    <string name="myprojects_confirm_project_overwrite">一个同名的项目已经存在.你想覆盖吗?</string>
-
     <string name="myprojects_list_menu_title_create_a_new_project">创建新项目</string>
-
     <string name="myprojects_list_menu_title_settings">设置</string>
-    <string name="myprojects_list_menu_title_share">分享</string>
-    <string name="myprojects_list_menu_title_sign">签署</string>
-    <string name="myprojects_list_menu_title_export">导出</string>
     <string name="myprojects_list_menu_title_delete">删除</string>
-
-    <string name="myprojects_show_message_different_package_name">请更改为不同的软件包名称.\n以开始的项目\"%s\" 软件包名称不能相同</string>
-    <string name="myprojects_fail_share">分享失败.请稍后再试</string>
-
     <string name="myprojects_settings_description_change_icon">点击更改图标</string>
     <string name="myprojects_settings_hint_enter_application_name">输入应用程序名称</string>
-
     <string name="myprojects_settings_actionbar_title_new_projet">新项目</string>
     <string name="myprojects_settings_actionbar_title_project_settings">项目设置</string>
     <string name="myprojects_settings_title_advanced_settings">高级设置</string>
-
     <string name="myprojects_settings_hint_enter_package_name">包名</string>
     <string name="myprojects_settings_hint_enter_project_name">项目名</string>
-
     <string name="myprojects_settings_message_contain_dot">包名称必须至少包含一个或多个点(.)字符</string>
-
     <string name="myprojects_settings_button_save">保存</string>
     <string name="myprojects_settings_button_create_app">创建应用</string>
-
     <string name="myprojects_settings_context_menu_title_choose">选择</string>
     <string name="myprojects_settings_context_menu_title_choose_gallery">从相册中选择</string>
     <string name="myprojects_settings_context_menu_title_choose_gallery_with_crop">从图库中选择(裁剪)</string>
     <string name="myprojects_settings_context_menu_title_choose_gallery_default">更改为默认图标</string>
-
     <string name="myprojects_settings_message_package_rename">此项目与Firebase关联. 如果更改软件包名称,Firebase可能无法正常工作.</string>
     <string name="myprojects_settings_confirm_reset_icon">你确定要重置图标吗？</string>
-
     <string name="myprojects_settings_version_control_title">版本控制</string>
     <string name="myprojects_settings_version_control_title_code">代码</string>
     <string name="myprojects_settings_version_control_title_name">名字</string>
 
-
-    <string name="myprojects_share_project_actionbar_title">共享项目</string>
-    <string name="myprojects_share_project_title_visibiity">公开度</string>
-    <string name="myprojects_share_project_title_visibiity_public">公开</string>
-    <string name="myprojects_share_project_title_visibiity_private">私人</string>
-
-    <string name="myprojects_share_project_title_allow_comments">允许评论</string>
-
-    <string name="myprojects_share_project_title_screenshots">截图</string>
-    <string name="myprojects_share_project_message_at_least_one_screenshot">至少需要一个屏幕截图</string>
-    <string name="myprojects_share_project_title_shrare_title">标题</string>
-    <string name="myprojects_share_project_title_shrare_description">描述</string>
-
-    <string name="myprojects_share_project_hint_share_title">这将是该帖子的标题</string>
-    <string name="myprojects_share_project_hint_share_desc">用几句话描述您的申请</string>
-
-    <string name="myprojects_share_project_dialog_terms_of_use_title">使用条款</string>
-    <string name="myprojects_share_project_dialog_terms_of_use_description">请继续阅读并同意我们的条款</string>
-
-    <string name="myprojects_share_project_message_set_project_private">如果您将项目设置为私人,则只能使用相同的登录信息访问它</string>
-
-    <string name="myprojects_share_project_message_complete_share">完成分享</string>
-
-    <string name="myprojects_share_project_title_select_my_projects">选择我的项目</string>
-    <string name="myprojects_share_project_title_select_shared_projects">选择共享项目</string>
-    <string name="myprojects_share_project_title_currently_shared_project">目前共享的项目</string>
-
-    <string name="myprojects_share_project_consent_actionbar_title">使用条款协议(Terms of Use Agreement)</string>
-
-    <string name="myprojects_share_project_consent_description_agree">您同意不会分享</string>
-    <string name="myprojects_share_project_consent_button_agree">我同意</string>
-
-    <string name="myprojects_share_project_consent_title_sexual_content">色情内容</string>
-    <string name="myprojects_share_project_consent_title_empty_projects">空项目</string>
-    <string name="myprojects_share_project_consent_title_advertisments">广告</string>
-    <string name="myprojects_share_project_consent_title_copyright_raw">侵犯版权法的内容</string>
-    <string name="myprojects_share_project_consent_title_disrespectful_or_insulting">不尊重或侮辱的项目</string>
-
-    <string name="myprojects_sign_apk_guide_title">发布到Google Play商店</string>
-    <string name="myprojects_sign_apk_guide_description">通过签署应用程序,您可以导出项目并上传到Play商店</string>
-
-    <string name="myprojects_sign_apk_actionbar_title">签署APK文件</string>
-    <string name="myprojects_sign_apk_button_sign">签署</string>
-    <string name="myprojects_sign_apk_description_need_certificate">要将APK文件上传到Google Play商店,需要使用自签署证书</string>
-    <string name="myprojects_sign_apk_title_certificate">证书</string>
-
-    <string name="myprojects_sign_apk_message_not_found_certificate">没有找到证书</string>
     <string name="myprojects_sign_apk_incorrect_password">密码错误</string>
-
     <string name="myprojects_sign_apk_hint_enter_new_password">输入新密码</string>
-    <string name="myprojects_sign_apk_hint_enter_current_password">输入当前密码</string>
-
-
     <string name="myprojects_sign_apk_new_certificate_title_new_certificate">创建一个新证书</string>
     <string name="myprojects_sign_apk_new_certificate_hint_certificate_name">输入证书名称</string>
     <string name="myprojects_sign_apk_new_certificate_title_certificate_creds">证书凭据</string>
     <string name="myprojects_sign_apk_new_certificate_title_certificate">证书</string>
     <string name="myprojects_sign_apk_new_certificate_title_validity">有效期(年)</string>
-
     <string name="myprojects_sign_apk_new_certificate_hint_first_and_last_name">名字和姓氏</string>
     <string name="myprojects_sign_apk_new_certificate_hint_organizational_unit">组织单位</string>
     <string name="myprojects_sign_apk_new_certificate_hint_organization">组织</string>
@@ -297,24 +194,9 @@
     <string name="myprojects_sign_apk_new_certificate_hint_state">州或省</string>
     <string name="myprojects_sign_apk_new_certificate_hint_country_code">国家代码(XX)</string>
     <string name="myprojects_sign_apk_new_certificate_hint_confirm_password">确认密码</string>
-
-
     <string name="myprojects_sign_apk_new_certificate_button_create">创建</string>
-
-
-    <string name="myprojects_sign_apk_title_export_certificate">导出证书</string>
     <string name="myprojects_sign_apk_error_failed_create_new_certificate">无法创建新证书</string>
-
-
-    <string name="myprojects_sign_apk_dialog_title_delete_certificate">删除证书</string>
-    <string name="myprojects_sign_apk_dialog_message_confirm_delete_certificate">您确定要删除此证书吗? 您将无法撤消此操作,并且在将应用上传到Google Play商店时可能会出现问题.</string>
     <string name="myprojects_sign_apk_dialog_complete_create_certificate">新证书已创建</string>
-
-    <string name="myprojects_export_title_email_subject">%sAPK文件的安装</string>
-    <string name="myprojects_export_title_email_body">附加文件:%s </string>
-    <string name="myprojects_export_chooser_title_email">选择邮件</string>
-    <string name="myprojects_export_button_share">分享APK文件</string>
-
     <!-- ************************************************************************************************************************* -->
     <!-- *************************************************        MY PROJECTS  End      ****************************************** -->
     <!-- ************************************************************************************************************************* -->
@@ -706,48 +588,30 @@
     <string name="logic_editor_title_select_animator_interpolator">选择插补器</string>
     <string name="logic_editor_title_select_gyroscope">选择陀螺仪组件</string>
     <string name="logic_editor_title_select_directory_type">选择目录类型</string>
-
-
     <string name="logic_editor_component_firebaseauth_title_select_firebase_auth">选择Firebase身份验证组件</string>
-
-
-
-
-
     <string name="logic_editor_option_menu_title_copy_blocks">复制块</string>
     <string name="logic_editor_option_menu_title_paste_blocks">粘贴复制的块</string>
-
     <string name="logic_editor_panel_button_add_variable">添加变量</string>
     <string name="logic_editor_panel_button_remove_variable">删除变量</string>
-
     <string name="logic_editor_panel_button_add_list">添加列表</string>
     <string name="logic_editor_panel_button_remove_list">删除列表</string>
-
     <string name="logic_editor_panel_button_create_moreblock">创建</string>
-
     <string name="logic_editor_panel_button_add_component">添加组件</string>
 
     <string name="logic_editor_title_add_new_variable">添加新变量</string>
     <string name="logic_editor_title_remove_variable">删除一个变量</string>
-
     <string name="logic_editor_title_block_collection">我的收藏</string>
-
     <string name="logic_editor_title_add_new_list">添加新列表</string>
     <string name="logic_editor_title_remove_list">删除一个列表</string>
 
     <string name="logic_editor_more_block_actionbar_title_create_more_block">创建一个新的组合块</string>
-
     <string name="logic_editor_more_block_title_name_of_block">块名称</string>
-
     <string name="logic_editor_more_block_dialog_message_confirm_goback">你确定?</string>
     <string name="logic_editor_more_block_dialog_description_goback">你目前的工作将会丢失</string>
-
     <string name="logic_editor_more_block_hint_enter_new_block_name">*输入该块的新名称</string>
     <string name="logic_editor_more_block_hint_enter_block_label">输入标签文字</string>
     <string name="logic_editor_more_block_hint_enter_variable_name">输入一个变量名称</string>
-
     <string name="logic_editor_more_block_button_add">添加</string>
-
     <string name="logic_editor_more_block_title_add_label">添加标签</string>
     <string name="logic_editor_more_block_title_add_variable">添加变量</string>
     <string name="logic_editor_more_block_title_add_variable_type">添加变量类型</string>
@@ -755,7 +619,6 @@
     <string name="logic_editor_title_enter_number_value">输入数字值</string>
     <string name="logic_editor_title_enter_string_value">输入字符串值</string>
     <string name="logic_editor_title_enter_data_value">输入数据值</string>
-
 
     <string name="logic_editor_message_currently_used_variable">所选变量当前正在使用\n请将使用此变量的块去除后再次尝试</string>
     <string name="logic_editor_message_currently_used_list">选定的列表当前正在使用\n请将使用此列表的块去除后再次尝试</string>
@@ -768,56 +631,6 @@
     <string name="logic_editor_message_name_requied">"组合块"必需有一个有效的名称</string>
 
     <string name="logic_editor_hint_enter_variable_name">输入变量名称（区分大小写）</string>
-    <!-- ************************************************************************************************************************* -->
-    <!-- *************************************************   Logic Editor   Start         **************************************** -->
-    <!-- ************************************************************************************************************************* -->
-
-    <!-- ************************************************************************************************************************* -->
-    <!-- *************************************************        Account  Start        ****************************************** -->
-    <!-- ************************************************************************************************************************* -->
-    <string name="account_mypage_tab_title_shared">共享</string>
-    <string name="account_mypage_tab_title_favorite">喜爱</string>
-
-    <string name="account_mypage_title_remaing_shares">剩余的分享:</string>
-    <string name="account_mypage_button_go_premmium">去溢价</string>
-
-    <string name="account_mypage_message_no_projects">没有要显示的项目</string>
-
-    <string name="account_settings_actionbar_title">帐号设定</string>
-    <string name="account_settings_description_no_nickname">没有创建昵称</string>
-    <string name="account_settings_button_logout">登出</string>
-
-    <string name="account_login_description_keep_your_project">使用免费的Sketchware账户保证您的项目安全</string>
-    <string name="account_login_description_create_account">创建一个Sketchware账户</string>
-    <string name="account_login_description_agree_terms">通过登录,您将同意这些条款</string>
-
-    <string name="account_login_button_terms_of_service">服务条款</string>
-
-    <string name="account_reset_password_actionbar_title">重设密码</string>
-
-    <string name="account_error_failed_login">登录失败</string>
-
-    <string name="account_dialog_google_login_title">选择一个帐户</string>
-
-    <string name="account_dialog_suspended_title">帐户已停用</string>
-    <string name="account_dialog_suspended_description">您的帐户(%s)已被停用.如果您觉得这是错误的,请联系help@sketchware.io</string>
-
-    <string name="account_deactivate_actionbar_title">停用账号</string>
-
-    <string name="account_message_nickname_unavailable">当前昵称不可用</string>
-    <string name="account_message_already_used_nickname">昵称不可用</string>
-
-
-    <string name="account_edit_profile_actionbar_title">编辑个人资料</string>
-    <string name="account_edit_profile_description_nickname_public">*此名称将显示给公众</string>
-    <string name="account_edit_profile_hint_enter_nickname">输入你的名字或昵称</string>
-
-
-    <string name="account_deactivate_dialog_deactivate_account">停用</string>
-    <string name="account_deactivate_button_deactivate_account">停用账号</string>
-    <string name="account_deactivate_dialog_confirm_lost_data">所有信息都将丢失.\n你想继续吗?</string>
-
-
     <!-- ************************************************************************************************************************* -->
     <!-- *************************************************        Account  End          ****************************************** -->
     <!-- ************************************************************************************************************************* -->
@@ -843,7 +656,6 @@
 
     <string name="shared_project_detail_dialog_last_version_title">需要更新</string>
     <string name="shared_project_detail_dialog_last_version_description">您需要最新版本的Sketchware才能打开此项目</string>
-
     <string name="shared_project_detail_dialog_share_project_title">分享项目</string>
     <string name="shared_project_detail_dialog_share_project_confirm">你想分享这个项目吗？</string>
 
@@ -854,17 +666,13 @@
 
     <string name="shared_project_detail_about_title_read_less">△收起△</string>
     <string name="shared_project_detail_about_title_read_more">阅读更多</string>
-
     <string name="shared_project_detail_about_project_information_last_updated">最近更新时间</string>
     <string name="shared_project_detail_about_project_information_registered_date">发布时间</string>
-
     <string name="shared_project_detail_about_title_more_project_by_whom">更多%s的项目 </string>
     <string name="shared_project_detail_about_title_report_project">举报项目</string>
-
     <string name="shared_project_detail_about_button_title_save_as_new">保存为新的</string>
     <string name="shared_project_detail_about_button_title_edit_project">修改项目</string>
     <string name="shared_project_detail_about_button_title_delete_project">删除项目</string>
-
     <string name="shared_project_detail_about_report_project_title_reason_type_1">色情内容</string>
     <string name="shared_project_detail_about_report_project_title_reason_type_2">暴力图像</string>
     <string name="shared_project_detail_about_report_project_title_reason_type_3">憎恨或辱骂的内容</string>
@@ -873,8 +681,6 @@
     <string name="shared_project_detail_about_report_project_title_reason_type_6">赌博内容</string>
     <string name="shared_project_detail_about_report_project_title_reason_type_7">非法活动</string>
     <string name="shared_project_detail_about_report_project_title_reason_type_8">其他异议</string>
-
-
     <string name="shared_project_detail_about_report_project_dialog_title_flag_as_inappropriate">举报不当内容</string>
     <string name="shared_project_detail_about_report_project_dialog_description_reason">您发现此内容或应用令人反感的原因:</string>
     <string name="shared_project_detail_about_report_project_hint_written_english">原因必须用英文书写</string>
@@ -882,16 +688,11 @@
     <string name="shared_project_detail_about_error_failed_delete_project">删除项目失败\n请稍后再试</string>
     <string name="shared_project_detail_about_error_failed_download_project">下载失败\n请稍后再试</string>
 
-
     <string name="shared_project_detail_comments_hint_enter_comment">输入你的评论</string>
-
     <string name="shared_project_detail_comments_context_menu_title">显示%s的项目</string>
     <string name="shared_project_detail_comments_context_menu_title_comment_copy">复制评论</string>
     <string name="shared_project_detail_comments_context_menu_title_comment_delete">删除评论</string>
-
     <string name="shared_project_detail_comments_confirm_delete_comment">你确定要删除此评论吗？ </string>
-
-
     <string name="shared_project_detail_comments_message_no_comments">没有要显示的评论</string>
     <string name="shared_project_detail_comments_message_commented">评论</string>
     <string name="shared_project_detail_comments_message_already_delete_comment">此评论已被删除</string>
@@ -901,7 +702,6 @@
     <string name="shared_project_detail_comment_hint_enter_comment">输入你的评论</string>
     <string name="shared_project_detail_comment_error_failed_comment">无法发表评论\n请稍后再试</string>
 
-
     <string name="shared_project_detail_message_already_liked_project">你已经喜欢这个项目</string>
     <string name="shared_project_detail_message_liked">喜欢</string>
     <string name="shared_project_detail_message_unliked">取消喜欢</string>
@@ -909,127 +709,18 @@
     <string name="shared_project_detail_error_failed_like_project">喜欢失败\n请稍后再试</string>
     <string name="shared_project_detail_error_failed_unlike_project">取消喜欢失败\n请稍后再试</string>
 
-
     <string name="shared_project_detail_comment_complete_deleted_comment">已删除评论</string>
     <string name="shared_project_detail_comment_complete_deleted_project">已删除的项目</string>
-
 
     <string name="shared_project_error_failed_generate_shareable_link">无法生成可分享的链接</string>
     <string name="shared_project_confirm_delete_project">你确定要删除这个项目吗?这个动作无法撤销</string>
 
-
     <string name="shared_project_viewpager_message_share_my_project">你最棒项目是什么?</string>
     <string name="shared_project_viewpager_button_share_my_project">分享我的项目</string>
-
     <string name="shared_project_viewpager_message_go_premium">想要你的项目特色?</string>
-
-
     <!-- ************************************************************************************************************************* -->
     <!-- *************************************************   Shared Project  End         ***************************************** -->
     <!-- ************************************************************************************************************************* -->
-
-    <!-- ************************************************************************************************************************* -->
-    <!-- *************************************************     Language Settings Start        ************************************ -->
-    <!-- ************************************************************************************************************************* -->
-
-    <string name="language_actionbar_title">语言文件</string>
-
-    <string name="language_upload_title">上传strings.xml</string>
-    <string name="language_download_title">下载语言文件</string>
-
-    <string name="language_title_version">版本</string>
-
-    <string name="language_dialog_title_shared_languages">共享语言文件</string>
-
-    <string name="language_dialog_reset_title">重置语言设置</string>
-    <string name="language_dialog_reset_description">确定?当前的语言文件将被删除,Sketchware将恢复为英文.</string>
-
-    <string name="language_message_confirm_update_new_version">新版本的本地化文件可用.你想更新吗?</string>
-
-    <string name="language_message_complete_download_restart">下载完成,现在重新启动Sketchware</string>
-
-    <string name="language_message_not_support_font">如果您的设备不支持上述字体,则括号中的文字可能无法显示</string>
-
-    <string name="language_actionbar_title_my_shared_language">我共享的语言文件</string>
-
-    <string name="language_actionbar_title_upload_language">上传strings.xml</string>
-    <string name="language_dialog_title_avaiable_language">可用的语言文件</string>
-
-    <string name="language_message_already_strings_xml">你已经分享了这个strings.xml文件</string>
-
-    <string name="language_actionbar_title_modify_lanuage">修改语言文件</string>
-
-    <string name="language_error_failed_upload_on_server">无法上传到服务器</string>
-    <string name="language_error_failed_update_on_server">无法更新服务器上的文件</string>
-    <string name="language_error_failed_delete_from_server">无法从服务器上删除</string>
-
-    <string name="language_message_confirm_strings_xml_upload">strings.xml文件将被上传. 继续?</string>
-    <string name="language_message_strings_xml_not_valid">你的strings.xml文件无效. 请仔细检查文件.</string>
-
-
-    <string name="language_title_language_information">语言信息</string>
-    <string name="language_invalid_rule_strings_xml_length">strings.xml的版本号不应超过%d字符</string>
-
-
-    <string name="language_message_duplicate_language_files">此文件的副本以前已下载或上传.</string>
-
-    <string name="language_message_complete_download">下载并加密完成.</string>
-
-    <string name="language_message_version_locale_not_found">未找到版本和区域设置代码.请将它们写在文件的第一行.</string>
-    <string name="language_message_missing_version_information">缺少版本信息.</string>
-    <string name="language_message_missing_locale_code">缺少语言环境代码.</string>
-    <string name="language_message_not_match_locale_code">strings.xml的语言环境代码与您尝试编辑的文件不匹配.</string>
-
-    <string name="language_detail_button_download">下载</string>
-
-    <string name="language_detail_comments_context_menu_title_comment_copy">复制评论</string>
-    <string name="language_detail_comments_context_menu_title_comment_delete">删除评论</string>
-
-    <string name="language_hint_explain_strings_xml">用几句话解释你的strings.xml</string>
-
-    <string name="language_description_no_language_uploaded">没有语言文件上传</string>
-
-    <string name="language_description_no_language_shared">没有语言文件共享</string>
-
-    <string name="language_title_more_language_by_whom">更多语言文件%s</string>
-
-    <string name="language_message_confirm_delete">你确定你要删除?</string>
-
-    <string name="language_message_already_liked_lanuage">你已经喜欢这种语言</string>
-    <string name="language_message_liked">喜欢</string>
-    <string name="language_message_unliked">取消喜欢</string>
-    <string name="language_error_failed_like">设置喜欢失败\n请稍后再试</string>
-    <string name="language_message_unregister_like">添加喜欢失败</string>
-    <string name="language_error_failed_unlike_project">设置不喜欢失败\n请稍后再试</string>
-
-    <string name="language_comment_error_failed_comment">无法发表评论\n请稍后再试</string>
-    <!-- ************************************************************************************************************************* -->
-    <!-- *************************************************     Language Settings End          ************************************ -->
-    <!-- ************************************************************************************************************************* -->
-
-
-    <!-- ************************************************************************************************************************* -->
-    <!-- *************************************************        Purchase  Start        ***************************************** -->
-    <!-- ************************************************************************************************************************* -->
-    <string name="purchase_actionbar_title">购买清单</string>
-    <string name="purchase_detail_title_list">购买列表</string>
-
-
-    <string name="purchase_list_title_license_duration">许可证期限</string>
-
-    <string name="purchase_list_title_order_no">订单号.</string>
-    <string name="purchase_list_title_timestamp">时间戳</string>
-    <string name="purchase_list_title_item_name">项目名</string>
-    <string name="purchase_list_title_price">价格</string>
-
-    <string name="purchase_message_paid_service_expired">付费服务已过期</string>
-
-    <string name="purchase_list_title_time_until_expiration">到期的时间</string>
-
-    <!-- ************************************************************************************************************************* -->
-    <!-- *************************************************        Purchase  End        ******************************************* -->
-    <!-- ************************************************************************************************************************* -->
-
 
     <!-- ************************************************************************************************************************* -->
     <!-- *************************************************  Program Information  Start        ************************************* -->
@@ -1069,123 +760,42 @@
     <!-- *************************************************  Program Information  End          ************************************* -->
     <!-- ************************************************************************************************************************* -->
 
-
     <!-- ************************************************************************************************************************* -->
     <!-- *************************************************  System Settings  Start           ************************************* -->
     <!-- ************************************************************************************************************************* -->
     <string name="system_settings_title_setting_vibration">振动</string>
     <string name="system_settings_title_automatically_save">自动保存</string>
-    <string name="system_settings_title_use_push_notification">使用推送通知</string>
-    <string name="system_settings_title_enable_alerts">启用提醒</string>
-    <string name="system_settings_title_subsribe_newsletter">订阅Sketchware新闻</string>
 
     <string name="system_settings_description_setting_vibration">当小部件或块被长时间按下时震动</string>
     <string name="system_settings_description_automatically_save">当您退出项目时自动保存</string>
-    <string name="system_settings_description_use_push_notification">*您需要启用自动登录才能使用此功能</string>
-    <string name="system_settings_description_subsribe_newsletter">保持最新的Sketchware消息</string>
     <!-- ************************************************************************************************************************* -->
     <!-- *************************************************  System Settings  End             ************************************* -->
     <!-- ************************************************************************************************************************* -->
 
     <!-- ************************************************************************************************************************* -->
-    <!-- *************************************************  Promotion Start            ******************************************* -->
-    <!-- ************************************************************************************************************************* -->
-    <string name="promotion_list_actionbar_title">正在进行的促销</string>
-    <string name="promotion_title_my_enrolled_promotions">我已登记的促销</string>
-    <string name="promotion_title_available_promotions">可用促销</string>
-    <string name="promotion_title_tickets">%d 券</string>
-    <string name="promotion_redeem_title">选择使用</string>
-
-    <string name="promotion_checkin_description_x_days">%d 注册日期</string>
-    <string name="promotion_checkin_description_checkin_rule">每天查看赢取免费折扣券！</string>
-
-    <string name="promotion_checkin_button_redeem_coupon">兑换优惠券</string>
-    <string name="promotion_checkin_button_check_in">签到</string>
-
-
-    <string name="promotion_ticket_title">券</string>
-    <string name="promotion_ticket_title_my_tickets">我的可用券</string>
-    <string name="promotion_ticket_title_choose_tickets">选择一张券</string>
-
-    <string name="promotion_ticket_button_show_result">显示结果</string>
-    <string name="promotion_ticket_description_received_tickets">你收到了一些%d券</string>
-    <string name="promotion_ticket_description_received_ticket">你收到 %d券</string>
-
-    <string name="promotion_reward_title_no_rewards">没有奖励</string>
-    <string name="promotion_reward_message_no_rewards">没有可用的奖励</string>
-    <string name="promotion_reward_title_won_free_pass">赢得免费通行证</string>
-    <string name="promotion_description_reward_discount_coupon">赢得%s优惠券</string>
-
-    <string name="promotion_description_can_redeem_coupon">你可以兑换%s优惠券</string>
-
-    <string name="promotion_description_try_again_next_time">请再次尝试</string>
-    <string name="promotion_message_checked_in_today">你今天查看了</string>
-
-    <string name="promotion_description_check_in">在一定的天数后,您将能够赢得折扣券</string>
-    <string name="promotion_description_tickets">根据您拥有的门票数量,您将有更高的获胜机会</string>
-    <string name="promotion_description_check_in_did_you_check">你今天签到了吗？ 您将获得免费折扣券！</string>
-
-    <string name="promotion_reward_message_won_free_pass">您赢得了免费通行证！\n请先兑换此通行证 %s</string>
-    <string name="promotion_description_won_discount_coupon" formatted="false">您赢得了免费的%d折扣优惠券\n请先兑换此优惠券 %s</string>
-
-    <string name="promotion_reward_message_expired">奖励已经过期\n[截止日期: %s]</string>
-
-    <string name="promotion_description_no_promotion">没有促销活动</string>
-    <string name="promotion_description_early_end">* 促销活动可能比注明的时间更早结束</string>
-
-    <string name="promotion_description_already_check_in">你今天已经参加了.请明天再试</string>
-    <string name="promotion_message_not_period">请在促销期间再试一次</string>
-
-    <string name="promotion_reward_message_invalid_reward">奖励无效</string>
-
-    <string name="promotion_reward_details">奖励详情</string>
-    <string name="promotion_title_discount_coupons">优惠券</string>
-
-    <string name="promotion_title_check_my_promotions">检查我的可用促销</string>
-
-    <!-- ************************************************************************************************************************* -->
-    <!-- *************************************************  Promotion Start            ******************************************* -->
-    <!-- ************************************************************************************************************************* -->
-
-
-
-    <!-- ************************************************************************************************************************* -->
     <!-- *************************************************       Etc  Start      ************************************************* -->
     <!-- ************************************************************************************************************************* -->
     <string name="invalid_component">无效组件</string>
-    <string name="invalid_email_address">无效的邮件地址</string>
     <string name="invalid_value_min_lenth">至少使用 %d 字母 </string>
     <string name="invalid_value_max_lenth">您可以使用最大值 %d 字母</string>
-
     <string name="invalid_value_rule_1">只使用字母(a-z), 数字和特殊字符(.),(@) </string>
     <string name="invalid_value_rule_2">只使用字母a-z), 数字和特殊字符(.) </string>
     <string name="invalid_value_rule_3">只使用字母(a-z), 数字和特殊字符(_) </string>
     <string name="invalid_value_rule_4">只能使用小写字母(a-z), 数字和特殊字符(_) </string>
     <string name="invalid_value_rule_5">不允许使用特殊字母(&amp;, &lt;, &gt;, \", \')</string>
-
     <string name="invalid_icon_id">图标ID无效</string>
     <string name="invalid_required_fields">某些必填字段为空</string>
     <string name="invalid_value_format">无效的格式</string>
 
-    <string name="source_code_dialog_title_change_font_size">更改字体大小</string>
-
     <string name="message_strings_xml_loaded">您的 \"strings.xml\" 文件已成功加载！</string>
-
     <string name="message_license_expired">证件过期.\n%s</string>
     <string name="message_device_not_support">您的设备不支持此硬件. 该组件可能无法正常运行</string>
-
-    <string name="notifiacation_description_project_like">%s 喜欢你的项目</string>
-    <string name="notifiacation_description_project_comment">%s 评论你的项目</string>
     <string name="message_compatible_chrome_brower">以下页面与Chrome浏览器兼容.\n你想安装Chrome浏览器吗？</string>
 
     <string name="message_device_not_supported">该设备不受支持.\nGoogle Play服务未安装.</string>
     <string name="title_discord_community">Discord</string>
     <string name="title_telegram_community">Telegram</string>
-    <string name="title_free_trial">免费试用</string>
     <string name="message_free_trial">您想观看广告以解锁内容以供单次使用吗？?</string>
-
-    <string name="update_available_title">有新的更新可用</string>
-    <string name="update_available_description">您需要最新版本的应用程序才能继续</string>
 
     <string name="picker_color_hint_enter_hex_color_code">输入十六进制颜色代码</string>
     <string name="picker_color_custom_color_not_found">找不到自定义颜色</string>
@@ -2578,81 +2188,20 @@
 
     <string name="main_drawer_title_subscribe">订阅</string>
 
-
-
-    <string name="publish_myproject_button_name">发布到Google Play商店</string>
-
     <string name="publish_account_setting_connecting_account_step_name">您是否拥有Google Play开发者帐户？</string>
     <string name="publish_account_setting_select_json_step_name">检查服务帐户凭据</string>
-
     <string name="publish_account_setting_title">发布帐户设置</string>
 
-    <string name="publish_title_dialog_authorization_error">授权错误</string>
     <string name="publish_message_dialog_authorization_error">此json文件的访问令牌已过期. 请选择一个有效的json文件</string>
-
-    <string name="publish_title_dialog_invalid_json">无效的Json文件</string>
     <string name="publish_message_dialog_invalid_json">json文件无效.请仔细检查文件</string>
 
     <string name="publish_connecting_account_have_account">我有一个Google Play开发者帐户</string>
     <string name="publish_connecting_account_no_have_account">我没有Google Play开发者帐户</string>
-
-    <string name="publish_select_account_json_title_json_path">Json文件</string>
-    <string name="publish_select_account_json_title_client_id">客户ID</string>
-    <string name="publish_select_account_json_title_client_mail">客户电子邮件</string>
-
-    <string name="publish_select_account_json_title_dialog_json_file_desc">选择Json文件</string>
-    <string name="publish_select_account_json_message_dialog_json_file_desc">此过程对于以后的发布是必要的.Sketchware不保存或编辑此json文件.你想继续吗?</string>
-
-    <string name="publish_select_account_json_dialog_refresh_account_title">刷新服务帐户</string>
-    <string name="publish_select_account_json_dialog_refresh_account_desc">服务帐户凭据将被重置.你想继续吗?</string>
-
-    <string name="publish_no_account_title">成为发布者</string>
-    <string name="publish_no_account_desc">要在Google Play上发布应用,您需要一个Google Play开发者帐户.请先创建一个Google Play开发者帐户.</string>
-    <string name="publish_no_account_step_desc">请参阅文档以获取其他帮助.</string>
-
-    <string name="publish_no_account_move_to_console">转到开发者控制台</string>
-
-    <string name="publish_select_project_step_name">应用信息</string>
-    <string name="publish_check_upload_apk_step_name">发布类型</string>
-    <string name="publish_store_listing_step_name">商店列表</string>
-    <string name="publish_images_step_name">图形资产</string>
-    <string name="publish_upload_apk_step_name">上传APK文件</string>
-    <string name="publish_release_track_step_name">发布信息</string>
-    <string name="publish_preview_step_name">查看信息</string>
-
-    <string name="publish_select_project_step_desc">默认语言和名称</string>
-    <string name="publish_check_upload_apk_step_desc">确定此发布的类型</string>
-    <string name="publish_store_listing_step_desc">提供简短或完整的描述</string>
-    <string name="publish_images_step_desc">为您的应用附加图片</string>
-    <string name="publish_upload_apk_step_desc">注册并上传此项目的apk文件</string>
-    <string name="publish_release_track_step_desc">提供发布信息</string>
-    <string name="publish_preview_step_desc">以下是Play商店中的应用程序预览,请检查所有信息是否正确.</string>
-
-    <string name="publish_publish_button_name">发布</string>
-    <string name="publish_sign_button_name">签署</string>
-
-    <string name="publish_title_choose_project">选择一个项目</string>
     <string name="publish_desc_choose_project">选择要发布或更新的项目</string>
 
     <string name="publish_message_dialog_default_package_name">请使用其他包装名称.\n无法发布以\"%s\"包名开头的项目</string>
-
-    <string name="publish_title_dialog_invalid_version">版本代码错误</string>
-    <string name="publish_message_dialog_invalid_version">版本代码需要在发布之前更新. 自动更新版本代码？</string>
-
-    <string name="publish_title_dialog_load_data">加载数据错误</string>
-    <string name="publish_title_dialog_commit">发布者提交错误</string>
-    <string name="publish_title_dialog_access">Publisher访问错误</string>
-    <string name="publish_title_dialog_upload_data">上传数据错误</string>
-    <string name="publish_title_dialog_delete_data">删除数据错误</string>
-    <string name="publish_title_dialog_change_version_code">版本代码更改</string>
-    <string name="publish_title_dialog_conflict_version_code">版本代码冲突</string>
-
     <string name="publish_message_dialog_conflict_version_code">此版本代码无法使用.如果您想更新版本代码,请单击确定按钮.</string>
     <string name="publish_message_dialog_change_version_code">这个应用程序的版本代码已更改,你想再次登录APK文件吗?</string>
-
-    <string name="publish_select_project_no_projects">没有要显示的项目</string>
-    <string name="publish_select_project_title_default_language">默认语言</string>
-    <string name="publish_select_project_title_application_name">应用名称</string>
 
     <string name="publish_check_upload_apk_title_radio_upload">我想发布包含APK文件的更新</string>
     <string name="publish_check_upload_apk_title_radio_not_upload">我想更新商店描述</string>
@@ -2660,71 +2209,16 @@
     <string name="publish_check_upload_apk_title_dialog_upload_apk_agreement">上传APK文件协议</string>
     <string name="publish_check_upload_apk_message_dialog_upload_apk_agreement">应用发布后,APK文件将上传到Sketchware服务器以进行备份. 你想继续吗？</string>
 
-    <string name="publish_store_listing_title">标题</string>
-    <string name="publish_store_listing_title_short_desc">简短的介绍</string>
-    <string name="publish_store_listing_title_full_desc">详细描述</string>
-    <string name="publish_store_listing_title_video">视频</string>
-
-    <string name="publish_store_listing_title_dialog_invalid_edit_text">无效的%s长度</string>
-    <string name="publish_store_listing_message_dialog_invalid_edit_text">文本长度无效.请仔细检查您的商家信息的长度.</string>
-
     <string name="publish_images_title_icon">图标</string>
     <string name="publish_images_title_screenshots">截图</string>
-
     <string name="publish_images_title_dialog_invalid_delete_screenshot">删除截图错误</string>
     <string name="publish_images_message_dialog_invalid_delete_screenshot">应该至少有两个截图</string>
-
     <string name="publish_images_title_dialog_invalid_screenshot_size">截图大小错误</string>
     <string name="publish_images_message_dialog_invalid_screenshot_size">屏幕截图大小无效.(最小长度:320px.最大长度:3840px)</string>
-
     <string name="publish_images_title_dialog_invalid_icon_size">图标大小错误</string>
     <string name="publish_images_message_dialog_invalid_icon_size">图标大小无效.(512 X 512)</string>
-
     <string name="publish_images_title_dialog_delete_screenshot">删除截图</string>
     <string name="publish_images_message_dialog_delete_screenshot">要删除该图片吗？</string>
-
-    <string name="publish_upload_apk_title_manage_my_release_key">自动登录APK文件（推荐）</string>
-    <string name="publish_upload_apk_title_own_release_key">使用我自己的发布密钥对APK文件进行签署</string>
-    <string name="publish_upload_apk_title_no_update">我没有更新我的APK文件</string>
-    <string name="publish_upload_apk_title_cert">发布密钥</string>
-    <string name="publish_upload_apk_title_passwd">密码</string>
-    <string name="publish_upload_apk_title_dialog_upload_apk">上传Apk错误</string>
-    <string name="publish_upload_apk_wrong_release_key_passwd">此版本密钥的密码不正确.</string>
-    <string name="publish_upload_apk_retry_sign_apk_button_name">再次登录APK文件</string>
-    <string name="publish_upload_apk_file_not_exist">APK文件不存在. 请再次登录APK文件</string>
-    <string name="publish_upload_apk_ready_to_upload">APK文件已准备好上传.\n点击 \"下一步\" 上传APK文件</string>
-    <string name="publish_upload_apk_upload_complete">APK文件已上传并可供发布.</string>
-    <string name="publish_upload_apk_title_use_release_key_in_sketchware">使用Sketchware服务器中的释放键对APK文件进行签署</string>
-    <string name="publish_upload_apk_title_already_uploaded_apk">我想使用已发布的APK文件</string>
-    <string name="publish_upload_apk_not_select_release_key_file">您没有选择发布密钥</string>
-
-    <string name="publish_release_track_title_track">跟踪</string>
-    <string name="publish_release_track_title_status">状态</string>
-    <string name="publish_release_track_title_release_name">发布名称</string>
-    <string name="publish_release_track_title_release_version">发行版</string>
-    <string name="publish_release_track_title_release_note">发行公告</string>
-    <string name="publish_release_track_title_fraction">分数</string>
-
-    <string name="publish_release_track_title_alpha">Alpha{开端}</string>
-    <string name="publish_release_track_title_beta">Beta[公测]</string>
-    <string name="publish_release_track_title_production">Production[生产]</string>
-    <string name="publish_release_track_title_internal">Internal[内部]</string>
-
-    <string name="publish_release_track_title_dialog_select_status">选择状态</string>
-
-    <string name="publish_release_track_title_dialog_halted">暂停</string>
-    <string name="publish_release_track_title_dialog_inprogress">进行中</string>
-    <string name="publish_release_track_title_dialog_completed">已完成</string>
-    <string name="publish_release_track_title_dialog_draft">草稿</string>
-
-    <string name="publish_release_track_title_dialog_track_manage_error">跟踪管理错误</string>
-    <string name="publish_release_track_message_dialog_track_manage_error">APK文件在此曲目的状态中不存在. 请仔细检查此曲目是否包含APK文件.</string>
-    <string name="publish_release_track_message_dialog_invalid_upload_track_data_error">APK文件的版本代码必须高于此曲目状态的版本代码. 请仔细检查此曲目的状态.</string>
-
-    <string name="publish_preview_install">安装</string>
-    <string name="publish_preview_read_more">阅读更多</string>
-
-    <string name="publish_preview_delete_no_release_note">没有要发布的发行说明</string>
 
     <string name="publish_complete_title">发布完成</string>
     <string name="publish_complete_desc">该项目已成功发布.</string>
@@ -2744,69 +2238,6 @@
     <string name="publish_manage_title">出版经理</string>
     <string name="publish_manage_no_publish_apps">单击FAB发布您的第一个应用程序</string>
 
-    <string name="publish_one_final_step_title">你的第一次上传</string>
-    <string name="publish_one_final_step_title_desc">这是您第一次上传此应用程序</string>
-    <string name="publish_one_final_step_desc_apk">在发布到Google Play功能正常工作之前,必须手动将一个具有相同包名称的APK提交到Google Play商店.</string>
-    <string name="publish_one_final_step_desc_mail">当你点击下面的按钮,我们会给你一个详细的指南与必要的资产到您的电子邮件：</string>
-    <string name="publish_one_final_step_understand_button_name">我明白</string>
-    <string name="publish_one_final_step_title_dialog_mail_addr">电子邮件地址</string>
-    <string name="publish_one_final_step_hint_dialog_mail_addr">请输入您的电子邮件地址</string>
-    <string name="publish_one_final_step_dialog_no_write">请输入有效的电子邮件地址</string>
-    <string name="publish_one_final_step_dialog_message_mail_failed">无法发送电子邮件</string>
-
-    <string name="publish_mail_complete_title">我们给你发了一封电子邮件！</string>
-    <string name="publish_mail_complete_desc">我们发送了你的APK和出版指南给你的电子邮件.请遵循电子邮件的指南并发布您的第一个APK.</string>
-
-    <string name="publish_title_dialog_project_not_linked">项目未链接</string>
-    <string name="publish_message_dialog_project_not_linked">该服务帐户对此软件包无效,或者此软件包名称已存在于Google Play商店中. 请检查这些问题</string>
-
-    <string name="publish_title_dialog_compile_apk_failed">编译APK失败</string>
-    <string name="publish_message_dialog_compile_apk_failed">APK文件的编译失败. 请检查这个项目</string>
-
-    <string name="publish_title_dialog_cannot_start_publish">发布开始失败</string>
-    <string name="publish_message_dialog_cannot_start_publish">保存为新后请再试一次</string>
-
-
-    <string name="common_word_playstore">应用商店</string>
-
-    <string name="myprojects_list_menu_title_publish">发布</string>
-
-    <string name="publish_project_backup_complete_title">备份完成</string>
-    <string name="publish_project_backup_fail_title">备份失败</string>
-    <string name="publish_project_backup_complete_description">备份成功.您可以随时重新下载项目.</string>
-
-    <string name="publish_project_download_complete_title">下载完成</string>
-    <string name="publish_project_download_fail_title">下载失败</string>
-    <string name="publish_project_download_complete_description">下载 %s 已完成</string>
-
-    <string name="title_compatible_chrome_browser">需要Chrome浏览器</string>
-
-    <string name="publish_message_failed_to_compile">APK编译失败</string>
-
-    <string name="subscribe_title_one">发布到Google Play商店</string>
-    <string name="subscribe_title_two">AdMob广告</string>
-    <string name="subscribe_title_three">无广告体验</string>
-    <string name="subscribe_title_four">导出项目</string>
-    <string name="subscribe_title_five">无限共享</string>
-
-    <string name="subscribe_desc_one">发布和更新您的应用程序</string>
-    <string name="subscribe_desc_two">通过您的应用程序获利</string>
-    <string name="subscribe_desc_three">无广告体验</string>
-    <string name="subscribe_desc_four">导出Android Studio的Java和XML源代码</string>
-    <string name="subscribe_desc_five">无限制的共享,签署和发布</string>
-
-    <string name="subscribe_desc_become_a_premium_user">立即订阅成为高级用户！</string>
-    <string name="subscribe_desc_premium_users_can">高级用户可以</string>
-
-    <string name="subscribe_title_premium_features">溢价特征</string>
-
-    <string name="subscribe_title_problem_in_app_billing">设置应用内结算时出现问题：</string>
-
-    <string name="subscribe_title_error_purchasing_1">1. 购买错误: </string>
-    <string name="subscribe_title_error_purchasing_2">2. 购买错误: </string>
-
-    <string name="subscribe_title_verify_error">验证错误 </string>
-
     <!-- ************************************************************************************************************************* -->
     <!-- *************************************************  append 3.1.0 end              ********************************************* -->
     <!-- ************************************************************************************************************************* -->
@@ -2817,28 +2248,19 @@
 
     <string name="main_drawer_title_save_sketchware">赞助Sketchware</string>
 
-    <string name="tutorials_download_sample_title">下载</string>
-    <string name="tutorials_download_sample_desc">您可以下载视频中展示的示例项目</string>
-
-
     <string name="design_library_admob_title_admob_manager">AdMob管理器</string>
 
     <string name="design_library_firebase_setting_step1_title">项目设置</string>
     <string name="design_library_firebase_setting_step1_desc">输入完整的数据库URL,Web API Key和App ID</string>
-
     <string name="design_library_firebase_setting_step2_title">存储URL设置</string>
     <string name="design_library_firebase_setting_step2_desc">输入Firebase存储URL</string>
-
     <string name="design_library_firebase_setting_step3_title">设置审核</string>
     <string name="design_library_firebase_setting_step3_desc">请查看以下信息. 如果它们都正确,请单击 \"保存\"..</string>
-
     <string name="design_library_firebase_title_project_id">项目ID</string>
     <string name="design_library_firebase_title_app_id">App ID</string>
     <string name="design_library_firebase_title_api_key">API Key</string>
     <string name="design_library_firebase_title_storage_bucket_url">存储桶URL</string>
-
     <string name="design_library_firebase_message_not_input_text">请提供所有必要的信息</string>
-
     <string name="design_library_firebase_title_firebase_manager">Firebase管理</string>
     <!-- ************************************************************************************************************************* -->
     <!-- *************************************************  append 3.3.0 end         ********************************************* -->
@@ -2849,69 +2271,7 @@
     <!-- ************************************************************************************************************************* -->
 
     <string name="main_tab_title_competitions">比赛</string>
-
-
     <string name="common_word_progressing">进行中</string>
-
-    <string name="user_grade_actionbar">用户排名</string>
-    <string name="user_grade_title">排名信息</string>
-    <string name="user_grade_point_range_title">点数范围</string>
-
-    <string name="competition_status_not_started">即将开始</string>
-    <string name="competition_status_closed">关闭</string>
-    <string name="competition_status_completed">已结束</string>
-
-    <string name="competition_remain_today">今天关闭</string>
-    <string name="competition_remain_days">剩余天数</string>
-
-    <string name="competition_message_no_data">没有比赛可显示</string>
-
-    <string name="competition_detail_my_status_title">我的状态</string>
-    <string name="competition_detail_reward_title">奖励</string>
-    <string name="competition_detail_reward_point_title">积分奖励</string>
-
-    <string name="competition_detail_reward_enroll_point_title">输入奖金</string>
-    <string name="competition_detail_reward_winner_point_title">赢得奖金</string>
-
-    <string name="competition_detail_button_enroll">注册</string>
-    <string name="competition_detail_button_submit">提交</string>
-
-    <string name="competition_detail_my_status_can_enroll">有资格注册</string>
-    <string name="competition_detail_my_status_cannot_enroll">不符合注册条件</string>
-    <string name="competition_detail_my_status_enrolled">已注册</string>
-    <string name="competition_detail_my_status_not_enrolled">未注册</string>
-    <string name="competition_detail_my_status_cannot_enroll_grade">你的等级不符合要求</string>
-
-    <string name="competition_detail_my_status_submit">提交</string>
-    <string name="competition_detail_my_status_not_submit">未提交</string>
-    <string name="competition_detail_my_status_winner">胜利者</string>
-
-    <string name="competition_detail_my_result_winner">恭喜,你赢了!</string>
-
-    <string name="competition_detail_message_success_enroll">注册完成</string>
-
-    <string name="competition_terms_actionbar_title">竞争条款</string>
-    <string name="competition_terms_title_how_to_submit">提交步骤</string>
-    <string name="competition_terms_desc_how_to_submit">
-        1. 屏幕录制项目, 从单击项目内的“运行”按钮开始..\n
-        * Play商店中有许多屏幕录制的应用程序.\n
-        2. 在YouTube上传视频.\n
-        3. 提交YouTube网址以及项目.\n
-        4. 如果不遵循上述步骤,将导致取消资格.
-    </string>
-    <string name="competition_terms_title_terms">竞争条款</string>
-    <string name="competition_terms_title_agreement">我同意这条款和条件</string>
-    <string name="competition_terms_button_join_entry">申请注册</string>
-
-    <string name="competition_submit_actionbar_title">提交项目</string>
-    <string name="competition_submit_youtube_url_title">Youtube网址</string>
-    <string name="competition_submit_youtube_description">请提交演示的屏幕录制. (按下RUN按钮记录)</string>
-    <string name="competition_submit_title_select_project">选择要提交的项目</string>
-    <string name="competition_submit_message_input_youtube_url">输入YouTube网址</string>
-    <string name="competition_submit_message_select_project">选择项目</string>
-    <string name="competition_submit_message_submit_complete">提交完成</string>
-    <string name="competition_submit_message_failed_to_submit">提交失败</string>
-
 
     <!-- ************************************************************************************************************************* -->
     <!-- *************************************************  append 3.4.0 end      ************************************************ -->
@@ -3007,26 +2367,13 @@
     <string name="init_language_setting_dialog_message">Sketchware的默认语言是英语,你想修改吗?</string>
 
     <string name="intro_guide_desc">马上使用Sketchware!</string>
+    <string name="intro_button_start">开始</string>
 
-    <string name="common_word_preset">预置</string>
     <string name="preset_setting_title">预置设置</string>
     <string name="preset_setting_edit_warning">如果应用预设,退出后视图数据将会被删除,继续?</string>
 
-    <string name="intro_button_start">开始</string>
-
-    <string name="account_deprecated_facebook">不推荐Facebook的方式登录 \n* 如果您需要将您以前的帐户转移到谷歌帐户, 请联系 help@sketchware.io.</string>
     <!-- ************************************************************************************************************************* -->
     <!-- *************************************************  append 3.5.0 end      ************************************************ -->
-    <!-- ************************************************************************************************************************* -->
-
-    <!-- ************************************************************************************************************************* -->
-    <!-- *************************************************  append 3.5.4 start    ************************************************ -->
-    <!-- ************************************************************************************************************************* -->
-
-    <string name="subscribe_button_unlock">观看视频解锁</string>
-
-    <!-- ************************************************************************************************************************* -->
-    <!-- *************************************************  append 3.5.4 end      ************************************************ -->
     <!-- ************************************************************************************************************************* -->
 
     <!-- ************************************************************************************************************************* -->
@@ -3134,60 +2481,11 @@
     <string name="share_block_message_uploading_block_data">上传块数据</string>
 
     <string name="common_message_selected_file_empty">所选文件为空</string>
-    <string name="common_message_uploading">上传中...</string>
-
-    <string name="shared_collection_message_no_search_keyword">请输入要搜索的关键字</string>
-
-    <string name="tutorial_status_request_publish">申请频道注册</string>
-    <string name="tutorial_status_already_requested">正在审核中</string>
-    <string name="tutorial_status_management_channel">渠道管理</string>
-
-    <string name="tutorial_list_button_goto_channel">前往频道</string>
-    <string name="tutorial_list_button_download_sample_project">下载示例项目</string>
-    <string name="tutorial_list_message_no_video">没有要显示的视频</string>
-
-    <string name="tutorial_message_request_publish">如果您是Youtube频道的所有者,并且Sketchware教程已上传到频道,请申请在Sketchware中发布您的Youtube频道.</string>
-    <string name="tutorial_word_request_publish">应用</string>
-
-    <string name="tutorial_management_actionbar_title">教程频道管理</string>
-    <string name="tutorial_management_title_channel_info">频道信息</string>
-    <string name="tutorial_management_title_language_info">语言信息</string>
-    <string name="tutorial_management_title_video_list">视频列表</string>
-    <string name="tutorial_management_message_delete_fail">无法删除</string>
-    <string name="tutorial_management_message_delete_complete">删除完成</string>
-
-    <string name="tutorial_request_publish_actionbar_title">教程频道注册</string>
-    <string name="tutorial_request_publish_title_warning">注意</string>
-    <string name="tutorial_request_publish_message_warning">注册完成最多需要3天.\n视频数量限制为最多5个.\n可以根据Sketchware的操作说明更改最大视频数.\n您可以上传包含视频的示例项目.</string>
-    <string name="tutorial_request_publish_title_youtube_url">Youtube频道网址</string>
-    <string name="tutorial_request_publish_title_api_key">API KEY</string>
-    <string name="tutorial_request_publish_button_goto_doc">获取API密钥的方法</string>
-    <string name="tutorial_request_publish_button_cert">证书</string>
-    <string name="tutorial_request_publish_title_available_language">选择语言</string>
-
-    <string name="tutorial_request_publish_message_cert_fail">证书失败.\n请再次检查网址和API密钥.</string>
-    <string name="tutorial_request_publish_message_cert_complete">证书完成.</string>
-    <string name="tutorial_request_publish_message_request_fail">申请失败.请联系管理员.</string>
-    <string name="tutorial_request_publish_message_request_complete">申请完成.</string>
-    <string name="tutorial_request_publish_message_invalid_user">该帐户无法注册.</string>
-    <string name="tutorial_request_publish_message_already_exist">注册已经应用.</string>
-
-    <string name="tutorial_upload_actionbar_title">上传教程视频</string>
-    <string name="tutorial_upload_title_youtube_url">Youtube视频网址</string>
-    <string name="tutorial_upload_title_video_info">视频信息</string>
-    <string name="tutorial_upload_title_sample_project">上传示例项目</string>
-    <string name="tutorial_upload_message_input_url">请输入网址</string>
-    <string name="tutorial_upload_message_cert_fail">请输入URL无法通过证书.\n请再次检查URL.</string>
-    <string name="tutorial_upload_message_not_cert_url">请证明URL.</string>
-    <string name="tutorial_upload_message_select_sample_project">请选择一个示例项目.</string>
-    <string name="tutorial_upload_message_upload_complete">注册完成.</string>
-    <string name="tutorial_upload_message_upload_fail">注册失败.</string>
 
     <string name="view_widget_favorites_image_auto_added">窗口小部件中使用的图像将添加到此项目中.</string>
     <string name="view_widget_favorites_save_guide_new">如果保存此窗口小部件,此窗口小部件将添加到窗口小部件集合中,此窗口小部件中使用的图像将自动添加到图像集合中. 保存的小部件可用于所有项目.</string>
     <string name="shared_collection_message_update_soon">此功能将很快更新. 请等待下一次更新.</string>
 
-    <string name="tutorial_upload_message_over_max_video_count">您已超过上传视频的最大数量 (5).</string>
     <string name="shared_views_detail_message_add_collection_complete">添加收藏完成.如果视图具有所需图像,则会自动将所需图像添加到图像集中,您可以直接在项目中使用包含所需图像的视图.</string>
     <string name="shared_collection_detail_title_dialog_add_collection_complete">添加收藏完成</string>
     <!-- ************************************************************************************************************************* -->
@@ -3251,15 +2549,10 @@
     <string name="share_collection_select_favorite_collection_message_no_data">没有收集分享.\n\n请在添加至少一个集合后再试一次。</string>
     <string name="share_collection_select_required_collection_message_no_data">没有收集分享。</string>
 
-    <string name="sign_apk_title_generate_apk_file">生成APK文件</string>
     <string name="sign_apk_desc_generate_apk_file">点击下面的签署按钮,生成一个APK文件！</string>
     <string name="sign_apk_title_export_apk_file">生成APK文件完成</string>
     <string name="sign_apk_desc_export_apk_file">APK文件已生成. APK文件在下面的保存目录中生成. 请检查保存目录.</string>
     <string name="sign_apk_title_apk_file_save_path">保存目录</string>
-
-    <string name="publish_one_final_step_desc_generate_apk_file">如果单击下面的按钮,将生成一个发布的APK文件.</string>
-    <string name="publish_one_final_step_title_sign_apk_file">为首次发布生成APK文件</string>
-    <string name="publish_one_final_step_button_title_move_to_guide">前往发布指南</string>
 
     <!-- ************************************************************************************************************************* -->
     <!-- *************************************************  append 3.6.5 end      ************************************************ -->
@@ -3431,8 +2724,6 @@
     <string name="logic_editor_title_mapview_map_type">选择地图类型</string>
     <string name="logic_editor_title_mapview_marker_color">选择标记颜色</string>
 
-    <string name="language_detail_message_downlading_language_data">下载语言数据</string>
-
     <string name="component_description_location_manager">位置管理\n用于加载当前位置的数据</string>
 
     <string name="event_on_location_changed">当位置已更改</string>
@@ -3517,30 +2808,15 @@
     <string name="search_result_message_no_data">没有搜索结果显示:(</string>
 
     <string name="myprojects_export_project_actionbar_title">导出项目</string>
-    <string name="myprojects_export_project_message_failed_to_export">导出失败</string>
-    <string name="myprojects_export_project_message_exceed_limit">超过了可以创建的网址数量.您可以在“管理导出的URL”菜单中管理网址.</string>
-    <string name="myprojects_export_project_message_complete_export">网址已创建. 您可以在"管理导出的URL"菜单中管理网址.</string>
-
-    <string name="myprojects_export_project_word_remain_days">剩余天数</string>
-    <string name="myprojects_export_project_word_valid_dt">截止日期</string>
-
     <string name="myprojects_export_project_title_sign_apk">签署APK</string>
-    <string name="myprojects_export_project_title_export_data">Sketchware的源数据</string>
     <string name="myprojects_export_project_title_export_src">Android Studio的源代码</string>
-
     <string name="myprojects_export_project_title_local_path">本地路径</string>
-    <string name="myprojects_export_project_title_download_url">下载网址</string>
-
     <string name="myprojects_export_project_button_sign_apk">签署APK</string>
-    <string name="myprojects_export_project_button_generate_url">创建下载URL</string>
     <string name="myprojects_export_project_button_export_src">导出源代码</string>
     <string name="myprojects_export_project_button_send_src_zip">发送源代码Zip文件</string>
-
     <string name="myprojects_export_src_title_email_subject">%s,Android Studio的源代码</string>
     <string name="myprojects_export_src_title_email_body">附件:%s </string>
     <string name="myprojects_export_src_chooser_title_email">选择邮箱</string>
-
-    <string name="myprojects_import_project_actionbar_title">导入项目</string>
 
     <string name="main_drawer_title_export_urls">导出为URL</string>
 
@@ -3599,7 +2875,7 @@
     <string name="logic_editor_title_select_component">选择组件</string>
     <string name="property_inject">注入</string>
     <string name="property_convert">转换</string>
-    <string name="remod_by">Re-mod by Aldi Sayuti</string>
+
     <string name="component_description_fragment_adapter">FragmentStatePagerAdapter与TabLayout和ViewPager一起使用来管理每个页面.</string>
     <string name="design_drawer_menu_injection">应用兼容</string>
     <string name="design_drawer_menu_injection_subtitle">修改应用兼容布局</string>
@@ -3610,14 +2886,12 @@
     <string name="component_description_fb_admin">OneSignal是客户参与领域的市场领导者,为移动推送Web推送,电子邮件和应用内消息提供支持</string>
     <string name="component_description_fb_ads_banner">Facebook广告横幅用于显示带有Facebook广告的广告横幅</string>
     <string name="component_description_fb_ads_interstitial">Facebook广告插页式广告用于与Facebook广告一起展示插页式广告</string>
-    <string name="property_border_color">图像边框颜色</string>
     <string name="design_drawer_menu_androidmanifest">AndroidManifest管理</string>
     <string name="design_drawer_menu_androidmanifest_subtitle">管理AndroidManifest</string>
     <string name="design_drawer_menu_proguard">代码缩减</string>
     <string name="design_drawer_menu_proguard_subtitle">使用R8/ProGuard最小化/混淆您的应用程序</string>
     <string name="design_drawer_menu_stringfog">加密字符串</string>
     <string name="design_drawer_menu_stringfog_subtitle">在编译时加密应用中的字符串</string>
-    <string name="design_drawer_menu_title_editor_code">直接代码编辑器</string>
     <string name="design_drawer_menu_subtitle_editor_code">编辑任何Java和XML文件</string>
     <string name="design_drawer_menu_nativelibs">原生库</string>
     <string name="design_drawer_menu_nativelibs_subtitle">添加原生库(.so)</string>
@@ -3625,7 +2899,7 @@
     <string name="design_drawer_menu_customblocks_subtitle">查看使用的自定义块</string>
     <string name="design_drawer_menu_title_logcat_reader">日志阅读器</string>
     <string name="design_drawer_menu_subtitle_logcat_reader">从已启用的项目读取日志</string>
-    <string name="text_to_search">要搜索的文本</string>
+
     <string name="myprojects_list_menu_title_restore_projects">恢复项目</string>
     <string name="sort_projects">排序项目</string>
     <string name="code_shrinker_use_r8">使用R8</string>
@@ -3635,8 +2909,7 @@
     <string name="code_shrinker_configure_shrinker">通过编辑规则文件来配置R8/ProGuard.此步骤是必需的,因为如果没有正确的配置,ProGuard可能会破坏您的项目.</string>
     <string name="code_shrinker_full_mode_def">使用它，您可以配置要包含在R8/ProGuarding进程中的特定本地库. (注意:启用此选项将忽略您选择的本地库的DEX文件,并强制Sketchware Pro将它们编译为dex,从而使编译速度明显变慢.)</string>
     <string name="code_shrinker_generate_debug_files">生成调试文件</string>
-    <string name="tutorial_option_menu_message_confirm_reset_tutorial">是否确实要重置教程?此操作无法撤消.</string>
-    <string name="tutorial_option_menu_title_reset_tutorial">重置教程</string>
+
     <string name="developer_tools_logcat_reader">日志阅读器</string>
     <string name="title_besome_blog">Medium</string>
     <string name="title_community">社交网络</string>
@@ -3646,10 +2919,6 @@
     <string name="title_company_tel">电话</string>
     <string name="title_company_url">网站</string>
     <string name="title_sketchware">Sketchware</string>
-    <string name="title_slogan">想象 创造 共享</string>
-    <string name="sketchware_for_ino_popup_title">Sketchware for Arduino已发布!</string>
-    <string name="sketchware_for_ino_popup_title_button_move_to_market">移动</string>
-    <string name="sketchware_for_ino_popup_title_button_never_show_again">不再显示</string>
     <string name="slack_url_primary">http://slack.sketchware.io</string>
     <string name="slack_url_secondary">http://sketchware.slack.com</string>
     <string name="s1">保存图像</string>
@@ -3659,10 +2928,6 @@
     <string name="s5">创建日历事件</string>
     <string name="s6">允许广告创建日历事件?</string>
     <string name="s7">测试广告</string>
-    <string name="company_email">help@sketchware.io</string>
-    <string name="company_tel">+82.70.8780.5456</string>
-    <string name="company_url">制作团队</string>
-    <string name="common_open_on_phone">在手机上打开</string>
     <string name="common_signin_button_text">登录</string>
     <string name="block_list_set_item_checked_body_1">setItemChecked pos</string>
     <string name="block_list_set_item_checked_body_2">value</string>
@@ -3692,30 +2957,8 @@
     <string name="developer_tools_component_type_name">类型名称</string>
     <string name="developer_tools_component_var_type_name">变量类型名称</string>
     <string name="docs_url">https://docs.sketchware.io/</string>
-    <string name="common_google_play_services_enable_button">启用</string>
-    <string name="common_google_play_services_enable_text">"%1$s除非您启用Google Play服务,否则将无法正常工作."</string>
-    <string name="common_google_play_services_enable_title">启用Google Play服务</string>
-    <string name="common_google_play_services_install_button">安装</string>
-    <string name="common_google_play_services_install_text">"%1$s如果没有Google Play服务,将无法运行,而这些服务在您的设备上缺失."</string>
-    <string name="common_google_play_services_install_title">获取Google Play服务</string>
-    <string name="common_google_play_services_notification_channel_name">Google Play服务可用</string>
-    <string name="common_google_play_services_notification_ticker">Google Play服务错误</string>
-    <string name="common_google_play_services_unknown_issue">%1$s在Google Play服务方面遇到问题,请重试.</string>
-    <string name="common_google_play_services_unsupported_text">"%1$s如果没有您的设备不支持的Google Play服务,则无法运行。"</string>
-    <string name="common_google_play_services_update_button">更新</string>
-    <string name="common_google_play_services_update_text">"%1$s除非您更新Google Play服务,否则不会运行."</string>
-    <string name="common_google_play_services_update_title">更新Google Play服务</string>
-    <string name="common_google_play_services_updating_text">%1$s没有Google Play服务将无法运行,这些服务目前正在更新.</string>
-    <string name="common_google_play_services_wear_update_text">需要新版本的Google Play服务,它将很快自行更新.</string>
-    <string name="common_signin_button_text_long">使用谷歌登录</string>
-    <string name="desc_expired_date">付费服务:直到%s</string>
-    <string name="desc_purchase_1month">您将可以访问所有高级功能,短期用户的最佳交易.</string>
-    <string name="desc_purchase_1year">与月度计划相比，此计划可为您节省%s.趁它持续的时候抓住这笔交易.</string>
-    <string name="desc_rest_day">%d天</string>
     <string name="design_button_properties">性能</string>
     <string name="event_title_edit_component">编辑组件</string>
-    <string name="facebook_app_id">255022168522663</string>
-    <string name="fcm_fallback_notification_channel_label">杂项</string>
     <string name="firebase_database_url">https://dependable-flag-825.firebaseio.com</string>
     <string name="ga_trackingId">UA-80718117-1</string>
     <string name="main_drawer_title_ad_label">Another Apps of Sketchware</string>
@@ -3723,7 +2966,7 @@
     <string name="program_information_title_open_source_license">开源许可证</string>
     <string name="program_information_title_suggest_ideas">提出建议</string>
     <string name="program_information_title_system_information">系统信息</string>
-    <string name="tutorial_dialog_description_confirm_save_as_new_project">是否要将教程另存为新项目?您将能够自由地玩弄它.</string>
+
     <string name="local_library_manager_download">下载</string>
     <string name="local_library_manager_enter_dependency">输入依赖关系</string>
     <string name="local_library_manager_dependency_info">您可以在Github中找到库的依赖项,通常在自述文件中.</string>
@@ -3941,6 +3184,33 @@
     <string name="common_word_deleted">已删除</string>
     <string name="only_xml_files_can_be_edited">只能编辑XML文件</string>
     <string name="creating_message">如果要创建文件,请确保添加扩展名.</string>
-    <string name="independent_class_method">Independent class/method</string>
+    <string name="independent_class_method">独立类/方法</string>
+    <string name="sign_apk_with_testkey">使用测试密钥对APK进行签名</string>
+
+    <string name="common_google_play_services_unknown_issue">%1$s在使用Google Play服务时遇到问题.请再试一次.</string>
+    <string name="common_signin_button_text_long">使用Google帐号登录</string>
+    <string name="ideas_url">https://ideas.sketchware.io/</string>
+    <string name="facebook_url">https://fb.com/sketchware</string>
+    <string name="publish_check_upload_apk_step_desc">确定此发布的类型</string>
+    <string name="publish_check_upload_apk_step_name">发布类型</string>
+    <string name="publish_images_step_desc">为您的应用附加图像</string>
+    <string name="publish_images_step_name">图像资源</string>
+    <string name="publish_mail_complete_desc">我们将您的apk和发布指南发送到您的电子邮件中.请按照电子邮件中的指南发布您的第一个 .</string>
+    <string name="publish_mail_complete_title">我们向您发送了一封电子邮件!</string>
+    <string name="publish_message_dialog_cannot_start_publish">另存为新款后请重试</string>
+    <string name="publish_message_dialog_compile_apk_failed">APK文件编译失败.请检查这个项目</string>
+    <string name="shared_collection_message_no_search_keyword">请输入关键字进行搜索</string>
+    <string name="title_compatible_chrome_browser">需要Chrome浏览器</string>
+    <string name="common_word_overwrite">覆盖</string>
+    <string name="deleted_successfully">已成功删除</string>
+    <string name="common_word_added">已添加</string>
+    <string name="activity_events">活动事件</string>
+    <string name="delete_this_event">删除此事件?</string>
+    <string name="export_android_app_bundle">导出安卓应用包</string>
+    <string name="export_aab">导出AAB</string>
+    <string name="send_aab">发送AAB</string>
+    <string name="listeners">监听器:</string>
+
+
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

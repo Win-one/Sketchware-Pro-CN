@@ -2367,6 +2367,16 @@ Please try again later"</string>
     <string name="only_xml_files_can_be_edited">Only XML files can be edited</string>
     <string name="creating_message">If you\'re creating a file, make sure to add an extension.</string>
     <string name="independent_class_method">Independent class/method</string>
+    <string name="sign_apk_with_testkey">Sign APK with testkey</string>
+    <string name="common_word_overwrite">Overwrite</string>
+    <string name="deleted_successfully">Deleted successfully</string>
+    <string name="common_word_added">Added</string>
+    <string name="activity_events">Activity events</string>
+    <string name="delete_this_event">Delete this event?</string>
+    <string name="export_android_app_bundle">Export Android App Bundle</string>
+    <string name="export_aab">Export AAB</string>
+    <string name="send_aab">Send AAB</string>
+    <string name="listeners">Listeners:</string>
 
 
 </resources>

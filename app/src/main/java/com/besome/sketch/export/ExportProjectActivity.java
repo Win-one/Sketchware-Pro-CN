@@ -427,10 +427,10 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
             ((LinearLayout) plannedParent).addView(exportAppBundleRoot);
         }
 
-        titleExportAppBundle.setText("Export Android App Bundle");
-        btnExportAppBundle.setText("Export AAB");
+        titleExportAppBundle.setText(R.string.export_android_app_bundle);
+        btnExportAppBundle.setText(R.string.export_aab);
         titleAppBundlePath.setText(Helper.getResString(R.string.myprojects_export_project_title_local_path));
-        btnSendAppBundle.setText("Send AAB");
+        btnSendAppBundle.setText(R.string.send_aab);
         layoutExportAppBundle.setVisibility(View.GONE);
 
         btnExportAppBundle.setOnClickListener(v -> {

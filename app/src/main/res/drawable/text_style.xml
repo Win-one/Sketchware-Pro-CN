@@ -5,7 +5,7 @@
 
     </corners>
 
-    <solid android:color="@color/Blue">
+    <solid android:color="@color/color_btn_blue_normal">
 
     </solid>
 

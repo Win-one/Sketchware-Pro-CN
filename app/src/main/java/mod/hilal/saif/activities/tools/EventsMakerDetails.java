@@ -17,18 +17,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.AddCustomAttributeBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import mod.SketchwareUtil;
 import mod.agus.jcoderz.lib.FileUtil;
 import mod.hey.studios.util.Helper;
 
-public class EventsMakerDetails extends Activity {
+public class EventsMakerDetails extends AppCompatActivity {
 
     private final ArrayList<HashMap<String, Object>> listMap = new ArrayList<>();
     private AlertDialog.Builder dia;
@@ -109,12 +112,13 @@ public class EventsMakerDetails extends Activity {
 
     private void setToolbar() {
         if (lisName.equals("")) {
-            binding.txToolbarTitle.setText("Activity events");
+            Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.activity_events);
         } else {
-            binding.txToolbarTitle.setText(lisName);
+           Objects.requireNonNull(getSupportActionBar()).setTitle(lisName);
         }
-        binding.igToolbarBack.setOnClickListener(Helper.getBackPressedClickListener(this));
-        Helper.applyRippleToToolbarView(binding.igToolbarBack);
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
     }
 
     private class ListAdapter extends BaseAdapter {
@@ -158,7 +162,7 @@ public class EventsMakerDetails extends Activity {
             ((LinearLayout) icon.getParent()).setGravity(17);
             title.setText((String) _data.get(position).get("name"));
             if ("".equals(_data.get(position).get("var"))) {
-                subtitle.setText("Activity event");
+                subtitle.setText(R.string.activity_events);
             } else {
                 subtitle.setText((String) _data.get(position).get("var"));
             }
@@ -181,7 +185,7 @@ public class EventsMakerDetails extends Activity {
             root.setOnLongClickListener(v -> {
                 dia = new AlertDialog.Builder(EventsMakerDetails.this)
                         .setTitle((String) _data.get(position).get("name"))
-                        .setMessage("Delete this event?")
+                        .setMessage(R.string.delete_this_event)
                         .setPositiveButton(R.string.common_word_delete, (dialog, which) -> deleteItem(position))
                         .setNeutralButton(R.string.common_word_edit, (dialog, which) -> {
                             Intent intent = new Intent();

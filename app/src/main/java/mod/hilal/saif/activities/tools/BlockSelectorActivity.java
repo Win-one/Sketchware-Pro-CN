@@ -85,13 +85,13 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
             if (current_item != 0) {
                 new AlertDialog.Builder(this).setTitle(contents.get(position))
                         .setMessage("Delete this item?")
-                        .setPositiveButton("Delete", (dialog, which) -> {
+                        .setPositiveButton(R.string.common_word_delete, (dialog, which) -> {
                             contents.remove(position);
                             map.put("data", contents);
                             _save_item();
                             _showItem(current_item);
                         })
-                        .setNegativeButton("Cancel", null)
+                        .setNegativeButton(R.string.common_word_cancel, null)
                         .setNeutralButton("Copy item", (dialog, which) -> {
                             ((ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("clipboard", contents.get(position)));
                             SketchwareUtil.toast("Copied to clipboard");
