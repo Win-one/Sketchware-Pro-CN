@@ -13,7 +13,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="While you wait..."
+            android:text="@string/while_you_wait"
             android:textColor="@color/color_primary"
             android:textStyle="bold" />
 

@@ -112,6 +112,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
     }
 
     private void save() {
+        Menu menu = binding.toolbar.getMenu();
         if (binding.name.getText().toString().isEmpty()) {
             SketchwareUtil.toast(getString(R.string.enter_a_name));
         } else if (binding.title.getText().toString().isEmpty()) {
@@ -132,6 +133,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                 TransitionManager.beginDelayedTransition(binding.back, autoTransition);
                 binding.contai.setVisibility(View.GONE);
                 Helper.setViewsVisibility(false, binding.add, binding.edi, binding.dele);
+                menu.setGroupVisible(0,true);
                 binding.spinner.setEnabled(true);
                 binding.listv.setEnabled(true);
                 isNewGroup = false;
@@ -147,6 +149,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                 TransitionManager.beginDelayedTransition(binding.back, autoTransition2);
                 binding.contai.setVisibility(View.GONE);
                 Helper.setViewsVisibility(false, binding.add, binding.edi, binding.dele);
+                menu.setGroupVisible(0,true);
                 binding.spinner.setEnabled(true);
                 binding.listv.setEnabled(true);
             }
@@ -193,7 +196,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         AutoTransition autoTransition = new AutoTransition();
         autoTransition.setDuration(200L);
         int id = v.getId();
-
+        Menu menu = binding.toolbar.getMenu();
         if (id == R.id.add) {
             _fabVisibility(false);
             TransitionManager.beginDelayedTransition(binding.back, autoTransition);
@@ -201,7 +204,8 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
             binding.title.setText("");
             isNewGroup = true;
             Helper.setViewsVisibility(true,  binding.add, binding.edi);
-            Helper.setViewsVisibility(false, binding.label, binding.dele, binding.contai);
+            Helper.setViewsVisibility(false,binding.label, binding.dele, binding.contai);
+            menu.setGroupVisible(0,false);
             binding.spinner.setEnabled(false);
             binding.listv.setEnabled(false);
         } else if (id == R.id.add_val) {
@@ -221,7 +225,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         } else if (id == R.id.dele) {
             if (current_item != 0) {
                 new AlertDialog.Builder(this).setMessage("Remove this menu and its items?")
-                        .setPositiveButton("Remove", (dialog, which) -> {
+                        .setPositiveButton(R.string.common_word_remove, (dialog, which) -> {
                             data.remove(binding.spinner.getSelectedItemPosition());
                             _save_item();
                             _refresh_display();
@@ -229,7 +233,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                             isNewGroup = false;
                             binding.spinner.setSelection(0);
                         })
-                        .setNegativeButton("Cancel", null)
+                        .setNegativeButton(R.string.common_word_cancel, null)
                         .create().show();
             } else {
                 SketchwareUtil.toastError("This menu can't be deleted.");
@@ -242,6 +246,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                 TransitionManager.beginDelayedTransition(binding.back, autoTransition);
                 binding.contai.setVisibility(View.VISIBLE);
                 Helper.setViewsVisibility(true,  binding.add, binding.edi, binding.dele);
+                menu.setGroupVisible(0,false);
                 binding.spinner.setEnabled(false);
                 binding.listv.setEnabled(false);
             } else {
@@ -253,6 +258,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
             _fabVisibility(true);
             TransitionManager.beginDelayedTransition(binding.back, autoTransition);
             Helper.setViewsVisibility(false,  binding.add, binding.edi, binding.dele);
+            menu.setGroupVisible(0,true);
             Helper.setViewsVisibility(true, binding.contai, binding.label);
             binding.spinner.setEnabled(true);
             binding.listv.setEnabled(true);

@@ -39,7 +39,7 @@
                 android:textColor="@color/color_primary"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                tools:text="Component name" />
+                tools:text="@string/component_name" />
         </LinearLayout>
 
         <View

@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
                     android:padding="4dp"
-                    android:text="EDIT"
+                    android:text="@string/edit"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -156,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
                     android:padding="4dp"
-                    android:text="EDIT"
+                    android:text="@string/edit"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
@@ -253,7 +253,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center|left"
-                    android:text="Rewarded Ad"
+                    android:text="@string/design_library_admob_title_rewarded"
                     android:textColor="@color/scolor_blue_01"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -264,7 +264,7 @@
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackground"
                     android:padding="4dp"
-                    android:text="EDIT"
+                    android:text="@string/edit"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 

@@ -2385,6 +2385,27 @@ Please try again later"</string>
     <string name="enter_a_title">Enter a title</string>
     <string name="create_a_new_activity_event">Create a new Activity event</string>
     <string name="create_a_new_event">Create a new event</string>
+    <string name="common_word_clear">Clear</string>
+    <string name="add_to_my_collection">Add to my collection</string>
+    <string name="permissions_manager">Permissions Manager</string>
+    <string name="search_for_permissions">Search for permissions</string>
+    <string name="scroll_to_the_top">Scroll to the top</string>
+    <string name="activating_stringfog">Activating StringFog will encrypt the strings in compilation time, which will make your app more difficult to reverse-engineer.</string>
+    <string name="stringfog_is_enabled">StringFog is enabled</string>
+    <string name="stringfog_is_disabled">StringFog is disabled</string>
+    <string name="while_you_wait">While you wait...</string>
+    <string name="break_your_project">This might break your project if you don\'t know what you\'re doing!</string>
+    <string name="excluded_built_in_libraries">Excluded built-in libraries</string>
+    <string name="design_library_admob_title_rewarded">Rewarded Ad</string>
+    <string name="edit">EDIT</string>
+    <string name="select_moreblock_type">Select Moreblock type</string>
+    <string name="custom_parameter">Custom parameter</string>
+    <string name="component_name">Component name</string>
+    <string name="cancel_button_label">Cancel</string>
+    <string name="choose_button_label">Select</string>
+    <string name="error_dir_access">Directory cannot be accessed</string>
+    <string name="label_parent_directory">Parent Directory</string>
+    <string name="last_edit">Last edited: </string>
 
 
 </resources>

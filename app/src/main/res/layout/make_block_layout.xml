@@ -94,7 +94,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginRight="8dp"
-                    android:text="Select Moreblock type"
+                    android:text="@string/select_moreblock_type"
                     android:textColor="@color/color_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -274,7 +274,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="8dp"
-                android:text="Custom parameter"
+                android:text="@string/custom_parameter"
                 android:textColor="@color/color_primary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -339,7 +339,7 @@
                         android:id="@+id/add"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ADD" />
+                        android:text="@string/common_word_add" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

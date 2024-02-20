@@ -3219,6 +3219,27 @@
     <string name="enter_a_title">输入标题</string>
     <string name="create_a_new_activity_event">创建新的活动活动事件</string>
     <string name="create_a_new_event">创建新活动</string>
+    <string name="common_word_clear">清除</string>
+    <string name="add_to_my_collection">添加到我的收藏夹</string>
+    <string name="permissions_manager">权限管理</string>
+    <string name="search_for_permissions">搜索权限</string>
+    <string name="scroll_to_the_top">滚动到顶部</string>
+    <string name="activating_stringfog">激活加密字符串将在编译时对字符串进行加密,这将使您的应用程序更难进行逆向工程.</string>
+    <string name="stringfog_is_enabled">已启用加密字符串</string>
+    <string name="stringfog_is_disabled">已关闭加密字符串</string>
+    <string name="while_you_wait">当您等待时...</string>
+    <string name="break_your_project">如果你不知道自己在做什么,这可能会破坏你的项目!</string>
+    <string name="excluded_built_in_libraries">排除内置库</string>
+    <string name="design_library_admob_title_rewarded">激励广告</string>
+    <string name="edit">编辑</string>
+    <string name="select_moreblock_type">选择更多块类型</string>
+    <string name="custom_parameter">自定义参数</string>
+    <string name="component_name">组件名称</string>
+    <string name="cancel_button_label">取消</string>
+    <string name="choose_button_label">选择</string>
+    <string name="error_dir_access">无法访问目录</string>
+    <string name="label_parent_directory">上级名录</string>
+    <string name="last_edit">最后编辑: </string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->
