@@ -2379,6 +2379,12 @@ Please try again later"</string>
     <string name="export_aab">Export AAB</string>
     <string name="send_aab">Send AAB</string>
     <string name="listeners">Listeners:</string>
+    <string name="activity_event">Activity event</string>
+    <string name="save_changes">Save changes</string>
+    <string name="enter_a_name">Enter a name</string>
+    <string name="enter_a_title">Enter a title</string>
+    <string name="create_a_new_activity_event">Create a new Activity event</string>
+    <string name="create_a_new_event">Create a new event</string>
 
 
 </resources>

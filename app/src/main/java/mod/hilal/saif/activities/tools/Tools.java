@@ -76,6 +76,7 @@ public class Tools extends AppCompatActivity {
         View toolbar = getLayoutInflater().inflate(R.layout.toolbar, null);
         setSupportActionBar((Toolbar) toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
         toolbar.findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
         getSupportActionBar().setTitle(R.string.developer_tools);
         ((Toolbar) toolbar).setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
@@ -116,7 +117,7 @@ public class Tools extends AppCompatActivity {
             } else {
                 new AlertDialog.Builder(this)
                         .setTitle(R.string.select_an_action)
-                        .setSingleChoiceItems(new String[]{"Edit", "Delete"}, -1, (actionDialog, which) -> {
+                        .setSingleChoiceItems(new String[]{getString(R.string.common_word_edit), getString(R.string.common_word_delete)}, -1, (actionDialog, which) -> {
                             switch (which) {
                                 case 0 -> {
                                     Intent intent = new Intent(getApplicationContext(), ConfigActivity.isLegacyCeEnabled() ?

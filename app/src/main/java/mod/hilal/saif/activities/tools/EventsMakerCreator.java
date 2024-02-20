@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.EventsCreatorBinding;
@@ -16,7 +18,7 @@ import mod.agus.jcoderz.lib.FileUtil;
 import mod.hey.studios.util.Helper;
 import mod.jbk.util.OldResourceIdMapper;
 
-public class EventsMakerCreator extends Activity {
+public class EventsMakerCreator extends AppCompatActivity {
 
     private String _code;
     private String _desc;
@@ -144,7 +146,7 @@ public class EventsMakerCreator extends Activity {
             arrayList.add(hashMap);
         }
         FileUtil.writeFile(concat, new Gson().toJson(arrayList));
-        SketchwareUtil.toast("Saved");
+        SketchwareUtil.toast(getString(R.string.common_word_saved));
         finish();
     }
 
@@ -165,11 +167,13 @@ public class EventsMakerCreator extends Activity {
         if (isEdit) {
             binding.txToolbarTitle.setText(event_name);
         } else if (isActivityEvent) {
-            binding.txToolbarTitle.setText("Create a new Activity event");
+            binding.txToolbarTitle.setText(getString(R.string.create_a_new_activity_event));
         } else {
-            binding.txToolbarTitle.setText(lisName + "Create a new event");
+            binding.txToolbarTitle.setText(lisName + getString(R.string.create_a_new_event));
         }
-        binding.igToolbarBack.setOnClickListener(Helper.getBackPressedClickListener(this));
-        Helper.applyRippleToToolbarView(binding.igToolbarBack);
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
     }
 }

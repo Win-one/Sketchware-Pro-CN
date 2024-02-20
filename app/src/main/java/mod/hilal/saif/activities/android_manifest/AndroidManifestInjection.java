@@ -365,6 +365,7 @@ public class AndroidManifestInjection extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
         findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
         getSupportActionBar().setTitle(R.string.androidmanifest_manager);
         toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));

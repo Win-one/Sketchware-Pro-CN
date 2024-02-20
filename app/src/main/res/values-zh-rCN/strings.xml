@@ -3211,6 +3211,14 @@
     <string name="send_aab">发送AAB</string>
     <string name="listeners">监听器:</string>
 
+    <string name="design_manager_message_invalid_font">所选字体无效</string>
+    <string name="design_manager_message_no_font_selected">您必须选择一种新字体</string>
+    <string name="activity_event">活动事件</string>
+    <string name="save_changes">保存更改</string>
+    <string name="enter_a_name">输入名称</string>
+    <string name="enter_a_title">输入标题</string>
+    <string name="create_a_new_activity_event">创建新的活动活动事件</string>
+    <string name="create_a_new_event">创建新活动</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

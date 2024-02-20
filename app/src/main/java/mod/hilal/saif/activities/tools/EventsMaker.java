@@ -427,7 +427,8 @@ public class EventsMaker extends AppCompatActivity {
     private void setToolbar() {
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.event_manager);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        binding.txToolbarTitle.setText(R.string.event_manager);
         binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
     }
 
@@ -499,7 +500,7 @@ public class EventsMaker extends AppCompatActivity {
             linearLayout.setOnLongClickListener(v -> {
                 new AlertDialog.Builder(EventsMaker.this)
                         .setTitle(_data.get(position).get("name").toString())
-                        .setItems(new String[]{"Edit", "Export", "Delete"}, (dialog, which) -> {
+                        .setItems(new String[]{getString(R.string.common_word_edit), getString(R.string.common_word_export), getString(R.string.common_word_delete)}, (dialog, which) -> {
                             switch (which) {
                                 case 0:
                                     editItemDialog(position);

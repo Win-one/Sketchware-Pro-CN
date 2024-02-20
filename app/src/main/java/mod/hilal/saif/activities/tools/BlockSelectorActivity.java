@@ -10,6 +10,7 @@ import android.os.Parcelable;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,6 +20,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.angads25.filepicker.model.DialogConfigs;
@@ -62,13 +64,19 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
 
     private void initialize() {
         fixbug();
-        binding.igToolbarBack.setOnClickListener(Helper.getBackPressedClickListener(this));
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setTitle(R.string.block_selector_menu_manager);
+        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
         binding.addVal.setOnClickListener(this);
         binding.dele.setOnClickListener(this);
         binding.edi.setOnClickListener(this);
         binding.add.setOnClickListener(this);
         binding.canc.setOnClickListener(this);
         binding.save.setOnClickListener(this);
+
+        binding.card.setOnClickListener(this);
 
         binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -100,18 +108,14 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
             }
             return true;
         });
-
-        binding.igToolbarLoadFile.setVisibility(View.VISIBLE);
-        binding.igToolbarLoadFile.setImageResource(R.drawable.ic_more_vert_white_24dp);
-        binding.igToolbarLoadFile.setOnClickListener(v -> showOptionsMenu());
-        applyRippleToView(binding.igToolbarBack, binding.dele, binding.edi, binding.add, binding.canc, binding.save, binding.addVal, binding.igToolbarLoadFile);
+        applyRippleToView( binding.dele, binding.edi, binding.add, binding.canc, binding.save, binding.addVal);
     }
 
     private void save() {
         if (binding.name.getText().toString().isEmpty()) {
-            SketchwareUtil.toast("Enter a name");
+            SketchwareUtil.toast(getString(R.string.enter_a_name));
         } else if (binding.title.getText().toString().isEmpty()) {
-            SketchwareUtil.toast("Enter a title");
+            SketchwareUtil.toast(getString(R.string.enter_a_title));
         } else {
             if (isNewGroup) {
                 map = new HashMap<>();
@@ -127,7 +131,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                 autoTransition.setDuration(200L);
                 TransitionManager.beginDelayedTransition(binding.back, autoTransition);
                 binding.contai.setVisibility(View.GONE);
-                Helper.setViewsVisibility(false, binding.igToolbarLoadFile, binding.add, binding.edi, binding.dele);
+                Helper.setViewsVisibility(false, binding.add, binding.edi, binding.dele);
                 binding.spinner.setEnabled(true);
                 binding.listv.setEnabled(true);
                 isNewGroup = false;
@@ -142,7 +146,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                 autoTransition2.setDuration(200L);
                 TransitionManager.beginDelayedTransition(binding.back, autoTransition2);
                 binding.contai.setVisibility(View.GONE);
-                Helper.setViewsVisibility(false, binding.igToolbarLoadFile, binding.add, binding.edi, binding.dele);
+                Helper.setViewsVisibility(false, binding.add, binding.edi, binding.dele);
                 binding.spinner.setEnabled(true);
                 binding.listv.setEnabled(true);
             }
@@ -150,36 +154,38 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private void showOptionsMenu() {
-        PopupMenu popupMenu = new PopupMenu(this, binding.igToolbarLoadFile);
-        Menu menu = popupMenu.getMenu();
-        menu.add("Import block selector menus");
-        menu.add("Export current block selector menu");
-        menu.add("Export all block selector menus");
-        popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getTitle().toString()) {
-                case "Export current block selector menu":
-                    ArrayList<HashMap<String, Object>> arrayList = new ArrayList<>();
-                    arrayList.add(data.get(current_item));
-                    FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/.sketchware/resources/block/export/menu/") + data.get(current_item).get("name") + ".json", new Gson().toJson(arrayList));
-                    SketchwareUtil.toast("Successfully exported block menu to:\n/Internal storage/.sketchware/resources/block/export", Toast.LENGTH_LONG);
-                    break;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(Menu.NONE,1,Menu.NONE,R.string.import_block_selector_menus);
+        menu.add(Menu.NONE,2,Menu.NONE,R.string.export_current_block_selector_menu);
+        menu.add(Menu.NONE,3,Menu.NONE,R.string.export_all_block_selector_menus);
+        return true;
+    }
 
-                case "Import block selector menus":
-                    openFileExplorerImport();
-                    break;
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case 2:
+                ArrayList<HashMap<String, Object>> arrayList = new ArrayList<>();
+                arrayList.add(data.get(current_item));
+                FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/.sketchware/resources/block/export/menu/") + data.get(current_item).get("name") + ".json", new Gson().toJson(arrayList));
+                SketchwareUtil.toast("Successfully exported block menu to:\n/Internal storage/.sketchware/resources/block/export", Toast.LENGTH_LONG);
+                break;
 
-                case "Export all block selector menus":
-                    FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/.sketchware/resources/block/export/menu/") + "All_Menus.json", new Gson().toJson(data));
-                    SketchwareUtil.toast("Successfully exported block menus to:\n/Internal storage/.sketchware/resources/block/export", Toast.LENGTH_LONG);
-                    break;
+            case 1:
+                openFileExplorerImport();
+                break;
 
-                default:
-                    return false;
-            }
-            return true;
-        });
-        popupMenu.show();
+            case 3:
+                FileUtil.writeFile(FileUtil.getExternalStorageDir().concat("/.sketchware/resources/block/export/menu/") + "All_Menus.json", new Gson().toJson(data));
+                SketchwareUtil.toast("Successfully exported block menus to:\n/Internal storage/.sketchware/resources/block/export", Toast.LENGTH_LONG);
+                break;
+
+            default:
+                return false;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -194,7 +200,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
             binding.name.setText("");
             binding.title.setText("");
             isNewGroup = true;
-            Helper.setViewsVisibility(true, binding.igToolbarLoadFile, binding.add, binding.edi);
+            Helper.setViewsVisibility(true,  binding.add, binding.edi);
             Helper.setViewsVisibility(false, binding.label, binding.dele, binding.contai);
             binding.spinner.setEnabled(false);
             binding.listv.setEnabled(false);
@@ -235,7 +241,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                 binding.title.setText(map.get("title").toString());
                 TransitionManager.beginDelayedTransition(binding.back, autoTransition);
                 binding.contai.setVisibility(View.VISIBLE);
-                Helper.setViewsVisibility(true, binding.igToolbarLoadFile, binding.add, binding.edi, binding.dele);
+                Helper.setViewsVisibility(true,  binding.add, binding.edi, binding.dele);
                 binding.spinner.setEnabled(false);
                 binding.listv.setEnabled(false);
             } else {
@@ -246,7 +252,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         } else if (id == R.id.canc) {
             _fabVisibility(true);
             TransitionManager.beginDelayedTransition(binding.back, autoTransition);
-            Helper.setViewsVisibility(false, binding.igToolbarLoadFile, binding.add, binding.edi, binding.dele);
+            Helper.setViewsVisibility(false,  binding.add, binding.edi, binding.dele);
             Helper.setViewsVisibility(true, binding.contai, binding.label);
             binding.spinner.setEnabled(true);
             binding.listv.setEnabled(true);

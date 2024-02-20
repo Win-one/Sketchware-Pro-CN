@@ -25,7 +25,6 @@ import com.sketchware.remod.databinding.AddCustomAttributeBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 import mod.SketchwareUtil;
 import mod.agus.jcoderz.lib.FileUtil;
@@ -112,12 +111,13 @@ public class EventsMakerDetails extends AppCompatActivity {
 
     private void setToolbar() {
         if (lisName.equals("")) {
-            Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.activity_events);
+            binding.txToolbarTitle.setText(R.string.activity_events);
         } else {
-           Objects.requireNonNull(getSupportActionBar()).setTitle(lisName);
+            binding.txToolbarTitle.setText(lisName);
         }
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
         binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
     }
 
@@ -162,7 +162,7 @@ public class EventsMakerDetails extends AppCompatActivity {
             ((LinearLayout) icon.getParent()).setGravity(17);
             title.setText((String) _data.get(position).get("name"));
             if ("".equals(_data.get(position).get("var"))) {
-                subtitle.setText(R.string.activity_events);
+                subtitle.setText(R.string.activity_event);
             } else {
                 subtitle.setText((String) _data.get(position).get("var"));
             }
