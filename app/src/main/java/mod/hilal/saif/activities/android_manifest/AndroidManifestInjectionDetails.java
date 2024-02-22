@@ -136,7 +136,7 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
         editText2.setVisibility(View.GONE);
         final EditText editText = inflate.findViewById(R.id.dialog_input_value);
         final TextView textView = (TextView) ((ViewGroup) editText2.getParent()).getChildAt(0);
-        textView.setText("Edit Value");
+        textView.setText(R.string.edit_value);
         editText.setText((String) listMap.get(pos).get("value"));
         editText.setHint("android:attr=\"value\"");
         textsave.setOnClickListener(view -> {

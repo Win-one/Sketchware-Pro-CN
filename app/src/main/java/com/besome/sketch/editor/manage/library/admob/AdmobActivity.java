@@ -144,6 +144,7 @@ public class AdmobActivity extends BaseAppCompatActivity implements View.OnClick
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (stepPosition > 0) {
             showStep(--stepPosition);
         } else {

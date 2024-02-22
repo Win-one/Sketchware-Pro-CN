@@ -3116,7 +3116,7 @@
     <string name="create_or_import">创建或导入</string>
     <string name="resource_manager">Resource管理</string>
     <string name="add_to_androidmanifest">添加到AndroidManifest</string>
-    <string name="logcat_hasn_t_captured_anything_yet">Logcat尚未捕获任何内容</string>
+    <string name="logcat_hasn_t_captured_anything_yet">尚未捕获任何内容</string>
     <string name="keep_this_screen_open_then_run_your_app">使此屏幕保持打开状态,然后运行应用</string>
     <string name="swipe_up_to_see_options">向上滑动查看选项</string>
     <string name="auto_scroll_enabled">启用自动滚动</string>
@@ -3240,6 +3240,16 @@
     <string name="error_dir_access">无法访问目录</string>
     <string name="label_parent_directory">上级名录</string>
     <string name="last_edit">最后编辑: </string>
+    <string name="sign_an_apk">签署APK</string>
+    <string name="discard">放弃</string>
+    <string name="edit_value">编辑值</string>
+    <string name="palettes">托盘</string>
+    <string name="properties">性能</string>
+    <string name="parameters">参数</string>
+    <string name="design">设计</string>
+    <string name="code">代码</string>
+    <string name="insert_block">插入块</string>
+    <string name="edit_block">编辑块</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

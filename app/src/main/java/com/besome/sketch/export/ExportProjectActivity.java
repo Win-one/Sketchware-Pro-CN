@@ -33,6 +33,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.sketchware.remod.BuildConfig;
 import com.sketchware.remod.R;
+import com.sketchware.remod.databinding.ExportProjectBinding;
 
 import org.spongycastle.jce.provider.BouncyCastleProvider;
 
@@ -99,18 +100,20 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
     private LottieAnimationView loading_sign_apk;
     private LinearLayout layout_apk_path;
     private TextView tv_apk_path;
+    private ExportProjectBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.export_project);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
+        binding = ExportProjectBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        setSupportActionBar(binding.toolbar);
+        binding.layoutMainLogo.setVisibility(View.GONE);
         getSupportActionBar().setTitle(Helper.getResString(R.string.myprojects_export_project_actionbar_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
         if (savedInstanceState == null) {
             sc_id = getIntent().getStringExtra("sc_id");
         } else {
@@ -245,6 +248,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
                     (int) getDip(8),
                     (int) getDip(8)
             );
+            exportAppBundleRoot.setCardBackgroundColor(0xffece7ec);
             exportAppBundleRoot.setLayoutParams(exportAppBundleRootParams);
         }
 
@@ -525,7 +529,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
         btn_sign_apk.setOnClickListener(v -> {
             GetKeyStoreCredentialsDialog credentialsDialog = new GetKeyStoreCredentialsDialog(this,
                     R.drawable.color_about_96,
-                    "Sign an APK",
+                    getString(R.string.sign_an_apk),
                     "To sign an APK, you need a keystore. Use your already created one, and copy it to " +
                             "/Internal storage/sketchware/keystore/release_key.jks and enter the alias's password.\n" +
                             "Note that this only signs your APK using signing scheme V1, to target Android 11+ for example, " +

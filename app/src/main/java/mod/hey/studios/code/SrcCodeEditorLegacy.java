@@ -73,7 +73,7 @@ public class SrcCodeEditorLegacy extends Activity {
                         Toast.makeText(this, "File saved", Toast.LENGTH_SHORT).show();
                         finish();
                     })
-                    .setNeutralButton("Discard", (dialog, which) -> finish())
+                    .setNeutralButton(R.string.discard, (dialog, which) -> finish())
                     .setNegativeButton(R.string.common_word_cancel, null)
                     .show();
         } else {

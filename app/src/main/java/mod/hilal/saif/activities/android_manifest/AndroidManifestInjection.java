@@ -129,7 +129,7 @@ public class AndroidManifestInjection extends AppCompatActivity {
 
         {
             LibraryItemView permission_card = new LibraryItemView(this);
-            makeup(permission_card, R.drawable.event_on_signin_complete_48dp, "Permissions", "Add custom Permissions to the app");
+            makeup(permission_card, R.drawable.event_on_signin_complete_48dp, getString(R.string.permissions), getString(R.string.add_custom_permissions_to_the_app));
             cards.addView(permission_card);
             permission_card.setOnClickListener(_view -> {
                 Intent inta = new Intent();
@@ -143,13 +143,13 @@ public class AndroidManifestInjection extends AppCompatActivity {
 
         {
             LibraryItemView permission_card = new LibraryItemView(this);
-            makeup(permission_card, R.drawable.recycling_48, "Launcher Activity", "Change the default Launcher Activity");
+            makeup(permission_card, R.drawable.recycling_48, getString(R.string.launcher_activity), getString(R.string.change_the_default_launcher_activity));
             cards.addView(permission_card);
             permission_card.setOnClickListener(v -> showLauncherActDialog(AndroidManifestInjector.getLauncherActivity(sc_id)));
         }
 
         LibraryItemView allAct_card = new LibraryItemView(this);
-        makeup(allAct_card, R.drawable.icons8_all_activities_attrs, "All Activities", "Add attributes for all Activities");
+        makeup(allAct_card, R.drawable.icons8_all_activities_attrs, getString(R.string.all_activities), getString(R.string.add_attributes_for_all_activities));
         cards.addView(allAct_card);
         allAct_card.setOnClickListener(v -> {
             Intent inta = new Intent();
@@ -161,7 +161,7 @@ public class AndroidManifestInjection extends AppCompatActivity {
         });
 
         LibraryItemView appCom_card = new LibraryItemView(this);
-        makeup(appCom_card, R.drawable.icons8_app_components, "App Components", "Add extra components");
+        makeup(appCom_card, R.drawable.icons8_app_components, getString(R.string.app_components), getString(R.string.add_extra_components));
         cards.addView(appCom_card);
         appCom_card.setOnClickListener(v -> showAppComponentDialog());
 
@@ -202,9 +202,9 @@ public class AndroidManifestInjection extends AppCompatActivity {
         inputAttr.setVisibility(View.GONE);
         final EditText inputValue = inflate.findViewById(R.id.dialog_input_value);
         final TextView textView = (TextView) ((ViewGroup) inputAttr.getParent()).getChildAt(0);
-        textView.setText("Launcher Activity (e.g. main)");
+        textView.setText(R.string.launcher_activity_e_g_main);
         inputValue.setText(actnamr);
-        inputValue.setHint("Activity name");
+        inputValue.setHint(R.string.activity_name);
 
         btnSave.setOnClickListener(v -> {
             create.dismiss();
@@ -231,15 +231,15 @@ public class AndroidManifestInjection extends AppCompatActivity {
         inputAttr.setVisibility(View.GONE);
         final EditText inputValue = inflate.findViewById(R.id.dialog_input_value);
         final TextView textView = (TextView) ((ViewGroup) inputAttr.getParent()).getChildAt(0);
-        textView.setText("Activity name");
+        textView.setText(R.string.activity_name);
         inputValue.setText(activityName);
-        inputValue.setHint("Activity name");
+        inputValue.setHint(R.string.activity_name);
 
         btnSave.setOnClickListener(v -> {
             addNewActivity(inputValue.getText().toString());
 
             create.dismiss();
-            SketchwareUtil.toast("New Activity added");
+            SketchwareUtil.toast(getString(R.string.new_activity_added));
         });
 
         btnCancel.setOnClickListener(Helper.getDialogDismissListener(create));
@@ -342,7 +342,7 @@ public class AndroidManifestInjection extends AppCompatActivity {
         FileUtil.writeFile(path, new Gson().toJson(data));
         refreshList();
         removeComponents(activity_name);
-        SketchwareUtil.toast("activity removed");
+        SketchwareUtil.toast(getString(R.string.activity_removed));
     }
 
     private void removeComponents(String str) {

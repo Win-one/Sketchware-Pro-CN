@@ -36,6 +36,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.sketchware.remod.R;
+import com.sketchware.remod.databinding.BlocksManagerBinding;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -59,15 +60,14 @@ public class BlocksManager extends AppCompatActivity {
     private String blocks_dir = "";
     private String pallet_dir = "";
     private ArrayList<HashMap<String, Object>> pallet_listmap = new ArrayList<>();
-    private ListView listview1;
-    private LinearLayout card2;
-    private TextView card2_sub;
-    private Toolbar toolbar;
+
+    private BlocksManagerBinding binding;
 
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        setContentView(R.layout.blocks_manager);
+        binding = BlocksManagerBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         initialize();
         initializeLogic();
     }
@@ -80,18 +80,14 @@ public class BlocksManager extends AppCompatActivity {
     }
 
     private void initialize() {
-        FloatingActionButton _fab = findViewById(R.id.fab);
-        listview1 = findViewById(R.id.list_pallete);
-        card2 = findViewById(R.id.recycle_bin);
-        card2_sub = findViewById(R.id.recycle_sub);
-        toolbar = findViewById(R.id.toolbar);
-        findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
-        setSupportActionBar(toolbar);
+
+        binding.layoutMainLogo.setVisibility(View.GONE);
+        setSupportActionBar(binding.toolbar);
         getSupportActionBar().setTitle(R.string.block_manager);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-        _fab.setOnClickListener(v -> showPaletteDialog(false, null, null, null, null));
+        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        binding.fab.setOnClickListener(v -> showPaletteDialog(false, null, null, null, null));
     }
 
     @Override
@@ -164,7 +160,7 @@ public class BlocksManager extends AppCompatActivity {
     private void initializeLogic() {
         _readSettings();
         _refresh_list();
-        _recycleBin(card2);
+        _recycleBin(binding.recycleBin);
     }
 
     @Override
@@ -230,12 +226,12 @@ public class BlocksManager extends AppCompatActivity {
             pallet_listmap = new ArrayList<>();
         }
 
-        Parcelable savedState = listview1.onSaveInstanceState();
-        listview1.setAdapter(new PaletteAdapter(pallet_listmap));
-        ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
-        listview1.onRestoreInstanceState(savedState);
+        Parcelable savedState = binding.listPallete.onSaveInstanceState();
+        binding.listPallete.setAdapter(new PaletteAdapter(pallet_listmap));
+        ((BaseAdapter)binding.listPallete.getAdapter()).notifyDataSetChanged();
+        binding.listPallete.onRestoreInstanceState(savedState);
 
-        card2_sub.setText("Blocks: " + (long) (_getN(-1)));
+        binding.recycleSub.setText("Blocks: " + (long) (_getN(-1)));
     }
 
     private double _getN(final double _p) {
@@ -252,25 +248,25 @@ public class BlocksManager extends AppCompatActivity {
         if (_p > 0) {
             Collections.swap(pallet_listmap, (int) (_p), (int) (_p + -1));
 
-            Parcelable savedState = listview1.onSaveInstanceState();
+            Parcelable savedState = binding.listPallete.onSaveInstanceState();
             FileUtil.writeFile(pallet_dir, new Gson().toJson(pallet_listmap));
             _swapRelatedBlocks(_p + 9, _p + 8);
             _readSettings();
             _refresh_list();
-            listview1.onRestoreInstanceState(savedState);
+            binding.listPallete.onRestoreInstanceState(savedState);
         }
     }
 
     private void _recycleBin(final View _v) {
         _a(_v);
-        card2.setOnClickListener(v -> {
+        binding.recycleBin.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), BlocksManagerDetailsActivity.class);
             intent.putExtra("position", "-1");
             intent.putExtra("dirB", blocks_dir);
             intent.putExtra("dirP", pallet_dir);
             startActivity(intent);
         });
-        card2.setOnLongClickListener(v -> {
+       binding.recycleBin.setOnLongClickListener(v -> {
             new AlertDialog.Builder(this)
                     .setTitle(R.string.common_word_recycle_bin)
                     .setMessage("Are you sure you want to empty the recycle bin? " +
@@ -286,12 +282,12 @@ public class BlocksManager extends AppCompatActivity {
         if (_p < (pallet_listmap.size() - 1)) {
             Collections.swap(pallet_listmap, (int) (_p), (int) (_p + 1));
             {
-                Parcelable savedState = listview1.onSaveInstanceState();
+                Parcelable savedState =binding.listPallete.onSaveInstanceState();
                 FileUtil.writeFile(pallet_dir, new Gson().toJson(pallet_listmap));
                 _swapRelatedBlocks(_p + 9, _p + 10);
                 _readSettings();
                 _refresh_list();
-                listview1.onRestoreInstanceState(savedState);
+                binding.listPallete.onRestoreInstanceState(savedState);
             }
         }
     }
@@ -445,7 +441,7 @@ public class BlocksManager extends AppCompatActivity {
         colorContainer.addView(openColorPalette);
 
         dialog.a(customView);
-        openColorPalette.setOnClickListener(getSharedPaletteColorPickerShower(dialog, colorEditText));
+        openColorPalette.setOnClickListener(getSharedPaletteColorPickerShower(dialog,colorEditText));
 
         dialog.b(Helper.getResString(R.string.common_word_save), (d, which) -> {
             try {
@@ -524,7 +520,7 @@ public class BlocksManager extends AppCompatActivity {
 
             title.setText(pallet_listmap.get(position).get("name").toString());
             sub.setText("Blocks: " + (long) (_getN(position + 9)));
-            card2_sub.setText("Blocks: " + (long) (_getN(-1)));
+            binding.recycleSub.setText("Blocks: " + (long) (_getN(-1)));
 
             int backgroundColor;
             String paletteColorValue = (String) palettes.get(position).get("color");
