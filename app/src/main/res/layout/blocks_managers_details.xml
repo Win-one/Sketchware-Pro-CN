@@ -9,24 +9,49 @@
         android:background="?attr/colorSurface"
         android:orientation="vertical">
 
-        <com.google.android.material.appbar.MaterialToolbar
+        <LinearLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:contentInsetStart="0dp"
-            app:contentInsetStart="0dp">
+            app:contentInsetStart="0dp"
+            android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/txToolbarTitle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:gravity="center|start"
-            android:text="@string/blocks_manager"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textColor="?attr/colorOnSurface" />
-        </com.google.android.material.appbar.MaterialToolbar>
+            <ImageView
+                android:id="@+id/backicon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="8dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/abc_ic_ab_back_material" />
+
+            <TextView
+                android:id="@+id/pagetitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="1"
+                android:text="@string/blocks_manager"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="?attr/colorOnSurface"
+                />
+
+            <ImageView
+                android:id="@+id/swap"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="8dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_menu_black_24dp" />
+
+            <ImageView
+                android:id="@+id/import_export"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="8dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/abc_ic_menu_overflow_material" />
+        </LinearLayout>
 
         <ListView
             android:id="@+id/listview"

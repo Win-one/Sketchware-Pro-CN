@@ -2409,13 +2409,25 @@ Please try again later"</string>
     <string name="sign_an_apk">Sign an APK</string>
     <string name="discard">Discard</string>
     <string name="edit_value">Edit Value</string>
-    <string name="palettes">Palettes</string>
+    <string name="palettes">Palettes:</string>
     <string name="properties">Properties</string>
     <string name="parameters">Parameters</string>
     <string name="design">Design</string>
     <string name="code">Code</string>
     <string name="insert_block">Insert block</string>
     <string name="edit_block">Edit block</string>
+    <string name="delete_block">Delete block?</string>
+    <string name="restore_to">Restore to</string>
+    <string name="move_to">Move to</string>
+    <string name="common_word_move">Move</string>
+    <string name="common_word_reverse">Reverse</string>
+    <string name="blocks">Blocks:</string>
+    <string name="attributes_for_all_activities">Attributes for all activities</string>
+    <string name="application_attributes">Application Attributes</string>
+    <string name="application_permissions">Application Permissions</string>
+    <string name="events">Events:</string>
+    <string name="create_a_new_palette">Create a new palette</string>
+    <string name="edit_palette">Edit palette</string>
 
 
 </resources>

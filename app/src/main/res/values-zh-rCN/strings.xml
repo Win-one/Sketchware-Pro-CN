@@ -3243,13 +3243,25 @@
     <string name="sign_an_apk">签署APK</string>
     <string name="discard">放弃</string>
     <string name="edit_value">编辑值</string>
-    <string name="palettes">托盘</string>
+    <string name="palettes">调色板:</string>
     <string name="properties">性能</string>
     <string name="parameters">参数</string>
     <string name="design">设计</string>
     <string name="code">代码</string>
     <string name="insert_block">插入块</string>
     <string name="edit_block">编辑块</string>
+    <string name="delete_block">删除块?</string>
+    <string name="restore_to">恢复到</string>
+    <string name="move_to">移至</string>
+    <string name="common_word_move">移动</string>
+    <string name="common_word_reverse">反向</string>
+    <string name="blocks">块:</string>
+    <string name="attributes_for_all_activities">所有活动的属性</string>
+    <string name="application_attributes">应用程序属性</string>
+    <string name="application_permissions">应用程序权限</string>
+    <string name="events">事件:</string>
+    <string name="create_a_new_palette">创建新调色板</string>
+    <string name="edit_palette">编辑调色板</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

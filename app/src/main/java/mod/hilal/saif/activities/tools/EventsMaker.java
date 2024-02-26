@@ -1,6 +1,5 @@
 package mod.hilal.saif.activities.tools;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -20,17 +19,16 @@ import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 
+import com.besome.sketch.editor.manage.library.LibraryItemView;
 import com.github.angads25.filepicker.model.DialogProperties;
 import com.github.angads25.filepicker.view.FilePickerDialog;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
@@ -100,18 +98,10 @@ public class EventsMaker extends AppCompatActivity {
         newLayout.addView(newText(getString(R.string.listeners), 16.0f, false, 0xff888888,
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0));
         base.addView(newLayout, 1);
-        CardView newCard = newCard(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                0);
-        LinearLayout newLayout2 = newLayout(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                0);
-        newCard.addView(newLayout2);
-        makeup(newLayout2, 0x7f07043e, getString(R.string.activity_events), getNumOfEvents(""));
-        base.addView(newCard, 1);
-        newLayout2.setOnClickListener(v -> {
+        LibraryItemView event_sub = new LibraryItemView(this);
+        makeup(event_sub, 0x7f07043e, getString(R.string.activity_events), getNumOfEvents(""));
+        base.addView(event_sub, 1);
+        event_sub.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.setClass(getApplicationContext(), EventsMakerDetails.class);
             intent.putExtra("lis_name", "");
@@ -354,39 +344,14 @@ public class EventsMaker extends AppCompatActivity {
         } else {
             eventAmount = 0;
         }
-        return "Events: " + eventAmount;
+        return getString(R.string.events) + eventAmount;
     }
 
-    private void makeup(View view, int resIcon, String title, String description) {
-        View inflate = getLayoutInflater().inflate(R.layout.manage_library_base_item, null);
-        ImageView icon = inflate.findViewById(R.id.lib_icon);
-        inflate.findViewById(R.id.tv_enable).setVisibility(View.GONE);
-        icon.setImageResource(resIcon);
-        ((LinearLayout) icon.getParent()).setGravity(Gravity.CENTER);
-        ((TextView) inflate.findViewById(R.id.lib_title)).setText(title);
-        ((TextView) inflate.findViewById(R.id.lib_desc)).setText(description);
-        ((ViewGroup) view).addView(inflate);
-    }
-
-    private CardView newCard(int width, int height, float weight) {
-        CardView cardView = new CardView(this);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height, weight);
-        layoutParams.setMargins(
-                (int) SketchwareUtil.getDip(4),
-                (int) SketchwareUtil.getDip(6),
-                (int) SketchwareUtil.getDip(4),
-                (int) SketchwareUtil.getDip(2)
-        );
-        cardView.setLayoutParams(layoutParams);
-        cardView.setPadding(
-                (int) SketchwareUtil.getDip(2),
-                (int) SketchwareUtil.getDip(2),
-                (int) SketchwareUtil.getDip(2),
-                (int) SketchwareUtil.getDip(2)
-        );
-        cardView.setCardBackgroundColor(Color.WHITE);
-        cardView.setRadius(SketchwareUtil.getDip(4));
-        return cardView;
+    private void makeup(LibraryItemView parent, int iconResourceId, String title, String description) {
+        parent.enabled.setVisibility(View.GONE);
+        parent.icon.setImageResource(iconResourceId);
+        parent.title.setText(title);
+        parent.description.setText(description);
     }
 
     private LinearLayout newLayout(int width, int height, float weight) {

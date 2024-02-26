@@ -116,7 +116,7 @@ public class AndroidManifestInjection extends AppCompatActivity {
         LinearLayout cards = findViewById(R.id.cards);
 
         LibraryItemView application_card = new LibraryItemView(this);
-        makeup(application_card, R.drawable.icons8_app_attrs, "Application", "Default properties for the app");
+        makeup(application_card, R.drawable.icons8_app_attrs, getString(R.string.application), getString(R.string.default_properties_for_the_app));
         cards.addView(application_card);
         application_card.setOnClickListener(v -> {
             Intent intent = new Intent();
@@ -181,10 +181,12 @@ public class AndroidManifestInjection extends AppCompatActivity {
 
         String APP_COMPONENTS_PATH = FileUtil.getExternalStorageDir().concat("/.sketchware/data/").concat(sc_id).concat("/Injection/androidmanifest/app_components.txt");
         if (!FileUtil.isExistFile(APP_COMPONENTS_PATH)) FileUtil.writeFile(APP_COMPONENTS_PATH, "");
+
         intent.putExtra("content", APP_COMPONENTS_PATH);
         intent.putExtra("xml", "");
         intent.putExtra("disableHeader", "");
-        intent.putExtra("title", "App Components");
+        String title = getString(R.string.app_components);
+        intent.putExtra("title",title );
         startActivity(intent);
     }
 
