@@ -1,41 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp"
     android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="fill_parent"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6.0dip"
-        android:background="#ffffffff"
-        android:orientation="vertical"
-        app:cardCornerRadius="5.0dip"
-        app:cardElevation="4.0dip">
+        android:layout_gravity="center"
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
-        <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8.0dip">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="20dp"
+        android:minWidth="280dp"
+        app:cardBackgroundColor="?colorSurfaceContainerHigh"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="10dp"
+        app:strokeWidth="0dp">
 
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8.0dip">
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:gravity="left"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/common_dialog_title_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|left"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/common_dialog_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="8dp"
+                    app:tint="?colorSecondary"
+                    android:src="@drawable/ic_tune_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:focusable="false"
-                    android:padding="8.0dip"
-                    android:text="@string/new_listener"
-                    android:textColor="#ff2196f3"
-                    android:textSize="18.0sp"
-                    android:textStyle="bold" />
+                    style="@style/MaterialAlertDialog.Material3.Title.Text"
+                    android:gravity="center_vertical"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@string/new_listener" />
+            </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="fill_parent"
@@ -97,7 +123,7 @@
                 <CheckBox
                     android:id="@id/separate"
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="8.0dip"
                     android:text="@string/independent_class_method"
@@ -107,6 +133,7 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -151,6 +178,6 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </ScrollView>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
+</ScrollView>
 </LinearLayout>

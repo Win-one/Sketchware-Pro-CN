@@ -99,7 +99,7 @@ public class EventsMaker extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0));
         base.addView(newLayout, 1);
         LibraryItemView event_sub = new LibraryItemView(this);
-        makeup(event_sub, 0x7f07043e, getString(R.string.activity_events), getNumOfEvents(""));
+        makeup(event_sub, R.drawable.new_window_96, getString(R.string.activity_events), getNumOfEvents(""));
         base.addView(event_sub, 1);
         event_sub.setOnClickListener(v -> {
             Intent intent = new Intent();
@@ -375,7 +375,7 @@ public class EventsMaker extends AppCompatActivity {
         TextView textView = new TextView(this);
         textView.setLayoutParams(new LinearLayout.LayoutParams(width, length, weight));
         textView.setPadding(
-                (int) SketchwareUtil.getDip(4),
+                (int) SketchwareUtil.getDip(8),
                 (int) SketchwareUtil.getDip(4),
                 (int) SketchwareUtil.getDip(4),
                 (int) SketchwareUtil.getDip(4)

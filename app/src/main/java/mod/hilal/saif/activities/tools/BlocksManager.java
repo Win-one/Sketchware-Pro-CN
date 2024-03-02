@@ -107,7 +107,7 @@ public class BlocksManager extends AppCompatActivity {
         TextView textView = new TextView(this);
         textView.setLayoutParams(new LinearLayout.LayoutParams(width, length, weight));
         textView.setPadding(
-                (int) SketchwareUtil.getDip(4),
+                (int) SketchwareUtil.getDip(8),
                 (int) SketchwareUtil.getDip(4),
                 (int) SketchwareUtil.getDip(4),
                 (int) SketchwareUtil.getDip(4)
@@ -158,7 +158,7 @@ public class BlocksManager extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, R.string.common_word_settings).setIcon(R.drawable.ic_settings_48).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menu.add(0, 0, 0, R.string.common_word_settings).setIcon(R.drawable.ic_settings_24).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         return true;
     }
 

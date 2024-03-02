@@ -3262,6 +3262,8 @@
     <string name="events">事件:</string>
     <string name="create_a_new_palette">创建新调色板</string>
     <string name="edit_palette">编辑调色板</string>
+    <string name="selected_apk">已选择的APK</string>
+    <string name="apk_path_will_appear_here">APK路径将显示在此处</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->
