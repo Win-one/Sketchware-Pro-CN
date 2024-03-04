@@ -2,10 +2,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffeeeeee"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?attr/colorSurface">
 
-    <include layout="@layout/toolbar" />
+   <com.google.android.material.appbar.MaterialToolbar
+       android:id="@+id/toolbar"
+       android:layout_width="match_parent"
+       android:layout_height="?attr/actionBarSize"
+       android:contentInsetStart="0dp"
+       app:contentInsetStart="0dp">
+
+       <TextView
+           android:id="@+id/txToolbarTitle"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_marginStart="8dp"
+           android:layout_weight="1"
+           android:gravity="center|start"
+           android:text="Title"
+           android:textAppearance="?attr/textAppearanceHeadline6"
+           android:textColor="?attr/colorOnSurface" />
+
+   </com.google.android.material.appbar.MaterialToolbar>
 
     <ScrollView
         android:id="@+id/scroll_view"
@@ -44,7 +62,7 @@
                         android:paddingTop="8dp"
                         android:paddingRight="8dp"
                         android:paddingBottom="8dp"
-                        android:text="Properties"
+                        android:text="@string/properties"
                         android:textColor="#ff424242"
                         android:textSize="16sp" />
 
@@ -157,7 +175,7 @@
                         android:paddingTop="8dp"
                         android:paddingRight="8dp"
                         android:paddingBottom="8dp"
-                        android:text="Design"
+                        android:text="@string/design"
                         android:textColor="#ff424242"
                         android:textSize="16sp" />
 
@@ -239,7 +257,7 @@
                         android:paddingTop="4dp"
                         android:paddingRight="4dp"
                         android:paddingBottom="4dp"
-                        android:text="Parameters"
+                        android:text="@string/parameters"
                         android:textColor="#ff757575"
                         android:textSize="10sp" />
 
@@ -315,7 +333,7 @@
                         android:layout_height="wrap_content"
                         android:background="#fff5f5f5"
                         android:gravity="center|left|top"
-                        android:hint="Code"
+                        android:hint="@string/code"
                         android:padding="8dp"
                         android:textColor="#ff000000"
                         android:textColorHint="#ff607d8b"

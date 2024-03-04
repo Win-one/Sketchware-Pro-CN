@@ -28,6 +28,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
+import com.sketchware.remod.databinding.AddCustomAttributeBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,16 +42,17 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
 
     private static String ATTRIBUTES_FILE_PATH;
     private final ArrayList<HashMap<String, Object>> listMap = new ArrayList<>();
-    private ListView listView;
     private String src_id;
     private String activityName;
     private String type;
     private String constant;
+    private AddCustomAttributeBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_custom_attribute);
+        binding = AddCustomAttributeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         if (getIntent().hasExtra("sc_id") && getIntent().hasExtra("file_name") && getIntent().hasExtra("type")) {
             src_id = getIntent().getStringExtra("sc_id");
@@ -84,9 +86,7 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
     }
 
     private void setupViews() {
-        FloatingActionButton fab = findViewById(R.id.add_attr_fab);
-        fab.setOnClickListener(v -> showAddDial());
-        listView = findViewById(R.id.add_attr_listview);
+        binding.addAttrFab.setOnClickListener(v -> showAddDial());
         refreshList();
     }
 
@@ -101,8 +101,8 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
                     listMap.add(data.get(i));
                 }
             }
-            listView.setAdapter(new ListAdapter(listMap));
-            ((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
+            binding.addAttrListview.setAdapter(new ListAdapter(listMap));
+            ((BaseAdapter) binding.addAttrListview.getAdapter()).notifyDataSetChanged();
         }
     }
 
@@ -136,7 +136,7 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
         editText2.setVisibility(View.GONE);
         final EditText editText = inflate.findViewById(R.id.dialog_input_value);
         final TextView textView = (TextView) ((ViewGroup) editText2.getParent()).getChildAt(0);
-        textView.setText("Edit Value");
+        textView.setText(R.string.edit_value);
         editText.setText((String) listMap.get(pos).get("value"));
         editText.setHint("android:attr=\"value\"");
         textsave.setOnClickListener(view -> {
@@ -227,34 +227,32 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
         String str = "";
         switch (type) {
             case "all":
-                str = "Attributes for all activities";
+                str = getString(R.string.attributes_for_all_activities);
                 break;
 
             case "application":
-                str = "Application Attributes";
+                str = getString(R.string.application_attributes);
                 break;
 
             case "permission":
-                str = "Application Permissions";
+                str = getString(R.string.application_permissions);
                 break;
 
             default:
                 str = activityName;
                 break;
         }
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(str);
+        setSupportActionBar(binding.toolbar);
+        binding.txToolbarTitle.setText(str);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        ((Toolbar) toolbar).setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-        if (!str.equals("Attributes for all activities") && !str.equals("Application Attributes") && !str.equals("Application Permissions")) {
+        ((Toolbar) binding.toolbar).setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        if (!str.equals(getString(R.string.attributes_for_all_activities)) && !str.equals(getString(R.string.application_attributes)) && !str.equals(getString(R.string.application_permissions))) {
             // Feature description: allows to inject anything into the {@code activity} tag of the Activity
             // (yes, Command Blocks can do that too, but removing features is bad.)
             TextView actComponent = newText("Components ASD", 15, Color.parseColor("#ffffff"), -2, -2, 0);
             actComponent.setTypeface(Typeface.DEFAULT_BOLD);
-            toolbar.addView(actComponent);
+            binding.toolbar.addView(actComponent);
             actComponent.setOnClickListener(v -> {
                 ActComponentsDialog acd = new ActComponentsDialog(this, src_id, activityName);
                 acd.show();

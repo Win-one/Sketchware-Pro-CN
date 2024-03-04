@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
@@ -21,21 +22,20 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
+import com.besome.sketch.editor.manage.library.LibraryItemView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.sketchware.remod.R;
+import com.sketchware.remod.databinding.BlocksManagerBinding;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -59,17 +59,83 @@ public class BlocksManager extends AppCompatActivity {
     private String blocks_dir = "";
     private String pallet_dir = "";
     private ArrayList<HashMap<String, Object>> pallet_listmap = new ArrayList<>();
-    private ListView listview1;
-    private LinearLayout card2;
-    private TextView card2_sub;
-    private Toolbar toolbar;
+
+    private BlocksManagerBinding binding;
+    private LibraryItemView recycle_sub;
 
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        setContentView(R.layout.blocks_manager);
+        binding = BlocksManagerBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         initialize();
+        setupViews();
         initializeLogic();
+    }
+
+    private void setupViews() {
+        ViewGroup base = (ViewGroup) binding.listPallete.getParent();
+        LinearLayout newLayout = newLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                0);
+        newLayout.setBackgroundColor(Color.parseColor("#00000000"));
+        newLayout.setPadding(
+                (int) SketchwareUtil.getDip(8),
+                (int) SketchwareUtil.getDip(8),
+                (int) SketchwareUtil.getDip(8),
+                (int) SketchwareUtil.getDip(8)
+        );
+        newLayout.setFocusable(false);
+        newLayout.setGravity(16);
+        newLayout.addView(newText(getString(R.string.palettes), 16.0f, false, 0xff888888,
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0));
+        base.addView(newLayout, 1);
+        recycle_sub = new LibraryItemView(this);
+        makeup(recycle_sub, R.drawable.icon_delete_active, getString(R.string.common_word_recycle_bin), getString(R.string.blocks) + (long) (_getN(-1)));
+        base.addView(recycle_sub, 1);
+    }
+
+    private void makeup(LibraryItemView parent, int iconResourceId, String title, String description) {
+        parent.enabled.setVisibility(View.GONE);
+        parent.icon.setImageResource(iconResourceId);
+        parent.title.setText(title);
+        parent.description.setText(description);
+    }
+
+    private TextView newText(String str, float size, boolean is, int color, int width, int length, float weight) {
+        TextView textView = new TextView(this);
+        textView.setLayoutParams(new LinearLayout.LayoutParams(width, length, weight));
+        textView.setPadding(
+                (int) SketchwareUtil.getDip(8),
+                (int) SketchwareUtil.getDip(4),
+                (int) SketchwareUtil.getDip(4),
+                (int) SketchwareUtil.getDip(4)
+        );
+        textView.setTextColor(color);
+        textView.setText(str);
+        textView.setTextSize(size);
+        if (is) {
+            textView.setTypeface(Typeface.DEFAULT_BOLD);
+        }
+        return textView;
+    }
+
+    private LinearLayout newLayout(int width, int height, float weight) {
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(width, height, weight));
+        linearLayout.setPadding(
+                (int) SketchwareUtil.getDip(4),
+                (int) SketchwareUtil.getDip(4),
+                (int) SketchwareUtil.getDip(4),
+                (int) SketchwareUtil.getDip(4)
+        );
+        GradientDrawable gradientDrawable = new GradientDrawable();
+        gradientDrawable.setColor(Color.WHITE);
+        linearLayout.setBackground(new RippleDrawable(new ColorStateList(new int[][]{new int[0]}, new int[]{Color.parseColor("#64B5F6")}), gradientDrawable, null));
+        linearLayout.setClickable(true);
+        linearLayout.setFocusable(true);
+        return linearLayout;
     }
 
     @Override
@@ -80,23 +146,19 @@ public class BlocksManager extends AppCompatActivity {
     }
 
     private void initialize() {
-        FloatingActionButton _fab = findViewById(R.id.fab);
-        listview1 = findViewById(R.id.list_pallete);
-        card2 = findViewById(R.id.recycle_bin);
-        card2_sub = findViewById(R.id.recycle_sub);
-        toolbar = findViewById(R.id.toolbar);
-        findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
-        setSupportActionBar(toolbar);
+
+        binding.layoutMainLogo.setVisibility(View.GONE);
+        setSupportActionBar(binding.toolbar);
         getSupportActionBar().setTitle(R.string.block_manager);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-        _fab.setOnClickListener(v -> showPaletteDialog(false, null, null, null, null));
+        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        binding.fab.setOnClickListener(v -> showPaletteDialog(false, null, null, null, null));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, R.string.common_word_settings).setIcon(R.drawable.settings_96).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menu.add(0, 0, 0, R.string.common_word_settings).setIcon(R.drawable.ic_settings_24).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         return true;
     }
 
@@ -164,7 +226,7 @@ public class BlocksManager extends AppCompatActivity {
     private void initializeLogic() {
         _readSettings();
         _refresh_list();
-        _recycleBin(card2);
+        _recycleBin(recycle_sub);
     }
 
     @Override
@@ -230,12 +292,10 @@ public class BlocksManager extends AppCompatActivity {
             pallet_listmap = new ArrayList<>();
         }
 
-        Parcelable savedState = listview1.onSaveInstanceState();
-        listview1.setAdapter(new PaletteAdapter(pallet_listmap));
-        ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
-        listview1.onRestoreInstanceState(savedState);
-
-        card2_sub.setText("Blocks: " + (long) (_getN(-1)));
+        Parcelable savedState = binding.listPallete.onSaveInstanceState();
+        binding.listPallete.setAdapter(new PaletteAdapter(pallet_listmap));
+        ((BaseAdapter) binding.listPallete.getAdapter()).notifyDataSetChanged();
+        binding.listPallete.onRestoreInstanceState(savedState);
     }
 
     private double _getN(final double _p) {
@@ -252,25 +312,25 @@ public class BlocksManager extends AppCompatActivity {
         if (_p > 0) {
             Collections.swap(pallet_listmap, (int) (_p), (int) (_p + -1));
 
-            Parcelable savedState = listview1.onSaveInstanceState();
+            Parcelable savedState = binding.listPallete.onSaveInstanceState();
             FileUtil.writeFile(pallet_dir, new Gson().toJson(pallet_listmap));
             _swapRelatedBlocks(_p + 9, _p + 8);
             _readSettings();
             _refresh_list();
-            listview1.onRestoreInstanceState(savedState);
+            binding.listPallete.onRestoreInstanceState(savedState);
         }
     }
 
     private void _recycleBin(final View _v) {
         _a(_v);
-        card2.setOnClickListener(v -> {
+        recycle_sub.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), BlocksManagerDetailsActivity.class);
             intent.putExtra("position", "-1");
             intent.putExtra("dirB", blocks_dir);
             intent.putExtra("dirP", pallet_dir);
             startActivity(intent);
         });
-        card2.setOnLongClickListener(v -> {
+        recycle_sub.setOnLongClickListener(v -> {
             new AlertDialog.Builder(this)
                     .setTitle(R.string.common_word_recycle_bin)
                     .setMessage("Are you sure you want to empty the recycle bin? " +
@@ -286,12 +346,12 @@ public class BlocksManager extends AppCompatActivity {
         if (_p < (pallet_listmap.size() - 1)) {
             Collections.swap(pallet_listmap, (int) (_p), (int) (_p + 1));
             {
-                Parcelable savedState = listview1.onSaveInstanceState();
+                Parcelable savedState = binding.listPallete.onSaveInstanceState();
                 FileUtil.writeFile(pallet_dir, new Gson().toJson(pallet_listmap));
                 _swapRelatedBlocks(_p + 9, _p + 10);
                 _readSettings();
                 _refresh_list();
-                listview1.onRestoreInstanceState(savedState);
+                binding.listPallete.onRestoreInstanceState(savedState);
             }
         }
     }
@@ -384,7 +444,7 @@ public class BlocksManager extends AppCompatActivity {
     private void showPaletteDialog(boolean isEditing, Integer oldPosition, String oldName, String oldColor, Integer insertAtPosition) {
         aB dialog = new aB(this);
         dialog.a(R.drawable.positive_96);
-        dialog.b(!isEditing ? "Create a new palette" : "Edit palette");
+        dialog.b(!isEditing ? getString(R.string.create_a_new_palette) : getString(R.string.edit_palette));
 
         LinearLayout customView = new LinearLayout(this);
         customView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -523,8 +583,9 @@ public class BlocksManager extends AppCompatActivity {
             final TextView sub = convertView.findViewById(R.id.sub);
 
             title.setText(pallet_listmap.get(position).get("name").toString());
-            sub.setText("Blocks: " + (long) (_getN(position + 9)));
-            card2_sub.setText("Blocks: " + (long) (_getN(-1)));
+            sub.setText(getString(R.string.blocks) + (long) (_getN(position + 9)));
+            makeup(recycle_sub, 0x7f07043e, getString(R.string.activity_events),
+                    getString(R.string.blocks) + (long) (_getN(-1)));
 
             int backgroundColor;
             String paletteColorValue = (String) palettes.get(position).get("color");

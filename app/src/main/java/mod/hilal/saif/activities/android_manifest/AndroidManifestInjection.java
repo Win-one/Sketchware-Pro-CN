@@ -11,6 +11,8 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -20,8 +22,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,6 +54,7 @@ import mod.hilal.saif.asd.DialogButtonGradientDrawable;
 import mod.jbk.code.CodeEditorColorSchemes;
 import mod.jbk.code.CodeEditorLanguages;
 import mod.remaker.view.CustomAttributeView;
+import shadow.bundletool.com.android.tools.r8.internal.Al;
 
 @SuppressLint("SetTextI18n")
 public class AndroidManifestInjection extends AppCompatActivity {
@@ -111,7 +116,7 @@ public class AndroidManifestInjection extends AppCompatActivity {
         LinearLayout cards = findViewById(R.id.cards);
 
         LibraryItemView application_card = new LibraryItemView(this);
-        makeup(application_card, R.drawable.icons8_app_attrs, "Application", "Default properties for the app");
+        makeup(application_card, R.drawable.icons8_app_attrs, getString(R.string.application), getString(R.string.default_properties_for_the_app));
         cards.addView(application_card);
         application_card.setOnClickListener(v -> {
             Intent intent = new Intent();
@@ -124,7 +129,7 @@ public class AndroidManifestInjection extends AppCompatActivity {
 
         {
             LibraryItemView permission_card = new LibraryItemView(this);
-            makeup(permission_card, R.drawable.event_on_signin_complete_48dp, "Permissions", "Add custom Permissions to the app");
+            makeup(permission_card, R.drawable.event_on_signin_complete_48dp, getString(R.string.permissions), getString(R.string.add_custom_permissions_to_the_app));
             cards.addView(permission_card);
             permission_card.setOnClickListener(_view -> {
                 Intent inta = new Intent();
@@ -138,13 +143,13 @@ public class AndroidManifestInjection extends AppCompatActivity {
 
         {
             LibraryItemView permission_card = new LibraryItemView(this);
-            makeup(permission_card, R.drawable.recycling_48, "Launcher Activity", "Change the default Launcher Activity");
+            makeup(permission_card, R.drawable.recycling_48, getString(R.string.launcher_activity), getString(R.string.change_the_default_launcher_activity));
             cards.addView(permission_card);
             permission_card.setOnClickListener(v -> showLauncherActDialog(AndroidManifestInjector.getLauncherActivity(sc_id)));
         }
 
         LibraryItemView allAct_card = new LibraryItemView(this);
-        makeup(allAct_card, R.drawable.icons8_all_activities_attrs, "All Activities", "Add attributes for all Activities");
+        makeup(allAct_card, R.drawable.icons8_all_activities_attrs, getString(R.string.all_activities), getString(R.string.add_attributes_for_all_activities));
         cards.addView(allAct_card);
         allAct_card.setOnClickListener(v -> {
             Intent inta = new Intent();
@@ -156,7 +161,7 @@ public class AndroidManifestInjection extends AppCompatActivity {
         });
 
         LibraryItemView appCom_card = new LibraryItemView(this);
-        makeup(appCom_card, R.drawable.icons8_app_components, "App Components", "Add extra components");
+        makeup(appCom_card, R.drawable.icons8_app_components, getString(R.string.app_components), getString(R.string.add_extra_components));
         cards.addView(appCom_card);
         appCom_card.setOnClickListener(v -> showAppComponentDialog());
 
@@ -176,10 +181,12 @@ public class AndroidManifestInjection extends AppCompatActivity {
 
         String APP_COMPONENTS_PATH = FileUtil.getExternalStorageDir().concat("/.sketchware/data/").concat(sc_id).concat("/Injection/androidmanifest/app_components.txt");
         if (!FileUtil.isExistFile(APP_COMPONENTS_PATH)) FileUtil.writeFile(APP_COMPONENTS_PATH, "");
+
         intent.putExtra("content", APP_COMPONENTS_PATH);
         intent.putExtra("xml", "");
         intent.putExtra("disableHeader", "");
-        intent.putExtra("title", "App Components");
+        String title = getString(R.string.app_components);
+        intent.putExtra("title",title );
         startActivity(intent);
     }
 
@@ -197,14 +204,14 @@ public class AndroidManifestInjection extends AppCompatActivity {
         inputAttr.setVisibility(View.GONE);
         final EditText inputValue = inflate.findViewById(R.id.dialog_input_value);
         final TextView textView = (TextView) ((ViewGroup) inputAttr.getParent()).getChildAt(0);
-        textView.setText("Launcher Activity (e.g. main)");
+        textView.setText(R.string.launcher_activity_e_g_main);
         inputValue.setText(actnamr);
-        inputValue.setHint("Activity name");
+        inputValue.setHint(R.string.activity_name);
 
         btnSave.setOnClickListener(v -> {
             create.dismiss();
             AndroidManifestInjector.setLauncherActivity(sc_id, inputValue.getText().toString());
-            SketchwareUtil.toast("Saved");
+            SketchwareUtil.toast(getString(R.string.common_word_saved));
         });
 
         btnCancel.setOnClickListener(Helper.getDialogDismissListener(create));
@@ -226,15 +233,15 @@ public class AndroidManifestInjection extends AppCompatActivity {
         inputAttr.setVisibility(View.GONE);
         final EditText inputValue = inflate.findViewById(R.id.dialog_input_value);
         final TextView textView = (TextView) ((ViewGroup) inputAttr.getParent()).getChildAt(0);
-        textView.setText("Activity name");
+        textView.setText(R.string.activity_name);
         inputValue.setText(activityName);
-        inputValue.setHint("Activity name");
+        inputValue.setHint(R.string.activity_name);
 
         btnSave.setOnClickListener(v -> {
             addNewActivity(inputValue.getText().toString());
 
             create.dismiss();
-            SketchwareUtil.toast("New Activity added");
+            SketchwareUtil.toast(getString(R.string.new_activity_added));
         });
 
         btnCancel.setOnClickListener(Helper.getDialogDismissListener(create));
@@ -337,7 +344,7 @@ public class AndroidManifestInjection extends AppCompatActivity {
         FileUtil.writeFile(path, new Gson().toJson(data));
         refreshList();
         removeComponents(activity_name);
-        SketchwareUtil.toast("activity removed");
+        SketchwareUtil.toast(getString(R.string.activity_removed));
     }
 
     private void removeComponents(String str) {
@@ -357,25 +364,34 @@ public class AndroidManifestInjection extends AppCompatActivity {
     }
 
     private void setupCustomToolbar() {
-        ImageView _back = findViewById(R.id.ig_toolbar_back);
-        Helper.applyRippleToToolbarView(_back);
-        ImageView _quickSource = findViewById(R.id.ig_toolbar_load_file);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
+        getSupportActionBar().setTitle(R.string.androidmanifest_manager);
+        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+    }
 
-        TextView _title = findViewById(R.id.tx_toolbar_title);
-        _title.setText("AndroidManifest Manager");
-        _back.setOnClickListener(Helper.getBackPressedClickListener(this));
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(Menu.NONE,1,Menu.NONE,"quickSource").setIcon(R.drawable.code_white_48).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        return true;
+    }
 
-        _quickSource.setImageResource(R.drawable.code_white_48);
-        _quickSource.setVisibility(View.VISIBLE);
-        Helper.applyRippleToToolbarView(_quickSource);
-        _quickSource.setOnClickListener((v1 -> showQuickManifestSourceDialog()));
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == 1) {
+            showQuickManifestSourceDialog();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void showQuickManifestSourceDialog() {
         ProgressMsgBoxBinding loadingDialogBinding = ProgressMsgBoxBinding.inflate(getLayoutInflater());
-        loadingDialogBinding.tvProgress.setText("Generating source code...");
+        loadingDialogBinding.tvProgress.setText(R.string.generating_source_code);
         var loadingDialog = new MaterialAlertDialogBuilder(this)
-                .setTitle("Please wait")
+                .setTitle(R.string.please_wait)
                 .setCancelable(false)
                 .setView(loadingDialogBinding.getRoot())
                 .create();
@@ -386,7 +402,7 @@ public class AndroidManifestInjection extends AppCompatActivity {
 
             var dialogBuilder = new MaterialAlertDialogBuilder(this)
                     .setTitle("AndroidManifest.xml")
-                    .setPositiveButton("Dismiss", null);
+                    .setPositiveButton(R.string.common_word_dismiss, null);
 
             runOnUiThread(() -> {
                 if (isFinishing()) return;

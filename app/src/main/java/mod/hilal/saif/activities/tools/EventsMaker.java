@@ -1,6 +1,5 @@
 package mod.hilal.saif.activities.tools;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -13,20 +12,23 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.cardview.widget.CardView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.besome.sketch.editor.manage.library.LibraryItemView;
 import com.github.angads25.filepicker.model.DialogProperties;
 import com.github.angads25.filepicker.view.FilePickerDialog;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
@@ -43,7 +45,7 @@ import mod.agus.jcoderz.lib.FileUtil;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.events.EventsHandler;
 
-public class EventsMaker extends Activity {
+public class EventsMaker extends AppCompatActivity {
 
     public static final File EVENT_EXPORT_LOCATION = new File(Environment.getExternalStorageDirectory(),
             ".sketchware/data/system/export/events/");
@@ -93,21 +95,13 @@ public class EventsMaker extends Activity {
         );
         newLayout.setFocusable(false);
         newLayout.setGravity(16);
-        newLayout.addView(newText("Listeners:", 16.0f, false, 0xff888888,
+        newLayout.addView(newText(getString(R.string.listeners), 16.0f, false, 0xff888888,
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0));
         base.addView(newLayout, 1);
-        CardView newCard = newCard(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                0);
-        LinearLayout newLayout2 = newLayout(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                0);
-        newCard.addView(newLayout2);
-        makeup(newLayout2, 0x7f07043e, "Activity events", getNumOfEvents(""));
-        base.addView(newCard, 1);
-        newLayout2.setOnClickListener(v -> {
+        LibraryItemView event_sub = new LibraryItemView(this);
+        makeup(event_sub, R.drawable.new_window_96, getString(R.string.activity_events), getNumOfEvents(""));
+        base.addView(event_sub, 1);
+        event_sub.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.setClass(getApplicationContext(), EventsMakerDetails.class);
             intent.putExtra("lis_name", "");
@@ -350,39 +344,14 @@ public class EventsMaker extends Activity {
         } else {
             eventAmount = 0;
         }
-        return "Events: " + eventAmount;
+        return getString(R.string.events) + eventAmount;
     }
 
-    private void makeup(View view, int resIcon, String title, String description) {
-        View inflate = getLayoutInflater().inflate(R.layout.manage_library_base_item, null);
-        ImageView icon = inflate.findViewById(R.id.lib_icon);
-        inflate.findViewById(R.id.tv_enable).setVisibility(View.GONE);
-        icon.setImageResource(resIcon);
-        ((LinearLayout) icon.getParent()).setGravity(Gravity.CENTER);
-        ((TextView) inflate.findViewById(R.id.lib_title)).setText(title);
-        ((TextView) inflate.findViewById(R.id.lib_desc)).setText(description);
-        ((ViewGroup) view).addView(inflate);
-    }
-
-    private CardView newCard(int width, int height, float weight) {
-        CardView cardView = new CardView(this);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, height, weight);
-        layoutParams.setMargins(
-                (int) SketchwareUtil.getDip(4),
-                (int) SketchwareUtil.getDip(6),
-                (int) SketchwareUtil.getDip(4),
-                (int) SketchwareUtil.getDip(2)
-        );
-        cardView.setLayoutParams(layoutParams);
-        cardView.setPadding(
-                (int) SketchwareUtil.getDip(2),
-                (int) SketchwareUtil.getDip(2),
-                (int) SketchwareUtil.getDip(2),
-                (int) SketchwareUtil.getDip(2)
-        );
-        cardView.setCardBackgroundColor(Color.WHITE);
-        cardView.setRadius(SketchwareUtil.getDip(4));
-        return cardView;
+    private void makeup(LibraryItemView parent, int iconResourceId, String title, String description) {
+        parent.enabled.setVisibility(View.GONE);
+        parent.icon.setImageResource(iconResourceId);
+        parent.title.setText(title);
+        parent.description.setText(description);
     }
 
     private LinearLayout newLayout(int width, int height, float weight) {
@@ -406,7 +375,7 @@ public class EventsMaker extends Activity {
         TextView textView = new TextView(this);
         textView.setLayoutParams(new LinearLayout.LayoutParams(width, length, weight));
         textView.setPadding(
-                (int) SketchwareUtil.getDip(4),
+                (int) SketchwareUtil.getDip(8),
                 (int) SketchwareUtil.getDip(4),
                 (int) SketchwareUtil.getDip(4),
                 (int) SketchwareUtil.getDip(4)
@@ -421,36 +390,34 @@ public class EventsMaker extends Activity {
     }
 
     private void setToolbar() {
-        binding.txToolbarTitle.setText("Event manager");
-        binding.igToolbarBack.setOnClickListener(Helper.getBackPressedClickListener(this));
-        Helper.applyRippleToToolbarView(binding.igToolbarBack);
-        binding.igToolbarLoadFile.setVisibility(View.VISIBLE);
-        binding.igToolbarLoadFile.setImageResource(R.drawable.ic_more_vert_white_24dp);
-        binding.igToolbarLoadFile.setOnClickListener(v -> {
-            PopupMenu popupMenu = new PopupMenu(this, binding.igToolbarLoadFile);
-            final Menu menu = popupMenu.getMenu();
-            menu.add("Import events");
-            menu.add("Export events");
-            popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getTitle().toString()) {
-                    case "Import events":
-                        openFileExplorerImport();
-                        break;
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        binding.txToolbarTitle.setText(R.string.event_manager);
+        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+    }
 
-                    case "Export events":
-                        exportAll();
-                        SketchwareUtil.toast("Successfully exported events to:\n" +
-                                "/Internal storage/.sketchware/data/system/export/events", Toast.LENGTH_LONG);
-                        break;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(Menu.NONE,1,Menu.NONE,R.string.import_events);
+        menu.add(Menu.NONE,2,Menu.NONE,R.string.export_events);
+        return true;
+    }
 
-                    default:
-                        return false;
-                }
-                return true;
-            });
-            popupMenu.show();
-        });
-        Helper.applyRippleToToolbarView(binding.igToolbarLoadFile);
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case 1 -> openFileExplorerImport();
+            case 2 -> {
+                exportAll();
+                SketchwareUtil.toast("Successfully exported events to:\n" +
+                        "/Internal storage/.sketchware/data/system/export/events", Toast.LENGTH_LONG);
+            }
+            default -> {
+                return false;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private class ListAdapter extends BaseAdapter {
@@ -498,7 +465,7 @@ public class EventsMaker extends Activity {
             linearLayout.setOnLongClickListener(v -> {
                 new AlertDialog.Builder(EventsMaker.this)
                         .setTitle(_data.get(position).get("name").toString())
-                        .setItems(new String[]{"Edit", "Export", "Delete"}, (dialog, which) -> {
+                        .setItems(new String[]{getString(R.string.common_word_edit), getString(R.string.common_word_export), getString(R.string.common_word_delete)}, (dialog, which) -> {
                             switch (which) {
                                 case 0:
                                     editItemDialog(position);

@@ -44,7 +44,7 @@
             android:layout_height="38dp"
             android:padding="6dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_undo_24"
+            android:src="@drawable/ic_undo_white_48dp"
             app:tint="#FFFFFFFF" />
 
         <ImageView
@@ -54,7 +54,7 @@
             android:layout_marginLeft="8dp"
             android:padding="6dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_redo_24"
+            android:src="@drawable/ic_redo_white_48dp"
             app:tint="#FFFFFFFF" />
 
         <ImageView
@@ -64,7 +64,7 @@
             android:layout_marginLeft="8dp"
             android:padding="6dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_save_24"
+            android:src="@drawable/save_white_48"
             app:tint="#FFFFFFFF" />
 
         <ImageView

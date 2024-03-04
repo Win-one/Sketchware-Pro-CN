@@ -60,6 +60,7 @@ public class ManageImageActivity extends BaseAppCompatActivity implements ViewPa
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (projectImagesFragment.isSelecting) {
             projectImagesFragment.a(false);
         } else {

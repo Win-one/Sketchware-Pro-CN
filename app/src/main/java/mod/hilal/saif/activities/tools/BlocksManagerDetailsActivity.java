@@ -83,12 +83,15 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
         import_export.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(this, import_export);
             final Menu menu = popupMenu.getMenu();
-            menu.add(Menu.NONE, 1, Menu.NONE, R.string.import_blocks);
-            menu.add(Menu.NONE, 2, Menu.NONE, R.string.export_blocks);
+            menu.add(Menu.NONE,1,Menu.NONE,R.string.import_blocks);
+            menu.add(Menu.NONE,2,Menu.NONE,R.string.export_blocks);
             popupMenu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
-                    case 1 -> openFileExplorerImport();
-                    case 2 -> {
+                    case 1:
+                        openFileExplorerImport();
+                        break;
+
+                    case 2:
                         Object paletteName = pallet_list.get(palette - 9).get("name");
                         if (paletteName instanceof String) {
                             String exportTo = new File(BLOCK_EXPORT_PATH, paletteName + ".json").getAbsolutePath();
@@ -97,10 +100,10 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                         } else {
                             SketchwareUtil.toastError("Invalid name of palette #" + (palette - 9));
                         }
-                    }
-                    default -> {
+                        break;
+
+                    default:
                         return false;
-                    }
                 }
                 return true;
             });
@@ -308,15 +311,20 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
         if (palette == -1) {
             PopupMenu popupMenu = new PopupMenu(this, view);
             Menu menu = popupMenu.getMenu();
-            menu.add(Menu.NONE, 3, Menu.NONE, R.string.delete_permanently);
-            menu.add(Menu.NONE, 4, Menu.NONE, R.string.common_word_restore);
+            menu.add(Menu.NONE,3,Menu.NONE,R.string.delete_permanently);
+            menu.add(Menu.NONE,4,Menu.NONE,R.string.common_word_restore);
             popupMenu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
-                    case 3 -> _deleteBlock(position);
-                    case 4 -> _changePallette(position);
-                    default -> {
+                    case 3:
+                        _deleteBlock(position);
+                        break;
+
+                    case 4:
+                        _changePallette(position);
+                        break;
+
+                    default:
                         return false;
-                    }
                 }
                 return true;
             });
@@ -325,10 +333,10 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
         }
         PopupMenu popupMenu = new PopupMenu(this, view);
         Menu menu = popupMenu.getMenu();
-        menu.add(Menu.NONE, 5, Menu.NONE, R.string.insert_above);
-        menu.add(Menu.NONE, 6, Menu.NONE, R.string.common_word_delete);
-        menu.add(Menu.NONE, 7, Menu.NONE, R.string.duplicate);
-        menu.add(Menu.NONE, 8, Menu.NONE, R.string.move_to_palette);
+        menu.add(Menu.NONE,5,Menu.NONE,R.string.insert_above);
+        menu.add(Menu.NONE,6,Menu.NONE,R.string.common_word_delete);
+        menu.add(Menu.NONE,7,Menu.NONE,R.string.duplicate);
+        menu.add(Menu.NONE,8,Menu.NONE,R.string.move_to_palette);
         popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 7:
@@ -355,9 +363,9 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
 
                 case 6:
                     new AlertDialog.Builder(this)
-                            .setTitle("Delete block?")
+                            .setTitle(R.string.delete_block)
                             .setMessage("Are you sure you want to delete this block?")
-                            .setPositiveButton("Recycle bin", (dialog, which) -> _moveToRecycleBin(position))
+                            .setPositiveButton(R.string.common_word_recycle_bin, (dialog, which) -> _moveToRecycleBin(position))
                             .setNegativeButton(R.string.common_word_cancel, null)
                             .setNeutralButton("Delete permanently", (dialog, which) -> _deleteBlock(position))
                             .show();
@@ -417,9 +425,9 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.common_word_cancel, null);
         if (palette == -1) {
             AtomicInteger restoreToChoice = new AtomicInteger(-1);
-            builder.setTitle("Restore to")
+            builder.setTitle(R.string.restore_to)
                     .setSingleChoiceItems(paletteNames.toArray(new String[0]), -1, (dialog, which) -> restoreToChoice.set(which))
-                    .setPositiveButton("Restore", (dialog, which) -> {
+                    .setPositiveButton(R.string.common_word_restore, (dialog, which) -> {
                         if (restoreToChoice.get() != -1) {
                             all_blocks_list.get(position).put("palette", String.valueOf(restoreToChoice.get() + 9));
                             Collections.swap(all_blocks_list, position, all_blocks_list.size() - 1);
@@ -429,9 +437,9 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                     });
         } else {
             AtomicInteger moveToChoice = new AtomicInteger(palette - 9);
-            builder.setTitle("Move to")
+            builder.setTitle(R.string.move_to)
                     .setSingleChoiceItems(paletteNames.toArray(new String[0]), palette - 9, (dialog, which) -> moveToChoice.set(which))
-                    .setPositiveButton("Move", (dialog, which) -> {
+                    .setPositiveButton(R.string.common_word_move, (dialog, which) -> {
                         all_blocks_list.get(position).put("palette", String.valueOf(moveToChoice.get() + 9));
                         Collections.swap(all_blocks_list, position, all_blocks_list.size() - 1);
                         FileUtil.writeFile(blocks_path, gson.toJson(all_blocks_list));
@@ -455,7 +463,7 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                 }
             }
             AlertDialog.Builder import_dialog = new AlertDialog.Builder(this);
-            import_dialog.setTitle("Import blocks")
+            import_dialog.setTitle(R.string.import_blocks)
                     .setMultiChoiceItems(names.toArray(new CharSequence[0]), null, (dialog, which, isChecked) -> {
                         if (isChecked) {
                             toAdd.add(which);
@@ -463,7 +471,7 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                             toAdd.remove((Integer) which);
                         }
                     })
-                    .setPositiveButton("Import", (dialog, which) -> {
+                    .setPositiveButton(R.string.common_word_import, (dialog, which) -> {
                         for (int i = 0; i < blocks.size(); i++) {
                             if (toAdd.contains(i)) {
                                 HashMap<String, Object> map = blocks.get(i);
@@ -475,7 +483,7 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                         _refreshLists();
                         SketchwareUtil.toast("Imported successfully");
                     })
-                    .setNegativeButton("Reverse", (dialog, which) -> {
+                    .setNegativeButton(R.string.common_word_reverse, (dialog, which) -> {
                         for (int i = 0; i < blocks.size(); i++) {
                             if (!toAdd.contains(i)) {
                                 HashMap<String, Object> map = blocks.get(i);
@@ -487,7 +495,7 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                         _refreshLists();
                         SketchwareUtil.toast("Imported successfully");
                     })
-                    .setNeutralButton("All", (dialog, which) -> {
+                    .setNeutralButton(R.string.common_word_all, (dialog, which) -> {
                         for (int i = 0; i < blocks.size(); i++) {
                             HashMap<String, Object> map = blocks.get(i);
                             map.put("palette", String.valueOf(palette));

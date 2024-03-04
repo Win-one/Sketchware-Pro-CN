@@ -304,7 +304,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="Rewarded Ad"
+                    android:text="@string/design_library_admob_title_rewarded"
                     android:textColor="#ff4d4d4d"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -332,7 +332,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center|left"
-                            android:text="Ad Name : "
+                            android:text="@string/design_library_admob_title_ad_name"
                             android:textColor="#ff404040"
                             android:textSize="14sp" />
 
@@ -355,7 +355,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center|left"
-                            android:text="Ad Unit ID : "
+                            android:text="@string/design_library_admob_title_ad_unit_id"
                             android:textColor="#ff404040"
                             android:textSize="14sp" />
 

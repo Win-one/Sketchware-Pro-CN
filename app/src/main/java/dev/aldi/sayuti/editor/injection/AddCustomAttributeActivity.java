@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -19,6 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.color.MaterialColors;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -49,17 +49,17 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
         listView = findViewById(R.id.add_attr_listview);
         fab.setOnClickListener(v -> dialog("create", 0));
 
-        TextView title = findViewById(R.id.tx_toolbar_title);
-        ImageView back = findViewById(R.id.ig_toolbar_back);
-        Helper.applyRippleToToolbarView(back);
-        back.setOnClickListener(Helper.getBackPressedClickListener(this));
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
+        getSupportActionBar().setTitle(widgetType);
+        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
 
         if (getIntent().hasExtra("sc_id") && getIntent().hasExtra("file_name") && getIntent().hasExtra("widget_type")) {
             String sc_id = getIntent().getStringExtra("sc_id");
             String activityFilename = getIntent().getStringExtra("file_name");
             widgetType = getIntent().getStringExtra("widget_type");
-
-            title.setText(widgetType);
 
             activityInjectionsFilePath = FileUtil.getExternalStorageDir() + "/.sketchware/data/" + sc_id + "/injection/appcompat/" + activityFilename;
             if (!FileUtil.isExistFile(activityInjectionsFilePath) || FileUtil.readFile(activityInjectionsFilePath).equals("")) {
@@ -106,10 +106,10 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
                     map.put("type", widgetType);
                     map.put("value", newValue);
                     activityInjections.add(map);
-                    SketchwareUtil.toast("Added");
+                    SketchwareUtil.toast(getString(R.string.common_word_added));
                 } else if (type.equals("edit")) {
                     activityInjections.get(position).put("value", newValue);
-                    SketchwareUtil.toast("Saved");
+                    SketchwareUtil.toast(getString(R.string.common_word_saved));
                 }
                 listView.setAdapter(new CustomAdapter(activityInjections));
                 ((BaseAdapter) listView.getAdapter()).notifyDataSetChanged();
@@ -175,8 +175,8 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
             attributeView.icon.setRotation(90);
             attributeView.icon.setOnClickListener(v -> {
                 PopupMenu popupMenu = new PopupMenu(AddCustomAttributeActivity.this, attributeView.icon);
-                popupMenu.getMenu().add(Menu.NONE, 0, Menu.NONE, "Edit");
-                popupMenu.getMenu().add(Menu.NONE, 1, Menu.NONE, "Delete");
+                popupMenu.getMenu().add(Menu.NONE, 0, Menu.NONE, R.string.common_word_edit);
+                popupMenu.getMenu().add(Menu.NONE, 1, Menu.NONE, R.string.common_word_delete);
                 popupMenu.setOnMenuItemClickListener(item -> {
                     if (item.getItemId() == 0) {
                         dialog("edit", position);
@@ -184,7 +184,7 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
                         injections.remove(position);
                         FileUtil.writeFile(activityInjectionsFilePath, new Gson().toJson(injections));
                         notifyDataSetChanged();
-                        SketchwareUtil.toast("Deleted successfully");
+                        SketchwareUtil.toast(getString(R.string.deleted_successfully));
                     }
                     return true;
                 });

@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
@@ -43,6 +44,7 @@ public class AddCustomComponentActivity extends AppCompatActivity implements Vie
 
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
+        EdgeToEdge.enable(this);
         super.onCreate(_savedInstanceState);
         binding = ManageCustomComponentAddBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:clipToPadding="false"
-    android:paddingLeft="24dp"
-    android:paddingRight="24dp">
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,6 +31,8 @@
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 android:gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -102,6 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="4dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
                     android:gravity="center|right"
                     android:orientation="horizontal">
 

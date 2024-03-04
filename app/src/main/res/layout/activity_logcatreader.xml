@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:gravity="center"
-            android:text="Logcat hasn't captured anything yet"
+            android:text="@string/logcat_hasn_t_captured_anything_yet"
             android:textSize="20sp" />
 
         <TextView
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:text="Keep this screen open then run your app"
+            android:text="@string/keep_this_screen_open_then_run_your_app"
             android:textSize="14sp" />
     </LinearLayout>
 
