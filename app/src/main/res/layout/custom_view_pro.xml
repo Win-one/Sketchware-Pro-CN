@@ -33,7 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginStart="8dp">
 
             <TextView
                 android:id="@id/custom_view_pro_title"

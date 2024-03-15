@@ -29,7 +29,9 @@
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"
                 android:textSize="12sp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp" />
 
             <ImageView
                 android:id="@+id/img_icon"
@@ -47,7 +49,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="40dp"
                 android:layout_toRightOf="@+id/img_icon"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_toEndOf="@+id/img_icon">
 
                 <TextView
                     android:id="@+id/tv_target_type"
@@ -85,7 +88,8 @@
                         android:layout_width="12dp"
                         android:layout_height="12dp"
                         android:layout_marginRight="4dp"
-                        tools:src="@drawable/event_on_click_48dp" />
+                        tools:src="@drawable/event_on_click_48dp"
+                        android:layout_marginEnd="4dp" />
 
                     <TextView
                         android:id="@+id/tv_event_text"
@@ -126,7 +130,9 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:background="?attr/colorControlHighlight" />
+                android:background="?attr/colorControlHighlight"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp" />
 
             <com.besome.sketch.editor.event.CollapsibleEventLayout
                 android:id="@+id/event_option"

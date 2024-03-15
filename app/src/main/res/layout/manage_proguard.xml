@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:checked="true"
-                android:gravity="center|left"
+                android:gravity="center|start"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="@string/common_word_activated"
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:checked="true"
-                android:gravity="center|left"
+                android:gravity="center|start"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="@string/code_shrinker_use_r8"
@@ -56,7 +56,8 @@
                     android:layout_marginRight="8dp"
                     android:padding="4dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/connected_96" />
+                    android:src="@drawable/connected_96"
+                    android:layout_marginEnd="8dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -117,7 +118,8 @@
                     android:layout_marginRight="8dp"
                     android:padding="4dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/side_menu_setting_icon_over" />
+                    android:src="@drawable/side_menu_setting_icon_over"
+                    android:layout_marginEnd="8dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -169,7 +171,8 @@
                     android:layout_marginRight="8dp"
                     android:padding="4dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/side_menu_setting_icon_over" />
+                    android:src="@drawable/side_menu_setting_icon_over"
+                    android:layout_marginEnd="8dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -186,7 +189,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
                 android:checked="true"
-                android:gravity="center|left"
+                android:gravity="center|start"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="@string/code_shrinker_generate_debug_files"

@@ -10,7 +10,9 @@
     android:paddingLeft="24dp"
     android:paddingTop="8dp"
     android:paddingRight="24dp"
-    android:paddingBottom="8dp">
+    android:paddingBottom="8dp"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp">
 
     <TextView
         android:id="@id/tv_stoast"

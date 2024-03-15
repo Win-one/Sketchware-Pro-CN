@@ -15,7 +15,9 @@
         android:padding="8dp"
         android:text="@string/about_team_title"
         android:textAppearance="?attr/textAppearanceLabelLarge"
-        tools:text="Main contributors" />
+        tools:text="Main contributors"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,7 +69,9 @@
                 android:paddingBottom="2dp"
                 android:singleLine="true"
                 android:textAppearance="?attr/textAppearanceBodyLarge"
-                tools:text="A contributor" />
+                tools:text="A contributor"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp" />
 
             <TextView
                 android:id="@+id/tv_description"
@@ -80,7 +84,9 @@
                 android:paddingRight="8dp"
                 android:paddingBottom="8dp"
                 android:textAppearance="?attr/textAppearanceBodySmall"
-                tools:text="Their description" />
+                tools:text="Their description"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp" />
 
             <TextView
                 android:id="@+id/tv_status"

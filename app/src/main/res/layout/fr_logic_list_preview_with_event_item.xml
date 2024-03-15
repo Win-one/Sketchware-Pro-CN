@@ -2,7 +2,8 @@
     android:id="@id/container"
     android:layout_width="32dp"
     android:layout_height="32dp"
-    android:layout_marginRight="4dp">
+    android:layout_marginRight="4dp"
+    android:layout_marginEnd="4dp">
 
     <ImageView
         android:id="@id/img_icon"

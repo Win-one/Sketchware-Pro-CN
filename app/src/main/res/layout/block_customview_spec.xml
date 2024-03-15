@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="29dp"
     android:focusable="false"
-    android:gravity="center|left"
+    android:gravity="center|start"
     android:paddingLeft="8dp"
     android:paddingTop="2dp"
     android:paddingRight="8dp"
@@ -16,4 +16,6 @@
     android:textStyle="bold"
     tools:background="@drawable/block_ori"
     tools:backgroundTint="#8a55d7"
-    tools:backgroundTintMode="multiply" />
+    tools:backgroundTintMode="multiply"
+    android:paddingEnd="8dp"
+    android:paddingStart="8dp" />

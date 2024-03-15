@@ -13,7 +13,8 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
         android:alpha="0.87"
-        android:textAppearance="?attr/textAppearanceBodyMedium" />
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:layout_marginStart="16dp" />
 
     <View
         android:layout_width="match_parent"

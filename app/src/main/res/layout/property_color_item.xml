@@ -16,7 +16,9 @@
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp" />
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
 
         <TextView
             android:id="@id/tv_name"
@@ -26,7 +28,8 @@
             android:paddingTop="10dp"
             android:paddingRight="60dp"
             android:textColor="#ff404040"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:paddingEnd="60dp" />
 
         <TextView
             android:id="@id/tv_value"
@@ -36,7 +39,8 @@
             android:layout_marginStart="40dp"
             android:paddingRight="60dp"
             android:textColor="#ff9a9a9a"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:paddingEnd="60dp" />
 
         <View
             android:id="@id/view_color"
@@ -44,7 +48,9 @@
             android:layout_height="28dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="16dp" />
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_alignParentEnd="true" />
 
         <View
             android:layout_width="match_parent"

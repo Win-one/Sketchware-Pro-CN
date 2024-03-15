@@ -68,7 +68,9 @@
         android:layout_height="wrap_content"
         android:fillViewport="true"
         android:paddingLeft="8dp"
-        android:paddingRight="8dp">
+        android:paddingRight="8dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp">
 
         <LinearLayout
             android:id="@id/layout_color_title"

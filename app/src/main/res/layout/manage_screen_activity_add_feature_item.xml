@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:layout_weight="1"
-        tools:text="ToolBar" />
+        tools:text="ToolBar"
+        android:layout_marginStart="4dp" />
 
     <CheckBox
         android:id="@id/checkbox"

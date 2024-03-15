@@ -10,7 +10,9 @@
         android:background="@drawable/layout_rounded_border_lightblue"
         android:gravity="center_vertical"
         android:paddingLeft="4dp"
-        android:paddingRight="4dp">
+        android:paddingRight="4dp"
+        android:paddingEnd="4dp"
+        android:paddingStart="4dp">
 
         <Spinner
             android:id="@+id/spn_widget"
@@ -67,7 +69,8 @@
             android:layout_height="82dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:orientation="horizontal" />
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
     <com.besome.sketch.editor.view.ViewEvents

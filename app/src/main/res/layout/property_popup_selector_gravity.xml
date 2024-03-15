@@ -8,7 +8,8 @@
         android:orientation="vertical"
         android:paddingTop="8dp"
         android:paddingRight="8dp"
-        android:paddingBottom="8dp">
+        android:paddingBottom="8dp"
+        android:paddingEnd="8dp">
 
         <CheckBox
             android:id="@id/chk_left"

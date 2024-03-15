@@ -15,7 +15,8 @@
             android:layout_height="28dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="8dp"
-            android:src="@drawable/rename_96_blue" />
+            android:src="@drawable/rename_96_blue"
+            android:layout_marginEnd="8dp" />
 
         <TextView
             android:id="@id/tv_title_storage_url"

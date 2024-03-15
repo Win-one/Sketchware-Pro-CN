@@ -46,7 +46,9 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:text="Generating source code, please wait." />
+                android:text="Generating source code, please wait."
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp" />
         </LinearLayout>
     </LinearLayout>
 

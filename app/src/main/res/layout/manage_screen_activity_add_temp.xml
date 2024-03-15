@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:background="#ff000000"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:orientation="horizontal"
                     android:padding="2dp">
 
@@ -52,7 +52,8 @@
                         android:layout_width="6dp"
                         android:layout_height="6dp"
                         android:layout_marginRight="2dp"
-                        android:src="@drawable/ic_wifi_white_24dp" />
+                        android:src="@drawable/ic_wifi_white_24dp"
+                        android:layout_marginEnd="2dp" />
 
                     <ImageView
                         android:layout_width="6dp"
@@ -67,7 +68,8 @@
                     android:layout_alignParentLeft="true"
                     android:background="#ff66aa5b"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="visible"
+                    android:layout_alignParentStart="true">
 
                     <LinearLayout
                         android:layout_width="20dp"
@@ -102,7 +104,8 @@
                         android:layout_above="@id/img_keyboard"
                         android:layout_alignParentRight="true"
                         android:padding="4dp"
-                        android:src="@drawable/fab_color" />
+                        android:src="@drawable/fab_color"
+                        android:layout_alignParentEnd="true" />
 
                     <ImageView
                         android:id="@id/img_keyboard"

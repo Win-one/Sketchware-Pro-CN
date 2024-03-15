@@ -119,7 +119,9 @@
             android:paddingTop="4dp"
             android:paddingRight="8dp"
             android:text="@string/about_loading_subtitle"
-            android:textAppearance="?attr/textAppearanceBodySmall" />
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton

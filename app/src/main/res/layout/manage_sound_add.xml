@@ -71,7 +71,8 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="File name" />
+                tools:text="File name"
+                android:layout_alignParentStart="true" />
 
             <ImageView
                 android:id="@+id/play"
@@ -106,7 +107,8 @@
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/seek"
                 app:layout_constraintTop_toBottomOf="@+id/seek"
-                tools:text="00:00" />
+                tools:text="00:00"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:id="@+id/file_length"
@@ -119,7 +121,8 @@
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="@id/seek"
                 app:layout_constraintTop_toBottomOf="@+id/seek"
-                tools:text="00:00" />
+                tools:text="00:00"
+                android:layout_alignParentEnd="true" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 

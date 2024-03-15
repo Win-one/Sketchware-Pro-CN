@@ -27,7 +27,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingRight="4dp"
-                android:paddingBottom="4dp" />
+                android:paddingBottom="4dp"
+                android:paddingEnd="4dp" />
 
             <LinearLayout
                 android:id="@+id/divider"
@@ -50,7 +51,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingRight="4dp"
-                android:paddingBottom="4dp" />
+                android:paddingBottom="4dp"
+                android:paddingEnd="4dp" />
         </LinearLayout>
     </com.besome.sketch.lib.ui.CustomScrollView>
 </LinearLayout>

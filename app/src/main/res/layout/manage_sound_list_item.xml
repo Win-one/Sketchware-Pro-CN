@@ -7,13 +7,15 @@
     android:layout_marginRight="4dp"
     android:layout_marginBottom="2dp"
     android:background="@color/transparent"
-    android:elevation="4dp">
+    android:elevation="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginStart="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?selectableItemBackground"
-        android:gravity="center|left"
+        android:gravity="center|start"
         android:orientation="horizontal">
 
         <CheckBox
@@ -21,7 +23,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:contentDescription="@null" />
+            android:contentDescription="@null"
+            android:layout_marginStart="16dp" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -29,7 +32,9 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp">
 
             <ImageView
                 android:id="@+id/img_album"
@@ -89,7 +94,9 @@
                         android:layout_marginRight="5dp"
                         android:paddingRight="5dp"
                         android:textColor="#ff9a9a9a"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:layout_marginEnd="5dp"
+                        android:paddingEnd="5dp" />
 
                     <ProgressBar
                         android:id="@+id/prog_playtime"
@@ -105,7 +112,9 @@
                         android:layout_marginLeft="5dp"
                         android:paddingLeft="5dp"
                         android:textColor="#ff9a9a9a"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:layout_marginStart="5dp"
+                        android:paddingStart="5dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -114,7 +123,8 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="8dp"
-                android:padding="8dp" />
+                android:padding="8dp"
+                android:layout_marginEnd="8dp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

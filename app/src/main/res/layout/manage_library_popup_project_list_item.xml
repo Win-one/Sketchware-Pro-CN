@@ -8,7 +8,9 @@
     android:layout_marginRight="4dp"
     android:layout_marginBottom="2dp"
     android:elevation="8dp"
-    app:cardBackgroundColor="#ffffffff">
+    app:cardBackgroundColor="#ffffffff"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp">
 
     <LinearLayout
         android:id="@+id/project_layout"
@@ -47,8 +49,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:gravity="center|left"
-                android:orientation="vertical">
+                android:gravity="center|start"
+                android:orientation="vertical"
+                android:layout_alignParentStart="true">
 
                 <TextView
                     android:id="@+id/project_name"
@@ -62,7 +65,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="40dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="40dp">
 
                     <TextView
                         android:id="@+id/app_name"
@@ -79,7 +83,8 @@
                         android:layout_marginLeft="4dp"
                         android:textColor="#ff9a9a9a"
                         android:textSize="10sp"
-                        tools:text="1.0(1)" />
+                        tools:text="1.0(1)"
+                        android:layout_marginStart="4dp" />
                 </LinearLayout>
 
                 <TextView
@@ -97,10 +102,11 @@
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:padding="8dp"
                 android:src="@drawable/ic_checkmark_green_48dp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:layout_alignParentEnd="true" />
         </RelativeLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

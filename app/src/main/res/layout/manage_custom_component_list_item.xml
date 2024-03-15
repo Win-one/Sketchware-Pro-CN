@@ -8,7 +8,9 @@
     android:layout_marginBottom="2dp"
     android:background="@drawable/bg_rectangle_white"
     android:elevation="2dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,7 +24,9 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="24dp"
-            android:contentDescription="@null" />
+            android:contentDescription="@null"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp" />
 
         <TextView
             android:id="@+id/tv_component_type"
@@ -31,7 +35,8 @@
             android:layout_marginLeft="72dp"
             android:layout_marginTop="12dp"
             android:textSize="14sp"
-            tools:text="Firebase DB" />
+            tools:text="Firebase DB"
+            android:layout_marginStart="72dp" />
 
         <TextView
             android:id="@+id/tv_component_id"
@@ -43,7 +48,9 @@
             android:gravity="center_vertical"
             android:textColor="#ff9a9a9a"
             android:textSize="14sp"
-            tools:text="36" />
+            tools:text="36"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="72dp" />
 
         <LinearLayout
             android:id="@+id/events_preview"
@@ -51,7 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/img_menu"
-            android:orientation="horizontal" />
+            android:orientation="horizontal"
+            android:layout_toStartOf="@+id/img_menu" />
 
         <ImageView
             android:id="@+id/img_menu"
@@ -62,7 +70,8 @@
             android:clickable="true"
             android:contentDescription="@null"
             android:padding="16dp"
-            android:src="@drawable/ic_arrow_drop_down_grey600_24dp" />
+            android:src="@drawable/ic_arrow_drop_down_grey600_24dp"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
     <LinearLayout

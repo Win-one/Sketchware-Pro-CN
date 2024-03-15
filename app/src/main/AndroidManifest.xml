@@ -23,7 +23,8 @@
         android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:supportsRtl="true">
 
         <provider
             android:name="androidx.core.content.FileProvider"

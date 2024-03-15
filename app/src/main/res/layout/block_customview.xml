@@ -13,7 +13,9 @@
         android:layout_marginBottom="3dp"
         android:orientation="vertical"
         app:cardCornerRadius="8dp"
-        app:cardElevation="2dp">
+        app:cardElevation="2dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp">
 
         <LinearLayout
             android:id="@+id/background"
@@ -24,12 +26,14 @@
             android:paddingLeft="8dp"
             android:paddingTop="5dp"
             android:paddingRight="8dp"
-            android:paddingBottom="5dp">
+            android:paddingBottom="5dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center|left"
+                android:gravity="center|start"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -49,7 +53,9 @@
                         android:paddingBottom="6dp"
                         android:text="application"
                         android:textColor="#ff424242"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:paddingEnd="2dp"
+                        android:paddingStart="2dp" />
 
                     <include layout="@layout/block_customview_spec" />
                 </LinearLayout>

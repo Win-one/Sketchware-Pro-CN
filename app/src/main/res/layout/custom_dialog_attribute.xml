@@ -5,7 +5,9 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     android:paddingLeft="14dp"
-    android:paddingRight="14dp">
+    android:paddingRight="14dp"
+    android:paddingEnd="14dp"
+    android:paddingStart="14dp">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -40,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:gravity="center|left"
+                    android:gravity="center|start"
                     android:orientation="horizontal"
                     android:padding="16dp">
 
@@ -49,7 +51,8 @@
                         android:layout_height="24dp"
                         android:layout_marginRight="8dp"
                         app:tint="?colorSecondary"
-                        android:src="@drawable/ic_tune_24" />
+                        android:src="@drawable/ic_tune_24"
+                        android:layout_marginEnd="8dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -105,7 +108,7 @@
                     android:layout_marginHorizontal="4dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginEnd="10dp"
-                    android:gravity="center|right"
+                    android:gravity="center|end"
                     android:orientation="horizontal">
 
                     <TextView
@@ -117,7 +120,9 @@
                         android:paddingRight="15dp"
                         android:paddingBottom="10dp"
                         android:text="@string/common_word_cancel"
-                        android:textColor="?colorPrimary" />
+                        android:textColor="?colorPrimary"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp" />
 
                     <TextView
                         android:id="@+id/dialog_btn_save"
@@ -128,7 +133,9 @@
                         android:paddingRight="15dp"
                         android:paddingBottom="10dp"
                         android:text="@string/common_word_save"
-                        android:textColor="?colorPrimary" />
+                        android:textColor="?colorPrimary"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp" />
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

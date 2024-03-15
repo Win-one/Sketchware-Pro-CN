@@ -14,7 +14,9 @@
         android:paddingLeft="8dp"
         android:paddingTop="8dp"
         android:paddingRight="4dp"
-        android:paddingBottom="8dp">
+        android:paddingBottom="8dp"
+        android:paddingEnd="4dp"
+        android:paddingStart="8dp">
 
         <TextView
             android:id="@+id/text_title"

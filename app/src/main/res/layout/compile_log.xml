@@ -52,7 +52,9 @@
                 android:paddingBottom="48dp"
                 android:textSize="11sp"
                 android:typeface="monospace"
-                tools:text="Errors will show up here" />
+                tools:text="Errors will show up here"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp" />
         </HorizontalScrollView>
     </androidx.core.widget.NestedScrollView>
 

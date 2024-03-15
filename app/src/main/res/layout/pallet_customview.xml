@@ -15,13 +15,15 @@
         android:background="#ffffffff"
         android:orientation="vertical"
         app:cardCornerRadius="5dp"
-        app:cardElevation="2dp">
+        app:cardElevation="2dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp">
 
         <LinearLayout
             android:id="@+id/background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center|left"
+            android:gravity="center|start"
             android:orientation="horizontal"
             android:padding="2dp">
 
@@ -33,7 +35,8 @@
                 android:layout_marginBottom="3dp"
                 android:orientation="vertical"
                 app:cardCornerRadius="0dp"
-                app:cardElevation="1dp">
+                app:cardElevation="1dp"
+                android:layout_marginStart="2dp">
 
                 <LinearLayout
                     android:id="@+id/color"
@@ -51,7 +54,8 @@
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="6dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginStart="8dp">
 
                 <TextView
                     android:id="@+id/title"

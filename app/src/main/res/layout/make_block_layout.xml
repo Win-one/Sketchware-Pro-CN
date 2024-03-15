@@ -10,7 +10,9 @@
         android:layout_height="80dp"
         android:background="#fff5f5f5"
         android:paddingLeft="8dp"
-        android:paddingRight="8dp">
+        android:paddingRight="8dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -50,7 +52,9 @@
                 android:padding="5dp"
                 android:text="use (moreblockName[type|typeName] or\nmoreblockName[type|typeName|typeCode]) for custom moreblock type(S)"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp" />
 
             <TextView
                 android:id="@+id/tv_title_blockname"
@@ -60,7 +64,8 @@
                 android:layout_marginTop="16dp"
                 android:textColor="@color/color_primary"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginStart="16dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ti_name"
@@ -68,7 +73,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:importantForAutofill="noExcludeDescendants">
+                android:importantForAutofill="noExcludeDescendants"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp">
 
                 <EditText
                     android:id="@+id/ed_name"
@@ -97,7 +104,9 @@
                     android:text="@string/select_moreblock_type"
                     android:textColor="@color/color_primary"
                     android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="16dp" />
 
                 <HorizontalScrollView
                     android:layout_width="match_parent"
@@ -170,7 +179,9 @@
                     android:layout_marginRight="8dp"
                     android:textColor="@color/color_primary"
                     android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="8dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -179,7 +190,9 @@
                     android:orientation="vertical"
                     android:paddingHorizontal="16dp"
                     android:paddingLeft="16dp"
-                    android:paddingRight="16dp">
+                    android:paddingRight="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp">
 
                     <LinearLayout
                         android:id="@+id/var_type_spinner"
@@ -188,7 +201,9 @@
                         android:background="@drawable/bg_outline"
                         android:orientation="vertical"
                         android:paddingLeft="8dp"
-                        android:paddingRight="8dp" />
+                        android:paddingRight="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -203,7 +218,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
                             android:layout_weight="1"
-                            android:importantForAutofill="noExcludeDescendants">
+                            android:importantForAutofill="noExcludeDescendants"
+                            android:layout_marginEnd="8dp">
 
                             <EditText
                                 android:id="@+id/ed_variable_name"
@@ -241,7 +257,9 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="16dp"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/ti_label"
@@ -249,7 +267,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
                         android:layout_weight="1"
-                        android:importantForAutofill="noExcludeDescendants">
+                        android:importantForAutofill="noExcludeDescendants"
+                        android:layout_marginEnd="8dp">
 
                         <EditText
                             android:id="@+id/ed_label"
@@ -277,7 +296,9 @@
                 android:text="@string/custom_parameter"
                 android:textColor="@color/color_primary"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -297,14 +318,17 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="16dp"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
                         android:layout_weight="1"
-                        android:importantForAutofill="noExcludeDescendants">
+                        android:importantForAutofill="noExcludeDescendants"
+                        android:layout_marginEnd="8dp">
 
                         <EditText
                             android:id="@+id/parameter"
@@ -322,7 +346,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
                         android:layout_weight="1"
-                        android:importantForAutofill="noExcludeDescendants">
+                        android:importantForAutofill="noExcludeDescendants"
+                        android:layout_marginEnd="8dp">
 
                         <EditText
                             android:id="@+id/name"

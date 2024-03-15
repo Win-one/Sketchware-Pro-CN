@@ -7,7 +7,9 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     android:layout_marginBottom="10dp"
-    app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+    app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
+    android:layout_marginEnd="16dp"
+    android:layout_marginStart="16dp">
 
     <LinearLayout
         android:id="@+id/project_one"

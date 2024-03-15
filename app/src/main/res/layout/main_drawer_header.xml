@@ -8,4 +8,6 @@
     android:layout_marginBottom="8dp"
     android:fitsSystemWindows="true"
     app:srcCompat="@drawable/swpro_header_logo"
-    app:tint="?attr/colorControlNormal" />
+    app:tint="?attr/colorControlNormal"
+    android:layout_marginStart="@dimen/main_drawer_horizontal_padding"
+    android:layout_marginEnd="@dimen/main_drawer_horizontal_padding" />
