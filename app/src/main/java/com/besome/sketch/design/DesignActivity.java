@@ -1167,11 +1167,6 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
         }
 
         @Override
-        protected String doInBackground(Void... voids) {
-            return a(voids);
-        }
-
-        @Override
         public void onPreExecute() {
             super.onPreExecute();
             var activity = this.activity.get();
@@ -1227,10 +1222,6 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
             activity.get().loadProject(savedInstanceState != null);
         }
 
-        @Override
-        protected String doInBackground(Void... voids) {
-            return a(voids);
-        }
     }
 
     private static class DiscardChangesProjectCloser extends MA {
@@ -1262,11 +1253,6 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
             jC.d(sc_id).v();
             jC.d(sc_id).w();
             jC.d(sc_id).u();
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            return a(voids);
         }
     }
 
@@ -1307,10 +1293,6 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
             jC.c(sc_id).l();
         }
 
-        @Override
-        protected String doInBackground(Void... voids) {
-            return a(voids);
-        }
     }
 
     private static class SaveChangesProjectCloser extends MA {
@@ -1348,10 +1330,6 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
             jC.d(sc_id).h();
         }
 
-        @Override
-        protected String doInBackground(Void... voids) {
-            return a(voids);
-        }
     }
 
     private static class UnsavedChangesSaver extends MA {
@@ -1376,10 +1354,6 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
             jC.a(activity.get().sc_id).k();
         }
 
-        @Override
-        protected String doInBackground(Void... voids) {
-            return a(voids);
-        }
     }
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
