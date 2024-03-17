@@ -87,7 +87,9 @@
                 android:layout_marginRight="8dp"
                 android:layout_weight="1"
                 android:textSize="@dimen/text_size_button_material"
-                tools:text="@string/common_word_delete" />
+                tools:text="@string/common_word_delete"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp" />
         </LinearLayout>
     </LinearLayout>
 

@@ -178,9 +178,5 @@ public class ManageFontActivity extends BaseAppCompatActivity {
             activityWeakReference.get().h();
         }
 
-        @Override
-        protected String doInBackground(Void... voids) {
-            return a(voids);
-        }
     }
 }

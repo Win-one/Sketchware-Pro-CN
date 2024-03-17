@@ -14,7 +14,9 @@
         android:paddingLeft="14dp"
         android:paddingTop="8dp"
         android:paddingRight="14dp"
-        android:paddingBottom="8dp">
+        android:paddingBottom="8dp"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp">
 
         <ImageView
             android:id="@id/img_backbtn"
@@ -70,7 +72,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp" />
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -112,7 +116,9 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp">
 
                     <CheckBox
                         android:id="@id/chk_samename"
@@ -131,14 +137,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp" />
+                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp" />
 
                 <Button
                     android:id="@id/btn_decide"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp" />
+                    android:layout_marginRight="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

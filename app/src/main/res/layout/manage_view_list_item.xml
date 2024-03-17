@@ -7,12 +7,14 @@
     android:layout_marginRight="4dp"
     android:layout_marginBottom="2dp"
     android:background="@color/transparent"
-    android:elevation="4dp">
+    android:elevation="4dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center|left"
+        android:gravity="center|start"
         android:orientation="horizontal">
 
         <CheckBox
@@ -20,7 +22,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:contentDescription="@null" />
+            android:contentDescription="@null"
+            android:layout_marginStart="16dp" />
 
         <LinearLayout
             android:id="@+id/delete_img_container"
@@ -31,7 +34,9 @@
             android:alpha="0.8"
             android:background="@drawable/circle_bg_dark_grey_alpha"
             android:gravity="center"
-            android:visibility="gone">
+            android:visibility="gone"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="16dp">
 
             <ImageView
                 android:id="@+id/img_delete"
@@ -46,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?selectableItemBackground"
-            android:gravity="center|left"
+            android:gravity="center|start"
             android:orientation="horizontal">
 
             <ImageView
@@ -58,7 +63,10 @@
                 android:layout_marginBottom="8dp"
                 android:background="#fff6f6f6"
                 android:paddingLeft="8dp"
-                android:paddingRight="8dp" />
+                android:paddingRight="8dp"
+                android:paddingEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:paddingStart="8dp" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -66,7 +74,9 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp">
 
                 <TextView
                     android:id="@+id/tv_screen_name"
@@ -90,7 +100,8 @@
                 android:layout_height="24dp"
                 android:layout_marginRight="16dp"
                 android:src="@drawable/ic_detail_setting_48dp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:layout_marginEnd="16dp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

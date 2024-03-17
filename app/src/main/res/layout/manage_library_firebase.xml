@@ -16,7 +16,9 @@
         android:paddingLeft="14dp"
         android:paddingTop="8dp"
         android:paddingRight="14dp"
-        android:paddingBottom="8dp">
+        android:paddingBottom="8dp"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp">
 
         <ImageView
             android:id="@id/img_backbtn"
@@ -94,7 +96,7 @@
             android:id="@id/cv_console"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:layout_margin="2dp"
             android:background="?selectableItemBackground"
             android:clickable="true"
@@ -117,7 +119,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:textSize="10sp" />
+                    android:textSize="10sp"
+                    android:layout_marginStart="8dp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
@@ -129,7 +132,9 @@
         android:layout_marginLeft="64dp"
         android:layout_marginRight="64dp"
         android:background="@color/color_secondary"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp" />
 
     <ScrollView
         android:layout_width="match_parent"

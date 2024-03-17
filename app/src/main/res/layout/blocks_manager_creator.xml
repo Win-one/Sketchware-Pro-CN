@@ -46,7 +46,9 @@
                 android:layout_marginBottom="3dp"
                 android:orientation="vertical"
                 app:cardCornerRadius="6dp"
-                app:cardElevation="3dp">
+                app:cardElevation="3dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginStart="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -64,13 +66,15 @@
                         android:paddingBottom="8dp"
                         android:text="@string/properties"
                         android:textColor="#ff424242"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:paddingStart="6dp"
+                        android:paddingEnd="8dp" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/name_lay"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center|left"
+                        android:gravity="center|start"
                         android:orientation="vertical"
                         android:padding="3dp">
 
@@ -78,7 +82,7 @@
                             android:id="@+id/name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center|left"
+                            android:gravity="center|start"
                             android:hint="Name"
                             android:padding="8dp"
                             android:textColor="#ff000000"
@@ -90,14 +94,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:baselineAligned="false"
-                        android:gravity="center|left"
+                        android:gravity="center|start"
                         android:orientation="horizontal">
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center|left"
+                            android:gravity="center|start"
                             android:orientation="vertical"
                             android:padding="3dp">
 
@@ -105,7 +109,7 @@
                                 android:id="@+id/type"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center|left"
+                                android:gravity="center|start"
                                 android:hint="Type"
                                 android:padding="8dp"
                                 android:textColor="#ff000000"
@@ -132,7 +136,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center|left"
+                        android:gravity="center|start"
                         android:orientation="vertical"
                         android:padding="3dp">
 
@@ -140,7 +144,7 @@
                             android:id="@+id/type_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center|left"
+                            android:gravity="center|start"
                             android:hint="Type name"
                             android:padding="8dp"
                             android:textColor="#ff000000"
@@ -159,7 +163,9 @@
                 android:layout_marginBottom="3dp"
                 android:orientation="vertical"
                 app:cardCornerRadius="6dp"
-                app:cardElevation="3dp">
+                app:cardElevation="3dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginStart="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -177,13 +183,15 @@
                         android:paddingBottom="8dp"
                         android:text="@string/design"
                         android:textColor="#ff424242"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="6dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:baselineAligned="false"
-                        android:gravity="center|left"
+                        android:gravity="center|start"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -205,7 +213,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:gravity="center|left"
+                            android:gravity="center|start"
                             android:orientation="vertical"
                             android:padding="3dp">
 
@@ -213,7 +221,7 @@
                                 android:id="@+id/color"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center|left"
+                                android:gravity="center|start"
                                 android:hint="color"
                                 android:padding="8dp"
                                 android:textColor="#ff000000"
@@ -241,7 +249,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:gravity="center|left"
+                        android:gravity="center|start"
                         android:hint="block spec"
                         android:padding="8dp"
                         android:singleLine="true"
@@ -259,7 +267,9 @@
                         android:paddingBottom="4dp"
                         android:text="@string/parameters"
                         android:textColor="#ff757575"
-                        android:textSize="10sp" />
+                        android:textSize="10sp"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="4dp" />
 
                     <HorizontalScrollView
                         android:id="@+id/scroll_parameters"
@@ -279,7 +289,7 @@
                         android:id="@+id/spec_2lay"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center|left"
+                        android:gravity="center|start"
                         android:orientation="vertical"
                         android:padding="3dp">
 
@@ -287,7 +297,7 @@
                             android:id="@+id/spec2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center|left"
+                            android:gravity="center|start"
                             android:hint="Spec2"
                             android:padding="8dp"
                             android:textColor="#ff000000"
@@ -306,7 +316,9 @@
                 android:layout_marginBottom="6dp"
                 android:orientation="vertical"
                 app:cardCornerRadius="6dp"
-                app:cardElevation="3dp">
+                app:cardElevation="3dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginStart="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -325,14 +337,16 @@
                         android:paddingBottom="8dp"
                         android:text="Code"
                         android:textColor="#ff424242"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="6dp" />
 
                     <EditText
                         android:id="@+id/code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#fff5f5f5"
-                        android:gravity="center|left|top"
+                        android:gravity="center|start|top"
                         android:hint="@string/code"
                         android:padding="8dp"
                         android:textColor="#ff000000"

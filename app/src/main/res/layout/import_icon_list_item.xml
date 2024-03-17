@@ -28,8 +28,10 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="8dp"
-            android:gravity="center|left"
+            android:gravity="center|start"
             android:textColor="#fff5f5f5"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp" />
     </LinearLayout>
 </RelativeLayout>

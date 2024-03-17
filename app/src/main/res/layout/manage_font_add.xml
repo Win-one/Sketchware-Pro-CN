@@ -99,7 +99,8 @@
                 app:iconSize="22dp"
                 app:iconTint="?colorPrimary"
                 app:strokeColor="?colorPrimary"
-                app:strokeWidth="1dp" />
+                app:strokeWidth="1dp"
+                android:paddingEnd="25dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/clear_input"
@@ -124,7 +125,8 @@
                 app:iconTint="?colorPrimary"
                 app:strokeColor="?colorPrimary"
                 app:strokeWidth="1dp"
-                tools:visibility="visible" />
+                tools:visibility="visible"
+                android:paddingEnd="25dp" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,9 +37,10 @@
                 android:id="@+id/lib_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:layout_marginLeft="8dp"
-                android:clickable="false" />
+                android:clickable="false"
+                android:layout_marginStart="8dp" />
         </LinearLayout>
 
         <ScrollView
@@ -65,7 +66,8 @@
                         android:layout_height="18dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/ic_title" />
+                        android:src="@drawable/ic_title"
+                        android:layout_marginEnd="8dp" />
 
                     <TextView
                         android:id="@+id/tv_title_project_id"
@@ -114,7 +116,8 @@
                         android:layout_height="18dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/ic_title" />
+                        android:src="@drawable/ic_title"
+                        android:layout_marginEnd="8dp" />
 
                     <TextView
                         android:id="@+id/tv_title_app_id"
@@ -154,7 +157,8 @@
                         android:layout_height="18dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/ic_key_48dp" />
+                        android:src="@drawable/ic_key_48dp"
+                        android:layout_marginEnd="8dp" />
 
                     <TextView
                         android:id="@+id/tv_title_api_key"
@@ -194,7 +198,8 @@
                         android:layout_height="18dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/rename_96_blue" />
+                        android:src="@drawable/rename_96_blue"
+                        android:layout_marginEnd="8dp" />
 
                     <TextView
                         android:id="@+id/tv_title_storage_url"

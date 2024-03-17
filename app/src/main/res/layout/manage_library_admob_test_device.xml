@@ -24,7 +24,8 @@
             android:layout_height="wrap_content"
             android:paddingLeft="4dp"
             android:textSize="12sp"
-            tools:text="@string/design_library_admob_button_set_test_device" />
+            tools:text="@string/design_library_admob_button_set_test_device"
+            android:paddingStart="4dp" />
     </LinearLayout>
 
     <View

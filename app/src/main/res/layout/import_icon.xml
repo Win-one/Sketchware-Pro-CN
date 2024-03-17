@@ -12,7 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:importantForAutofill="noExcludeDescendants">
+        android:importantForAutofill="noExcludeDescendants"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp">
 
         <EditText
             android:id="@+id/ed_input"
@@ -27,7 +29,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right|center"
+        android:gravity="end|center"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:orientation="horizontal">
@@ -72,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffffff"
-        android:gravity="center|right"
+        android:gravity="center|end"
         android:orientation="horizontal"
         android:padding="4dp">
 
@@ -82,7 +84,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_marginStart="8dp" />
 
         <Button
             android:id="@+id/btn_accept"
@@ -90,6 +93,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp" />
     </LinearLayout>
 </LinearLayout>

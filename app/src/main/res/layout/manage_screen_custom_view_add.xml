@@ -21,7 +21,9 @@
                 android:layout_marginRight="24dp"
                 android:layout_marginBottom="8dp"
                 android:text="Custom View can be used to change the way items are displayed inside the ListView or the Spinner"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ti_input"

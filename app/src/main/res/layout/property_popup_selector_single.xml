@@ -15,7 +15,8 @@
             android:layout_marginRight="8dp"
             android:padding="8dp"
             android:textSize="14sp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:layout_marginEnd="8dp" />
 
         <RadioGroup
             android:id="@+id/rg_content"
@@ -24,6 +25,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            android:layout_marginEnd="8dp" />
     </LinearLayout>
 </ScrollView>

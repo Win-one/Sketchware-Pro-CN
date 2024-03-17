@@ -52,7 +52,8 @@
                         android:layout_height="24dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:src="@drawable/ic_apk_color_48dp" />
+                        android:src="@drawable/ic_apk_color_48dp"
+                        android:layout_alignParentStart="true" />
 
                     <TextView
                         android:id="@id/title_sign_apk"
@@ -63,7 +64,9 @@
                         android:layout_toRightOf="@id/icon_apk"
                         android:textColor="@color/scolor_black_01"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:layout_toEndOf="@id/icon_apk"
+                        android:layout_marginStart="8dp" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@id/btn_sign_apk"
@@ -93,7 +96,9 @@
                                 android:layout_marginLeft="16dp"
                                 android:layout_marginRight="16dp"
                                 android:gravity="center_vertical"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginStart="16dp">
 
                                 <ImageView
                                     android:layout_width="24dp"
@@ -106,7 +111,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="8dp"
                                     android:textSize="14sp"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:layout_marginStart="8dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -116,7 +122,9 @@
                                 android:layout_marginTop="4dp"
                                 android:layout_marginRight="16dp"
                                 android:background="@drawable/bg_round_light_grey"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp">
 
                                 <HorizontalScrollView
                                     android:layout_width="match_parent"
@@ -131,7 +139,9 @@
                                         android:paddingLeft="8dp"
                                         android:paddingRight="8dp"
                                         android:textColor="@color/scolor_black_01"
-                                        android:textSize="13sp" />
+                                        android:textSize="13sp"
+                                        android:paddingEnd="8dp"
+                                        android:paddingStart="8dp" />
                                 </HorizontalScrollView>
                             </LinearLayout>
                         </LinearLayout>
@@ -164,7 +174,8 @@
                         android:layout_height="24dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:src="@drawable/android_icon" />
+                        android:src="@drawable/android_icon"
+                        android:layout_alignParentStart="true" />
 
                     <TextView
                         android:id="@id/title_export_src"
@@ -175,7 +186,9 @@
                         android:layout_toRightOf="@id/icon_src"
                         android:textColor="@color/scolor_black_01"
                         android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:layout_marginStart="8dp"
+                        android:layout_toEndOf="@id/icon_src" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@id/btn_export_src"
@@ -209,7 +222,9 @@
                             android:layout_marginLeft="16dp"
                             android:layout_marginRight="16dp"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginStart="16dp">
 
                             <ImageView
                                 android:layout_width="24dp"
@@ -222,7 +237,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="8dp"
                                 android:textSize="14sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                android:layout_marginStart="8dp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -232,7 +248,9 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginRight="16dp"
                             android:background="@drawable/bg_round_light_grey"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp">
 
                             <HorizontalScrollView
                                 android:layout_width="match_parent"
@@ -247,7 +265,9 @@
                                     android:paddingLeft="8dp"
                                     android:paddingRight="8dp"
                                     android:textColor="@color/scolor_black_01"
-                                    android:textSize="13sp" />
+                                    android:textSize="13sp"
+                                    android:paddingEnd="8dp"
+                                    android:paddingStart="8dp" />
                             </HorizontalScrollView>
                         </LinearLayout>
 
@@ -255,9 +275,10 @@
                             android:id="@id/btn_send_src"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
-                            android:layout_gravity="right"
+                            android:layout_gravity="end"
                             android:layout_marginRight="16dp"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:layout_marginEnd="16dp" />
                     </LinearLayout>
                 </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>

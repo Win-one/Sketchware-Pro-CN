@@ -65,7 +65,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
-            android:gravity="center|left"
+            android:gravity="center|start"
             android:textAppearance="?attr/textAppearanceBodyMedium"
             tools:text="Remaker" />
     </LinearLayout>
@@ -77,5 +77,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_margin="2dp"
-        android:src="@drawable/ic_9_patch_blue_48dp" />
+        android:src="@drawable/ic_9_patch_blue_48dp"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

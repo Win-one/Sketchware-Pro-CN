@@ -30,7 +30,9 @@
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
             android:textColor="#ff7d7d7d"
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            android:paddingEnd="4dp"
+            android:paddingStart="4dp" />
 
         <TextView
             android:id="@id/tv_sub_title"
@@ -43,6 +45,8 @@
             android:singleLine="true"
             android:textColor="@color/scolor_black_02"
             android:textSize="10sp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:paddingEnd="4dp"
+            android:paddingStart="4dp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

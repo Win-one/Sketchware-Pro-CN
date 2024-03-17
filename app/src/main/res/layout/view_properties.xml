@@ -9,7 +9,9 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="4dp"
-        android:paddingRight="4dp">
+        android:paddingRight="4dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp">
 
         <Spinner
             android:id="@+id/spn_widget"

@@ -30,7 +30,9 @@
             android:layout_marginLeft="8dp"
             android:layout_toRightOf="@id/button_bar"
             android:padding="8dp"
-            android:src="@drawable/ic_add_circle_outline_white_36dp" />
+            android:src="@drawable/ic_add_circle_outline_white_36dp"
+            android:layout_toEndOf="@id/button_bar"
+            android:layout_marginStart="8dp" />
     </RelativeLayout>
 
     <TextView

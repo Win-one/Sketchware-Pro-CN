@@ -31,7 +31,8 @@
             android:layout_height="36dp"
             android:visibility="gone"
             android:layout_marginLeft="16dp"
-            android:padding="8dp" />
+            android:padding="8dp"
+            android:layout_marginStart="16dp" />
 
         <LinearLayout
             android:id="@+id/delete_img_container"

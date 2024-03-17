@@ -6,7 +6,9 @@
     android:layout_marginHorizontal="24dp"
     android:layout_marginLeft="24dp"
     android:layout_marginRight="24dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp">
 
     <LinearLayout
         android:id="@id/layout_quiz"
@@ -56,6 +58,8 @@
             android:paddingRight="16dp"
             android:text="@string/common_message_loading"
             android:textColor="#ffffffff"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp" />
     </LinearLayout>
 </LinearLayout>

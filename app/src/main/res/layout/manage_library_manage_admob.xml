@@ -39,9 +39,10 @@
                 android:id="@id/lib_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:layout_marginLeft="8dp"
-                android:clickable="false" />
+                android:clickable="false"
+                android:layout_marginStart="8dp" />
         </LinearLayout>
 
         <ScrollView
@@ -72,7 +73,8 @@
                             android:layout_height="18dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="8dp"
-                            android:src="@drawable/widget_file" />
+                            android:src="@drawable/widget_file"
+                            android:layout_marginEnd="8dp" />
 
                         <TextView
                             android:id="@+id/tv_title_app_id"
@@ -105,7 +107,7 @@
                                     android:id="@+id/tv_app_id"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center|left"
+                                    android:gravity="center|start"
                                     android:textColor="#ff7d7d7d"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -130,7 +132,8 @@
                             android:layout_height="18dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="8dp"
-                            android:src="@drawable/widget_file" />
+                            android:src="@drawable/widget_file"
+                            android:layout_marginEnd="8dp" />
 
                         <TextView
                             android:id="@+id/tv_title_banner"
@@ -164,7 +167,7 @@
                                     android:id="@+id/tv_title_banner_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center|left"
+                                    android:gravity="center|start"
                                     android:textColor="#ff404040"
                                     android:textSize="14sp"
                                     tools:text="@string/design_library_admob_title_ad_name" />
@@ -173,7 +176,7 @@
                                     android:id="@+id/tv_banner_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center|left"
+                                    android:gravity="center|start"
                                     android:textColor="#ff7d7d7d"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -187,7 +190,7 @@
                                     android:id="@+id/tv_title_banner_id"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center|left"
+                                    android:gravity="center|start"
                                     android:textColor="#ff404040"
                                     android:textSize="14sp"
                                     tools:text="@string/design_library_admob_title_ad_unit_id" />
@@ -196,7 +199,7 @@
                                     android:id="@+id/tv_banner_id"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center|left"
+                                    android:gravity="center|start"
                                     android:textColor="#ff7d7d7d"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -221,7 +224,8 @@
                             android:layout_height="18dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="8dp"
-                            android:src="@drawable/widget_file" />
+                            android:src="@drawable/widget_file"
+                            android:layout_marginEnd="8dp" />
 
                         <TextView
                             android:id="@+id/tv_title_inter"
@@ -255,7 +259,7 @@
                                     android:id="@+id/tv_title_inter_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center|left"
+                                    android:gravity="center|start"
                                     android:textColor="#ff404040"
                                     android:textSize="14sp"
                                     tools:text="@string/design_library_admob_title_ad_name" />
@@ -264,7 +268,7 @@
                                     android:id="@+id/tv_inter_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center|left"
+                                    android:gravity="center|start"
                                     android:textColor="#ff7d7d7d"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -278,7 +282,7 @@
                                     android:id="@+id/tv_title_inter_id"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center|left"
+                                    android:gravity="center|start"
                                     android:textColor="#ff404040"
                                     android:textSize="14sp"
                                     tools:text="@string/design_library_admob_title_ad_unit_id" />
@@ -287,7 +291,7 @@
                                     android:id="@+id/tv_inter_id"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center|left"
+                                    android:gravity="center|start"
                                     android:textColor="#ff7d7d7d"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -312,7 +316,8 @@
                             android:layout_height="18dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="8dp"
-                            android:src="@drawable/widget_file" />
+                            android:src="@drawable/widget_file"
+                            android:layout_marginEnd="8dp" />
 
                         <TextView
                             android:id="@+id/tv_title_reward"
@@ -346,7 +351,7 @@
                                     android:id="@+id/tv_title_reward_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center|left"
+                                    android:gravity="center|start"
                                     android:textColor="#ff404040"
                                     android:textSize="14sp"
                                     tools:text="@string/design_library_admob_title_ad_name" />
@@ -355,7 +360,7 @@
                                     android:id="@+id/tv_reward_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center|left"
+                                    android:gravity="center|start"
                                     android:textColor="#ff7d7d7d"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -369,7 +374,7 @@
                                     android:id="@+id/tv_title_reward_id"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center|left"
+                                    android:gravity="center|start"
                                     android:textColor="#ff404040"
                                     android:textSize="14sp"
                                     tools:text="@string/design_library_admob_title_ad_unit_id" />
@@ -378,7 +383,7 @@
                                     android:id="@+id/tv_reward_id"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center|left"
+                                    android:gravity="center|start"
                                     android:textColor="#ff7d7d7d"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -398,7 +403,8 @@
                         android:layout_height="18dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/ic_test_device_48dp" />
+                        android:src="@drawable/ic_test_device_48dp"
+                        android:layout_marginEnd="8dp" />
 
                     <TextView
                         android:id="@+id/tv_title_test_device"

@@ -16,7 +16,9 @@
         android:orientation="horizontal"
         android:paddingHorizontal="8dp"
         android:paddingLeft="8dp"
-        android:paddingRight="8dp">
+        android:paddingRight="8dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp">
 
         <ImageView
             android:id="@id/icon"
@@ -30,7 +32,8 @@
             android:layout_marginLeft="8dp"
             android:gravity="center_vertical"
             android:textColor="@color/scolor_black_02"
-            android:textSize="12dp" />
+            android:textSize="12dp"
+            android:layout_marginStart="8dp" />
     </LinearLayout>
 
     <ImageView

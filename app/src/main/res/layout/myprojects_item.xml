@@ -7,7 +7,9 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     android:layout_marginBottom="10dp"
-    app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+    app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
+    android:layout_marginEnd="16dp"
+    android:layout_marginStart="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,8 +56,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:gravity="center|left"
-                    android:orientation="vertical">
+                    android:gravity="center|start"
+                    android:orientation="vertical"
+                    android:layout_alignParentStart="true">
 
                     <TextView
                         android:id="@+id/project_name"
@@ -68,7 +71,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="40dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginEnd="40dp">
 
                         <TextView
                             android:id="@+id/app_name"
@@ -86,7 +90,8 @@
                             android:alpha="0.6"
                             android:textAppearance="?attr/textAppearanceBodySmall"
                             android:textSize="10sp"
-                            tools:text="1.0(1)" />
+                            tools:text="1.0(1)"
+                            android:layout_marginStart="4dp" />
                     </LinearLayout>
 
                     <TextView
@@ -104,10 +109,11 @@
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     android:padding="8dp"
                     android:src="@drawable/selector_ic_expand_more_24"
-                    app:tint="?attr/colorControlNormal" />
+                    app:tint="?attr/colorControlNormal"
+                    android:layout_alignParentEnd="true" />
 
                 <TextView
                     android:id="@+id/tv_published"
@@ -115,12 +121,13 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
                     android:textAppearance="?attr/textAppearanceBodySmall"
                     android:textColor="?attr/colorTertiary"
-                    tools:text="605" />
+                    tools:text="605"
+                    android:layout_alignParentEnd="true" />
             </RelativeLayout>
         </LinearLayout>
 

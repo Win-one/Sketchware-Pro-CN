@@ -5,7 +5,9 @@
     android:layout_marginLeft="8dp"
     android:layout_marginTop="4dp"
     android:layout_marginRight="8dp"
-    android:background="@drawable/selector_toggle_list_view">
+    android:background="@drawable/selector_toggle_list_view"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp">
 
     <ImageView
         android:id="@id/img_icon"
@@ -14,7 +16,9 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
-        android:contentDescription="@null" />
+        android:contentDescription="@null"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp" />
 
     <TextView
         android:id="@id/tv_target_type"
@@ -34,7 +38,8 @@
         android:layout_toRightOf="@id/tv_target_type"
         android:text=" : "
         android:textColor="#ff404040"
-        android:textSize="13sp" />
+        android:textSize="13sp"
+        android:layout_toEndOf="@id/tv_target_type" />
 
     <TextView
         android:id="@id/tv_target_id"
@@ -46,7 +51,8 @@
         android:layout_toRightOf="@id/tv_sep"
         android:textColor="#ff202020"
         android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_toEndOf="@id/tv_sep" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,5 +90,6 @@
         android:layout_marginRight="8dp"
         android:clickable="true"
         android:contentDescription="@null"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_marginEnd="8dp" />
 </RelativeLayout>

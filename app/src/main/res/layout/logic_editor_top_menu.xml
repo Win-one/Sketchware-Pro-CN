@@ -24,14 +24,16 @@
             android:layout_height="18dp"
             android:layout_marginLeft="4dp"
             android:scaleType="centerInside"
-            android:src="@drawable/icon_delete" />
+            android:src="@drawable/icon_delete"
+            android:layout_marginStart="4dp" />
 
         <TextView
             android:id="@id/tv_delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_marginStart="4dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -51,14 +53,16 @@
             android:layout_height="18dp"
             android:layout_marginLeft="4dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_content_paste_grey600_24dp" />
+            android:src="@drawable/ic_content_paste_grey600_24dp"
+            android:layout_marginStart="4dp" />
 
         <TextView
             android:id="@id/tv_copy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_marginStart="4dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -78,14 +82,16 @@
             android:layout_height="18dp"
             android:layout_marginLeft="4dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_bookmark_red_48dp" />
+            android:src="@drawable/ic_bookmark_red_48dp"
+            android:layout_marginStart="4dp" />
 
         <TextView
             android:id="@id/tv_favorite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_marginStart="4dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -105,13 +111,15 @@
             android:layout_height="18dp"
             android:layout_marginLeft="4dp"
             android:scaleType="centerInside"
-            android:src="@drawable/more_block_96dp" />
+            android:src="@drawable/more_block_96dp"
+            android:layout_marginStart="4dp" />
 
         <TextView
             android:id="@id/tv_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_marginStart="4dp" />
     </LinearLayout>
 </LinearLayout>

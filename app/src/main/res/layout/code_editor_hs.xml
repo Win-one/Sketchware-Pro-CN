@@ -12,7 +12,9 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="4dp"
-        android:paddingRight="4dp">
+        android:paddingRight="4dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -20,7 +22,8 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="vertical"
-            android:paddingLeft="12dp">
+            android:paddingLeft="12dp"
+            android:paddingStart="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -55,7 +58,8 @@
             android:padding="6dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_redo_white_48dp"
-            app:tint="#FFFFFFFF" />
+            app:tint="#FFFFFFFF"
+            android:layout_marginStart="8dp" />
 
         <ImageView
             android:id="@+id/save"
@@ -65,7 +69,8 @@
             android:padding="6dp"
             android:scaleType="centerInside"
             android:src="@drawable/save_white_48"
-            app:tint="#FFFFFFFF" />
+            app:tint="#FFFFFFFF"
+            android:layout_marginStart="8dp" />
 
         <ImageView
             android:id="@+id/more"
@@ -75,7 +80,8 @@
             android:padding="6dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_morevert_24"
-            app:tint="#FFFFFFFF" />
+            app:tint="#FFFFFFFF"
+            android:layout_marginStart="8dp" />
     </LinearLayout>
 
     <io.github.rosemoe.sora.widget.CodeEditor
