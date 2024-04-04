@@ -113,12 +113,12 @@ dependencies {
     implementation "com.google.android.flexbox:flexbox:3.0.0"
 
     implementation "androidx.annotation:annotation:1.7.1"
-    implementation "com.android.tools:annotations:31.3.0"
+    implementation "com.android.tools:annotations:31.3.1"
     implementation "com.google.guava:guava:32.0.1-jre"
     implementation 'androidx.exifinterface:exifinterface:1.3.6'
 
     def editorGroupId = "io.github.Rosemoe.sora-editor"
-    implementation platform("$editorGroupId:bom:0.22.0")
+    implementation platform("$editorGroupId:bom:0.23.4")
     implementation "$editorGroupId:editor"
     implementation "$editorGroupId:language-java"
     implementation "$editorGroupId:language-textmate"
@@ -146,7 +146,7 @@ dependencies {
     minApi21Implementation "net.sf.proguard:proguard-base:6.0.3"
     minApi26Implementation files('libs/proguard-base-7.2.2.jar')
     minApi26Implementation 'com.guardsquare:proguard-core:9.0.2'
-    minApi26Implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22'
+    minApi26Implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.23'
 
     //noinspection GradleDependency
     minApi21Implementation "org.eclipse.jdt:ecj:3.13.0"
