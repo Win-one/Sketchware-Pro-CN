@@ -221,7 +221,7 @@ public class Tools extends AppCompatActivity {
             dialog.show();
         });
 
-        apkPathDialog.b(getString(R.string.common_word_continue), (dialogInterface, i) -> {
+        apkPathDialog.b(getString(R.string.common_word_continue), v -> {
             if(!isAPKSelected[0]) {
                 SketchwareUtil.toast("Please select an APK file to sign", Toast.LENGTH_SHORT);
                 shakeView(binding.selectFile);
@@ -238,10 +238,9 @@ public class Tools extends AppCompatActivity {
                 confirmOverwrite.b("File exists");
                 confirmOverwrite.a("An APK named " + output_apk_file_name + " already exists at /sketchware/signed_apk/.  Overwrite it?");
 
-                confirmOverwrite.a(Helper.getResString(R.string.common_word_cancel),
-                        (d, which) -> Helper.getDialogDismissListener(d));
-                confirmOverwrite.b(getString(R.string.common_word_overwrite), (d, which) -> {
-                    d.dismiss();
+                confirmOverwrite.a(Helper.getResString(R.string.common_word_cancel), view -> Helper.getDialogDismissListener(confirmOverwrite));
+                confirmOverwrite.b(getString(R.string.common_word_overwrite), view -> {
+                    confirmOverwrite.dismiss();
                     signApkFileWithDialog(input_apk_path, output_apk_path, true,
                             null, null, null, null);
                 });
@@ -252,10 +251,10 @@ public class Tools extends AppCompatActivity {
             }
         });
 
-        apkPathDialog.a(Helper.getResString(R.string.common_word_cancel), (dialogInterface, whichDialog) -> dialogInterface.dismiss());
+        apkPathDialog.a(Helper.getResString(R.string.common_word_cancel), v -> apkPathDialog.dismiss());
 
         apkPathDialog.a(testkey_root);
-        apkPathDialog.autoDismiss(false);
+        apkPathDialog.setCancelable(false);
         apkPathDialog.show();
     }
 

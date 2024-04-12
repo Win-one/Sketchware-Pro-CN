@@ -29,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.besome.sketch.editor.manage.library.LibraryItemView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
@@ -197,7 +198,7 @@ public class BlocksManager extends AppCompatActivity {
             blocksPath.setText(blocks_dir.replace(FileUtil.getExternalStorageDir(), ""));
             tilBlocksPath.addView(blocksPath);
             dialog.a(customView);
-            dialog.b(Helper.getResString(R.string.common_word_save), (d, which) -> {
+            dialog.b(Helper.getResString(R.string.common_word_save), view -> {
                 ConfigActivity.setSetting(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH,
                         palettesPath.getText().toString());
                 ConfigActivity.setSetting(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_BLOCK_FILE_PATH,
@@ -205,10 +206,10 @@ public class BlocksManager extends AppCompatActivity {
 
                 _readSettings();
                 _refresh_list();
-                d.dismiss();
+                dialog.dismiss();
             });
-            dialog.a(Helper.getResString(R.string.common_word_cancel), (d, which) -> Helper.getDialogDismissListener(d));
-            dialog.configureDefaultButton(getString(R.string.common_word_defaults), (d, which) -> {
+            dialog.a(Helper.getResString(R.string.common_word_cancel), view -> Helper.getDialogDismissListener(dialog));
+            dialog.configureDefaultButton(getString(R.string.common_word_defaults), view -> {
                 ConfigActivity.setSetting(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH,
                         ConfigActivity.getDefaultValue(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH));
                 ConfigActivity.setSetting(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_BLOCK_FILE_PATH,
@@ -216,7 +217,7 @@ public class BlocksManager extends AppCompatActivity {
 
                 _readSettings();
                 _refresh_list();
-                d.dismiss();
+                dialog.dismiss();
             });
             dialog.show();
         }
@@ -428,16 +429,15 @@ public class BlocksManager extends AppCompatActivity {
         _refresh_list();
     }
 
-    private View.OnClickListener getSharedPaletteColorPickerShower(MaterialAlertDialogBuilder dialog, EditText storePickedResultIn) {
+    private View.OnClickListener getSharedPaletteColorPickerShower(Dialog dialog, EditText storePickedResultIn) {
         return v -> {
-            AlertDialog alertDialog = dialog.create();
             LayoutInflater inf = getLayoutInflater();
             final View a = inf.inflate(R.layout.color_picker, null);
             final Zx zx = new Zx(a, this, 0, true, false);
-            zx.a(new PCP(this, storePickedResultIn, alertDialog));
+            zx.a(new PCP(this, storePickedResultIn, dialog));
             zx.setAnimationStyle(R.anim.abc_fade_in);
             zx.showAtLocation(a, Gravity.CENTER, 0, 0);
-            alertDialog.dismiss();
+            dialog.dismiss();
         };
     }
 
@@ -507,7 +507,7 @@ public class BlocksManager extends AppCompatActivity {
         dialog.a(customView);
         openColorPalette.setOnClickListener(getSharedPaletteColorPickerShower(dialog, colorEditText));
 
-        dialog.b(Helper.getResString(R.string.common_word_save), (d, which) -> {
+        dialog.b(Helper.getResString(R.string.common_word_save), v -> {
             try {
                 String nameInput = nameEditText.getText().toString();
                 String colorInput = colorEditText.getText().toString();
@@ -537,13 +537,13 @@ public class BlocksManager extends AppCompatActivity {
                     _readSettings();
                     _refresh_list();
                 }
-                d.dismiss();
+                dialog.dismiss();
             } catch (IllegalArgumentException | StringIndexOutOfBoundsException e) {
                 color.setError("Malformed hexadecimal color");
                 color.requestFocus();
             }
         });
-        dialog.a(Helper.getResString(R.string.common_word_cancel), (d, which) -> Helper.getDialogDismissListener(d));
+        dialog.a(Helper.getResString(R.string.common_word_cancel), v -> Helper.getDialogDismissListener(dialog));
         dialog.show();
     }
 

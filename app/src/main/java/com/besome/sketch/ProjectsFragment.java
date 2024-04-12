@@ -252,7 +252,7 @@ public class ProjectsFragment extends DA implements View.OnClickListener {
             sortOrderDesc.setChecked(true);
         }
         dialog.a(root);
-        dialog.b(getString(R.string.common_word_save), (d, which) -> {
+        dialog.b(getString(R.string.common_word_save), v -> {
             int sortValue = 0;
             if (sortByName.isChecked()) {
                 sortValue |= ProjectComparator.SORT_BY_NAME;
@@ -267,10 +267,10 @@ public class ProjectsFragment extends DA implements View.OnClickListener {
                 sortValue |= ProjectComparator.SORT_ORDER_DESCENDING;
             }
             preference.a("sortBy", sortValue, true);
-            d.dismiss();
+            dialog.dismiss();
             refreshProjectsList();
         });
-        dialog.a(getString(R.string.common_word_cancel), (d, which) -> Helper.getDialogDismissListener(d));
+        dialog.a(getString(R.string.common_word_cancel), v -> Helper.getDialogDismissListener(dialog));
         dialog.show();
     }
 }
