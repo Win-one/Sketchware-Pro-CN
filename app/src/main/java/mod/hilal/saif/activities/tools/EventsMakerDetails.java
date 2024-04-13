@@ -57,6 +57,8 @@ public class EventsMakerDetails extends AppCompatActivity {
     }
 
     private void setupViews() {
+        binding.activityEvent.setVisibility(View.GONE);
+        binding.tvListeners.setVisibility(View.GONE);
         binding.addAttrFab.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.setClass(getApplicationContext(), EventsMakerCreator.class);

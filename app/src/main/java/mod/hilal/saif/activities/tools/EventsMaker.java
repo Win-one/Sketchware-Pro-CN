@@ -80,34 +80,14 @@ public class EventsMaker extends AppCompatActivity {
     }
 
     private void setupViews() {
-        FloatingActionButton fab = findViewById(R.id.add_attr_fab);
-        ViewGroup base = (ViewGroup) binding.addAttrListview.getParent();
-        LinearLayout newLayout = newLayout(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                0);
-        newLayout.setBackgroundColor(Color.parseColor("#00000000"));
-        newLayout.setPadding(
-                (int) SketchwareUtil.getDip(8),
-                (int) SketchwareUtil.getDip(8),
-                (int) SketchwareUtil.getDip(8),
-                (int) SketchwareUtil.getDip(8)
-        );
-        newLayout.setFocusable(false);
-        newLayout.setGravity(16);
-        newLayout.addView(newText(getString(R.string.listeners), 16.0f, false, 0xff888888,
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0));
-        base.addView(newLayout, 1);
-        LibraryItemView event_sub = new LibraryItemView(this);
-        makeup(event_sub, R.drawable.new_window_96, getString(R.string.activity_events), getNumOfEvents(""));
-        base.addView(event_sub, 1);
-        event_sub.setOnClickListener(v -> {
+        binding.eventSub.setText(getNumOfEvents(""));
+        binding.activityEvent.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.setClass(getApplicationContext(), EventsMakerDetails.class);
             intent.putExtra("lis_name", "");
             startActivity(intent);
         });
-        fab.setOnClickListener(v -> showAddDial());
+        binding.addAttrFab.setOnClickListener(v -> showAddDial());
         refreshList();
     }
 
@@ -345,48 +325,6 @@ public class EventsMaker extends AppCompatActivity {
             eventAmount = 0;
         }
         return getString(R.string.events) + eventAmount;
-    }
-
-    private void makeup(LibraryItemView parent, int iconResourceId, String title, String description) {
-        parent.enabled.setVisibility(View.GONE);
-        parent.icon.setImageResource(iconResourceId);
-        parent.title.setText(title);
-        parent.description.setText(description);
-    }
-
-    private LinearLayout newLayout(int width, int height, float weight) {
-        LinearLayout linearLayout = new LinearLayout(this);
-        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(width, height, weight));
-        linearLayout.setPadding(
-                (int) SketchwareUtil.getDip(4),
-                (int) SketchwareUtil.getDip(4),
-                (int) SketchwareUtil.getDip(4),
-                (int) SketchwareUtil.getDip(4)
-        );
-        GradientDrawable gradientDrawable = new GradientDrawable();
-        gradientDrawable.setColor(Color.WHITE);
-        linearLayout.setBackground(new RippleDrawable(new ColorStateList(new int[][]{new int[0]}, new int[]{Color.parseColor("#64B5F6")}), gradientDrawable, null));
-        linearLayout.setClickable(true);
-        linearLayout.setFocusable(true);
-        return linearLayout;
-    }
-
-    private TextView newText(String str, float size, boolean is, int color, int width, int length, float weight) {
-        TextView textView = new TextView(this);
-        textView.setLayoutParams(new LinearLayout.LayoutParams(width, length, weight));
-        textView.setPadding(
-                (int) SketchwareUtil.getDip(8),
-                (int) SketchwareUtil.getDip(4),
-                (int) SketchwareUtil.getDip(4),
-                (int) SketchwareUtil.getDip(4)
-        );
-        textView.setTextColor(color);
-        textView.setText(str);
-        textView.setTextSize(size);
-        if (is) {
-            textView.setTypeface(Typeface.DEFAULT_BOLD);
-        }
-        return textView;
     }
 
     private void setToolbar() {

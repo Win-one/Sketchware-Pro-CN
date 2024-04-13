@@ -8,22 +8,19 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="6dp"
         android:layout_marginTop="3dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginRight="6dp"
         android:layout_marginBottom="3dp"
-        android:background="#ffffffff"
         android:orientation="vertical"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="2dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp">
+        app:cardCornerRadius="3dp"
+        app:cardElevation="2dp">
 
         <LinearLayout
             android:id="@+id/background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center|start"
+            android:gravity="center|left"
             android:orientation="horizontal"
             android:padding="2dp">
 
@@ -35,8 +32,7 @@
                 android:layout_marginBottom="3dp"
                 android:orientation="vertical"
                 app:cardCornerRadius="0dp"
-                app:cardElevation="1dp"
-                android:layout_marginStart="2dp">
+                app:cardElevation="1dp">
 
                 <LinearLayout
                     android:id="@+id/color"
@@ -54,15 +50,13 @@
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="6dp"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="8dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false"
-                    android:textColor="#ff757575"
                     android:textSize="14sp"
                     tools:text="Operator 2" />
 
