@@ -2430,6 +2430,7 @@ Please try again later"</string>
     <string name="edit_palette">Edit palette</string>
     <string name="selected_apk">Selected APK</string>
     <string name="apk_path_will_appear_here">APK path will appear here</string>
+    <string name="add_a_new_block">Add a new block</string>
 
 
 </resources>

@@ -1,14 +1,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#ffffffff"
     android:orientation="vertical"
     android:theme="@style/AppTheme">
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="#fff5f5f5"
         android:paddingLeft="8dp"
         android:paddingRight="8dp">
 
@@ -84,7 +82,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/bg_rectangle_white"
                 android:orientation="vertical">
 
                 <TextView
@@ -94,7 +91,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginRight="8dp"
-                    android:text="Select Moreblock type"
+                    android:text="@string/select_moreblock_type"
                     android:textColor="@color/color_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -105,7 +102,7 @@
 
                     <RadioGroup
                         android:id="@+id/radio_mb_type"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="6dp">
@@ -229,7 +226,6 @@
                 android:layout_marginVertical="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/bg_rectangle_white"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
                 android:paddingBottom="8dp">
@@ -274,7 +270,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="8dp"
-                android:text="Custom parameter"
+                android:text="@string/custom_parameter"
                 android:textColor="@color/color_primary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -285,7 +281,6 @@
                 android:layout_marginVertical="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/bg_rectangle_white"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
                 android:paddingBottom="8dp">
@@ -342,7 +337,7 @@
                         android:id="@+id/add"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ADD" />
+                        android:text="@string/common_word_add" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

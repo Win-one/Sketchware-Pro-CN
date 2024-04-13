@@ -22,6 +22,9 @@ android {
         }
         return stdout.toString().trim()
     }
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
 
     defaultConfig {
         applicationId "com.sketchware.remod"

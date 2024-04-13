@@ -60,7 +60,6 @@ public class BlocksManager extends AppCompatActivity {
     private String blocks_dir = "";
     private String pallet_dir = "";
     private ArrayList<HashMap<String, Object>> pallet_listmap = new ArrayList<>();
-
     private BlocksManagerBinding binding;
     private LibraryItemView recycle_sub;
 
@@ -93,7 +92,6 @@ public class BlocksManager extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0));
         base.addView(newLayout, 1);
         recycle_sub = new LibraryItemView(this);
-        makeup(recycle_sub, R.drawable.icon_delete_active, getString(R.string.common_word_recycle_bin), getString(R.string.blocks) + (long) (_getN(-1)));
         base.addView(recycle_sub, 1);
     }
 
@@ -297,6 +295,7 @@ public class BlocksManager extends AppCompatActivity {
         binding.listPallete.setAdapter(new PaletteAdapter(pallet_listmap));
         ((BaseAdapter) binding.listPallete.getAdapter()).notifyDataSetChanged();
         binding.listPallete.onRestoreInstanceState(savedState);
+        makeup(recycle_sub, R.drawable.icon_delete_active, getString(R.string.common_word_recycle_bin), getString(R.string.blocks) + (long) (_getN(-1)));
     }
 
     private double _getN(final double _p) {
@@ -584,7 +583,7 @@ public class BlocksManager extends AppCompatActivity {
 
             title.setText(pallet_listmap.get(position).get("name").toString());
             sub.setText(getString(R.string.blocks) + (long) (_getN(position + 9)));
-            makeup(recycle_sub, 0x7f07043e, getString(R.string.activity_events),
+            makeup(recycle_sub, R.drawable.icon_delete_active, getString(R.string.blocks),
                     getString(R.string.blocks) + (long) (_getN(-1)));
 
             int backgroundColor;

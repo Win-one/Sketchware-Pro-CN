@@ -21,7 +21,6 @@
             android:id="@+id/background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffffff"
             android:orientation="vertical"
             android:paddingLeft="8dp"
             android:paddingTop="5dp"
@@ -80,7 +79,6 @@
                             android:id="@+id/down"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#ffffffff"
                             android:gravity="center"
                             android:orientation="vertical">
 
@@ -108,7 +106,6 @@
                             android:id="@+id/up"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#ffffffff"
                             android:gravity="center"
                             android:orientation="vertical">
 

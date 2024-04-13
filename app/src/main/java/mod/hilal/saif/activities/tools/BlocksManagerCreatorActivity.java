@@ -57,9 +57,6 @@ public class BlocksManagerCreatorActivity extends AppCompatActivity {
 
     private final ArrayList<String> id_detector = new ArrayList<>();
     private ArrayList<HashMap<String, Object>> blocksList = new ArrayList<>();
-    private EditText code;
-    private EditText colour;
-    private HorizontalScrollView parameterScrollView;
     /**
      * Current mode of this activity, "edit" if editing a block, "add" if creating a new block and "insert" if inserting a block above another
      */
@@ -164,7 +161,7 @@ public class BlocksManagerCreatorActivity extends AppCompatActivity {
                     TransitionManager.beginDelayedTransition(binding.scrollView, transition);
                     binding.spec2lay.setVisibility(View.GONE);
                 }
-                updateBlockSpec(s.toString(), colour.getText().toString());
+                updateBlockSpec(s.toString(), binding.color.getText().toString());
             }
         });
 
@@ -200,12 +197,12 @@ public class BlocksManagerCreatorActivity extends AppCompatActivity {
         binding.colourSelector.setOnClickListener(v -> {
             View inflate = getLayoutInflater().inflate(R.layout.color_picker, null);
             Zx zx = new Zx(inflate, this, 0, true, false);
-            zx.a(new PCP(colour));
+            zx.a(new PCP(binding.color));
             zx.setAnimationStyle(R.anim.abc_fade_in);
             zx.showAtLocation(inflate, Gravity.CENTER, 0, 0);
         });
 
-        colour.addTextChangedListener(new BaseTextWatcher() {
+        binding.color.addTextChangedListener(new BaseTextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 updateBlockSpec(binding.type.getText().toString(), s.toString());
@@ -228,7 +225,7 @@ public class BlocksManagerCreatorActivity extends AppCompatActivity {
             }
         });
 
-        binding.reset.setOnClickListener(v -> colour.setText(palletColour));
+        binding.reset.setOnClickListener(v -> binding.color.setText(palletColour));
         binding.spec.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
@@ -248,7 +245,7 @@ public class BlocksManagerCreatorActivity extends AppCompatActivity {
         inputProperties();
         addParameters();
         receiveIntents();
-        new SimpleHighlighter(code);
+        new SimpleHighlighter(binding.code);
     }
 
     private View addBlockMenu(final String menu, String name) {
@@ -285,14 +282,14 @@ public class BlocksManagerCreatorActivity extends AppCompatActivity {
         binding.typeName.setSingleLine(true);
         binding.spec.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         binding.spec.setSingleLine(true);
-        colour.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-        colour.setSingleLine(true);
+        binding.color.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        binding.color.setSingleLine(true);
         binding.spec2.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         binding.spec2.setSingleLine(true);
-        code.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-        code.setSingleLine(false);
-        parameterScrollView.setVerticalScrollBarEnabled(false);
-        parameterScrollView.setHorizontalScrollBarEnabled(false);
+        binding.code.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        binding.code.setSingleLine(false);
+        binding.scrollParameters.setVerticalScrollBarEnabled(false);
+        binding.scrollParameters.setHorizontalScrollBarEnabled(false);
         binding.spec2lay.setVisibility(View.GONE);
     }
 
@@ -328,12 +325,12 @@ public class BlocksManagerCreatorActivity extends AppCompatActivity {
         getBlockList();
         if (mode.equals("add")) {
             blockPosition = Integer.parseInt(getIntent().getStringExtra("pallet"));
-            colour.setText(palletColour);
-            getSupportActionBar().setTitle("Add a new block");
+            binding.color.setText(palletColour);
+            binding.txToolbarTitle.setText(R.string.add_a_new_block);
             return;
         }
         blockPosition = Integer.parseInt(getIntent().getStringExtra("pos"));
-        colour.setText(palletColour);
+        binding.color.setText(palletColour);
         binding.txToolbarTitle.setText(R.string.insert_block);
         if (mode.equals("edit")) {
            binding.txToolbarTitle.setText(R.string.edit_block);
@@ -392,19 +389,19 @@ public class BlocksManagerCreatorActivity extends AppCompatActivity {
         Object colorObject = block.get("color");
         if (colorObject != null) {
             if (colorObject instanceof String) {
-                colour.setText((String) colorObject);
+                binding.color.setText((String) colorObject);
             } else {
-                colour.setError("Invalid color block data");
+                binding.color.setError("Invalid color block data");
             }
         } else {
-            colour.setText(palletColour);
+            binding.color.setText(palletColour);
         }
 
         Object codeObject = block.get("code");
         if (codeObject instanceof String) {
-            code.setText((String) codeObject);
+            binding.code.setText((String) codeObject);
         } else {
-            code.setHint("(Invalid code block data)");
+            binding.code.setHint("(Invalid code block data)");
         }
     }
 
@@ -491,7 +488,7 @@ public class BlocksManagerCreatorActivity extends AppCompatActivity {
         if (binding.type.getText().toString().equals("e")) {
             tempMap.put("spec2", binding.spec2.getText().toString());
         }
-        tempMap.put("code", code.getText().toString());
+        tempMap.put("code", binding.code.getText().toString());
         tempMap.put("palette", String.valueOf(blockPosition));
         blocksList.add(tempMap);
         FileUtil.writeFile(path, new Gson().toJson(blocksList));
@@ -513,7 +510,7 @@ public class BlocksManagerCreatorActivity extends AppCompatActivity {
         if (binding.type.getText().toString().equals("e")) {
             tempMap.put("spec2", binding.spec2.getText().toString());
         }
-        tempMap.put("code", code.getText().toString());
+        tempMap.put("code", binding.code.getText().toString());
         tempMap.put("palette", blocksList.get(position).get("palette"));
         blocksList.add(position, tempMap);
         FileUtil.writeFile(path, new Gson().toJson(blocksList));
@@ -535,7 +532,7 @@ public class BlocksManagerCreatorActivity extends AppCompatActivity {
         if (binding.type.getText().toString().equals("e")) {
             tempMap.put("spec2", binding.spec2.getText().toString());
         }
-        tempMap.put("code", code.getText().toString());
+        tempMap.put("code", binding.code.getText().toString());
         FileUtil.writeFile(path, new Gson().toJson(blocksList));
         SketchwareUtil.toast("Saved");
         finish();

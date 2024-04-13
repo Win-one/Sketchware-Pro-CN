@@ -53,7 +53,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#ffffffff"
                     android:orientation="vertical"
                     android:padding="8dp">
 
@@ -65,7 +64,6 @@
                         android:paddingRight="8dp"
                         android:paddingBottom="8dp"
                         android:text="@string/properties"
-                        android:textColor="#ff424242"
                         android:textSize="16sp"
                         android:paddingStart="6dp"
                         android:paddingEnd="8dp" />
@@ -170,7 +168,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#ffffffff"
                     android:orientation="vertical"
                     android:padding="8dp">
 
@@ -182,7 +179,6 @@
                         android:paddingRight="8dp"
                         android:paddingBottom="8dp"
                         android:text="@string/design"
-                        android:textColor="#ff424242"
                         android:textSize="16sp"
                         android:paddingEnd="8dp"
                         android:paddingStart="6dp" />
@@ -224,7 +220,6 @@
                                 android:gravity="center|start"
                                 android:hint="color"
                                 android:padding="8dp"
-                                android:textColor="#ff000000"
                                 android:textColorHint="#ff607d8b"
                                 android:textSize="14sp" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -266,7 +261,6 @@
                         android:paddingRight="4dp"
                         android:paddingBottom="4dp"
                         android:text="@string/parameters"
-                        android:textColor="#ff757575"
                         android:textSize="10sp"
                         android:paddingStart="5dp"
                         android:paddingEnd="4dp" />
@@ -280,7 +274,6 @@
                             android:id="@+id/parameter_holder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="#fff5f5f5"
                             android:orientation="horizontal"
                             android:padding="8dp" />
                     </HorizontalScrollView>
@@ -324,7 +317,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#ffffffff"
                     android:orientation="vertical"
                     android:padding="8dp">
 
@@ -336,7 +328,6 @@
                         android:paddingRight="8dp"
                         android:paddingBottom="8dp"
                         android:text="Code"
-                        android:textColor="#ff424242"
                         android:textSize="16sp"
                         android:paddingEnd="8dp"
                         android:paddingStart="6dp" />
@@ -345,7 +336,6 @@
                         android:id="@+id/code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#fff5f5f5"
                         android:gravity="center|start|top"
                         android:hint="@string/code"
                         android:padding="8dp"
