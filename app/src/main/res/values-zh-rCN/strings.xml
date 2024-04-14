@@ -3271,6 +3271,8 @@
     <string name="select_built_in_libraries">选择内置库</string>
     <string name="none_selected">未选择任何选项.点击此处进行配置.</string>
     <string name="advanced">高级</string>
+    <string name="use_custom_library_versions">使用自定义库版本</string>
+    <string name="built_in_libraries_excluded">%1$d/%2$d内置库已排除</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->
