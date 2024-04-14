@@ -172,7 +172,7 @@ public class BlocksManager extends AppCompatActivity {
     private void _a(final View _view) {
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setShape(GradientDrawable.RECTANGLE);
-        gradientDrawable.setColor(Color.parseColor("#ffffff"));
+        gradientDrawable.setColor(Color.parseColor("#00ffffff"));
         RippleDrawable rippleDrawable = new RippleDrawable(new ColorStateList(new int[][]{new int[0]}, new int[]{Color.parseColor("#20008DCD")}), gradientDrawable, null);
         if (Build.VERSION.SDK_INT >= 21) {
             _view.setBackground(rippleDrawable);
@@ -256,14 +256,14 @@ public class BlocksManager extends AppCompatActivity {
 
     private void _recycleBin(final View _v) {
         _a(_v);
-        binding.recycleSub.setOnClickListener(v -> {
+        binding.recycleBin.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), BlocksManagerDetailsActivity.class);
             intent.putExtra("position", "-1");
             intent.putExtra("dirB", blocks_dir);
             intent.putExtra("dirP", pallet_dir);
             startActivity(intent);
         });
-        binding.recycleSub.setOnLongClickListener(v -> {
+        binding.recycleBin.setOnLongClickListener(v -> {
             new AlertDialog.Builder(this)
                     .setTitle(R.string.common_word_recycle_bin)
                     .setMessage("Are you sure you want to empty the recycle bin? " +
@@ -395,8 +395,6 @@ public class BlocksManager extends AppCompatActivity {
         nameEditText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         nameEditText.setPadding(dpToPx(8), dpToPx(8), dpToPx(8), dpToPx(8));
-        nameEditText.setTextColor(0xff000000);
-        nameEditText.setHintTextColor(0xff607d8b);
         nameEditText.setTextSize(14);
         if (isEditing) {
             nameEditText.setText(oldName);
@@ -421,8 +419,6 @@ public class BlocksManager extends AppCompatActivity {
         colorEditText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         colorEditText.setPadding(dpToPx(8), dpToPx(8), dpToPx(8), dpToPx(8));
-        colorEditText.setTextColor(0xff000000);
-        colorEditText.setHintTextColor(0xff607d8b);
         colorEditText.setTextSize(14);
         if (isEditing) {
             colorEditText.setText(oldColor);

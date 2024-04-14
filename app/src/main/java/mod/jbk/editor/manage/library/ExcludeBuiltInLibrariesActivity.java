@@ -81,7 +81,7 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity imple
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
-        getSupportActionBar().setTitle("Exclude built-in libraries");
+        getSupportActionBar().setTitle(R.string.exclude_built_in_libraries);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((Toolbar) toolbar).setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
@@ -89,9 +89,9 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity imple
         TextView enable = findViewById(R.id.tv_enable);
         enable.setText(Helper.getResString(R.string.design_library_settings_title_enabled));
         TextView warning = findViewById(R.id.tv_desc);
-        warning.setText("This might break your project if you don't know what you're doing!");
+        warning.setText(R.string.this_might_break_your_project);
         TextView label = findViewById(R.id.tv_title);
-        label.setText("Excluded built-in libraries");
+        label.setText(R.string.exclude_built_in_libraries);
 
         LinearLayout excludedLibraries = findViewById(R.id.item);
         excludedLibraries.setOnClickListener(this);
@@ -179,7 +179,7 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity imple
                 .map(BuiltInLibraries.BuiltInLibrary::getName)
                 .collect(Collectors.joining(", "));
         if (libraries.isEmpty()) {
-            libraries = "None selected. Tap here to configure.";
+            libraries = getString(R.string.none_selected);
         }
         preview.setText(libraries);
     }
@@ -188,7 +188,7 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity imple
         aB dialog = new aB(this);
         dialog.a(R.drawable.rollback_96);
         dialog.b(Helper.getResString(R.string.common_word_reset));
-        dialog.a("Reset excluded built-in libraries? This action cannot be undone.");
+        dialog.a(getString(R.string.reset_excluded_built_in_libraries));
         dialog.b(Helper.getResString(R.string.common_word_reset), v -> {
             saveConfig(sc_id, false, Collections.emptyList());
             enabled.setChecked(false);
@@ -283,7 +283,7 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity imple
 
     private void showSelectBuiltInLibrariesDialog() {
         aB dialog = new aB(this);
-        dialog.b("Select built-in libraries");
+        dialog.b(getString(R.string.select_built_in_libraries));
         RecyclerView list = new RecyclerView(this);
 
         // magic to initialize scrollbars even without android:scrollbars defined in XML

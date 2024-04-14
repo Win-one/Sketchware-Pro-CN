@@ -2394,8 +2394,6 @@ Please try again later"</string>
     <string name="stringfog_is_enabled">StringFog is enabled</string>
     <string name="stringfog_is_disabled">StringFog is disabled</string>
     <string name="while_you_wait">While you wait...</string>
-    <string name="break_your_project">This might break your project if you don\'t know what you\'re doing!</string>
-    <string name="excluded_built_in_libraries">Excluded built-in libraries</string>
     <string name="design_library_admob_title_rewarded">Rewarded Ad</string>
     <string name="edit">EDIT</string>
     <string name="select_moreblock_type">Select Moreblock type</string>
@@ -2433,6 +2431,12 @@ Please try again later"</string>
     <string name="add_a_new_block">Add a new block</string>
     <string name="event_properties">Event properties</string>
     <string name="create_new_listener">Create New Listener</string>
+    <string name="exclude_built_in_libraries">Exclude built-in libraries</string>
+    <string name="this_might_break_your_project">This might break your project if you don\'t know what you\'re doing!</string>
+    <string name="reset_excluded_built_in_libraries">Reset excluded built-in libraries? This action cannot be undone.</string>
+    <string name="select_built_in_libraries">Select built-in libraries</string>
+    <string name="none_selected">None selected. Tap here to configure.</string>
+    <string name="advanced">Advanced</string>
 
 
 </resources>

@@ -3228,8 +3228,6 @@
     <string name="stringfog_is_enabled">已启用加密字符串</string>
     <string name="stringfog_is_disabled">已关闭加密字符串</string>
     <string name="while_you_wait">当您等待时...</string>
-    <string name="break_your_project">如果你不知道自己在做什么,这可能会破坏你的项目!</string>
-    <string name="excluded_built_in_libraries">排除内置库</string>
     <string name="design_library_admob_title_rewarded">激励广告</string>
     <string name="edit">编辑</string>
     <string name="select_moreblock_type">选择更多块类型</string>
@@ -3267,6 +3265,12 @@
     <string name="add_a_new_block">添加新块</string>
     <string name="event_properties">事件属性</string>
     <string name="create_new_listener">创建新监听器</string>
+    <string name="exclude_built_in_libraries">排除内置库</string>
+    <string name="this_might_break_your_project">如果您不知道自己在做什么,这可能会破坏您的项目!</string>
+    <string name="reset_excluded_built_in_libraries">重置排除的内置库?此操作无法撤消.</string>
+    <string name="select_built_in_libraries">选择内置库</string>
+    <string name="none_selected">未选择任何选项.点击此处进行配置.</string>
+    <string name="advanced">高级</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

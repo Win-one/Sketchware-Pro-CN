@@ -61,6 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:gravity="center"
                     android:padding="8dp">
 
                     <ImageView
@@ -79,7 +80,7 @@
                         android:gravity="start"
                         android:textColor="#ff757575"
                         android:textSize="14sp"
-                        tools:text="@string/break_your_project" />
+                        tools:text="@string/this_might_break_your_project" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -104,7 +105,7 @@
                         android:textColor="#ff4d4d4d"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        tools:text="@string/excluded_built_in_libraries" />
+                        tools:text="@string/exclude_built_in_libraries" />
                 </LinearLayout>
 
                 <androidx.cardview.widget.CardView

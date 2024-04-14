@@ -57,7 +57,7 @@ public class ConfigActivity extends AppCompatActivity {
     public static final String SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH = "palletteDir";
     public static final String SETTING_BLOCKMANAGER_DIRECTORY_BLOCK_FILE_PATH = "blockDir";
 
-    private static final int DEFAULT_BACKGROUND_COLOR = Color.parseColor("#fafafa");
+    private static final int DEFAULT_BACKGROUND_COLOR = Color.parseColor(String.valueOf(R.color.backgroundColor));
     private LinearLayout root;
     private HashMap<String, Object> setting_map = new HashMap<>();
 

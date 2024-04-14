@@ -68,7 +68,7 @@ public class ManageLibraryActivity extends BaseAppCompatActivity implements View
 
         if (libraryItemView instanceof ExcludeBuiltInLibrariesLibraryItemView) {
             TextView title = findViewById(R.id.title);
-            title.setText("Advanced");
+            title.setText(R.string.advanced);
             ((ViewGroup) title.getParent()).removeView(title);
             libraryItemLayout.addView(title);
         }
