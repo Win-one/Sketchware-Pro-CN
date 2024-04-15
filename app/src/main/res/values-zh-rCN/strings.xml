@@ -3273,6 +3273,17 @@
     <string name="advanced">高级</string>
     <string name="use_custom_library_versions">使用自定义库版本</string>
     <string name="built_in_libraries_excluded">%1$d/%2$d内置库已排除</string>
+    <string name="you_haven_t_used_any_custom_blocks_in_this_project">您尚未在此项目中使用任何自定义块.</string>
+    <string name="used_custom_blocks">使用的自定义块</string>
+    <string name="you_have_used">您已经使用</string>
+    <string name="custom_block_s_in_this_project">自定义块在此项目中.</string>
+    <string name="new_folder">新建文件夹</string>
+    <string name="import_library">导入库</string>
+    <string name="native_library_manager">原生库管理</string>
+    <string name="create_a_new_folder">创建新文件夹</string>
+    <string name="enter_the_name_of_the_new_folder">输入新文件夹的名称</string>
+    <string name="folder_name">文件夹名称</string>
+    <string name="code_editor">代码编辑器</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

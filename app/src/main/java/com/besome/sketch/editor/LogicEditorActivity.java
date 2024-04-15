@@ -1530,7 +1530,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
             i++;
         }
         dialog.a(a2);
-        dialog.configureDefaultButton("Code Editor", v -> {
+        dialog.configureDefaultButton(getString(R.string.code_editor), v -> {
             AsdAllEditor editor = new AsdAllEditor(this);
             editor.setCon(ss.getArgValue().toString());
             editor.show();

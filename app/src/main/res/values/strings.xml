@@ -2439,6 +2439,17 @@ Please try again later"</string>
     <string name="advanced">Advanced</string>
     <string name="use_custom_library_versions">Use custom Library versions</string>
     <string name="built_in_libraries_excluded">%1$d/%2$d built-in libraries excluded</string>
+    <string name="you_haven_t_used_any_custom_blocks_in_this_project">You haven\'t used any custom blocks in this project.</string>
+    <string name="used_custom_blocks">Used Custom Blocks</string>
+    <string name="you_have_used">You have used</string>
+    <string name="custom_block_s_in_this_project">custom block(s) in this project.</string>
+    <string name="new_folder">New folder</string>
+    <string name="import_library">Import library</string>
+    <string name="native_library_manager">Native Library Manager</string>
+    <string name="create_a_new_folder">Create a new folder</string>
+    <string name="enter_the_name_of_the_new_folder">Enter the name of the new folder</string>
+    <string name="folder_name">Folder name</string>
+    <string name="code_editor">Code Editor</string>
 
 
 </resources>

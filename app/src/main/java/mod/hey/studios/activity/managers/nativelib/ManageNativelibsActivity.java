@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -100,15 +101,15 @@ public class ManageNativelibsActivity extends AppCompatActivity implements View.
 
     private void handleFab() {
         if (isInMainDirectory()) {
-            binding.showOptionsButton.setText("New folder");
+            binding.showOptionsButton.setText(R.string.new_folder);
         } else {
-            binding.showOptionsButton.setText("Import library");
+            binding.showOptionsButton.setText(getString(R.string.import_library));
         }
     }
 
     private void setupUI() {
         binding.topAppBar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-        binding.topAppBar.setTitle("Native Library Manager");
+        binding.topAppBar.setTitle(R.string.native_library_manager);
 
         binding.showOptionsButton.setOnClickListener(view -> hideShowOptionsButton(false));
         binding.closeButton.setOnClickListener(view -> hideShowOptionsButton(true));
@@ -165,14 +166,14 @@ public class ManageNativelibsActivity extends AppCompatActivity implements View.
 
         var dialog = new MaterialAlertDialogBuilder(this)
                 .setView(dialogBinding.getRoot())
-                .setTitle("Create a new folder")
-                .setMessage("Enter the name of the new folder")
-                .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
-                .setPositiveButton("Create", null)
+                .setTitle(R.string.create_a_new_folder)
+                .setMessage(R.string.enter_the_name_of_the_new_folder)
+                .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton(R.string.common_word_create, null)
                 .create();
 
         dialogBinding.chipGroupTypes.setVisibility(View.GONE);
-        textInputLayout.setHint("Folder name");
+        textInputLayout.setHint(getString(R.string.folder_name));
 
         inputText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -259,10 +260,10 @@ public class ManageNativelibsActivity extends AppCompatActivity implements View.
         var inputText = dialogBinding.inputText;
 
         var dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle("Rename")
+                .setTitle(R.string.common_word_rename)
                 .setView(dialogBinding.getRoot())
-                .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
-                .setPositiveButton("Rename", (dialogInterface, i) -> {
+                .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton(R.string.common_word_rename, (dialogInterface, i) -> {
                     String newName = inputText.getText().toString();
                     if (!newName.isEmpty()) {
                         if (FileUtil.renameFile(path, path.substring(0, path.lastIndexOf(File.separator)) + File.separator + newName)) {
@@ -328,13 +329,12 @@ public class ManageNativelibsActivity extends AppCompatActivity implements View.
                 menu.getMenu().getItem(2).setVisible(false);
 
                 menu.setOnMenuItemClickListener(item -> {
-                    String title = item.getTitle().toString();
-                    switch (title) {
-                        case "Delete" -> {
+                    switch (item.getItemId()) {
+                        case R.id.delete -> {
                             FileUtil.deleteFile(frc.listFileNativeLibs.get(position));
                             handleAdapter(nativeLibrariesPath);
                         }
-                        case "Rename" -> showRenameDialog(frc.listFileNativeLibs.get(position));
+                        case R.id.rename -> showRenameDialog(frc.listFileNativeLibs.get(position));
                         default -> {
                             return false;
                         }
@@ -348,11 +348,11 @@ public class ManageNativelibsActivity extends AppCompatActivity implements View.
             binding.getRoot().setOnLongClickListener((View.OnLongClickListener) view -> {
                 if (FileUtil.isDirectory(frc.listFileNativeLibs.get(position))) {
                     PopupMenu menu = new PopupMenu(ManageNativelibsActivity.this, view);
-                    menu.getMenu().add("Delete");
+                    menu.getMenu().add(R.string.common_word_delete);
                     menu.setOnMenuItemClickListener(item -> {
                         FileUtil.deleteFile(frc.listFileNativeLibs.get(position));
                         handleAdapter(nativeLibrariesPath);
-                        SketchwareUtil.toast("Deleted");
+                        SketchwareUtil.toast(getString(R.string.common_word_deleted));
 
                         return true;
                     });

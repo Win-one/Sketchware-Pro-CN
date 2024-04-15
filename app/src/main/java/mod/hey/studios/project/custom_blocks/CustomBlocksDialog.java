@@ -13,23 +13,25 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.besome.sketch.beans.BlockBean;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.ViewUsedCustomBlocksBinding;
 
 import java.util.ArrayList;
 
 import a.a.a.Rs;
 import mod.hey.studios.editor.manage.block.v2.BlockLoader;
+import mod.hey.studios.util.Helper;
 
 public class CustomBlocksDialog {
     public static void show(Activity context, String sc_id) {
         ViewUsedCustomBlocksBinding dialogBinding = ViewUsedCustomBlocksBinding.inflate(context.getLayoutInflater());
         var blockContainer = dialogBinding.customBlocksContainer;
-        var subtitle = "You haven't used any custom blocks in this project.";
+        var subtitle = Helper.getResString(R.string.you_haven_t_used_any_custom_blocks_in_this_project);
 
         ArrayList<BlockBean> list = new CustomBlocksManager(sc_id).getUsedBlocks();
 
         if (!list.isEmpty()) {
-            subtitle = "You have used " + list.size() + " custom block(s) in this project.";
+            subtitle =Helper.getResString(R.string.you_have_used) + list.size() +Helper.getResString(R.string.custom_block_s_in_this_project);
             for (int i = 0; i < list.size(); i++) {
                 BlockBean block = list.get(i);
 
@@ -41,7 +43,7 @@ public class CustomBlocksDialog {
         }
 
         var dialogBuilder = new MaterialAlertDialogBuilder(context)
-                .setTitle("Used Custom Blocks")
+                .setTitle(R.string.used_custom_blocks)
                 .setMessage(subtitle);
         if (!list.isEmpty()) dialogBuilder.setView(dialogBinding.getRoot());
 

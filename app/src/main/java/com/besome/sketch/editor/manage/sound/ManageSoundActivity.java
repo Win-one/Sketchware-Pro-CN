@@ -54,6 +54,7 @@ public class ManageSoundActivity extends BaseAppCompatActivity implements ViewPa
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (projectSounds.k) {
             projectSounds.a(false);
             return;
