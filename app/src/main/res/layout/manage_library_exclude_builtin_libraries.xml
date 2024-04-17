@@ -78,7 +78,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="start"
-                        android:textColor="#ff757575"
                         android:textSize="14sp"
                         tools:text="@string/this_might_break_your_project" />
                 </LinearLayout>
@@ -102,13 +101,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:textColor="#ff4d4d4d"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         tools:text="@string/exclude_built_in_libraries" />
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp">
@@ -117,7 +115,6 @@
                         android:id="@+id/item"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="?selectableItemBackground"
                         android:orientation="horizontal"
                         android:padding="8dp">
 
@@ -128,11 +125,10 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
                             android:padding="8dp"
-                            android:textColor="#ff4d4d4d"
                             android:textSize="12sp"
                             tools:text="firebase-common-19.3.1, firebase-database-19.3.1" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

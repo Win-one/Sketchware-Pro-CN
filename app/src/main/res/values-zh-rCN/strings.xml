@@ -3284,6 +3284,29 @@
     <string name="enter_the_name_of_the_new_folder">输入新文件夹的名称</string>
     <string name="folder_name">文件夹名称</string>
     <string name="code_editor">代码编辑器</string>
+    <string name="backup_filename_format">备份文件名格式</string>
+    <string name="built_in_blocks">内置模块</string>
+    <string name="may_slow_down_loading_blocks_in_logic_editor">可能会减慢逻辑编辑器中的加载块速度.</string>
+    <string name="show_all_variable_blocks">显示所有变量块</string>
+    <string name="all_variable_blocks_will_be_visible">所有变量块都将可见，即使您没有变量.</string>
+    <string name="show_all_blocks_of_palettes">显示所有调色板块</string>
+    <string name="every_single_available_block_will_be_shown">将显示每个可用的.会减慢打开调色板的速度!</string>
+    <string name="backup_directory">备份目录</string>
+    <string name="the_default_directory">默认目录为/Internal storage/.sketchware/backups/.</string>
+    <string name="directory_inside_internal_storage">内部目录/内部存储/, e.g. sketchware/backups</string>
+    <string name="use_legacy_code_editor">使用旧版代码编辑器</string>
+    <string name="enables_old_code_editor">从v6.2.0启用旧的代码编辑器.</string>
+    <string name="install_projects_with_root_access">使用root访问权限安装项目</string>
+    <string name="automatically_installs_project_apks">使用root访问权限构建后自动安装项目APK.</string>
+    <string name="launch_projects_after_installing">安装后启动项目</string>
+    <string name="opens_projects_automatically">使用root自动安装后自动打开项目.</string>
+    <string name="use_new_version_control">使用新的版本控制</string>
+    <string name="enables_custom_version_code_and_name_for_projects">为项目启用自定义版本代码和名称.</string>
+    <string name="enable_block_text_input_highlighting">启用块文本输入高亮显示</string>
+    <string name="enables_syntax_highlighting_while_editing_blocks_text_parameters">在编辑块文本参数时启用语法高亮显示.</string>
+    <string name="default_is_projectname_v_versionname_pkgname_versioncode_time">默认值为\"$projectName v$versionName ($pkgName, $versionCode) $time(yyyy-MM-dd\'T\'HHmmss)\"</string>
+    <string name="format">格式</string>
+    <string name="googlemap_settings">谷歌地图设置</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

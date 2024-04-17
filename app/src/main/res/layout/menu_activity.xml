@@ -1,6 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -112,7 +111,6 @@
                     android:paddingTop="8dp"
                     android:paddingRight="8dp"
                     android:text="New menu: "
-                    android:textColor="#ff616161"
                     android:textSize="16sp"
                     android:paddingEnd="8dp"
                     android:paddingStart="8dp" />
@@ -138,8 +136,6 @@
                             android:gravity="center|start"
                             android:hint="Name"
                             android:padding="8dp"
-                            android:textColor="#ff000000"
-                            android:textColorHint="#ff607d8b"
                             android:textSize="14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -157,8 +153,6 @@
                             android:gravity="center|start"
                             android:hint="Title"
                             android:padding="8dp"
-                            android:textColor="#ff000000"
-                            android:textColorHint="#ff607d8b"
                             android:textSize="14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -229,12 +223,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#ffffffff"
                     android:gravity="center|start"
                     android:orientation="horizontal"
                     android:padding="8dp">
 
-                    <EditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/val"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -243,8 +236,6 @@
                         android:hint="Value"
                         android:padding="8dp"
                         android:singleLine="true"
-                        android:textColor="#ff000000"
-                        android:textColorHint="#ff607d8b"
                         android:textSize="12sp" />
 
                     <LinearLayout

@@ -4,7 +4,6 @@ import static mod.SketchwareUtil.dpToPx;
 import static mod.SketchwareUtil.getDip;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -21,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.android.annotations.NonNull;
 import com.google.android.material.materialswitch.MaterialSwitch;
@@ -56,8 +55,6 @@ public class ConfigActivity extends AppCompatActivity {
     public static final String SETTING_SKIP_MAJOR_CHANGES_REMINDER = "skip-major-changes-reminder";
     public static final String SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH = "palletteDir";
     public static final String SETTING_BLOCKMANAGER_DIRECTORY_BLOCK_FILE_PATH = "blockDir";
-
-    private static final int DEFAULT_BACKGROUND_COLOR = Color.parseColor(String.valueOf(R.color.backgroundColor));
     private LinearLayout root;
     private HashMap<String, Object> setting_map = new HashMap<>();
 
@@ -258,7 +255,7 @@ public class ConfigActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void initialize() {
         root = new LinearLayout(this);
-        root.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
+        root.setBackgroundColor(ContextCompat.getColor(this,R.color.backgroundColor));
         root.setOrientation(LinearLayout.VERTICAL);
 
         ScrollView _scroll = new ScrollView(this);
@@ -267,7 +264,7 @@ public class ConfigActivity extends AppCompatActivity {
         _scroll.setLayoutParams(_lp);
 
         LinearLayout _base = new LinearLayout(this);
-        _base.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
+        _base.setBackgroundColor(ContextCompat.getColor(this,R.color.backgroundColor));
         _base.setOrientation(LinearLayout.VERTICAL);
         _base.setLayoutParams(_lp);
 
@@ -284,20 +281,20 @@ public class ConfigActivity extends AppCompatActivity {
         ((Toolbar) toolbar).setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
 
 
-        addSwitchPreference("Built-in blocks",
-                "May slow down loading blocks in Logic Editor.",
+        addSwitchPreference(getString(R.string.built_in_blocks),
+                getString(R.string.may_slow_down_loading_blocks_in_logic_editor),
                 SETTING_SHOW_BUILT_IN_BLOCKS,
                 false);
-        addSwitchPreference("Show all variable blocks",
-                "All variable blocks will be visible, even if you don't have variables for them.",
+        addSwitchPreference(getString(R.string.show_all_variable_blocks),
+                getString(R.string.all_variable_blocks_will_be_visible),
                 SETTING_ALWAYS_SHOW_BLOCKS,
                 false);
-        addSwitchPreference("Show all blocks of palettes",
-                "Every single available block will be shown. Will slow down opening palettes!",
+        addSwitchPreference(getString(R.string.show_all_blocks_of_palettes),
+                getString(R.string.every_single_available_block_will_be_shown),
                 SETTING_SHOW_EVERY_SINGLE_BLOCK,
                 false);
-        addTextInputPreference("Backup directory",
-                "The default directory is /Internal storage/.sketchware/backups/.", v -> {
+        addTextInputPreference(getString(R.string.backup_directory),
+                getString(R.string.the_default_directory), v -> {
                     final LinearLayout container = new LinearLayout(this);
                     container.setPadding(
                             (int) getDip(20),
@@ -309,8 +306,8 @@ public class ConfigActivity extends AppCompatActivity {
                     tilBackupDirectory.setLayoutParams(new LinearLayout.LayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.WRAP_CONTENT));
-                    tilBackupDirectory.setHint("Backup directory");
-                    tilBackupDirectory.setHelperText("Directory inside /Internal storage/, e.g. sketchware/backups");
+                    tilBackupDirectory.setHint(R.string.backup_directory);
+                    tilBackupDirectory.setHelperText(getString(R.string.directory_inside_internal_storage));
                     container.addView(tilBackupDirectory);
 
                     final EditText backupDirectory = new EditText(this);
@@ -322,7 +319,7 @@ public class ConfigActivity extends AppCompatActivity {
                     tilBackupDirectory.addView(backupDirectory);
 
                     new AlertDialog.Builder(this)
-                            .setTitle("Backup directory")
+                            .setTitle(R.string.backup_directory)
                             .setView(container)
                             .setPositiveButton(R.string.common_word_save, (dialogInterface, which) -> {
                                 ConfigActivity.setSetting(SETTING_BACKUP_DIRECTORY, backupDirectory.getText().toString());
@@ -331,11 +328,11 @@ public class ConfigActivity extends AppCompatActivity {
                             .setNegativeButton(R.string.common_word_cancel, (dialogInterface, which) -> dialogInterface.dismiss())
                             .show();
                 });
-        addSwitchPreference("Use legacy Code Editor",
-                "Enables old Code Editor from v6.2.0.",
+        addSwitchPreference(getString(R.string.use_legacy_code_editor),
+                getString(R.string.enables_old_code_editor),
                 SETTING_LEGACY_CODE_EDITOR,
                 false);
-        addSwitchPreference("Install projects with root access", "Automatically installs project APKs after building using root access.",
+        addSwitchPreference(getString(R.string.install_projects_with_root_access), getString(R.string.automatically_installs_project_apks),
                 SETTING_ROOT_AUTO_INSTALL_PROJECTS, false, (buttonView, isChecked) -> {
             if (isChecked) {
                 Shell.getShell(shell -> {
@@ -346,20 +343,20 @@ public class ConfigActivity extends AppCompatActivity {
                 });
             }
         });
-        addSwitchPreference("Launch projects after installing",
-                "Opens projects automatically after auto-installation using root.",
+        addSwitchPreference(getString(R.string.launch_projects_after_installing),
+                getString(R.string.opens_projects_automatically),
                 SETTING_ROOT_AUTO_OPEN_AFTER_INSTALLING,
                 true);
-        addSwitchPreference("Use new Version Control",
-                "Enables custom version code and name for projects.",
+        addSwitchPreference(getString(R.string.use_new_version_control),
+                getString(R.string.enables_custom_version_code_and_name_for_projects),
                 SETTING_USE_NEW_VERSION_CONTROL,
                 false);
-        addSwitchPreference("Enable block text input highlighting",
-                "Enables syntax highlighting while editing blocks' text parameters.",
+        addSwitchPreference(getString(R.string.enable_block_text_input_highlighting),
+                getString(R.string.enables_syntax_highlighting_while_editing_blocks_text_parameters),
                 SETTING_USE_ASD_HIGHLIGHTER,
                 false);
-        addTextInputPreference("Backup filename format",
-                "Default is \"$projectName v$versionName ($pkgName, $versionCode) $time(yyyy-MM-dd'T'HHmmss)\"", v -> {
+        addTextInputPreference(getString(R.string.backup_filename_format),
+                getString(R.string.default_is_projectname_v_versionname_pkgname_versioncode_time), v -> {
                     final LinearLayout container = new LinearLayout(this);
                     container.setPadding(
                             (int) getDip(20),
@@ -371,7 +368,7 @@ public class ConfigActivity extends AppCompatActivity {
                     tilBackupFormat.setLayoutParams(new LinearLayout.LayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.WRAP_CONTENT));
-                    tilBackupFormat.setHint("Format");
+                    tilBackupFormat.setHint(R.string.format);
                     tilBackupFormat.setHelperText("This defines how SWB backup files get named.\n" +
                             "Available variables:\n" +
                             " - $projectName - Project name\n" +
@@ -393,7 +390,7 @@ public class ConfigActivity extends AppCompatActivity {
                     tilBackupFormat.addView(backupFilename);
 
                     new AlertDialog.Builder(this)
-                            .setTitle("Backup filename format")
+                            .setTitle(R.string.backup_filename_format)
                             .setView(container)
                             .setNegativeButton(R.string.common_word_cancel, (dialogInterface, which) -> dialogInterface.dismiss())
                             .setPositiveButton(R.string.common_word_save, (dialogInterface, which) -> {
@@ -411,7 +408,7 @@ public class ConfigActivity extends AppCompatActivity {
     }
 
     private void applyDesign(View view) {
-        Helper.applyRippleEffect(view, Color.parseColor("#dbedf5"), DEFAULT_BACKGROUND_COLOR);
+        Helper.applyRippleEffect(view, Color.parseColor("#dbedf5"), ContextCompat.getColor(this,R.color.backgroundColor));
         view.setClickable(true);
         view.setFocusable(true);
     }
@@ -427,7 +424,7 @@ public class ConfigActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 0.0f
         ));
-        preferenceRoot.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
+        preferenceRoot.setBackgroundColor(ContextCompat.getColor(this,R.color.backgroundColor));
         preferenceRoot.setOrientation(LinearLayout.HORIZONTAL);
         preferenceRoot.setPadding(
                 dpToPx(4),
@@ -466,7 +463,6 @@ public class ConfigActivity extends AppCompatActivity {
                 dpToPx(4)
         );
         titleView.setText(title);
-        titleView.setTextColor(Color.parseColor("#616161"));
         titleView.setTextSize(16);
         textContainer.addView(titleView);
 
@@ -476,7 +472,6 @@ public class ConfigActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT
         ));
         subtitleView.setText(subtitle);
-        subtitleView.setTextColor(Color.parseColor("#bdbdbd"));
         subtitleView.setTextSize(12);
         textContainer.addView(subtitleView);
 
@@ -507,7 +502,6 @@ public class ConfigActivity extends AppCompatActivity {
                 dpToPx(8),
                 dpToPx(8)
         );
-        switchView.setTextColor(Color.parseColor("#000000"));
         switchView.setTextSize(12);
         switchContainer.addView(switchView);
 
@@ -552,7 +546,7 @@ public class ConfigActivity extends AppCompatActivity {
         );
         preferenceRootParams.bottomMargin = dpToPx(4);
         preferenceRoot.setLayoutParams(preferenceRootParams);
-        preferenceRoot.setBackgroundColor(DEFAULT_BACKGROUND_COLOR);
+        preferenceRoot.setBackgroundColor(ContextCompat.getColor(this,R.color.backgroundColor));
         preferenceRoot.setOrientation(LinearLayout.HORIZONTAL);
         preferenceRoot.setPadding(
                 dpToPx(4),
@@ -585,7 +579,6 @@ public class ConfigActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT
         ));
         titleView.setText(title);
-        titleView.setTextColor(Color.parseColor("#616161"));
         titleView.setTextSize(16);
         textContainer.addView(titleView);
 
@@ -595,7 +588,6 @@ public class ConfigActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT
         ));
         subtitleView.setText(subtitle);
-        subtitleView.setTextColor(Color.parseColor("#bdbdbd"));
         subtitleView.setTextSize(12);
         textContainer.addView(subtitleView);
 

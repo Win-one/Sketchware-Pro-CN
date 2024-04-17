@@ -75,7 +75,6 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         binding.add.setOnClickListener(this);
         binding.canc.setOnClickListener(this);
         binding.save.setOnClickListener(this);
-
         binding.card.setOnClickListener(this);
 
         binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -377,7 +376,6 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         viewGroup.addView(binding.title, 0);
         binding.title.setHint("");
         TextView textView = new TextView(this);
-        textView.setTextColor(855638016);
         textView.setPadding((int) SketchwareUtil.getDip(8),
                 (int) SketchwareUtil.getDip(4),
                 (int) SketchwareUtil.getDip(8),
@@ -387,7 +385,6 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         viewGroup.addView(binding.name, 0);
         binding.name.setHint("");
         TextView textView2 = new TextView(this);
-        textView2.setTextColor(855638016);
         textView2.setPadding((int) SketchwareUtil.getDip(8), (int) SketchwareUtil.getDip(4), (int) SketchwareUtil.getDip(8), (int) SketchwareUtil.getDip(0));
         textView2.setText("Name");
         viewGroup.addView(textView2, 0);

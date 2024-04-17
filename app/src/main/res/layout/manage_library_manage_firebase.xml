@@ -74,13 +74,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:textColor="#ff4d4d4d"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         tools:text="@string/design_library_firebase_title_project_id" />
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp">
@@ -88,7 +87,6 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#ffffffff"
                         android:orientation="horizontal"
                         android:padding="8dp">
 
@@ -99,10 +97,9 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
                             android:padding="8dp"
-                            android:textColor="#ff4d4d4d"
                             android:textSize="12sp" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -124,13 +121,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:textColor="#ff4d4d4d"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         tools:text="@string/design_library_firebase_title_app_id" />
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp">
@@ -141,9 +137,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:padding="16dp"
-                        android:textColor="#ff4d4d4d"
                         android:textSize="12sp" />
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -165,13 +160,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:textColor="#ff4d4d4d"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         tools:text="@string/design_library_firebase_title_api_key" />
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp">
@@ -184,7 +178,7 @@
                         android:padding="16dp"
                         android:textColor="#ff4d4d4d"
                         android:textSize="12sp" />
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -206,13 +200,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:textColor="#ff4d4d4d"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         tools:text="@string/design_library_firebase_title_storage_bucket_url" />
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp">
@@ -225,7 +218,7 @@
                         android:padding="16dp"
                         android:textColor="#ff4d4d4d"
                         android:textSize="12sp" />
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
         </ScrollView>
 

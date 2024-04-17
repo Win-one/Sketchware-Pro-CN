@@ -2450,6 +2450,29 @@ Please try again later"</string>
     <string name="enter_the_name_of_the_new_folder">Enter the name of the new folder</string>
     <string name="folder_name">Folder name</string>
     <string name="code_editor">Code Editor</string>
+    <string name="backup_filename_format">Backup filename format</string>
+    <string name="built_in_blocks">Built-in blocks</string>
+    <string name="may_slow_down_loading_blocks_in_logic_editor">May slow down loading blocks in Logic Editor.</string>
+    <string name="show_all_variable_blocks">Show all variable blocks</string>
+    <string name="all_variable_blocks_will_be_visible">All variable blocks will be visible, even if you don\'t have variables for them.</string>
+    <string name="show_all_blocks_of_palettes">Show all blocks of palettes</string>
+    <string name="every_single_available_block_will_be_shown">Every single available block will be shown. Will slow down opening palettes!</string>
+    <string name="backup_directory">Backup directory</string>
+    <string name="the_default_directory">The default directory is /Internal storage/.sketchware/backups/.</string>
+    <string name="directory_inside_internal_storage">Directory inside /Internal storage/, e.g. sketchware/backups</string>
+    <string name="use_legacy_code_editor">Use legacy Code Editor</string>
+    <string name="enables_old_code_editor">Enables old Code Editor from v6.2.0.</string>
+    <string name="install_projects_with_root_access">Install projects with root access</string>
+    <string name="automatically_installs_project_apks">Automatically installs project APKs after building using root access.</string>
+    <string name="launch_projects_after_installing">Launch projects after installing</string>
+    <string name="opens_projects_automatically">Opens projects automatically after auto-installation using root.</string>
+    <string name="use_new_version_control">Use new Version Control</string>
+    <string name="enables_custom_version_code_and_name_for_projects">Enables custom version code and name for projects.</string>
+    <string name="enable_block_text_input_highlighting">Enable block text input highlighting</string>
+    <string name="enables_syntax_highlighting_while_editing_blocks_text_parameters">Enables syntax highlighting while editing blocks\' text parameters.</string>
+    <string name="default_is_projectname_v_versionname_pkgname_versioncode_time">Default is \"$projectName v$versionName ($pkgName, $versionCode) $time(yyyy-MM-dd\'T\'HHmmss)\"</string>
+    <string name="format">Format</string>
+    <string name="googlemap_settings">GoogleMap Settings</string>
 
 
 </resources>
