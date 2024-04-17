@@ -249,7 +249,7 @@ public class MainActivity extends BasePermissionAppCompatActivity {
                 launcher.putExtra("select", "majorChanges");
                 startActivity(launcher);
             });
-            dialog.a(getString(R.string.common_word_close), v -> Helper.getDialogDismissListener(dialog));
+            dialog.a(getString(R.string.common_word_close), Helper.getDialogDismissListener(dialog));
             dialog.configureDefaultButton(getString(R.string.never_show_again), v -> {
                 ConfigActivity.setSetting(ConfigActivity.SETTING_SKIP_MAJOR_CHANGES_REMINDER, true);
                 dialog.dismiss();
@@ -312,7 +312,7 @@ public class MainActivity extends BasePermissionAppCompatActivity {
                     FileUtil.requestAllFilesAccessPermission(this);
                     dialog.dismiss();
                 });
-                dialog.a(getString(R.string.common_word_skip), v -> Helper.getDialogDismissListener(dialog));
+                dialog.a(getString(R.string.common_word_skip), Helper.getDialogDismissListener(dialog));
                 dialog.configureDefaultButton(getString(R.string.don_t_show_anymore), v -> {
                     try {
                         if (!optOutFile.createNewFile())
@@ -348,7 +348,7 @@ public class MainActivity extends BasePermissionAppCompatActivity {
         dialog.b(Helper.getResString(R.string.common_message_insufficient_storage_space_title));
         dialog.a(R.drawable.high_priority_96_red);
         dialog.a(Helper.getResString(R.string.common_message_insufficient_storage_space));
-        dialog.b(Helper.getResString(R.string.common_word_ok), v -> Helper.getDialogDismissListener(dialog));
+        dialog.b(Helper.getResString(R.string.common_word_ok), Helper.getDialogDismissListener(dialog));
         dialog.show();
     }
 

@@ -188,7 +188,7 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
                 readSettings();
                 dialog.dismiss();
             });
-            dialog.a(Helper.getResString(R.string.common_word_cancel), v -> Helper.getDialogDismissListener(dialog));
+            dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
             dialog.show();
         } else {
             var component = components.get(0);
@@ -220,7 +220,7 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
             SketchwareUtil.toast(Helper.getResString(R.string.developer_tools_component_success_message_export, filePath));
             dialog.dismiss();
         });
-        dialog.a(Helper.getResString(R.string.common_word_cancel), v -> Helper.getDialogDismissListener(dialog));
+        dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
         dialog.show();
     }
 

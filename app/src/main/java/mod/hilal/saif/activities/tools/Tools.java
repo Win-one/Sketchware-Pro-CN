@@ -238,7 +238,7 @@ public class Tools extends AppCompatActivity {
                 confirmOverwrite.b("File exists");
                 confirmOverwrite.a("An APK named " + output_apk_file_name + " already exists at /sketchware/signed_apk/.  Overwrite it?");
 
-                confirmOverwrite.a(Helper.getResString(R.string.common_word_cancel), view -> Helper.getDialogDismissListener(confirmOverwrite));
+                confirmOverwrite.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(confirmOverwrite));
                 confirmOverwrite.b(getString(R.string.common_word_overwrite), view -> {
                     confirmOverwrite.dismiss();
                     signApkFileWithDialog(input_apk_path, output_apk_path, true,

@@ -139,7 +139,7 @@ public class BlocksManager extends AppCompatActivity {
                 _refresh_list();
                 dialog.dismiss();
             });
-            dialog.a(Helper.getResString(R.string.common_word_cancel), view -> Helper.getDialogDismissListener(dialog));
+            dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
             dialog.configureDefaultButton(getString(R.string.common_word_defaults), view -> {
                 ConfigActivity.setSetting(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH,
                         ConfigActivity.getDefaultValue(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH));
@@ -471,7 +471,7 @@ public class BlocksManager extends AppCompatActivity {
                 color.requestFocus();
             }
         });
-        dialog.a(Helper.getResString(R.string.common_word_cancel), v -> Helper.getDialogDismissListener(dialog));
+        dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
         dialog.show();
     }
 
