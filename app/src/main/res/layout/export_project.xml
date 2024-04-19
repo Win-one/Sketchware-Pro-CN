@@ -62,7 +62,6 @@
                         android:layout_alignParentTop="true"
                         android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@id/icon_apk"
-                        android:textColor="@color/scolor_black_01"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:layout_toEndOf="@id/icon_apk"
@@ -137,7 +136,6 @@
                                         android:lines="1"
                                         android:paddingLeft="8dp"
                                         android:paddingRight="8dp"
-                                        android:textColor="@color/scolor_black_01"
                                         android:textSize="13sp"
                                         android:paddingEnd="8dp"
                                         android:paddingStart="8dp" />
@@ -183,7 +181,6 @@
                         android:layout_alignParentTop="true"
                         android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@id/icon_src"
-                        android:textColor="@color/scolor_black_01"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:layout_marginStart="8dp"
@@ -262,7 +259,6 @@
                                     android:lines="1"
                                     android:paddingLeft="8dp"
                                     android:paddingRight="8dp"
-                                    android:textColor="@color/scolor_black_01"
                                     android:textSize="13sp"
                                     android:paddingEnd="8dp"
                                     android:paddingStart="8dp" />

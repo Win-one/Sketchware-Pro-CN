@@ -5,13 +5,11 @@
     android:layout_marginTop="16dp"
     android:layout_marginBottom="16dp"
     android:animateLayoutChanges="true"
-    android:background="#ffffffff"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffffff"
         android:orientation="vertical">
 
         <LinearLayout
@@ -106,7 +104,6 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="28dp"
                     android:layout_marginRight="16dp"
-                    android:textColor="@color/grey"
                     android:textSize="12sp"
                     tools:text="This is a simple description"
                     android:layout_marginEnd="16dp"

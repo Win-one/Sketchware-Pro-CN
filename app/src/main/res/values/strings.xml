@@ -2481,6 +2481,17 @@ Please try again later"</string>
     <string name="this_menu_can_t_be_modified">This menu can\'t be modified.</string>
     <string name="select_a_json_file">Select a JSON file</string>
     <string name="optional">Optional</string>
+    <string name="can_t_generate_app_bundle">Can\'t generate App Bundle</string>
+    <string name="this_sketchware_pro_version_doesn_t_support_building">This Sketchware Pro version doesn\'t support building AABs as it must work on</string>
+    <string name="earlier_use_sketchware_pro">Android 7.1.1 and earlier. Use Sketchware Pro</string>
+    <string name="sign_outputted_aab">Sign outputted AAB</string>
+    <string name="keystore_alias">Keystore alias</string>
+    <string name="alias_password">Alias password</string>
+    <string name="example_sha256withrsa">Example: SHA256withRSA</string>
+    <string name="signing_algorithm">Signing algorithm</string>
+    <string name="sign_using_key_store">Sign using key store</string>
+    <string name="sign_using_testkey">Sign using testkey</string>
+    <string name="don_t_sign">Don\'t sign</string>
 
 
 </resources>

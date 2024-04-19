@@ -3315,6 +3315,17 @@
     <string name="this_menu_can_t_be_modified">无法修改此菜单.</string>
     <string name="select_a_json_file">选择JSON文件</string>
     <string name="optional">自选</string>
+    <string name="can_t_generate_app_bundle">无法生成App Bundle</string>
+    <string name="this_sketchware_pro_version_doesn_t_support_building">此Sketchware Pro版本不支持构建AAB，因为它必须工作</string>
+    <string name="earlier_use_sketchware_pro">Android 7.1.1及更高版本.使用 Sketchware Pro</string>
+    <string name="sign_outputted_aab">签名输出AAB</string>
+    <string name="keystore_alias">密钥库别名</string>
+    <string name="alias_password">别名密码</string>
+    <string name="example_sha256withrsa">例如: SHA256withRSA</string>
+    <string name="signing_algorithm">签名算法</string>
+    <string name="sign_using_key_store">使用密钥库进行签名</string>
+    <string name="sign_using_testkey">使用测试密钥签名</string>
+    <string name="don_t_sign">不签名</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

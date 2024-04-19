@@ -218,7 +218,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                     binding.val.setText("");
                 }
             } else {
-                SketchwareUtil.toastError("This menu can't be modified.");
+                SketchwareUtil.toastError(getString(R.string.this_menu_can_t_be_modified));
             }
         } else if (id == R.id.dele) {
             if (current_item != 0) {

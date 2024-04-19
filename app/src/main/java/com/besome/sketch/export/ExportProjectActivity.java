@@ -2,9 +2,9 @@ package com.besome.sketch.export;
 
 import static mod.SketchwareUtil.getDip;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
@@ -23,8 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -236,6 +234,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
         }
     }
 
+    @SuppressLint("ResourceType")
     private void initializeAppBundleExportViews() {
         MaterialCardView exportAppBundleRoot = new MaterialCardView(this);
         {
@@ -248,7 +247,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
                     (int) getDip(8),
                     (int) getDip(8)
             );
-            exportAppBundleRoot.setCardBackgroundColor(0xffece7ec);
+            exportAppBundleRoot.setCardBackgroundColor(R.attr.colorSurfaceContainerHigh);
             exportAppBundleRoot.setLayoutParams(exportAppBundleRootParams);
         }
 
@@ -287,7 +286,6 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
             titleExportAppBundleParams.leftMargin = (int) getDip(8);
             titleExportAppBundleParams.addRule(RelativeLayout.RIGHT_OF, R.id.icon_src);
             titleExportAppBundle.setLayoutParams(titleExportAppBundleParams);
-            titleExportAppBundle.setTextColor(ContextCompat.getColor(this, R.color.scolor_black_01));
             titleExportAppBundle.setTextSize(16f);
             titleExportAppBundle.setTypeface(Typeface.DEFAULT_BOLD);
         }
@@ -304,7 +302,6 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
             );
             btnExportAppBundle.setLayoutParams(btnExportAppBundleParams);
             btnExportAppBundle.setAllCaps(false);
-            btnExportAppBundle.setTextColor(Color.WHITE);
             btnExportAppBundle.setTextSize(14f);
         }
 
@@ -365,7 +362,6 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
             var3Params.topMargin = (int) getDip(4);
             var3Params.rightMargin = (int) getDip(16);
             var3.setLayoutParams(var3Params);
-            var3.setBackgroundResource(R.drawable.bg_round_light_grey);
             var3.setOrientation(LinearLayout.HORIZONTAL);
         }
 
@@ -389,7 +385,6 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
                     (int) getDip(8),
                     (int) getDip(0)
             );
-            tvAppBundlePath.setTextColor(ContextCompat.getColor(this, R.color.scolor_black_01));
             tvAppBundlePath.setTextSize(13f);
         }
         var4.addView(tvAppBundlePath);
@@ -416,7 +411,6 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
                 btnSendAppBundle.setLayoutParams(btnSendAppBundleParams);
-                btnSendAppBundle.setTextColor(Color.WHITE);
                 btnSendAppBundle.setTextSize(12f);
             }
             btnSendAppBundleContainer.addView(btnSendAppBundle);
@@ -441,15 +435,15 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
             aB dialog = new aB(this);
             if (BuildConfig.FLAVOR.equals(BuildConfig.FLAVOR_NAME_WITHOUT_AABS)) {
                 dialog.a(R.drawable.break_warning_96_red);
-                dialog.b("Can't generate App Bundle");
-                dialog.a("This Sketchware Pro version doesn't support building AABs as it must work on " +
-                        "Android 7.1.1 and earlier. Use Sketchware Pro " + BuildConfig.VERSION_NAME_WITHOUT_FLAVOR + "-" +
+                dialog.b(getString(R.string.can_t_generate_app_bundle));
+                dialog.a(getString(R.string.this_sketchware_pro_version_doesn_t_support_building) +
+                        getString(R.string.earlier_use_sketchware_pro) + BuildConfig.VERSION_NAME_WITHOUT_FLAVOR + "-" +
                         BuildConfig.FLAVOR_NAME_WITH_AABS + " instead.");
                 dialog.b(Helper.getResString(R.string.common_word_close), Helper.getDialogDismissListener(dialog));
                 dialog.show();
             } else {
                 GetKeyStoreCredentialsDialog credentialsDialog = new GetKeyStoreCredentialsDialog(this,
-                        R.drawable.color_about_96, "Sign outputted AAB", "The generated .aab file must be signed.\n" +
+                        R.drawable.color_about_96, getString(R.string.sign_outputted_aab), "The generated .aab file must be signed.\n" +
                         "Copy your keystore to /Internal storage/sketchware/keystore/release_key.jks " +
                         "and enter the alias' password.");
                 credentialsDialog.setListener(credentials -> {

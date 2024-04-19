@@ -7,7 +7,6 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -149,7 +148,7 @@ public class GetKeyStoreCredentialsDialog {
 
         tilAlias = new TextInputLayout(activity);
         alias = new EditText(activity);
-        alias.setHint("Keystore alias");
+        alias.setHint(R.string.keystore_alias);
         tilAlias.addView(alias, 0, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -157,7 +156,7 @@ public class GetKeyStoreCredentialsDialog {
 
         tilPassword = new TextInputLayout(activity);
         password = new EditText(activity);
-        password.setHint("Alias password");
+        password.setHint(R.string.alias_password);
         password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         tilPassword.setEndIconMode(TextInputLayout.END_ICON_PASSWORD_TOGGLE);
         tilPassword.addView(password, 0, new LinearLayout.LayoutParams(
@@ -166,9 +165,9 @@ public class GetKeyStoreCredentialsDialog {
         inputContainer.addView(tilPassword);
 
         tilSigningAlgorithm = new TextInputLayout(activity);
-        tilSigningAlgorithm.setHelperText("Example: SHA256withRSA");
+        tilSigningAlgorithm.setHelperText(Helper.getResString(R.string.example_sha256withrsa));
         signingAlgorithm = new EditText(activity);
-        signingAlgorithm.setHint("Signing algorithm");
+        signingAlgorithm.setHint(R.string.signing_algorithm);
         tilSigningAlgorithm.addView(signingAlgorithm, 0, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -263,9 +262,9 @@ public class GetKeyStoreCredentialsDialog {
     }
 
     private enum SigningMode {
-        OWN_KEY_STORE("Sign using key store"),
-        TESTKEY("Sign using testkey"),
-        DONT_SIGN("Don't sign");
+        OWN_KEY_STORE(Helper.getResString(R.string.sign_using_key_store)),
+        TESTKEY(Helper.getResString(R.string.sign_using_testkey)),
+        DONT_SIGN(Helper.getResString(R.string.don_t_sign));
 
         private final String label;
 
