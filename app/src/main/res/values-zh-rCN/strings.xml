@@ -3307,6 +3307,14 @@
     <string name="default_is_projectname_v_versionname_pkgname_versioncode_time">默认值为\"$projectName v$versionName ($pkgName, $versionCode) $time(yyyy-MM-dd\'T\'HHmmss)\"</string>
     <string name="format">格式</string>
     <string name="googlemap_settings">谷歌地图设置</string>
+    <string name="appcompat_injection_manager">应用兼容注入管理</string>
+    <string name="auto_scroll_disabled">自动滚动已禁用</string>
+    <string name="for_multiple_package_names">对于多个包名称,请用逗号分隔它们(,).</string>
+    <string name="this_menu_can_t_be_deleted">无法删除此菜单.</string>
+    <string name="remove_this_menu_and_its_items">删除此菜单及其项?</string>
+    <string name="this_menu_can_t_be_modified">无法修改此菜单.</string>
+    <string name="select_a_json_file">选择JSON文件</string>
+    <string name="optional">自选</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

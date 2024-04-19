@@ -3,7 +3,6 @@
     android:layout_width="60dp"
     android:layout_height="60dp"
     android:layout_margin="2dp"
-    android:background="#ffffffff"
     android:gravity="center">
 
     <ImageView
@@ -18,7 +17,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:alpha="0.8"
-        android:background="#ff606060"
         android:orientation="horizontal"
         android:visibility="invisible">
 
@@ -29,7 +27,6 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="8dp"
             android:gravity="center|start"
-            android:textColor="#fff5f5f5"
             android:textSize="14sp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="16dp" />

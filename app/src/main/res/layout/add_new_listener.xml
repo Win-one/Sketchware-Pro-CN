@@ -80,8 +80,6 @@
                         android:layout_height="wrap_content"
                         android:hint="name"
                         android:padding="8.0dip"
-                        android:textColor="#ff000000"
-                        android:textColorHint="#ff607d8b"
                         android:textSize="16.0sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,8 +97,6 @@
                         android:layout_height="wrap_content"
                         android:hint="custom import"
                         android:padding="8.0dip"
-                        android:textColor="#ff000000"
-                        android:textColorHint="#ff607d8b"
                         android:textSize="16.0sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -118,8 +114,6 @@
                         android:layout_height="wrap_content"
                         android:hint="Code (### => variable name)"
                         android:padding="8.0dip"
-                        android:textColor="#ff000000"
-                        android:textColorHint="#ff607d8b"
                         android:textSize="16.0sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,7 +124,6 @@
                     android:gravity="center"
                     android:padding="8.0dip"
                     android:text="@string/independent_class_method"
-                    android:textColor="#ff616161"
                     android:textSize="16.0sp" />
 
                 <LinearLayout
@@ -155,7 +148,6 @@
                             android:gravity="center"
                             android:padding="8.0dip"
                             android:text="@string/common_word_cancel"
-                            android:textColor="#ff616161"
                             android:textSize="14.0sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -175,7 +167,6 @@
                             android:gravity="center"
                             android:padding="8.0dip"
                             android:text="@string/common_word_save"
-                            android:textColor="#ff2196f3"
                             android:textSize="14.0sp"
                             android:textStyle="bold" />
                     </LinearLayout>

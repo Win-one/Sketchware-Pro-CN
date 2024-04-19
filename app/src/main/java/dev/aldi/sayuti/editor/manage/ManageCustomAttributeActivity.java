@@ -37,7 +37,7 @@ public class ManageCustomAttributeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manage_custom_attribute);
 
-        ((TextView) findViewById(R.id.tx_toolbar_title)).setText("AppCompat Injection Manager");
+        ((TextView) findViewById(R.id.tx_toolbar_title)).setText(R.string.appcompat_injection_manager);
         ImageView back = findViewById(R.id.ig_toolbar_back);
         back.setOnClickListener(Helper.getBackPressedClickListener(this));
         Helper.applyRippleToToolbarView(back);

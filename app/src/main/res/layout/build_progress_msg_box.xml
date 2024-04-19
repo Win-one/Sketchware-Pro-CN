@@ -14,7 +14,6 @@
         android:id="@id/layout_quiz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffffff"
         android:orientation="vertical"
         android:padding="8dp" />
 

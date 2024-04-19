@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -91,7 +90,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         binding.listv.setOnItemLongClickListener((parent, view, position, id) -> {
             if (current_item != 0) {
                 new AlertDialog.Builder(this).setTitle(contents.get(position))
-                        .setMessage("Delete this item?")
+                        .setMessage(getString(R.string.delete_this_item))
                         .setPositiveButton(R.string.common_word_delete, (dialog, which) -> {
                             contents.remove(position);
                             map.put("data", contents);
@@ -99,7 +98,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                             _showItem(current_item);
                         })
                         .setNegativeButton(R.string.common_word_cancel, null)
-                        .setNeutralButton("Copy item", (dialog, which) -> {
+                        .setNeutralButton(getString(R.string.copy_item), (dialog, which) -> {
                             ((ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("clipboard", contents.get(position)));
                             SketchwareUtil.toast("Copied to clipboard");
                         })
@@ -223,7 +222,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
             }
         } else if (id == R.id.dele) {
             if (current_item != 0) {
-                new AlertDialog.Builder(this).setMessage("Remove this menu and its items?")
+                new AlertDialog.Builder(this).setMessage(R.string.remove_this_menu_and_its_items)
                         .setPositiveButton(R.string.common_word_remove, (dialog, which) -> {
                             data.remove(binding.spinner.getSelectedItemPosition());
                             _save_item();
@@ -235,7 +234,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                         .setNegativeButton(R.string.common_word_cancel, null)
                         .create().show();
             } else {
-                SketchwareUtil.toastError("This menu can't be deleted.");
+                SketchwareUtil.toastError(getString(R.string.this_menu_can_t_be_deleted));
             }
         } else if (id == R.id.edi) {
             if (current_item != 0) {
@@ -249,7 +248,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
                 binding.spinner.setEnabled(false);
                 binding.listv.setEnabled(false);
             } else {
-                SketchwareUtil.toastError("This menu can't be modified.");
+                SketchwareUtil.toastError(getString(R.string.this_menu_can_t_be_modified));
             }
         } else if (id == R.id.save) {
             save();
@@ -295,7 +294,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         dialogProperties.offset = file;
         dialogProperties.extensions = new String[]{"json"};
         FilePickerDialog filePickerDialog = new FilePickerDialog(this, dialogProperties);
-        filePickerDialog.setTitle("Select a JSON file");
+        filePickerDialog.setTitle(getString(R.string.select_a_json_file));
         filePickerDialog.setDialogSelectionListener(selections -> {
             String fileContent = FileUtil.readFile(selections[0]);
             if (fileContent.equals("")) {

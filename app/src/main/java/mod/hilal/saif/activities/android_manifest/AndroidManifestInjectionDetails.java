@@ -54,6 +54,9 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
         binding = AddCustomAttributeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.activityEvent.setVisibility(View.GONE);
+        binding.tvListeners.setVisibility(View.GONE);
+
         if (getIntent().hasExtra("sc_id") && getIntent().hasExtra("file_name") && getIntent().hasExtra("type")) {
             src_id = getIntent().getStringExtra("sc_id");
             activityName = getIntent().getStringExtra("file_name").replaceAll(".java", "");

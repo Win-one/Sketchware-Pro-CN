@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -64,14 +64,12 @@
                         android:orientation="vertical"
                         android:padding="4dp">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/events_creator_eventname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="event name"
                             android:padding="8dp"
-                            android:textColor="#ff000000"
-                            android:textColorHint="#ff607d8b"
                             android:textSize="14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,14 +82,12 @@
                         android:orientation="vertical"
                         android:padding="4dp">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/events_creator_varname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="widget/component name"
                             android:padding="8dp"
-                            android:textColor="#ff000000"
-                            android:textColorHint="#ff607d8b"
                             android:textSize="14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,14 +100,12 @@
                         android:orientation="vertical"
                         android:padding="4dp">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/events_creator_listenername"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="listener name"
                             android:padding="8dp"
-                            android:textColor="#ff000000"
-                            android:textColorHint="#ff607d8b"
                             android:textSize="14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -132,15 +126,13 @@
                             android:orientation="vertical"
                             android:padding="4dp">
 
-                            <EditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/events_creator_icon"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="icon"
                                 android:inputType="number"
                                 android:padding="8dp"
-                                android:textColor="#ff000000"
-                                android:textColorHint="#ff607d8b"
                                 android:textSize="14sp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -168,14 +160,12 @@
                         android:orientation="vertical"
                         android:padding="4dp">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/events_creator_desc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="description"
                             android:padding="8dp"
-                            android:textColor="#ff000000"
-                            android:textColorHint="#ff607d8b"
                             android:textSize="14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -188,14 +178,12 @@
                         android:orientation="vertical"
                         android:padding="4dp">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/events_creator_params"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="parameters"
                             android:padding="8dp"
-                            android:textColor="#ff000000"
-                            android:textColorHint="#ff607d8b"
                             android:textSize="14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -208,14 +196,12 @@
                         android:orientation="vertical"
                         android:padding="4dp">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/events_creator_spec"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="spec  (### => variable name)"
                             android:padding="8dp"
-                            android:textColor="#ff000000"
-                            android:textColorHint="#ff607d8b"
                             android:textSize="14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -228,14 +214,12 @@
                         android:orientation="vertical"
                         android:padding="4dp">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/events_creator_code"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="event code (### ==> variable name)"
                             android:padding="8dp"
-                            android:textColor="#ff000000"
-                            android:textColorHint="#ff607d8b"
                             android:textSize="14sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -247,7 +231,7 @@
                         android:text="@string/create_new_listener"
                         android:textSize="12sp" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
@@ -260,8 +244,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#ffffffff"
-                    android:orientation="vertical"
                     android:padding="8dp">
 
                     <LinearLayout
@@ -276,7 +258,6 @@
                             android:layout_height="wrap_content"
                             android:padding="8dp"
                             android:text="Listener properties :"
-                            android:textColor="#ff616161"
                             android:textSize="16sp" />
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -288,14 +269,12 @@
                             android:orientation="vertical"
                             android:padding="4dp">
 
-                            <EditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/events_creator_listenernameA"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="listener name"
                                 android:padding="8dp"
-                                android:textColor="#ff000000"
-                                android:textColorHint="#ff607d8b"
                                 android:textSize="14sp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -308,14 +287,12 @@
                             android:orientation="vertical"
                             android:padding="4dp">
 
-                            <EditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/events_creator_listenercode"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="listener code (### ==> variable name)"
                                 android:padding="8dp"
-                                android:textColor="#ff000000"
-                                android:textColorHint="#ff607d8b"
                                 android:textSize="14sp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -328,14 +305,12 @@
                             android:orientation="vertical"
                             android:padding="4dp">
 
-                            <EditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/events_creator_listenercustomimport"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="custom import"
                                 android:padding="8dp"
-                                android:textColor="#ff000000"
-                                android:textColorHint="#ff607d8b"
                                 android:textSize="14sp" />
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
@@ -357,7 +332,6 @@
                     android:padding="8dp"
                     android:text="@string/common_word_cancel"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-                    android:textColor="#ffffffff"
                     android:textSize="14sp" />
 
                 <com.google.android.material.button.MaterialButton
@@ -370,7 +344,6 @@
                     android:padding="8dp"
                     android:text="@string/common_word_save"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-                    android:textColor="#ffffffff"
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>

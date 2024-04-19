@@ -5,7 +5,6 @@ import static mod.SketchwareUtil.getDip;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -22,6 +21,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import com.android.annotations.NonNull;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
@@ -57,7 +57,6 @@ public class ConfigActivity extends AppCompatActivity {
     public static final String SETTING_BLOCKMANAGER_DIRECTORY_BLOCK_FILE_PATH = "blockDir";
     private LinearLayout root;
     private HashMap<String, Object> setting_map = new HashMap<>();
-
     public static String getBackupPath() {
         if (FileUtil.isExistFile(SETTINGS_FILE.getAbsolutePath())) {
             HashMap<String, Object> settings = readSettings();
@@ -318,12 +317,12 @@ public class ConfigActivity extends AppCompatActivity {
                     backupDirectory.setText(getBackupPath());
                     tilBackupDirectory.addView(backupDirectory);
 
-                    new AlertDialog.Builder(this)
+              new MaterialAlertDialogBuilder(this)
                             .setTitle(R.string.backup_directory)
                             .setView(container)
                             .setPositiveButton(R.string.common_word_save, (dialogInterface, which) -> {
                                 ConfigActivity.setSetting(SETTING_BACKUP_DIRECTORY, backupDirectory.getText().toString());
-                                SketchwareUtil.toast("Saved");
+                                SketchwareUtil.toast(getString(R.string.common_word_saved));
                             })
                             .setNegativeButton(R.string.common_word_cancel, (dialogInterface, which) -> dialogInterface.dismiss())
                             .show();
@@ -389,14 +388,14 @@ public class ConfigActivity extends AppCompatActivity {
                     backupFilename.setText(getBackupFileName());
                     tilBackupFormat.addView(backupFilename);
 
-                    new AlertDialog.Builder(this)
+                    new MaterialAlertDialogBuilder(this)
                             .setTitle(R.string.backup_filename_format)
                             .setView(container)
                             .setNegativeButton(R.string.common_word_cancel, (dialogInterface, which) -> dialogInterface.dismiss())
                             .setPositiveButton(R.string.common_word_save, (dialogInterface, which) -> {
                                 setting_map.put(SETTING_BACKUP_FILENAME, backupFilename.getText().toString());
                                 FileUtil.writeFile(SETTINGS_FILE.getAbsolutePath(), new Gson().toJson(setting_map));
-                                SketchwareUtil.toast("Saved");
+                                SketchwareUtil.toast(getString(R.string.common_word_saved));
                             })
                             .setNeutralButton(R.string.common_word_reset, (dialogInterface, which) -> {
                                 setting_map.remove(SETTING_BACKUP_FILENAME);
@@ -408,7 +407,7 @@ public class ConfigActivity extends AppCompatActivity {
     }
 
     private void applyDesign(View view) {
-        Helper.applyRippleEffect(view, Color.parseColor("#dbedf5"), ContextCompat.getColor(this,R.color.backgroundColor));
+        Helper.applyRippleEffect(view,  ContextCompat.getColor(this,R.color.backgroundColor), ContextCompat.getColor(this,R.color.backgroundColor));
         view.setClickable(true);
         view.setFocusable(true);
     }

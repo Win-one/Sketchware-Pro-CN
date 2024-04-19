@@ -2473,6 +2473,14 @@ Please try again later"</string>
     <string name="default_is_projectname_v_versionname_pkgname_versioncode_time">Default is \"$projectName v$versionName ($pkgName, $versionCode) $time(yyyy-MM-dd\'T\'HHmmss)\"</string>
     <string name="format">Format</string>
     <string name="googlemap_settings">GoogleMap Settings</string>
+    <string name="appcompat_injection_manager">AppCompat Injection Manager</string>
+    <string name="auto_scroll_disabled">Auto scroll disabled</string>
+    <string name="for_multiple_package_names">For multiple package names, separate them with a comma (,).</string>
+    <string name="this_menu_can_t_be_deleted">This menu can\'t be deleted.</string>
+    <string name="remove_this_menu_and_its_items">Remove this menu and its items?</string>
+    <string name="this_menu_can_t_be_modified">This menu can\'t be modified.</string>
+    <string name="select_a_json_file">Select a JSON file</string>
+    <string name="optional">Optional</string>
 
 
 </resources>

@@ -77,8 +77,6 @@
                         android:layout_height="wrap_content"
                         android:hint="res"
                         android:padding="8dp"
-                        android:textColor="#ff212121"
-                        android:textColorHint="#ff607d8b"
                         android:textSize="16sp" />
 
                     <EditText
@@ -87,8 +85,6 @@
                         android:layout_height="wrap_content"
                         android:hint="attr"
                         android:padding="8dp"
-                        android:textColor="#ff212121"
-                        android:textColorHint="#ff607d8b"
                         android:textSize="16sp" />
 
                     <EditText
@@ -97,8 +93,6 @@
                         android:layout_height="wrap_content"
                         android:hint="value"
                         android:padding="8dp"
-                        android:textColor="#ff212121"
-                        android:textColorHint="#ff607d8b"
                         android:textSize="16sp" />
                 </LinearLayout>
 

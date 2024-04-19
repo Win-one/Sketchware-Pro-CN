@@ -134,10 +134,10 @@ public class LogReaderActivity extends AppCompatActivity {
         binding.autoScrollSwitch.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             autoScroll = isChecked;
             if (autoScroll) {
-                binding.autoScrollSwitch.setText("Auto scroll enabled");
+                binding.autoScrollSwitch.setText(R.string.auto_scroll_enabled);
                 Objects.requireNonNull(binding.logsRecyclerView.getLayoutManager()).scrollToPosition(Objects.requireNonNull(binding.logsRecyclerView.getAdapter()).getItemCount() - 1);
             } else {
-                binding.autoScrollSwitch.setText("Auto scroll disabled");
+                binding.autoScrollSwitch.setText(R.string.auto_scroll_disabled);
             }
         });
 
@@ -229,21 +229,21 @@ public class LogReaderActivity extends AppCompatActivity {
         dialogBinding.imgDelete.setVisibility(View.GONE);
 
         var builder = new MaterialAlertDialogBuilder(this)
-                .setTitle("Filter by package name")
-                .setMessage("For multiple package names, separate them with a comma (,).")
+                .setTitle(R.string.filter_by_package_name)
+                .setMessage(R.string.for_multiple_package_names)
                 .setIcon(R.drawable.ic_filter_24)
                 .setView(view)
-                .setPositiveButton("Apply", (dialog, which) -> {
+                .setPositiveButton(R.string.common_word_apply, (dialog, which) -> {
                     pkgFilter = dialogBinding.easyEdInput.getText().toString();
                     pkgFilterList = new ArrayList<>(Arrays.asList(pkgFilter.split(",")));
                     binding.searchInput.setText(binding.searchInput.getText().toString());
                 })
-                .setNeutralButton("Reset", (dialog, which) -> {
+                .setNeutralButton(R.string.common_word_reset, (dialog, which) -> {
                     pkgFilter = "";
                     pkgFilterList.clear();
                     dialogBinding.easyEdInput.setText("");
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(R.string.common_word_cancel, null)
                 .create();
 
         builder.show();

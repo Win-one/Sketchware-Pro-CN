@@ -46,32 +46,35 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/ic_title"
-                        android:layout_marginEnd="8dp" />
+                        android:src="@drawable/ic_title" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/developer_tools_component_name"
-                        android:textColor="#4D4D4D"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <EditText
-                    android:id="@+id/component_name"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/bg_round_light_grey"
-                    android:gravity="center_vertical"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:padding="8dp"
-                    android:singleLine="true"
-                    android:textSize="14sp" />
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/component_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center_vertical"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:padding="8dp"
+                        android:singleLine="true"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -83,85 +86,90 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/ic_key_48dp"
-                        android:layout_marginEnd="8dp" />
+                        android:src="@drawable/ic_key_48dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/developer_tools_component_id"
-                        android:textColor="#4D4D4D"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <EditText
-                    android:id="@+id/component_id"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/bg_round_light_grey"
-                    android:gravity="center_vertical"
-                    android:imeOptions="actionNext"
-                    android:inputType="numberSigned"
-                    android:padding="8dp"
-                    android:singleLine="true"
-                    android:textSize="14sp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="8dp"
-                        android:src="@drawable/ic_picture_48dp"
-                        android:layout_marginEnd="8dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="@string/developer_tools_component_icon"
-                        android:textColor="#4D4D4D"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/component_icon"
-                        android:layout_width="0dp"
+                        android:id="@+id/component_id"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_round_light_grey"
+                        android:layout_marginBottom="8dp"
                         android:gravity="center_vertical"
                         android:imeOptions="actionNext"
                         android:inputType="numberSigned"
                         android:padding="8dp"
                         android:singleLine="true"
                         android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/ic_picture_48dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/developer_tools_component_icon"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <EditText
+                            android:id="@+id/component_icon"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberSigned"
+                            android:padding="8dp"
+                            android:singleLine="true"
+                            android:textSize="14sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageView
                         android:id="@+id/pick"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/plus_96"
-                        android:layout_marginStart="8dp" />
+                        android:src="@drawable/ic_add_24" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -174,33 +182,33 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/connected_96"
-                        android:layout_marginEnd="8dp" />
+                        android:src="@drawable/connected_96" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/developer_tools_component_var_type_name"
-                        android:textColor="#4D4D4D"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-
+<com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/component_var_type_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/bg_round_light_grey"
                     android:gravity="center_vertical"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textSize="14sp" />
-
+            </com.google.android.material.textfield.TextInputLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -211,33 +219,33 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/connected_96"
-                        android:layout_marginEnd="8dp" />
+                        android:src="@drawable/connected_96" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/developer_tools_component_type_name"
-                        android:textColor="#4D4D4D"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/component_type_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/bg_round_light_grey"
                     android:gravity="center_vertical"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textSize="14sp" />
-
+                </com.google.android.material.textfield.TextInputLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -248,33 +256,33 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/connected_96"
-                        android:layout_marginEnd="8dp" />
+                        android:src="@drawable/connected_96" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/developer_tools_component_build_class"
-                        android:textColor="#4D4D4D"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/component_build_class"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/bg_round_light_grey"
                     android:gravity="center_vertical"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textSize="14sp" />
-
+                </com.google.android.material.textfield.TextInputLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -285,39 +293,39 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/connected_96"
-                        android:layout_marginEnd="8dp" />
+                        android:src="@drawable/connected_96" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/developer_tools_component_type_class"
-                        android:textColor="#4D4D4D"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/component_type_class"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/bg_round_light_grey"
                     android:gravity="center_vertical"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textSize="14sp" />
-
+                </com.google.android.material.textfield.TextInputLayout>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:padding="8dp"
-                    android:text="Optional"
+                    android:text="@string/optional"
                     android:textColor="#F44336"
                     android:textSize="14sp" />
 
@@ -331,30 +339,30 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/ic_full_desc"
-                        android:layout_marginEnd="8dp" />
+                        android:src="@drawable/ic_full_desc" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/developer_tools_component_description"
-                        android:textColor="#4D4D4D"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/component_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/bg_round_light_grey"
                     android:inputType="textMultiLine"
                     android:padding="8dp"
                     android:textSize="14sp" />
-
+                </com.google.android.material.textfield.TextInputLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -365,33 +373,33 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/rename_96_blue"
-                        android:layout_marginEnd="8dp" />
+                        android:src="@drawable/rename_96_blue" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/developer_tools_component_url"
-                        android:textColor="#4D4D4D"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/component_doc_url"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/bg_round_light_grey"
                     android:gravity="center_vertical"
                     android:imeOptions="actionNext"
                     android:inputType="text|textUri"
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textSize="14sp" />
-
+                </com.google.android.material.textfield.TextInputLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -402,36 +410,35 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/code_48"
-                        android:layout_marginEnd="8dp" />
+                        android:src="@drawable/code_48" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/developer_tools_component_add_var"
-                        android:textColor="#4D4D4D"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/component_add_var"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_round_light_grey"
                     android:inputType="textMultiLine"
                     android:padding="8dp"
                     android:textSize="14sp" />
-
+                </com.google.android.material.textfield.TextInputLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginBottom="8dp"
                     android:text="(### -&gt; variable name)"
-                    android:textColor="#9A9A9A"
                     android:textSize="12sp" />
 
                 <LinearLayout
@@ -444,37 +451,36 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/code_48"
-                        android:layout_marginEnd="8dp" />
+                        android:src="@drawable/code_48" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/developer_tools_component_define_add_var"
-                        android:textColor="#4D4D4D"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/component_def_add_var"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_round_light_grey"
                     android:gravity="center_vertical"
                     android:inputType="textMultiLine"
                     android:padding="8dp"
                     android:textSize="14sp" />
-
+                </com.google.android.material.textfield.TextInputLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginBottom="8dp"
                     android:text="(### -&gt; variable name)"
-                    android:textColor="#9A9A9A"
                     android:textSize="12sp" />
 
                 <LinearLayout
@@ -487,30 +493,31 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
-                        android:src="@drawable/code_48"
-                        android:layout_marginEnd="8dp" />
+                        android:src="@drawable/code_48" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/developer_tools_component_imports"
-                        android:textColor="#4D4D4D"
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/component_imports"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:background="@drawable/bg_round_light_grey"
                     android:gravity="center_vertical"
                     android:inputType="textMultiLine"
                     android:padding="8dp"
                     android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
@@ -523,29 +530,29 @@
                 android:id="@+id/btn_import"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="8dp"
                 android:padding="8dp"
                 android:text="@string/common_word_import"
-                android:textSize="14sp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp" />
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/btn_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="8dp"
                 android:padding="8dp"
                 android:text="@string/common_word_accept"
-                android:textSize="14sp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp" />
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

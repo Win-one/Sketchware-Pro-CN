@@ -60,7 +60,6 @@ public class BuildSettingsDialog {
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         textView.setText(title);
         textView.setTextSize(14f);
-        textView.setTextColor(com.google.android.material.R.attr.colorPrimary);
         textView.setTypeface(null, Typeface.BOLD);
         textView.setPadding(
                 0,
@@ -88,7 +87,6 @@ public class BuildSettingsDialog {
             radioButton.setLayoutParams(layoutParams);
             radioButton.setId(View.generateViewId());
             radioButton.setText(choice);
-            radioButton.setTextColor(0xff000000);
             radioButton.setTextSize(16f);
 
             if (settings.getValue(key, defaultValue).equals(choice)) {
@@ -128,7 +126,6 @@ public class BuildSettingsDialog {
         String value = settings.getValue(key, defaultValue ? "true" : "false");
         checkBox.setText(label);
         checkBox.setChecked(value.equals("true"));
-        checkBox.setTextColor(0xff000000);
         checkBox.setPadding(
                 (int) getDip(4),
                 (int) getDip(8),
@@ -176,9 +173,7 @@ public class BuildSettingsDialog {
                 (int) getDip(8)
         );
         editText.setTextSize(16f);
-        editText.setTextColor(0xff000000);
         editText.setHint(hint);
-        editText.setHintTextColor(0xff607d8b);
         editText.setText(settings.getValue(key, defaultValue));
         editText.setTag(key);
         editText.setInputType(inputType);
