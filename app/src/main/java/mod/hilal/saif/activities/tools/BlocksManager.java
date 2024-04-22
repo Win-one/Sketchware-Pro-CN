@@ -2,6 +2,7 @@ package mod.hilal.saif.activities.tools;
 
 import static mod.SketchwareUtil.dpToPx;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -165,11 +166,12 @@ public class BlocksManager extends AppCompatActivity {
         _refresh_list();
     }
 
+    @SuppressLint("ResourceAsColor")
     private void _a(final View _view) {
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setShape(GradientDrawable.RECTANGLE);
-        gradientDrawable.setColor(Color.parseColor("#00ffffff"));
-        RippleDrawable rippleDrawable = new RippleDrawable(new ColorStateList(new int[][]{new int[0]}, new int[]{Color.parseColor("#20008DCD")}), gradientDrawable, null);
+        gradientDrawable.setColor(R.color.backgroundColor);
+        RippleDrawable rippleDrawable = new RippleDrawable(new ColorStateList(new int[][]{new int[0]}, new int[]{Color.parseColor("#ff008DCD")}), gradientDrawable, null);
         if (Build.VERSION.SDK_INT >= 21) {
             _view.setBackground(rippleDrawable);
             _view.setClickable(true);

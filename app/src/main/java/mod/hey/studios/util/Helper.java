@@ -125,13 +125,14 @@ public class Helper {
 
     public static void applyRippleToToolbarView(View view) {
         GradientDrawable content = new GradientDrawable();
+        content.setColor(Color.parseColor("#00008dcd"));
         content.setCornerRadius(90);
 
         view.setBackground(
                 new RippleDrawable(
                         new ColorStateList(
                                 new int[][]{new int[]{0}},
-                                new int[]{Color.parseColor("#00fcfcff")}
+                                new int[]{Color.parseColor("#64b5f6")}
                         ),
                         content,
                         null
