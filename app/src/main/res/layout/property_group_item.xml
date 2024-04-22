@@ -19,7 +19,6 @@
         android:paddingHorizontal="8dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:textColor="#ffffffff"
         android:textSize="12sp"
         android:paddingEnd="8dp"
         android:paddingStart="8dp" />

@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:backgroundTint="#ffffffff"
+            android:backgroundTint="@color/backgroundColor"
             android:spinnerMode="dropdown" />
 
         <ImageView
@@ -37,7 +37,7 @@
         android:id="@+id/layout_property_group"
         android:layout_width="match_parent"
         android:layout_height="32dp"
-        android:background="#fff6f6f6"
+        android:background="@color/colorProperty"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingStart="4dp"
@@ -47,7 +47,7 @@
         android:id="@+id/property_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffeeeeee"
+        android:background="@color/colorProperty"
         android:orientation="horizontal">
 
         <com.besome.sketch.lib.ui.CustomHorizontalScrollView

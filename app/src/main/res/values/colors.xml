@@ -157,4 +157,6 @@
     <!--  views  -->
     <color name="cardStrokeColor">#D1D1D1</color>
 
+    <color name="colorProperty">#f6f6f6</color>
+
 </resources>
