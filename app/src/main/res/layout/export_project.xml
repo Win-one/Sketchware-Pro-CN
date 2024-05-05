@@ -14,15 +14,15 @@
         android:contentInsetStart="0dp"
         app:contentInsetStart="0dp">
 
-    <ImageView
-        android:id="@+id/layout_main_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:contentDescription="@string/title_sketchware"
-        android:scaleType="fitCenter"
-        android:src="@drawable/top_title_logo"
-        app:tint="?attr/colorOnSurface" />
+        <ImageView
+            android:id="@+id/layout_main_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/title_sketchware"
+            android:scaleType="fitCenter"
+            android:src="@drawable/top_title_logo"
+            app:tint="?attr/colorOnSurface" />
     </com.google.android.material.appbar.MaterialToolbar>
 
     <ScrollView
@@ -39,6 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
                 app:cardElevation="4dp"
                 app:contentPadding="8dp">
 
@@ -50,10 +51,10 @@
                         android:id="@id/icon_apk"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:src="@drawable/ic_apk_color_48dp"
-                        android:layout_alignParentStart="true" />
+                        android:src="@drawable/ic_apk_color_48dp" />
 
                     <TextView
                         android:id="@id/title_sign_apk"
@@ -91,12 +92,12 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="24dp"
+                                android:layout_marginStart="16dp"
                                 android:layout_marginLeft="16dp"
+                                android:layout_marginEnd="16dp"
                                 android:layout_marginRight="16dp"
                                 android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:layout_marginEnd="16dp"
-                                android:layout_marginStart="16dp">
+                                android:orientation="horizontal">
 
                                 <ImageView
                                     android:layout_width="24dp"
@@ -107,21 +108,21 @@
                                     android:id="@id/title_apk_path"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
                                     android:layout_marginLeft="8dp"
                                     android:textSize="14sp"
-                                    android:textStyle="bold"
-                                    android:layout_marginStart="8dp" />
+                                    android:textStyle="bold" />
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="24dp"
+                                android:layout_marginStart="16dp"
                                 android:layout_marginLeft="16dp"
                                 android:layout_marginTop="4dp"
+                                android:layout_marginEnd="16dp"
                                 android:layout_marginRight="16dp"
-                                android:orientation="horizontal"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginEnd="16dp">
+                                android:orientation="horizontal">
 
                                 <HorizontalScrollView
                                     android:layout_width="match_parent"
@@ -133,11 +134,11 @@
                                         android:layout_height="match_parent"
                                         android:gravity="center_vertical"
                                         android:lines="1"
+                                        android:paddingStart="8dp"
                                         android:paddingLeft="8dp"
-                                        android:paddingRight="8dp"
-                                        android:textSize="13sp"
                                         android:paddingEnd="8dp"
-                                        android:paddingStart="8dp" />
+                                        android:paddingRight="8dp"
+                                        android:textSize="13sp" />
                                 </HorizontalScrollView>
                             </LinearLayout>
                         </LinearLayout>
@@ -157,34 +158,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
                 app:cardElevation="4dp"
                 app:contentPadding="8dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
+                    android:layout_height="match_parent">
 
                     <ImageView
                         android:id="@id/icon_src"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:src="@drawable/android_icon"
-                        android:layout_alignParentStart="true" />
+                        android:src="@drawable/android_icon" />
 
                     <TextView
                         android:id="@id/title_export_src"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
+                        android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
+                        android:layout_toEndOf="@id/icon_src"
                         android:layout_toRightOf="@id/icon_src"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:layout_marginStart="8dp"
-                        android:layout_toEndOf="@id/icon_src" />
+                        android:textStyle="bold" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@id/btn_export_src"
@@ -215,12 +216,12 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="24dp"
+                            android:layout_marginStart="16dp"
                             android:layout_marginLeft="16dp"
+                            android:layout_marginEnd="16dp"
                             android:layout_marginRight="16dp"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginStart="16dp">
+                            android:orientation="horizontal">
 
                             <ImageView
                                 android:layout_width="24dp"
@@ -231,21 +232,21 @@
                                 android:id="@id/title_src_path"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
                                 android:layout_marginLeft="8dp"
                                 android:textSize="14sp"
-                                android:textStyle="bold"
-                                android:layout_marginStart="8dp" />
+                                android:textStyle="bold" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="24dp"
+                            android:layout_marginStart="16dp"
                             android:layout_marginLeft="16dp"
                             android:layout_marginTop="4dp"
+                            android:layout_marginEnd="16dp"
                             android:layout_marginRight="16dp"
-                            android:orientation="horizontal"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginEnd="16dp">
+                            android:orientation="horizontal">
 
                             <HorizontalScrollView
                                 android:layout_width="match_parent"
@@ -257,11 +258,11 @@
                                     android:layout_height="match_parent"
                                     android:gravity="center_vertical"
                                     android:lines="1"
+                                    android:paddingStart="8dp"
                                     android:paddingLeft="8dp"
-                                    android:paddingRight="8dp"
-                                    android:textSize="13sp"
                                     android:paddingEnd="8dp"
-                                    android:paddingStart="8dp" />
+                                    android:paddingRight="8dp"
+                                    android:textSize="13sp" />
                             </HorizontalScrollView>
                         </LinearLayout>
 
@@ -270,9 +271,125 @@
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_gravity="end"
+                            android:layout_marginEnd="16dp"
                             android:layout_marginRight="16dp"
-                            android:textSize="12sp"
-                            android:layout_marginEnd="16dp" />
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_export_sab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
+                app:cardElevation="4dp"
+                app:contentPadding="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/icon_sab"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:src="@drawable/open_box_48" />
+
+                    <TextView
+                        android:id="@+id/title_export_sab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toEndOf="@id/icon_sab"
+                        android:layout_toRightOf="@id/icon_sab"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_export_sab"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="48dp"
+                        android:layout_marginBottom="16dp"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:id="@+id/layout_export_sab"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginRight="16dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_folder_48dp" />
+
+                            <TextView
+                                android:id="@+id/title_sab_path"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginRight="16dp"
+                            android:orientation="horizontal">
+
+                            <HorizontalScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/tv_sab_path"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:lines="1"
+                                    android:paddingStart="8dp"
+                                    android:paddingLeft="8dp"
+                                    android:paddingEnd="8dp"
+                                    android:paddingRight="8dp"
+                                    android:textSize="13sp" />
+                            </HorizontalScrollView>
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_send_sab"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginRight="16dp"
+                            android:textSize="12sp" />
                     </LinearLayout>
                 </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>

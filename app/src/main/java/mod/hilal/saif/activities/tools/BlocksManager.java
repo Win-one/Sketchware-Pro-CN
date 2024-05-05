@@ -170,7 +170,6 @@ public class BlocksManager extends AppCompatActivity {
     private void _a(final View _view) {
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setShape(GradientDrawable.RECTANGLE);
-        gradientDrawable.setColor(R.color.backgroundColor);
         RippleDrawable rippleDrawable = new RippleDrawable(new ColorStateList(new int[][]{new int[0]}, new int[]{Color.parseColor("#ff008DCD")}), gradientDrawable, null);
         if (Build.VERSION.SDK_INT >= 21) {
             _view.setBackground(rippleDrawable);

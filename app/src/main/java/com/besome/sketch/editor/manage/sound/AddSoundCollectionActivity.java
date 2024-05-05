@@ -47,6 +47,7 @@ import a.a.a.yy;
 
 
 
+
 public class AddSoundCollectionActivity extends BaseDialogActivity implements View.OnClickListener {
     public TextInputEditText inputAudioName;
     public TextInputLayout inputLayoutAudioName;

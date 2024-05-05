@@ -1,26 +1,17 @@
 package com.besome.sketch.export;
 
-import static mod.SketchwareUtil.getDip;
-
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.core.content.FileProvider;
@@ -28,8 +19,6 @@ import androidx.core.content.FileProvider;
 import com.airbnb.lottie.LottieAnimationView;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.card.MaterialCardView;
 import com.sketchware.remod.BuildConfig;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.ExportProjectBinding;
@@ -237,202 +226,19 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
 
     @SuppressLint("ResourceType")
     private void initializeAppBundleExportViews() {
-        MaterialCardView exportAppBundleRoot = new MaterialCardView(this);
-        {
-            FrameLayout.LayoutParams exportAppBundleRootParams = new FrameLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-            exportAppBundleRootParams.setMargins(
-                    (int) getDip(8),
-                    (int) getDip(8),
-                    (int) getDip(8),
-                    (int) getDip(8)
-            );
-            exportAppBundleRoot.setElevation(getDip(4));
-            exportAppBundleRoot.setLayoutParams(exportAppBundleRootParams);
-        }
-
-        RelativeLayout relativeLayout = new RelativeLayout(this);
-        relativeLayout.setLayoutParams(new RelativeLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
-        relativeLayout.setPadding(
-                (int) getDip(8),
-                (int) getDip(8),
-                (int) getDip(8),
-                (int) getDip(8)
-        );
-        exportAppBundleRoot.addView(relativeLayout);
-
-        ImageView imgAppBundle = new ImageView(this);
-        {
-            imgAppBundle.setId(R.id.icon_src);
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                    (int) getDip(24),
-                    (int) getDip(24)
-            );
-            params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
-            params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-            imgAppBundle.setLayoutParams(params);
-            imgAppBundle.setImageResource(R.drawable.open_box_48);
-        }
-        relativeLayout.addView(imgAppBundle);
-
-        TextView titleExportAppBundle = new TextView(this);
-        {
-            RelativeLayout.LayoutParams titleExportAppBundleParams = new RelativeLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-            titleExportAppBundleParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-            titleExportAppBundleParams.leftMargin = (int) getDip(8);
-            titleExportAppBundleParams.addRule(RelativeLayout.RIGHT_OF, R.id.icon_src);
-            titleExportAppBundle.setLayoutParams(titleExportAppBundleParams);
-            titleExportAppBundle.setTextSize(16f);
-            titleExportAppBundle.setTypeface(Typeface.DEFAULT_BOLD);
-        }
-        relativeLayout.addView(titleExportAppBundle);
-
-        MaterialButton btnExportAppBundle = new MaterialButton(this);
-        {
-            RelativeLayout.LayoutParams btnExportAppBundleParams = (RelativeLayout.LayoutParams) btn_export_src.getLayoutParams();
-            btnExportAppBundleParams.setMargins(
-                    0,
-                    (int) getDip(48),
-                    0,
-                    (int) getDip(16)
-            );
-            btnExportAppBundle.setLayoutParams(btnExportAppBundleParams);
-            btnExportAppBundle.setAllCaps(false);
-            btnExportAppBundle.setTextSize(14f);
-        }
-
-        relativeLayout.addView(btnExportAppBundle);
-
-        LinearLayout layoutExportAppBundle = new LinearLayout(this);
-        {
-            LinearLayout.LayoutParams layoutExportAppBundleParams = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutExportAppBundleParams.topMargin = (int) getDip(32);
-            layoutExportAppBundleParams.bottomMargin = (int) getDip(8);
-            layoutExportAppBundle.setLayoutParams(layoutExportAppBundleParams);
-            layoutExportAppBundle.setOrientation(LinearLayout.VERTICAL);
-        }
-
-        LinearLayout var1 = new LinearLayout(this);
-        {
-            LinearLayout.LayoutParams var1Params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    (int) getDip(24));
-            var1Params.leftMargin = (int) getDip(16);
-            var1Params.rightMargin = (int) getDip(16);
-            var1Params.gravity = Gravity.CENTER_VERTICAL;
-            var1.setLayoutParams(var1Params);
-            var1.setOrientation(LinearLayout.HORIZONTAL);
-        }
-
-        ImageView var2 = new ImageView(this);
-        {
-            var2.setLayoutParams(new LinearLayout.LayoutParams(
-                    (int) getDip(24),
-                    (int) getDip(24)));
-            var2.setImageResource(R.drawable.ic_folder_48dp);
-        }
-        var1.addView(var2);
-
-        TextView titleAppBundlePath = new TextView(this);
-        {
-            LinearLayout.LayoutParams titleAppBundlePathParams = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
-            titleAppBundlePathParams.leftMargin = (int) getDip(8);
-            titleAppBundlePath.setLayoutParams(titleAppBundlePathParams);
-            titleAppBundlePath.setTextSize(14f);
-            titleAppBundlePath.setTypeface(Typeface.DEFAULT_BOLD);
-        }
-        var1.addView(titleAppBundlePath);
-
-        layoutExportAppBundle.addView(var1);
-
-        LinearLayout var3 = new LinearLayout(this);
-        {
-            LinearLayout.LayoutParams var3Params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    (int) getDip(24));
-            var3Params.leftMargin = (int) getDip(16);
-            var3Params.topMargin = (int) getDip(4);
-            var3Params.rightMargin = (int) getDip(16);
-            var3.setLayoutParams(var3Params);
-            var3.setOrientation(LinearLayout.HORIZONTAL);
-        }
-
-        HorizontalScrollView var4 = new HorizontalScrollView(this);
-        {
-            var4.setLayoutParams(new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT));
-        }
-
-        TextView tvAppBundlePath = new TextView(this);
-        {
-            tvAppBundlePath.setLayoutParams(new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT));
-            tvAppBundlePath.setGravity(Gravity.CENTER_VERTICAL);
-            tvAppBundlePath.setLines(1);
-            tvAppBundlePath.setPadding(
-                    (int) getDip(8),
-                    (int) getDip(0),
-                    (int) getDip(8),
-                    (int) getDip(0)
-            );
-            tvAppBundlePath.setTextSize(13f);
-        }
-        var4.addView(tvAppBundlePath);
-
-        var3.addView(var4);
-
-        layoutExportAppBundle.addView(var3);
-
-        MaterialButton btnSendAppBundle;
-        {
-            LinearLayout btnSendAppBundleContainer = new LinearLayout(this);
-            {
-                LinearLayout.LayoutParams btnSendAppBundleContainerParams = new LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        (int) getDip(40));
-                btnSendAppBundleContainerParams.gravity = Gravity.RIGHT;
-                btnSendAppBundleContainerParams.rightMargin = (int) getDip(16);
-                btnSendAppBundleContainer.setLayoutParams(btnSendAppBundleContainerParams);
-            }
-
-            btnSendAppBundle = new MaterialButton(this);
-            {
-                LinearLayout.LayoutParams btnSendAppBundleParams = new LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT);
-                btnSendAppBundle.setLayoutParams(btnSendAppBundleParams);
-                btnSendAppBundle.setTextSize(12f);
-            }
-            btnSendAppBundleContainer.addView(btnSendAppBundle);
-
-            layoutExportAppBundle.addView(btnSendAppBundleContainer);
-        }
-
-        relativeLayout.addView(layoutExportAppBundle);
 
         ViewParent plannedParent = findViewById(R.id.icon_apk).getParent().getParent().getParent();
         if (plannedParent instanceof LinearLayout) {
-            ((LinearLayout) plannedParent).addView(exportAppBundleRoot);
+            binding.cvExportSab.setVisibility(View.VISIBLE);
         }
 
-        titleExportAppBundle.setText(R.string.export_android_app_bundle);
-        btnExportAppBundle.setText(R.string.export_aab);
-        titleAppBundlePath.setText(Helper.getResString(R.string.myprojects_export_project_title_local_path));
-        btnSendAppBundle.setText(R.string.send_aab);
-        layoutExportAppBundle.setVisibility(View.GONE);
+        binding.titleExportSab.setText(R.string.export_android_app_bundle);
+        binding.btnExportSab.setText(R.string.export_aab);
+        binding.titleSabPath.setText(Helper.getResString(R.string.myprojects_export_project_title_local_path));
+        binding.btnSendSab.setText(R.string.send_aab);
+        binding.layoutExportSab.setVisibility(View.GONE);
 
-        btnExportAppBundle.setOnClickListener(v -> {
+        binding.btnExportSab.setOnClickListener(v -> {
             aB dialog = new aB(this);
             if (BuildConfig.FLAVOR.equals(BuildConfig.FLAVOR_NAME_WITHOUT_AABS)) {
                 dialog.a(R.drawable.break_warning_96_red);
@@ -448,8 +254,8 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
                         "Copy your keystore to /Internal storage/sketchware/keystore/release_key.jks " +
                         "and enter the alias' password.");
                 credentialsDialog.setListener(credentials -> {
-                    btnExportAppBundle.setVisibility(View.GONE);
-                    layoutExportAppBundle.setVisibility(View.GONE);
+                    binding.btnExportSab.setVisibility(View.GONE);
+                    binding.layoutExportSab.setVisibility(View.GONE);
 
                     BuildingAsyncTask task = new BuildingAsyncTask(this);
                     task.enableAppBundleBuild();
