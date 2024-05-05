@@ -4,8 +4,15 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
@@ -22,9 +29,9 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        android:supportsRtl="true">
+        android:usesCleartextTraffic="true">
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -75,8 +82,8 @@
             android:configChanges="orientation|screenSize" />
         <activity
             android:name="com.besome.sketch.design.DesignActivity"
-            android:theme="@style/AppTheme.Design"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.Design" />
         <activity
             android:name="com.besome.sketch.MainActivity"
             android:configChanges="orientation|screenSize"
@@ -206,10 +213,10 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name="com.besome.sketch.editor.manage.library.admob.AdmobActivity"
-            android:configChanges="orientation|screenSize"/>
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name="com.besome.sketch.editor.manage.library.firebase.FirebaseActivity"
-            android:configChanges="orientation|screenSize"/>
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name="com.besome.sketch.editor.manage.library.firebase.ManageFirebaseActivity"
             android:configChanges="orientation|screenSize" />

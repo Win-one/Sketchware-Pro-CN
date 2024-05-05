@@ -23,9 +23,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.github.angads25.filepicker.model.DialogConfigs;
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
+import com.developer.filepicker.model.DialogConfigs;
+import com.developer.filepicker.model.DialogProperties;
+import com.developer.filepicker.view.FilePickerDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.DialogCreateNewFileLayoutBinding;
@@ -109,7 +109,7 @@ public class ManageAssetsActivity extends AppCompatActivity {
         )) {
             super.onBackPressed();
         } else {
-            current_path = current_path.substring(0, current_path.lastIndexOf(DialogConfigs.DIRECTORY_SEPERATOR));
+            current_path = current_path.substring(0, current_path.lastIndexOf(DialogConfigs.DEFAULT_DIR));
             refresh();
         }
     }
@@ -332,7 +332,7 @@ public class ManageAssetsActivity extends AppCompatActivity {
 
         public String getFileName(int position) {
             String item = getItem(position);
-            return item.substring(item.lastIndexOf(DialogConfigs.DIRECTORY_SEPERATOR) + 1);
+            return item.substring(item.lastIndexOf(DialogConfigs.DEFAULT_DIR) + 1);
         }
 
         public boolean isFolder(int position) {

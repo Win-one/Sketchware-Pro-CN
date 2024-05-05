@@ -111,7 +111,7 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.viewpager:viewpager:1.0.0"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-    implementation "com.google.android.material:material:1.10.0"
+    implementation "com.google.android.material:material:1.11.0"
     implementation "com.airbnb.android:lottie:6.3.0"
     implementation "com.google.android.flexbox:flexbox:3.0.0"
 
@@ -127,7 +127,7 @@ dependencies {
     implementation "$editorGroupId:language-textmate"
 
     implementation "de.hdodenhof:circleimageview:3.1.0"
-    implementation "com.github.angads25:filepicker:1.1.1"
+    implementation "io.github.tutorialsandroid:filepicker:9.2.5"
 
     minApi26Implementation "com.android.tools.build:bundletool:1.15.6"
     //noinspection GradleDependency copied from above dependency for not just runtime access

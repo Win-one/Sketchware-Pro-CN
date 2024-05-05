@@ -2,7 +2,6 @@ package mod.hilal.saif.activities.tools;
 
 import static com.besome.sketch.editor.view.ViewEditor.shakeView;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,7 +11,6 @@ import android.os.Environment;
 import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -22,9 +20,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.besome.sketch.editor.manage.library.LibraryItemView;
-import com.github.angads25.filepicker.model.DialogConfigs;
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
+import com.developer.filepicker.model.DialogConfigs;
+import com.developer.filepicker.model.DialogProperties;
+import com.developer.filepicker.view.FilePickerDialog;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.DialogSelectApkToSignBinding;
 

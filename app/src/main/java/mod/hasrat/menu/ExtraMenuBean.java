@@ -17,9 +17,9 @@ import com.besome.sketch.beans.AdUnitBean;
 import com.besome.sketch.beans.ComponentBean;
 import com.besome.sketch.beans.ProjectFileBean;
 import com.besome.sketch.editor.LogicEditorActivity;
-import com.github.angads25.filepicker.model.DialogConfigs;
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
+import com.developer.filepicker.model.DialogConfigs;
+import com.developer.filepicker.model.DialogProperties;
+import com.developer.filepicker.view.FilePickerDialog;
 import com.sketchware.remod.R;
 
 import java.io.File;
