@@ -220,7 +220,7 @@ public class Tools extends AppCompatActivity {
         });
 
         apkPathDialog.b(getString(R.string.common_word_continue), v -> {
-            if(!isAPKSelected[0]) {
+            if (!isAPKSelected[0]) {
                 SketchwareUtil.toast("Please select an APK file to sign", Toast.LENGTH_SHORT);
                 shakeView(binding.selectFile);
                 return;

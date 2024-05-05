@@ -29,6 +29,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.card.MaterialCardView;
 import com.sketchware.remod.BuildConfig;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.ExportProjectBinding;
@@ -247,7 +248,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
                     (int) getDip(8),
                     (int) getDip(8)
             );
-            exportAppBundleRoot.setCardBackgroundColor(R.attr.colorSurfaceContainerHigh);
+            exportAppBundleRoot.setElevation(getDip(4));
             exportAppBundleRoot.setLayoutParams(exportAppBundleRootParams);
         }
 
