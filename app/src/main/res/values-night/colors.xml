@@ -10,6 +10,6 @@
     <!--  views  -->
     <color name="cardStrokeColor">#2E2E2E</color>
 
-    <color name="colorProperty">#828282</color>
+    <color name="colorProperty">#ff828282</color>
     <color name="grey">#ff272822</color>
 </resources>
