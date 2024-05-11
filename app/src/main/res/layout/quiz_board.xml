@@ -18,7 +18,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@id/tv_remaing_time"
+            android:id="@+id/tv_remaing_time"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:animateLayoutChanges="true"
@@ -54,7 +54,7 @@
             android:src="@drawable/qa_q" />
 
         <TextView
-            android:id="@id/tv_question"
+            android:id="@+id/tv_question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -63,7 +63,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@id/timeout_bar"
+        android:id="@+id/timeout_bar"
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:orientation="horizontal"
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:id="@id/layout_answer_ox"
+            android:id="@+id/layout_answer_ox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -82,7 +82,7 @@
             android:visibility="visible">
 
             <ImageView
-                android:id="@id/img_answer_o"
+                android:id="@+id/img_answer_o"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
@@ -90,7 +90,7 @@
                 android:src="@drawable/answer_o" />
 
             <ImageView
-                android:id="@id/img_answer_x"
+                android:id="@+id/img_answer_x"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
@@ -99,14 +99,14 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:id="@id/layout_answer_ab"
+            android:id="@+id/layout_answer_ab"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@id/view_answer_a"
+                android:id="@+id/view_answer_a"
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
                 android:background="@drawable/bg_outline"
@@ -119,7 +119,7 @@
                 android:paddingStart="8dp">
 
                 <TextView
-                    android:id="@id/tv_answer_a"
+                    android:id="@+id/tv_answer_a"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -128,14 +128,14 @@
                     android:textColor="@color/scolor_black_02" />
 
                 <ImageView
-                    android:id="@id/img_answer_a"
+                    android:id="@+id/img_answer_a"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/ok_48" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@id/view_answer_b"
+                android:id="@+id/view_answer_b"
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
                 android:layout_marginTop="4dp"
@@ -149,7 +149,7 @@
                 android:paddingStart="8dp">
 
                 <TextView
-                    android:id="@id/tv_answer_b"
+                    android:id="@+id/tv_answer_b"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -158,7 +158,7 @@
                     android:textColor="@color/scolor_black_02" />
 
                 <ImageView
-                    android:id="@id/img_answer_b"
+                    android:id="@+id/img_answer_b"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/ok_48" />

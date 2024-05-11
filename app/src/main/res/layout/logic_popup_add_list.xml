@@ -8,7 +8,7 @@
         android:orientation="vertical">
 
         <RadioGroup
-            android:id="@id/rg_type"
+            android:id="@+id/rg_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
@@ -19,24 +19,24 @@
             android:layout_marginStart="8dp">
 
             <RadioButton
-                android:id="@id/rb_int"
+                android:id="@+id/rb_int"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:checked="true" />
 
             <RadioButton
-                android:id="@id/rb_string"
+                android:id="@+id/rb_string"
                 android:layout_width="match_parent"
                 android:layout_height="40dp" />
 
             <RadioButton
-                android:id="@id/rb_map"
+                android:id="@+id/rb_map"
                 android:layout_width="match_parent"
                 android:layout_height="40dp" />
         </RadioGroup>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@id/ti_input"
+            android:id="@+id/ti_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
@@ -47,7 +47,7 @@
             android:layout_marginStart="8dp">
 
             <EditText
-                android:id="@id/ed_input"
+                android:id="@+id/ed_input"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:imeOptions="actionDone"
