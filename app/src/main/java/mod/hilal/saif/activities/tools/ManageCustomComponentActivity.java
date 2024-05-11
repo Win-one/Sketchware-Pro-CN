@@ -20,13 +20,12 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.besome.sketch.lib.base.CollapsibleViewHolder;
 import com.besome.sketch.lib.ui.CollapsibleButton;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.elevation.SurfaceColors;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.ManageCustomComponentBinding;
@@ -47,6 +46,7 @@ import mod.elfilibustero.sketch.editor.component.CollapsibleCustomComponentLayou
 import mod.elfilibustero.sketch.lib.ui.SketchFilePickerDialog;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.components.ComponentsHandler;
+import mod.jbk.util.AddMarginOnApplyWindowInsetsListener;
 
 public class ManageCustomComponentActivity extends AppCompatActivity {
 
@@ -62,8 +62,8 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
         super.onCreate(_savedInstanceState);
         setContentView(binding.getRoot());
 
-        binding.collapsingToolbar.setStatusBarScrimColor(SurfaceColors.SURFACE_2.getColor(this));
-        binding.collapsingToolbar.setContentScrimColor(SurfaceColors.SURFACE_2.getColor(this));
+        ViewCompat.setOnApplyWindowInsetsListener(binding.fab,
+                new AddMarginOnApplyWindowInsetsListener(WindowInsetsCompat.Type.navigationBars(), WindowInsetsCompat.CONSUMED));
         init();
     }
 
