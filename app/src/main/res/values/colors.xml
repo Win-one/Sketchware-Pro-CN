@@ -157,5 +157,4 @@
     <!--  views  -->
     <color name="cardStrokeColor">#D1D1D1</color>
     <color name="select">@color/md_theme_light_primary</color>
-
 </resources>
