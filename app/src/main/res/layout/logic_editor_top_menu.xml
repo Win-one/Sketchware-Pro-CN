@@ -1,7 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="#ffefefef"
     android:orientation="horizontal"
     android:paddingVertical="8dp"
     android:paddingTop="8dp"
@@ -14,7 +13,6 @@
         android:layout_marginStart="2dp"
         android:layout_marginEnd="2dp"
         android:layout_weight="1"
-        android:background="#fffefefe"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -43,7 +41,6 @@
         android:layout_marginStart="2dp"
         android:layout_marginEnd="2dp"
         android:layout_weight="1"
-        android:background="#fffefefe"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -72,7 +69,6 @@
         android:layout_marginStart="2dp"
         android:layout_marginEnd="2dp"
         android:layout_weight="1"
-        android:background="#fffefefe"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -101,7 +97,6 @@
         android:layout_marginStart="2dp"
         android:layout_marginEnd="2dp"
         android:layout_weight="1"
-        android:background="#fffefefe"
         android:gravity="center"
         android:orientation="horizontal">
 

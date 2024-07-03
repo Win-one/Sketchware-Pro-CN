@@ -130,7 +130,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
     private DB r;
     private DB t;
     private Button buildSettings;
-    private Button runProject;
+    private static Button runProject;
     private ProjectFileSelector projectFileSelector;
     private ViewEditorFragment viewTabAdapter = null;
     private rs eventTabAdapter = null;
@@ -212,7 +212,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
      */
     private void indicateCompileErrorOccurred(String error) {
         new CompileErrorSaver(sc_id).writeLogsToFile(error);
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, R.string.show_compile_log, Snackbar.LENGTH_INDEFINITE);
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, "Show compile log", Snackbar.LENGTH_INDEFINITE);
         snackbar.setAction(Helper.getResString(R.string.common_word_show), v -> {
             if (!mB.a()) {
                 snackbar.dismiss();
@@ -299,7 +299,6 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if (drawer.isDrawerOpen(GravityCompat.END)) {
             drawer.closeDrawer(GravityCompat.END);
         } else if (viewTabAdapter.g()) {
@@ -323,15 +322,15 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
             if (v.getId() == R.id.btn_execute) {
                 new BuildAsyncTask(this).execute();
             } else if (v.getId() == R.id.btn_compiler_opt) {
-                PopupMenu popupMenu = new PopupMenu(this, buildSettings);
+                PopupMenu popupMenu = new PopupMenu(this, buildSettings, 0, R.attr.popupMenuStyle, R.style.Widget_Material3_PopupMenu);
                 Menu menu = popupMenu.getMenu();
 
-                menu.add(Menu.NONE, 1, Menu.NONE, R.string.build_settings);
-                menu.add(Menu.NONE, 2, Menu.NONE, R.string.clean_temporary_files);
-                menu.add(Menu.NONE, 3, Menu.NONE, R.string.show_last_compile_error);
-                menu.add(Menu.NONE, 5, Menu.NONE, R.string.show_source_code);
+                menu.add(Menu.NONE, 1, Menu.NONE, "Build Settings");
+                menu.add(Menu.NONE, 2, Menu.NONE, "Clean temporary files");
+                menu.add(Menu.NONE, 3, Menu.NONE, "Show last compile error");
+                menu.add(Menu.NONE, 5, Menu.NONE, "Show source code");
                 if (FileUtil.isExistFile(q.finalToInstallApkPath)) {
-                    menu.add(Menu.NONE, 4, Menu.NONE, R.string.install_last_built_apk);
+                    menu.add(Menu.NONE, 4, Menu.NONE, "Install last built APK");
                 }
 
                 popupMenu.setOnMenuItemClickListener(item -> {
@@ -340,14 +339,14 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
                         case 2 -> new Thread(() -> {
                             FileUtil.deleteFile(q.projectMyscPath);
                             runOnUiThread(() ->
-                                    SketchwareUtil.toast(getString(R.string.done_cleaning_temporary_files)));
+                                    SketchwareUtil.toast("Done cleaning temporary files!"));
                         }).start();
                         case 3 -> new CompileErrorSaver(sc_id).showLastErrors(this);
                         case 4 -> {
                             if (FileUtil.isExistFile(q.finalToInstallApkPath)) {
                                 installBuiltApk();
                             } else {
-                                SketchwareUtil.toast(getString(R.string.apk_doesn_t_exist_anymore));
+                                SketchwareUtil.toast("APK doesn't exist anymore");
                             }
                         }
                         case 5 -> showCurrentActivitySrcCode();
@@ -492,7 +491,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.design_actionbar_titleopen_drawer) {
             if (!drawer.isDrawerOpen(GravityCompat.END)) {
@@ -659,9 +658,9 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
 
     private void showCurrentActivitySrcCode() {
         ProgressMsgBoxBinding loadingDialogBinding = ProgressMsgBoxBinding.inflate(getLayoutInflater());
-        loadingDialogBinding.tvProgress.setText(R.string.generating_source_code);
+        loadingDialogBinding.tvProgress.setText("Generating source code...");
         var loadingDialog = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.please_wait)
+                .setTitle("Please wait")
                 .setCancelable(false)
                 .setView(loadingDialogBinding.getRoot())
                 .create();
@@ -674,7 +673,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
             var dialogBuilder = new MaterialAlertDialogBuilder(this)
                     .setTitle(filename)
                     .setCancelable(false)
-                    .setPositiveButton(R.string.common_word_dismiss, null);
+                    .setPositiveButton("Dismiss", null);
 
             runOnUiThread(() -> {
                 if (isFinishing()) return;
@@ -688,7 +687,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
                 editor.getComponent(Magnifier.class).setWithinEditorForcibly(true);
 
                 if (filename.endsWith(".xml")) {
-                    editor.setColorScheme(CodeEditorColorSchemes.loadTextMateColorScheme(CodeEditorColorSchemes.THEME_DRACULA));
+                    editor.setColorScheme(CodeEditorColorSchemes.loadTextMateColorScheme(CodeEditorColorSchemes.THEME_GITHUB));
                     editor.setEditorLanguage(CodeEditorLanguages.loadTextMateLanguage(CodeEditorLanguages.SCOPE_NAME_XML));
                 } else {
                     editor.setColorScheme(new EditorColorScheme());
@@ -919,7 +918,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
             var activity = this.activity.get();
             activity.runOnUiThread(() -> {
                 dismiss();
-                SketchwareUtil.toastError(activity.getString(R.string.apk_build_failed));
+                SketchwareUtil.toastError("APK build failed");
                 activity.runProject.setText(Helper.getResString(R.string.common_word_run));
                 activity.runProject.setClickable(true);
                 activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -941,7 +940,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
                 try {
                     var q = activity.q;
                     var sc_id = activity.sc_id;
-                    publishProgress(activity.getString(R.string.deleting_temporary_files));
+                    publishProgress("Deleting temporary files...");
                     FileUtil.deleteFile(q.projectMyscPath);
 
                     q.c(a);
@@ -978,14 +977,14 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
                         return;
                     }
 
-                    publishProgress(activity.getString(R.string.extracting_built_in_libraries));
+                    publishProgress("Extracting built-in libraries...");
                     BuiltInLibraries.extractCompileAssets(this);
                     if (canceled) {
                         cancel(true);
                         return;
                     }
 
-                    publishProgress(activity.getString(R.string.aapt2_is_running));
+                    publishProgress("AAPT2 is running...");
                     builder.compileResources();
                     if (canceled) {
                         cancel(true);
@@ -998,7 +997,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
                         return;
                     }
 
-                    publishProgress(activity.getString(R.string.java_is_compiling));
+                    publishProgress("Java is compiling...");
                     builder.compileJavaCode();
                     if (canceled) {
                         cancel(true);
@@ -1028,21 +1027,21 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
                         return;
                     }
 
-                    publishProgress(activity.getString(R.string.merging_dex_files));
+                    publishProgress("Merging DEX files...");
                     builder.getDexFilesReady();
                     if (canceled) {
                         cancel(true);
                         return;
                     }
 
-                    publishProgress(activity.getString(R.string.building_apk));
+                    publishProgress("Building APK...");
                     builder.buildApk();
                     if (canceled) {
                         cancel(true);
                         return;
                     }
 
-                    publishProgress(activity.getString(R.string.signing_apk));
+                    publishProgress("Signing APK...");
                     builder.signDebugApk();
                     if (canceled) {
                         cancel(true);
@@ -1062,7 +1061,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
                             dialog.a("A directory important for building is missing. " +
                                     "Sketchware Pro can try creating " + e.getMissingFile().getAbsolutePath() +
                                     " if you'd like to.");
-                            dialog.configureDefaultButton(Helper.getResString(R.string.common_word_create), v -> {
+                            dialog.configureDefaultButton("Create", v -> {
                                 dialog.dismiss();
                                 if (!e.getMissingFile().mkdirs()) {
                                     SketchwareUtil.toastError("Failed to create directory / directories!");
@@ -1074,7 +1073,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
                                     "Put the correct file back to " + e.getMissingFile().getAbsolutePath() +
                                     " and try building again.");
                         }
-                        dialog.b(Helper.getResString(R.string.common_word_dismiss), Helper.getDialogDismissListener(dialog));
+                        dialog.b("Dismiss", Helper.getDialogDismissListener(dialog));
                         dialog.show();
                     });
                 } catch (Throwable tr) {
@@ -1134,11 +1133,13 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
                             if (!dialog.isCancelableOnBackPressed()) {
                                 dialog.setIsCancelableOnBackPressed(true);
                                 maybeShow();
-                                publishProgress(Helper.getResString(R.string.canceling_build));
                                 canceled = true;
                             }
                             dialog.show();
                         }
+                        runProject.setText("Canceling build...");
+                        publishProgress("Canceling build...");
+                        cancelDialog.dismiss();
                         dialog.dismiss();
                     });
 
@@ -1170,7 +1171,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
         public void onPreExecute() {
             super.onPreExecute();
             var activity = this.activity.get();
-            activity.runProject.setText(R.string.building_apk_file);
+            activity.runProject.setText("Building APK file...");
             activity.runProject.setClickable(false);
             activity.r.a("P1I10", true);
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

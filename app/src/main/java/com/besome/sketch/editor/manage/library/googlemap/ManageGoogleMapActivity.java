@@ -124,7 +124,7 @@ public class ManageGoogleMapActivity extends BaseAppCompatActivity implements Vi
         toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
         LinearLayout switchLayout = findViewById(R.id.layout_switch);
         switchLayout.setOnClickListener(this);
-        libSwitch = findViewById(R.id.switch_lib);
+        libSwitch = findViewById(R.id.lib_switch);
         editApiKey = findViewById(R.id.ed_api_key);
         ((TextView) findViewById(R.id.tv_api_key)).setText(Helper.getResString(R.string.design_library_google_map_title_api_key));
         ((TextView) findViewById(R.id.tv_desc)).setText(Helper.getResString(R.string.design_library_google_maps_description_operate_normally));

@@ -17,18 +17,16 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.activity.EdgeToEdge;
 
 import com.besome.sketch.lib.base.CollapsibleViewHolder;
 import com.besome.sketch.lib.ui.CollapsibleButton;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
-import com.sketchware.remod.databinding.ManageCustomComponentBinding;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -46,7 +44,6 @@ import mod.elfilibustero.sketch.editor.component.CollapsibleCustomComponentLayou
 import mod.elfilibustero.sketch.lib.ui.SketchFilePickerDialog;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.components.ComponentsHandler;
-import mod.jbk.util.AddMarginOnApplyWindowInsetsListener;
 
 public class ManageCustomComponentActivity extends AppCompatActivity {
 
@@ -54,22 +51,29 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
 
     private static final String COMPONENT_EXPORT_DIR = wq.getExtraDataExport() + "/components/";
     private static final String COMPONENT_DIR = wq.getCustomComponent();
-    private ManageCustomComponentBinding binding;
+
+    private TextView tv_guide;
+    private RecyclerView componentView;
+
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
         EdgeToEdge.enable(this);
-        binding = ManageCustomComponentBinding.inflate(getLayoutInflater());
         super.onCreate(_savedInstanceState);
-        setContentView(binding.getRoot());
-
-        ViewCompat.setOnApplyWindowInsetsListener(binding.fab,
-                new AddMarginOnApplyWindowInsetsListener(WindowInsetsCompat.Type.navigationBars(), WindowInsetsCompat.CONSUMED));
+        setContentView(R.layout.manage_custom_component);
         init();
     }
 
     private void init() {
-        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-        binding.fab.setOnClickListener(_view ->
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+
+        tv_guide = findViewById(R.id.tv_guide);
+        componentView = findViewById(R.id.list);
+
+        findViewById(R.id.fab).setOnClickListener(_view ->
                 startActivity(new Intent(getApplicationContext(), AddCustomComponentActivity.class)));
     }
 
@@ -81,7 +85,7 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, R.string.common_word_import);
+        menu.add(0, 0, 0, "Import");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -104,8 +108,8 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
         if (FileUtil.isExistFile(COMPONENT_DIR)) {
             readComponents(COMPONENT_DIR);
         } else {
-            binding.noContentLayout.setVisibility(View.VISIBLE);
-            binding.list.setVisibility(View.GONE);
+            tv_guide.setVisibility(View.VISIBLE);
+            componentView.setVisibility(View.GONE);
         }
     }
 
@@ -113,16 +117,16 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
         componentsList = new Gson().fromJson(FileUtil.readFile(_path), Helper.TYPE_MAP_LIST);
         if (componentsList != null && componentsList.size() > 0) {
             ComponentsAdapter adapter = new ComponentsAdapter(componentsList);
-            Parcelable state = binding.list.getLayoutManager().onSaveInstanceState();
-            binding.list.setAdapter(adapter);
-            binding.list.getLayoutManager().onRestoreInstanceState(state);
+            Parcelable state = componentView.getLayoutManager().onSaveInstanceState();
+            componentView.setAdapter(adapter);
+            componentView.getLayoutManager().onRestoreInstanceState(state);
             adapter.notifyDataSetChanged();
-            binding.list.setVisibility(View.VISIBLE);
-            binding.noContentLayout.setVisibility(View.GONE);
+            componentView.setVisibility(View.VISIBLE);
+            tv_guide.setVisibility(View.GONE);
             return;
         }
-        binding.noContentLayout.setVisibility(View.VISIBLE);
-        binding.list.setVisibility(View.GONE);
+        tv_guide.setVisibility(View.VISIBLE);
+        componentView.setVisibility(View.GONE);
     }
 
     private void showFilePickerDialog() {

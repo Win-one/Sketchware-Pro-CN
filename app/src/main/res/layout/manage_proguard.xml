@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
+    <include layout="@layout/toolbar_improved" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,11 +22,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:checked="true"
-                android:gravity="center|start"
+                android:gravity="center|left"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:text="@string/common_word_activated"
-                android:textColor="#ffe53935"
+                android:text="Activated"
                 android:textSize="16sp" />
 
             <!-- R8 code shrinker my beloved, I'll come to your house if your remove it -->
@@ -36,11 +35,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:checked="true"
-                android:gravity="center|start"
+                android:gravity="center|left"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
+                android:textColor="?attr/colorPrimary"
                 android:text="@string/code_shrinker_use_r8"
-                android:textColor="#5271FF"
                 android:textSize="16sp" />
 
 
@@ -56,14 +55,12 @@
                     android:layout_marginRight="8dp"
                     android:padding="4dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/connected_96"
-                    android:layout_marginEnd="8dp" />
+                    android:src="@drawable/connected_96" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/code_shrinker_obfuscate_def"
-                    android:textColor="#ff757575"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -73,7 +70,6 @@
                 android:layout_marginTop="8dp"
                 android:padding="8dp"
                 android:text="@string/code_shrinker_warning"
-                android:textColor="#ffde0000"
                 android:textSize="12sp" />
 
             <LinearLayout
@@ -87,14 +83,14 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginBottom="2dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="@string/code_shrinker_rules"
-                    android:textColor="#ffe53935"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="16sp" />
 
                 <ImageView
@@ -103,7 +99,7 @@
                     android:padding="4dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/ic_edit_white_48dp"
-                    app:tint="@color/colorAccent" />
+                    app:tint="?attr/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
@@ -118,14 +114,12 @@
                     android:layout_marginRight="8dp"
                     android:padding="4dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/side_menu_setting_icon_over"
-                    android:layout_marginEnd="8dp" />
+                    android:src="@drawable/settings_24px" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/code_shrinker_configure_shrinker"
-                    android:textColor="#ff757575"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -140,14 +134,14 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginBottom="2dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
-                    android:text="@string/full_mode"
-                    android:textColor="#ffe53935"
+                    android:text="Full Mode"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="16sp" />
 
                 <ImageView
@@ -156,7 +150,7 @@
                     android:padding="4dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/ic_edit_white_48dp"
-                    app:tint="@color/colorAccent" />
+                    app:tint="?attr/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
@@ -171,14 +165,12 @@
                     android:layout_marginRight="8dp"
                     android:padding="4dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/side_menu_setting_icon_over"
-                    android:layout_marginEnd="8dp" />
+                    android:src="@drawable/settings_24px" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/code_shrinker_full_mode_def"
-                    android:textColor="#ff757575"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -189,11 +181,11 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
                 android:checked="true"
-                android:gravity="center|start"
+                android:gravity="center|left"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:text="@string/code_shrinker_generate_debug_files"
-                android:textColor="#ffe53935"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>

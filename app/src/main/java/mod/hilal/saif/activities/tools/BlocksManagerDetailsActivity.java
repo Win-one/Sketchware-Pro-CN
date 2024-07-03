@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -23,12 +24,14 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
-import com.developer.filepicker.model.DialogConfigs;
-import com.developer.filepicker.model.DialogProperties;
-import com.developer.filepicker.view.FilePickerDialog;
+import com.github.angads25.filepicker.model.DialogConfigs;
+import com.github.angads25.filepicker.model.DialogProperties;
+import com.github.angads25.filepicker.view.FilePickerDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
@@ -50,85 +53,42 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
 
     private final ArrayList<HashMap<String, Object>> filtered_list = new ArrayList<>();
     private final ArrayList<Integer> reference_list = new ArrayList<>();
-    private FloatingActionButton _fab;
     private ArrayList<HashMap<String, Object>> all_blocks_list = new ArrayList<>();
     private String blocks_path = "";
-    private ImageView import_export;
-    private ListView listview1;
     private String mode = "normal";
-    private TextView page_title;
     private ArrayList<HashMap<String, Object>> pallet_list = new ArrayList<>();
     private String pallet_path = "";
     private int palette = 0;
     private Parcelable listViewSavedState;
-    private ImageView swap;
+
+    private Toolbar toolbar;
+    private ListView block_list;
+    private LinearLayout background;
+    private com.google.android.material.floatingactionbutton.FloatingActionButton fab_button;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.blocks_managers_details);
+
+        background = findViewById(R.id.background);
+        block_list = findViewById(R.id.block_list);
+        fab_button = findViewById(R.id.fab_button);
+
         initialize();
         _receive_intents();
     }
 
     private void initialize() {
-        _fab = findViewById(R.id.fab);
-        listview1 = findViewById(R.id.listview);
-        ImageView back_icon = findViewById(R.id.backicon);
-        page_title = findViewById(R.id.pagetitle);
-        import_export = findViewById(R.id.import_export);
-        swap = findViewById(R.id.swap);
-        back_icon.setOnClickListener(Helper.getBackPressedClickListener(this));
-        Helper.applyRippleToToolbarView(back_icon);
-        import_export.setOnClickListener(v -> {
-            PopupMenu popupMenu = new PopupMenu(this, import_export);
-            final Menu menu = popupMenu.getMenu();
-            menu.add(Menu.NONE,1,Menu.NONE,R.string.import_blocks);
-            menu.add(Menu.NONE,2,Menu.NONE,R.string.export_blocks);
-            popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()) {
-                    case 1:
-                        openFileExplorerImport();
-                        break;
 
-                    case 2:
-                        Object paletteName = pallet_list.get(palette - 9).get("name");
-                        if (paletteName instanceof String) {
-                            String exportTo = new File(BLOCK_EXPORT_PATH, paletteName + ".json").getAbsolutePath();
-                            FileUtil.writeFile(exportTo, new Gson().toJson(filtered_list));
-                            SketchwareUtil.toast("Successfully exported blocks to:\n" + exportTo, Toast.LENGTH_LONG);
-                        } else {
-                            SketchwareUtil.toastError("Invalid name of palette #" + (palette - 9));
-                        }
-                        break;
+        toolbar = (Toolbar) getLayoutInflater().inflate(R.layout.toolbar_improved, background, false);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        ((ViewGroup) background).addView(toolbar, 0);
 
-                    default:
-                        return false;
-                }
-                return true;
-            });
-            popupMenu.show();
-        });
-        Helper.applyRippleToToolbarView(import_export);
-        swap.setOnClickListener(v -> {
-            if (mode.equals("normal")) {
-                swap.setImageResource(R.drawable.icon_checkbox_white_96);
-                mode = "editor";
-                import_export.setVisibility(View.GONE);
-                _fabVisibility(false);
-            } else {
-                swap.setImageResource(R.drawable.ic_menu_white_24dp);
-                mode = "normal";
-                import_export.setVisibility(View.VISIBLE);
-                _fabVisibility(true);
-            }
-            Parcelable savedInstanceState = listview1.onSaveInstanceState();
-            listview1.setAdapter(new Adapter(filtered_list));
-            ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
-            listview1.onRestoreInstanceState(savedInstanceState);
-        });
-        Helper.applyRippleToToolbarView(swap);
-        _fab.setOnClickListener(v -> {
+        fab_button.setOnClickListener(v -> {
             Object paletteColor = pallet_list.get(palette - 9).get("color");
             if (paletteColor instanceof String) {
                 Intent intent = new Intent(getApplicationContext(), BlocksManagerCreatorActivity.class);
@@ -174,33 +134,86 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        listViewSavedState = listview1.onSaveInstanceState();
+        listViewSavedState = block_list.onSaveInstanceState();
     }
 
     @Override
     public void onStart() {
         super.onStart();
         if (listViewSavedState != null) {
-            listview1.onRestoreInstanceState(listViewSavedState);
+            block_list.onRestoreInstanceState(listViewSavedState);
             _refreshLists();
         }
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if (mode.equals("editor")) {
-            swap.setImageResource(R.drawable.ic_menu_white_24dp);
             mode = "normal";
-            Parcelable savedState = listview1.onSaveInstanceState();
-            listview1.setAdapter(new Adapter(filtered_list));
-            ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
-            listview1.onRestoreInstanceState(savedState);
-            import_export.setVisibility(View.VISIBLE);
-            _fabVisibility(true);
+            Parcelable savedState = block_list.onSaveInstanceState();
+            block_list.setAdapter(new Adapter(filtered_list));
+            ((BaseAdapter) block_list.getAdapter()).notifyDataSetChanged();
+            block_list.onRestoreInstanceState(savedState);
+            fabButtonVisibility(true);
+            onCreateOptionsMenu(toolbar.getMenu());
         } else {
             finish();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
+        if (Integer.parseInt(getIntent().getStringExtra("position")) != -1) {
+            if (mode.equals("normal")) {
+                menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Swap").setIcon(getDrawable(R.drawable.swap_vert_24px)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Import");
+                menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Export");
+            } else {
+                menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Swap").setIcon(getDrawable(R.drawable.save_icon_24px)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem menuItem) {
+        String title = menuItem.getTitle().toString();
+        switch (title) {
+            case "Swap":
+                if (mode.equals("normal")) {
+                    mode = "editor";
+                    fabButtonVisibility(false);
+                } else {
+                    mode = "normal";
+                    fabButtonVisibility(true);
+                }
+                Parcelable savedInstanceState = block_list.onSaveInstanceState();
+                block_list.setAdapter(new Adapter(filtered_list));
+                ((BaseAdapter) block_list.getAdapter()).notifyDataSetChanged();
+                block_list.onRestoreInstanceState(savedInstanceState);
+                onCreateOptionsMenu(toolbar.getMenu());
+                break;
+
+            case "Import":
+                openFileExplorerImport();
+                break;
+
+            case "Export":
+                Object paletteName = pallet_list.get(palette - 9).get("name");
+                if (paletteName instanceof String) {
+                    String exportTo = new File(BLOCK_EXPORT_PATH, paletteName + ".json").getAbsolutePath();
+                    FileUtil.writeFile(exportTo, new Gson().toJson(filtered_list));
+                    SketchwareUtil.toast("Successfully exported blocks to:\n" + exportTo, Toast.LENGTH_LONG);
+                } else {
+                    SketchwareUtil.toastError("Invalid name of palette #" + (palette - 9));
+                }
+                break;
+
+            default:
+                return false;
+        }
+        return super.onOptionsItemSelected(menuItem);
     }
 
     private void _receive_intents() {
@@ -209,15 +222,14 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
         blocks_path = getIntent().getStringExtra("dirB");
         _refreshLists();
         if (palette == -1) {
-            page_title.setText(R.string.common_word_recycle_bin);
-            swap.setVisibility(View.GONE);
-            import_export.setVisibility(View.GONE);
-            _fab.setVisibility(View.GONE);
+            getSupportActionBar().setTitle("Recycle Bin");
+            fab_button.setVisibility(View.GONE);
         } else {
             Object paletteName = pallet_list.get(palette - 9).get("name");
 
             if (paletteName instanceof String) {
-                page_title.setText((String) paletteName);
+                getSupportActionBar().setTitle("Manage Block");
+                getSupportActionBar().setSubtitle((String) paletteName);
             }
         }
     }
@@ -285,10 +297,10 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                 }
             }
         }
-        Parcelable onSaveInstanceState = listview1.onSaveInstanceState();
-        listview1.setAdapter(new Adapter(filtered_list));
-        ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
-        listview1.onRestoreInstanceState(onSaveInstanceState);
+        Parcelable onSaveInstanceState = block_list.onSaveInstanceState();
+        block_list.setAdapter(new Adapter(filtered_list));
+        ((BaseAdapter) block_list.getAdapter()).notifyDataSetChanged();
+        block_list.onRestoreInstanceState(onSaveInstanceState);
     }
 
     private void _a(View view) {
@@ -311,15 +323,15 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
         if (palette == -1) {
             PopupMenu popupMenu = new PopupMenu(this, view);
             Menu menu = popupMenu.getMenu();
-            menu.add(Menu.NONE,3,Menu.NONE,R.string.delete_permanently);
-            menu.add(Menu.NONE,4,Menu.NONE,R.string.common_word_restore);
+            menu.add("Delete permanently");
+            menu.add("Restore");
             popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()) {
-                    case 3:
+                switch (item.getTitle().toString()) {
+                    case "Delete permanently":
                         _deleteBlock(position);
                         break;
 
-                    case 4:
+                    case "Restore":
                         _changePallette(position);
                         break;
 
@@ -333,17 +345,17 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
         }
         PopupMenu popupMenu = new PopupMenu(this, view);
         Menu menu = popupMenu.getMenu();
-        menu.add(Menu.NONE,5,Menu.NONE,R.string.insert_above);
-        menu.add(Menu.NONE,6,Menu.NONE,R.string.common_word_delete);
-        menu.add(Menu.NONE,7,Menu.NONE,R.string.duplicate);
-        menu.add(Menu.NONE,8,Menu.NONE,R.string.move_to_palette);
+        menu.add("Insert above");
+        menu.add("Delete");
+        menu.add("Duplicate");
+        menu.add("Move to palette");
         popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case 7:
+            switch (item.getTitle().toString()) {
+                case "Duplicate":
                     _duplicateBlock(position);
                     break;
 
-                case 5:
+                case "Insert above":
                     Object paletteColor = pallet_list.get(palette - 9).get("color");
                     if (paletteColor instanceof String) {
                         Intent intent = new Intent(getApplicationContext(), BlocksManagerCreatorActivity.class);
@@ -357,15 +369,15 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                     }
                     break;
 
-                case 8:
+                case "Move to palette":
                     _changePallette(position);
                     break;
 
-                case 6:
+                case "Delete":
                     new AlertDialog.Builder(this)
-                            .setTitle(R.string.delete_block)
+                            .setTitle("Delete block?")
                             .setMessage("Are you sure you want to delete this block?")
-                            .setPositiveButton(R.string.common_word_recycle_bin, (dialog, which) -> _moveToRecycleBin(position))
+                            .setPositiveButton("Recycle bin", (dialog, which) -> _moveToRecycleBin(position))
                             .setNegativeButton(R.string.common_word_cancel, null)
                             .setNeutralButton("Delete permanently", (dialog, which) -> _deleteBlock(position))
                             .show();
@@ -425,9 +437,9 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.common_word_cancel, null);
         if (palette == -1) {
             AtomicInteger restoreToChoice = new AtomicInteger(-1);
-            builder.setTitle(R.string.restore_to)
+            builder.setTitle("Restore to")
                     .setSingleChoiceItems(paletteNames.toArray(new String[0]), -1, (dialog, which) -> restoreToChoice.set(which))
-                    .setPositiveButton(R.string.common_word_restore, (dialog, which) -> {
+                    .setPositiveButton("Restore", (dialog, which) -> {
                         if (restoreToChoice.get() != -1) {
                             all_blocks_list.get(position).put("palette", String.valueOf(restoreToChoice.get() + 9));
                             Collections.swap(all_blocks_list, position, all_blocks_list.size() - 1);
@@ -437,9 +449,9 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                     });
         } else {
             AtomicInteger moveToChoice = new AtomicInteger(palette - 9);
-            builder.setTitle(R.string.move_to)
+            builder.setTitle("Move to")
                     .setSingleChoiceItems(paletteNames.toArray(new String[0]), palette - 9, (dialog, which) -> moveToChoice.set(which))
-                    .setPositiveButton(R.string.common_word_move, (dialog, which) -> {
+                    .setPositiveButton("Move", (dialog, which) -> {
                         all_blocks_list.get(position).put("palette", String.valueOf(moveToChoice.get() + 9));
                         Collections.swap(all_blocks_list, position, all_blocks_list.size() - 1);
                         FileUtil.writeFile(blocks_path, gson.toJson(all_blocks_list));
@@ -463,7 +475,7 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                 }
             }
             AlertDialog.Builder import_dialog = new AlertDialog.Builder(this);
-            import_dialog.setTitle(R.string.import_blocks)
+            import_dialog.setTitle("Import blocks")
                     .setMultiChoiceItems(names.toArray(new CharSequence[0]), null, (dialog, which, isChecked) -> {
                         if (isChecked) {
                             toAdd.add(which);
@@ -471,7 +483,7 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                             toAdd.remove((Integer) which);
                         }
                     })
-                    .setPositiveButton(R.string.common_word_import, (dialog, which) -> {
+                    .setPositiveButton("Import", (dialog, which) -> {
                         for (int i = 0; i < blocks.size(); i++) {
                             if (toAdd.contains(i)) {
                                 HashMap<String, Object> map = blocks.get(i);
@@ -483,7 +495,7 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                         _refreshLists();
                         SketchwareUtil.toast("Imported successfully");
                     })
-                    .setNegativeButton(R.string.common_word_reverse, (dialog, which) -> {
+                    .setNegativeButton("Reverse", (dialog, which) -> {
                         for (int i = 0; i < blocks.size(); i++) {
                             if (!toAdd.contains(i)) {
                                 HashMap<String, Object> map = blocks.get(i);
@@ -495,7 +507,7 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
                         _refreshLists();
                         SketchwareUtil.toast("Imported successfully");
                     })
-                    .setNeutralButton(R.string.common_word_all, (dialog, which) -> {
+                    .setNeutralButton("All", (dialog, which) -> {
                         for (int i = 0; i < blocks.size(); i++) {
                             HashMap<String, Object> map = blocks.get(i);
                             map.put("palette", String.valueOf(palette));
@@ -511,11 +523,11 @@ public class BlocksManagerDetailsActivity extends AppCompatActivity {
         }
     }
 
-    private void _fabVisibility(boolean visible) {
+    private void fabButtonVisibility(boolean visible) {
         if (visible) {
-            ObjectAnimator.ofFloat(_fab, "translationX", _fab.getTranslationX(), -50.0f, 0.0f).setDuration(400L).start();
+            ObjectAnimator.ofFloat(fab_button, "translationX", fab_button.getTranslationX(), -50.0f, 0.0f).setDuration(400L).start();
         } else {
-            ObjectAnimator.ofFloat(_fab, "translationX", _fab.getTranslationX(), -50.0f, 250.0f).setDuration(400L).start();
+            ObjectAnimator.ofFloat(fab_button, "translationX", fab_button.getTranslationX(), -50.0f, 250.0f).setDuration(400L).start();
         }
     }
 

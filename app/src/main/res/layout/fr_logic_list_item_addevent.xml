@@ -5,9 +5,7 @@
     android:layout_marginLeft="8dp"
     android:layout_marginTop="4dp"
     android:layout_marginRight="8dp"
-    android:background="@drawable/selector_toggle_list_view"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp">
+    android:background="@drawable/selector_toggle_list_view">
 
     <ImageView
         android:id="@+id/img_icon"
@@ -16,9 +14,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
-        android:contentDescription="@null"
-        android:layout_marginEnd="12dp"
-        android:layout_marginStart="12dp" />
+        android:contentDescription="@null" />
 
     <TextView
         android:id="@+id/tv_target_type"
@@ -27,7 +23,6 @@
         android:layout_marginStart="56dp"
         android:layout_marginLeft="56dp"
         android:layout_marginTop="16dp"
-        android:textColor="#ff404040"
         android:textSize="13sp" />
 
     <TextView
@@ -37,9 +32,7 @@
         android:layout_marginTop="16dp"
         android:layout_toRightOf="@+id/tv_target_type"
         android:text=" : "
-        android:textColor="#ff404040"
-        android:textSize="13sp"
-        android:layout_toEndOf="@id/tv_target_type" />
+        android:textSize="13sp" />
 
     <TextView
         android:id="@+id/tv_target_id"
@@ -49,10 +42,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_toRightOf="@+id/tv_sep"
-        android:textColor="#ff202020"
         android:textSize="14sp"
-        android:textStyle="bold"
-        android:layout_toEndOf="@id/tv_sep" />
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,7 +67,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:textColor="#ff9a9a9a"
             android:textSize="11sp" />
     </LinearLayout>
 
@@ -90,6 +80,5 @@
         android:layout_marginRight="8dp"
         android:clickable="true"
         android:contentDescription="@null"
-        android:gravity="center"
-        android:layout_marginEnd="8dp" />
+        android:gravity="center" />
 </RelativeLayout>

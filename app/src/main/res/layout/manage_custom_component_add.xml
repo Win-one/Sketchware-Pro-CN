@@ -13,7 +13,6 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:popupTheme="@style/ThemeOverlay.ToolbarMenu"
             app:layout_collapseMode="parallax" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -46,7 +45,6 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:src="@drawable/ic_title" />
 
@@ -55,26 +53,23 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/developer_tools_component_name"
+                        
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
+                <EditText
+                    android:id="@+id/component_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/component_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:gravity="center_vertical"
-                        android:imeOptions="actionNext"
-                        android:inputType="text"
-                        android:padding="8dp"
-                        android:singleLine="true"
-                        android:textSize="14sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_round_light_grey"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:padding="8dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -86,7 +81,6 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:src="@drawable/ic_key_48dp" />
 
@@ -99,22 +93,18 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
+                <EditText
+                    android:id="@+id/component_id"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/component_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:gravity="center_vertical"
-                        android:imeOptions="actionNext"
-                        android:inputType="numberSigned"
-                        android:padding="8dp"
-                        android:singleLine="true"
-                        android:textSize="14sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_round_light_grey"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberSigned"
+                    android:padding="8dp"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -126,7 +116,6 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:src="@drawable/ic_picture_48dp" />
 
@@ -146,30 +135,26 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <EditText
+                        android:id="@+id/component_icon"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
-                        <EditText
-                            android:id="@+id/component_icon"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:imeOptions="actionNext"
-                            android:inputType="numberSigned"
-                            android:padding="8dp"
-                            android:singleLine="true"
-                            android:textSize="14sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_round_light_grey"
+                        android:gravity="center_vertical"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberSigned"
+                        android:padding="8dp"
+                        android:singleLine="true"
+                        android:textSize="14sp" />
 
                     <ImageView
                         android:id="@+id/pick"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/ic_add_24" />
+                        android:src="@drawable/plus_96" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -182,7 +167,6 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:src="@drawable/connected_96" />
 
@@ -194,21 +178,20 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-<com.google.android.material.textfield.TextInputLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+
                 <EditText
                     android:id="@+id/component_var_type_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_round_light_grey"
                     android:gravity="center_vertical"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -219,7 +202,6 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:src="@drawable/connected_96" />
 
@@ -231,21 +213,20 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+
                 <EditText
                     android:id="@+id/component_type_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_round_light_grey"
                     android:gravity="center_vertical"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textSize="14sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -256,7 +237,6 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:src="@drawable/connected_96" />
 
@@ -268,21 +248,20 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+
                 <EditText
                     android:id="@+id/component_build_class"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_round_light_grey"
                     android:gravity="center_vertical"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textSize="14sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -293,7 +272,6 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:src="@drawable/connected_96" />
 
@@ -305,28 +283,27 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+
                 <EditText
                     android:id="@+id/component_type_class"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_round_light_grey"
                     android:gravity="center_vertical"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textSize="14sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:padding="8dp"
-                    android:text="@string/optional"
-                    android:textColor="#F44336"
+                    android:text="Optional"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="14sp" />
 
                 <LinearLayout
@@ -339,7 +316,6 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:src="@drawable/ic_full_desc" />
 
@@ -351,18 +327,17 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+
                 <EditText
                     android:id="@+id/component_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_round_light_grey"
                     android:inputType="textMultiLine"
                     android:padding="8dp"
                     android:textSize="14sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -373,7 +348,6 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:src="@drawable/rename_96_blue" />
 
@@ -385,21 +359,20 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+
                 <EditText
                     android:id="@+id/component_doc_url"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_round_light_grey"
                     android:gravity="center_vertical"
                     android:imeOptions="actionNext"
                     android:inputType="text|textUri"
                     android:padding="8dp"
                     android:singleLine="true"
                     android:textSize="14sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -410,7 +383,6 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:src="@drawable/code_48" />
 
@@ -422,21 +394,20 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+
                 <EditText
                     android:id="@+id/component_add_var"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_round_light_grey"
                     android:inputType="textMultiLine"
                     android:padding="8dp"
                     android:textSize="14sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
+                    android:layout_gravity="right"
                     android:layout_marginBottom="8dp"
                     android:text="(### -&gt; variable name)"
                     android:textSize="12sp" />
@@ -451,7 +422,6 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:src="@drawable/code_48" />
 
@@ -463,22 +433,21 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+
                 <EditText
                     android:id="@+id/component_def_add_var"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_round_light_grey"
                     android:gravity="center_vertical"
                     android:inputType="textMultiLine"
                     android:padding="8dp"
                     android:textSize="14sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
+                    android:layout_gravity="right"
                     android:layout_marginBottom="8dp"
                     android:text="(### -&gt; variable name)"
                     android:textSize="12sp" />
@@ -493,7 +462,6 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:src="@drawable/code_48" />
 
@@ -505,19 +473,17 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+
                 <EditText
                     android:id="@+id/component_imports"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_round_light_grey"
                     android:gravity="center_vertical"
                     android:inputType="textMultiLine"
                     android:padding="8dp"
                     android:textSize="14sp" />
-                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
@@ -530,10 +496,8 @@
                 android:id="@+id/btn_import"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="8dp"
                 android:padding="8dp"
@@ -544,10 +508,8 @@
                 android:id="@+id/btn_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="8dp"
                 android:padding="8dp"

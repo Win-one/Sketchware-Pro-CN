@@ -33,7 +33,6 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/design_manager_image_description_guide_add_image"
-                        android:textColor="@color/grey"
                         android:textSize="14sp"
                         android:visibility="gone" />
 

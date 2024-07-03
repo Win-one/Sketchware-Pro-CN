@@ -2,40 +2,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <LinearLayout
-        android:id="@+id/layout_switch"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:background="?selectableItemBackground"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        style="?attr/materialCardViewFilledStyle"
+        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
 
-        <TextView
-            android:id="@+id/tv_enable"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/layout_switch"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:textColor="?colorError"
-            android:textSize="14sp"
-            tools:text="@string/design_library_settings_title_enabled" />
+            android:background="?selectableItemBackground"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="6dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <com.google.android.material.materialswitch.MaterialSwitch
-            android:id="@+id/lib_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginLeft="8dp"
-            android:clickable="false"
-            android:layout_marginStart="8dp" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_enable"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="?colorControlNormal"
+                android:textSize="18sp"
+                tools:text="@string/design_library_settings_title_enabled" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/lib_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="8dp"
+                android:clickable="false" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,18 +58,19 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp">
+                style="?attr/materialCardViewFilledStyle"
+                app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="8dp">
+                    android:padding="14dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="12dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -91,7 +99,7 @@
                             android:id="@+id/tv_app_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center|start"
+                            android:gravity="center|left"
                             android:textColor="#ff7d7d7d"
                             android:textSize="12sp"
                             tools:text="App ID : ca-app-pub-3940256099942544/1033173712"/>
@@ -103,13 +111,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="12dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -117,15 +125,14 @@
                     android:layout_height="18dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="8dp"
-                    android:src="@drawable/widget_file"
-                    android:layout_marginEnd="8dp" />
+                    android:src="@drawable/widget_file" />
 
                 <TextView
                     android:id="@+id/tv_title_banner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#ff4d4d4d"
+                    android:textColor="?colorControlNormal"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     tools:text="@string/design_library_admob_title_banner" />
@@ -134,13 +141,14 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp">
+                style="?attr/materialCardViewFilledStyle"
+                app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="8dp">
+                    android:padding="14dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -152,8 +160,8 @@
                             android:id="@+id/tv_title_banner_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center|start"
-                            android:textColor="#ff404040"
+                            android:gravity="center|left"
+                            android:textColor="?colorControlNormal"
                             android:textSize="14sp"
                             tools:text="@string/design_library_admob_title_ad_name" />
 
@@ -161,7 +169,7 @@
                             android:id="@+id/tv_banner_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center|start"
+                            android:gravity="center|left"
                             android:textColor="#ff7d7d7d"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -175,8 +183,8 @@
                             android:id="@+id/tv_title_banner_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center|start"
-                            android:textColor="#ff404040"
+                            android:gravity="center|left"
+                            android:textColor="?colorControlNormal"
                             android:textSize="14sp"
                             tools:text="@string/design_library_admob_title_ad_unit_id" />
 
@@ -184,7 +192,7 @@
                             android:id="@+id/tv_banner_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center|start"
+                            android:gravity="center|left"
                             android:textColor="#ff7d7d7d"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -195,13 +203,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="12dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -209,15 +217,14 @@
                     android:layout_height="18dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="8dp"
-                    android:src="@drawable/widget_file"
-                    android:layout_marginEnd="8dp" />
+                    android:src="@drawable/widget_file" />
 
                 <TextView
                     android:id="@+id/tv_title_inter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#ff4d4d4d"
+                    android:textColor="?colorControlNormal"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     tools:text="@string/design_library_admob_title_interstitial" />
@@ -226,13 +233,14 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp">
+                style="?attr/materialCardViewFilledStyle"
+                app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="8dp">
+                    android:padding="14dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -244,8 +252,8 @@
                             android:id="@+id/tv_title_inter_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center|start"
-                            android:textColor="#ff404040"
+                            android:gravity="center|left"
+                            android:textColor="?colorControlNormal"
                             android:textSize="14sp"
                             tools:text="@string/design_library_admob_title_ad_name" />
 
@@ -253,7 +261,7 @@
                             android:id="@+id/tv_inter_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center|start"
+                            android:gravity="center|left"
                             android:textColor="#ff7d7d7d"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -267,8 +275,8 @@
                             android:id="@+id/tv_title_inter_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center|start"
-                            android:textColor="#ff404040"
+                            android:gravity="center|left"
+                            android:textColor="?colorControlNormal"
                             android:textSize="14sp"
                             tools:text="@string/design_library_admob_title_ad_unit_id" />
 
@@ -276,7 +284,7 @@
                             android:id="@+id/tv_inter_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center|start"
+                            android:gravity="center|left"
                             android:textColor="#ff7d7d7d"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -287,13 +295,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="12dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -301,16 +309,15 @@
                     android:layout_height="18dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="8dp"
-                    android:src="@drawable/widget_file"
-                    android:layout_marginEnd="8dp" />
+                    android:src="@drawable/widget_file" />
 
                 <TextView
                     android:id="@+id/tv_title_reward"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="@string/design_library_admob_title_rewarded"
-                    android:textColor="#ff4d4d4d"
+                    android:text="Rewarded Ad"
+                    android:textColor="?colorControlNormal"
                     android:textSize="14sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -318,13 +325,14 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp">
+                style="?attr/materialCardViewFilledStyle"
+                app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="8dp">
+                    android:padding="14dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -336,16 +344,16 @@
                             android:id="@+id/tv_title_reward_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center|start"
-                            android:text="@string/design_library_admob_title_ad_name"
-                            android:textColor="#ff404040"
+                            android:gravity="center|left"
+                            android:text="Ad Name : "
+                            android:textColor="?colorControlNormal"
                             android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/tv_reward_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center|start"
+                            android:gravity="center|left"
                             android:textColor="#ff7d7d7d"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -359,16 +367,16 @@
                             android:id="@+id/tv_title_reward_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center|start"
-                            android:text="@string/design_library_admob_title_ad_unit_id"
-                            android:textColor="#ff404040"
+                            android:gravity="center|left"
+                            android:text="Ad Unit ID : "
+                            android:textColor="?colorControlNormal"
                             android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/tv_reward_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center|start"
+                            android:gravity="center|left"
                             android:textColor="#ff7d7d7d"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -379,8 +387,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -388,15 +396,14 @@
                 android:layout_height="18dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="8dp"
-                android:src="@drawable/widget_file"
-                android:layout_marginEnd="8dp" />
+                android:src="@drawable/widget_file" />
 
             <TextView
                 android:id="@+id/tv_title_test_device"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textColor="#ff4d4d4d"
+                android:textColor="?colorControlNormal"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 tools:text="@string/design_library_admob_dialog_set_test_device_title" />
@@ -405,13 +412,14 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp">
+            style="?attr/materialCardViewFilledStyle"
+            app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_test_device"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="8dp"
+                android:padding="14dp"
                 tools:listitem="@layout/manage_library_setting_admob_test_device_item" />
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>

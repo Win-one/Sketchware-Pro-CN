@@ -4,36 +4,48 @@ import static mod.SketchwareUtil.dpToPx;
 import static mod.SketchwareUtil.getDip;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
+import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
+import android.content.DialogInterface;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
+import androidx.activity.EdgeToEdge;
+import androidx.core.widget.NestedScrollView;
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.annotations.NonNull;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.sketchware.remod.R;
 import com.topjohnwu.superuser.Shell;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.sketchware.remod.databinding.DialogCreateNewFileLayoutBinding;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import a.a.a.mB;
 import mod.SketchwareUtil;
 import mod.agus.jcoderz.lib.FileUtil;
 import mod.hey.studios.util.Helper;
@@ -55,8 +67,40 @@ public class ConfigActivity extends AppCompatActivity {
     public static final String SETTING_SKIP_MAJOR_CHANGES_REMINDER = "skip-major-changes-reminder";
     public static final String SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH = "palletteDir";
     public static final String SETTING_BLOCKMANAGER_DIRECTORY_BLOCK_FILE_PATH = "blockDir";
-    private LinearLayout root;
     private HashMap<String, Object> setting_map = new HashMap<>();
+
+    private LinearLayout content;
+    private NestedScrollView contentLayout;
+    private com.google.android.material.appbar.AppBarLayout appBarLayout;
+    private com.google.android.material.appbar.MaterialToolbar topAppBar;
+    private com.google.android.material.appbar.CollapsingToolbarLayout collapsingToolbar;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        EdgeToEdge.enable(this);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.prefences_content_appbar);
+
+        content = findViewById(R.id.content);
+        topAppBar = findViewById(R.id.topAppBar);
+        appBarLayout = findViewById(R.id.appBarLayout);
+        contentLayout = findViewById(R.id.contentLayout);
+        collapsingToolbar = findViewById(R.id.collapsingToolbar);
+
+        topAppBar.setTitle("Mod Settings");
+        topAppBar.setNavigationOnClickListener(view -> onBackPressed());
+
+        if (FileUtil.isExistFile(SETTINGS_FILE.getAbsolutePath())) {
+            setting_map = readSettings();
+            if (!setting_map.containsKey(SETTING_SHOW_BUILT_IN_BLOCKS) || !setting_map.containsKey(SETTING_ALWAYS_SHOW_BLOCKS)) {
+                restoreDefaultSettings();
+            }
+        } else {
+            restoreDefaultSettings();
+        }
+        initialize();
+    }
+
     public static String getBackupPath() {
         if (FileUtil.isExistFile(SETTINGS_FILE.getAbsolutePath())) {
             HashMap<String, Object> settings = readSettings();
@@ -89,7 +133,6 @@ public class ConfigActivity extends AppCompatActivity {
             return toReturnAndSetIfNotFound;
         }
     }
-
 
     public static String getBackupFileName() {
         if (FileUtil.isExistFile(SETTINGS_FILE.getAbsolutePath())) {
@@ -237,101 +280,52 @@ public class ConfigActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (FileUtil.isExistFile(SETTINGS_FILE.getAbsolutePath())) {
-            setting_map = readSettings();
-            if (!setting_map.containsKey(SETTING_SHOW_BUILT_IN_BLOCKS) || !setting_map.containsKey(SETTING_ALWAYS_SHOW_BLOCKS)) {
-                restoreDefaultSettings();
-            }
-        } else {
-            restoreDefaultSettings();
-        }
-        initialize();
-    }
-
     @SuppressLint("SetTextI18n")
     private void initialize() {
-        root = new LinearLayout(this);
-        root.setBackgroundColor(ContextCompat.getColor(this,R.color.backgroundColor));
-        root.setOrientation(LinearLayout.VERTICAL);
-
-        ScrollView _scroll = new ScrollView(this);
-        LinearLayout.LayoutParams _lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        _scroll.setLayoutParams(_lp);
-
-        LinearLayout _base = new LinearLayout(this);
-        _base.setBackgroundColor(ContextCompat.getColor(this,R.color.backgroundColor));
-        _base.setOrientation(LinearLayout.VERTICAL);
-        _base.setLayoutParams(_lp);
-
-        View toolbar = getLayoutInflater().inflate(R.layout.toolbar, root, false);
-        _base.addView(toolbar);
-        _base.addView(_scroll);
-        _scroll.addView(root);
-        setContentView(_base);
-        toolbar.findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
-        setSupportActionBar((Toolbar) toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setTitle(R.string.mod_settings);
-        ((Toolbar) toolbar).setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-
-
-        addSwitchPreference(getString(R.string.built_in_blocks),
-                getString(R.string.may_slow_down_loading_blocks_in_logic_editor),
+        addSwitchPreference("Built-in blocks",
+                "May slow down loading blocks in Logic Editor.",
                 SETTING_SHOW_BUILT_IN_BLOCKS,
-                false);
-        addSwitchPreference(getString(R.string.show_all_variable_blocks),
-                getString(R.string.all_variable_blocks_will_be_visible),
+                false, false);
+        addSwitchPreference("Show all variable blocks",
+                "All variable blocks will be visible, even if you don't have variables for them.",
                 SETTING_ALWAYS_SHOW_BLOCKS,
-                false);
-        addSwitchPreference(getString(R.string.show_all_blocks_of_palettes),
-                getString(R.string.every_single_available_block_will_be_shown),
+                false, false);
+        addSwitchPreference("Show all blocks of palettes",
+                "Every single available block will be shown. Will slow down opening palettes!",
                 SETTING_SHOW_EVERY_SINGLE_BLOCK,
-                false);
-        addTextInputPreference(getString(R.string.backup_directory),
-                getString(R.string.the_default_directory), v -> {
-                    final LinearLayout container = new LinearLayout(this);
-                    container.setPadding(
-                            (int) getDip(20),
-                            (int) getDip(8),
-                            (int) getDip(20),
-                            0);
-
-                    final TextInputLayout tilBackupDirectory = new TextInputLayout(this);
-                    tilBackupDirectory.setLayoutParams(new LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT));
-                    tilBackupDirectory.setHint(R.string.backup_directory);
-                    tilBackupDirectory.setHelperText(getString(R.string.directory_inside_internal_storage));
-                    container.addView(tilBackupDirectory);
-
-                    final EditText backupDirectory = new EditText(this);
-                    backupDirectory.setLayoutParams(new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.MATCH_PARENT));
-                    backupDirectory.setTextSize(14.0f);
-                    backupDirectory.setText(getBackupPath());
-                    tilBackupDirectory.addView(backupDirectory);
-
-              new MaterialAlertDialogBuilder(this)
-                            .setTitle(R.string.backup_directory)
-                            .setView(container)
-                            .setPositiveButton(R.string.common_word_save, (dialogInterface, which) -> {
-                                ConfigActivity.setSetting(SETTING_BACKUP_DIRECTORY, backupDirectory.getText().toString());
-                                SketchwareUtil.toast(getString(R.string.common_word_saved));
-                            })
-                            .setNegativeButton(R.string.common_word_cancel, (dialogInterface, which) -> dialogInterface.dismiss())
-                            .show();
-                });
-        addSwitchPreference(getString(R.string.use_legacy_code_editor),
-                getString(R.string.enables_old_code_editor),
+                false, false);
+        addTextInputPreference("Backup directory",
+                "The default directory is /Internal storage/.sketchware/backups/.", v -> {
+                    DialogCreateNewFileLayoutBinding dialogBinding = DialogCreateNewFileLayoutBinding.inflate(getLayoutInflater());
+                    EditText inputText = dialogBinding.inputText;
+                    inputText.setText(getBackupPath());
+                    AlertDialog dialog = new MaterialAlertDialogBuilder(this) 
+                            .setView(dialogBinding.getRoot())
+                            .setTitle("Backup directory")
+                            .setMessage("Directory inside /Internal storage/, e.g. .sketchware/backups")
+                            .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
+                            .setPositiveButton(R.string.common_word_save, null)
+                            .create();
+                      
+                    dialogBinding.chipGroupTypes.setVisibility(View.GONE);
+                    dialog.setOnShowListener(dialogInterface -> {
+                          Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                          positiveButton.setOnClickListener(view -> {
+                                setSetting(SETTING_BACKUP_DIRECTORY, inputText.getText().toString());
+                                SketchwareUtil.toast("Saved");
+                                dialog.dismiss();
+                          });
+                            
+                          dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                          inputText.requestFocus();
+                    });
+                    dialog.show();
+                }, false);
+        addSwitchPreference("Use legacy Code Editor",
+                "Enables old Code Editor from v6.2.0.",
                 SETTING_LEGACY_CODE_EDITOR,
-                false);
-        addSwitchPreference(getString(R.string.install_projects_with_root_access), getString(R.string.automatically_installs_project_apks),
+                false, false);
+        addSwitchPreference("Install projects with root access", "Automatically installs project APKs after building using root access.",
                 SETTING_ROOT_AUTO_INSTALL_PROJECTS, false, (buttonView, isChecked) -> {
             if (isChecked) {
                 Shell.getShell(shell -> {
@@ -341,34 +335,29 @@ public class ConfigActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
-        addSwitchPreference(getString(R.string.launch_projects_after_installing),
-                getString(R.string.opens_projects_automatically),
+        }, false);
+        addSwitchPreference("Launch projects after installing",
+                "Opens projects automatically after auto-installation using root.",
                 SETTING_ROOT_AUTO_OPEN_AFTER_INSTALLING,
-                true);
-        addSwitchPreference(getString(R.string.use_new_version_control),
-                getString(R.string.enables_custom_version_code_and_name_for_projects),
+                true, false);
+        addSwitchPreference("Use new Version Control",
+                "Enables custom version code and name for projects.",
                 SETTING_USE_NEW_VERSION_CONTROL,
-                false);
-        addSwitchPreference(getString(R.string.enable_block_text_input_highlighting),
-                getString(R.string.enables_syntax_highlighting_while_editing_blocks_text_parameters),
+                false, false);
+        addSwitchPreference("Enable block text input highlighting",
+                "Enables syntax highlighting while editing blocks' text parameters.",
                 SETTING_USE_ASD_HIGHLIGHTER,
-                false);
-        addTextInputPreference(getString(R.string.backup_filename_format),
-                getString(R.string.default_is_projectname_v_versionname_pkgname_versioncode_time), v -> {
-                    final LinearLayout container = new LinearLayout(this);
-                    container.setPadding(
-                            (int) getDip(20),
-                            (int) getDip(8),
-                            (int) getDip(20),
-                            0);
-
-                    final TextInputLayout tilBackupFormat = new TextInputLayout(this);
-                    tilBackupFormat.setLayoutParams(new LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT));
-                    tilBackupFormat.setHint(R.string.format);
-                    tilBackupFormat.setHelperText("This defines how SWB backup files get named.\n" +
+                false, false);
+        addTextInputPreference("Backup filename format",
+                "Default is \"$projectName v$versionName ($pkgName, $versionCode) $time(yyyy-MM-dd'T'HHmmss)\"", v -> {
+                   DialogCreateNewFileLayoutBinding dialogBinding = DialogCreateNewFileLayoutBinding.inflate(getLayoutInflater());
+                   EditText inputText = dialogBinding.inputText;
+                   inputText.setText(getBackupFileName());
+                   
+                   AlertDialog dialog = new MaterialAlertDialogBuilder(this)
+                      .setView(dialogBinding.getRoot())
+                      .setTitle("Backup filename format")
+                      .setMessage("This defines how SWB backup files get named.\n" +
                             "Available variables:\n" +
                             " - $projectName - Project name\n" +
                             " - $versionCode - App version code\n" +
@@ -377,63 +366,60 @@ public class ConfigActivity extends AppCompatActivity {
                             " - $timeInMs - Time during backup in milliseconds\n" +
                             "\n" +
                             "Additionally, you can format your own time like this using Java's date formatter syntax:\n" +
-                            "$time(yyyy-MM-dd'T'HHmmss)\n");
-                    container.addView(tilBackupFormat);
-
-                    final EditText backupFilename = new EditText(this);
-                    backupFilename.setLayoutParams(new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.MATCH_PARENT));
-                    backupFilename.setTextSize(14.0f);
-                    backupFilename.setText(getBackupFileName());
-                    tilBackupFormat.addView(backupFilename);
-
-                    new MaterialAlertDialogBuilder(this)
-                            .setTitle(R.string.backup_filename_format)
-                            .setView(container)
-                            .setNegativeButton(R.string.common_word_cancel, (dialogInterface, which) -> dialogInterface.dismiss())
-                            .setPositiveButton(R.string.common_word_save, (dialogInterface, which) -> {
-                                setting_map.put(SETTING_BACKUP_FILENAME, backupFilename.getText().toString());
-                                FileUtil.writeFile(SETTINGS_FILE.getAbsolutePath(), new Gson().toJson(setting_map));
-                                SketchwareUtil.toast(getString(R.string.common_word_saved));
-                            })
-                            .setNeutralButton(R.string.common_word_reset, (dialogInterface, which) -> {
-                                setting_map.remove(SETTING_BACKUP_FILENAME);
-                                FileUtil.writeFile(SETTINGS_FILE.getAbsolutePath(), new Gson().toJson(setting_map));
-                                SketchwareUtil.toast("Reset to default complete.");
-                            })
-                            .show();
-                });
+                            "$time(yyyy-MM-dd'T'HHmmss)\n")
+                      .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
+                      .setPositiveButton(R.string.common_word_save, null)
+                      .setNeutralButton(R.string.common_word_reset, (dialogInterface, which) -> {
+                           setting_map.remove(SETTING_BACKUP_FILENAME);
+                           FileUtil.writeFile(SETTINGS_FILE.getAbsolutePath(), new Gson().toJson(setting_map));
+                           SketchwareUtil.toast("Reset to default complete.");
+                      }).create();
+                      
+                   dialogBinding.chipGroupTypes.setVisibility(View.GONE);
+                   dialog.setOnShowListener(dialogInterface -> {
+                         Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                         positiveButton.setOnClickListener(view -> {
+                              setting_map.put(SETTING_BACKUP_FILENAME, inputText.getText().toString());
+                              FileUtil.writeFile(SETTINGS_FILE.getAbsolutePath(), new Gson().toJson(setting_map));
+                              SketchwareUtil.toast("Saved");
+                              dialog.dismiss();
+                         });
+                         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                         inputText.requestFocus();
+                   });
+                   dialog.show();
+                }, true);
     }
 
     private void applyDesign(View view) {
-        Helper.applyRippleEffect(view,  ContextCompat.getColor(this,R.color.backgroundColor), ContextCompat.getColor(this,R.color.backgroundColor));
         view.setClickable(true);
         view.setFocusable(true);
     }
 
-    private void addSwitchPreference(String title, String subtitle, String keyName, boolean defaultValue) {
-        addSwitchPreference(title, subtitle, keyName, defaultValue, null);
+    private void addSwitchPreference(String title, String subtitle, String keyName, boolean defaultValue, boolean lastItem) {
+        addSwitchPreference(title, subtitle, keyName, defaultValue, null, lastItem);
     }
 
-    private void addSwitchPreference(String title, String subtitle, String keyName, boolean defaultValue, CompoundButton.OnCheckedChangeListener onCheckedChangeListener) {
+    private void addSwitchPreference(String title, String subtitle, String keyName, boolean defaultValue, CompoundButton.OnCheckedChangeListener onCheckedChangeListener, boolean lastItem) {
         LinearLayout preferenceRoot = new LinearLayout(this);
-        preferenceRoot.setLayoutParams(new LinearLayout.LayoutParams(
+        
+        LinearLayout.LayoutParams preferenceRootParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 0.0f
-        ));
-        preferenceRoot.setBackgroundColor(ContextCompat.getColor(this,R.color.backgroundColor));
+        );
+        preferenceRootParams.bottomMargin = lastItem ? dpToPx(25) : dpToPx(4);
+        preferenceRoot.setLayoutParams(preferenceRootParams);
         preferenceRoot.setOrientation(LinearLayout.HORIZONTAL);
         preferenceRoot.setPadding(
+                dpToPx(8),
                 dpToPx(4),
                 dpToPx(4),
-                dpToPx(4),
-                dpToPx(4)
+                dpToPx(8)
         );
         /* Android Studio complained about that inside the original XML */
         preferenceRoot.setBaselineAligned(false);
-        root.addView(preferenceRoot);
+        content.addView(preferenceRoot);
 
         LinearLayout textContainer = new LinearLayout(this);
         textContainer.setLayoutParams(new LinearLayout.LayoutParams(
@@ -448,6 +434,7 @@ public class ConfigActivity extends AppCompatActivity {
                 dpToPx(8),
                 dpToPx(8)
         );
+        textContainer.setGravity(Gravity.CENTER_VERTICAL);
         preferenceRoot.addView(textContainer);
 
         TextView titleView = new TextView(this);
@@ -462,6 +449,7 @@ public class ConfigActivity extends AppCompatActivity {
                 dpToPx(4)
         );
         titleView.setText(title);
+        titleView.setTextColor(getResources().getColor(R.color.color_text_onSurface));
         titleView.setTextSize(16);
         textContainer.addView(titleView);
 
@@ -471,6 +459,7 @@ public class ConfigActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT
         ));
         subtitleView.setText(subtitle);
+        subtitleView.setTextColor(getResources().getColor(R.color.color_text_onSurfaceVariant));
         subtitleView.setTextSize(12);
         textContainer.addView(subtitleView);
 
@@ -501,6 +490,7 @@ public class ConfigActivity extends AppCompatActivity {
                 dpToPx(8),
                 dpToPx(8)
         );
+        switchView.setTextColor(Color.parseColor("#000000"));
         switchView.setTextSize(12);
         switchContainer.addView(switchView);
 
@@ -536,26 +526,27 @@ public class ConfigActivity extends AppCompatActivity {
         applyDesign(preferenceRoot);
     }
 
-    private void addTextInputPreference(String title, String subtitle, View.OnClickListener listener) {
+    private void addTextInputPreference(String title, String subtitle, View.OnClickListener listener, boolean lastItem) {
         LinearLayout preferenceRoot = new LinearLayout(this);
         LinearLayout.LayoutParams preferenceRootParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 0.0f
         );
-        preferenceRootParams.bottomMargin = dpToPx(4);
+        
+        preferenceRootParams.bottomMargin = lastItem ? dpToPx(25) : dpToPx(4);
+        
         preferenceRoot.setLayoutParams(preferenceRootParams);
-        preferenceRoot.setBackgroundColor(ContextCompat.getColor(this,R.color.backgroundColor));
         preferenceRoot.setOrientation(LinearLayout.HORIZONTAL);
         preferenceRoot.setPadding(
-                dpToPx(4),
+                dpToPx(8),
                 dpToPx(4),
                 dpToPx(4),
                 dpToPx(4)
         );
         /* Android Studio complained about this in the original XML files */
         preferenceRoot.setBaselineAligned(false);
-        root.addView(preferenceRoot);
+        content.addView(preferenceRoot);
 
         LinearLayout textContainer = new LinearLayout(this);
         textContainer.setLayoutParams(new LinearLayout.LayoutParams(
@@ -570,6 +561,7 @@ public class ConfigActivity extends AppCompatActivity {
                 dpToPx(8),
                 dpToPx(8)
         );
+        textContainer.setGravity(Gravity.CENTER_VERTICAL);
         preferenceRoot.addView(textContainer);
 
         TextView titleView = new TextView(this);
@@ -578,6 +570,7 @@ public class ConfigActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT
         ));
         titleView.setText(title);
+        titleView.setTextColor(getResources().getColor(R.color.color_text_onSurface));
         titleView.setTextSize(16);
         textContainer.addView(titleView);
 
@@ -587,6 +580,7 @@ public class ConfigActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT
         ));
         subtitleView.setText(subtitle);
+        subtitleView.setTextColor(getResources().getColor(R.color.color_text_onSurfaceVariant));
         subtitleView.setTextSize(12);
         textContainer.addView(subtitleView);
 

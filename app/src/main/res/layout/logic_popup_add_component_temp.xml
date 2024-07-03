@@ -17,8 +17,7 @@
             android:layout_height="48dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="8dp"
-            android:paddingStart="8dp">
+            android:paddingLeft="8dp">
 
             <ImageView
                 android:id="@+id/img_back"
@@ -35,17 +34,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:textColor="@color/color_primary"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                tools:text="@string/component_name"
-                android:layout_marginStart="8dp" />
+                tools:text="Component name" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/color_secondary" />
+            android:background="?attr/colorSecondary" />
     </LinearLayout>
 
     <RelativeLayout
@@ -104,10 +102,9 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="28dp"
                     android:layout_marginRight="16dp"
+                    android:textColor="@color/grey"
                     android:textSize="12sp"
-                    tools:text="This is a simple description"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginStart="8dp" />
+                    tools:text="This is a simple description" />
             </LinearLayout>
 
             <LinearLayout
@@ -123,11 +120,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="28dp"
                     android:layout_marginRight="24dp"
-                    android:gravity="start"
-                    android:textColor="#ffff0000"
-                    android:textSize="12sp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginStart="28dp" />
+                    android:gravity="left"
+                    android:textSize="12sp" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/ti_input"
@@ -136,9 +130,7 @@
                     android:layout_marginLeft="24dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="24dp"
-                    android:importantForAutofill="noExcludeDescendants"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp">
+                    android:importantForAutofill="noExcludeDescendants">
 
                     <EditText
                         android:id="@+id/ed_input"
@@ -159,9 +151,7 @@
                     android:layout_marginRight="24dp"
                     android:importantForAutofill="noExcludeDescendants"
                     android:visibility="gone"
-                    tools:visibility="visible"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp">
+                    tools:visibility="visible">
 
                     <EditText
                         android:id="@+id/ed_input_filename"
@@ -182,9 +172,7 @@
                     android:layout_marginRight="24dp"
                     android:importantForAutofill="noExcludeDescendants"
                     android:visibility="gone"
-                    tools:visibility="visible"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginStart="24dp">
+                    tools:visibility="visible">
 
                     <EditText
                         android:id="@+id/ed_input_firebase_path"
@@ -205,9 +193,7 @@
                     android:textSize="12sp"
                     android:textStyle="italic"
                     android:visibility="gone"
-                    tools:visibility="visible"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginEnd="24dp" />
+                    tools:visibility="visible" />
 
                 <LinearLayout
                     android:id="@+id/layout_input_file_picker"
@@ -218,9 +204,7 @@
                     android:layout_marginRight="24dp"
                     android:orientation="horizontal"
                     android:visibility="gone"
-                    tools:visibility="visible"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginStart="24dp">
+                    tools:visibility="visible">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/ti_input_file_picker"
@@ -257,9 +241,7 @@
                     android:textSize="12sp"
                     android:textStyle="italic"
                     android:visibility="gone"
-                    tools:visibility="visible"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginEnd="24dp" />
+                    tools:visibility="visible" />
             </LinearLayout>
         </LinearLayout>
 
@@ -268,8 +250,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:padding="16dp"
-            android:layout_alignParentEnd="true">
+            android:padding="16dp">
 
             <Button
                 android:id="@+id/docs_button"

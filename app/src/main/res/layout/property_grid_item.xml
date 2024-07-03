@@ -1,12 +1,11 @@
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card="http://schemas.android.com/apk/res-auto"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/property_menu_item"
     android:layout_width="74dp"
     android:layout_height="74dp"
     android:layout_margin="4dp"
-    android:visibility="gone"
-    card:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
-    card:cardCornerRadius="8dp">
+    style="?attr/materialCardViewFilledStyle"
+    app:cardBackgroundColor="@color/view_property_grid_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +16,8 @@
         <ImageView
             android:id="@+id/img_icon"
             android:layout_width="24dp"
-            android:layout_height="24dp" />
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"/>
 
         <TextView
             android:id="@+id/tv_title"
@@ -29,9 +29,8 @@
             android:paddingHorizontal="4dp"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:textSize="10sp"
-            android:paddingEnd="4dp"
-            android:paddingStart="4dp" />
+            android:textColor="?colorControlNormal"
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/tv_sub_title"
@@ -42,9 +41,8 @@
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
             android:singleLine="true"
+            android:textColor="@color/scolor_black_02"
             android:textSize="10sp"
-            android:visibility="gone"
-            android:paddingEnd="4dp"
-            android:paddingStart="4dp" />
+            android:visibility="gone" />
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

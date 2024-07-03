@@ -10,31 +10,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:contentInsetStart="0dp"
-            app:contentInsetStart="0dp">
-
-            <ImageView
-                android:id="@+id/layout_main_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:contentDescription="@string/title_sketchware"
-                android:scaleType="fitCenter"
-                android:src="@drawable/top_title_logo"
-                app:tint="?attr/colorOnSurface" />
-        </com.google.android.material.appbar.MaterialToolbar>
-
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/recycle_bin_card"
+            style="?attr/materialCardViewFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginVertical="8dp"
             android:orientation="vertical"
-            app:cardCornerRadius="3dp"
-            app:cardElevation="3dp">
+            app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
 
             <LinearLayout
                 android:id="@+id/recycle_bin"
@@ -42,7 +26,8 @@
                 android:layout_height="wrap_content"
                 android:baselineAligned="false"
                 android:gravity="center|start"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="6dp">
 
                 <LinearLayout
                     android:layout_width="48dp"
@@ -71,14 +56,17 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/common_word_recycle_bin"
+                        android:text="Recycle bin"
+                        android:textAppearance="?attr/textAppearanceBodyLarge"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/recycle_sub"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#ffbdbdbd"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant"
                         android:textSize="12sp"
                         tools:text="Blocks: 23" />
                 </LinearLayout>
@@ -92,8 +80,10 @@
             android:paddingTop="8dp"
             android:paddingEnd="8dp"
             android:paddingBottom="8dp"
-            android:text="@string/palettes"
-            android:textSize="16sp" />
+            android:text="Palettes"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="18sp" />
 
         <ListView
             android:id="@+id/list_pallete"

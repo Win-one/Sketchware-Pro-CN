@@ -1,16 +1,22 @@
 package mod.hey.studios.project.proguard;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.materialswitch.MaterialSwitch;
 import com.sketchware.remod.R;
+
+import com.google.android.material.materialswitch.MaterialSwitch;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +34,9 @@ public class ManageProguardActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.ln_pg_rules) {
+        if (id == R.id.ig_toolbar_back) {
+            finish();
+        } else if (id == R.id.ln_pg_rules) {
             new ProguardRulesDialog(this, pg).show();
         } else if (id == R.id.ln_pg_fm) {
             fmDialog();
@@ -54,8 +62,8 @@ public class ManageProguardActivity extends AppCompatActivity implements View.On
             }
         }
 
-        AlertDialog.Builder bld = new AlertDialog.Builder(this);
-        bld.setTitle(R.string.select_local_libraries);
+        MaterialAlertDialogBuilder bld = new MaterialAlertDialogBuilder(this);
+        bld.setTitle("Select Local libraries");
         bld.setMultiChoiceItems(libraries, enabledLibraries, (dialog, which, isChecked) -> enabledLibraries[which] = isChecked);
         bld.setPositiveButton(R.string.common_word_save, (dialog, which) -> {
 
@@ -66,10 +74,8 @@ public class ManageProguardActivity extends AppCompatActivity implements View.On
                     finalList.add(libraries[i]);
                 }
             }
-
+            
             pg.setProguardFMLibs(finalList);
-
-            dialog.dismiss();
         });
         bld.setNegativeButton(R.string.common_word_cancel, null);
         bld.create().show();
@@ -124,10 +130,9 @@ public class ManageProguardActivity extends AppCompatActivity implements View.On
     private void _initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
-        getSupportActionBar().setTitle(R.string.manage_proguard_title);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Code Shrinking Manager");
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
     }
 }
