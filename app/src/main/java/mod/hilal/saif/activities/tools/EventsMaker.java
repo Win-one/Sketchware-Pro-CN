@@ -23,9 +23,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.developer.filepicker.model.DialogProperties;
 import com.developer.filepicker.view.FilePickerDialog;
+import com.google.android.material.card.MaterialCardView;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.AddCustomAttributeBinding;
@@ -77,7 +79,7 @@ public class EventsMaker extends AppCompatActivity {
 
     private void setupViews() {
         binding.eventSub.setText(getNumOfEvents(""));
-        binding.activityEvent.setOnClickListener(v -> {
+        binding.activityEventCard.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.setClass(getApplicationContext(), EventsMakerDetails.class);
             intent.putExtra("lis_name", "");
@@ -323,17 +325,19 @@ public class EventsMaker extends AppCompatActivity {
     }
 
     private void setToolbar() {
-        setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar) getLayoutInflater().inflate(R.layout.toolbar_improved, binding.background, false);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.event_manager);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        binding.txToolbarTitle.setText(R.string.event_manager);
-        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        binding.background.addView(toolbar, 0);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(Menu.NONE,1,Menu.NONE,R.string.import_events);
-        menu.add(Menu.NONE,2,Menu.NONE,R.string.export_events);
+        menu.add(Menu.NONE, 1, Menu.NONE, R.string.import_events);
+        menu.add(Menu.NONE, 2, Menu.NONE, R.string.export_events);
         return true;
     }
 
@@ -381,21 +385,21 @@ public class EventsMaker extends AppCompatActivity {
             if (convertView == null) {
                 convertView = getLayoutInflater().inflate(R.layout.custom_view_pro, parent, false);
             }
-            LinearLayout linearLayout = convertView.findViewById(R.id.custom_view_pro_background);
-            a(linearLayout, (int) SketchwareUtil.getDip(4), (int) SketchwareUtil.getDip(2), true);
+            MaterialCardView materialCardView = convertView.findViewById(R.id.custom_view_pro_background);
+            a(materialCardView, (int) SketchwareUtil.getDip(4), (int) SketchwareUtil.getDip(2), true);
             ImageView imageView = convertView.findViewById(R.id.custom_view_pro_img);
             TextView textView = convertView.findViewById(R.id.custom_view_pro_title);
             imageView.setImageResource(R.drawable.event_on_response_48dp);
             ((LinearLayout) imageView.getParent()).setGravity(Gravity.CENTER);
             textView.setText((String) _data.get(position).get("name"));
             ((TextView) convertView.findViewById(R.id.custom_view_pro_subtitle)).setText(getNumOfEvents(textView.getText().toString()));
-            linearLayout.setOnClickListener(v -> {
+            materialCardView.setOnClickListener(v -> {
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext(), EventsMakerDetails.class);
                 intent.putExtra("lis_name", (String) _data.get(position).get("name"));
                 startActivity(intent);
             });
-            linearLayout.setOnLongClickListener(v -> {
+            materialCardView.setOnLongClickListener(v -> {
                 new AlertDialog.Builder(EventsMaker.this)
                         .setTitle(_data.get(position).get("name").toString())
                         .setItems(new String[]{getString(R.string.common_word_edit), getString(R.string.common_word_export), getString(R.string.common_word_delete)}, (dialog, which) -> {

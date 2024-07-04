@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import a.a.a.Us;
 import a.a.a.wB;
 import mod.hey.studios.util.Helper;
-import mod.hilal.saif.activities.tools.AppSettings;
+import mod.hilal.saif.activities.tools.Tools;
 
 public class LogicEditorDrawer extends LinearLayout {
 
@@ -52,7 +52,7 @@ public class LogicEditorDrawer extends LinearLayout {
 
         MaterialCardView tools = findViewById(R.id.new_button);
         tools.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), AppSettings.class);
+            Intent intent = new Intent(getContext(), Tools.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             getContext().startActivity(intent);
         });

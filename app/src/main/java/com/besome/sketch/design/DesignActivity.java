@@ -299,6 +299,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (drawer.isDrawerOpen(GravityCompat.END)) {
             drawer.closeDrawer(GravityCompat.END);
         } else if (viewTabAdapter.g()) {
@@ -325,12 +326,12 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
                 PopupMenu popupMenu = new PopupMenu(this, buildSettings, 0, R.attr.popupMenuStyle, R.style.Widget_Material3_PopupMenu);
                 Menu menu = popupMenu.getMenu();
 
-                menu.add(Menu.NONE, 1, Menu.NONE, "Build Settings");
-                menu.add(Menu.NONE, 2, Menu.NONE, "Clean temporary files");
-                menu.add(Menu.NONE, 3, Menu.NONE, "Show last compile error");
-                menu.add(Menu.NONE, 5, Menu.NONE, "Show source code");
+                menu.add(Menu.NONE, 1, Menu.NONE, R.string.build_settings);
+                menu.add(Menu.NONE, 2, Menu.NONE, R.string.clean_temporary_files);
+                menu.add(Menu.NONE, 3, Menu.NONE, R.string.show_last_compile_error);
+                menu.add(Menu.NONE, 5, Menu.NONE, R.string.show_source_code);
                 if (FileUtil.isExistFile(q.finalToInstallApkPath)) {
-                    menu.add(Menu.NONE, 4, Menu.NONE, "Install last built APK");
+                    menu.add(Menu.NONE, 4, Menu.NONE, R.string.install_last_built_apk);
                 }
 
                 popupMenu.setOnMenuItemClickListener(item -> {
@@ -339,14 +340,14 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
                         case 2 -> new Thread(() -> {
                             FileUtil.deleteFile(q.projectMyscPath);
                             runOnUiThread(() ->
-                                    SketchwareUtil.toast("Done cleaning temporary files!"));
+                                    SketchwareUtil.toast(getString(R.string.done_cleaning_temporary_files)));
                         }).start();
                         case 3 -> new CompileErrorSaver(sc_id).showLastErrors(this);
                         case 4 -> {
                             if (FileUtil.isExistFile(q.finalToInstallApkPath)) {
                                 installBuiltApk();
                             } else {
-                                SketchwareUtil.toast("APK doesn't exist anymore");
+                                SketchwareUtil.toast(getString(R.string.apk_doesn_t_exist_anymore));
                             }
                         }
                         case 5 -> showCurrentActivitySrcCode();
@@ -673,7 +674,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
             var dialogBuilder = new MaterialAlertDialogBuilder(this)
                     .setTitle(filename)
                     .setCancelable(false)
-                    .setPositiveButton("Dismiss", null);
+                    .setPositiveButton(R.string.common_word_dismiss, null);
 
             runOnUiThread(() -> {
                 if (isFinishing()) return;

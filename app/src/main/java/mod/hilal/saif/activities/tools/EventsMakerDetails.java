@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
@@ -35,7 +36,6 @@ public class EventsMakerDetails extends AppCompatActivity {
     private final ArrayList<HashMap<String, Object>> listMap = new ArrayList<>();
     private AlertDialog.Builder dia;
     private String lisName;
-
     private AddCustomAttributeBinding binding;
 
     @Override
@@ -57,8 +57,8 @@ public class EventsMakerDetails extends AppCompatActivity {
     }
 
     private void setupViews() {
-        binding.activityEvent.setVisibility(View.GONE);
-        binding.tvListeners.setVisibility(View.GONE);
+        binding.activityEventCard.setVisibility(View.GONE);
+        binding.listeners.setVisibility(View.GONE);
         binding.addAttrFab.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.setClass(getApplicationContext(), EventsMakerCreator.class);
@@ -112,15 +112,18 @@ public class EventsMakerDetails extends AppCompatActivity {
     }
 
     private void setToolbar() {
-        if (lisName.equals("")) {
-            binding.txToolbarTitle.setText(R.string.activity_events);
-        } else {
-            binding.txToolbarTitle.setText(lisName);
-        }
-        setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar) getLayoutInflater().inflate(R.layout.toolbar_improved, binding.background, false);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        binding.background.addView(toolbar, 0);
+        if (lisName.equals("")) {
+            toolbar.setTitle(R.string.activity_events);
+        } else {
+            toolbar.setTitle(lisName);
+        }
+
     }
 
     private class ListAdapter extends BaseAdapter {

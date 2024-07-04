@@ -2,7 +2,6 @@ package mod.hilal.saif.activities.android_manifest;
 
 import static mod.SketchwareUtil.getDip;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -16,14 +15,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
+import com.sketchware.remod.databinding.AddCustomAttributeBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +35,7 @@ import mod.hey.studios.util.Helper;
 import mod.hilal.saif.android_manifest.ActComponentsDialog;
 import mod.remaker.view.CustomAttributeView;
 
-public class AndroidManifestInjectionDetails extends Activity {
+public class AndroidManifestInjectionDetails extends AppCompatActivity {
 
     private static String ATTRIBUTES_FILE_PATH;
     private final ArrayList<HashMap<String, Object>> listMap = new ArrayList<>();
@@ -42,11 +44,13 @@ public class AndroidManifestInjectionDetails extends Activity {
     private String activityName;
     private String type;
     private String constant;
+    private AddCustomAttributeBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_custom_attribute);
+        binding = AddCustomAttributeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         if (getIntent().hasExtra("sc_id") && getIntent().hasExtra("file_name") && getIntent().hasExtra("type")) {
             src_id = getIntent().getStringExtra("sc_id");
@@ -219,21 +223,24 @@ public class AndroidManifestInjectionDetails extends Activity {
 
     private void setToolbar() {
         String str = switch (type) {
-            case "all" -> "Attributes for all activities";
-            case "application" -> "Application Attributes";
-            case "permission" -> "Application Permissions";
+            case "all" -> getString(R.string.attributes_for_all_activities);
+            case "application" -> getString(R.string.application_attributes);
+            case "permission" -> getString(R.string.application_permissions);
             default -> activityName;
         };
-        ((TextView) findViewById(R.id.tx_toolbar_title)).setText(str);
-        ViewGroup par = (ViewGroup) findViewById(R.id.tx_toolbar_title).getParent();
-        ImageView _img = findViewById(R.id.ig_toolbar_back);
-        _img.setOnClickListener(Helper.getBackPressedClickListener(this));
-        if (!str.equals("Attributes for all activities") && !str.equals("Application Attributes") && !str.equals("Application Permissions")) {
+        Toolbar toolbar = (Toolbar) getLayoutInflater().inflate(R.layout.toolbar_improved, binding.background, false);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(str);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        binding.background.addView(toolbar, 0);
+        if (!str.equals(getString(R.string.attributes_for_all_activities)) && !str.equals(getString(R.string.application_attributes)) && !str.equals(getString(R.string.application_permissions))) {
             // Feature description: allows to inject anything into the {@code activity} tag of the Activity
             // (yes, Command Blocks can do that too, but removing features is bad.)
             TextView actComponent = newText("Components ASD", 15, Color.parseColor("#ffffff"), -2, -2, 0);
             actComponent.setTypeface(Typeface.DEFAULT_BOLD);
-            par.addView(actComponent);
+            toolbar.addView(actComponent);
             actComponent.setOnClickListener(v -> {
                 ActComponentsDialog acd = new ActComponentsDialog(this, src_id, activityName);
                 acd.show();

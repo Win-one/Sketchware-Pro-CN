@@ -2,6 +2,7 @@ package mod.hilal.saif.activities.tools;
 
 import static mod.SketchwareUtil.dpToPx;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -90,7 +91,7 @@ public class BlocksManager extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) getLayoutInflater().inflate(R.layout.toolbar_improved, background, false);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Block Manager");
+        getSupportActionBar().setTitle(R.string.block_manager);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
@@ -143,7 +144,7 @@ public class BlocksManager extends AppCompatActivity {
     private void showBlockConfigurationDialog() {
         aB dialog = new aB(this);
         dialog.a(R.drawable.ic_folder_48dp);
-        dialog.b("Block configuration");
+        dialog.b(getString(R.string.block_configuration));
 
         LinearLayout.LayoutParams defaultParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         LinearLayout customView = new LinearLayout(this);
@@ -154,7 +155,7 @@ public class BlocksManager extends AppCompatActivity {
         tilPalettesPath.setLayoutParams(defaultParams);
         tilPalettesPath.setOrientation(LinearLayout.VERTICAL);
         tilPalettesPath.setPadding(dpToPx(4), dpToPx(4), dpToPx(4), dpToPx(4));
-        tilPalettesPath.setHint("JSON file with palettes");
+        tilPalettesPath.setHint(R.string.json_file_with_palettes);
         customView.addView(tilPalettesPath);
 
         EditText palettesPath = new EditText(this);
@@ -168,7 +169,7 @@ public class BlocksManager extends AppCompatActivity {
         tilBlocksPath.setLayoutParams(defaultParams);
         tilBlocksPath.setOrientation(LinearLayout.VERTICAL);
         tilBlocksPath.setPadding(dpToPx(4), dpToPx(4), dpToPx(4), dpToPx(4));
-        tilBlocksPath.setHint("JSON file with blocks");
+        tilBlocksPath.setHint(R.string.json_file_with_blocks);
         customView.addView(tilBlocksPath);
 
         EditText blocksPath = new EditText(this);
@@ -190,7 +191,7 @@ public class BlocksManager extends AppCompatActivity {
             dialog.dismiss();
         });
         dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
-        dialog.configureDefaultButton("Defaults", view -> {
+        dialog.configureDefaultButton(getString(R.string.common_word_defaults), view -> {
             ConfigActivity.setSetting(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH,
                     ConfigActivity.getDefaultValue(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH));
             ConfigActivity.setSetting(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_BLOCK_FILE_PATH,
@@ -251,7 +252,7 @@ public class BlocksManager extends AppCompatActivity {
         ((BaseAdapter) list_pallete.getAdapter()).notifyDataSetChanged();
         list_pallete.onRestoreInstanceState(savedState);
 
-        recycle_sub.setText("Blocks: " + (long) (_getN(-1)));
+        recycle_sub.setText(getString(R.string.blocks) + (long) (_getN(-1)));
     }
 
     private double _getN(final double _p) {
@@ -287,10 +288,10 @@ public class BlocksManager extends AppCompatActivity {
         });
         recycle_bin_card.setOnLongClickListener(v -> {
             new AlertDialog.Builder(this)
-                    .setTitle("Recycle bin")
+                    .setTitle(R.string.common_word_recycle_bin)
                     .setMessage("Are you sure you want to empty the recycle bin? " +
                             "Blocks inside will be deleted PERMANENTLY, you CANNOT recover them!")
-                    .setPositiveButton("Empty", (dialog, which) -> _emptyRecyclebin())
+                    .setPositiveButton(R.string.common_word_empty, (dialog, which) -> _emptyRecyclebin())
                     .setNegativeButton(R.string.common_word_cancel, null)
                     .show();
             return true;
@@ -398,7 +399,7 @@ public class BlocksManager extends AppCompatActivity {
     private void showPaletteDialog(boolean isEditing, Integer oldPosition, String oldName, String oldColor, Integer insertAtPosition) {
         aB dialog = new aB(this);
         dialog.a(R.drawable.positive_96);
-        dialog.b(!isEditing ? "Create a new palette" : "Edit palette");
+        dialog.b(!isEditing ? getString(R.string.create_a_new_palette) : getString(R.string.edit_palette));
 
         LinearLayout customView = new LinearLayout(this);
         customView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -524,6 +525,7 @@ public class BlocksManager extends AppCompatActivity {
             return position;
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             LayoutInflater _inflater = getLayoutInflater();
@@ -538,8 +540,8 @@ public class BlocksManager extends AppCompatActivity {
             final com.google.android.material.card.MaterialCardView background_card = convertView.findViewById(R.id.background_card);
 
             title.setText(pallet_listmap.get(position).get("name").toString());
-            sub.setText("Blocks: " + (long) (_getN(position + 9)));
-            recycle_sub.setText("Blocks: " + (long) (_getN(-1)));
+            sub.setText(getString(R.string.blocks) + (long) (_getN(position + 9)));
+            recycle_sub.setText(getString(R.string.blocks) + (long) (_getN(-1)));
 
             int backgroundColor;
             String paletteColorValue = (String) palettes.get(position).get("color");
@@ -552,28 +554,24 @@ public class BlocksManager extends AppCompatActivity {
             color.setBackgroundColor(backgroundColor);
 
             background_card.setOnLongClickListener(v -> {
-                final String moveUp = "Move up";
-                final String moveDown = "Move down";
-                final String edit = "Edit";
-                final String delete = "Delete";
-                final String insert = "Insert";
 
                 PopupMenu popup = new PopupMenu(BlocksManager.this, background);
                 Menu menu = popup.getMenu();
-                if (position != 0) menu.add(moveUp);
-                if (position != getCount() - 1) menu.add(moveDown);
-                menu.add(edit);
-                menu.add(delete);
-                menu.add(insert);
+                if (position != 0) menu.add(Menu.NONE, 1, Menu.NONE, R.string.move_up);
+                if (position != getCount() - 1)
+                    menu.add(Menu.NONE, 2, Menu.NONE, R.string.move_down);
+                menu.add(Menu.NONE, 3, Menu.NONE, R.string.common_word_edit);
+                menu.add(Menu.NONE, 4, Menu.NONE, R.string.common_word_delete);
+                menu.add(Menu.NONE, 5, Menu.NONE, R.string.insert);
                 popup.setOnMenuItemClickListener(item -> {
-                    switch (item.getTitle().toString()) {
-                        case edit:
+                    switch (item.getItemId()) {
+                        case 3:
                             showPaletteDialog(true, position,
                                     pallet_listmap.get(position).get("name").toString(),
                                     pallet_listmap.get(position).get("color").toString(), null);
                             break;
 
-                        case delete:
+                        case 4:
                             new AlertDialog.Builder(BlocksManager.this)
                                     .setTitle(pallet_listmap.get(position).get("name").toString())
                                     .setMessage("Remove all blocks related to this palette?")
@@ -595,15 +593,15 @@ public class BlocksManager extends AppCompatActivity {
                                     }).show();
                             break;
 
-                        case moveUp:
+                        case 1:
                             _MoveUp(position);
                             break;
 
-                        case moveDown:
+                        case 2:
                             _moveDown(position);
                             break;
 
-                        case insert:
+                        case 5:
                             showPaletteDialog(false, null, null, null, position);
                             break;
 

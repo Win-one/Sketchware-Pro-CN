@@ -11,12 +11,14 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.color.MaterialColors;
 import com.google.gson.Gson;
@@ -37,6 +39,7 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
     private String activityInjectionsFilePath = "";
     private String widgetType = "";
     private AddCustomAttributeBinding binding;
+    private LinearLayout background;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,13 +48,13 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.addAttrFab.setOnClickListener(v -> dialog("create", 0));
-        binding.activityEvent.setVisibility(View.GONE);
-        binding.tvListeners.setVisibility(View.GONE);
-        setSupportActionBar(binding.toolbar);
+        Toolbar toolbar = (Toolbar) getLayoutInflater().inflate(R.layout.toolbar_improved, background, false);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(widgetType);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        background.addView(toolbar, 0);
 
         if (getIntent().hasExtra("sc_id") && getIntent().hasExtra("file_name") && getIntent().hasExtra("widget_type")) {
             String sc_id = getIntent().getStringExtra("sc_id");

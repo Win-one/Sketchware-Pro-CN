@@ -3327,5 +3327,22 @@
     <string name="sign_using_testkey">使用测试密钥签名</string>
     <string name="don_t_sign">不签名</string>
 
+    <string name="local_library_manager_download_status">下载状态</string>
+    <string name="appearance">主题设置</string>
+    <string name="appearance_description">更改Sketchware的外观并使其成为您自己的!</string>
+    <string name="appearance_theme">Sketchware主题</string>
+    <string name="appearance_theme_system">系统默认</string>
+    <string name="appearance_theme_light">浅色主题</string>
+    <string name="appearance_theme_dark">深色主题</string>
+    <string name="change_launcher_activity_dialog_title">启动器活动</string>
+    <string name="common_word_add_activtiy">添加活动</string>
+    <string name="delete_custom_activity_dialog_message">与%1$s相关的所有功能都将被删除.是否确定?</string>
+    <string name="delete_custom_activity_dialog_title">删除活动</string>
+    <string name="delete_project_dialog_title">删除项目</string>
+    <string name="delete_project_dialog_message">是否确实要删除此名为%1$s的项目?</string>
+    <string name="src_code_editor_unsaved_changes_dialog_warning_message">您有未保存的更改.您确定要退出吗?</string>
+    <string name="change_firebase_config_title">更改Firebase配置</string>
+    <string name="review_firebase_config_title">检查</string>
+
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->
