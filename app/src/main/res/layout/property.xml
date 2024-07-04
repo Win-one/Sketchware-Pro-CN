@@ -22,15 +22,11 @@
                 android:splitMotionEvents="false"
                 android:visibility="gone" />
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#ff008dcd" />
-
             <com.besome.sketch.lib.ui.CustomScrollView
                 android:id="@+id/scroll_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:scrollbars="none">
 
                 <LinearLayout
                     android:id="@+id/content"
