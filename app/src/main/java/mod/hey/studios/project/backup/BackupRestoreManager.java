@@ -65,7 +65,7 @@ public class BackupRestoreManager {
 
         aB dialog = new aB(act);
         dialog.a(R.drawable.ic_backup);
-        dialog.b("Backup Options");
+        dialog.b(Helper.getResString(R.string.backup_options));
 
         LinearLayout checkboxContainer = new LinearLayout(act);
         checkboxContainer.setOrientation(LinearLayout.VERTICAL);
@@ -114,7 +114,7 @@ public class BackupRestoreManager {
         checkboxContainer.addView(includeUsedCustomBlocks);
 
         dialog.a(checkboxContainer);
-        dialog.b("Back up", v -> {
+        dialog.b(Helper.getResString(R.string.back_up), v -> {
             dialog.dismiss();
             doBackup(sc_id, project_name);
         });
@@ -148,7 +148,7 @@ public class BackupRestoreManager {
                     boolean restoringMultipleBackups = files.length > 1;
 
                     new MaterialAlertDialogBuilder(act)
-                         .setTitle("Warning")
+                         .setTitle(R.string.common_word_warning)
                          .setMessage(getRestoreIntegratedLocalLibrariesMessage(restoringMultipleBackups, i, files.length,
                                FileUtil.getFileNameNoExtension(backupFilePath)))
                          .setPositiveButton("Copy", (dialog, which) -> doRestore(backupFilePath, true))

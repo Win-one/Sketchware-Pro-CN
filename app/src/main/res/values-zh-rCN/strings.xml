@@ -3035,7 +3035,7 @@
     <string name="common_word_type">类型</string>
     <string name="common_word_activated">激活</string>
     <string name="full_mode">完整模式</string>
-    <string name="manage_proguard_title">代码缩减管理</string>
+    <string name="code_shrinking_manager">代码缩减管理</string>
     <string name="block_manager">块管理</string>
     <string name="select_local_libraries">选择本地库</string>
     <string name="block_configuration">块配置</string>
@@ -3343,6 +3343,8 @@
     <string name="src_code_editor_unsaved_changes_dialog_warning_message">您有未保存的更改.您确定要退出吗?</string>
     <string name="change_firebase_config_title">更改Firebase配置</string>
     <string name="review_firebase_config_title">检查</string>
+    <string name="edit_view_properties_title">编辑属性</string>
+    <string name="backup_options">Backup Options</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

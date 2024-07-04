@@ -2236,7 +2236,6 @@ Please try again later"</string>
     <string name="common_word_type">Type</string>
     <string name="common_word_activated">Activated</string>
     <string name="full_mode">Full Mode</string>
-    <string name="manage_proguard_title">Code Shrinking Manager</string>
     <string name="block_manager">Block manager</string>
     <string name="select_local_libraries">Select Local libraries</string>
     <string name="block_configuration">Block configuration</string>
@@ -2509,6 +2508,8 @@ Please try again later"</string>
     <string name="sign_using_key_store">Sign using key store</string>
     <string name="sign_using_testkey">Sign using testkey</string>
     <string name="don_t_sign">Don\'t sign</string>
+    <string name="code_shrinking_manager">Code Shrinking Manager</string>
+    <string name="backup_options">Backup Options</string>
 
 
 </resources>

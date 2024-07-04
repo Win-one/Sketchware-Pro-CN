@@ -61,7 +61,7 @@ public class ManageProguardActivity extends AppCompatActivity implements View.On
         }
 
         MaterialAlertDialogBuilder bld = new MaterialAlertDialogBuilder(this);
-        bld.setTitle("Select Local libraries");
+        bld.setTitle(R.string.select_local_libraries);
         bld.setMultiChoiceItems(libraries, enabledLibraries, (dialog, which, isChecked) -> enabledLibraries[which] = isChecked);
         bld.setPositiveButton(R.string.common_word_save, (dialog, which) -> {
 
@@ -130,7 +130,7 @@ public class ManageProguardActivity extends AppCompatActivity implements View.On
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Code Shrinking Manager");
+        getSupportActionBar().setTitle(R.string.code_shrinking_manager);
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
     }
 }
