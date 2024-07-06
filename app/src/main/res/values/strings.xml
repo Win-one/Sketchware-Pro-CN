@@ -2496,6 +2496,7 @@ Please try again later"</string>
     <string name="detected_invalid_preference_restoring_defaults">Detected invalid preference. Restoring defaults</string>
     <string name="couldn_t_parse_mod_settings_restoring_defaults">Couldn\'t parse Mod Settings! Restoring defaults.</string>
     <string name="reset_to_default_complete">Reset to default complete.</string>
+    <string name="show_apk_signatures">Show Apk signatures</string>
 
 
 </resources>
