@@ -116,6 +116,7 @@ import mod.jbk.diagnostic.CompileErrorSaver;
 import mod.jbk.diagnostic.MissingFileException;
 import mod.jbk.util.LogUtil;
 import mod.khaled.logcat.LogReaderActivity;
+import mod.trindadedev.tools.ApkSignatures;
 
 public class DesignActivity extends BaseAppCompatActivity implements OnClickListener {
     private ImageView xmlLayoutOrientation;
@@ -331,6 +332,8 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
                 menu.add(Menu.NONE, 3, Menu.NONE, R.string.show_last_compile_error);
                 menu.add(Menu.NONE, 5, Menu.NONE, R.string.show_source_code);
                 if (FileUtil.isExistFile(q.finalToInstallApkPath)) {
+                    menu.add(Menu.NONE, 4, Menu.NONE, "Install last built APK");
+                    menu.add(Menu.NONE, 6, Menu.NONE, "Show Apk signatures");
                     menu.add(Menu.NONE, 4, Menu.NONE, R.string.install_last_built_apk);
                 }
 
@@ -351,6 +354,10 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
                             }
                         }
                         case 5 -> showCurrentActivitySrcCode();
+                        case 6 -> {
+                            ApkSignatures apkSignatures = new ApkSignatures(this, q.finalToInstallApkPath);
+                            apkSignatures.showSignaturesDialog();
+                        }
                         default -> {
                             return false;
                         }
