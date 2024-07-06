@@ -3344,7 +3344,13 @@
     <string name="change_firebase_config_title">更改Firebase配置</string>
     <string name="review_firebase_config_title">检查</string>
     <string name="edit_view_properties_title">编辑属性</string>
-    <string name="backup_options">Backup Options</string>
+    <string name="backup_options">备份选项</string>
+    <string name="don_t_copy">不复制</string>
+    <string name="detected_invalid_preference_for_legacy">检测到对旧版的无效首选项</string>
+    <string name="code_editor_restoring_defaults">代码编辑器.恢复默认值</string>
+    <string name="detected_invalid_preference_restoring_defaults">检测到无效的首选项.恢复默认值</string>
+    <string name="couldn_t_parse_mod_settings_restoring_defaults">无法解析模组设置!恢复默认值.</string>
+    <string name="reset_to_default_complete">重置为默认值完成.</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

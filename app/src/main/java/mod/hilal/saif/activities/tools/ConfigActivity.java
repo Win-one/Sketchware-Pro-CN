@@ -87,7 +87,7 @@ public class ConfigActivity extends AppCompatActivity {
         contentLayout = findViewById(R.id.contentLayout);
         collapsingToolbar = findViewById(R.id.collapsingToolbar);
 
-        topAppBar.setTitle("Mod Settings");
+        topAppBar.setTitle(R.string.mod_settings);
         topAppBar.setNavigationOnClickListener(view -> onBackPressed());
 
         if (FileUtil.isExistFile(SETTINGS_FILE.getAbsolutePath())) {
@@ -165,8 +165,8 @@ public class ConfigActivity extends AppCompatActivity {
             if (value instanceof Boolean) {
                 return (Boolean) value;
             } else {
-                SketchwareUtil.toastError("Detected invalid preference for legacy "
-                                + " Code Editor. Restoring defaults",
+                SketchwareUtil.toastError(Helper.getResString(R.string.detected_invalid_preference_for_legacy)
+                                + Helper.getResString(R.string.code_editor_restoring_defaults),
                         Toast.LENGTH_LONG);
                 settings.remove(SETTING_LEGACY_CODE_EDITOR);
                 FileUtil.writeFile(SETTINGS_FILE.getAbsolutePath(), new Gson().toJson(settings));
@@ -186,7 +186,7 @@ public class ConfigActivity extends AppCompatActivity {
             if (value instanceof Boolean) {
                 return (Boolean) value;
             } else {
-                SketchwareUtil.toastError("Detected invalid preference. Restoring defaults",
+                SketchwareUtil.toastError(Helper.getResString(R.string.detected_invalid_preference_restoring_defaults),
                         Toast.LENGTH_LONG);
                 settings.remove(keyName);
                 FileUtil.writeFile(SETTINGS_FILE.getAbsolutePath(), new Gson().toJson(settings));
@@ -222,7 +222,7 @@ public class ConfigActivity extends AppCompatActivity {
                 // fall-through to shared error handler
             }
 
-            SketchwareUtil.toastError("Couldn't parse Mod Settings! Restoring defaults.");
+            SketchwareUtil.toastError(Helper.getResString(R.string.couldn_t_parse_mod_settings_restoring_defaults));
             LogUtil.e("ConfigActivity", "Failed to parse Mod Settings.", toLog);
         }
         settings = new HashMap<>();
@@ -282,50 +282,50 @@ public class ConfigActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void initialize() {
-        addSwitchPreference("Built-in blocks",
-                "May slow down loading blocks in Logic Editor.",
+        addSwitchPreference(getString(R.string.built_in_blocks),
+                getString(R.string.may_slow_down_loading_blocks_in_logic_editor),
                 SETTING_SHOW_BUILT_IN_BLOCKS,
                 false, false);
-        addSwitchPreference("Show all variable blocks",
-                "All variable blocks will be visible, even if you don't have variables for them.",
+        addSwitchPreference(getString(R.string.show_all_blocks_of_palettes),
+                getString(R.string.all_variable_blocks_will_be_visible),
                 SETTING_ALWAYS_SHOW_BLOCKS,
                 false, false);
-        addSwitchPreference("Show all blocks of palettes",
-                "Every single available block will be shown. Will slow down opening palettes!",
+        addSwitchPreference(getString(R.string.show_all_blocks_of_palettes),
+                getString(R.string.every_single_available_block_will_be_shown),
                 SETTING_SHOW_EVERY_SINGLE_BLOCK,
                 false, false);
-        addTextInputPreference("Backup directory",
-                "The default directory is /Internal storage/.sketchware/backups/.", v -> {
+        addTextInputPreference(getString(R.string.backup_directory),
+                getString(R.string.the_default_directory), v -> {
                     DialogCreateNewFileLayoutBinding dialogBinding = DialogCreateNewFileLayoutBinding.inflate(getLayoutInflater());
                     EditText inputText = dialogBinding.inputText;
                     inputText.setText(getBackupPath());
-                    AlertDialog dialog = new MaterialAlertDialogBuilder(this) 
+                    AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                             .setView(dialogBinding.getRoot())
-                            .setTitle("Backup directory")
-                            .setMessage("Directory inside /Internal storage/, e.g. .sketchware/backups")
+                            .setTitle(R.string.backup_directory)
+                            .setMessage(R.string.directory_inside_internal_storage)
                             .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
                             .setPositiveButton(R.string.common_word_save, null)
                             .create();
-                      
+
                     dialogBinding.chipGroupTypes.setVisibility(View.GONE);
                     dialog.setOnShowListener(dialogInterface -> {
                           Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
                           positiveButton.setOnClickListener(view -> {
                                 setSetting(SETTING_BACKUP_DIRECTORY, inputText.getText().toString());
-                                SketchwareUtil.toast("Saved");
+                                SketchwareUtil.toast(getString(R.string.common_word_saved));
                                 dialog.dismiss();
                           });
-                            
+
                           dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
                           inputText.requestFocus();
                     });
                     dialog.show();
                 }, false);
-        addSwitchPreference("Use legacy Code Editor",
-                "Enables old Code Editor from v6.2.0.",
+        addSwitchPreference(getString(R.string.use_legacy_code_editor),
+                getString(R.string.enables_old_code_editor),
                 SETTING_LEGACY_CODE_EDITOR,
                 false, false);
-        addSwitchPreference("Install projects with root access", "Automatically installs project APKs after building using root access.",
+        addSwitchPreference(getString(R.string.install_projects_with_root_access), getString(R.string.automatically_installs_project_apks),
                 SETTING_ROOT_AUTO_INSTALL_PROJECTS, false, (buttonView, isChecked) -> {
             if (isChecked) {
                 Shell.getShell(shell -> {
@@ -336,27 +336,27 @@ public class ConfigActivity extends AppCompatActivity {
                 });
             }
         }, false);
-        addSwitchPreference("Launch projects after installing",
-                "Opens projects automatically after auto-installation using root.",
+        addSwitchPreference(getString(R.string.launch_projects_after_installing),
+                getString(R.string.opens_projects_automatically),
                 SETTING_ROOT_AUTO_OPEN_AFTER_INSTALLING,
                 true, false);
-        addSwitchPreference("Use new Version Control",
-                "Enables custom version code and name for projects.",
+        addSwitchPreference(getString(R.string.use_new_version_control),
+                getString(R.string.enables_custom_version_code_and_name_for_projects),
                 SETTING_USE_NEW_VERSION_CONTROL,
                 false, false);
-        addSwitchPreference("Enable block text input highlighting",
-                "Enables syntax highlighting while editing blocks' text parameters.",
+        addSwitchPreference(getString(R.string.enable_block_text_input_highlighting),
+                getString(R.string.enables_syntax_highlighting_while_editing_blocks_text_parameters),
                 SETTING_USE_ASD_HIGHLIGHTER,
                 false, false);
-        addTextInputPreference("Backup filename format",
-                "Default is \"$projectName v$versionName ($pkgName, $versionCode) $time(yyyy-MM-dd'T'HHmmss)\"", v -> {
+        addTextInputPreference(getString(R.string.backup_filename_format),
+                getString(R.string.default_is_projectname_v_versionname_pkgname_versioncode_time), v -> {
                    DialogCreateNewFileLayoutBinding dialogBinding = DialogCreateNewFileLayoutBinding.inflate(getLayoutInflater());
                    EditText inputText = dialogBinding.inputText;
                    inputText.setText(getBackupFileName());
                    
                    AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                       .setView(dialogBinding.getRoot())
-                      .setTitle("Backup filename format")
+                      .setTitle(R.string.backup_filename_format)
                       .setMessage("This defines how SWB backup files get named.\n" +
                             "Available variables:\n" +
                             " - $projectName - Project name\n" +
@@ -372,7 +372,7 @@ public class ConfigActivity extends AppCompatActivity {
                       .setNeutralButton(R.string.common_word_reset, (dialogInterface, which) -> {
                            setting_map.remove(SETTING_BACKUP_FILENAME);
                            FileUtil.writeFile(SETTINGS_FILE.getAbsolutePath(), new Gson().toJson(setting_map));
-                           SketchwareUtil.toast("Reset to default complete.");
+                           SketchwareUtil.toast(getString(R.string.reset_to_default_complete));
                       }).create();
                       
                    dialogBinding.chipGroupTypes.setVisibility(View.GONE);
@@ -381,7 +381,7 @@ public class ConfigActivity extends AppCompatActivity {
                          positiveButton.setOnClickListener(view -> {
                               setting_map.put(SETTING_BACKUP_FILENAME, inputText.getText().toString());
                               FileUtil.writeFile(SETTINGS_FILE.getAbsolutePath(), new Gson().toJson(setting_map));
-                              SketchwareUtil.toast("Saved");
+                              SketchwareUtil.toast(getString(R.string.common_word_saved));
                               dialog.dismiss();
                          });
                          dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);

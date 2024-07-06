@@ -221,8 +221,8 @@ public class MainActivity extends BasePermissionAppCompatActivity {
                                 new MaterialAlertDialogBuilder(MainActivity.this)
                                         .setTitle(R.string.common_word_warning)
                                         .setMessage(BackupRestoreManager.getRestoreIntegratedLocalLibrariesMessage(false, -1, -1, null))
-                                        .setPositiveButton("Copy", (dialog, which) -> manager.doRestore(path, true))
-                                        .setNegativeButton("Don't copy", (dialog, which) -> manager.doRestore(path, false))
+                                        .setPositiveButton(getString(R.string.common_word_copy), (dialog, which) -> manager.doRestore(path, true))
+                                        .setNegativeButton(R.string.don_t_copy, (dialog, which) -> manager.doRestore(path, false))
                                         .setNeutralButton(R.string.common_word_cancel, null)
                                         .show();
                             } else {

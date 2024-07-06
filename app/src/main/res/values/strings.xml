@@ -2392,7 +2392,7 @@ Please try again later"</string>
     <string name="activity_events">Activity events</string>
     <string name="delete_this_event">Delete this event?</string>
     <string name="export_android_app_bundle">Export Android App Bundle</string>
-    <string name="export_aab">Export AAB</string>
+    <string name="export_aab">Export AAB(Android App Bundle)</string>
     <string name="send_aab">Send AAB</string>
     <string name="listeners">Listeners:</string>
     <string name="activity_event">Activity event</string>
@@ -2510,6 +2510,12 @@ Please try again later"</string>
     <string name="don_t_sign">Don\'t sign</string>
     <string name="code_shrinking_manager">Code Shrinking Manager</string>
     <string name="backup_options">Backup Options</string>
+    <string name="don_t_copy">Don\'t copy</string>
+    <string name="detected_invalid_preference_for_legacy">Detected invalid preference for legacy</string>
+    <string name="code_editor_restoring_defaults">Code Editor. Restoring defaults</string>
+    <string name="detected_invalid_preference_restoring_defaults">Detected invalid preference. Restoring defaults</string>
+    <string name="couldn_t_parse_mod_settings_restoring_defaults">Couldn\'t parse Mod Settings! Restoring defaults.</string>
+    <string name="reset_to_default_complete">Reset to default complete.</string>
 
 
 </resources>
