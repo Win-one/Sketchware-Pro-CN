@@ -154,7 +154,7 @@
                         android:layout_height="36dp"
                         android:layout_marginLeft="8dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/plus_96" />
+                        android:src="@drawable/ic_add_24" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -302,7 +302,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:padding="8dp"
-                    android:text="Optional"
+                    android:text="@string/optional"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="14sp" />
 

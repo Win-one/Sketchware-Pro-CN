@@ -3316,6 +3316,7 @@
     <string name="couldn_t_parse_mod_settings_restoring_defaults">无法解析模组设置!恢复默认值.</string>
     <string name="reset_to_default_complete">重置为默认值完成.</string>
     <string name="show_apk_signatures">显示Apk签名</string>
+    <string name="sketchware_language">Sketchware语言</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

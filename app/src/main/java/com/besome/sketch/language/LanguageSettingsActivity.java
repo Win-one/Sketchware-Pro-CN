@@ -18,6 +18,7 @@ import com.besome.sketch.language.util.MultiLanguageUtil;
 import com.besome.sketch.language.util.SpUtil;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.sketchware.remod.R;
+import com.sketchware.remod.databinding.ActivityLanguageSettingsBinding;
 
 import java.util.Locale;
 import java.util.Objects;
@@ -25,71 +26,41 @@ import java.util.Objects;
 import mod.hey.studios.util.Helper;
 
 public class LanguageSettingsActivity extends BaseAppCompatActivity {
-    private RadioGroup radioGroup_language;
-    private RadioButton radioButton_fs;
-    private RadioButton radioButton_zh;
-    private RadioButton radioButton_en;
+    private ActivityLanguageSettingsBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_language_settings);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        radioGroup_language = findViewById(R.id.rg_language);
-        radioButton_zh = findViewById(R.id.rb_chinese);
-        radioButton_en = findViewById(R.id.rb_english);
-        radioButton_fs = findViewById(R.id.rb_follow_system);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
-        getSupportActionBar().setTitle(R.string.main_drawer_title_language_settings);
-        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        binding = ActivityLanguageSettingsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        binding.topAppBar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
         getAppLanguage();
-    }
 
-    private void getAppLanguage() {
-        radioButton_fs.setId(R.id.rb_follow_system);
-        radioButton_zh.setId(R.id.rb_chinese);
-        radioButton_en.setId(R.id.rb_english);
-        int checkid = SpUtil.getInt("CheckID");
-        if (checkid == R.id.rb_chinese) {
-            radioButton_zh.setChecked(true);
-        } else if (checkid == R.id.rb_english) {
-            radioButton_en.setChecked(true);
-        } else {
-            radioButton_fs.setChecked(true);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.language_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int v = item.getItemId();
-        if (v == R.id.menu_save) {
-            if (radioGroup_language.getCheckedRadioButtonId() == R.id.rb_chinese) {
+        binding.toggleLanguage.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.rb_chinese) {
                 changeLanguage("zh", "CN");
-            } else if (radioGroup_language.getCheckedRadioButtonId() == R.id.rb_english) {
+            } else if (checkedId == R.id.rb_english) {
                 changeLanguage("en", "US");
             } else {
                 changeLanguage("", "");
             }
-        }
-        return super.onOptionsItemSelected(item);
+        });
     }
 
-    /**
-     * @param language
-     * @param area
-     */
+    private void getAppLanguage() {
+        int checkid = SpUtil.getInt("CheckID");
+        if (checkid == R.id.rb_chinese) {
+            binding.rbChinese.setChecked(true);
+        } else if (checkid == R.id.rb_english) {
+            binding.rbEnglish.setChecked(true);
+        } else {
+            binding.rbFollowSystem.setChecked(true);
+        }
+    }
+
     //修改应用内语言设置
     private void changeLanguage(String language, String area) {
-        SpUtil.saveInt("CheckID", radioGroup_language.getCheckedRadioButtonId());
+        SpUtil.saveInt("CheckID", binding.toggleLanguage.getCheckedChipId());
         if (TextUtils.isEmpty(language) && TextUtils.isEmpty(area)) {
             //如果语言和地区都是空，那么跟随系统
             SpUtil.saveString(ConstantGlobal.LOCALE_LANGUAGE, "");
