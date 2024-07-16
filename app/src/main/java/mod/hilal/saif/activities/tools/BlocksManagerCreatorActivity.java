@@ -1,5 +1,6 @@
 package mod.hilal.saif.activities.tools;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -164,7 +165,7 @@ public class BlocksManagerCreatorActivity extends AppCompatActivity {
                     "Header (h)"
             );
             AtomicInteger choice = new AtomicInteger();
-            new AlertDialog.Builder(this).setTitle("Block type")
+            new AlertDialog.Builder(this).setTitle(R.string.block_type)
                     .setSingleChoiceItems(choices.toArray(new String[0]),
                             types.indexOf(type.getText().toString()), (dialog, which) -> choice.set(which))
                     .setPositiveButton(R.string.common_word_save, (dialog, which) -> type.setText(types.get(choice.get())))
@@ -191,6 +192,7 @@ public class BlocksManagerCreatorActivity extends AppCompatActivity {
         });
 
         spec.addTextChangedListener(new BaseTextWatcher() {
+            @SuppressLint("Range")
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Matcher matcher = Pattern.compile("%[smdb]\\.?[a-zA-Z]*").matcher(s.toString());
@@ -351,14 +353,14 @@ public class BlocksManagerCreatorActivity extends AppCompatActivity {
         if (mode.equals("add")) {
             blockPosition = Integer.parseInt(getIntent().getStringExtra("pallet"));
             colour.setText(palletColour);
-            getSupportActionBar().setTitle("Add a new block");
+            getSupportActionBar().setTitle(R.string.add_a_new_block);
             return;
         }
         blockPosition = Integer.parseInt(getIntent().getStringExtra("pos"));
         colour.setText(palletColour);
-        getSupportActionBar().setTitle("Insert block");
+        getSupportActionBar().setTitle(R.string.insert_block);
         if (mode.equals("edit")) {
-            getSupportActionBar().setTitle("Edit block");
+            getSupportActionBar().setTitle(R.string.edit_block);
             fillUpInputs(blockPosition);
         }
     }

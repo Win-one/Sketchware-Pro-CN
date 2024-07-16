@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
@@ -60,7 +60,7 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/down_layout"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -86,9 +86,9 @@
                                 android:scaleType="fitXY"
                                 android:src="@drawable/selector_ic_chevron_left_grey_48" />
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/up_layout"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -114,9 +114,9 @@
                                 android:scaleType="fitXY"
                                 android:src="@drawable/selector_ic_chevron_left_grey_48" />
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

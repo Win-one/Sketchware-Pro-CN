@@ -3317,6 +3317,16 @@
     <string name="reset_to_default_complete">重置为默认值完成.</string>
     <string name="show_apk_signatures">显示Apk签名</string>
     <string name="sketchware_language">Sketchware语言</string>
+    <string name="some_required_fields_are_empty">一些必填字段为空!</string>
+    <string name="the_selected_file_is_empty">所选文件为空!</string>
+    <string name="are_you_sure_you_want_to_empty_the_recycle_bin">是否确实要清空回收站?</string>
+    <string name="blocks_inside_will_be_deleted_permanently">里面的块将被永久删除,您无法恢复它们!</string>
+    <string name="manage_block">管理块</string>
+    <string name="invalid_json_file">无效的JSON文件</string>
+    <string name="select_a_txt_file">选择.txt文件</string>
+    <string name="invalid_file">文件无效</string>
+    <string name="common_word_swap">Swap</string>
+    <string name="are_you_sure_you_want_to_delete_this_block">是否确实要删除此块?</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

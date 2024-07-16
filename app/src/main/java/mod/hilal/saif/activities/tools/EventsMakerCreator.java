@@ -110,7 +110,7 @@ public class EventsMakerCreator extends AppCompatActivity {
 
     private void save() {
         if (!filledIn()) {
-            SketchwareUtil.toast("Some required fields are empty!");
+            SketchwareUtil.toast(getString(R.string.some_required_fields_are_empty));
             return;
         }
         if (!OldResourceIdMapper.isValidIconId(binding.eventsCreatorIcon.getText().toString())) {

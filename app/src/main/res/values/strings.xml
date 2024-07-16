@@ -2498,6 +2498,16 @@ Please try again later"</string>
     <string name="reset_to_default_complete">Reset to default complete.</string>
     <string name="show_apk_signatures">Show Apk signatures</string>
     <string name="sketchware_language">Sketchware Language</string>
+    <string name="some_required_fields_are_empty">Some required fields are empty!</string>
+    <string name="the_selected_file_is_empty">The selected file is empty!</string>
+    <string name="are_you_sure_you_want_to_empty_the_recycle_bin">Are you sure you want to empty the recycle bin?</string>
+    <string name="blocks_inside_will_be_deleted_permanently">Blocks inside will be deleted PERMANENTLY, you CANNOT recover them!</string>
+    <string name="manage_block">Manage Block</string>
+    <string name="invalid_json_file">Invalid JSON file</string>
+    <string name="select_a_txt_file">Select a .txt file</string>
+    <string name="invalid_file">Invalid file</string>
+    <string name="common_word_swap">Swap</string>
+    <string name="are_you_sure_you_want_to_delete_this_block">Are you sure you want to delete this block?</string>
 
 
 </resources>

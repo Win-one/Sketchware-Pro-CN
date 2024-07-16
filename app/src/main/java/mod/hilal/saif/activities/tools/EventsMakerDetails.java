@@ -20,6 +20,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.AddCustomAttributeBinding;
@@ -68,18 +69,6 @@ public class EventsMakerDetails extends AppCompatActivity {
         refreshList();
     }
 
-    private void a(View view, int i, int i2, boolean z) {
-        GradientDrawable gradientDrawable = new GradientDrawable();
-        gradientDrawable.setShape(GradientDrawable.RECTANGLE);
-        gradientDrawable.setCornerRadii(new float[]{i, i, i / 2f, i / 2f, i, i, i / 2f, i / 2f});
-        gradientDrawable.setColor(Color.parseColor("#ffffff"));
-        RippleDrawable rippleDrawable = new RippleDrawable(new ColorStateList(new int[][]{new int[0]}, new int[]{Color.parseColor("#20008DCD")}), gradientDrawable, null);
-        view.setElevation((float) i2);
-        view.setBackground(rippleDrawable);
-        view.setClickable(true);
-        view.setFocusable(true);
-    }
-
     public void refreshList() {
         listMap.clear();
         if (FileUtil.isExistFile(EVENTS_FILE.getAbsolutePath())) {
@@ -119,9 +108,9 @@ public class EventsMakerDetails extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
         binding.background.addView(toolbar, 0);
         if (lisName.equals("")) {
-            toolbar.setTitle(R.string.activity_events);
+           getSupportActionBar().setTitle(R.string.activity_events);
         } else {
-            toolbar.setTitle(lisName);
+           getSupportActionBar().setTitle(lisName);
         }
 
     }
@@ -154,8 +143,7 @@ public class EventsMakerDetails extends AppCompatActivity {
             if (convertView == null) {
                 convertView = getLayoutInflater().inflate(R.layout.custom_view_pro, parent, false);
             }
-            LinearLayout root = convertView.findViewById(R.id.custom_view_pro_background);
-            a(root, (int) SketchwareUtil.getDip(4), (int) SketchwareUtil.getDip(2), true);
+            MaterialCardView root = convertView.findViewById(R.id.custom_view_pro_background);
             ImageView icon = convertView.findViewById(R.id.custom_view_pro_img);
             TextView title = convertView.findViewById(R.id.custom_view_pro_title);
             TextView subtitle = convertView.findViewById(R.id.custom_view_pro_subtitle);

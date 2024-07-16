@@ -23,6 +23,7 @@
 
             <ImageView
                 android:id="@+id/custom_view_pro_img"
+                android:layout_marginStart="8dp"
                 android:layout_width="28dp"
                 android:layout_height="28dp" />
 

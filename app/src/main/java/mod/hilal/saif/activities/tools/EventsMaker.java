@@ -122,17 +122,6 @@ public class EventsMaker extends AppCompatActivity {
         create.show();
     }
 
-    private void a(View view, int i, int i2, boolean z) {
-        GradientDrawable gradientDrawable = new GradientDrawable();
-        gradientDrawable.setShape(GradientDrawable.RECTANGLE);
-        gradientDrawable.setCornerRadii(new float[]{(float) i, (float) i, ((float) i) / 2.0f, ((float) i) / 2.0f, (float) i, (float) i, ((float) i) / 2.0f, ((float) i) / 2.0f});
-        RippleDrawable rippleDrawable = new RippleDrawable(new ColorStateList(new int[][]{new int[0]}, new int[]{Color.parseColor("#20008DCD")}), gradientDrawable, null);
-        view.setElevation((float) i2);
-        view.setBackground(rippleDrawable);
-        view.setClickable(true);
-        view.setFocusable(true);
-    }
-
     private void overrideEvents(String before, String after) {
         ArrayList<HashMap<String, Object>> events = new ArrayList<>();
         if (FileUtil.isExistFile(EVENTS_FILE.getAbsolutePath())) {
@@ -244,19 +233,19 @@ public class EventsMaker extends AppCompatActivity {
         dialogProperties.offset = file;
         dialogProperties.extensions = null;
         FilePickerDialog filePickerDialog = new FilePickerDialog(this, dialogProperties);
-        filePickerDialog.setTitle("Select a .txt file");
+        filePickerDialog.setTitle(getString(R.string.select_a_txt_file));
         filePickerDialog.setDialogSelectionListener(selections -> {
             if (FileUtil.readFile(selections[0]).equals("")) {
-                SketchwareUtil.toastError("The selected file is empty!");
+                SketchwareUtil.toastError(getString(R.string.the_selected_file_is_empty));
             } else if (FileUtil.readFile(selections[0]).equals("[]")) {
-                SketchwareUtil.toastError("The selected file is empty!");
+                SketchwareUtil.toastError(getString(R.string.the_selected_file_is_empty));
             } else {
                 try {
                     String[] split = FileUtil.readFile(selections[0]).split("\n");
                     importEvents(new Gson().fromJson(split[0], Helper.TYPE_MAP_LIST),
                             new Gson().fromJson(split[1], Helper.TYPE_MAP_LIST));
                 } catch (Exception e) {
-                    SketchwareUtil.toastError("Invalid file");
+                    SketchwareUtil.toastError(getString(R.string.invalid_file));
                 }
             }
         });
@@ -386,7 +375,6 @@ public class EventsMaker extends AppCompatActivity {
                 convertView = getLayoutInflater().inflate(R.layout.custom_view_pro, parent, false);
             }
             MaterialCardView materialCardView = convertView.findViewById(R.id.custom_view_pro_background);
-            a(materialCardView, (int) SketchwareUtil.getDip(4), (int) SketchwareUtil.getDip(2), true);
             ImageView imageView = convertView.findViewById(R.id.custom_view_pro_img);
             TextView textView = convertView.findViewById(R.id.custom_view_pro_title);
             imageView.setImageResource(R.drawable.event_on_response_48dp);
