@@ -372,7 +372,7 @@ public class BlocksManager extends AppCompatActivity {
 
     private void showPaletteDialog(boolean isEditing, Integer oldPosition, String oldName, String oldColor, Integer insertAtPosition) {
         aB dialog = new aB(this);
-        dialog.a(R.drawable.positive_96);
+        dialog.a(R.drawable.add_new_48_gray);
         dialog.b(!isEditing ? getString(R.string.create_a_new_palette) : getString(R.string.edit_palette));
 
         LinearLayout customView = new LinearLayout(this);
@@ -548,8 +548,8 @@ public class BlocksManager extends AppCompatActivity {
                         case 4:
                             new AlertDialog.Builder(BlocksManager.this)
                                     .setTitle(pallet_listmap.get(position).get("name").toString())
-                                    .setMessage("Remove all blocks related to this palette?")
-                                    .setPositiveButton("Remove permanently", (dialog, which) -> {
+                                    .setMessage(R.string.remove_all_blocks)
+                                    .setPositiveButton(R.string.remove_permanently, (dialog, which) -> {
                                         pallet_listmap.remove(position);
                                         FileUtil.writeFile(pallet_dir, new Gson().toJson(pallet_listmap));
                                         _removeRelatedBlocks(position + 9);
@@ -557,7 +557,7 @@ public class BlocksManager extends AppCompatActivity {
                                         _refresh_list();
                                     })
                                     .setNegativeButton(R.string.common_word_cancel, null)
-                                    .setNeutralButton("Move to recycle bin", (dialog, which) -> {
+                                    .setNeutralButton(R.string.move_to_recycle_bin, (dialog, which) -> {
                                         _moveRelatedBlocksToRecycleBin(position + 9);
                                         pallet_listmap.remove(position);
                                         FileUtil.writeFile(pallet_dir, new Gson().toJson(pallet_listmap));

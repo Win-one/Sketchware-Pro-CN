@@ -84,6 +84,8 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
     }
 
     private void setupViews() {
+        binding.activityEventCard.setVisibility(View.GONE);
+        binding.listeners.setVisibility(View.GONE);
         FloatingActionButton fab = findViewById(R.id.add_attr_fab);
         fab.setOnClickListener(v -> showAddDial());
         listView = findViewById(R.id.add_attr_listview);
@@ -134,7 +136,7 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
         editText2.setVisibility(View.GONE);
         final EditText editText = inflate.findViewById(R.id.dialog_input_value);
         final TextView textView = (TextView) ((ViewGroup) editText2.getParent()).getChildAt(0);
-        textView.setText("Edit Value");
+        textView.setText(R.string.edit_value);
         editText.setText((String) listMap.get(pos).get("value"));
         editText.setHint("android:attr=\"value\"");
         textsave.setOnClickListener(view -> {
@@ -289,8 +291,8 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
             attributeView.setOnClickListener(v -> showDial(position));
             attributeView.setOnLongClickListener(v -> {
                 new AlertDialog.Builder(AndroidManifestInjectionDetails.this)
-                        .setTitle("Delete this attribute?")
-                        .setMessage("This action cannot be undone.")
+                        .setTitle(R.string.delete_this_attribute)
+                        .setMessage(R.string.this_action_cannot_be_undone)
                         .setPositiveButton(R.string.common_word_delete, (dialog, which) -> {
                             listMap.remove(position);
                             applyChange();

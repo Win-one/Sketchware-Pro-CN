@@ -298,14 +298,14 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         filePickerDialog.setDialogSelectionListener(selections -> {
             String fileContent = FileUtil.readFile(selections[0]);
             if (fileContent.equals("")) {
-                SketchwareUtil.toastError("The selected file is empty!");
+                SketchwareUtil.toastError(getString(R.string.the_selected_file_is_empty));
             } else if (fileContent.equals("[]")) {
-                SketchwareUtil.toastError("The selected file is empty!");
+                SketchwareUtil.toastError(getString(R.string.the_selected_file_is_empty));
             } else {
                 try {
                     _importMenu(new Gson().fromJson(fileContent, Helper.TYPE_MAP_LIST));
                 } catch (Exception e) {
-                    SketchwareUtil.toastError("Invalid JSON file");
+                    SketchwareUtil.toastError(getString(R.string.invalid_json_file));
                 }
             }
         });
@@ -319,7 +319,7 @@ public class BlockSelectorActivity extends AppCompatActivity implements View.OnC
         if (data.size() != 0) {
             _showItem(0);
         }
-        SketchwareUtil.toast("Successfully imported menu");
+        SketchwareUtil.toast(getString(R.string.successfully_imported_menu));
     }
 
     private void _readFile() {

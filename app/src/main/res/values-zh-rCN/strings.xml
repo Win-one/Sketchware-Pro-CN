@@ -3327,6 +3327,9 @@
     <string name="invalid_file">文件无效</string>
     <string name="common_word_swap">Swap</string>
     <string name="are_you_sure_you_want_to_delete_this_block">是否确实要删除此块?</string>
+    <string name="delete_this_attribute">删除此属性?</string>
+    <string name="this_action_cannot_be_undone">此操作无法撤消.</string>
+    <string name="successfully_imported_menu">已成功导入菜单</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

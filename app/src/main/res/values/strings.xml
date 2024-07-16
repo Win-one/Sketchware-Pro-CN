@@ -2508,6 +2508,9 @@ Please try again later"</string>
     <string name="invalid_file">Invalid file</string>
     <string name="common_word_swap">Swap</string>
     <string name="are_you_sure_you_want_to_delete_this_block">Are you sure you want to delete this block?</string>
+    <string name="delete_this_attribute">Delete this attribute?</string>
+    <string name="this_action_cannot_be_undone">This action cannot be undone.</string>
+    <string name="successfully_imported_menu">Successfully imported menu</string>
 
 
 </resources>
