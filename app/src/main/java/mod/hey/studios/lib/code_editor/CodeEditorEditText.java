@@ -15,7 +15,7 @@ import android.widget.EditText;
  * @author Hey! Studios DEV - 28.07.2020
  */
 
-public class CodeEditorEditText extends EditText {
+public class CodeEditorEditText extends androidx.appcompat.widget.AppCompatEditText {
 
     private static final int HIGHLIGHTER_COLOR = 0xffefefef;
     private static final boolean LINES = true;

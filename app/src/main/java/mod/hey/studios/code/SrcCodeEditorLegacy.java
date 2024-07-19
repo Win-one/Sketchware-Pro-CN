@@ -66,11 +66,11 @@ public class SrcCodeEditorLegacy extends Activity {
         boolean exitConfirmationDialogEnabled = sp.getBoolean("exit_confirmation_dialog", false);
         if (exitConfirmationDialogEnabled) {
             new AlertDialog.Builder(this)
-                    .setTitle("Save Changes?")
-                    .setMessage("Do you want to save your changes? If not, the file will be reverted.")
+                    .setTitle(R.string.save_changes)
+                    .setMessage(R.string.do_you_want_to_save_your_changes)
                     .setPositiveButton(R.string.common_word_save, (dialog, which) -> {
                         FileUtil.writeFile(getIntent().getStringExtra("content"), codeEditor.getText());
-                        Toast.makeText(this, "File saved", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.file_saved, Toast.LENGTH_SHORT).show();
                         finish();
                     })
                     .setNeutralButton(R.string.discard, (dialog, which) -> finish())
@@ -80,7 +80,7 @@ public class SrcCodeEditorLegacy extends Activity {
             super.onBackPressed();
 
             FileUtil.writeFile(getIntent().getStringExtra("content"), codeEditor.getText());
-            Toast.makeText(this, "File saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.file_saved, Toast.LENGTH_SHORT).show();
         }
     }
 

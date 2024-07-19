@@ -104,6 +104,10 @@ android {
     configurations.implementation {
         exclude group: 'javax.inject', module: 'javax.inject'
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {

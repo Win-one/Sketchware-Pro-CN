@@ -3330,6 +3330,19 @@
     <string name="delete_this_attribute">删除此属性?</string>
     <string name="this_action_cannot_be_undone">此操作无法撤消.</string>
     <string name="successfully_imported_menu">已成功导入菜单</string>
+    <string name="errors_will_show_up_here">错误将显示在此处</string>
+    <string name="awesome_no_bugs_to_fix">太棒了,没有错误要修复!</string>
+    <string name="let_s_continue_working_on_the_project">让我们继续这个项目</string>
+    <string name="select_language">选择语言</string>
+    <string name="select_theme">选择主题</string>
+    <string name="your_code_contains_incorrectly_nested_parentheses">您的代码包含不正确的嵌套括号</string>
+    <string name="failed_to_format_xml_file">无法格式化XML文件</string>
+    <string name="only_java_and_xml_files_can_be_formatted">只能格式化Java和XML文件</string>
+    <string name="do_you_want_to_save_your_changes">是否要保存更改?否则,文件将被还原.</string>
+    <string name="file_saved">文件已保存</string>
+    <string name="error_your_code_contains_incorrectly_nested_parentheses">错误:您的代码包含不正确的嵌套括号</string>
+    <string name="select_a_more_block">选择更多块</string>
+    <string name="search">搜索...</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

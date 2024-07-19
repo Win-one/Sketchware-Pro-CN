@@ -2511,6 +2511,19 @@ Please try again later"</string>
     <string name="delete_this_attribute">Delete this attribute?</string>
     <string name="this_action_cannot_be_undone">This action cannot be undone.</string>
     <string name="successfully_imported_menu">Successfully imported menu</string>
+    <string name="errors_will_show_up_here">Errors will show up here</string>
+    <string name="awesome_no_bugs_to_fix">Awesome, no bugs to fix!</string>
+    <string name="let_s_continue_working_on_the_project">Let\'s continue working on the project</string>
+    <string name="select_language">Select language</string>
+    <string name="select_theme">Select theme</string>
+    <string name="your_code_contains_incorrectly_nested_parentheses">Your code contains incorrectly nested parentheses</string>
+    <string name="failed_to_format_xml_file">Failed to format XML file</string>
+    <string name="only_java_and_xml_files_can_be_formatted">Only Java and XML files can be formatted</string>
+    <string name="do_you_want_to_save_your_changes">Do you want to save your changes? If not, the file will be reverted.</string>
+    <string name="file_saved">File saved</string>
+    <string name="error_your_code_contains_incorrectly_nested_parentheses">Error: Your code contains incorrectly nested parentheses</string>
+    <string name="select_a_more_block">Select a more block</string>
+    <string name="search">Search...</string>
 
 
 </resources>
