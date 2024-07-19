@@ -1,7 +1,6 @@
 package com.besome.sketch.common;
 
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -28,14 +27,9 @@ import a.a.a.bB;
 import a.a.a.jC;
 import a.a.a.yq;
 import io.github.rosemoe.sora.langs.java.JavaLanguage;
-import io.github.rosemoe.sora.langs.textmate.TextMateColorScheme;
 import io.github.rosemoe.sora.widget.CodeEditor;
 import io.github.rosemoe.sora.widget.schemes.EditorColorScheme;
 import io.github.rosemoe.sora.widget.schemes.SchemeDarcula;
-import io.github.rosemoe.sora.widget.schemes.SchemeEclipse;
-import io.github.rosemoe.sora.widget.schemes.SchemeGitHub;
-import io.github.rosemoe.sora.widget.schemes.SchemeNotepadXX;
-import io.github.rosemoe.sora.widget.schemes.SchemeVS2019;
 import mod.hey.studios.util.Helper;
 import mod.jbk.code.CodeEditorColorSchemes;
 import mod.jbk.code.CodeEditorLanguages;
@@ -191,10 +185,10 @@ public class SrcViewerActivity extends AppCompatActivity {
                 Gravity.CENTER));
 
         new MaterialAlertDialogBuilder(this)
-                .setTitle("Select font size")
+                .setTitle(R.string.select_font_size)
                 .setIcon(R.drawable.ic_formattext_24)
                 .setView(layout)
-                .setPositiveButton("Apply", (dialog, which) -> {
+                .setPositiveButton(R.string.common_word_apply, (dialog, which) -> {
                     sourceCodeFontSize = picker.getValue();
                     codeViewer.setTextSize(sourceCodeFontSize);
                 })

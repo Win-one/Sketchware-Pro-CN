@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -6,15 +7,28 @@
     android:orientation="vertical"
     android:padding="4dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center|start"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="14dp"
-        android:paddingHorizontal="4dp"
-        android:text="@string/local_library_manager_enter_dependency"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="20sp" />
+        android:paddingHorizontal="4dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_download_24"
+            app:tint="?colorSecondary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/local_library_manager_enter_dependency"
+            style="@style/MaterialAlertDialog.Material3.Title.Text" />
+    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dependencyInputLayout"
@@ -71,8 +85,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginTop="4dp"
-                android:textSize="14sp"
                 android:singleLine="true"
+                android:textSize="14sp"
                 tools:text="Downloading dependencies..." />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

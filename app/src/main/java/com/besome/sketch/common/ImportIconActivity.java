@@ -181,7 +181,7 @@ public class ImportIconActivity extends BaseAppCompatActivity implements View.On
         getMenuInflater().inflate(R.menu.menu_import_icon, menu);
         search = menu.findItem(R.id.menu_find);
         searchView = (SearchView) search.getActionView();
-        searchView.setQueryHint("Search");
+        searchView.setQueryHint(getString(R.string.search));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

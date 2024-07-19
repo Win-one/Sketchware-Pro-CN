@@ -2524,6 +2524,8 @@ Please try again later"</string>
     <string name="error_your_code_contains_incorrectly_nested_parentheses">Error: Your code contains incorrectly nested parentheses</string>
     <string name="select_a_more_block">Select a more block</string>
     <string name="search">Search...</string>
+    <string name="this_is_a_simple_description">This is a simple description</string>
+    <string name="variable_name">Variable name</string>
 
 
 </resources>

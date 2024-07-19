@@ -1568,18 +1568,18 @@
     <string name="block_start_activity_head">开启活动</string>
     <string name="block_start_activity_tail"></string>
 
-    <string name="block_intent_get_string_head">活动取额外 key</string>
+    <string name="block_intent_get_string_head">活动取额外key</string>
     <string name="block_intent_get_string_tail"></string>
 
     <string name="block_finish_activity_head">完成</string>
     <string name="block_finish_activity_tail">Activity</string>
 
     <string name="block_file_get_data_head">文件</string>
-    <string name="block_file_get_data_body_1">取数据 key</string>
+    <string name="block_file_get_data_body_1">取数据key</string>
     <string name="block_file_get_data_tail"></string>
 
     <string name="block_file_set_data_head">文件</string>
-    <string name="block_file_set_data_body_1">设数据 key</string>
+    <string name="block_file_set_data_body_1">设数据key</string>
     <string name="block_file_set_data_body_2">值</string>
     <string name="block_file_set_data_tail"></string>
 
@@ -1604,7 +1604,7 @@
     <string name="block_calendar_format_body_1">格式</string>
     <string name="block_calendar_format_tail"></string>
 
-    <string name="block_calendar_diff_head">日历 差异</string>
+    <string name="block_calendar_diff_head">日历差异</string>
     <string name="block_calendar_diff_body_1">-</string>
     <string name="block_calendar_diff_tail"></string>
 
@@ -1618,7 +1618,7 @@
 
     <string name="block_timer_every_head">定时器</string>
     <string name="block_timer_every_body_1">在</string>
-    <string name="block_timer_every_body_2">ms后 每</string>
+    <string name="block_timer_every_body_2">ms后每</string>
     <string name="block_timer_every_tail">ms</string>
 
     <string name="block_timer_cancel_head">定时器</string>
@@ -3180,7 +3180,7 @@
     <string name="save_changes">保存更改</string>
     <string name="enter_a_name">输入名称</string>
     <string name="enter_a_title">输入标题</string>
-    <string name="create_a_new_activity_event">创建新的活动活动事件</string>
+    <string name="create_a_new_activity_event">创建新的活动事件</string>
     <string name="create_a_new_event">创建新活动</string>
     <string name="common_word_clear">清除</string>
     <string name="add_to_my_collection">添加到我的收藏夹</string>
@@ -3343,6 +3343,8 @@
     <string name="error_your_code_contains_incorrectly_nested_parentheses">错误:您的代码包含不正确的嵌套括号</string>
     <string name="select_a_more_block">选择更多块</string>
     <string name="search">搜索...</string>
+    <string name="this_is_a_simple_description">这是一个简单的描述</string>
+    <string name="variable_name">变量名称</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

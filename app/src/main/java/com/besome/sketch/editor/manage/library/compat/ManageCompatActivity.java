@@ -3,15 +3,9 @@ package com.besome.sketch.editor.manage.library.compat;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Switch;
-import android.widget.TextView;
-
-import androidx.appcompat.widget.Toolbar;
 
 import com.besome.sketch.beans.ProjectLibraryBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import com.google.android.material.materialswitch.MaterialSwitch;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.ManageLibraryManageCompatBinding;
 
@@ -85,7 +79,7 @@ public class ManageCompatActivity extends BaseAppCompatActivity implements View.
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
-        binding.toolbar.setTitle(Helper.getResString(R.string.design_library_title_appcompat_and_design));
+        getSupportActionBar().setTitle(R.string.design_library_title_appcompat_and_design);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
