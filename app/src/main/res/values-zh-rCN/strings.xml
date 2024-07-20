@@ -3165,7 +3165,7 @@
     <string name="shared_collection_message_no_search_keyword">请输入关键字进行搜索</string>
     <string name="title_compatible_chrome_browser">需要Chrome浏览器</string>
     <string name="common_word_overwrite">覆盖</string>
-    <string name="deleted_successfully">已成功删除</string>
+    <string name="deleted_successfully">删除成功</string>
     <string name="common_word_added">已添加</string>
     <string name="activity_events">活动事件</string>
     <string name="delete_this_event">删除此事件?</string>
@@ -3345,6 +3345,26 @@
     <string name="search">搜索...</string>
     <string name="this_is_a_simple_description">这是一个简单的描述</string>
     <string name="variable_name">变量名称</string>
+    <string name="select_an_asset_file">选择asset文件</string>
+    <string name="couldn_t_import_file">无法导入文件! [</string>
+    <string name="renamed_successfully">重命名成功</string>
+    <string name="create_a_new_file">创建新文件</string>
+    <string name="enter_a_name_for_the_new">输入新名称</string>
+    <string name="common_word_folder">文件夹</string>
+    <string name="common_word_file">文件</string>
+    <string name="common_word_class">类</string>
+    <string name="java_activity">Java活动</string>
+    <string name="kotlin_class">Kotlin类</string>
+    <string name="kotlin_activity">Kotlin活动</string>
+    <string name="java_class">Java类</string>
+    <string name="are_you_sure_you_want_to_delete_this">您确定要删除这个</string>
+    <string name="font_name">字体名称</string>
+    <string name="add_sound">添加声音</string>
+    <string name="file_name">文件名</string>
+    <string name="enter_sound_name">输入声音名称</string>
+    <string name="file_extension_will_be_added_automatically">文件扩展名将根据您选择的文件类型自动添加</string>
+    <string name="select_java_kotlin_file_s">选择Java/Kotlin文件</string>
+    <string name="this_will_also_remove_it_from_androidmanifest">这也将从AndroidManifest中删除它.</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

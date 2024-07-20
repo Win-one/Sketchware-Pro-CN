@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:paddingHorizontal="16dp">
 
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
         android:id="@+id/select_file"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,12 +41,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:text="Add Sound"
+                    android:text="@string/add_sound"
                     android:textColor="#ff7d7d7d"
                     android:textSize="12sp" />
             </LinearLayout>
         </RelativeLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/layout_control"
@@ -71,7 +71,7 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="File name"
+                tools:text="@string/file_name"
                 android:layout_alignParentStart="true" />
 
             <ImageView
@@ -138,7 +138,7 @@
             android:id="@+id/ed_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter sound name"
+            android:hint="@string/enter_sound_name"
             android:imeOptions="actionDone"
             android:inputType="text"
             android:lines="1" />
@@ -148,5 +148,5 @@
         android:id="@+id/chk_collection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add to my collection" />
+        android:text="@string/add_to_my_collection" />
 </LinearLayout>

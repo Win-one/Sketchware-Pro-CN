@@ -2526,6 +2526,26 @@ Please try again later"</string>
     <string name="search">Search...</string>
     <string name="this_is_a_simple_description">This is a simple description</string>
     <string name="variable_name">Variable name</string>
+    <string name="select_an_asset_file">Select an asset file</string>
+    <string name="couldn_t_import_file">Couldn\'t import file! [</string>
+    <string name="renamed_successfully">Renamed successfully</string>
+    <string name="create_a_new_file">Create a new file</string>
+    <string name="enter_a_name_for_the_new">Enter a name for the new</string>
+    <string name="common_word_folder">folder</string>
+    <string name="common_word_file">file</string>
+    <string name="common_word_class">Class</string>
+    <string name="java_activity">Java Activity</string>
+    <string name="kotlin_class">Kotlin Class</string>
+    <string name="kotlin_activity">Kotlin Activity</string>
+    <string name="java_class">Java Class</string>
+    <string name="are_you_sure_you_want_to_delete_this">Are you sure you want to delete this</string>
+    <string name="font_name">Font name</string>
+    <string name="add_sound">Add Sound</string>
+    <string name="file_name">File name</string>
+    <string name="enter_sound_name">Enter sound name</string>
+    <string name="file_extension_will_be_added_automatically">File extension will be added automatically based on the file type you select</string>
+    <string name="select_java_kotlin_file_s">Select Java/Kotlin file(s)</string>
+    <string name="this_will_also_remove_it_from_androidmanifest">"This will also remove it from AndroidManifest. "</string>
 
 
 </resources>

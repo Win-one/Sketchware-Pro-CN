@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
 import com.besome.sketch.beans.ProjectResourceBean;
@@ -17,7 +18,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.google.android.material.card.MaterialCardView;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.ManageSoundAddBinding;
 
@@ -83,7 +83,7 @@ public class AddSoundCollectionActivity extends BaseDialogActivity implements Vi
     }
 
     public void onActivityResult(int i, int i2, Intent intent) {
-        MaterialCardView relativeLayout;
+        LinearLayout relativeLayout;
         Uri data;
         super.onActivityResult(i, i2, intent);
         if (i == 218 && (relativeLayout = binding.selectFile) != null) {

@@ -174,7 +174,7 @@ public class ManageAssetsActivity extends AppCompatActivity {
         properties.extensions = null;
 
         FilePickerDialog dialog = new FilePickerDialog(this, properties);
-        dialog.setTitle("Select an asset file");
+        dialog.setTitle(getString(R.string.select_an_asset_file));
         dialog.setDialogSelectionListener(selections -> {
             for (String path : selections) {
                 File file = new File(path);
@@ -182,7 +182,7 @@ public class ManageAssetsActivity extends AppCompatActivity {
                     FileUtil.copyDirectory(file, new File(current_path, file.getName()));
                     refresh();
                 } catch (IOException e) {
-                    SketchwareUtil.toastError("Couldn't import file! [" + e.getMessage() + "]");
+                    SketchwareUtil.toastError(getString(R.string.couldn_t_import_file) + e.getMessage() + "]");
                 }
             }
         });
@@ -203,7 +203,7 @@ public class ManageAssetsActivity extends AppCompatActivity {
                     if (!inputText.getText().toString().isEmpty()) {
                         FileUtil.renameFile(assetsAdapter.getItem(position), new File(current_path, inputText.getText().toString()).getAbsolutePath());
                         refresh();
-                        SketchwareUtil.toast("Renamed successfully");
+                        SketchwareUtil.toast(getString(R.string.renamed_successfully));
                     }
                     dialogInterface.dismiss();
                 })
@@ -220,12 +220,12 @@ public class ManageAssetsActivity extends AppCompatActivity {
     private void showDeleteDialog(final int position) {
         new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.common_word_delete + assetsAdapter.getFileName(position) + "?")
-                .setMessage("Are you sure you want to delete this " + (assetsAdapter.isFolder(position) ? "folder" : "file") + "? "
-                        + "This action cannot be undone.")
+                .setMessage(getString(R.string.are_you_sure_you_want_to_delete_this) + (assetsAdapter.isFolder(position) ? getString(R.string.common_word_folder) : getString(R.string.common_word_file)) + "? "
+                        + getString(R.string.this_action_cannot_be_undone))
                 .setPositiveButton(R.string.common_word_delete, (dialog, which) -> {
                     FileUtil.deleteFile(assetsAdapter.getItem(position));
                     refresh();
-                    SketchwareUtil.toast("Deleted successfully");
+                    SketchwareUtil.toast(Helper.getResString(R.string.deleted_successfully));
                 })
                 .setNegativeButton(R.string.common_word_cancel, null)
                 .create()

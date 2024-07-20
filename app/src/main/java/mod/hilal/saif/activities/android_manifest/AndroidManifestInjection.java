@@ -12,15 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.besome.sketch.editor.manage.library.LibraryItemView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -28,6 +24,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
+import com.sketchware.remod.databinding.AndroidManifestInjectionBinding;
 import com.sketchware.remod.databinding.ProgressMsgBoxBinding;
 
 import java.util.ArrayList;
@@ -38,11 +35,8 @@ import a.a.a.aB;
 import a.a.a.jC;
 import a.a.a.wB;
 import a.a.a.yq;
-import io.github.rosemoe.sora.langs.java.JavaLanguage;
 import io.github.rosemoe.sora.widget.CodeEditor;
 import io.github.rosemoe.sora.widget.component.Magnifier;
-import io.github.rosemoe.sora.widget.schemes.EditorColorScheme;
-import io.github.rosemoe.sora.widget.schemes.SchemeDarcula;
 import mod.SketchwareUtil;
 import mod.agus.jcoderz.lib.FileUtil;
 import mod.hey.studios.code.SrcCodeEditor;
@@ -61,11 +55,13 @@ public class AndroidManifestInjection extends AppCompatActivity {
     private ListView act_list;
     private String sc_id;
     private String activityName;
+    private AndroidManifestInjectionBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.android_manifest_injection);
+        binding = AndroidManifestInjectionBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         if (getIntent().hasExtra("sc_id") && getIntent().hasExtra("file_name")) {
             sc_id = getIntent().getStringExtra("sc_id");
@@ -110,12 +106,9 @@ public class AndroidManifestInjection extends AppCompatActivity {
     }
 
     private void setupViews() {
-        LinearLayout content = findViewById(R.id.content);
-        LinearLayout cards = findViewById(R.id.cards);
-
         LibraryItemView application_card = new LibraryItemView(this);
         makeup(application_card, R.drawable.icons8_app_attrs, getString(R.string.application), getString(R.string.default_properties_for_the_app));
-        cards.addView(application_card);
+        binding.cards.addView(application_card);
         application_card.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.setClass(getApplicationContext(), AndroidManifestInjectionDetails.class);
@@ -128,7 +121,7 @@ public class AndroidManifestInjection extends AppCompatActivity {
         {
             LibraryItemView permission_card = new LibraryItemView(this);
             makeup(permission_card, R.drawable.event_on_signin_complete_48dp, getString(R.string.permissions), getString(R.string.add_custom_permissions_to_the_app));
-            cards.addView(permission_card);
+            binding.cards.addView(permission_card);
             permission_card.setOnClickListener(_view -> {
                 Intent inta = new Intent();
                 inta.setClass(getApplicationContext(), AndroidManifestInjectionDetails.class);
@@ -142,13 +135,13 @@ public class AndroidManifestInjection extends AppCompatActivity {
         {
             LibraryItemView permission_card = new LibraryItemView(this);
             makeup(permission_card, R.drawable.recycling_48, getString(R.string.launcher_activity), getString(R.string.change_the_default_launcher_activity));
-            cards.addView(permission_card);
+            binding.cards.addView(permission_card);
             permission_card.setOnClickListener(v -> showLauncherActDialog(AndroidManifestInjector.getLauncherActivity(sc_id)));
         }
 
         LibraryItemView allAct_card = new LibraryItemView(this);
         makeup(allAct_card, R.drawable.icons8_all_activities_attrs, getString(R.string.all_activities), getString(R.string.add_attributes_for_all_activities));
-        cards.addView(allAct_card);
+        binding.cards.addView(allAct_card);
         allAct_card.setOnClickListener(v -> {
             Intent inta = new Intent();
             inta.setClass(getApplicationContext(), AndroidManifestInjectionDetails.class);
@@ -160,13 +153,13 @@ public class AndroidManifestInjection extends AppCompatActivity {
 
         LibraryItemView appCom_card = new LibraryItemView(this);
         makeup(appCom_card, R.drawable.icons8_app_components, getString(R.string.app_components), getString(R.string.add_extra_components));
-        cards.addView(appCom_card);
+        binding.cards.addView(appCom_card);
         appCom_card.setOnClickListener(v -> showAppComponentDialog());
 
         act_list = new ListView(this);
         act_list.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         act_list.setDividerHeight(0);
-        content.addView(act_list);
+        binding.content.addView(act_list);
     }
 
     private void showAppComponentDialog() {
@@ -215,7 +208,7 @@ public class AndroidManifestInjection extends AppCompatActivity {
     // if you change method name, you need also change it in layout
     public void showAddActivityDialog(View view) {
         aB dialog = new aB(this);
-        dialog.a(R.drawable.add_96_blue);
+        dialog.a(R.drawable.add_new_48_gray);
         dialog.b(Helper.getResString(R.string.common_word_add_activtiy));
         View inflate = wB.a(this, R.layout.dialog_add_custom_activity);
 
@@ -352,12 +345,8 @@ public class AndroidManifestInjection extends AppCompatActivity {
     }
 
     private void setupCustomToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.androidmanifest_manager);
-        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        binding.toolbar.setTitle(R.string.androidmanifest_manager);
+        binding.toolbar.setNavigationOnClickListener(view -> onBackPressed());
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

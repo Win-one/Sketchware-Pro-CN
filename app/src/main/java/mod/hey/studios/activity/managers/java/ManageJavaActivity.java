@@ -195,7 +195,7 @@ public class ManageJavaActivity extends AppCompatActivity {
         var dialog = new MaterialAlertDialogBuilder(this)
                 .setView(dialogBinding.getRoot())
                 .setTitle(R.string.create_new)
-                .setMessage("File extension will be added automatically based on the file type you select")
+                .setMessage(R.string.file_extension_will_be_added_automatically)
                 .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
                 .setPositiveButton(R.string.common_word_create, null)
                 .create();
@@ -280,7 +280,7 @@ public class ManageJavaActivity extends AppCompatActivity {
 
         FilePickerDialog pickerDialog = new FilePickerDialog(this, properties);
 
-        pickerDialog.setTitle("Select Java/Kotlin file(s)");
+        pickerDialog.setTitle(getString(R.string.select_java_kotlin_file_s));
         pickerDialog.setDialogSelectionListener(selections -> {
 
             for (String path : selections) {
@@ -365,9 +365,9 @@ public class ManageJavaActivity extends AppCompatActivity {
 
         new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.common_word_delete + filesAdapter.getFileName(position) + "?")
-                .setMessage("Are you sure you want to delete this " + (filesAdapter.isFolder(position) ? "folder" : "file") + "? "
-                        + (isInManifest ? "This will also remove it from AndroidManifest. " : "")
-                        + "This action cannot be undone.")
+                .setMessage(R.string.are_you_sure_you_want_to_delete_this + (filesAdapter.isFolder(position) ? getString(R.string.common_word_folder) : getString(R.string.common_word_file)) + "? "
+                        + (isInManifest ? getString(R.string.this_will_also_remove_it_from_androidmanifest) : "")
+                        + getString(R.string.this_action_cannot_be_undone))
                 .setPositiveButton(R.string.common_word_delete, (dialog, which) -> {
                     if (!filesAdapter.isFolder(position) && isInManifest) {
                         frc.getJavaManifestList().remove(filesAdapter.getFullName(position));
@@ -376,7 +376,7 @@ public class ManageJavaActivity extends AppCompatActivity {
 
                     FileUtil.deleteFile(filesAdapter.getItem(position));
                     refresh();
-                    SketchwareUtil.toast("Deleted successfully");
+                    SketchwareUtil.toast(Helper.getResString(R.string.deleted_successfully));
                 })
                 .setNegativeButton(R.string.common_word_cancel, null)
                 .create()

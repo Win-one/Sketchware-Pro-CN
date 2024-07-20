@@ -59,7 +59,7 @@
                 android:id="@+id/ed_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Font name"
+                android:hint="@string/font_name"
                 android:imeOptions="actionDone"
                 android:inputType="text"
                 android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_"

@@ -175,8 +175,8 @@ public class ManageResourceActivity extends AppCompatActivity {
 
         var dialog = new MaterialAlertDialogBuilder(this)
                 .setView(dialogBinding.getRoot())
-                .setTitle(isFolder ? "Create a new folder" : "Create a new file")
-                .setMessage("Enter a name for the new " + (isFolder ? "folder" : "file"))
+                .setTitle(isFolder ? getString( R.string.create_a_new_folder) : getString(R.string.create_a_new_file))
+                .setMessage(getString(R.string.enter_a_name_for_the_new) + (isFolder ? getString(R.string.common_word_folder) : getString(R.string.common_word_file)))
                 .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
                 .setPositiveButton(R.string.common_word_create, null)
                 .create();
@@ -265,7 +265,7 @@ public class ManageResourceActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.common_word_rename, (dialogInterface, i) -> {
                     if (!inputText.getText().toString().isEmpty()) {
                         if (FileUtil.renameFile(path, path.substring(0, path.lastIndexOf("/")) + "/" + inputText.getText().toString())) {
-                            SketchwareUtil.toast("Renamed successfully");
+                            SketchwareUtil.toast(Helper.getResString(R.string.renamed_successfully));
                         } else {
                             SketchwareUtil.toastError("Renaming failed");
                         }
