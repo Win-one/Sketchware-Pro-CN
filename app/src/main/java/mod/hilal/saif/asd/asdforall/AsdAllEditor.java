@@ -68,7 +68,7 @@ public class AsdAllEditor extends Dialog {
                         Color.WHITE,
                         Color.WHITE));
         title = findViewById(R.id.text_title);
-        title.setText("Code Editor");
+        title.setText(R.string.code_editor);
         addControl();
         getWindow().setLayout(
                 WindowManager.LayoutParams.MATCH_PARENT,

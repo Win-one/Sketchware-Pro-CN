@@ -55,7 +55,7 @@ public class AsdOldDialog extends Dialog {
         base.setBackground(new DialogButtonGradientDrawable()
                 .getIns((int) getDip(4), 0, Color.WHITE, Color.WHITE));
         TextView title = findViewById(R.id.text_title);
-        title.setText("Code Editor");
+        title.setText(R.string.code_editor);
         addControl();
         getWindow().setLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,

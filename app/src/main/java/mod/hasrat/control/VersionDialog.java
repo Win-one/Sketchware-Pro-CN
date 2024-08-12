@@ -25,7 +25,7 @@ public class VersionDialog {
     public void show() {
         final aB dialog = new aB(activity);
         dialog.a(R.drawable.numbers_48);
-        dialog.b("Advanced Version Control");
+        dialog.b(activity.getString(R.string.advanced_version_control));
 
         binding.versionCode.setText(String.valueOf(Integer.parseInt(activity.binding.verCode.getText().toString())));
         binding.versionName1.setText(activity.binding.verName.getText().toString().split(" ")[0]);
@@ -44,13 +44,13 @@ public class VersionDialog {
             if (validVerCode) {
                 binding.versionCode.setError(null);
             } else {
-                binding.versionCode.setError("Invalid Version Code");
+                binding.versionCode.setError(Helper.getResString(R.string.invalid_version_code));
             }
 
             if (validVerName) {
                 binding.versionName1.setError(null);
             } else {
-                binding.versionName1.setError("Invalid Version Name");
+                binding.versionName1.setError(Helper.getResString(R.string.invalid_version_name));
             }
 
             if (!mB.a() && validVerCode && validVerName) {

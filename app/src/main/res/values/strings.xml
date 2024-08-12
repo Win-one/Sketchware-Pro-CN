@@ -2546,6 +2546,18 @@ Please try again later"</string>
     <string name="file_extension_will_be_added_automatically">File extension will be added automatically based on the file type you select</string>
     <string name="select_java_kotlin_file_s">Select Java/Kotlin file(s)</string>
     <string name="this_will_also_remove_it_from_androidmanifest">"This will also remove it from AndroidManifest. "</string>
+    <string name="advanced_version_control">Advanced Version Control</string>
+    <string name="invalid_version_code">Invalid Version Code</string>
+    <string name="invalid_version_name">Invalid Version Name</string>
+    <string name="version_name_extra">Version name extra</string>
+    <string name="package_installed_successfully">Package installed successfully!</string>
+    <string name="failed_to_generate_source">Failed to generate source.</string>
+    <string name="missing_directory_detected">Missing directory detected</string>
+    <string name="missing_file_detected">Missing file detected</string>
+    <string name="permanently_this_cannot_be_undone">permanently? This cannot be undone.</string>
+    <string name="please_select_an_apk_file_to_sign">Please select an APK file to sign</string>
+    <string name="an_error_occurred_check_the_log_for_more_details">An error occurred. Check the log for more details.</string>
+    <string name="currently_not_supported_sorry">Currently not supported, sorry!</string>
 
 
 </resources>

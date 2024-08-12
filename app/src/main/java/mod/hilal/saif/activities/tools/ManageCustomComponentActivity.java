@@ -58,9 +58,9 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
     private ManageCustomComponentBinding binding;
 
     @Override
-    protected void onCreate(Bundle _savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         EdgeToEdge.enable(this);
-        super.onCreate(_savedInstanceState);
+        super.onCreate(savedInstanceState);
         binding = ManageCustomComponentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         init();
@@ -70,7 +70,7 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
         setSupportActionBar(binding.topAppBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        binding.topAppBar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        binding.topAppBar.setNavigationOnClickListener(view ->onBackPressed());
 
         binding.fab.setOnClickListener(_view ->
                 startActivity(new Intent(getApplicationContext(), AddCustomComponentActivity.class)));

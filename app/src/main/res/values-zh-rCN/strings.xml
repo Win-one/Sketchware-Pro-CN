@@ -3365,6 +3365,18 @@
     <string name="file_extension_will_be_added_automatically">文件扩展名将根据您选择的文件类型自动添加</string>
     <string name="select_java_kotlin_file_s">选择Java/Kotlin文件</string>
     <string name="this_will_also_remove_it_from_androidmanifest">这也将从AndroidManifest中删除它.</string>
+    <string name="advanced_version_control">高级版本控制</string>
+    <string name="invalid_version_code">版本代码无效</string>
+    <string name="invalid_version_name">版本名称无效</string>
+    <string name="version_name_extra">版本名称别名</string>
+    <string name="package_installed_successfully">软件包已成功安装!</string>
+    <string name="failed_to_generate_source">无法生成源.</string>
+    <string name="missing_directory_detected">检测到缺少目录</string>
+    <string name="missing_file_detected">检测到缺少文件</string>
+    <string name="permanently_this_cannot_be_undone">/?此操作无法撤消.</string>
+    <string name="please_select_an_apk_file_to_sign">请选择一个APK文件进行签名</string>
+    <string name="an_error_occurred_check_the_log_for_more_details">发生错误.查看日志了解更多详情.</string>
+    <string name="currently_not_supported_sorry">目前不支持,抱歉!</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

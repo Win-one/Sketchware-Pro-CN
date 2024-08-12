@@ -74,8 +74,8 @@ public class Tools extends AppCompatActivity {
                         .setTitle(R.string.select_an_action)
                         .setSingleChoiceItems(new String[]{getString(R.string.common_word_delete)}, -1, (actionDialog, which) -> {
                             new AlertDialog.Builder(this)
-                                    .setTitle(R.string.common_word_delete + (isDirectory ? "folder" : "file") + "?")
-                                    .setMessage("Are you sure you want to delete this " + (isDirectory ? "folder" : "file") + " permanently? This cannot be undone.")
+                                    .setTitle(R.string.common_word_delete + (isDirectory ? R.string.common_word_folder : R.string.common_word_file) + "?")
+                                    .setMessage(R.string.are_you_sure_you_want_to_delete_this + (isDirectory ? R.string.common_word_folder : R.string.common_word_file) + getString(R.string.permanently_this_cannot_be_undone))
                                     .setPositiveButton(R.string.common_word_delete, (deleteConfirmationDialog, pressedButton) -> {
                                         for (String file : files) {
                                             FileUtil.deleteFile(file);
@@ -170,7 +170,7 @@ public class Tools extends AppCompatActivity {
 
         apkPathDialog.b(getString(R.string.common_word_continue), v -> {
             if (!isAPKSelected[0]) {
-                SketchwareUtil.toast("Please select an APK file to sign", Toast.LENGTH_SHORT);
+                SketchwareUtil.toast(getString(R.string.please_select_an_apk_file_to_sign), Toast.LENGTH_SHORT);
                 shakeView(binding.selectFile);
                 return;
             }
@@ -255,7 +255,7 @@ public class Tools extends AppCompatActivity {
                                         + Uri.fromFile(new File(outputApkPath)).getLastPathSegment(),
                                 Toast.LENGTH_LONG);
                     } else {
-                        tv_progress.setText("An error occurred. Check the log for more details.");
+                        tv_progress.setText(R.string.an_error_occurred_check_the_log_for_more_details);
                     }
                 });
             }

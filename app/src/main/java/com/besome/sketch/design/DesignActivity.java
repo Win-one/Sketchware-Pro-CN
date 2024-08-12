@@ -212,7 +212,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
      */
     private void indicateCompileErrorOccurred(String error) {
         new CompileErrorSaver(sc_id).writeLogsToFile(error);
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, "Show compile log", Snackbar.LENGTH_INDEFINITE);
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, R.string.show_compile_log, Snackbar.LENGTH_INDEFINITE);
         snackbar.setAction(Helper.getResString(R.string.common_word_show), v -> {
             if (!mB.a()) {
                 snackbar.dismiss();
@@ -259,7 +259,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
 
                     Shell.cmd("cat " + apkUri + " | pm install -S " + length).to(stdout, stderr).submit(result -> {
                         if (result.isSuccess()) {
-                            SketchwareUtil.toast("Package installed successfully!");
+                            SketchwareUtil.toast(getString(R.string.package_installed_successfully));
                             if (ConfigActivity.isSettingEnabled(ConfigActivity.SETTING_ROOT_AUTO_OPEN_AFTER_INSTALLING)) {
                                 Intent launcher = getPackageManager().getLaunchIntentForPackage(q.packageName);
                                 if (launcher != null) {
@@ -665,9 +665,9 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
 
     private void showCurrentActivitySrcCode() {
         ProgressMsgBoxBinding loadingDialogBinding = ProgressMsgBoxBinding.inflate(getLayoutInflater());
-        loadingDialogBinding.tvProgress.setText("Generating source code...");
+        loadingDialogBinding.tvProgress.setText(R.string.generating_source_code);
         var loadingDialog = new MaterialAlertDialogBuilder(this)
-                .setTitle("Please wait")
+                .setTitle(R.string.please_wait)
                 .setCancelable(false)
                 .setView(loadingDialogBinding.getRoot())
                 .create();
@@ -690,7 +690,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
                 editor.setTypefaceText(Typeface.MONOSPACE);
                 editor.setEditable(false);
                 editor.setTextSize(14);
-                editor.setText(!source.equals("") ? source : "Failed to generate source.");
+                editor.setText(!source.equals("") ? source : getString(R.string.failed_to_generate_source));
                 editor.getComponent(Magnifier.class).setWithinEditorForcibly(true);
 
                 if (filename.endsWith(".xml")) {
@@ -925,7 +925,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
             var activity = this.activity.get();
             activity.runOnUiThread(() -> {
                 dismiss();
-                SketchwareUtil.toastError("APK build failed");
+                SketchwareUtil.toastError(Helper.getResString(R.string.apk_build_failed));
                 activity.runProject.setText(Helper.getResString(R.string.common_word_run));
                 activity.runProject.setClickable(true);
                 activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -1064,7 +1064,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
 
                         aB dialog = new aB(activity);
                         if (isMissingDirectory) {
-                            dialog.b("Missing directory detected");
+                            dialog.b(Helper.getResString(R.string.missing_directory_detected));
                             dialog.a("A directory important for building is missing. " +
                                     "Sketchware Pro can try creating " + e.getMissingFile().getAbsolutePath() +
                                     " if you'd like to.");
@@ -1075,12 +1075,12 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
                                 }
                             });
                         } else {
-                            dialog.b("Missing file detected");
+                            dialog.b(Helper.getResString(R.string.missing_file_detected));
                             dialog.a("A file needed for building is missing. " +
                                     "Put the correct file back to " + e.getMissingFile().getAbsolutePath() +
                                     " and try building again.");
                         }
-                        dialog.b("Dismiss", Helper.getDialogDismissListener(dialog));
+                        dialog.b(Helper.getResString(R.string.common_word_dismiss), Helper.getDialogDismissListener(dialog));
                         dialog.show();
                     });
                 } catch (Throwable tr) {
