@@ -1068,7 +1068,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
                             dialog.a("A directory important for building is missing. " +
                                     "Sketchware Pro can try creating " + e.getMissingFile().getAbsolutePath() +
                                     " if you'd like to.");
-                            dialog.configureDefaultButton("Create", v -> {
+                            dialog.configureDefaultButton(Helper.getResString(R.string.common_word_create), v -> {
                                 dialog.dismiss();
                                 if (!e.getMissingFile().mkdirs()) {
                                     SketchwareUtil.toastError("Failed to create directory / directories!");
@@ -1178,7 +1178,7 @@ public class DesignActivity extends BaseAppCompatActivity implements OnClickList
         public void onPreExecute() {
             super.onPreExecute();
             var activity = this.activity.get();
-            activity.runProject.setText("Building APK file...");
+            activity.runProject.setText(R.string.building_apk_file);
             activity.runProject.setClickable(false);
             activity.r.a("P1I10", true);
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

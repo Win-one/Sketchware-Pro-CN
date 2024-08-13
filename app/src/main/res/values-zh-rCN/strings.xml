@@ -3377,6 +3377,8 @@
     <string name="please_select_an_apk_file_to_sign">请选择一个APK文件进行签名</string>
     <string name="an_error_occurred_check_the_log_for_more_details">发生错误.查看日志了解更多详情.</string>
     <string name="currently_not_supported_sorry">目前不支持,抱歉!</string>
+    <string name="rewarded_ad">激励广告</string>
+    <string name="select_your_google_services_json">选择您的google-services.json</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

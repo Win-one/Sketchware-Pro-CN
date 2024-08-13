@@ -282,7 +282,7 @@ public class ManageFirebaseActivity extends BaseAppCompatActivity implements Vie
 
         FilePickerDialog pickerDialog = new FilePickerDialog(this, properties);
 
-        pickerDialog.setTitle("Select your google-services.json");
+        pickerDialog.setTitle(getString(R.string.select_your_google_services_json));
         pickerDialog.setDialogSelectionListener(selections -> {
             // Since the picker's in single mode, only one element can exist.
             String fileContent = FileUtil.readFile(selections[0]);
