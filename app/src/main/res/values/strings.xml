@@ -2560,6 +2560,40 @@ Please try again later"</string>
     <string name="currently_not_supported_sorry">Currently not supported, sorry!</string>
     <string name="rewarded_ad">Rewarded Ad</string>
     <string name="select_your_google_services_json">Select your google-services.json</string>
+    <string name="select_a_fragmentadapter_component">Select a FragmentAdapter Component</string>
+    <string name="select_a_firebasephone_component">Select a FirebasePhone Component</string>
+    <string name="select_a_dynamiclink_component">Select a DynamicLink Component</string>
+    <string name="select_a_cloudmessage_component">Select a CloudMessage Component</string>
+    <string name="select_a_firebasegoogle_component">Select a FirebaseGoogle Component</string>
+    <string name="select_a_onesignal_component">Select a OneSignal Component</string>
+    <string name="select_an_fbadsbanner_component">Select an FBAdsBanner Component</string>
+    <string name="select_an_fbadsinterstitial_component">Select an FBAdsInterstitial Component</string>
+    <string name="select_a_background_service">Select a Background Service</string>
+    <string name="select_a_broadcast_receiver">Select a Broadcast Receiver</string>
+    <string name="custom_activities">Custom Activities</string>
+    <string name="select_a_custom_view">Select a Custom View</string>
+    <string name="select_a_signinbutton_color">Select a SignInButton Color</string>
+    <string name="select_signinbutton_size">Select SignInButton Size</string>
+    <string name="select_an_asset">Select an Asset</string>
+    <string name="select_a_native_library">Select a Native library</string>
+    <string name="select_a_test_device">Select a Test device</string>
+    <string name="select_an_intent_key">Select an Intent key</string>
+    <string name="select_a_pattern_flags">Select a Pattern Flags</string>
+    <string name="select_a_permission">Select a Permission</string>
+    <string name="select_an_ad_size">Select an Ad size</string>
+    <string name="select_a_pixelformat">Select a PixelFormat</string>
+    <string name="select_a_variable">Select a Variable</string>
+    <string name="select_a_component">Select a Component</string>
+    <string name="select_a_custom_variable">Select a Custom Variable</string>
+    <string name="select_an_ad_unit">Select an Ad Unit</string>
+    <string name="deprecated">Deprecated</string>
+    <string name="block_menu_was_initially_used_to_parse_resource_values">This Block Menu was initially used to parse resource values, but was too I/O heavy and has been removed due to that. Please use the Code Editor instead.</string>
+    <string name="remove_old_deprecated_methods">Remove old deprecated methods in files, like showMessage, getDip, etc.</string>
+    <string name="use_new_materialcomponents_apptheme">Use new MaterialComponents AppTheme (will replace e.g. Button with MaterialButton, be careful!)</string>
+    <string name="alias_can_t_be_empty">Alias can\'t be empty</string>
+    <string name="password_can_t_be_empty">Password can\'t be empty</string>
+    <string name="algorithm_can_t_be_empty">Algorithm can\'t be empty</string>
+    <string name="keystore_not_found">Keystore not found</string>
 
 
 </resources>

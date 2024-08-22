@@ -1625,9 +1625,9 @@ public class OldResourceIdMapper {
             case 2131165995:
                 return R.drawable.notification_icon_background;
             case 2131165996:
-                return R.drawable.notification_template_icon_bg;
+                return androidx.core.R.drawable.notification_template_icon_bg;
             case 2131165997:
-                return R.drawable.notification_template_icon_low_bg;
+                return androidx.core.R.drawable.notification_template_icon_low_bg;
             case 2131165998:
                 return R.drawable.notification_tile_bg;
             case 2131165999:
@@ -2197,7 +2197,7 @@ public class OldResourceIdMapper {
             case 2131166281:
                 return R.drawable.yellow_arrow_down;
             case 2131166282:
-                return R.drawable.bottom_shadow;
+                return  com.developer.filepicker.R.drawable.bottom_shadow;
             case 2131166283:
                 return R.drawable.ic_folder_128;
             case 2131166284:

@@ -39,7 +39,6 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
     private String activityInjectionsFilePath = "";
     private String widgetType = "";
     private AddCustomAttributeBinding binding;
-    private LinearLayout background;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,13 +47,13 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.addAttrFab.setOnClickListener(v -> dialog("create", 0));
-        Toolbar toolbar = (Toolbar) getLayoutInflater().inflate(R.layout.toolbar_improved, background, false);
+        Toolbar toolbar = (Toolbar) getLayoutInflater().inflate(R.layout.toolbar_improved, binding.background, false);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(widgetType);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
-        background.addView(toolbar, 0);
+        binding.background.addView(toolbar, 0);
 
         if (getIntent().hasExtra("sc_id") && getIntent().hasExtra("file_name") && getIntent().hasExtra("widget_type")) {
             String sc_id = getIntent().getStringExtra("sc_id");
@@ -162,7 +161,7 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
             CustomAttributeView attributeView = new CustomAttributeView(parent.getContext());
 
             int violet = getColor(attributeView, R.attr.colorViolet);
-            int onSurface = getColor(attributeView, R.attr.colorOnSurface);
+            int onSurface = getColor(attributeView, com.google.android.material.R.attr.colorOnSurface);
             int green = getColor(attributeView, R.attr.colorGreen);
 
             String value = getItem(position).get("value").toString();

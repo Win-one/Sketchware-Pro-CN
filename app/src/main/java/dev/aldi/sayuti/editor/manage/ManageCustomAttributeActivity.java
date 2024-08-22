@@ -10,6 +10,8 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.sketchware.remod.R;
+import com.sketchware.remod.databinding.ManageCustomAttributeBinding;
+import com.sketchware.remod.databinding.ManageCustomComponentAddBinding;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -23,24 +25,16 @@ public class ManageCustomAttributeActivity extends AppCompatActivity {
     private final List<String> customAttributeLocations = new LinkedList<>();
     private String sc_id = "";
     private String xmlFilename = "";
+    private ManageCustomAttributeBinding binding;
 
-    private ListView manage_attr_listview;
-    private com.google.android.material.appbar.AppBarLayout appBarLayout;
-    private com.google.android.material.appbar.MaterialToolbar topAppBar;
-    private com.google.android.material.appbar.CollapsingToolbarLayout collapsingToolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.manage_custom_attribute);
+        binding = ManageCustomAttributeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        topAppBar = findViewById(R.id.topAppBar);
-        appBarLayout = findViewById(R.id.appBarLayout);
-        collapsingToolbar = findViewById(R.id.collapsingToolbar);
-        manage_attr_listview = findViewById(R.id.manage_attr_listview);
-
-        topAppBar.setNavigationOnClickListener(view -> onBackPressed());
-
+        binding.topAppBar.setNavigationOnClickListener(view -> onBackPressed());
 
         if (getIntent().hasExtra("sc_id") && getIntent().hasExtra("file_name")) {
             sc_id = getIntent().getStringExtra("sc_id");
@@ -51,7 +45,7 @@ public class ManageCustomAttributeActivity extends AppCompatActivity {
             addType("FloatingActionButton");
             addType("DrawerLayout");
             addType("NavigationDrawer");
-            manage_attr_listview.setAdapter(new CustomAdapter(customAttributeLocations));
+            binding.manageAttrListview.setAdapter(new CustomAdapter(customAttributeLocations));
         } else {
             finish();
         }

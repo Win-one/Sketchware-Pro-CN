@@ -301,6 +301,7 @@ public class ConfigActivity extends AppCompatActivity {
                     inputText.setText(getBackupPath());
                     AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                             .setView(dialogBinding.getRoot())
+                            .setIcon(R.drawable.ic_folder_48dp)
                             .setTitle(R.string.backup_directory)
                             .setMessage(R.string.directory_inside_internal_storage)
                             .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
@@ -356,6 +357,7 @@ public class ConfigActivity extends AppCompatActivity {
                    
                    AlertDialog dialog = new MaterialAlertDialogBuilder(this)
                       .setView(dialogBinding.getRoot())
+                           .setIcon(R.drawable.file_48_blue)
                       .setTitle(R.string.backup_filename_format)
                       .setMessage("This defines how SWB backup files get named.\n" +
                             "Available variables:\n" +

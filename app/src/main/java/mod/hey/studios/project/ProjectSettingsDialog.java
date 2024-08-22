@@ -73,13 +73,13 @@ public class ProjectSettingsDialog {
         CheckBox removeOldMethods = addTogglePref(
                 ProjectSettings.SETTING_DISABLE_OLD_METHODS,
                 false,
-                "Remove old deprecated methods in files, like showMessage, getDip, etc.",
+                Helper.getResString(R.string.remove_old_deprecated_methods),
                 preferenceContainer);
 
         CheckBox useNewMaterialComponentsAppTheme = addTogglePref(
                 ProjectSettings.SETTING_ENABLE_BRIDGELESS_THEMES,
                 false,
-                "Use new MaterialComponents AppTheme (will replace e.g. Button with MaterialButton, be careful!)",
+                Helper.getResString(R.string.use_new_materialcomponents_apptheme),
                 preferenceContainer);
 
         preferenceScroller.addView(preferenceContainer);

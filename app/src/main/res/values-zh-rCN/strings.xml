@@ -3380,5 +3380,41 @@
     <string name="rewarded_ad">激励广告</string>
     <string name="select_your_google_services_json">选择您的google-services.json</string>
 
+    <!-- ExtraMenuBean-->
+    <string name="select_a_fragmentadapter_component">选择FragmentAdapter组件</string>
+    <string name="select_a_firebasephone_component">选择FirebasePhone组件</string>
+    <string name="select_a_dynamiclink_component">选择DynamicLink组件</string>
+    <string name="select_a_cloudmessage_component">选择CloudMessage组件</string>
+    <string name="select_a_firebasegoogle_component">选择FirebaseGoogle组件</string>
+    <string name="select_a_onesignal_component">选择OneSignal组件</string>
+    <string name="select_an_fbadsbanner_component">选择FBAdsBanner组件</string>
+    <string name="select_an_fbadsinterstitial_component">选择FBAdsInterstitial组件</string>
+    <string name="select_a_background_service">选择后台服务</string>
+    <string name="select_a_broadcast_receiver">选择广播接收器</string>
+    <string name="custom_activities">自定义活动</string>
+    <string name="select_a_custom_view">选择自定义视图</string>
+    <string name="select_a_signinbutton_color">选择SignInButton颜色</string>
+    <string name="select_signinbutton_size">选择SignInButton大小</string>
+    <string name="select_an_asset">选择Asset</string>
+    <string name="select_a_native_library">选择本地库</string>
+    <string name="select_a_test_device">选择测试设备</string>
+    <string name="select_an_intent_key">选择意图密钥</string>
+    <string name="select_a_pattern_flags">选择模式标志</string>
+    <string name="select_a_permission">选择权限</string>
+    <string name="select_an_ad_size">选择广告尺寸</string>
+    <string name="select_a_pixelformat">选择PixelFormat</string>
+    <string name="select_a_variable">选择变量</string>
+    <string name="select_a_component">选择组件</string>
+    <string name="select_a_custom_variable">选择自定义变量</string>
+    <string name="select_an_ad_unit">选择广告单元</string>
+    <string name="deprecated">废弃</string>
+    <string name="block_menu_was_initially_used_to_parse_resource_values">此块菜单最初用于解析资源值,但I/O量太大,因此已被删除.请改用代码编辑器.</string>
+    <string name="remove_old_deprecated_methods">删除文件中已弃用的旧方法,例如showMessage,getDip等.</string>
+    <string name="use_new_materialcomponents_apptheme">使用新的MaterialComponents AppTheme(将用MaterialButton替换Button,请注意!)</string>
+    <string name="alias_can_t_be_empty">别名不能为空</string>
+    <string name="password_can_t_be_empty">密码不能为空</string>
+    <string name="algorithm_can_t_be_empty">算法不能为空</string>
+    <string name="keystore_not_found">未找到密钥库</string>
+
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

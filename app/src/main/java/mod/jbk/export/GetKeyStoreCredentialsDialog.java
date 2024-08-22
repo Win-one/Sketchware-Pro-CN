@@ -53,17 +53,17 @@ public class GetKeyStoreCredentialsDialog {
                     boolean algorithmEmpty = TextUtils.isEmpty(signingAlgorithm.getText().toString());
 
                     if (aliasEmpty) {
-                        tilAlias.setError("Alias can't be empty");
+                        tilAlias.setError(activity.getString(R.string.alias_can_t_be_empty));
                     } else {
                         tilAlias.setError(null);
                     }
                     if (passwordEmpty) {
-                        tilPassword.setError("Password can't be empty");
+                        tilPassword.setError(activity.getString(R.string.password_can_t_be_empty));
                     } else {
                         tilPassword.setError(null);
                     }
                     if (algorithmEmpty) {
-                        tilSigningAlgorithm.setError("Algorithm can't be empty");
+                        tilSigningAlgorithm.setError(activity.getString(R.string.algorithm_can_t_be_empty));
                     } else {
                         tilSigningAlgorithm.setError(null);
                     }
@@ -75,7 +75,7 @@ public class GetKeyStoreCredentialsDialog {
                                 password.getText().toString(), alias.getText().toString(), password.getText().toString()));
                     }
                 } else {
-                    SketchwareUtil.toastError("Keystore not found");
+                    SketchwareUtil.toastError(activity.getString(R.string.keystore_not_found));
                 }
             } else if (mode == SigningMode.TESTKEY) {
                 dialog.dismiss();
