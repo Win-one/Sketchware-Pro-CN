@@ -25,6 +25,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.AndroidManifestInjectionBinding;
+import com.sketchware.remod.databinding.DialogAddCustomActivityBinding;
+import com.sketchware.remod.databinding.DialogChangeLauncherActivityBinding;
 import com.sketchware.remod.databinding.ProgressMsgBoxBinding;
 
 import java.util.ArrayList;
@@ -162,7 +164,7 @@ public class AndroidManifestInjection extends AppCompatActivity {
         binding.content.addView(act_list);
     }
 
-    private void showAppComponentDialog() {
+    private void  showAppComponentDialog() {
         Intent intent = new Intent();
         if (ConfigActivity.isLegacyCeEnabled()) {
             intent.setClass(getApplicationContext(), SrcCodeEditorLegacy.class);
@@ -181,53 +183,45 @@ public class AndroidManifestInjection extends AppCompatActivity {
     }
 
     private void showLauncherActDialog(String actnamr) {
-        aB dialog = new aB(this);
-        dialog.a(R.drawable.recycling_48);
-        dialog.b(Helper.getResString(R.string.change_launcher_activity_dialog_title));
-        View view = wB.a(this, R.layout.dialog_change_launcher_activity);
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
+        dialog.setIcon(R.drawable.recycling_48);
+        dialog.setTitle(Helper.getResString(R.string.change_launcher_activity_dialog_title));
+        DialogChangeLauncherActivityBinding changeLauncherActivityBinding = DialogChangeLauncherActivityBinding.inflate(getLayoutInflater());
+        dialog.setView(changeLauncherActivityBinding.getRoot());
 
-        final TextInputLayout activity_name_input_layout = view.findViewById(R.id.activity_name_input_layout);
-        final TextInputEditText activity_name_input = view.findViewById(R.id.activity_name_input);
-
-        activity_name_input.setText(actnamr);
-
-        dialog.a(view);
-        dialog.b(Helper.getResString(R.string.common_word_save), v -> {
-            if (!activity_name_input.getText().toString().trim().isEmpty()) {
-                AndroidManifestInjector.setLauncherActivity(sc_id, activity_name_input.getText().toString());
+        changeLauncherActivityBinding.activityNameInput.setText(actnamr);
+        dialog.setPositiveButton(Helper.getResString(R.string.common_word_save),  (dialog1, which) -> {
+            if (!changeLauncherActivityBinding.activityNameInput.getText().toString().trim().isEmpty()) {
+                AndroidManifestInjector.setLauncherActivity(sc_id, changeLauncherActivityBinding.activityNameInput.getText().toString());
                 SketchwareUtil.toast(getString(R.string.common_word_saved));
-                dialog.dismiss();
+                dialog1.dismiss();
             } else {
-                activity_name_input.setError("Enter activity name");
+                changeLauncherActivityBinding.activityNameInput.setError(getString(R.string.enter_activity_name));
             }
         });
-        dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
+        dialog.setNegativeButton(R.string.common_word_cancel, (dialog1, which) -> dialog1.dismiss());
         dialog.show();
     }
 
     // if you change method name, you need also change it in layout
     public void showAddActivityDialog(View view) {
-        aB dialog = new aB(this);
-        dialog.a(R.drawable.add_new_48_gray);
-        dialog.b(Helper.getResString(R.string.common_word_add_activtiy));
-        View inflate = wB.a(this, R.layout.dialog_add_custom_activity);
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
+        dialog.setIcon(R.drawable.add_new_48_orange);
+        dialog.setTitle(Helper.getResString(R.string.common_word_add_activtiy));
+        DialogAddCustomActivityBinding addCustomActivityBinding = DialogAddCustomActivityBinding.inflate(getLayoutInflater());
 
-        final TextInputLayout activity_name_input_layout = inflate.findViewById(R.id.activity_name_input_layout);
-        final TextInputEditText activity_name_input = inflate.findViewById(R.id.activity_name_input);
-
-        activity_name_input.setText(activityName);
-
-        dialog.a(inflate);
-        dialog.b(Helper.getResString(R.string.common_word_save), v -> {
-            if (!activity_name_input.getText().toString().trim().isEmpty()) {
-                addNewActivity(activity_name_input.getText().toString());
-                SketchwareUtil.toast("New Activity added");
-                dialog.dismiss();
+        addCustomActivityBinding.activityNameInput.setText(activityName);
+        dialog.setView(addCustomActivityBinding.getRoot());
+        dialog.setPositiveButton(Helper.getResString(R.string.common_word_save), (dialog1, which) -> {
+            if (!addCustomActivityBinding.activityNameInput.getText().toString().trim().isEmpty()) {
+                addNewActivity(addCustomActivityBinding.activityNameInput.getText().toString());
+                SketchwareUtil.toast(getString(R.string.new_activity_added));
+                dialog1.dismiss();
             } else {
-                activity_name_input.setError("Enter activity name");
+                addCustomActivityBinding.activityNameInput.setError(getString(R.string.enter_activity_name));
             }
         });
-        dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
+        dialog.setNegativeButton(R.string.common_word_cancel, (dialog1, which) -> dialog1.dismiss());
         dialog.show();
     }
 

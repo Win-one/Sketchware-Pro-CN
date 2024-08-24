@@ -52,7 +52,7 @@ public class ActComponentsDialog extends Dialog {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_code);
-        codeEditor = findViewById(R.id.text_content);
+        codeEditor = findViewById(R.id.code_editor);
         TextView zoom_in = findViewById(R.id.code_editor_zoomin);
         zoom_in.setOnClickListener(v -> codeEditor.increaseTextSize());
         TextView zoom_out = findViewById(R.id.code_editor_zoomout);

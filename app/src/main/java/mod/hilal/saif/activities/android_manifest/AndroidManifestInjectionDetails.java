@@ -22,10 +22,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.AddCustomAttributeBinding;
+import com.sketchware.remod.databinding.CustomDialogAttributeBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -108,91 +110,49 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
         }
     }
 
-    private void a(View view, int i2, int i3) {
-        GradientDrawable gradientDrawable = new GradientDrawable();
-        gradientDrawable.setShape(GradientDrawable.RECTANGLE);
-        gradientDrawable.setCornerRadii(new float[]{(float) i2, (float) i2, (float) i2 / 2, (float) i2 / 2, (float) i2, (float) i2, (float) i2 / 2, (float) i2 / 2});
-        gradientDrawable.setColor(Color.parseColor("#ffffff"));
-        RippleDrawable rippleDrawable = new RippleDrawable(new ColorStateList(new int[][]{new int[0]}, new int[]{Color.parseColor("#20008DCD")}), gradientDrawable, null);
-        view.setElevation((float) i3);
-        view.setBackground(rippleDrawable);
-        view.setClickable(true);
-        view.setFocusable(true);
-    }
 
     private void showDial(int pos) {
-        final AlertDialog create = new AlertDialog.Builder(this).create();
-        View inflate = getLayoutInflater().inflate(R.layout.custom_dialog_attribute, null);
-        create.setView(inflate);
-        create.setCanceledOnTouchOutside(true);
-        ///create.setCancelable(true);
-        create.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        final TextView textsave = inflate.findViewById(R.id.dialog_btn_save);
-        final TextView textcancel = inflate.findViewById(R.id.dialog_btn_cancel);
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
+        dialog.setTitle(R.string.edit_value);
+        CustomDialogAttributeBinding attributeBinding = CustomDialogAttributeBinding.inflate(getLayoutInflater());
+        dialog.setView(attributeBinding.getRoot());
 
-        final EditText editText3 = inflate.findViewById(R.id.dialog_input_res);
-        editText3.setVisibility(View.GONE);
-        final EditText editText2 = inflate.findViewById(R.id.dialog_input_attr);
-        editText2.setVisibility(View.GONE);
-        final EditText editText = inflate.findViewById(R.id.dialog_input_value);
-        final TextView textView = (TextView) ((ViewGroup) editText2.getParent()).getChildAt(0);
-        textView.setText(R.string.edit_value);
-        editText.setText((String) listMap.get(pos).get("value"));
-        editText.setHint("android:attr=\"value\"");
-        textsave.setOnClickListener(view -> {
-            listMap.get(pos).put("value", editText.getText().toString());
+        attributeBinding.dialogInputRes.setVisibility(View.GONE);
+        attributeBinding.dialogInputAttr.setVisibility(View.GONE);
+
+        attributeBinding.dialogInputValue.setText((String) listMap.get(pos).get("value"));
+        attributeBinding.dialogInputValue.setHint("android:attr=\"value\"");
+        dialog.setPositiveButton(R.string.common_word_save, (dialog1, which) -> {
+            listMap.get(pos).put("value", attributeBinding.dialogInputValue.getText().toString());
             applyChange();
-            create.dismiss();
         });
 
-        textcancel.setOnClickListener(Helper.getDialogDismissListener(create));
-
-        create.show();
+        dialog.show();
     }
 
     private void showAddDial() {
-        final AlertDialog create = new AlertDialog.Builder(this).create();
-        View inflate = getLayoutInflater().inflate(R.layout.custom_dialog_attribute, null);
-        create.setView(inflate);
-        create.setCanceledOnTouchOutside(true);
-        ///create.setCancelable(true);
-        create.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        final TextView textsave = inflate.findViewById(R.id.dialog_btn_save);
-        final TextView textcancel = inflate.findViewById(R.id.dialog_btn_cancel);
-
-        final EditText editText3 = inflate.findViewById(R.id.dialog_input_res);
-        //editText3.setVisibility(View.GONE);
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
+        dialog.setTitle(type.equals("permission") ? getString(R.string.add_new_permission) : getString(R.string.add_new_attribute));
+        dialog.setIcon(R.drawable.ic_tune_24);
+        CustomDialogAttributeBinding attributeBinding = CustomDialogAttributeBinding.inflate(getLayoutInflater());
+        dialog.setView(attributeBinding.getRoot());
         if (type.equals("permission")) {
-            editText3.setText("android");
+            attributeBinding.dialogInputRes.setText("android");
+            attributeBinding.dialogInputAttr.setText("name");
+            attributeBinding.inputLayoutValue.setHint("permission");
         }
-        final EditText editText2 = inflate.findViewById(R.id.dialog_input_attr);
-        //editText2.setVisibility(View.GONE);
-        if (type.equals("permission")) {
-            editText2.setText("name");
-        }
-        final EditText editText = inflate.findViewById(R.id.dialog_input_value);
-        if (type.equals("permission")) {
-            editText3.setHint("permission");
-        }
-        final TextView textView = (TextView) ((ViewGroup) editText2.getParent()).getChildAt(0);
-        if (type.equals("permission")) {
-            textView.setText("Add new Permission");
-        } else {
-            textView.setText("Add new Attribute");
-        }
-
-        textsave.setOnClickListener(_view -> {
-            String fstr = editText3.getText().toString().trim() + ":" + editText2.getText().toString().trim() + "=\"" + editText.getText().toString().trim() + "\"";
+        dialog.setPositiveButton(R.string.common_word_save, (dialog1, which) -> {
+            String fstr = attributeBinding.dialogInputRes.getText().toString().trim() + ":" + attributeBinding.dialogInputAttr.getText().toString().trim() + "=\"" + attributeBinding.dialogInputValue.getText().toString().trim() + "\"";
             HashMap<String, Object> map = new HashMap<>();
             map.put("name", constant);
             map.put("value", fstr);
             listMap.add(map);
             applyChange();
-            create.dismiss();
+            dialog1.dismiss();
         });
 
-        textcancel.setOnClickListener(Helper.getDialogDismissListener(create));
-        create.show();
+        dialog.setNegativeButton(R.string.common_word_cancel, (dialog1, which) -> dialog1.dismiss());
+        dialog.show();
     }
 
     private void applyChange() {
@@ -290,7 +250,7 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
             attributeView.icon.setVisibility(View.GONE);
             attributeView.setOnClickListener(v -> showDial(position));
             attributeView.setOnLongClickListener(v -> {
-                new AlertDialog.Builder(AndroidManifestInjectionDetails.this)
+                new MaterialAlertDialogBuilder(AndroidManifestInjectionDetails.this)
                         .setTitle(R.string.delete_this_attribute)
                         .setMessage(R.string.this_action_cannot_be_undone)
                         .setPositiveButton(R.string.common_word_delete, (dialog, which) -> {

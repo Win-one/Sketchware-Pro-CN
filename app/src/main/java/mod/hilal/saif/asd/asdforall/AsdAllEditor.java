@@ -51,7 +51,7 @@ public class AsdAllEditor extends Dialog {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_code);
-        code_editor = findViewById(R.id.text_content);
+        code_editor = findViewById(R.id.code_editor);
         zoom_in = findViewById(R.id.code_editor_zoomin);
         zoom_in.setOnClickListener(v -> code_editor.increaseTextSize());
         zoom_out = findViewById(R.id.code_editor_zoomout);

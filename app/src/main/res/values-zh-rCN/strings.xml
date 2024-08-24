@@ -2977,7 +2977,6 @@
     <string name="follow_system">跟随系统</string>
     <string name="chinese">中文</string>
     <string name="english">English</string>
-    <string name="input_attribute_value">输入属性值</string>
     <string name="about_the_team">关于团队</string>
     <string name="system_settings">系统设置</string>
     <string name="changelog">更新日志</string>
@@ -3415,6 +3414,9 @@
     <string name="password_can_t_be_empty">密码不能为空</string>
     <string name="algorithm_can_t_be_empty">算法不能为空</string>
     <string name="keystore_not_found">未找到密钥库</string>
+    <string name="edit_attribute">Edit attribute</string>
+    <string name="add_new_attribute">添加新属性</string>
+    <string name="add_new_permission">添加新权限</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

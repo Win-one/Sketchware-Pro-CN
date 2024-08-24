@@ -18,6 +18,15 @@
         android:paddingEnd="4dp"
         android:paddingStart="8dp">
 
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/abc_ic_ab_back_material"
+            app:tint="?attr/colorControlNormal">
+
+        </ImageView>
+
         <TextView
             android:id="@+id/text_title"
             android:layout_width="wrap_content"
@@ -66,7 +75,7 @@
     </LinearLayout>
 
     <mod.hey.studios.lib.code_editor.CodeEditorLayout
-        android:id="@+id/text_content"
+        android:id="@+id/code_editor"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

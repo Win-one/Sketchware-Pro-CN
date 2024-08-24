@@ -2195,7 +2195,6 @@ Please try again later"</string>
     <string name="follow_system">Follow System</string>
     <string name="chinese">中文</string>
     <string name="english">English</string>
-    <string name="input_attribute_value">Input attribute value</string>
     <string name="about_the_team">About the Team</string>
     <string name="system_settings">System Settings</string>
     <string name="changelog">Changelog</string>
@@ -2594,6 +2593,9 @@ Please try again later"</string>
     <string name="password_can_t_be_empty">Password can\'t be empty</string>
     <string name="algorithm_can_t_be_empty">Algorithm can\'t be empty</string>
     <string name="keystore_not_found">Keystore not found</string>
+    <string name="edit_attribute">Edit attribute</string>
+    <string name="add_new_attribute">Add new attribute</string>
+    <string name="add_new_permission">Add new permission</string>
 
 
 </resources>

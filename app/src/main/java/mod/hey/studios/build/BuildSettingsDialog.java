@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.besome.sketch.lib.ThemeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import com.sketchware.remod.R;
@@ -60,6 +61,7 @@ public class BuildSettingsDialog {
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         textView.setText(title);
         textView.setTextSize(14f);
+        textView.setTextColor(ThemeUtils.getColor(textView, R.attr.colorOnSurface));
         textView.setTypeface(null, Typeface.BOLD);
         textView.setPadding(
                 0,
@@ -87,6 +89,7 @@ public class BuildSettingsDialog {
             radioButton.setLayoutParams(layoutParams);
             radioButton.setId(View.generateViewId());
             radioButton.setText(choice);
+            radioButton.setTextColor(ThemeUtils.getColor(radioButton, R.attr.colorOnSurface));
             radioButton.setTextSize(16f);
 
             if (settings.getValue(key, defaultValue).equals(choice)) {
@@ -126,6 +129,7 @@ public class BuildSettingsDialog {
         String value = settings.getValue(key, defaultValue ? "true" : "false");
         checkBox.setText(label);
         checkBox.setChecked(value.equals("true"));
+        checkBox.setTextColor(ThemeUtils.getColor(checkBox, R.attr.colorOnSurface));
         checkBox.setPadding(
                 (int) getDip(4),
                 (int) getDip(8),
@@ -173,7 +177,9 @@ public class BuildSettingsDialog {
                 (int) getDip(8)
         );
         editText.setTextSize(16f);
+        editText.setTextColor(ThemeUtils.getColor(editText, R.attr.colorOnSurface));
         editText.setHint(hint);
+        editText.setHintTextColor(ThemeUtils.getColor(editText, R.attr.colorPrimary));
         editText.setText(settings.getValue(key, defaultValue));
         editText.setTag(key);
         editText.setInputType(inputType);

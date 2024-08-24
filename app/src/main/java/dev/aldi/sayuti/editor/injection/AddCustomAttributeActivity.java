@@ -21,12 +21,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.color.MaterialColors;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.AddCustomAttributeBinding;
+import com.sketchware.remod.databinding.CustomDialogAttributeBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 import mod.SketchwareUtil;
 import mod.agus.jcoderz.lib.FileUtil;
@@ -74,30 +77,22 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
     }
 
     private void dialog(String type, int position) {
-        AlertDialog dialog = new AlertDialog.Builder(this).create();
-        View inflate = getLayoutInflater().inflate(R.layout.custom_dialog_attribute, null);
-        dialog.setView(inflate);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setCancelable(false);
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
-        TextView save = inflate.findViewById(R.id.dialog_btn_save);
-        TextView cancel = inflate.findViewById(R.id.dialog_btn_cancel);
-        EditText namespace = inflate.findViewById(R.id.dialog_input_res);
-        EditText name = inflate.findViewById(R.id.dialog_input_attr);
-        EditText value = inflate.findViewById(R.id.dialog_input_value);
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
+        dialog.setTitle(type.equals("create") ? getString(R.string.add_new_attribute) : getString(R.string.edit_attribute));
+        CustomDialogAttributeBinding attributeBinding = CustomDialogAttributeBinding.inflate(getLayoutInflater());
+        dialog.setView(attributeBinding.getRoot());
 
         if (type.equals("edit")) {
             String injectionValue = activityInjections.get(position).get("value").toString();
-            namespace.setText(injectionValue.substring(0, injectionValue.indexOf(":")));
-            name.setText(injectionValue.substring(injectionValue.indexOf(":") + 1, injectionValue.indexOf("=")));
-            value.setText(injectionValue.substring(injectionValue.indexOf("\"") + 1, injectionValue.length() - 1));
+            attributeBinding.dialogInputRes.setText(injectionValue.substring(0, injectionValue.indexOf(":")));
+            attributeBinding.dialogInputAttr.setText(injectionValue.substring(injectionValue.indexOf(":") + 1, injectionValue.indexOf("=")));
+            attributeBinding.dialogInputValue.setText(injectionValue.substring(injectionValue.indexOf("\"") + 1, injectionValue.length() - 1));
         }
 
-        save.setOnClickListener(v -> {
-            String namespaceInput = namespace.getText().toString();
-            String nameInput = name.getText().toString();
-            String valueInput = value.getText().toString();
+        dialog.setPositiveButton(R.string.common_word_save, (dialog1, which) -> {
+            String namespaceInput = attributeBinding.dialogInputRes.getText().toString();
+            String nameInput = attributeBinding.dialogInputAttr.getText().toString();
+            String valueInput = attributeBinding.dialogInputValue.getText().toString();
             if (!namespaceInput.trim().equals("") && !nameInput.trim().equals("") && !valueInput.trim().equals("")) {
                 String newValue = namespaceInput + ":" + nameInput + "=\"" + valueInput + "\"";
                 if (type.equals("create")) {
@@ -112,15 +107,15 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
                 }
                 binding.addAttrListview.setAdapter(new CustomAdapter(activityInjections));
                 ((BaseAdapter) binding.addAttrListview.getAdapter()).notifyDataSetChanged();
-                dialog.dismiss();
+                dialog1.dismiss();
                 FileUtil.writeFile(activityInjectionsFilePath, new Gson().toJson(activityInjections));
             }
         });
-        cancel.setOnClickListener(Helper.getDialogDismissListener(dialog));
+        dialog.setNegativeButton(R.string.common_word_cancel, (dialog1, which) -> dialog1.dismiss());
         dialog.show();
 
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        namespace.requestFocus();
+        Objects.requireNonNull(dialog.create().getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        attributeBinding.dialogInputRes.requestFocus();
     }
 
     private class CustomAdapter extends BaseAdapter {

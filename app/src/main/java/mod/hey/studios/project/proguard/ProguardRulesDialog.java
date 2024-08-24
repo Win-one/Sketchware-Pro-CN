@@ -19,6 +19,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.sketchware.remod.R;
+import com.sketchware.remod.databinding.ViewCodeBinding;
 
 import mod.agus.jcoderz.lib.FileUtil;
 import mod.hey.studios.lib.code_editor.CodeEditorLayout;
@@ -30,9 +31,9 @@ public class ProguardRulesDialog extends Dialog implements View.OnClickListener 
     private static final int save_id = 627;
     private final ProguardHandler pg;
     private ViewGroup base;
-    private CodeEditorLayout codeEditor;
     private TextView cancel;
     private TextView save;
+    private ViewCodeBinding binding;
 
     public ProguardRulesDialog(Activity act, ProguardHandler pg) {
         super(act);
@@ -44,11 +45,11 @@ public class ProguardRulesDialog extends Dialog implements View.OnClickListener 
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.code_editor_zoomin) {
-            codeEditor.increaseTextSize();
+            binding.codeEditor.increaseTextSize();
         } else if (id == R.id.code_editor_zoomout) {
-            codeEditor.decreaseTextSize();
+            binding.codeEditor.decreaseTextSize();
         } else if (id == save_id) {
-            FileUtil.writeFile(pg.getCustomProguardRules(), codeEditor.getText());
+            FileUtil.writeFile(pg.getCustomProguardRules(), binding.codeEditor.getText());
             dismiss();
         } else if (id == cancel_id) {
             dismiss();
@@ -58,24 +59,24 @@ public class ProguardRulesDialog extends Dialog implements View.OnClickListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_code);
+        binding = ViewCodeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        ((TextView) findViewById(R.id.text_title)).setText("proguard-rules.pro");
-        codeEditor = findViewById(R.id.text_content);
-        codeEditor.setLayoutParams(new LayoutParams(
+        binding.textTitle.setText("proguard-rules.pro");
+        binding.codeEditor.setLayoutParams(new LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 0,
                 1.0f));
-        base = (ViewGroup) codeEditor.getParent();
+        base = (ViewGroup) binding.codeEditor.getParent();
 
         addControl();
 
-        findViewById(R.id.code_editor_zoomin).setOnClickListener(this);
-        findViewById(R.id.code_editor_zoomout).setOnClickListener(this);
+        binding.codeEditorZoomin.setOnClickListener(this);
+        binding.codeEditorZoomout.setOnClickListener(this);
 
-        codeEditor.start(ColorScheme.JAVA());
-        codeEditor.onCreateOptionsMenu(findViewById(R.id.codeeditor_more_options));
-        codeEditor.setText(FileUtil.readFile(pg.getCustomProguardRules()));
+        binding.codeEditor.start(ColorScheme.JAVA());
+        binding.codeEditor.onCreateOptionsMenu(findViewById(R.id.codeeditor_more_options));
+        binding.codeEditor.setText(FileUtil.readFile(pg.getCustomProguardRules()));
 
         save.setOnClickListener(this);
         cancel.setOnClickListener(this);
@@ -97,7 +98,7 @@ public class ProguardRulesDialog extends Dialog implements View.OnClickListener 
                 (int) getDip(0)
         );
         layout.setOrientation(LinearLayout.HORIZONTAL);
-        if (codeEditor.dark_theme) {
+        if (binding.codeEditor.dark_theme) {
             layout.setBackgroundColor(Color.parseColor("#FF292929"));
         } else {
             layout.setBackgroundColor(Color.WHITE);
@@ -124,7 +125,7 @@ public class ProguardRulesDialog extends Dialog implements View.OnClickListener 
         );
         cancel.setGravity(Gravity.CENTER);
         cancel.setId(cancel_id);
-        if (codeEditor.dark_theme) {
+        if (binding.codeEditor.dark_theme) {
             cancel.setBackgroundColor(0xff333333);
         } else {
             cancel.setBackgroundColor(0xff008dcd);
@@ -153,7 +154,7 @@ public class ProguardRulesDialog extends Dialog implements View.OnClickListener 
         );
         save.setGravity(Gravity.CENTER);
         save.setId(save_id);
-        if (codeEditor.dark_theme) {
+        if (binding.codeEditor.dark_theme) {
             save.setBackgroundColor(0xff333333);
         } else {
             save.setBackgroundColor(0xff008dcd);
@@ -161,7 +162,7 @@ public class ProguardRulesDialog extends Dialog implements View.OnClickListener 
 
         save.setTextSize(15f);
         layout.addView(save);
-        if (codeEditor.dark_theme) {
+        if (binding.codeEditor.dark_theme) {
             save.setBackground(getGD((int) getDip(4), 0, 0xff333333, 0xff333333));
             cancel.setBackground(getGD((int) getDip(4), 0, 0xff333333, 0xff333333));
         } else {
@@ -179,7 +180,7 @@ public class ProguardRulesDialog extends Dialog implements View.OnClickListener 
         Runnable task = new Runnable() {
             @Override
             public void run() {
-                if (codeEditor.dark_theme) {
+                if (binding.codeEditor.dark_theme) {
                     layout.setBackgroundColor(0xff292929);
 
                     save.setBackground(getGD((int) getDip(4), 0, 0xff333333, 0xff333333));
