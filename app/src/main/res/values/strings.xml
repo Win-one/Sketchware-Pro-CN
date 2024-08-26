@@ -2596,6 +2596,16 @@ Please try again later"</string>
     <string name="edit_attribute">Edit attribute</string>
     <string name="add_new_attribute">Add new attribute</string>
     <string name="add_new_permission">Add new permission</string>
+    <string name="select_backups_to_restore">Select backups to restore (</string>
+    <string name="include_used_local_libraries">Include used Local libraries</string>
+    <string name="include_used_custom_blocks">Include used Custom Blocks</string>
+    <string name="creating_backup">Creating backup...</string>
+    <string name="successfully_created_backup_to">Successfully created backup to:</string>
+    <string name="restoring">Restoring...</string>
+    <string name="couldn_t_restore">Couldn/t restore:</string>
+    <string name="restored_successfully">Restored successfully</string>
+    <string name="refresh_to_see_the_project">Restored successfully. Refresh to see the project</string>
+    <string name="received_invalid_data">Received invalid data</string>
 
 
 </resources>

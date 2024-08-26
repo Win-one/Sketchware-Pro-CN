@@ -117,7 +117,7 @@ public class BlocksManager extends AppCompatActivity {
 
     private void showBlockConfigurationDialog() {
         aB dialog = new aB(this);
-        dialog.a(R.drawable.ic_folder_48dp);
+        dialog.a(R.drawable.services_48);
         dialog.b(getString(R.string.block_configuration));
 
         LinearLayout.LayoutParams defaultParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

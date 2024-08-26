@@ -200,7 +200,7 @@ public class MyProjectSettingActivity extends BaseAppCompatActivity implements V
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data == null) {
-            SketchwareUtil.toast("Received invalid data");
+            SketchwareUtil.toast(getString(R.string.received_invalid_data));
             finish();
             return;
         }

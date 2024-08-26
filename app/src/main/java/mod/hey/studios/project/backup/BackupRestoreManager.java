@@ -97,7 +97,7 @@ public class BackupRestoreManager {
 
         CheckBox includeLocalLibraries = new CheckBox(act);
         includeLocalLibraries.setTag(localLibrariesTag);
-        includeLocalLibraries.setText("Include used Local libraries");
+        includeLocalLibraries.setText(R.string.include_used_local_libraries);
         includeLocalLibraries.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -106,7 +106,7 @@ public class BackupRestoreManager {
 
         CheckBox includeUsedCustomBlocks = new CheckBox(act);
         includeUsedCustomBlocks.setTag(customBlocksTag);
-        includeUsedCustomBlocks.setText("Include used Custom Blocks");
+        includeUsedCustomBlocks.setText(R.string.include_used_custom_blocks);
         includeUsedCustomBlocks.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -139,7 +139,7 @@ public class BackupRestoreManager {
         properties.extensions = new String[]{BackupFactory.EXTENSION};
 
         FilePickerDialog fpd = new FilePickerDialog(act, properties);
-        fpd.setTitle("Select backups to restore (" + BackupFactory.EXTENSION + ")");
+        fpd.setTitle(Helper.getResString(R.string.select_backups_to_restore) + BackupFactory.EXTENSION + ")");
         fpd.setDialogSelectionListener(files -> {
             for (int i = 0; i < files.length; i++) {
                 String backupFilePath = files[i];
@@ -151,8 +151,8 @@ public class BackupRestoreManager {
                          .setTitle(R.string.common_word_warning)
                          .setMessage(getRestoreIntegratedLocalLibrariesMessage(restoringMultipleBackups, i, files.length,
                                FileUtil.getFileNameNoExtension(backupFilePath)))
-                         .setPositiveButton("Copy", (dialog, which) -> doRestore(backupFilePath, true))
-                         .setNegativeButton("Don't copy", (dialog, which) -> doRestore(backupFilePath, false))
+                         .setPositiveButton(R.string.common_word_copy, (dialog, which) -> doRestore(backupFilePath, true))
+                         .setNegativeButton(R.string.don_t_copy, (dialog, which) -> doRestore(backupFilePath, false))
                          .setNeutralButton(R.string.common_word_cancel, null)
                          .show();
 
@@ -188,7 +188,7 @@ public class BackupRestoreManager {
         @Override
         protected void onPreExecute() {
             dlg = new ProgressDialog(activityWeakReference.get());
-            dlg.setMessage("Creating backup...");
+            dlg.setMessage(Helper.getResString(R.string.creating_backup));
             dlg.setCancelable(false);
             dlg.show();
         }
@@ -209,7 +209,7 @@ public class BackupRestoreManager {
             dlg.dismiss();
 
             if (bm.getOutFile() != null) {
-                SketchwareUtil.toast("Successfully created backup to: " + bm.getOutFile().getAbsolutePath());
+                SketchwareUtil.toast(Helper.getResString(R.string.successfully_created_backup_to) + bm.getOutFile().getAbsolutePath());
             } else {
                 SketchwareUtil.toastError("Error: " + bm.error, Toast.LENGTH_LONG);
             }
@@ -236,7 +236,7 @@ public class BackupRestoreManager {
         @Override
         protected void onPreExecute() {
             dlg = new ProgressDialog(activityWeakReference.get());
-            dlg.setMessage("Restoring...");
+            dlg.setMessage(Helper.getResString(R.string.restoring));
             dlg.setCancelable(false);
             dlg.show();
         }
@@ -261,12 +261,12 @@ public class BackupRestoreManager {
             dlg.dismiss();
 
             if (!bm.isRestoreSuccess() || error) {
-                SketchwareUtil.toastError("Couldn't restore: " + bm.error, Toast.LENGTH_LONG);
+                SketchwareUtil.toastError(Helper.getResString(R.string.couldn_t_restore) + bm.error, Toast.LENGTH_LONG);
             } else if (projectsFragment != null) {
                 projectsFragment.refreshProjectsList();
-                SketchwareUtil.toast("Restored successfully");
+                SketchwareUtil.toast(Helper.getResString(R.string.restored_successfully));
             } else {
-                SketchwareUtil.toast("Restored successfully. Refresh to see the project", Toast.LENGTH_LONG);
+                SketchwareUtil.toast(Helper.getResString(R.string.refresh_to_see_the_project), Toast.LENGTH_LONG);
             }
         }
     }
