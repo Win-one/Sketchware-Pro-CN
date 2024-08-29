@@ -445,8 +445,8 @@ public class AndroidManifestInjection extends AppCompatActivity {
         public View getView(final int position, View convertView, ViewGroup parent) {
             CustomAttributeView attributeView = new CustomAttributeView(parent.getContext());
 
-            attributeView.icon.setVisibility(View.GONE);
-            attributeView.text.setText((String) list_map.get(position).get("act_name"));
+            attributeView.getImageView().setVisibility(View.GONE);
+            attributeView.getTextView().setText((String) list_map.get(position).get("act_name"));
             attributeView.setOnClickListener(v -> {
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext(), AndroidManifestInjectionDetails.class);

@@ -25,9 +25,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.developer.filepicker.model.DialogProperties;
-import com.developer.filepicker.view.FilePickerDialog;
-import com.google.android.material.card.MaterialCardView;
+import dev.trindadedev.lib.filepicker.model.DialogProperties;
+import dev.trindadedev.lib.filepicker.view.FilePickerDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.AddCustomAttributeBinding;

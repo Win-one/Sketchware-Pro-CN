@@ -1,6 +1,5 @@
 package dev.aldi.sayuti.editor.injection;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -10,17 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 
-import androidx.annotation.AttrRes;
-import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.color.MaterialColors;
+import com.besome.sketch.lib.ThemeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
@@ -39,29 +32,29 @@ import mod.remaker.view.CustomAttributeView;
 public class AddCustomAttributeActivity extends AppCompatActivity {
 
     private ArrayList<HashMap<String, Object>> activityInjections = new ArrayList<>();
+
     private String activityInjectionsFilePath = "";
     private String widgetType = "";
+
     private AddCustomAttributeBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=AddCustomAttributeBinding.inflate(getLayoutInflater());
+        binding = AddCustomAttributeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         binding.addAttrFab.setOnClickListener(v -> dialog("create", 0));
-        Toolbar toolbar = (Toolbar) getLayoutInflater().inflate(R.layout.toolbar_improved, binding.background, false);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(widgetType);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(view -> onBackPressed());
-        binding.background.addView(toolbar, 0);
+
+        Helper.applyRippleToToolbarView(binding.igToolbarBack);
+        binding.igToolbarBack.setOnClickListener(Helper.getBackPressedClickListener(this));
 
         if (getIntent().hasExtra("sc_id") && getIntent().hasExtra("file_name") && getIntent().hasExtra("widget_type")) {
             String sc_id = getIntent().getStringExtra("sc_id");
             String activityFilename = getIntent().getStringExtra("file_name");
             widgetType = getIntent().getStringExtra("widget_type");
+
+            binding.txToolbarTitle.setText(widgetType);
 
             activityInjectionsFilePath = FileUtil.getExternalStorageDir() + "/.sketchware/data/" + sc_id + "/injection/appcompat/" + activityFilename;
             if (!FileUtil.isExistFile(activityInjectionsFilePath) || FileUtil.readFile(activityInjectionsFilePath).equals("")) {
@@ -78,21 +71,21 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
 
     private void dialog(String type, int position) {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
-        dialog.setTitle(type.equals("create") ? getString(R.string.add_new_attribute) : getString(R.string.edit_attribute));
+        dialog.setTitle(type.equals("create") ? "Add new attribute" : "Edit attribute");
         CustomDialogAttributeBinding attributeBinding = CustomDialogAttributeBinding.inflate(getLayoutInflater());
         dialog.setView(attributeBinding.getRoot());
 
         if (type.equals("edit")) {
             String injectionValue = activityInjections.get(position).get("value").toString();
-            attributeBinding.dialogInputRes.setText(injectionValue.substring(0, injectionValue.indexOf(":")));
-            attributeBinding.dialogInputAttr.setText(injectionValue.substring(injectionValue.indexOf(":") + 1, injectionValue.indexOf("=")));
-            attributeBinding.dialogInputValue.setText(injectionValue.substring(injectionValue.indexOf("\"") + 1, injectionValue.length() - 1));
+            attributeBinding.inputRes.setText(injectionValue.substring(0, injectionValue.indexOf(":")));
+            attributeBinding.inputAttr.setText(injectionValue.substring(injectionValue.indexOf(":") + 1, injectionValue.indexOf("=")));
+            attributeBinding.inputValue.setText(injectionValue.substring(injectionValue.indexOf("\"") + 1, injectionValue.length() - 1));
         }
 
         dialog.setPositiveButton(R.string.common_word_save, (dialog1, which) -> {
-            String namespaceInput = attributeBinding.dialogInputRes.getText().toString();
-            String nameInput = attributeBinding.dialogInputAttr.getText().toString();
-            String valueInput = attributeBinding.dialogInputValue.getText().toString();
+            String namespaceInput = attributeBinding.inputRes.getText().toString();
+            String nameInput = attributeBinding.inputAttr.getText().toString();
+            String valueInput = attributeBinding.inputValue.getText().toString();
             if (!namespaceInput.trim().equals("") && !nameInput.trim().equals("") && !valueInput.trim().equals("")) {
                 String newValue = namespaceInput + ":" + nameInput + "=\"" + valueInput + "\"";
                 if (type.equals("create")) {
@@ -100,10 +93,10 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
                     map.put("type", widgetType);
                     map.put("value", newValue);
                     activityInjections.add(map);
-                    SketchwareUtil.toast(getString(R.string.common_word_added));
+                    SketchwareUtil.toast("Added");
                 } else if (type.equals("edit")) {
                     activityInjections.get(position).put("value", newValue);
-                    SketchwareUtil.toast(getString(R.string.common_word_saved));
+                    SketchwareUtil.toast("Saved");
                 }
                 binding.addAttrListview.setAdapter(new CustomAdapter(activityInjections));
                 ((BaseAdapter) binding.addAttrListview.getAdapter()).notifyDataSetChanged();
@@ -113,9 +106,8 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
         });
         dialog.setNegativeButton(R.string.common_word_cancel, (dialog1, which) -> dialog1.dismiss());
         dialog.show();
-
         Objects.requireNonNull(dialog.create().getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        attributeBinding.dialogInputRes.requestFocus();
+        attributeBinding.inputRes.requestFocus();
     }
 
     private class CustomAdapter extends BaseAdapter {
@@ -155,9 +147,9 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             CustomAttributeView attributeView = new CustomAttributeView(parent.getContext());
 
-            int violet = getColor(attributeView, R.attr.colorViolet);
-            int onSurface = getColor(attributeView, com.google.android.material.R.attr.colorOnSurface);
-            int green = getColor(attributeView, R.attr.colorGreen);
+            int violet = ThemeUtils.getColor(attributeView, R.attr.colorViolet);
+            int onSurface = ThemeUtils.getColor(attributeView, R.attr.colorOnSurface);
+            int green = ThemeUtils.getColor(attributeView, R.attr.colorGreen);
 
             String value = getItem(position).get("value").toString();
             SpannableString spannableString = new SpannableString(value);
@@ -165,12 +157,12 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
             spannableString.setSpan(new ForegroundColorSpan(onSurface), value.indexOf(":"), value.indexOf("=") + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             spannableString.setSpan(new ForegroundColorSpan(green), value.indexOf("\""), value.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-            attributeView.text.setText(spannableString);
-            attributeView.icon.setRotation(90);
-            attributeView.icon.setOnClickListener(v -> {
-                PopupMenu popupMenu = new PopupMenu(AddCustomAttributeActivity.this, attributeView.icon);
-                popupMenu.getMenu().add(Menu.NONE, 0, Menu.NONE, R.string.common_word_edit);
-                popupMenu.getMenu().add(Menu.NONE, 1, Menu.NONE, R.string.common_word_delete);
+            attributeView.getTextView().setText(spannableString);
+            attributeView.getImageView().setRotation(90);
+            attributeView.getImageView().setOnClickListener(v -> {
+                PopupMenu popupMenu = new PopupMenu(AddCustomAttributeActivity.this, attributeView.getImageView());
+                popupMenu.getMenu().add(Menu.NONE, 0, Menu.NONE, "Edit");
+                popupMenu.getMenu().add(Menu.NONE, 1, Menu.NONE, "Delete");
                 popupMenu.setOnMenuItemClickListener(item -> {
                     if (item.getItemId() == 0) {
                         dialog("edit", position);
@@ -178,7 +170,7 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
                         injections.remove(position);
                         FileUtil.writeFile(activityInjectionsFilePath, new Gson().toJson(injections));
                         notifyDataSetChanged();
-                        SketchwareUtil.toast(getString(R.string.deleted_successfully));
+                        SketchwareUtil.toast("Deleted successfully");
                     }
                     return true;
                 });
@@ -186,12 +178,6 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
             });
 
             return attributeView;
-        }
-
-        // todo: move that method to another class, maybe SkColors
-        // SkColors#getColor(View, int) ?????
-        private @ColorInt int getColor(View view, @AttrRes int resourceId) {
-            return MaterialColors.getColor(view, resourceId);
         }
     }
 }

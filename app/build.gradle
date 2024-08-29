@@ -101,7 +101,7 @@ android {
         abortOnError false
     }
 
-    configurations.implementation {
+    configurations.minApi26Implementation {
         exclude group: 'javax.inject', module: 'javax.inject'
     }
 
@@ -132,7 +132,6 @@ dependencies {
     implementation "$editorGroupId:language-textmate"
 
     implementation "de.hdodenhof:circleimageview:3.1.0"
-    implementation "io.github.tutorialsandroid:filepicker:9.2.5"
 
     minApi26Implementation "com.android.tools.build:bundletool:1.15.6"
     //noinspection GradleDependency copied from above dependency for not just runtime access
@@ -165,7 +164,9 @@ dependencies {
     implementation "com.github.topjohnwu.libsu:core:5.0.4"
     implementation "dev.chrisbanes.insetter:insetter:0.6.1"
 
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:2.14"
+    def tUtilVersion = "3.1.1"
+    implementation "com.github.aquilesTrindade.trindade-util:components:$tUtilVersion"
+    implementation "com.github.aquilesTrindade.trindade-util:filepicker:$tUtilVersion"
 
     // Analytics and Crashlytics
     if (analyticsEnabled) {

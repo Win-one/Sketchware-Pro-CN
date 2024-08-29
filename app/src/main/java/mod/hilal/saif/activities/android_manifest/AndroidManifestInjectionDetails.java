@@ -2,6 +2,7 @@ package mod.hilal.saif.activities.android_manifest;
 
 import static mod.SketchwareUtil.getDip;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -242,12 +243,12 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
                 spannableString.setSpan(new ForegroundColorSpan(0xff7a2e8c), 0, ((String) _data.get(position).get("value")).indexOf(":"), 33);
                 spannableString.setSpan(new ForegroundColorSpan(0xff212121), ((String) _data.get(position).get("value")).indexOf(":"), ((String) _data.get(position).get("value")).indexOf("=") + 1, 33);
                 spannableString.setSpan(new ForegroundColorSpan(0xff45a245), ((String) _data.get(position).get("value")).indexOf("\""), ((String) _data.get(position).get("value")).length(), 33);
-                attributeView.text.setText(spannableString);
+                attributeView.getTextView().setText(spannableString);
             } catch (Exception e) {
-                attributeView.text.setText((String) _data.get(position).get("value"));
+                attributeView.getTextView().setText((String) _data.get(position).get("value"));
             }
 
-            attributeView.icon.setVisibility(View.GONE);
+            attributeView.getImageView().setVisibility(View.GONE);
             attributeView.setOnClickListener(v -> showDial(position));
             attributeView.setOnLongClickListener(v -> {
                 new MaterialAlertDialogBuilder(AndroidManifestInjectionDetails.this)

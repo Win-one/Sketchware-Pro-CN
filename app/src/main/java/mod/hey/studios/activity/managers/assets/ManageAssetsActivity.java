@@ -23,9 +23,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.developer.filepicker.model.DialogConfigs;
-import com.developer.filepicker.model.DialogProperties;
-import com.developer.filepicker.view.FilePickerDialog;
+import dev.trindadedev.lib.filepicker.model.DialogConfigs;
+import dev.trindadedev.lib.filepicker.model.DialogProperties;
+import dev.trindadedev.lib.filepicker.view.FilePickerDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.DialogCreateNewFileLayoutBinding;

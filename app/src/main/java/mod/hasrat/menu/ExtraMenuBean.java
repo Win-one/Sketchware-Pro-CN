@@ -17,9 +17,9 @@ import com.besome.sketch.beans.AdUnitBean;
 import com.besome.sketch.beans.ComponentBean;
 import com.besome.sketch.beans.ProjectFileBean;
 import com.besome.sketch.editor.LogicEditorActivity;
-import com.developer.filepicker.model.DialogConfigs;
-import com.developer.filepicker.model.DialogProperties;
-import com.developer.filepicker.view.FilePickerDialog;
+import dev.trindadedev.lib.filepicker.model.DialogConfigs;
+import dev.trindadedev.lib.filepicker.model.DialogProperties;
+import dev.trindadedev.lib.filepicker.view.FilePickerDialog;
 import com.sketchware.remod.R;
 
 import java.io.File;
@@ -732,8 +732,8 @@ public class ExtraMenuBean {
             AsdAllEditor editor = new AsdAllEditor(logicEditor);
             editor.setCon(menu.getArgValue().toString());
             editor.show();
-            editor.saveLis(logicEditor, menu, editor);
-            editor.cancelLis(logicEditor, editor);
+            editor.saveLis(logicEditor, menu);
+            editor.cancelLis(editor);
             dialog.dismiss();
         });
         dialog.show();

@@ -22,9 +22,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.developer.filepicker.model.DialogConfigs;
-import com.developer.filepicker.model.DialogProperties;
-import com.developer.filepicker.view.FilePickerDialog;
+import dev.trindadedev.lib.filepicker.model.DialogConfigs;
+import dev.trindadedev.lib.filepicker.model.DialogProperties;
+import dev.trindadedev.lib.filepicker.view.FilePickerDialog;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.sketchware.remod.R;

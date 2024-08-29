@@ -17,7 +17,6 @@ import com.besome.sketch.language.util.SpUtil;
 import com.besome.sketch.tools.CollectErrorActivity;
 
 import com.google.android.gms.analytics.Tracker;
-import com.google.android.material.color.DynamicColors;
 
 import java.util.Locale;
 
@@ -57,7 +56,6 @@ public class SketchApplication extends Application {
             }
         });
         super.onCreate();
-        DynamicColors.applyToActivitiesIfAvailable(this);
         ThemeManager.applyTheme(this, ThemeManager.getCurrentTheme(this));
         mApplicationContext = getApplicationContext();
         //初始化本地语言，这句话可以不要，因为在attachBaseContext中已经处理了

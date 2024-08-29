@@ -72,4 +72,3 @@ public class ItemFloatingActionButton extends FloatingActionButton implements sy
         invalidate();
     }
 }
-
