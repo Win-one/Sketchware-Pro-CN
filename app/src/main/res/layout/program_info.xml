@@ -1,16 +1,36 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
 
-    <include layout="@layout/toolbar" />
-
-    <ScrollView
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/abc_ic_ab_back_material" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,11 +85,11 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:background="?attr/colorOutlineVariant"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginStart="16dp" />
+                    android:layout_marginRight="16dp"
+                    android:background="?attr/colorOutlineVariant" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -109,5 +129,5 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

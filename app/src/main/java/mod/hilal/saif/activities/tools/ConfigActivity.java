@@ -36,6 +36,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.sketchware.remod.R;
+import com.sketchware.remod.databinding.PrefencesContentAppbarBinding;
 import com.topjohnwu.superuser.Shell;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.sketchware.remod.databinding.DialogCreateNewFileLayoutBinding;
@@ -68,27 +69,17 @@ public class ConfigActivity extends AppCompatActivity {
     public static final String SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH = "palletteDir";
     public static final String SETTING_BLOCKMANAGER_DIRECTORY_BLOCK_FILE_PATH = "blockDir";
     private HashMap<String, Object> setting_map = new HashMap<>();
-
-    private LinearLayout content;
-    private NestedScrollView contentLayout;
-    private com.google.android.material.appbar.AppBarLayout appBarLayout;
-    private com.google.android.material.appbar.MaterialToolbar topAppBar;
-    private com.google.android.material.appbar.CollapsingToolbarLayout collapsingToolbar;
+    private PrefencesContentAppbarBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.prefences_content_appbar);
+        binding = PrefencesContentAppbarBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        content = findViewById(R.id.content);
-        topAppBar = findViewById(R.id.topAppBar);
-        appBarLayout = findViewById(R.id.appBarLayout);
-        contentLayout = findViewById(R.id.contentLayout);
-        collapsingToolbar = findViewById(R.id.collapsingToolbar);
-
-        topAppBar.setTitle(R.string.mod_settings);
-        topAppBar.setNavigationOnClickListener(view -> onBackPressed());
+        binding.topAppBar.setTitle(R.string.mod_settings);
+        binding.topAppBar.setNavigationOnClickListener(view -> onBackPressed());
 
         if (FileUtil.isExistFile(SETTINGS_FILE.getAbsolutePath())) {
             setting_map = readSettings();
@@ -421,7 +412,7 @@ public class ConfigActivity extends AppCompatActivity {
         );
         /* Android Studio complained about that inside the original XML */
         preferenceRoot.setBaselineAligned(false);
-        content.addView(preferenceRoot);
+        binding.content.addView(preferenceRoot);
 
         LinearLayout textContainer = new LinearLayout(this);
         textContainer.setLayoutParams(new LinearLayout.LayoutParams(
@@ -548,7 +539,7 @@ public class ConfigActivity extends AppCompatActivity {
         );
         /* Android Studio complained about this in the original XML files */
         preferenceRoot.setBaselineAligned(false);
-        content.addView(preferenceRoot);
+        binding.content.addView(preferenceRoot);
 
         LinearLayout textContainer = new LinearLayout(this);
         textContainer.setLayoutParams(new LinearLayout.LayoutParams(

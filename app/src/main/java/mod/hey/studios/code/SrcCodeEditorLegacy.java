@@ -44,9 +44,7 @@ public class SrcCodeEditorLegacy extends Activity {
         super.onCreate(savedInstanceState);
         binding = ViewCodeBinding.inflate(getLayoutInflater());
         sp = getSharedPreferences("code_editor_pref", 0);
-
         setContentView(binding.getRoot());
-        binding.back.setOnClickListener(Helper.getBackPressedClickListener(this));
 
         if (getIntent().hasExtra("java")) {
             binding.codeEditor.start(ColorScheme.JAVA());

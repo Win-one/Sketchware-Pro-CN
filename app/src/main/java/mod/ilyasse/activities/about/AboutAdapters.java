@@ -97,7 +97,7 @@ public class AboutAdapters {
             }
 
             if (isPartofTeamBool) {
-                advancedCorners(holder.sidebar, MaterialColors.getColor(holder.sidebar, com.google.android.material.R.attr.colorPrimary));
+                advancedCorners(holder.sidebar, MaterialColors.getColor(holder.sidebar, R.attr.colorPrimary));
             } else {
                 advancedCorners(holder.sidebar, MaterialColors.getColor(holder.sidebar, R.attr.colorGreen));
             }

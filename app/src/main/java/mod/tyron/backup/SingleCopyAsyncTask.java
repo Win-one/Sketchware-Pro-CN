@@ -1,5 +1,6 @@
 package mod.tyron.backup;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -107,6 +108,7 @@ public class SingleCopyAsyncTask extends AsyncTask<Uri, Integer, String> {
 
     }
 
+    @SuppressLint("Range")
     private String getFileName(Uri uri, Context context) {
         String result = null;
         if (uri.getScheme() != null) {

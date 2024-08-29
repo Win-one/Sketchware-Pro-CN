@@ -11,12 +11,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.widget.Toolbar;
 
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.besome.sketch.lib.ui.PropertyOneLineItem;
 import com.besome.sketch.lib.ui.PropertyTwoLineItem;
 import com.sketchware.remod.R;
+import com.sketchware.remod.databinding.ProgramInfoBinding;
 
 import a.a.a.GB;
 import a.a.a.aB;
@@ -34,8 +36,8 @@ public class ProgramInfoActivity extends BaseAppCompatActivity implements OnClic
     private static final int ITEM_TELEGRAM = 8;
     private static final int ITEM_OPEN_SOURCE_LICENSES = 15;
     private static final int ITEM_SUGGEST_IDEAS = 17;
+    private ProgramInfoBinding binding;
 
-    private LinearLayout content;
 
     private void addTwoLineItem(int key, int name, int description) {
         addTwoLineItem(key, getString(name), getString(description));
@@ -46,7 +48,7 @@ public class ProgramInfoActivity extends BaseAppCompatActivity implements OnClic
         item.setKey(key);
         item.setName(name);
         item.setDesc(description);
-        content.addView(item);
+        binding.content.addView(item);
         item.setOnClickListener(this);
     }
 
@@ -58,7 +60,7 @@ public class ProgramInfoActivity extends BaseAppCompatActivity implements OnClic
         PropertyOneLineItem item = new PropertyOneLineItem(this);
         item.setKey(key);
         item.setName(name);
-        content.addView(item);
+        binding.content.addView(item);
         if (key == ITEM_SYSTEM_INFORMATION || key == ITEM_OPEN_SOURCE_LICENSES) {
             item.setOnClickListener(this);
         }
@@ -122,23 +124,18 @@ public class ProgramInfoActivity extends BaseAppCompatActivity implements OnClic
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.program_info);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
-        getSupportActionBar().setTitle(Helper.getResString(R.string.main_drawer_title_program_information));
-        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-        content = findViewById(R.id.content);
+        binding = ProgramInfoBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        TextView version = findViewById(R.id.tv_sketch_ver);
-        version.setText(GB.e(getApplicationContext()));
-        Button resetSystem = findViewById(R.id.btn_app_init);
-        resetSystem.setOnClickListener(this);
-        Button checkForUpdates = findViewById(R.id.btn_app_upgrade);
-        checkForUpdates.setOnClickListener(view -> {
+        binding.toolbar.setTitle(Helper.getResString(R.string.main_drawer_title_program_information));
+        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+
+        binding.tvSketchVer.setText(GB.e(getApplicationContext()));
+        binding.btnAppInit.setOnClickListener(this);
+
+        binding.btnAppUpgrade.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.link_github_release)));
             startActivity(intent);
         });
