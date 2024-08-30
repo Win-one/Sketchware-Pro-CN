@@ -2606,6 +2606,8 @@ Please try again later"</string>
     <string name="restored_successfully">Restored successfully</string>
     <string name="refresh_to_see_the_project">Restored successfully. Refresh to see the project</string>
     <string name="received_invalid_data">Received invalid data</string>
+    <string name="detected_invalid_preference">Detected invalid preference</string>
+    <string name="backup_filename_restoring_defaults">for backup filename.Restoring defaults</string>
 
 
 </resources>

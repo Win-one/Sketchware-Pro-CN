@@ -1,26 +1,18 @@
 package mod.hey.studios.code;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.constraintlayout.solver.state.State;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.sketchware.remod.R;
-import com.sketchware.remod.databinding.CodeEditorLayoutBinding;
 import com.sketchware.remod.databinding.ViewCodeBinding;
 
 import mod.agus.jcoderz.lib.FileUtil;
-import mod.hey.studios.lib.code_editor.CodeEditorLayout;
 import mod.hey.studios.lib.code_editor.ColorScheme;
-import mod.hey.studios.util.Helper;
 
 /**
  * Legacy code editor

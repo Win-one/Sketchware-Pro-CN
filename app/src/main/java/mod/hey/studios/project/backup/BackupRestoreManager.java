@@ -1,7 +1,6 @@
 package mod.hey.studios.project.backup;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.widget.CheckBox;
@@ -18,9 +17,6 @@ import dev.trindadedev.lib.filepicker.model.DialogConfigs;
 import dev.trindadedev.lib.filepicker.model.DialogProperties;
 import dev.trindadedev.lib.filepicker.view.FilePickerDialog;
 
-import com.developer.filepicker.model.DialogConfigs;
-import com.developer.filepicker.model.DialogProperties;
-import com.developer.filepicker.view.FilePickerDialog;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.ProgressMsgBoxBinding;
 
@@ -196,7 +192,7 @@ public class BackupRestoreManager {
             ProgressMsgBoxBinding loadingDialogBinding = ProgressMsgBoxBinding.inflate(LayoutInflater.from(activityWeakReference.get()));
             loadingDialogBinding.tvProgress.setText(Helper.getResString(R.string.creating_backup));
             dlg = new MaterialAlertDialogBuilder(activityWeakReference.get())
-                  .setTitle("Please wait")
+                  .setTitle(R.string.please_wait)
                   .setCancelable(false)
                   .setView(loadingDialogBinding.getRoot())
                   .create();
@@ -248,7 +244,7 @@ public class BackupRestoreManager {
             ProgressMsgBoxBinding loadingDialogBinding = ProgressMsgBoxBinding.inflate(LayoutInflater.from(activityWeakReference.get()));
             loadingDialogBinding.tvProgress.setText(Helper.getResString(R.string.restoring));
             dlg = new MaterialAlertDialogBuilder(activityWeakReference.get())
-                  .setTitle("Please wait")
+                  .setTitle(R.string.please_wait)
                   .setCancelable(false)
                   .setView(loadingDialogBinding.getRoot())
                   .create();

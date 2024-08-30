@@ -10,17 +10,15 @@ import android.os.Bundle;
 import android.os.Process;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.besome.sketch.language.ConstantGlobal;
 import com.besome.sketch.language.util.MultiLanguageUtil;
 import com.besome.sketch.language.util.SpUtil;
 import com.besome.sketch.tools.CollectErrorActivity;
-
 import com.google.android.gms.analytics.Tracker;
-
+import com.google.android.material.color.DynamicColors;
 import java.util.Locale;
 
-import mod.trindadedev.settings.appearance.theme.manage.ThemeManager;
+import mod.trindadedev.manage.theme.ThemeManager;
 
 public class SketchApplication extends Application {
 
@@ -56,6 +54,7 @@ public class SketchApplication extends Application {
             }
         });
         super.onCreate();
+        DynamicColors.applyToActivitiesIfAvailable(this);
         ThemeManager.applyTheme(this, ThemeManager.getCurrentTheme(this));
         mApplicationContext = getApplicationContext();
         //初始化本地语言，这句话可以不要，因为在attachBaseContext中已经处理了

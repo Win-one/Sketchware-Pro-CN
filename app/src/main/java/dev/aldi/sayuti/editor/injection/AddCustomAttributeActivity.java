@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.PopupMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.besome.sketch.lib.ThemeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -45,16 +46,18 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.addAttrFab.setOnClickListener(v -> dialog("create", 0));
-
-        Helper.applyRippleToToolbarView(binding.igToolbarBack);
-        binding.igToolbarBack.setOnClickListener(Helper.getBackPressedClickListener(this));
+        Toolbar toolbar = (Toolbar) getLayoutInflater().inflate(R.layout.toolbar_improved, binding.background, false);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(widgetType);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        binding.background.addView(toolbar, 0);
 
         if (getIntent().hasExtra("sc_id") && getIntent().hasExtra("file_name") && getIntent().hasExtra("widget_type")) {
             String sc_id = getIntent().getStringExtra("sc_id");
             String activityFilename = getIntent().getStringExtra("file_name");
             widgetType = getIntent().getStringExtra("widget_type");
-
-            binding.txToolbarTitle.setText(widgetType);
 
             activityInjectionsFilePath = FileUtil.getExternalStorageDir() + "/.sketchware/data/" + sc_id + "/injection/appcompat/" + activityFilename;
             if (!FileUtil.isExistFile(activityInjectionsFilePath) || FileUtil.readFile(activityInjectionsFilePath).equals("")) {
@@ -71,21 +74,21 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
 
     private void dialog(String type, int position) {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
-        dialog.setTitle(type.equals("create") ? "Add new attribute" : "Edit attribute");
+        dialog.setTitle(type.equals("create") ? getString(R.string.add_new_attribute) : getString(R.string.edit_attribute));
         CustomDialogAttributeBinding attributeBinding = CustomDialogAttributeBinding.inflate(getLayoutInflater());
         dialog.setView(attributeBinding.getRoot());
 
         if (type.equals("edit")) {
             String injectionValue = activityInjections.get(position).get("value").toString();
-            attributeBinding.inputRes.setText(injectionValue.substring(0, injectionValue.indexOf(":")));
-            attributeBinding.inputAttr.setText(injectionValue.substring(injectionValue.indexOf(":") + 1, injectionValue.indexOf("=")));
-            attributeBinding.inputValue.setText(injectionValue.substring(injectionValue.indexOf("\"") + 1, injectionValue.length() - 1));
+            attributeBinding.dialogInputRes.setText(injectionValue.substring(0, injectionValue.indexOf(":")));
+            attributeBinding.dialogInputAttr.setText(injectionValue.substring(injectionValue.indexOf(":") + 1, injectionValue.indexOf("=")));
+            attributeBinding.dialogInputValue.setText(injectionValue.substring(injectionValue.indexOf("\"") + 1, injectionValue.length() - 1));
         }
 
         dialog.setPositiveButton(R.string.common_word_save, (dialog1, which) -> {
-            String namespaceInput = attributeBinding.inputRes.getText().toString();
-            String nameInput = attributeBinding.inputAttr.getText().toString();
-            String valueInput = attributeBinding.inputValue.getText().toString();
+            String namespaceInput = attributeBinding.dialogInputRes.getText().toString();
+            String nameInput = attributeBinding.dialogInputAttr.getText().toString();
+            String valueInput = attributeBinding.dialogInputValue.getText().toString();
             if (!namespaceInput.trim().equals("") && !nameInput.trim().equals("") && !valueInput.trim().equals("")) {
                 String newValue = namespaceInput + ":" + nameInput + "=\"" + valueInput + "\"";
                 if (type.equals("create")) {
@@ -93,10 +96,10 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
                     map.put("type", widgetType);
                     map.put("value", newValue);
                     activityInjections.add(map);
-                    SketchwareUtil.toast("Added");
+                    SketchwareUtil.toast(getString(R.string.common_word_added));
                 } else if (type.equals("edit")) {
                     activityInjections.get(position).put("value", newValue);
-                    SketchwareUtil.toast("Saved");
+                    SketchwareUtil.toast(getString(R.string.common_word_saved));
                 }
                 binding.addAttrListview.setAdapter(new CustomAdapter(activityInjections));
                 ((BaseAdapter) binding.addAttrListview.getAdapter()).notifyDataSetChanged();
@@ -107,7 +110,7 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
         dialog.setNegativeButton(R.string.common_word_cancel, (dialog1, which) -> dialog1.dismiss());
         dialog.show();
         Objects.requireNonNull(dialog.create().getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        attributeBinding.inputRes.requestFocus();
+        attributeBinding.dialogInputRes.requestFocus();
     }
 
     private class CustomAdapter extends BaseAdapter {
@@ -161,8 +164,8 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
             attributeView.getImageView().setRotation(90);
             attributeView.getImageView().setOnClickListener(v -> {
                 PopupMenu popupMenu = new PopupMenu(AddCustomAttributeActivity.this, attributeView.getImageView());
-                popupMenu.getMenu().add(Menu.NONE, 0, Menu.NONE, "Edit");
-                popupMenu.getMenu().add(Menu.NONE, 1, Menu.NONE, "Delete");
+                popupMenu.getMenu().add(Menu.NONE, 0, Menu.NONE, R.string.common_word_edit);
+                popupMenu.getMenu().add(Menu.NONE, 1, Menu.NONE, R.string.common_word_delete);
                 popupMenu.setOnMenuItemClickListener(item -> {
                     if (item.getItemId() == 0) {
                         dialog("edit", position);
@@ -170,7 +173,7 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
                         injections.remove(position);
                         FileUtil.writeFile(activityInjectionsFilePath, new Gson().toJson(injections));
                         notifyDataSetChanged();
-                        SketchwareUtil.toast("Deleted successfully");
+                        SketchwareUtil.toast(getString(R.string.deleted_successfully));
                     }
                     return true;
                 });

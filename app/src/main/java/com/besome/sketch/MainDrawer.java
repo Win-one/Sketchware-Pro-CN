@@ -27,7 +27,7 @@ import dev.chrisbanes.insetter.Insetter;
 import dev.chrisbanes.insetter.Side;
 import mod.hilal.saif.activities.tools.Tools;
 import mod.ilyasse.activities.about.AboutModActivity;
-import mod.trindadedev.settings.appearance.AppearanceActivity;
+import mod.trindadedev.manage.theme.AppearanceActivity;
 
 public class MainDrawer extends NavigationView {
     private static final int DEF_STYLE_RES = R.style.MainDrawer;

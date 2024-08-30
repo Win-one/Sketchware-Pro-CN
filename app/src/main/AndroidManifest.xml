@@ -316,6 +316,7 @@
         <activity
             android:name="mod.trindadedev.settings.appearance.AppearanceActivity" />
         <activity android:name="com.besome.sketch.language.LanguageSettingsActivity" />
+        <activity android:name="mod.trindadedev.manage.theme.AppearanceActivity" />
 
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"

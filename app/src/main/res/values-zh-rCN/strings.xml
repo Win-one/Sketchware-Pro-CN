@@ -3290,13 +3290,13 @@
     <string name="don_t_sign">不签名</string>
 
     <string name="local_library_manager_download_status">下载状态</string>
-    <string name="appearance">主题设置</string>
+    <string name="settings_appearance">主题设置</string>
     <string name="signatures_title">签名</string>
-    <string name="appearance_description">更改Sketchware的外观并使其成为您自己的!</string>
-    <string name="appearance_theme">Sketchware主题</string>
-    <string name="appearance_theme_system">系统默认</string>
-    <string name="appearance_theme_light">浅色主题</string>
-    <string name="appearance_theme_dark">深色主题</string>
+    <string name="settings_appearance_description">更改Sketchware的外观并使其成为您自己的!</string>
+    <string name="settings_appearance_theme">Sketchware主题</string>
+    <string name="settings_appearance_theme_system">系统默认</string>
+    <string name="settings_appearance_theme_light">浅色主题</string>
+    <string name="settings_appearance_theme_dark">深色主题</string>
     <string name="change_launcher_activity_dialog_title">启动器活动</string>
     <string name="common_word_add_activtiy">添加活动</string>
     <string name="delete_custom_activity_dialog_message">与%1$s相关的所有功能都将被删除.是否确定?</string>
@@ -3427,6 +3427,8 @@
     <string name="restored_successfully">恢复成功</string>
     <string name="refresh_to_see_the_project">已成功恢复.刷新以查看项目</string>
     <string name="received_invalid_data">收到无效数据</string>
+    <string name="detected_invalid_preference">检测到无效的首选项</string>
+    <string name="backup_filename_restoring_defaults">作为备份文件名.恢复默认值</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

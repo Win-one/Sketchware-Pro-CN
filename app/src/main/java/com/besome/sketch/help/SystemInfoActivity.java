@@ -30,18 +30,11 @@ public class SystemInfoActivity extends BaseAppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySystemInfoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
-        getSupportActionBar().setTitle(Helper.getResString(R.string.program_information_title_system_information));
-        toolbar.setNavigationOnClickListener(v -> {
+        binding.toolbar.setNavigationOnClickListener(v -> {
             if (!mB.a()) onBackPressed();
         });
-        content = findViewById(R.id.content);
+
         addApiLevelInfo();
         addAndroidVersionNameInfo();
         addScreenResolutionInfo();
