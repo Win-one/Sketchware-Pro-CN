@@ -30,7 +30,7 @@ import mod.ilyasse.activities.about.AboutModActivity;
 import mod.trindadedev.manage.theme.AppearanceActivity;
 
 public class MainDrawer extends NavigationView {
-    private static final int DEF_STYLE_RES = R.style.MainDrawer;
+    private static final int DEF_STYLE_RES = R.style.Widget_SketchwarePro_NavigationView_Main;
 
     public MainDrawer(@NonNull Context context) {
         this(context, null);
