@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -22,6 +21,7 @@ import com.besome.sketch.beans.EventBean;
 import com.besome.sketch.beans.ProjectFileBean;
 import com.besome.sketch.beans.ViewBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.sketchware.remod.R;
@@ -49,7 +49,7 @@ public class ManageViewActivity extends BaseAppCompatActivity implements OnClick
     private boolean selecting = false;
     private String isAppCompatEnabled = "N";
     // signature mustn't be changed: used in La/a/a/Bw;->a(Landroidx/recyclerview/widget/RecyclerView;II)V, La/a/a/tw;->a(Landroidx/recyclerview/widget/RecyclerView;II)V
-    public FloatingActionButton s;
+    public FloatingActionButton floatingActionButton;
     private Fw activitiesFragment;
     private xw customViewsFragment;
     private ViewPager viewPager;
@@ -134,7 +134,7 @@ public class ManageViewActivity extends BaseAppCompatActivity implements OnClick
 
     @Override
     public void onPageSelected(int var1) {
-        s.show();
+        floatingActionButton.show();
     }
 
     // signature mustn't be changed: used in La/a/a/Fw;->b(Lcom/besome/sketch/beans/ProjectFileBean;)V
@@ -237,7 +237,7 @@ public class ManageViewActivity extends BaseAppCompatActivity implements OnClick
                     activitiesFragment.g();
                     customViewsFragment.g();
                     bB.a(getApplicationContext(), getTranslatedString(R.string.common_message_complete_delete), bB.TOAST_WARNING).show();
-                    s.show();
+                    floatingActionButton.show();
                 }
             } else if (viewId == R.id.fab) {
                 a(false);
@@ -272,8 +272,8 @@ public class ManageViewActivity extends BaseAppCompatActivity implements OnClick
         });
 
         actionButtonsContainer = findViewById(R.id.layout_btn_group);
-        Button delete = findViewById(R.id.btn_delete);
-        Button cancel = findViewById(R.id.btn_cancel);
+        MaterialButton delete = findViewById(R.id.btn_delete);
+        MaterialButton cancel = findViewById(R.id.btn_cancel);
         delete.setText(getTranslatedString(R.string.common_word_delete));
         cancel.setText(getTranslatedString(R.string.common_word_cancel));
         delete.setOnClickListener(this);
@@ -293,8 +293,8 @@ public class ManageViewActivity extends BaseAppCompatActivity implements OnClick
         viewPager.setOffscreenPageLimit(TAB_COUNT);
         viewPager.addOnPageChangeListener(this);
         tabLayout.setupWithViewPager(viewPager);
-        s = findViewById(R.id.fab);
-        s.setOnClickListener(this);
+        floatingActionButton = findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(this);
     }
 
     @Override

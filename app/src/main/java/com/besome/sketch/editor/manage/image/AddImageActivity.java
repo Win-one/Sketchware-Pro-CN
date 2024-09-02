@@ -139,6 +139,7 @@ public class AddImageActivity extends BaseDialogActivity implements View.OnClick
         f(R.drawable.add_new_48_gray);
         e(xB.b().a(this, R.string.design_manager_image_title_add_image));
         d(xB.b().a(getApplicationContext(), R.string.common_word_save));
+        b(xB.b().a(getApplicationContext(),R.string.common_word_cancel));
         setContentView(R.layout.manage_image_add);
         Intent intent = getIntent();
         existingImages = intent.getParcelableArrayListExtra("images");

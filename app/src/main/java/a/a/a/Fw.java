@@ -261,11 +261,11 @@ public class Fw extends qA {
                     public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                         super.onScrolled(recyclerView, dx, dy);
                         if (dy > 2) {
-                            if (((ManageViewActivity) getActivity()).s.isEnabled()) {
-                                ((ManageViewActivity) getActivity()).s.hide();
+                            if (((ManageViewActivity) getActivity()).floatingActionButton.isEnabled()) {
+                                ((ManageViewActivity) getActivity()).floatingActionButton.hide();
                             }
-                        } else if (dy < -2 && ((ManageViewActivity) getActivity()).s.isEnabled()) {
-                            ((ManageViewActivity) getActivity()).s.show();
+                        } else if (dy < -2 && ((ManageViewActivity) getActivity()).floatingActionButton.isEnabled()) {
+                            ((ManageViewActivity) getActivity()).floatingActionButton.show();
                         }
                     }
                 });

@@ -213,7 +213,7 @@ public class pu extends qA implements View.OnClickListener {
     public void onClick(View v) {
         if (!mB.a()) {
             int id = v.getId();
-            if (id == R.id.btn_accept) {
+            if (id == R.id.btn_delete) {
                 if (isSelecting) {
                     deleteSelected();
                     a(false);
@@ -261,7 +261,7 @@ public class pu extends qA implements View.OnClickListener {
         guide = root.findViewById(R.id.tv_guide);
         guide.setText(xB.b().a(requireContext(), R.string.design_manager_image_description_guide_add_image));
         actionButtonContainer = root.findViewById(R.id.layout_btn_group);
-        MaterialButton delete = root.findViewById(R.id.btn_accept);
+        MaterialButton delete = root.findViewById(R.id.btn_delete);
         MaterialButton cancel = root.findViewById(R.id.btn_cancel);
         delete.setText(xB.b().a(requireContext(), R.string.common_word_delete));
         cancel.setText(xB.b().a(requireContext(), R.string.common_word_cancel));
