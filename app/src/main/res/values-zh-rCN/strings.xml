@@ -3429,6 +3429,17 @@
     <string name="received_invalid_data">收到无效数据</string>
     <string name="detected_invalid_preference">检测到无效的首选项</string>
     <string name="backup_filename_restoring_defaults">作为备份文件名.恢复默认值</string>
+    <string name="important_note">重要提示</string>
+    <string name="common_word_understood">明白</string>
+    <string name="fill_in_the_keystore_details_to_sign_the_aab">填写密钥库详细信息以对AAB进行签名.</string>
+    <string name="fill_in_the_keystore_details_to_sign_the_apk">填写密钥库详细信息以对APK进行签名.</string>
+    <string name="if_you_don_t_have_a_keystore_you_can_use_a_test_key">如果您没有密钥库,则可以使用测试密钥.</string>
+    <string name="finished_exporting_aab">已完成AAB导出</string>
+    <string name="you_can_find_the_generated_signed_aab_file">您可以在以下位置找到生成的已签名AAB文件:\n</string>
+    <string name="this_sketchware_pro_version_doesn_t_support_building_aabs">此Sketchware Pro版本不支持构建AAB，因为它必须在</string>
+    <string name="instead">代替.</string>
+    <string name="the_generated_aab_file_must_be_signed">必须对生成的.aab文件进行签名.\n将密钥库复制到 /Internal storage/sketchware/keystore/release_key.jks并输入别名密码.</string>
+    <string name="signing_mode">签名模式</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

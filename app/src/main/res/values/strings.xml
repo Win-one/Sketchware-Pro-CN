@@ -2608,6 +2608,17 @@ Please try again later"</string>
     <string name="received_invalid_data">Received invalid data</string>
     <string name="detected_invalid_preference">Detected invalid preference</string>
     <string name="backup_filename_restoring_defaults">for backup filename.Restoring defaults</string>
+    <string name="important_note">Important note</string>
+    <string name="common_word_understood">Understood</string>
+    <string name="fill_in_the_keystore_details_to_sign_the_aab">Fill in the keystore details to sign the AAB.</string>
+    <string name="fill_in_the_keystore_details_to_sign_the_apk">Fill in the keystore details to sign the APK.</string>
+    <string name="if_you_don_t_have_a_keystore_you_can_use_a_test_key">If you don\'t have a keystore, you can use a test key.</string>
+    <string name="finished_exporting_aab">Finished exporting AAB</string>
+    <string name="you_can_find_the_generated_signed_aab_file">You can find the generated, signed AAB file at:\n</string>
+    <string name="this_sketchware_pro_version_doesn_t_support_building_aabs">"This Sketchware Pro version doesn't support building AABs as it must work on "</string>
+    <string name="instead">" instead."</string>
+    <string name="the_generated_aab_file_must_be_signed">The generated .aab file must be signed.\nCopy your keystore to /Internal storage/sketchware/keystore/release_key.jks and enter the alias\' password.</string>
+    <string name="signing_mode">Signing mode</string>
 
 
 </resources>
