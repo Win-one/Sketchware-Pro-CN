@@ -1,29 +1,28 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_item"
+    style="?attr/materialCardViewFilledStyle"
     android:layout_width="match_parent"
     android:layout_height="64dp"
-    android:layout_marginVertical="2dp"
-    android:layout_marginLeft="4dp"
-    android:layout_marginTop="2dp"
-    android:layout_marginRight="4dp"
-    android:layout_marginBottom="2dp"
-    app:cardElevation="4dp">
+    android:layout_marginLeft="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="?attr/colorSurfaceContainer">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?selectableItemBackground"
-        android:gravity="center|start"
+        android:gravity="center|left"
         android:orientation="horizontal">
 
         <CheckBox
             android:id="@+id/chk_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:contentDescription="@null"
-            android:layout_marginStart="16dp" />
+            android:layout_marginLeft="16dp" />
 
         <LinearLayout
             android:id="@+id/delete_img_container"
@@ -34,9 +33,7 @@
             android:alpha="0.8"
             android:background="@drawable/circle_bg_dark_grey_alpha"
             android:gravity="center"
-            android:visibility="gone"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="12dp">
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/img_delete"
@@ -53,13 +50,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:background="#fff6f6f6"
             android:paddingHorizontal="8dp"
             android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:layout_marginStart="8dp"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp" />
+            android:paddingRight="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,17 +61,14 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_screen_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:textColor="#ff404040"
-                android:textSize="16sp" />
+                android:textAppearance="?attr/textAppearanceBodyLarge" />
         </LinearLayout>
 
         <ImageView
@@ -87,7 +77,6 @@
             android:layout_height="24dp"
             android:layout_marginRight="16dp"
             android:src="@drawable/ic_detail_setting_48dp"
-            android:visibility="gone"
-            android:layout_marginEnd="16dp" />
+            android:visibility="gone" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -6,9 +6,6 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission
         android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
@@ -78,7 +75,7 @@
         <activity
             android:name="com.besome.sketch.design.DesignActivity"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/Theme.SketchwarePro.Design" />
+            android:theme="@style/Theme.SketchwarePro.SmallToolbar" />
         <activity
             android:name="com.besome.sketch.MainActivity"
             android:configChanges="orientation|screenSize"
@@ -208,10 +205,10 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name="com.besome.sketch.editor.manage.library.admob.AdmobActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"/>
         <activity
             android:name="com.besome.sketch.editor.manage.library.firebase.FirebaseActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"/>
         <activity
             android:name="com.besome.sketch.editor.manage.library.firebase.ManageFirebaseActivity"
             android:configChanges="orientation|screenSize" />
@@ -298,7 +295,7 @@
             android:name="mod.hilal.saif.activities.tools.EventsMakerDetails"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name="mod.hilal.saif.activities.tools.Tools"
+            android:name="mod.hilal.saif.activities.tools.AppSettings"
             android:configChanges="orientation|screenSize" />
         <activity
             android:name="mod.ilyasse.activities.about.AboutModActivity"
