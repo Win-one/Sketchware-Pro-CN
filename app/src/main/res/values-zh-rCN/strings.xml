@@ -3440,6 +3440,7 @@
     <string name="instead">代替.</string>
     <string name="the_generated_aab_file_must_be_signed">必须对生成的.aab文件进行签名.\n将密钥库复制到 /Internal storage/sketchware/keystore/release_key.jks并输入别名密码.</string>
     <string name="signing_mode">签名模式</string>
+    <string name="new_menu">新建菜单:</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

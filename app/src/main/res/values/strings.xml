@@ -2619,6 +2619,7 @@ Please try again later"</string>
     <string name="instead">" instead."</string>
     <string name="the_generated_aab_file_must_be_signed">The generated .aab file must be signed.\nCopy your keystore to /Internal storage/sketchware/keystore/release_key.jks and enter the alias\' password.</string>
     <string name="signing_mode">Signing mode</string>
+    <string name="new_menu">New menu:</string>
 
 
 </resources>

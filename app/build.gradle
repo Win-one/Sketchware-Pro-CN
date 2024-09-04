@@ -45,7 +45,7 @@ android {
     productFlavors {
         minApi26 {
             dimension "api"
-            minSdkVersion 28
+            minSdkVersion 26
             versionNameSuffix "-minApi26"
             isDefault = true
         }
@@ -149,7 +149,7 @@ dependencies {
     minApi21Implementation "net.sf.proguard:proguard-base:6.2.2"
     minApi26Implementation files('libs/proguard-base-7.2.2.jar')
     minApi26Implementation 'com.guardsquare:proguard-core:9.0.2'
-    minApi26Implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.10'
+    minApi26Implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.20'
 
     //noinspection GradleDependency
     minApi21Implementation "org.eclipse.jdt:ecj:3.13.0"

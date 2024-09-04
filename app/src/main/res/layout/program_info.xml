@@ -55,11 +55,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:textStyle="bold"
                     android:gravity="center"
                     android:text="@string/title_sketchware"
                     android:textAppearance="?attr/textAppearanceHeadlineSmall"
-                    android:textColor="?attr/colorPrimary" />
+                    android:textColor="?attr/colorPrimary"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_sketch_ver"
@@ -99,6 +99,7 @@
 
                     <Button
                         android:id="@+id/btn_app_init"
+                        style="?attr/materialButtonOutlinedStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
