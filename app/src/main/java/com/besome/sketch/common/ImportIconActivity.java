@@ -1,11 +1,8 @@
 package com.besome.sketch.common;
 
-import static mod.remaker.util.ThemeUtils.isDarkThemeEnabled;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Pair;
@@ -17,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
@@ -32,7 +29,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButtonToggleGroup;
-import com.google.android.material.color.MaterialColors;
 import com.google.android.material.textfield.TextInputLayout;
 import com.sketchware.remod.R;
 
@@ -275,7 +271,7 @@ public class ImportIconActivity extends BaseAppCompatActivity implements View.On
         }
 
         private class ViewHolder extends RecyclerView.ViewHolder {
-            public final LinearLayout background;
+            public final RelativeLayout background;
             public final TextView name;
             public final ImageView icon;
 
