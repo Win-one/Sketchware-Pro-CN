@@ -2,7 +2,6 @@ package mod.hilal.saif.activities.tools;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.SparseBooleanArray;
@@ -19,17 +18,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.activity.EdgeToEdge;
 
 import com.besome.sketch.lib.base.CollapsibleViewHolder;
 import com.besome.sketch.lib.ui.CollapsibleButton;
+import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.card.MaterialCardView;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
-import com.sketchware.remod.databinding.ManageCustomComponentBinding;
-import com.sketchware.remod.databinding.ManageLocallibrariesBinding;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -48,31 +46,35 @@ import mod.elfilibustero.sketch.lib.ui.SketchFilePickerDialog;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.components.ComponentsHandler;
 
-public class ManageCustomComponentActivity extends AppCompatActivity {
+public class ManageCustomComponentActivity extends BaseAppCompatActivity {
 
     private List<HashMap<String, Object>> componentsList = new ArrayList<>();
 
     private static final String COMPONENT_EXPORT_DIR = wq.getExtraDataExport() + "/components/";
     private static final String COMPONENT_DIR = wq.getCustomComponent();
 
-    private ManageCustomComponentBinding binding;
+    private TextView tv_guide;
+    private RecyclerView componentView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle _savedInstanceState) {
         EdgeToEdge.enable(this);
-        super.onCreate(savedInstanceState);
-        binding = ManageCustomComponentBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        super.onCreate(_savedInstanceState);
+        setContentView(R.layout.manage_custom_component);
         init();
     }
 
     private void init() {
-        setSupportActionBar(binding.topAppBar);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        binding.topAppBar.setNavigationOnClickListener(view ->onBackPressed());
+        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
 
-        binding.fab.setOnClickListener(_view ->
+        tv_guide = findViewById(R.id.tv_guide);
+        componentView = findViewById(R.id.list);
+
+        findViewById(R.id.fab).setOnClickListener(_view ->
                 startActivity(new Intent(getApplicationContext(), AddCustomComponentActivity.class)));
     }
 
@@ -84,7 +86,7 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, R.string.common_word_import);
+        menu.add(0, 0, 0, "Import");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -107,8 +109,8 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
         if (FileUtil.isExistFile(COMPONENT_DIR)) {
             readComponents(COMPONENT_DIR);
         } else {
-            binding.noContentLayout.setVisibility(View.VISIBLE);
-            binding.list.setVisibility(View.GONE);
+            tv_guide.setVisibility(View.VISIBLE);
+            componentView.setVisibility(View.GONE);
         }
     }
 
@@ -116,16 +118,16 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
         componentsList = new Gson().fromJson(FileUtil.readFile(_path), Helper.TYPE_MAP_LIST);
         if (componentsList != null && componentsList.size() > 0) {
             ComponentsAdapter adapter = new ComponentsAdapter(componentsList);
-            Parcelable state = binding.list.getLayoutManager().onSaveInstanceState();
-            binding.list.setAdapter(adapter);
-            binding.list.getLayoutManager().onRestoreInstanceState(state);
+            Parcelable state = componentView.getLayoutManager().onSaveInstanceState();
+            componentView.setAdapter(adapter);
+            componentView.getLayoutManager().onRestoreInstanceState(state);
             adapter.notifyDataSetChanged();
-            binding.list.setVisibility(View.VISIBLE);
-            binding.noContentLayout.setVisibility(View.GONE);
+            componentView.setVisibility(View.VISIBLE);
+            tv_guide.setVisibility(View.GONE);
             return;
         }
-        binding.noContentLayout.setVisibility(View.VISIBLE);
-        binding.list.setVisibility(View.GONE);
+        tv_guide.setVisibility(View.VISIBLE);
+        componentView.setVisibility(View.GONE);
     }
 
     private void showFilePickerDialog() {
@@ -280,7 +282,7 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
         }
 
         public class ViewHolder extends CollapsibleViewHolder {
-            public final LinearLayout root;
+            public final MaterialCardView root;
             public final LinearLayout optionLayout;
             public final ImageView icon;
             public final TextView type;
@@ -290,7 +292,7 @@ public class ManageCustomComponentActivity extends AppCompatActivity {
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView, 200);
-                root = (LinearLayout) itemView;
+                root = (MaterialCardView) itemView;
                 icon = itemView.findViewById(R.id.img_icon);
                 type = itemView.findViewById(R.id.tv_component_type);
                 id = itemView.findViewById(R.id.tv_component_id);

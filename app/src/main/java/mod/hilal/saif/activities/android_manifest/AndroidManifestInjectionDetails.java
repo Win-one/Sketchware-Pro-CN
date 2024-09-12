@@ -2,8 +2,6 @@ package mod.hilal.saif.activities.android_manifest;
 
 import static mod.SketchwareUtil.getDip;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -15,20 +13,17 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
-import com.sketchware.remod.databinding.AddCustomAttributeBinding;
 import com.sketchware.remod.databinding.CustomDialogAttributeBinding;
+import com.besome.sketch.lib.base.BaseAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +33,7 @@ import mod.hey.studios.util.Helper;
 import mod.hilal.saif.android_manifest.ActComponentsDialog;
 import mod.remaker.view.CustomAttributeView;
 
-public class AndroidManifestInjectionDetails extends AppCompatActivity {
+public class AndroidManifestInjectionDetails extends BaseAppCompatActivity {
 
     private static String ATTRIBUTES_FILE_PATH;
     private final ArrayList<HashMap<String, Object>> listMap = new ArrayList<>();
@@ -47,13 +42,11 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
     private String activityName;
     private String type;
     private String constant;
-    private AddCustomAttributeBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = AddCustomAttributeBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.add_custom_attribute);
 
         if (getIntent().hasExtra("sc_id") && getIntent().hasExtra("file_name") && getIntent().hasExtra("type")) {
             src_id = getIntent().getStringExtra("sc_id");
@@ -87,8 +80,6 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
     }
 
     private void setupViews() {
-        binding.activityEventCard.setVisibility(View.GONE);
-        binding.listeners.setVisibility(View.GONE);
         FloatingActionButton fab = findViewById(R.id.add_attr_fab);
         fab.setOnClickListener(v -> showAddDial());
         listView = findViewById(R.id.add_attr_listview);
@@ -111,20 +102,31 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
         }
     }
 
+    private void a(View view, int i2, int i3) {
+        GradientDrawable gradientDrawable = new GradientDrawable();
+        gradientDrawable.setShape(GradientDrawable.RECTANGLE);
+        gradientDrawable.setCornerRadii(new float[]{(float) i2, (float) i2, (float) i2 / 2, (float) i2 / 2, (float) i2, (float) i2, (float) i2 / 2, (float) i2 / 2});
+        gradientDrawable.setColor(Color.parseColor("#ffffff"));
+        RippleDrawable rippleDrawable = new RippleDrawable(new ColorStateList(new int[][]{new int[0]}, new int[]{Color.parseColor("#20008DCD")}), gradientDrawable, null);
+        view.setElevation((float) i3);
+        view.setBackground(rippleDrawable);
+        view.setClickable(true);
+        view.setFocusable(true);
+    }
 
     private void showDial(int pos) {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
-        dialog.setTitle(R.string.edit_value);
+        dialog.setTitle("Edit Value");
         CustomDialogAttributeBinding attributeBinding = CustomDialogAttributeBinding.inflate(getLayoutInflater());
         dialog.setView(attributeBinding.getRoot());
 
-        attributeBinding.dialogInputRes.setVisibility(View.GONE);
-        attributeBinding.dialogInputAttr.setVisibility(View.GONE);
+        attributeBinding.inputRes.setVisibility(View.GONE);
+        attributeBinding.inputAttr.setVisibility(View.GONE);
 
-        attributeBinding.dialogInputValue.setText((String) listMap.get(pos).get("value"));
-        attributeBinding.dialogInputValue.setHint("android:attr=\"value\"");
+        attributeBinding.inputValue.setText((String) listMap.get(pos).get("value"));
+        attributeBinding.inputValue.setHint("android:attr=\"value\"");
         dialog.setPositiveButton(R.string.common_word_save, (dialog1, which) -> {
-            listMap.get(pos).put("value", attributeBinding.dialogInputValue.getText().toString());
+            listMap.get(pos).put("value", attributeBinding.inputValue.getText().toString());
             applyChange();
         });
 
@@ -133,17 +135,16 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
 
     private void showAddDial() {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
-        dialog.setTitle(type.equals("permission") ? getString(R.string.add_new_permission) : getString(R.string.add_new_attribute));
-        dialog.setIcon(R.drawable.ic_tune_24);
+        dialog.setTitle(type.equals("permission") ? "Add new permission" : "Add new attribute");
         CustomDialogAttributeBinding attributeBinding = CustomDialogAttributeBinding.inflate(getLayoutInflater());
         dialog.setView(attributeBinding.getRoot());
         if (type.equals("permission")) {
-            attributeBinding.dialogInputRes.setText("android");
-            attributeBinding.dialogInputAttr.setText("name");
+            attributeBinding.inputRes.setText("android");
+            attributeBinding.inputAttr.setText("name");
             attributeBinding.inputLayoutValue.setHint("permission");
         }
         dialog.setPositiveButton(R.string.common_word_save, (dialog1, which) -> {
-            String fstr = attributeBinding.dialogInputRes.getText().toString().trim() + ":" + attributeBinding.dialogInputAttr.getText().toString().trim() + "=\"" + attributeBinding.dialogInputValue.getText().toString().trim() + "\"";
+            String fstr = attributeBinding.inputRes.getText().toString().trim() + ":" + attributeBinding.inputAttr.getText().toString().trim() + "=\"" + attributeBinding.inputValue.getText().toString().trim() + "\"";
             HashMap<String, Object> map = new HashMap<>();
             map.put("name", constant);
             map.put("value", fstr);
@@ -151,7 +152,6 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
             applyChange();
             dialog1.dismiss();
         });
-
         dialog.setNegativeButton(R.string.common_word_cancel, (dialog1, which) -> dialog1.dismiss());
         dialog.show();
     }
@@ -186,24 +186,21 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
 
     private void setToolbar() {
         String str = switch (type) {
-            case "all" -> getString(R.string.attributes_for_all_activities);
-            case "application" -> getString(R.string.application_attributes);
-            case "permission" -> getString(R.string.application_permissions);
+            case "all" -> "Attributes for all activities";
+            case "application" -> "Application Attributes";
+            case "permission" -> "Application Permissions";
             default -> activityName;
         };
-        Toolbar toolbar = (Toolbar) getLayoutInflater().inflate(R.layout.toolbar_improved, binding.background, false);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(str);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(view -> onBackPressed());
-        binding.background.addView(toolbar, 0);
-        if (!str.equals(getString(R.string.attributes_for_all_activities)) && !str.equals(getString(R.string.application_attributes)) && !str.equals(getString(R.string.application_permissions))) {
+        ((TextView) findViewById(R.id.tx_toolbar_title)).setText(str);
+        ViewGroup par = (ViewGroup) findViewById(R.id.tx_toolbar_title).getParent();
+        ImageView _img = findViewById(R.id.ig_toolbar_back);
+        _img.setOnClickListener(Helper.getBackPressedClickListener(this));
+        if (!str.equals("Attributes for all activities") && !str.equals("Application Attributes") && !str.equals("Application Permissions")) {
             // Feature description: allows to inject anything into the {@code activity} tag of the Activity
             // (yes, Command Blocks can do that too, but removing features is bad.)
             TextView actComponent = newText("Components ASD", 15, Color.parseColor("#ffffff"), -2, -2, 0);
             actComponent.setTypeface(Typeface.DEFAULT_BOLD);
-            toolbar.addView(actComponent);
+            par.addView(actComponent);
             actComponent.setOnClickListener(v -> {
                 ActComponentsDialog acd = new ActComponentsDialog(this, src_id, activityName);
                 acd.show();
@@ -252,8 +249,8 @@ public class AndroidManifestInjectionDetails extends AppCompatActivity {
             attributeView.setOnClickListener(v -> showDial(position));
             attributeView.setOnLongClickListener(v -> {
                 new MaterialAlertDialogBuilder(AndroidManifestInjectionDetails.this)
-                        .setTitle(R.string.delete_this_attribute)
-                        .setMessage(R.string.this_action_cannot_be_undone)
+                        .setTitle("Delete this attribute?")
+                        .setMessage("This action cannot be undone.")
                         .setPositiveButton(R.string.common_word_delete, (dialog, which) -> {
                             listMap.remove(position);
                             applyChange();
