@@ -6,6 +6,7 @@ import com.besome.sketch.beans.ComponentBean;
 import com.besome.sketch.beans.ProjectFileBean;
 import com.besome.sketch.beans.ViewBean;
 import com.besome.sketch.editor.LogicEditorActivity;
+import com.sketchware.remod.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -390,16 +391,16 @@ public class ExtraPaletteBlock {
 
         switch (paletteId) {
             case 0:
-                logicEditor.b("Add variable", "variableAdd");
-                logicEditor.b("Add custom variable", "variableAddNew", clickListener);
-                logicEditor.b("Remove variable", "variableRemove", clickListener);
+                logicEditor.b(logicEditor.getString(R.string.add_variable), "variableAdd");
+                logicEditor.b(logicEditor.getString(R.string.add_custom_variable), "variableAddNew", clickListener);
+                logicEditor.b(logicEditor.getString(R.string.remove_variable), "variableRemove", clickListener);
                 variables();
                 return;
 
             case 1:
-                logicEditor.b("Add list", "listAdd");
-                logicEditor.b("Add custom List", "listAddCustom", clickListener);
-                logicEditor.b("Remove list", "listRemove", clickListener);
+                logicEditor.b(logicEditor.getString(R.string.add_list), "listAdd");
+                logicEditor.b(logicEditor.getString(R.string.add_custom_list), "listAddCustom", clickListener);
+                logicEditor.b(logicEditor.getString(R.string.remove_list), "listRemove", clickListener);
                 list();
                 return;
 

@@ -2620,6 +2620,12 @@ Please try again later"</string>
     <string name="the_generated_aab_file_must_be_signed">The generated .aab file must be signed.\nCopy your keystore to /Internal storage/sketchware/keystore/release_key.jks and enter the alias\' password.</string>
     <string name="signing_mode">Signing mode</string>
     <string name="new_menu">New menu:</string>
+    <string name="add_custom_variable">Add custom variable</string>
+    <string name="remove_variable">Remove variable</string>
+    <string name="add_list">Add list</string>
+    <string name="add_variable">Add variable</string>
+    <string name="add_custom_list">Add custom List</string>
+    <string name="remove_list">Remove list</string>
 
 
 </resources>
