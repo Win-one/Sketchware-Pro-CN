@@ -120,7 +120,7 @@ public class EventsManagerDetailsFragment extends BaseFragment {
 
             holder.binding.eventTitle.setText((String) item.get("name"));
             if ("".equals(dataArray.get(position).get("var"))) {
-                holder.binding.eventSubtitle.setText("Activity event");
+                holder.binding.eventSubtitle.setText(R.string.activity_event);
             } else {
                 holder.binding.eventSubtitle.setText((String) dataArray.get(position).get("var"));
             }
@@ -144,9 +144,9 @@ public class EventsManagerDetailsFragment extends BaseFragment {
             holder.binding.eventCard.setOnLongClickListener(v -> {
                 new MaterialAlertDialogBuilder(requireContext())
                         .setTitle((String) dataArray.get(position).get("name"))
-                        .setMessage("Delete this event?")
-                        .setPositiveButton("Delete", (dialog, i) -> deleteItem(position))
-                        .setNeutralButton("Edit", (dialog, i) -> {
+                        .setMessage(R.string.delete_this_event)
+                        .setPositiveButton(R.string.common_word_delete, (dialog, i) -> deleteItem(position))
+                        .setNeutralButton(R.string.common_word_edit, (dialog, i) -> {
                             Bundle args = new Bundle();
                             args.putString("lis_name", listName);
                             args.putString("event", (String) dataArray.get(position).get("name"));
@@ -163,7 +163,7 @@ public class EventsManagerDetailsFragment extends BaseFragment {
                             fragment.setArguments(args);
                             openFragment(fragment);
                         })
-                        .setNegativeButton("Cancel", (di, i) -> di.dismiss())
+                        .setNegativeButton(R.string.common_word_cancel, (di, i) -> di.dismiss())
                         .show();
                 return true;
             });

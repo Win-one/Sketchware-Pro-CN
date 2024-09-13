@@ -2200,7 +2200,6 @@ Please try again later"</string>
     <string name="about_the_team">About the Team</string>
     <string name="system_settings">System Settings</string>
     <string name="changelog">Changelog</string>
-    <string name="developer_tools">Developer Tools</string>
     <string name="create_release_keystore">Create Release Keystore</string>
     <string name="related_links">Related links</string>
     <string name="language_settings">Language Settings</string>
@@ -2240,9 +2239,6 @@ Please try again later"</string>
     <string name="manage_your_own_block_selector_menus">Manage your own block selector menus</string>
     <string name="component_manager">Component manager</string>
     <string name="manage_your_own_components">Manage your own components</string>
-    <string name="event_manager">Event manager</string>
-    <string name="manage_your_own_events">Manage your own events</string>
-    <string name="manage_and_download_local_libraries">Manage and download local libraries</string>
     <string name="mod_settings">Mod settings</string>
     <string name="change_general_mod_settings">Change general mod settings</string>
     <string name="open_working_directory">Open working directory</string>
@@ -2375,7 +2371,6 @@ Please try again later"</string>
     <string name="export_android_app_bundle">Export Android App Bundle</string>
     <string name="export_aab">Export AAB(Android App Bundle)</string>
     <string name="send_aab">Send AAB</string>
-    <string name="listeners">Listeners:</string>
     <string name="activity_event">Activity event</string>
     <string name="save_changes">Save changes</string>
     <string name="enter_a_name">Enter a name</string>
@@ -2628,6 +2623,28 @@ Please try again later"</string>
     <string name="add_variable">Add variable</string>
     <string name="add_custom_list">Add custom List</string>
     <string name="remove_list">Remove list</string>
-
+    <string name="auto_save_and_vibrations">Auto-save and vibrations</string>
+    <string name="app_settings">App Settings</string>
+    <string name="edit_listener">Edit Listener</string>
+    <string name="type_info_of_the_listener">Type info of the listener</string>
+    <string name="delete_listener">Delete listener</string>
+    <string name="are_you_sure_you_want_to_delete_this_item">Are you sure you want to delete this item?</string>
+    <string name="successfully_imported_events">Successfully imported events</string>
+    <string name="event_manager">Event manager</string>
+    <string name="manage_your_own_events">Manage your own events</string>
+    <string name="manage_and_download_local_libraries">Manage and download local libraries</string>
+    <string name="change_the_sketchware_language">Change the Sketchware language</string>
+    <string name="enter_a_value">Enter a value</string>
+    <string name="block_name_already_in_use">Block name already in use</string>
+    <string name="invalid_name_block_data">Invalid name block data</string>
+    <string name="invalid_type_block_data">Invalid type block data</string>
+    <string name="invalid_typename_block_data">Invalid typeName block data</string>
+    <string name="invalid_spec_block_data">Invalid spec block data</string>
+    <string name="invalid_spec2_block_data">Invalid spec2 block data</string>
+    <string name="invalid_color_block_data">Invalid color block data</string>
+    <string name="invalid_code_block_data">(Invalid code block data)</string>
+    <string name="invalid_block_name_entry">(Invalid block name entry)</string>
+    <string name="invalid_block_spec_entry">(Invalid block spec entry)</string>
+    <string name="couldn_t_acquire_root_access">Couldn\'t acquire root access</string>
 
 </resources>

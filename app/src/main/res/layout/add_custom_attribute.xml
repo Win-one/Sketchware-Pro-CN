@@ -81,7 +81,7 @@
             android:paddingTop="8dp"
             android:paddingEnd="8dp"
             android:paddingBottom="8dp"
-            android:text="@string/listeners"
+            android:text="@string/tools_events_manager_listeners"
             android:textAppearance="?attr/textAppearanceBodyLarge"
             android:textColor="?attr/colorOnSurface"
             android:textSize="18sp" />

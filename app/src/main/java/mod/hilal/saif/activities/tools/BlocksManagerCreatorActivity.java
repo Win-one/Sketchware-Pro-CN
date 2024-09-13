@@ -20,19 +20,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.sketchware.remod.R;
-import com.besome.sketch.lib.base.BaseAppCompatActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -120,7 +119,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
                     save.setEnabled(true);
                 } else if (!mode.equals("edit")) {
                     nameLayout.setErrorEnabled(true);
-                    nameLayout.setError("Block name already in use");
+                    nameLayout.setError(getString(R.string.block_name_already_in_use));
                     save.setEnabled(false);
                 } else {
                     HashMap<String, Object> savedBlocksListBlock = blocksList.get(blockPosition);
@@ -128,7 +127,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
 
                     if (!string.equals(blockNameObject)) {
                         nameLayout.setErrorEnabled(true);
-                        nameLayout.setError("Block name already in use");
+                        nameLayout.setError(getString(R.string.block_name_already_in_use));
                         save.setEnabled(false);
                     }
                 }
@@ -372,7 +371,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         if (nameObject instanceof String) {
             name.setText((String) nameObject);
         } else {
-            name.setError("Invalid name block data");
+            name.setError(getString(R.string.invalid_name_block_data));
         }
 
         Object typeObject = block.get("type");
@@ -385,7 +384,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
                 type.setText(typeString);
             }
         } else {
-            type.setError("Invalid type block data");
+            type.setError(getString(R.string.invalid_type_block_data));
         }
 
         Object typeName = block.get("typeName");
@@ -393,7 +392,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             if (typeName instanceof String) {
                 typename.setText((String) typeName);
             } else {
-                typename.setError("Invalid typeName block data");
+                typename.setError(getString(R.string.invalid_typename_block_data));
             }
         }
 
@@ -401,7 +400,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         if (specObject instanceof String) {
             spec.setText((String) specObject);
         } else {
-            spec.setError("Invalid spec block data");
+            spec.setError(getString(R.string.invalid_spec_block_data));
         }
 
         Object spec2Object = block.get("spec2");
@@ -409,7 +408,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             if (spec2Object instanceof String) {
                 spec2.setText((String) spec2Object);
             } else {
-                spec2.setError("Invalid spec2 block data");
+                spec2.setError(getString(R.string.invalid_spec2_block_data));
             }
         }
 
@@ -418,7 +417,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             if (colorObject instanceof String) {
                 colour.setText((String) colorObject);
             } else {
-                colour.setError("Invalid color block data");
+                colour.setError(getString(R.string.invalid_color_block_data));
             }
         } else {
             colour.setText(palletColour);
@@ -428,7 +427,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         if (codeObject instanceof String) {
             code.setText((String) codeObject);
         } else {
-            code.setHint("(Invalid code block data)");
+            code.setHint(R.string.invalid_code_block_data);
         }
     }
 

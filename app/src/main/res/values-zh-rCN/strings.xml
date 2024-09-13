@@ -2980,7 +2980,6 @@
     <string name="about_the_team">关于团队</string>
     <string name="system_settings">系统设置</string>
     <string name="changelog">更新日志</string>
-    <string name="developer_tools">开发者工具</string>
     <string name="create_release_keystore">创建发布密钥库</string>
     <string name="related_links">相关链接</string>
     <string name="language_settings">语言设置</string>
@@ -3021,9 +3020,10 @@
     <string name="manage_your_own_block_selector_menus">管理您自己的区块选择器菜单</string>
     <string name="component_manager">组件管理</string>
     <string name="manage_your_own_components">管理您自己的组件</string>
-    <string name="event_manager">事件管理</string>
-    <string name="manage_your_own_events">管理您自己的事件</string>
-    <string name="manage_and_download_local_libraries">管理和下载本地库</string>
+    <string name="tools_events_manager">事件管理</string>
+    <string name="tools_events_manager_activity_events">活动事件</string>
+    <string name="tools_events_manager_listeners">监听器</string>
+    <string name="tools_events_manager_details">事件管理器详细信息</string>
     <string name="mod_settings">模组设置</string>
     <string name="change_general_mod_settings">更改常规模组设置</string>
     <string name="open_working_directory">打开工作目录</string>
@@ -3171,7 +3171,6 @@
     <string name="export_android_app_bundle">导出安卓应用包</string>
     <string name="export_aab">导出AAB</string>
     <string name="send_aab">发送AAB</string>
-    <string name="listeners">监听器:</string>
 
     <string name="design_manager_message_invalid_font">所选字体无效</string>
     <string name="design_manager_message_no_font_selected">您必须选择一种新字体</string>
@@ -3292,7 +3291,7 @@
     <string name="local_library_manager_download_status">下载状态</string>
     <string name="settings_appearance">主题设置</string>
     <string name="signatures_title">签名</string>
-    <string name="settings_appearance_description">更改Sketchware的外观并使其成为您自己的!</string>
+    <string name="settings_appearance_description">更改Sketchware主题</string>
     <string name="settings_appearance_theme">Sketchware主题</string>
     <string name="settings_appearance_theme_system">系统默认</string>
     <string name="settings_appearance_theme_light">浅色主题</string>
@@ -3447,6 +3446,29 @@
     <string name="add_variable">添加变量</string>
     <string name="add_custom_list">添加自定义列表</string>
     <string name="remove_list">删除列表</string>
+    <string name="auto_save_and_vibrations">自动保存和振动</string>
+    <string name="app_settings">应用设置</string>
+    <string name="edit_listener">编辑监听器</string>
+    <string name="type_info_of_the_listener">键入监听器的信息</string>
+    <string name="delete_listener">删除监听器</string>
+    <string name="are_you_sure_you_want_to_delete_this_item">是否确实要删除此项目?</string>
+    <string name="successfully_imported_events">成功导入的事件</string>
+    <string name="event_manager">事件管理</string>
+    <string name="manage_your_own_events">管理您自己的事件</string>
+    <string name="manage_and_download_local_libraries">管理和下载本地库</string>
+    <string name="change_the_sketchware_language">更改Sketchware语言</string>
+    <string name="enter_a_value">输入值</string>
+    <string name="block_name_already_in_use">块名称已使用</string>
+    <string name="invalid_name_block_data">块名称数据无效</string>
+    <string name="invalid_type_block_data">块类型数据无效</string>
+    <string name="invalid_typename_block_data">块类型名称数据无效</string>
+    <string name="invalid_spec_block_data">规范块数据无效</string>
+    <string name="invalid_spec2_block_data">规范2块数据无效</string>
+    <string name="invalid_color_block_data">块颜色数据无效</string>
+    <string name="invalid_code_block_data">(代码块数据无效)</string>
+    <string name="invalid_block_name_entry">(块名称条目无效)</string>
+    <string name="invalid_block_spec_entry">(块规范条目无效)</string>
+    <string name="couldn_t_acquire_root_access">无法获取root访问权限</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->
