@@ -22,10 +22,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import com.github.angads25.filepicker.model.DialogConfigs;
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
-
+import com.developer.filepicker.model.DialogConfigs;
+import com.developer.filepicker.model.DialogProperties;
+import com.developer.filepicker.view.FilePickerDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import com.sketchware.remod.R;
@@ -194,7 +193,7 @@ public class ManageResourceActivity extends BaseAppCompatActivity {
             Button positiveButton = ((androidx.appcompat.app.AlertDialog) dialogInterface).getButton(DialogInterface.BUTTON_POSITIVE);
             positiveButton.setOnClickListener(view -> {
                 if (inputText.getText().toString().isEmpty()) {
-                    SketchwareUtil.toastError("Invalid name");
+                    SketchwareUtil.toastError(getString(R.string.invalid_name));
                     return;
                 }
 
@@ -207,7 +206,7 @@ public class ManageResourceActivity extends BaseAppCompatActivity {
                 }
 
                 if (FileUtil.isExistFile(path)) {
-                    SketchwareUtil.toastError("File exists already");
+                    SketchwareUtil.toastError(getString(R.string.file_exists_already));
                     return;
                 }
                 if (isFolder) {
@@ -216,7 +215,7 @@ public class ManageResourceActivity extends BaseAppCompatActivity {
                     FileUtil.writeFile(path, "<?xml version=\"1.0\" encoding=\"utf-8\"?>");
                 }
                 handleAdapter(temp);
-                SketchwareUtil.toast("Created file successfully");
+                SketchwareUtil.toast(getString(R.string.created_file_successfully));
                 dialog.dismiss();
             });
 
@@ -249,7 +248,7 @@ public class ManageResourceActivity extends BaseAppCompatActivity {
                 try {
                     FileUtil.copyDirectory(new File(path), new File(temp + File.separator + Uri.parse(path).getLastPathSegment()));
                 } catch (IOException e) {
-                    SketchwareUtil.toastError("Couldn't import resource! [" + e.getMessage() + "]");
+                    SketchwareUtil.toastError(getString(R.string.couldn_t_import_resource) + e.getMessage() + "]");
                 }
             }
             handleAdapter(temp);
@@ -271,7 +270,7 @@ public class ManageResourceActivity extends BaseAppCompatActivity {
                         if (FileUtil.renameFile(path, path.substring(0, path.lastIndexOf("/")) + "/" + inputText.getText().toString())) {
                             SketchwareUtil.toast(Helper.getResString(R.string.renamed_successfully));
                         } else {
-                            SketchwareUtil.toastError("Renaming failed");
+                            SketchwareUtil.toastError(getString(R.string.renaming_failed));
                         }
                         handleAdapter(temp);
                         handleFab();
@@ -297,8 +296,8 @@ public class ManageResourceActivity extends BaseAppCompatActivity {
     private void showDeleteDialog(final int position) {
         new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.common_word_delete + Uri.fromFile(new File(adapter.getItem(position))).getLastPathSegment() + "?")
-                .setMessage("Are you sure you want to delete this " + (FileUtil.isDirectory(adapter.getItem(position)) ? "folder" : "file") + "? "
-                        + "This action cannot be undone.")
+                .setMessage(R.string.are_you_sure_you_want_to_delete_this + (FileUtil.isDirectory(adapter.getItem(position)) ? "folder" : "file") + "? "
+                        + R.string.this_action_cannot_be_undone)
                 .setPositiveButton(R.string.common_word_delete, (dialog, which) -> {
                     FileUtil.deleteFile(frc.listFileResource.get(position));
                     handleAdapter(temp);
@@ -376,7 +375,7 @@ public class ManageResourceActivity extends BaseAppCompatActivity {
                                 intent.setDataAndType(Uri.fromFile(new File(frc.listFileResource.get(position))), "text/plain");
                                 startActivity(intent);
                             } else {
-                                SketchwareUtil.toast("Only XML files can be edited");
+                                SketchwareUtil.toast(getString(R.string.only_xml_files_can_be_edited));
                             }
                         }
                         case R.id.edit -> goEdit(position);

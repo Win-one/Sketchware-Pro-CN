@@ -23,9 +23,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.angads25.filepicker.model.DialogConfigs;
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
+import com.developer.filepicker.model.DialogConfigs;
+import com.developer.filepicker.model.DialogProperties;
+import com.developer.filepicker.view.FilePickerDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 
@@ -234,11 +234,11 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
                 } else if (checkedChipId == R.id.chip_folder) {
                     FileUtil.makeDir(new File(current_path, name).getAbsolutePath());
                     refresh();
-                    SketchwareUtil.toast("Folder was created successfully");
+                    SketchwareUtil.toast(getString(R.string.folder_was_created_successfully));
                     dialog.dismiss();
                     return;
                 } else {
-                    SketchwareUtil.toast("Select a file type");
+                    SketchwareUtil.toast(getString(R.string.select_a_file_type));
                     return;
                 }
 
@@ -251,7 +251,7 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
 
                 FileUtil.writeFile(new File(current_path, name + extension).getAbsolutePath(), newFileContent);
                 refresh();
-                SketchwareUtil.toast("File was created successfully");
+                SketchwareUtil.toast(getString(R.string.file_was_created_successfully));
                 dialog.dismiss();
             });
 
@@ -341,7 +341,7 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
 
                         FileUtil.renameFile(filesAdapter.getItem(position), new File(current_path, inputText.getText().toString()).getAbsolutePath());
                         refresh();
-                        SketchwareUtil.toast("Renamed successfully");
+                        SketchwareUtil.toast(getString(R.string.renamed_successfully));
                     }
                     dialogInterface.dismiss();
                 })

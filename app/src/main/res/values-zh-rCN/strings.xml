@@ -3023,7 +3023,7 @@
     <string name="tools_events_manager">事件管理</string>
     <string name="tools_events_manager_activity_events">活动事件</string>
     <string name="tools_events_manager_listeners">监听器</string>
-    <string name="tools_events_manager_details">事件管理器详细信息</string>
+    <string name="tools_events_manager_details">事件管理详细信息</string>
     <string name="mod_settings">模组设置</string>
     <string name="change_general_mod_settings">更改常规模组设置</string>
     <string name="open_working_directory">打开工作目录</string>
@@ -3394,7 +3394,7 @@
     <string name="select_a_signinbutton_color">选择SignInButton颜色</string>
     <string name="select_signinbutton_size">选择SignInButton大小</string>
     <string name="select_an_asset">选择Asset</string>
-    <string name="select_a_native_library">选择本地库</string>
+    <string name="select_a_native_library">选择本地库(.so)</string>
     <string name="select_a_test_device">选择测试设备</string>
     <string name="select_an_intent_key">选择意图密钥</string>
     <string name="select_a_pattern_flags">选择模式标志</string>
@@ -3469,6 +3469,23 @@
     <string name="invalid_block_name_entry">(块名称条目无效)</string>
     <string name="invalid_block_spec_entry">(块规范条目无效)</string>
     <string name="couldn_t_acquire_root_access">无法获取root访问权限</string>
+    <string name="file_exists">文件已存在</string>
+    <string name="this_defines_how_swb_backup_files_get_named">这定义了SWB备份文件的命名方式.\n</string>
+    <string name="invalid_name">名称无效</string>
+    <string name="file_exists_already">文件已存在</string>
+    <string name="created_file_successfully">已成功创建文件</string>
+    <string name="couldn_t_import_resource">无法导入资源! [</string>
+    <string name="renaming_failed">重命名失败</string>
+    <string name="select_a_file_type">选择文件类型</string>
+    <string name="file_was_created_successfully">已成功创建文件</string>
+    <string name="folder_was_created_successfully">已成功创建文件夹</string>
+    <string name="created_folder_successfully">已成功创建文件夹</string>
+    <string name="invalid_folder_name">文件夹名称无效</string>
+    <string name="folder_already_exists">文件夹已存在</string>
+    <string name="couldn_t_import_library">无法导入库! [</string>
+    <string name="nothing_changed">什么都没有改变</string>
+    <string name="no_events">无事件</string>
+    <string name="start_by_creating_an_new_one">首先创建一个新的</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

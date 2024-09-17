@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.developer.filepicker.model.DialogProperties;
+import com.developer.filepicker.view.FilePickerDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 import com.sketchware.remod.R;
@@ -25,8 +27,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
 import mod.SketchwareUtil;
 import mod.agus.jcoderz.lib.FileUtil;
 import mod.hey.studios.util.Helper;
@@ -48,7 +48,7 @@ public class EventsManagerFragment extends BaseFragment {
                 }
             }
         }
-        return "Events: " + eventAmount;
+        return Helper.getResString(R.string.events) + eventAmount;
     }
 
     @Override
@@ -121,7 +121,7 @@ public class EventsManagerFragment extends BaseFragment {
                         addListenerItem();
                         di.dismiss();
                     } else {
-                        SketchwareUtil.toastError("Invalid name!");
+                        SketchwareUtil.toastError(getString(R.string.invalid_name));
                     }
                 })
                 .setNegativeButton(R.string.common_word_cancel, (di, i) -> di.dismiss()).create();

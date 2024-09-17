@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:gravity="center"
-            android:text="No events"
+            android:text="@string/no_events"
             android:textSize="20sp" />
 
         <TextView
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:text="Start by creating an new one"
+            android:text="@string/start_by_creating_an_new_one"
             android:textSize="14sp" />
     </LinearLayout>
 

@@ -22,9 +22,9 @@ import com.besome.sketch.editor.manage.library.LibraryItemView;
 import com.besome.sketch.help.SystemSettingActivity;
 import com.besome.sketch.language.LanguageSettingsActivity;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import com.github.angads25.filepicker.model.DialogConfigs;
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
+import com.developer.filepicker.model.DialogConfigs;
+import com.developer.filepicker.model.DialogProperties;
+import com.developer.filepicker.view.FilePickerDialog;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.sketchware.remod.R;
@@ -34,9 +34,6 @@ import java.io.File;
 
 import a.a.a.aB;
 import dev.aldi.sayuti.editor.manage.ManageLocalLibraryActivity;
-import dev.trindadedev.lib.filepicker.model.DialogConfigs;
-import dev.trindadedev.lib.filepicker.model.DialogProperties;
-import dev.trindadedev.lib.filepicker.view.FilePickerDialog;
 import kellinwood.security.zipsigner.ZipSigner;
 import mod.SketchwareUtil;
 import mod.agus.jcoderz.lib.FileUtil;
@@ -134,7 +131,7 @@ public class AppSettings extends BaseAppCompatActivity {
         createToolsView(R.drawable.ic_settings_24, getString(R.string.main_drawer_title_system_settings), getString(R.string.auto_save_and_vibrations), content, new ActivityLauncher(new Intent(getApplicationContext(), SystemSettingActivity.class)), false);
         createToolsView(R.drawable.icon_pallete, getString(R.string.settings_appearance), getString(R.string.settings_appearance_description), content, openSettingsActivity(SettingsActivity.SETTINGS_APPEARANCE_FRAGMENT), false);
         createToolsView(R.drawable.language_24, getString(R.string.language_settings), getString(R.string.change_the_sketchware_language), content, new ActivityLauncher(new Intent(getApplicationContext(), LanguageSettingsActivity.class)), false);
-        createToolsView(R.drawable.ic_type_folder, getString(R.string.open_working_directory), getString(R.string.open_directory), content, v -> openWorkingDirectory(), false);
+        createToolsView(R.drawable.ic_folder_48dp, getString(R.string.open_working_directory), getString(R.string.open_directory), content, v -> openWorkingDirectory(), false);
         createToolsView(R.drawable.ic_apk_color_96dp, getString(R.string.sign_an_apk_file_with_testkey), getString(R.string.sign_an_already_existing_apk_file), content, v -> signApkFileDialog(), false);
         createToolsView(R.drawable.icons8_app_components, getString(R.string.design_drawer_menu_title_logcat_reader), getString(R.string.design_drawer_menu_subtitle_logcat_reader), content, new ActivityLauncher(new Intent(getApplicationContext(), LogReaderActivity.class)), true);
     }
@@ -200,7 +197,7 @@ public class AppSettings extends BaseAppCompatActivity {
             if (new File(output_apk_path).exists()) {
                 aB confirmOverwrite = new aB(this);
                 confirmOverwrite.a(R.drawable.color_save_as_new_96);
-                confirmOverwrite.b("File exists");
+                confirmOverwrite.b(getString(R.string.file_exists));
                 confirmOverwrite.a("An APK named " + output_apk_file_name + " already exists at /sketchware/signed_apk/.  Overwrite it?");
 
                 confirmOverwrite.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(confirmOverwrite));

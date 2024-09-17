@@ -63,7 +63,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="4dp"
-                        android:text="Event properties"
+                        android:text="@string/event_properties"
                         android:textSize="16sp" />
 
                     <com.google.android.material.textfield.TextInputLayout

@@ -23,10 +23,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import com.github.angads25.filepicker.model.DialogConfigs;
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
-
+import com.developer.filepicker.model.DialogConfigs;
+import com.developer.filepicker.model.DialogProperties;
+import com.developer.filepicker.view.FilePickerDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import com.sketchware.remod.R;
@@ -147,12 +146,12 @@ public class ManageAssetsActivity extends BaseAppCompatActivity {
                 } else if (checkedChipId == R.id.chip_folder) {
                     FileUtil.makeDir(new File(current_path, editable).getAbsolutePath());
                 } else {
-                    SketchwareUtil.toast("Select a file type");
+                    SketchwareUtil.toast(getString(R.string.select_a_file_type));
                     return;
                 }
 
                 refresh();
-                SketchwareUtil.toast("File was created successfully");
+                SketchwareUtil.toast(getString(R.string.file_was_created_successfully));
                 dialogInterface.dismiss();
             });
         });

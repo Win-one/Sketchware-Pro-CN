@@ -2571,7 +2571,7 @@ Please try again later"</string>
     <string name="select_a_signinbutton_color">Select a SignInButton Color</string>
     <string name="select_signinbutton_size">Select SignInButton Size</string>
     <string name="select_an_asset">Select an Asset</string>
-    <string name="select_a_native_library">Select a Native library</string>
+    <string name="select_a_native_library">Select a Native library(.so)</string>
     <string name="select_a_test_device">Select a Test device</string>
     <string name="select_an_intent_key">Select an Intent key</string>
     <string name="select_a_pattern_flags">Select a Pattern Flags</string>
@@ -2646,5 +2646,22 @@ Please try again later"</string>
     <string name="invalid_block_name_entry">(Invalid block name entry)</string>
     <string name="invalid_block_spec_entry">(Invalid block spec entry)</string>
     <string name="couldn_t_acquire_root_access">Couldn\'t acquire root access</string>
+    <string name="file_exists">File exists</string>
+    <string name="this_defines_how_swb_backup_files_get_named">This defines how SWB backup files get named.\n</string>
+    <string name="invalid_name">Invalid name</string>
+    <string name="file_exists_already">File exists already</string>
+    <string name="created_file_successfully">Created file successfully</string>
+    <string name="couldn_t_import_resource">Couldn\'t import resource! [</string>
+    <string name="renaming_failed">Renaming failed</string>
+    <string name="select_a_file_type">Select a file type</string>
+    <string name="file_was_created_successfully">File was created successfully</string>
+    <string name="folder_was_created_successfully">Folder was created successfully</string>
+    <string name="created_folder_successfully">Created folder successfully</string>
+    <string name="invalid_folder_name">Invalid folder name</string>
+    <string name="folder_already_exists">Folder already exists</string>
+    <string name="couldn_t_import_library">Couldn\'t import library! [</string>
+    <string name="nothing_changed">Nothing changed</string>
+    <string name="no_events">No events</string>
+    <string name="start_by_creating_an_new_one">Start by creating an new one</string>
 
 </resources>
