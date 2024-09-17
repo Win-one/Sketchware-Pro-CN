@@ -14,9 +14,6 @@ import com.besome.sketch.language.ConstantGlobal;
 import com.besome.sketch.language.util.MultiLanguageUtil;
 import com.besome.sketch.language.util.SpUtil;
 import com.besome.sketch.tools.CollectErrorActivity;
-import com.google.android.gms.analytics.Tracker;
-import com.google.android.material.color.DynamicColors;
-import java.util.Locale;
 
 import mod.trindadedev.manage.theme.ThemeManager;
 
@@ -26,10 +23,6 @@ public class SketchApplication extends Application {
 
     public static Context getContext() {
         return mApplicationContext;
-    }
-
-    public synchronized Tracker a() {
-        return new Tracker();
     }
 
     @Override
