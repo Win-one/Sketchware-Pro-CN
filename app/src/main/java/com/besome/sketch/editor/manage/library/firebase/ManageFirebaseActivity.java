@@ -20,10 +20,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.besome.sketch.beans.ProjectLibraryBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import com.developer.filepicker.model.DialogConfigs;
-import com.developer.filepicker.model.DialogProperties;
-import com.developer.filepicker.view.FilePickerDialog;
 import com.google.android.material.materialswitch.MaterialSwitch;
+import com.oneskyer.library.model.DialogConfigs;
+import com.oneskyer.library.model.DialogProperties;
+import com.oneskyer.library.view.FilePickerDialog;
 import com.sketchware.remod.R;
 
 import java.util.regex.Matcher;

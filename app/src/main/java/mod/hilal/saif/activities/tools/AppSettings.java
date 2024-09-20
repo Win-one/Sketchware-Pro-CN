@@ -22,11 +22,11 @@ import com.besome.sketch.editor.manage.library.LibraryItemView;
 import com.besome.sketch.help.SystemSettingActivity;
 import com.besome.sketch.language.LanguageSettingsActivity;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import com.developer.filepicker.model.DialogConfigs;
-import com.developer.filepicker.model.DialogProperties;
-import com.developer.filepicker.view.FilePickerDialog;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.oneskyer.library.model.DialogConfigs;
+import com.oneskyer.library.model.DialogProperties;
+import com.oneskyer.library.view.FilePickerDialog;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.DialogSelectApkToSignBinding;
 

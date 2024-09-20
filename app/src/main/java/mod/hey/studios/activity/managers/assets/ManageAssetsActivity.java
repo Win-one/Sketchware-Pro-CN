@@ -23,11 +23,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import com.developer.filepicker.model.DialogConfigs;
-import com.developer.filepicker.model.DialogProperties;
-import com.developer.filepicker.view.FilePickerDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import com.oneskyer.library.model.DialogConfigs;
+import com.oneskyer.library.model.DialogProperties;
+import com.oneskyer.library.view.FilePickerDialog;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.DialogCreateNewFileLayoutBinding;
 import com.sketchware.remod.databinding.DialogInputLayoutBinding;
