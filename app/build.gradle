@@ -130,7 +130,7 @@ dependencies {
     implementation "$editorGroupId:language-textmate"
 
     implementation "de.hdodenhof:circleimageview:3.1.0"
-    implementation 'com.github.Win-one:FilePicker:1.0.5'
+    implementation 'com.github.Win-one:FilePicker:1.0.8'
 
     minApi26Implementation "com.android.tools.build:bundletool:1.15.6"
     //noinspection GradleDependency copied from above dependency for not just runtime access
