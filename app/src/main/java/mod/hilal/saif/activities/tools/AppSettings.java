@@ -22,13 +22,13 @@ import com.besome.sketch.editor.manage.library.LibraryItemView;
 import com.besome.sketch.help.SystemSettingActivity;
 import com.besome.sketch.language.LanguageSettingsActivity;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.oneskyer.library.model.DialogConfigs;
 import com.oneskyer.library.model.DialogProperties;
 import com.oneskyer.library.view.FilePickerDialog;
 import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.DialogSelectApkToSignBinding;
+import com.sketchware.remod.databinding.PrefencesContentAppbarBinding;
 
 import java.io.File;
 
@@ -45,20 +45,16 @@ import mod.trindadedev.ui.activities.SettingsActivity;
 
 public class AppSettings extends BaseAppCompatActivity {
 
-    private LinearLayout content;
-    private MaterialToolbar topAppBar;
+    private PrefencesContentAppbarBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.prefences_content_appbar);
-
-        content = findViewById(R.id.content);
-        topAppBar = findViewById(R.id.topAppBar);
-
-        topAppBar.setTitle(R.string.app_settings);
-        topAppBar.setNavigationOnClickListener(view -> onBackPressed());
+        binding = PrefencesContentAppbarBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        binding.topAppBar.setTitle(R.string.app_settings);
+        binding.topAppBar.setNavigationOnClickListener(view -> onBackPressed());
         setupViews();
     }
 
@@ -122,18 +118,18 @@ public class AppSettings extends BaseAppCompatActivity {
     }
 
     private void setupViews() {
-        createToolsView(R.drawable.block_96_blue, getString(R.string.block_manager), getString(R.string.manage_your_own_blocks_to_use_in_logic_editor), content, new ActivityLauncher(new Intent(getApplicationContext(), BlocksManager.class)), false);
-        createToolsView(R.drawable.pull_down_48, getString(R.string.block_selector_menu_manager), getString(R.string.manage_your_own_block_selector_menus), content, new ActivityLauncher(new Intent(getApplicationContext(), BlockSelectorActivity.class)), false);
-        createToolsView(R.drawable.collage_48, getString(R.string.component_manager), getString(R.string.manage_your_own_components), content, new ActivityLauncher(new Intent(getApplicationContext(), ManageCustomComponentActivity.class)), false);
-        createToolsView(R.drawable.event_on_item_clicked_48dp, getString(R.string.event_manager), getString(R.string.manage_your_own_events), content, openSettingsActivity(SettingsActivity.EVENTS_MANAGER_FRAGMENT), false);
-        createToolsView(R.drawable.colored_box_96, getString(R.string.local_library_manager), getString(R.string.manage_and_download_local_libraries), content, new ActivityLauncher(new Intent(getApplicationContext(), ManageLocalLibraryActivity.class), new Pair<>("sc_id", "system")), false);
-        createToolsView(R.drawable.engineering_48, getString(R.string.mod_settings), getString(R.string.change_general_mod_settings), content, new ActivityLauncher(new Intent(getApplicationContext(), ConfigActivity.class)), false);
-        createToolsView(R.drawable.ic_settings_24, getString(R.string.main_drawer_title_system_settings), getString(R.string.auto_save_and_vibrations), content, new ActivityLauncher(new Intent(getApplicationContext(), SystemSettingActivity.class)), false);
-        createToolsView(R.drawable.icon_pallete, getString(R.string.settings_appearance), getString(R.string.settings_appearance_description), content, openSettingsActivity(SettingsActivity.SETTINGS_APPEARANCE_FRAGMENT), false);
-        createToolsView(R.drawable.language_24, getString(R.string.language_settings), getString(R.string.change_the_sketchware_language), content, new ActivityLauncher(new Intent(getApplicationContext(), LanguageSettingsActivity.class)), false);
-        createToolsView(R.drawable.ic_folder_48dp, getString(R.string.open_working_directory), getString(R.string.open_directory), content, v -> openWorkingDirectory(), false);
-        createToolsView(R.drawable.ic_apk_color_96dp, getString(R.string.sign_an_apk_file_with_testkey), getString(R.string.sign_an_already_existing_apk_file), content, v -> signApkFileDialog(), false);
-        createToolsView(R.drawable.icons8_app_components, getString(R.string.design_drawer_menu_title_logcat_reader), getString(R.string.design_drawer_menu_subtitle_logcat_reader), content, new ActivityLauncher(new Intent(getApplicationContext(), LogReaderActivity.class)), true);
+        createToolsView(R.drawable.block_96_blue, getString(R.string.block_manager), getString(R.string.manage_your_own_blocks_to_use_in_logic_editor), binding.content, new ActivityLauncher(new Intent(getApplicationContext(), BlocksManager.class)), false);
+        createToolsView(R.drawable.pull_down_48, getString(R.string.block_selector_menu_manager), getString(R.string.manage_your_own_block_selector_menus), binding.content, new ActivityLauncher(new Intent(getApplicationContext(), BlockSelectorActivity.class)), false);
+        createToolsView(R.drawable.collage_48, getString(R.string.component_manager), getString(R.string.manage_your_own_components), binding.content, new ActivityLauncher(new Intent(getApplicationContext(), ManageCustomComponentActivity.class)), false);
+        createToolsView(R.drawable.event_on_item_clicked_48dp, getString(R.string.event_manager), getString(R.string.manage_your_own_events), binding.content, openSettingsActivity(SettingsActivity.EVENTS_MANAGER_FRAGMENT), false);
+        createToolsView(R.drawable.colored_box_96, getString(R.string.local_library_manager), getString(R.string.manage_and_download_local_libraries), binding.content, new ActivityLauncher(new Intent(getApplicationContext(), ManageLocalLibraryActivity.class), new Pair<>("sc_id", "system")), false);
+        createToolsView(R.drawable.engineering_48, getString(R.string.mod_settings), getString(R.string.change_general_mod_settings), binding.content, new ActivityLauncher(new Intent(getApplicationContext(), ConfigActivity.class)), false);
+        createToolsView(R.drawable.ic_settings_24, getString(R.string.main_drawer_title_system_settings), getString(R.string.auto_save_and_vibrations), binding.content, new ActivityLauncher(new Intent(getApplicationContext(), SystemSettingActivity.class)), false);
+        createToolsView(R.drawable.icon_pallete, getString(R.string.settings_appearance), getString(R.string.settings_appearance_description), binding.content, openSettingsActivity(SettingsActivity.SETTINGS_APPEARANCE_FRAGMENT), false);
+        createToolsView(R.drawable.language_24, getString(R.string.language_settings), getString(R.string.change_the_sketchware_language), binding.content, new ActivityLauncher(new Intent(getApplicationContext(), LanguageSettingsActivity.class)), false);
+        createToolsView(R.drawable.ic_folder_48dp, getString(R.string.open_working_directory), getString(R.string.open_directory), binding.content, v -> openWorkingDirectory(), false);
+        createToolsView(R.drawable.ic_apk_color_96dp, getString(R.string.sign_an_apk_file_with_testkey), getString(R.string.sign_an_already_existing_apk_file), binding.content, v -> signApkFileDialog(), false);
+        createToolsView(R.drawable.icons8_app_components, getString(R.string.design_drawer_menu_title_logcat_reader), getString(R.string.design_drawer_menu_subtitle_logcat_reader), binding.content, new ActivityLauncher(new Intent(getApplicationContext(), LogReaderActivity.class)), true);
     }
 
     private View.OnClickListener openSettingsActivity(String fragmentTag) {
@@ -254,8 +250,8 @@ public class AppSettings extends BaseAppCompatActivity {
                             zipSigner.setKeymode(ZipSigner.KEY_TESTKEY);
                             zipSigner.signZip(inputApkPath, outputApkPath);
                         } catch (Exception e) {
-                            tv_progress.setText("An error occurred. Check the log for more details.");
-                            tv_log.setText("Failed to sign APK with zipsigner: " + e);
+                            tv_progress.setText(R.string.an_error_occurred_check_the_log_for_more_details);
+                            tv_log.setText(getString(R.string.failed_to_sign_apk_with_zipsigner) + e);
                         }
                     }
                 } else {

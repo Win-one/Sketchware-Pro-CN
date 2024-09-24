@@ -228,7 +228,7 @@ public class ProjectsFragment extends DA implements View.OnClickListener {
 
     private void showProjectSortingDialog() {
         aB dialog = new aB(requireActivity());
-        dialog.b("Sort options");
+        dialog.b(getString(R.string.sort_options));
 
         SortProjectDialogBinding dialogBinding = SortProjectDialogBinding.inflate(LayoutInflater.from(requireActivity()));
         RadioButton sortByName = dialogBinding.sortByName;
@@ -251,7 +251,7 @@ public class ProjectsFragment extends DA implements View.OnClickListener {
         }
 
         dialog.a(dialogBinding.getRoot());
-        dialog.b("Save", v -> {
+        dialog.b(getString(R.string.common_word_save), v -> {
             int sortValue = 0;
             if (sortByName.isChecked()) {
                 sortValue |= ProjectComparator.SORT_BY_NAME;
@@ -269,7 +269,7 @@ public class ProjectsFragment extends DA implements View.OnClickListener {
             dialog.dismiss();
             refreshProjectsList();
         });
-        dialog.a("Cancel", Helper.getDialogDismissListener(dialog));
+        dialog.a(getString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
         dialog.show();
     }
 }

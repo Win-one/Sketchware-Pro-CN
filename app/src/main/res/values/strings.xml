@@ -2669,5 +2669,18 @@ Please try again later"</string>
     <string name="nothing_changed">Nothing changed</string>
     <string name="no_events">No events</string>
     <string name="start_by_creating_an_new_one">Start by creating an new one</string>
+    <string name="imported_successfully">Imported successfully</string>
+    <string name="name_cannot_be_empty">Name cannot be empty</string>
+    <string name="color_cannot_be_empty">Color cannot be empty</string>
+    <string name="malformed_hexadecimal_color">Malformed hexadecimal color</string>
+    <string name="block_embedded_code">Block embedded code</string>
+    <string name="failed_to_sign_apk_with_zipsigner">Failed to sign APK with zipsigner:</string>
+    <string name="custom_android_jar">Custom android.jar</string>
+    <string name="classpath_separated_by">Classpath \'separated by :\'</string>
+    <string name="java_version">Java version</string>
+    <string name="hide_warnings_in_error_log">Hide warnings in error log</string>
+    <string name="don_t_include_http_legacy_28_dex">Don\'t include http-legacy-28.dex</string>
+    <string name="enable_debug_logcat_logs_viewable_in_logcat_reader">Enable debug logcat logs viewable in Logcat Reader. Not enabled in exported AABs/APKs.</string>
+    <string name="note_that_this_option_may_cause_issues">Note that this option may cause issues if RequestNetwork component is used</string>
 
 </resources>
