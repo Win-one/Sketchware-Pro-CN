@@ -58,7 +58,7 @@ public class ProjectSettingsDialog {
 
         EditText targetSdkVersion = addInputPref(
                 ProjectSettings.SETTING_TARGET_SDK_VERSION,
-                "28",
+                "34",
                 "Target SDK version",
                 InputType.TYPE_CLASS_NUMBER,
                 preferenceContainer);

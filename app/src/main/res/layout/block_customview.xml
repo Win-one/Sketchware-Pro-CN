@@ -12,8 +12,9 @@
         android:layout_marginRight="14dp"
         android:layout_marginBottom="3.5dp"
         android:orientation="vertical"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="2dp">
+        style="?attr/materialCardViewFilledStyle"
+        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh"
+        app:cardCornerRadius="12dp">
 
         <LinearLayout
             android:id="@+id/background"
@@ -46,7 +47,7 @@
                         android:paddingTop="2dp"
                         android:paddingRight="2dp"
                         android:paddingBottom="6dp"
-                        android:text="application"
+                        android:text="Application"
                         android:textSize="14sp" />
 
                     <include layout="@layout/block_customview_spec" />
@@ -65,6 +66,8 @@
                         android:layout_margin="4dp"
                         android:gravity="center"
                         android:orientation="vertical"
+                        style="?attr/materialCardViewFilledStyle"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainer"
                         app:cardCornerRadius="5dp"
                         app:cardElevation="1dp">
 
@@ -92,6 +95,8 @@
                         android:layout_margin="4dp"
                         android:gravity="center"
                         android:orientation="vertical"
+                        style="?attr/materialCardViewFilledStyle"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainer"
                         app:cardCornerRadius="5dp"
                         app:cardElevation="1dp">
 
