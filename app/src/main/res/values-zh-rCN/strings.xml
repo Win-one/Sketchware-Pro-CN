@@ -3499,6 +3499,7 @@
     <string name="don_t_include_http_legacy_28_dex">不要包含http-legacy-28.dex</string>
     <string name="enable_debug_logcat_logs_viewable_in_logcat_reader">启用可在日志阅读器中查看的调试日志.在导出的AAB/APK中不可用.</string>
     <string name="note_that_this_option_may_cause_issues">请注意,如果使用RequestNetwork组件,此选项可能会导致问题</string>
+    <string name="developer_tools">开发人员工具</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

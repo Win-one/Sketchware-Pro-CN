@@ -27,5 +27,5 @@
         android:gravity="center"
         android:textColor="?attr/colorControlNormal"
         android:textSize="12sp"
-        tools:text="Back up" />
+        tools:text="@string/back_up" />
 </LinearLayout>

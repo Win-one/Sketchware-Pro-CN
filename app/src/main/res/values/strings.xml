@@ -2682,5 +2682,6 @@ Please try again later"</string>
     <string name="don_t_include_http_legacy_28_dex">Don\'t include http-legacy-28.dex</string>
     <string name="enable_debug_logcat_logs_viewable_in_logcat_reader">Enable debug logcat logs viewable in Logcat Reader. Not enabled in exported AABs/APKs.</string>
     <string name="note_that_this_option_may_cause_issues">Note that this option may cause issues if RequestNetwork component is used</string>
+    <string name="developer_tools">Developer Tools</string>
 
 </resources>

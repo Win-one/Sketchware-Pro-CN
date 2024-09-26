@@ -16,9 +16,24 @@
         android:title="@string/program_information" />
 
     <item
-        android:id="@+id/app_settings"
+        android:id="@+id/system_settings"
         android:icon="@drawable/ic_settings_24"
-        android:title="@string/app_settings" />
+        android:title="@string/system_settings" />
+
+    <item
+        android:id="@+id/appearance_settings"
+        android:icon="@drawable/icon_pallete"
+        android:title="@string/settings_appearance" />
+    <item
+        android:id="@+id/language_settings"
+        android:icon="@drawable/language_24"
+        android:title="@string/language_settings" />
+
+    <item
+        android:id="@+id/app_settings"
+        android:icon="@drawable/ic_terminal_24"
+        android:title="@string/developer_tools" />
+
 
     <item
         android:id="@+id/create_release_keystore"
