@@ -99,7 +99,10 @@ public class MainDrawer extends NavigationView {
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             activity.startActivity(intent);
         } else if (id == R.id.appearance_settings) {
-            openSettingsActivity(SettingsActivity.SETTINGS_APPEARANCE_FRAGMENT);
+            Intent intent = new Intent(getContext(), SettingsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.putExtra("fragment_tag", SettingsActivity.SETTINGS_APPEARANCE_FRAGMENT);
+            activity.startActivity(intent);
         } else if (id == R.id.language_settings) {
             Intent intent = new Intent(activity, LanguageSettingsActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -113,12 +116,6 @@ public class MainDrawer extends NavigationView {
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             activity.startActivity(intent);
         }
-    }
-
-    private void openSettingsActivity(String fragmentTag) {
-        Intent intent = new Intent(getContext(), SettingsActivity.class);
-        intent.putExtra("fragment_tag", fragmentTag);
-        getContext().startActivity(intent);
     }
 
     private void openUrl(String url) {

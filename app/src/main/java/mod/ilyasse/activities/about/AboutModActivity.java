@@ -19,18 +19,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -38,10 +37,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.LongSerializationPolicy;
-
 import com.sketchware.remod.R;
-
-import com.besome.sketch.lib.base.BaseAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -123,7 +119,7 @@ public class AboutModActivity extends BaseAppCompatActivity {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(discordInviteLink)));
             } catch (Exception e) {
                 ((ClipboardManager) getSystemService(CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("clipboard", discordInviteLink));
-                Toast.makeText(this, "Your device doesn't have a browser app installed. Invite link has been copied to your clipboard.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.your_device_doesn_t_have_a_browser_app_installed, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -161,10 +157,10 @@ public class AboutModActivity extends BaseAppCompatActivity {
                         shadAnim(fab, "alpha", 1, 300);
                     }, 200);
                 } catch (JsonParseException e) {
-                    loadingTitle.setText("Something went wrong");
-                    loadingDescription.setText("We're sorry for any inconvenience. Please contact us on our " +
-                            "Discord server if this error keeps showing up:\n" + e.getMessage() +
-                            "\n\nStack trace: " + Log.getStackTraceString(e));
+                    loadingTitle.setText(R.string.something_went_wrong);
+                    loadingDescription.setText(getString(R.string.we_re_sorry_for_any_inconvenience) +
+                            getString(R.string.discord_server_if_this_error) + e.getMessage() +
+                            getString(R.string.stack_trace) + Log.getStackTraceString(e));
                 }
                 appbar.setVisibility(View.VISIBLE);
                 fab.show();
@@ -175,8 +171,8 @@ public class AboutModActivity extends BaseAppCompatActivity {
             public void onErrorResponse(String tag, String message) {
                 if (sharedPref.getString("moddersBackup", "").isEmpty()
                         || sharedPref.getString("changelogBackup", "").isEmpty()) {
-                    loadingTitle.setText("Your device is offline!");
-                    loadingDescription.setText("Check your internet connection and try again.");
+                    loadingTitle.setText(R.string.your_device_is_offline);
+                    loadingDescription.setText(R.string.check_your_internet_connection_and_try_again);
                 } else {
                     teamList = new Gson().fromJson(sharedPref.getString("moddersBackup", ""), Helper.TYPE_MAP_LIST);
                     changelogList = new Gson().fromJson(sharedPref.getString("changelogBackup", ""), Helper.TYPE_MAP_LIST);
@@ -318,7 +314,7 @@ public class AboutModActivity extends BaseAppCompatActivity {
                     majorChanges.setTextSize(14);
                 }
 
-                majorChanges.setText("Major changes to Sketchware Pro will appear here.");
+                majorChanges.setText(R.string.major_changes_to_sketchware_pro_will_appear_here);
                 viewContainer.addView(majorChanges);
             }
             container.addView(v, 0);

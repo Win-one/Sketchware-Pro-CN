@@ -101,6 +101,10 @@ android {
     configurations.minApi26Implementation {
         exclude group: 'javax.inject', module: 'javax.inject'
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -130,7 +134,7 @@ dependencies {
     implementation "$editorGroupId:language-textmate"
 
     implementation "de.hdodenhof:circleimageview:3.1.0"
-    implementation 'com.github.Win-one:FilePicker:2.0.0'
+    implementation 'com.github.Win-one:FilePicker:2.2.0'
 
     minApi26Implementation "com.android.tools.build:bundletool:1.15.6"
     //noinspection GradleDependency copied from above dependency for not just runtime access

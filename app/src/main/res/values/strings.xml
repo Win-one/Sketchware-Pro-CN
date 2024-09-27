@@ -2683,5 +2683,13 @@ Please try again later"</string>
     <string name="enable_debug_logcat_logs_viewable_in_logcat_reader">Enable debug logcat logs viewable in Logcat Reader. Not enabled in exported AABs/APKs.</string>
     <string name="note_that_this_option_may_cause_issues">Note that this option may cause issues if RequestNetwork component is used</string>
     <string name="developer_tools">Developer Tools</string>
+    <string name="your_device_doesn_t_have_a_browser_app_installed">Your device doesn\'t have a browser app installed. Invite link has been copied to your clipboard.</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="we_re_sorry_for_any_inconvenience">We\'re sorry for any inconvenience. Please contact us on our</string>
+    <string name="discord_server_if_this_error">Discord server if this error keeps showing up:\n</string>
+    <string name="stack_trace">\n\nStack trace:</string>
+    <string name="your_device_is_offline">Your device is offline!</string>
+    <string name="check_your_internet_connection_and_try_again">Check your internet connection and try again.</string>
+    <string name="major_changes_to_sketchware_pro_will_appear_here">Major changes to Sketchware Pro will appear here.</string>
 
 </resources>

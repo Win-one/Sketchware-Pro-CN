@@ -3500,6 +3500,14 @@
     <string name="enable_debug_logcat_logs_viewable_in_logcat_reader">启用可在日志阅读器中查看的调试日志.在导出的AAB/APK中不可用.</string>
     <string name="note_that_this_option_may_cause_issues">请注意,如果使用RequestNetwork组件,此选项可能会导致问题</string>
     <string name="developer_tools">开发人员工具</string>
+    <string name="your_device_doesn_t_have_a_browser_app_installed">您的设备没有安装浏览器应用程序.邀请链接已复制到剪贴板.</string>
+    <string name="something_went_wrong">出错了</string>
+    <string name="we_re_sorry_for_any_inconvenience">对于给您带来的不便,我们深表歉意.请联系我们</string>
+    <string name="discord_server_if_this_error">Discord服务器如果此错误不断出现:\n</string>
+    <string name="stack_trace">\n\n堆栈跟踪: </string>
+    <string name="your_device_is_offline">您的设备处于离线状态!</string>
+    <string name="check_your_internet_connection_and_try_again">请检查您的互联网连接,然后重试.</string>
+    <string name="major_changes_to_sketchware_pro_will_appear_here">Sketchware Pro的主要更改将在此处显示.</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->
