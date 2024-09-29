@@ -13,10 +13,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
+import a.a.a.Ox;
 import a.a.a.jC;
 import a.a.a.jq;
 import a.a.a.kq;
-import a.a.a.Ox;
 import mod.SketchwareUtil;
 import mod.agus.jcoderz.beans.ViewBeans;
 import mod.agus.jcoderz.lib.FileResConfig;
@@ -441,7 +441,7 @@ public class ExtraPaletteBlock {
 
             case 5:
                 extraBlocks.fileBlocks();
-                logicEditor.a("FileUtil Blocks", 0xff555555);
+                logicEditor.a(logicEditor.getString(R.string.fileutil_blocks), 0xff555555);
                 if (frc.getAssetsFile().size() > 0) {
                     logicEditor.a(" ", "getAssetFile");
                     logicEditor.a("s", "copyAssetFile");
@@ -913,7 +913,7 @@ public class ExtraPaletteBlock {
             return;
 
             case 7:
-                logicEditor.b("Add component", "componentAdd");
+                logicEditor.b(logicEditor.getString(R.string.add_component), "componentAdd");
                 logicEditor.a(" ", "changeStatebarColour");
                 logicEditor.a(" ", "LightStatusBar");
                 logicEditor.a(" ", "showKeyboard");
@@ -1151,8 +1151,8 @@ public class ExtraPaletteBlock {
                 return;
 
             case 8:
-                logicEditor.b("Create", "blockAdd");
-                logicEditor.b("Import From Collection", "blockImport");
+                logicEditor.b(logicEditor.getString(R.string.common_word_create), "blockAdd");
+                logicEditor.b(logicEditor.getString(R.string.import_from_collection), "blockImport");
                 if (ConfigActivity.isSettingEnabled(ConfigActivity.SETTING_SHOW_BUILT_IN_BLOCKS)) {
                     logicEditor.a(" ", "customToast");
                     logicEditor.a(" ", "customToastWithIcon");

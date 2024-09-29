@@ -479,7 +479,7 @@
     <string name="component_file_picker_title_select_mime_type_audio_files">音频文件</string>
     <string name="component_file_picker_title_select_mime_type_text_files">文本文件</string>
 
-    <string name="component_title_add_component">全部组件</string>
+    <string name="component_title_add_component">添加组件</string>
 
     <string name="component_description_intent">Intent \n用于启动新的活动</string>
     <string name="component_description_file">File \n用于本地保存数据</string>
@@ -3508,6 +3508,21 @@
     <string name="your_device_is_offline">您的设备处于离线状态!</string>
     <string name="check_your_internet_connection_and_try_again">请检查您的互联网连接,然后重试.</string>
     <string name="major_changes_to_sketchware_pro_will_appear_here">Sketchware Pro的主要更改将在此处显示.</string>
+    <string name="couldn_t_load_font">无法加载字体</string>
+    <string name="now_saving">保存中..</string>
+    <string name="add_a_new_custom_variable">添加新的自定义变量</string>
+    <string name="private_public_or_public_static_optional">private, public或 public static (可选)</string>
+    <string name="enter_modifier_e_g_private_public_public_static_or_empty_package_private">输入修饰符,例如 private,public,public static或空（package private）.</string>
+    <string name="type_e_g_file">类型, e.g. File</string>
+    <string name="name_e_g_file">名称, e.g. file</string>
+    <string name="initializer_e_g_new_file_optional">初始化, e.g. new File() (optional)</string>
+    <string name="type_can_t_be_empty">类型不能为空</string>
+    <string name="name_can_t_be_empty">名称不能为空</string>
+    <string name="add_a_new_custom_list">添加新的自定义列表</string>
+    <string name="add_component">添加组件</string>
+    <string name="fileutil_blocks">文件工具块</string>
+    <string name="import_from_collection">从集合导入</string>
+    <string name="file_blocks">文件块</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

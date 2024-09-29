@@ -11,7 +11,6 @@ import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -96,34 +95,34 @@ public class LogicClickListener implements View.OnClickListener {
     private void addCustomVariable() {
         aB dialog = new aB(logicEditor);
         dialog.a(R.drawable.abc_96_color);
-        dialog.b("Add a new custom variable");
+        dialog.b(logicEditor.getString(R.string.add_a_new_custom_variable));
 
         LinearLayout root = new LinearLayout(logicEditor);
         root.setOrientation(LinearLayout.VERTICAL);
 
         TextInputLayout modifierLayout = commonTextInputLayout();
-        EditText modifier = commonEditText("private, public or public static (optional)");
+        EditText modifier = commonEditText(logicEditor.getString(R.string.private_public_or_public_static_optional));
         modifierLayout.addView(modifier);
-        modifierLayout.setHelperText("Enter modifier e.g. private, public, public static, or empty (package private).");
+        modifierLayout.setHelperText(logicEditor.getString(R.string.enter_modifier_e_g_private_public_public_static_or_empty_package_private));
         modifierLayout.setPadding(0, 0, 0, (int) getDip(8));
         root.addView(modifierLayout);
         VariableModifierValidator modifiersValidator = new VariableModifierValidator(getContext(), modifierLayout);
         modifier.addTextChangedListener(modifiersValidator);
 
         TextInputLayout typeLayout = commonTextInputLayout();
-        EditText type = commonEditText("Type, e.g. File");
+        EditText type = commonEditText(logicEditor.getString(R.string.type_e_g_file));
         typeLayout.addView(type);
         root.addView(typeLayout);
         VariableTypeValidator varTypeValidator = new VariableTypeValidator(getContext(), typeLayout);
         type.addTextChangedListener(varTypeValidator);
 
         TextInputLayout nameLayout = commonTextInputLayout();
-        EditText name = commonEditText("Name, e.g. file");
+        EditText name = commonEditText(logicEditor.getString(R.string.name_e_g_file));
         nameLayout.addView(name);
         root.addView(nameLayout);
 
         TextInputLayout initializerLayout = commonTextInputLayout();
-        EditText initializer = commonEditText("Initializer, e.g. new File() (optional)");
+        EditText initializer = commonEditText(logicEditor.getString(R.string.initializer_e_g_new_file_optional));
         initializerLayout.addView(initializer);
         root.addView(initializerLayout);
 
@@ -150,7 +149,7 @@ public class LogicClickListener implements View.OnClickListener {
             } else {
                 typeLayout.requestFocus();
                 if (variableType.isEmpty()) {
-                    typeLayout.setError("Type can't be empty");
+                    typeLayout.setError(logicEditor.getString(R.string.type_can_t_be_empty));
                 }
                 return;
             }
@@ -160,7 +159,7 @@ public class LogicClickListener implements View.OnClickListener {
             } else {
                 nameLayout.requestFocus();
                 if (variableName.isEmpty()) {
-                    nameLayout.setError("Name can't be empty");
+                    nameLayout.setError(logicEditor.getString(R.string.name_can_t_be_empty));
                 }
                 return;
             }
@@ -239,7 +238,7 @@ public class LogicClickListener implements View.OnClickListener {
     private void addCustomList() {
         aB dialog = new aB(logicEditor);
         dialog.a(R.drawable.add_96_blue);
-        dialog.b("Add a new custom List");
+        dialog.b(logicEditor.getString(R.string.add_a_new_custom_list));
 
         LinearLayout root = new LinearLayout(logicEditor);
         root.setOrientation(LinearLayout.VERTICAL);
@@ -269,16 +268,16 @@ public class LogicClickListener implements View.OnClickListener {
                 typeLayout.setError(null);
             } else {
                 if (validName) typeLayout.requestFocus();
-                typeLayout.setError("Type can't be empty");
+                typeLayout.setError(logicEditor.getString(R.string.type_can_t_be_empty));
             }
 
             CharSequence nameError = nameLayout.getError();
-            if (nameError == null || "Name can't be empty".contentEquals(nameError)) {
+            if (nameError == null || logicEditor.getString(R.string.name_can_t_be_empty).contentEquals(nameError)) {
                 if (validName) {
                     nameLayout.setError(null);
                 } else {
                     nameLayout.requestFocus();
-                    nameLayout.setError("Name can't be empty");
+                    nameLayout.setError(logicEditor.getString(R.string.name_can_t_be_empty));
                 }
             }
 

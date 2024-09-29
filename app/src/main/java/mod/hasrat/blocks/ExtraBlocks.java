@@ -3,6 +3,7 @@ package mod.hasrat.blocks;
 import android.util.Pair;
 
 import com.besome.sketch.editor.LogicEditorActivity;
+import com.sketchware.remod.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -156,7 +157,7 @@ public class ExtraBlocks {
 
     public void fileBlocks() {
         if (isCustomVarUsed("File")) {
-            logicEditor.a("File Blocks", 0xff555555);
+            logicEditor.a(logicEditor.getString(R.string.file_blocks), 0xff555555);
             logicEditor.a("b", "fileCanExecute");
             logicEditor.a("b", "fileCanRead");
             logicEditor.a("b", "fileCanWrite");

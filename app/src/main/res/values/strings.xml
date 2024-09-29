@@ -2691,5 +2691,20 @@ Please try again later"</string>
     <string name="your_device_is_offline">Your device is offline!</string>
     <string name="check_your_internet_connection_and_try_again">Check your internet connection and try again.</string>
     <string name="major_changes_to_sketchware_pro_will_appear_here">Major changes to Sketchware Pro will appear here.</string>
+    <string name="couldn_t_load_font">Couldn\'t load font</string>
+    <string name="now_saving">Now saving..</string>
+    <string name="add_a_new_custom_variable">Add a new custom variable</string>
+    <string name="private_public_or_public_static_optional">private, public or public static (optional)</string>
+    <string name="enter_modifier_e_g_private_public_public_static_or_empty_package_private">Enter modifier e.g. private, public, public static, or empty (package private).</string>
+    <string name="type_e_g_file">Type, e.g. File</string>
+    <string name="name_e_g_file">Name, e.g. file</string>
+    <string name="initializer_e_g_new_file_optional">Initializer, e.g. new File() (optional)</string>
+    <string name="type_can_t_be_empty">Type can\'t be empty</string>
+    <string name="name_can_t_be_empty">Name can\'t be empty</string>
+    <string name="add_a_new_custom_list">Add a new custom List</string>
+    <string name="add_component">Add component</string>
+    <string name="fileutil_blocks">FileUtil Blocks</string>
+    <string name="import_from_collection">Import From Collection</string>
+    <string name="file_blocks">File Blocks</string>
 
 </resources>

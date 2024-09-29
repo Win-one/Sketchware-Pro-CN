@@ -1,7 +1,6 @@
 package mod.hey.studios.lib.code_editor;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -28,6 +27,7 @@ import android.widget.NumberPicker;
 import android.widget.PopupMenu;
 import android.widget.ScrollView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.sketchware.remod.R;
 
 import java.util.List;
@@ -157,7 +157,7 @@ public class CodeEditorLayout extends LinearLayout implements TextWatcher {
         popup.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case 1 -> {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context);
                     final NumberPicker numPicker = new NumberPicker(context);
                     numPicker.setMinValue(5);
                     numPicker.setMaxValue(20);

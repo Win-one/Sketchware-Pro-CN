@@ -1330,7 +1330,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
         linearLayout.addView(name);
         TextView preview = new TextView(this);
         preview.setLayoutParams(layoutParams);
-        preview.setText("Preview");
+        preview.setText(R.string.common_word_preview);
 
         Typeface typeface;
         if (fontName.equalsIgnoreCase("default_font")) {
@@ -1340,7 +1340,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
                 typeface = Typeface.createFromFile(jC.d(B).d(fontName));
             } catch (RuntimeException e) {
                 typeface = Typeface.DEFAULT;
-                preview.setText("Couldn't load font");
+                preview.setText(R.string.couldn_t_load_font);
             }
         }
 
@@ -2514,7 +2514,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
 
         @Override
         public void b() {
-            publishProgress("Now saving..");
+            publishProgress(Helper.getResString(R.string.now_saving));
             activity.get().E();
         }
     }
