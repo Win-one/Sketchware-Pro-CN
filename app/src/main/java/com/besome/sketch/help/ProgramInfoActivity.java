@@ -5,14 +5,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.widget.Toolbar;
 
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.besome.sketch.lib.ui.PropertyOneLineItem;
@@ -35,6 +31,7 @@ public class ProgramInfoActivity extends BaseAppCompatActivity implements OnClic
     private static final int ITEM_DISCORD = 6;
     private static final int ITEM_TELEGRAM = 8;
     private static final int ITEM_OPEN_SOURCE_LICENSES = 15;
+    private static final int ITEM_LANGUAGE = 16;
     private static final int ITEM_SUGGEST_IDEAS = 17;
     private ProgramInfoBinding binding;
 
@@ -117,6 +114,8 @@ public class ProgramInfoActivity extends BaseAppCompatActivity implements OnClic
                     case ITEM_SUGGEST_IDEAS -> openUrl(getString(R.string.link_ideas_url));
                     case ITEM_TELEGRAM -> openUrl(getString(R.string.link_telegram_invite));
                     case ITEM_DISCORD -> openUrl(getString(R.string.link_discord_invite));
+                    case ITEM_LANGUAGE ->
+                            openUrl("https://github.com/Win-one/Sketchware-Pro/tree/material-one");
                 }
             }
         }
@@ -144,6 +143,7 @@ public class ProgramInfoActivity extends BaseAppCompatActivity implements OnClic
         addSingleLineItem(ITEM_SOCIAL_NETWORK, R.string.title_community);
         addTwoLineItem(ITEM_DISCORD, R.string.title_discord_community, R.string.link_discord_invite);
         addTwoLineItem(ITEM_TELEGRAM, R.string.title_telegram_community, R.string.link_telegram_invite);
+        addTwoLineItem(ITEM_LANGUAGE, getString(R.string.simplified_chinese), "Win-one");
         addSingleLineItem(ITEM_SYSTEM_INFORMATION, R.string.program_information_title_system_information);
         addSingleLineItem(ITEM_OPEN_SOURCE_LICENSES, R.string.program_information_title_open_source_license);
     }

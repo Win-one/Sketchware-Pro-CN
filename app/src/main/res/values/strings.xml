@@ -2706,5 +2706,6 @@ Please try again later"</string>
     <string name="fileutil_blocks">FileUtil Blocks</string>
     <string name="import_from_collection">Import From Collection</string>
     <string name="file_blocks">File Blocks</string>
+    <string name="simplified_chinese">Simplified Chinese</string>
 
 </resources>
