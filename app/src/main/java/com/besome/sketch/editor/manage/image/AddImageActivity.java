@@ -136,7 +136,7 @@ public class AddImageActivity extends BaseDialogActivity implements View.OnClick
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        f(R.drawable.add_new_48_gray);
+        f(R.drawable.add_new_24);
         e(xB.b().a(this, R.string.design_manager_image_title_add_image));
         d(xB.b().a(getApplicationContext(), R.string.common_word_save));
         b(xB.b().a(getApplicationContext(),R.string.common_word_cancel));

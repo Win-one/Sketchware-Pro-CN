@@ -2548,7 +2548,7 @@ Please try again later"</string>
     <string name="enter_sound_name">Enter sound name</string>
     <string name="file_extension_will_be_added_automatically">File extension will be added automatically based on the file type you select</string>
     <string name="select_java_kotlin_file_s">Select Java/Kotlin file(s)</string>
-    <string name="this_will_also_remove_it_from_androidmanifest">"This will also remove it from AndroidManifest. "</string>
+    <string name="this_will_also_remove_it_from_androidmanifest">This will also remove it from AndroidManifest.</string>
     <string name="advanced_version_control">Advanced Version Control</string>
     <string name="invalid_version_code">Invalid Version Code</string>
     <string name="invalid_version_name">Invalid Version Name</string>
@@ -2591,8 +2591,7 @@ Please try again later"</string>
     <string name="select_an_ad_unit">Select an Ad Unit</string>
     <string name="deprecated">Deprecated</string>
     <string name="block_menu_was_initially_used_to_parse_resource_values">This Block Menu was initially used to parse resource values, but was too I/O heavy and has been removed due to that. Please use the Code Editor instead.</string>
-    <string name="remove_old_deprecated_methods">Remove old deprecated methods in files, like showMessage, getDip, etc.</string>
-    <string name="use_new_materialcomponents_apptheme">Use new MaterialComponents AppTheme (will replace e.g. Button with MaterialButton, be careful!)</string>
+    <string name="remove_old_deprecated_methods">This will remove old deprecated methods in files, like showMessage, getDip, etc.</string>
     <string name="alias_can_t_be_empty">Alias can\'t be empty</string>
     <string name="password_can_t_be_empty">Password can\'t be empty</string>
     <string name="algorithm_can_t_be_empty">Algorithm can\'t be empty</string>
@@ -2711,5 +2710,13 @@ Please try again later"</string>
     <string name="screen_orientation">Screen orientation</string>
     <string name="keyboard_settings">Keyboard settings</string>
     <string name="enter_activity_name">Enter activity name</string>
+    <string name="view_changes">View changes</string>
+    <string name="use_materialcomponents">Use MaterialComponents</string>
+    <string name="this_will_replace_e_g_button_with_materialbutton_be_careful">This will replace e.g. Button with MaterialButton, be careful!</string>
+    <string name="project_settings">Project settings</string>
+    <string name="change_project_settings">Change project settings</string>
+    <string name="backup_project">Backup project</string>
+    <string name="export_sign">Export/Sign</string>
+    <string name="delete_project">Delete project</string>
 
 </resources>

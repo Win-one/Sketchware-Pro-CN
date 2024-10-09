@@ -178,7 +178,7 @@ public class AddViewActivity extends BaseBottomSheetDialogActivity {
         binding = ManageScreenActivityAddTempBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         e(getTranslatedString(R.string.design_manager_view_title_add_view));
-        f(R.drawable.add_new_48_gray);
+        f(R.drawable.add_new_24);
         Intent intent1 = getIntent();
         ArrayList<String> screenNames = intent1.getStringArrayListExtra("screen_names");
         requestCode = intent1.getIntExtra("request_code", 264);

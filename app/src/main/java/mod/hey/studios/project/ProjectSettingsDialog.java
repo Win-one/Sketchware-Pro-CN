@@ -25,7 +25,7 @@ public class ProjectSettingsDialog {
     public void show() {
         aB dialog = new aB(activity);
         dialog.a(R.drawable.services_48);
-        dialog.b("Project configurations");
+        dialog.b(Helper.getResString(R.string.project_configuration));
 
         DialogProjectSettingsBinding binding = DialogProjectSettingsBinding.inflate(activity.getLayoutInflater());
 

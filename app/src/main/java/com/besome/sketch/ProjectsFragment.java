@@ -89,6 +89,7 @@ public class ProjectsFragment extends DA implements View.OnClickListener {
 
     public void toProjectSettingsActivity() {
         Intent intent = new Intent(getActivity(), MyProjectSettingActivity.class);
+        intent.putExtra("title", "newproject");
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         openProjectSettings.launch(intent);
     }

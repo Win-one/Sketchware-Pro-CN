@@ -135,7 +135,7 @@ public class AddSoundActivity extends BaseDialogActivity implements View.OnClick
         e(getTranslatedString(R.string.design_manager_sound_title_add_sound));
         d(getTranslatedString(R.string.common_word_save));
         b(getTranslatedString(R.string.common_word_cancel));
-        f(R.drawable.add_new_48_gray);
+        f(R.drawable.add_new_24);
 
         Intent intent = getIntent();
         ArrayList<String> existingSoundNames = intent.getStringArrayListExtra("sound_names");

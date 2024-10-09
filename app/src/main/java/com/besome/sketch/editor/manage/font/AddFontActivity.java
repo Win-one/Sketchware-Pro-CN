@@ -45,7 +45,7 @@ public class AddFontActivity extends BaseDialogActivity implements View.OnClickL
         e(Helper.getResString(R.string.design_manager_font_title_add_font));
         d(Helper.getResString(R.string.common_word_save));
         b(Helper.getResString(R.string.common_word_cancel));
-        f(R.drawable.add_new_48_gray);
+        f(R.drawable.add_new_24);
         setContentView(binding.getRoot());
 
         Intent intent = getIntent();

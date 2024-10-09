@@ -100,7 +100,7 @@ public class EventsManagerFragment extends BaseFragment {
 
         var dialog = new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(existingListener == null ? getString(R.string.new_listener) : getString(R.string.edit_listener))
-                .setIcon(R.drawable.add_new_48_gray)
+                .setIcon(R.drawable.add_new_24)
                 .setMessage(R.string.type_info_of_the_listener)
                 .setView(listenerBinding.getRoot())
                 .setPositiveButton(R.string.common_word_save, (di, i) -> {

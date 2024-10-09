@@ -3408,8 +3408,7 @@
     <string name="select_an_ad_unit">选择广告单元</string>
     <string name="deprecated">废弃</string>
     <string name="block_menu_was_initially_used_to_parse_resource_values">此块菜单最初用于解析资源值,但I/O量太大,因此已被删除.请改用代码编辑器.</string>
-    <string name="remove_old_deprecated_methods">删除文件中已弃用的旧方法,例如showMessage,getDip等.</string>
-    <string name="use_new_materialcomponents_apptheme">使用新的MaterialComponents AppTheme(将用MaterialButton替换Button,请注意!)</string>
+    <string name="remove_old_deprecated_methods">这将删除文件中已弃用的旧方法,例如showMessage,getDip等.</string>
     <string name="alias_can_t_be_empty">别名不能为空</string>
     <string name="password_can_t_be_empty">密码不能为空</string>
     <string name="algorithm_can_t_be_empty">算法不能为空</string>
@@ -3528,6 +3527,14 @@
     <string name="screen_orientation">屏幕方向</string>
     <string name="keyboard_settings">键盘设置</string>
     <string name="enter_activity_name">输入活动名称</string>
+    <string name="view_changes">查看更改</string>
+    <string name="use_materialcomponents">使用MaterialComponents</string>
+    <string name="this_will_replace_e_g_button_with_materialbutton_be_careful">这将用MaterialButton替换Button等,请注意!</string>
+    <string name="project_settings">项目设置</string>
+    <string name="change_project_settings">更改项目设置</string>
+    <string name="backup_project">备份项目</string>
+    <string name="export_sign">导出/签名</string>
+    <string name="delete_project">删除项目</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

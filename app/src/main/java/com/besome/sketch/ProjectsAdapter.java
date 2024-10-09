@@ -228,6 +228,7 @@ public class ProjectsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         intent.putExtra("sc_id", yB.c(project, "sc_id"));
         intent.putExtra("is_update", true);
         intent.putExtra("index", index);
+        intent.putExtra("title", "editproject");
         projectsFragment.openProjectSettings.launch(intent);
     }
 

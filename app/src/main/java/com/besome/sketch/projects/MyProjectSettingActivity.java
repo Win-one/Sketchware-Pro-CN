@@ -77,6 +77,7 @@ public class MyProjectSettingActivity extends BaseAppCompatActivity implements V
     private int projectVersionNameSecondPart;
     private boolean shownPackageNameChangeWarning;
     private String sc_id;
+    private String title;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,11 +85,11 @@ public class MyProjectSettingActivity extends BaseAppCompatActivity implements V
         binding = MyprojectSettingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.toolbar.setNavigationOnClickListener(arg0 -> onBackPressed());
-
         if (!isStoragePermissionGranted()) finish();
 
         sc_id = getIntent().getStringExtra("sc_id");
+        title = getIntent().getStringExtra("title");
+        setToolbar();
         updatingExistingProject = getIntent().getBooleanExtra("is_update", false);
 
         binding.verCode.setSelected(true);
@@ -193,6 +194,17 @@ public class MyProjectSettingActivity extends BaseAppCompatActivity implements V
             }
         }
         syncThemeColors();
+    }
+
+    private void setToolbar() {
+        String string = switch (title) {
+            case "newproject" ->
+                    getString(R.string.myprojects_list_menu_title_create_a_new_project);
+            case "editproject" -> getString(R.string.change_project_settings);
+            default -> null;
+        };
+        binding.toolbar.setTitle(string);
+        binding.toolbar.setNavigationOnClickListener(arg0 -> onBackPressed());
     }
 
     @Override

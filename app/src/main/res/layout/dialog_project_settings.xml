@@ -75,7 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="0dp"
-                    android:text="Remove old deprecated methods"
+                    android:text="@string/remove_old_deprecated_methods"
                     android:textStyle="bold" />
 
                 <TextView
@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="26dp"
-                    android:text="This will remove methods in files, like showMessage, getDip, etc."
+                    android:text="@string/remove_old_deprecated_methods"
                     android:textColor="?android:attr/textColorSecondary" />
 
             </LinearLayout>
@@ -109,7 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="0dp"
-                    android:text="Use MaterialComponents"
+                    android:text="@string/use_materialcomponents"
                     android:textStyle="bold" />
 
                 <TextView
@@ -117,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="26dp"
-                    android:text="This will replace e.g. Button with MaterialButton, be careful!"
+                    android:text="@string/this_will_replace_e_g_button_with_materialbutton_be_careful"
                     android:textColor="?android:attr/textColorSecondary" />
 
             </LinearLayout>

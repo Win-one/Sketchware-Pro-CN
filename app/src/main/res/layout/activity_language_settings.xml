@@ -38,67 +38,59 @@
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginHorizontal="8dp"
             android:orientation="vertical"
             android:paddingTop="16dp">
 
-            <LinearLayout
-                android:id="@+id/preferenceGroupLanguage"
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:orientation="vertical">
+                android:text="@string/sketchware_language"
+                android:textColor="?colorPrimary" />
 
-                <TextView
-                    android:layout_width="match_parent"
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:requiresFadingEdge="horizontal"
+                android:scrollbars="none">
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/toggleLanguage"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:text="@string/sketchware_language"
-                    android:textColor="?attr/colorPrimary" />
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    app:checkedButton="@id/auto"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
 
-                <LinearLayout
-                    android:id="@+id/preferenceLanguageContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.button.MaterialButtonToggleGroup
-                        android:id="@+id/toggleLanguage"
-                        android:layout_width="match_parent"
+                    <Button
+                        android:id="@+id/rb_follow_system"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_horizontal"
-                        app:checkedButton="@id/auto"
-                        app:selectionRequired="true"
-                        app:singleSelection="true">
+                        android:text="@string/follow_system" />
 
-                        <Button
-                            android:id="@+id/rb_follow_system"
-                            style="?attr/materialButtonOutlinedStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/follow_system" />
+                    <Button
+                        android:id="@+id/rb_chinese"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/chinese" />
 
-                        <Button
-                            android:id="@+id/rb_chinese"
-                            style="?attr/materialButtonOutlinedStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/chinese" />
+                    <Button
+                        android:id="@+id/rb_english"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/english" />
 
-                        <Button
-                            android:id="@+id/rb_english"
-                            style="?attr/materialButtonOutlinedStyle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/english" />
-
-                    </com.google.android.material.button.MaterialButtonToggleGroup>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+            </HorizontalScrollView>
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

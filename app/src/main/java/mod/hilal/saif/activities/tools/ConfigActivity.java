@@ -56,24 +56,34 @@ public class ConfigActivity extends BaseAppCompatActivity {
     public static final String SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH = "palletteDir";
     public static final String SETTING_BLOCKMANAGER_DIRECTORY_BLOCK_FILE_PATH = "blockDir";
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        EdgeToEdge.enable(this);
-        super.onCreate(savedInstanceState);
-        var binding = PreferenceActivityBinding.inflate(getLayoutInflater());
-        // unfortunately, androidx.preference doesn't make it easy to support edge-to-edge layout properly, so this will have to do
-        Insetter.builder()
-                .padding(WindowInsetsCompat.Type.navigationBars())
-                .applyToView(binding.getRoot());
-        setContentView(binding.getRoot());
+    @NonNull
+    private static HashMap<String, Object> readSettings() {
+        HashMap<String, Object> settings;
 
-        binding.topAppBar.setTitle("App Settings");
-        binding.topAppBar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-        var fragment = new PreferenceFragment();
-        fragment.setSnackbarView(binding.getRoot());
-        getSupportFragmentManager().beginTransaction()
-                .replace(binding.fragmentContainer.getId(), fragment)
-                .commit();
+        if (SETTINGS_FILE.exists()) {
+            Exception toLog;
+
+            try {
+                settings = new Gson().fromJson(FileUtil.readFile(SETTINGS_FILE.getAbsolutePath()), Helper.TYPE_MAP);
+
+                if (settings != null) {
+                    return settings;
+                }
+
+                toLog = new NullPointerException("settings == null");
+                // fall-through to shared error handler
+            } catch (JsonParseException e) {
+                toLog = e;
+                // fall-through to shared error handler
+            }
+
+            SketchwareUtil.toastError(Helper.getResString(R.string.couldn_t_parse_mod_settings_restoring_defaults));
+            LogUtil.e("ConfigActivity", "Failed to parse Mod Settings.", toLog);
+        }
+        settings = new HashMap<>();
+        restoreDefaultSettings(settings);
+
+        return settings;
     }
 
     public static String getBackupPath() {
@@ -119,34 +129,24 @@ public class ConfigActivity extends BaseAppCompatActivity {
         dataStore.persist();
     }
 
-    @NonNull
-    private static HashMap<String, Object> readSettings() {
-        HashMap<String, Object> settings;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        EdgeToEdge.enable(this);
+        super.onCreate(savedInstanceState);
+        var binding = PreferenceActivityBinding.inflate(getLayoutInflater());
+        // unfortunately, androidx.preference doesn't make it easy to support edge-to-edge layout properly, so this will have to do
+        Insetter.builder()
+                .padding(WindowInsetsCompat.Type.navigationBars())
+                .applyToView(binding.getRoot());
+        setContentView(binding.getRoot());
 
-        if (SETTINGS_FILE.exists()) {
-            Exception toLog;
-
-            try {
-                settings = new Gson().fromJson(FileUtil.readFile(SETTINGS_FILE.getAbsolutePath()), Helper.TYPE_MAP);
-
-                if (settings != null) {
-                    return settings;
-                }
-
-                toLog = new NullPointerException("settings == null");
-                // fall-through to shared error handler
-            } catch (JsonParseException e) {
-                toLog = e;
-                // fall-through to shared error handler
-            }
-
-            SketchwareUtil.toastError("Couldn't parse Mod Settings! Restoring defaults.");
-            LogUtil.e("ConfigActivity", "Failed to parse Mod Settings.", toLog);
-        }
-        settings = new HashMap<>();
-        restoreDefaultSettings(settings);
-
-        return settings;
+        binding.topAppBar.setTitle(R.string.mod_settings);
+        binding.topAppBar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        var fragment = new PreferenceFragment();
+        fragment.setSnackbarView(binding.getRoot());
+        getSupportFragmentManager().beginTransaction()
+                .replace(binding.fragmentContainer.getId(), fragment)
+                .commit();
     }
 
     private static void restoreDefaultSettings(HashMap<String, Object> settings) {
@@ -203,8 +203,8 @@ public class ConfigActivity extends BaseAppCompatActivity {
                 binding.chipGroupTypes.setVisibility(View.GONE);
                 AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
                         .setView(binding.getRoot())
-                        .setTitle("Backup directory")
-                        .setMessage("Directory inside /Internal storage/, e.g. .sketchware/backups")
+                        .setTitle(R.string.backup_directory)
+                        .setMessage(R.string.directory_inside_internal_storage)
                         .setNegativeButton(R.string.common_word_cancel, null)
                         .setPositiveButton(R.string.common_word_save, null)
                         .create();
@@ -231,7 +231,7 @@ public class ConfigActivity extends BaseAppCompatActivity {
                 if (installWithRoot.isChecked()) {
                     Shell.getShell(shell -> {
                         if (!shell.isRoot()) {
-                            Snackbar.make(snackbarView, "Couldn't acquire root access", BaseTransientBottomBar.LENGTH_SHORT).show();
+                            Snackbar.make(snackbarView, R.string.couldn_t_acquire_root_access, BaseTransientBottomBar.LENGTH_SHORT).show();
                             installWithRoot.setChecked(false);
                         }
                     });
@@ -248,8 +248,8 @@ public class ConfigActivity extends BaseAppCompatActivity {
 
                 AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
                         .setView(binding.getRoot())
-                        .setTitle("Backup filename format")
-                        .setMessage("This defines how SWB backup files get named.\n" +
+                        .setTitle(R.string.backup_filename_format)
+                        .setMessage(getString(R.string.this_defines_how_swb_backup_files_get_named) +
                                 "Available variables:\n" +
                                 " - $projectName - Project name\n" +
                                 " - $versionCode - App version code\n" +
@@ -263,7 +263,7 @@ public class ConfigActivity extends BaseAppCompatActivity {
                         .setPositiveButton(R.string.common_word_save, null)
                         .setNeutralButton(R.string.common_word_reset, (dialogInterface, which) -> {
                             getDataStore().putString(SETTING_BACKUP_FILENAME, null);
-                            Snackbar.make(snackbarView, "Reset to default complete.", BaseTransientBottomBar.LENGTH_SHORT).show();
+                            Snackbar.make(snackbarView, R.string.reset_to_default_complete, BaseTransientBottomBar.LENGTH_SHORT).show();
                         })
                         .create();
 
