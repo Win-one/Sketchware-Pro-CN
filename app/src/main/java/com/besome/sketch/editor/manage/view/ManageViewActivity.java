@@ -226,6 +226,7 @@ public class ManageViewActivity extends BaseAppCompatActivity implements OnClick
         if (!mB.a()) {
             int viewId = v.getId();
             if (viewId == R.id.btn_cancel) {
+                floatingActionButton.setVisibility(View.VISIBLE);
                 if (selecting) {
                     a(false);
                 }
@@ -307,6 +308,7 @@ public class ManageViewActivity extends BaseAppCompatActivity implements OnClick
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.menu_screen_delete) {
+            floatingActionButton.setVisibility(View.GONE);
             a(!selecting);
         }
         return super.onOptionsItemSelected(menuItem);

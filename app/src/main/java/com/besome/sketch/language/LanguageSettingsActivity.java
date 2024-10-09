@@ -3,14 +3,6 @@ package com.besome.sketch.language;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 
 import com.besome.sketch.MainActivity;
 import com.besome.sketch.SketchApplication;
@@ -21,7 +13,6 @@ import com.sketchware.remod.R;
 import com.sketchware.remod.databinding.ActivityLanguageSettingsBinding;
 
 import java.util.Locale;
-import java.util.Objects;
 
 import mod.hey.studios.util.Helper;
 
@@ -36,13 +27,15 @@ public class LanguageSettingsActivity extends BaseAppCompatActivity {
         binding.topAppBar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
         getAppLanguage();
 
-        binding.toggleLanguage.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.rb_chinese) {
-                changeLanguage("zh", "CN");
-            } else if (checkedId == R.id.rb_english) {
-                changeLanguage("en", "US");
-            } else {
-                changeLanguage("", "");
+        binding.toggleLanguage.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
+            if (isChecked) {
+                if (checkedId == R.id.rb_chinese) {
+                    changeLanguage("zh", "CN");
+                } else if (checkedId == R.id.rb_english) {
+                    changeLanguage("en", "US");
+                } else {
+                    changeLanguage("", "");
+                }
             }
         });
     }
@@ -50,17 +43,19 @@ public class LanguageSettingsActivity extends BaseAppCompatActivity {
     private void getAppLanguage() {
         int checkid = SpUtil.getInt("CheckID");
         if (checkid == R.id.rb_chinese) {
-            binding.rbChinese.setChecked(true);
+            binding.toggleLanguage.check(R.id.rb_chinese);
         } else if (checkid == R.id.rb_english) {
-            binding.rbEnglish.setChecked(true);
+            binding.toggleLanguage.check(R.id.rb_english);
+            ;
         } else {
-            binding.rbFollowSystem.setChecked(true);
+            binding.toggleLanguage.check(R.id.rb_follow_system);
+            ;
         }
     }
 
     //修改应用内语言设置
     private void changeLanguage(String language, String area) {
-        SpUtil.saveInt("CheckID", binding.toggleLanguage.getCheckedChipId());
+        SpUtil.saveInt("CheckID", binding.toggleLanguage.getCheckedButtonId());
         if (TextUtils.isEmpty(language) && TextUtils.isEmpty(area)) {
             //如果语言和地区都是空，那么跟随系统
             SpUtil.saveString(ConstantGlobal.LOCALE_LANGUAGE, "");

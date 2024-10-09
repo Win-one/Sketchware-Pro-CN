@@ -62,32 +62,38 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <com.google.android.material.chip.ChipGroup
+                    <com.google.android.material.button.MaterialButtonToggleGroup
                         android:id="@+id/toggleLanguage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_horizontal"
+                        app:checkedButton="@id/auto"
+                        app:selectionRequired="true"
                         app:singleSelection="true">
 
-                        <com.google.android.material.chip.Chip
+                        <Button
                             android:id="@+id/rb_follow_system"
+                            style="?attr/materialButtonOutlinedStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/follow_system" />
 
-                        <com.google.android.material.chip.Chip
+                        <Button
                             android:id="@+id/rb_chinese"
+                            style="?attr/materialButtonOutlinedStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/chinese" />
 
-                        <com.google.android.material.chip.Chip
+                        <Button
                             android:id="@+id/rb_english"
+                            style="?attr/materialButtonOutlinedStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/english" />
 
-                    </com.google.android.material.chip.ChipGroup>
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
 
                 </LinearLayout>
 

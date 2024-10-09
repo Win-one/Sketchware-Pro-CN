@@ -301,7 +301,8 @@
     <string name="design_manager_view_title_add_custom_view">新的自定义视图</string>
 
     <string name="design_manager_view_title_add_view">新活动</string>
-    <string name="design_manager_view_title_edit_view">修改活动</string>
+    <string name="design_manager_view_title_edit_activity">编辑活动</string>
+    <string name="design_manager_view_title_edit_view">编辑视图</string>
 
     <string name="design_manager_view_title_screen_orientation">屏幕方向</string>
     <string name="design_manager_view_title_keyboad_settings">键盘设置</string>
@@ -2991,7 +2992,7 @@
     <string name="descending_z_a">降序(Z-A)</string>
     <string name="version_code">版本代码</string>
     <string name="version_name">版本名称</string>
-    <string name="enter_activity_name">输入活动名称</string>
+    <string name="enter_view_name">输入视图名称</string>
     <string name="manage_screen_warning">警告:这对用户来说是一个有用的信息</string>
     <string name="common_word_type">类型</string>
     <string name="common_word_activated">激活</string>
@@ -3524,6 +3525,9 @@
     <string name="import_from_collection">从集合导入</string>
     <string name="file_blocks">文件块</string>
     <string name="simplified_chinese">简体中文</string>
+    <string name="screen_orientation">屏幕方向</string>
+    <string name="keyboard_settings">键盘设置</string>
+    <string name="enter_activity_name">输入活动名称</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

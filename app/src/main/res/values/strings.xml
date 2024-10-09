@@ -2218,7 +2218,7 @@ Please try again later"</string>
     <string name="descending_z_a">Descending(Z-A)</string>
     <string name="version_code">Version code</string>
     <string name="version_name">Version name</string>
-    <string name="enter_activity_name">Enter activity name</string>
+    <string name="enter_view_name">Enter view name</string>
     <string name="manage_screen_warning">Warning: this is a useful information for the user</string>
     <string name="common_word_type">Type</string>
     <string name="common_word_activated">Activated</string>
@@ -2708,5 +2708,8 @@ Please try again later"</string>
     <string name="import_from_collection">Import From Collection</string>
     <string name="file_blocks">File Blocks</string>
     <string name="simplified_chinese">Simplified Chinese</string>
+    <string name="screen_orientation">Screen orientation</string>
+    <string name="keyboard_settings">Keyboard settings</string>
+    <string name="enter_activity_name">Enter activity name</string>
 
 </resources>

@@ -149,7 +149,7 @@
                 android:id="@+id/ed_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter view name"
+                android:hint="@string/enter_view_name"
                 android:imeOptions="actionDone"
                 android:inputType="text"
                 android:lines="1" />
@@ -192,7 +192,7 @@
                         android:layout_marginTop="1dp"
                         android:layout_marginBottom="2dp"
                         android:layout_toEndOf="@+id/tipIcon"
-                        android:text="Important note"
+                        android:text="@string/important_note"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -220,7 +220,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:text="Type"
+                    android:gravity="center"
+                    android:text="@string/common_word_type"
                     android:textColor="?colorPrimary" />
 
                 <HorizontalScrollView
@@ -283,7 +284,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:text="Screen orientation"
+                    android:gravity="center"
+                    android:text="@string/screen_orientation"
                     android:textColor="?colorPrimary" />
 
 
@@ -335,7 +337,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:text="Keyboard settings"
+                    android:gravity="center"
+                    android:text="@string/keyboard_settings"
                     android:textColor="?colorPrimary" />
 
                 <com.google.android.material.button.MaterialButtonToggleGroup
