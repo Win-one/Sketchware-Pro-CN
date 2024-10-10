@@ -1,15 +1,5 @@
 package com.besome.sketch.editor.event;
 
-import a.a.a.bB;
-import a.a.a.dt;
-import a.a.a.gB;
-import a.a.a.jC;
-import a.a.a.mB;
-import a.a.a.oq;
-import a.a.a.rs;
-import a.a.a.wB;
-import a.a.a.xB;
-
 import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,6 +29,16 @@ import com.sketchware.remod.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import a.a.a.bB;
+import a.a.a.dt;
+import a.a.a.gB;
+import a.a.a.jC;
+import a.a.a.mB;
+import a.a.a.oq;
+import a.a.a.rs;
+import a.a.a.wB;
+import a.a.a.xB;
 
 public class AddEventActivity extends BaseAppCompatActivity implements View.OnClickListener {
     private ArrayList<EventBean> addableDrawerViewEvents;
@@ -306,16 +306,16 @@ public class AddEventActivity extends BaseAppCompatActivity implements View.OnCl
         categories.put(2, addableComponentEvents);
         categories.put(3, addableDrawerViewEvents);
         categories.put(4, addableEtcEvents);
-        event_list.setHasFixedSize(true);
+        //event_list.setHasFixedSize(true);
         event_list.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
         eventAdapter = new EventAdapter();
         event_list.setAdapter(eventAdapter);
-        category_list.setHasFixedSize(true);
+        //category_list.setHasFixedSize(true);
         categoryAdapter = new CategoryAdapter();
         category_list.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL, false));
         category_list.setAdapter(categoryAdapter);
         ((SimpleItemAnimator) category_list.getItemAnimator()).setSupportsChangeAnimations(false);
-        events_preview.setHasFixedSize(true);
+        //events_preview.setHasFixedSize(true);
         eventsToAddAdapter = new EventsToAddAdapter();
         events_preview.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL, false));
         events_preview.setAdapter(eventsToAddAdapter);

@@ -42,8 +42,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="-40dp"
         android:layout_marginRight="16dp"
+        android:layout_toStartOf="@+id/checkbox"
         android:layout_toRightOf="@+id/tv_sep"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -55,8 +56,9 @@
         android:layout_below="@+id/tv_target_id"
         android:layout_marginStart="56dp"
         android:layout_marginLeft="56dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="-40dp"
         android:layout_marginRight="16dp"
+        android:layout_toStartOf="@+id/checkbox"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 

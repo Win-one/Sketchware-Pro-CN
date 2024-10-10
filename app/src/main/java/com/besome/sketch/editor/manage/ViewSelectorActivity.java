@@ -193,7 +193,7 @@ public class ViewSelectorActivity extends BaseAppCompatActivity {
         RelativeLayout container = findViewById(R.id.container);
         adapter = new Adapter();
         list_xml.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
-        list_xml.setHasFixedSize(true);
+        //list_xml.setHasFixedSize(true);
         list_xml.setAdapter(adapter);
         viewTypeSelector.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
             if (isChecked) {

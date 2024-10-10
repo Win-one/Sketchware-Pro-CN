@@ -203,7 +203,7 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
     // if you change method name, you need also change it in layout
     public void showAddActivityDialog(View view) {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
-        dialog.setIcon(R.drawable.add_new_48_orange);
+        dialog.setIcon(R.drawable.add_new_24);
         dialog.setTitle(Helper.getResString(R.string.common_word_add_activtiy));
         DialogAddCustomActivityBinding addCustomActivityBinding = DialogAddCustomActivityBinding.inflate(getLayoutInflater());
 
@@ -316,7 +316,7 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         FileUtil.writeFile(path, new Gson().toJson(data));
         refreshList();
         removeComponents(activity_name);
-        SketchwareUtil.toast("Activity removed");
+        SketchwareUtil.toast(getString(R.string.activity_removed));
     }
 
     private void removeComponents(String str) {
