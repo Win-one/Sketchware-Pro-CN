@@ -111,7 +111,7 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
 
     private void readComponents(final String _path) {
         componentsList = new Gson().fromJson(FileUtil.readFile(_path), Helper.TYPE_MAP_LIST);
-        if (componentsList != null && componentsList.size() > 0) {
+        if (componentsList != null && !componentsList.isEmpty()) {
             ComponentsAdapter adapter = new ComponentsAdapter(componentsList);
             Parcelable state = binding.list.getLayoutManager().onSaveInstanceState();
             binding.list.setAdapter(adapter);

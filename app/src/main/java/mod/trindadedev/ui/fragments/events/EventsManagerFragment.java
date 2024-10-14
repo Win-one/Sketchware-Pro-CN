@@ -150,7 +150,7 @@ public class EventsManagerFragment extends BaseFragment {
         FilePickerDialog filePickerDialog = new FilePickerDialog(requireContext(), dialogProperties);
         filePickerDialog.setTitle(R.string.select_a_txt_file);
         filePickerDialog.setDialogSelectionListener(selections -> {
-            if (FileUtil.readFile(selections[0]).equals("")) {
+            if (FileUtil.readFile(selections[0]).isEmpty()) {
                 SketchwareUtil.toastError(Helper.getResString(R.string.the_selected_file_is_empty));
             } else if (FileUtil.readFile(selections[0]).equals("[]")) {
                 SketchwareUtil.toastError(Helper.getResString(R.string.the_selected_file_is_empty));

@@ -278,7 +278,7 @@ public class BlockSelectorActivity extends BaseAppCompatActivity implements View
     private void initializeLogic() {
         Helper.setViewsVisibility(true, binding.contai, binding.label);
         _readFile();
-        if (data.size() != 0) {
+        if (!data.isEmpty()) {
             _showItem(0);
         }
     }
@@ -296,7 +296,7 @@ public class BlockSelectorActivity extends BaseAppCompatActivity implements View
         filePickerDialog.setTitle(getString(R.string.select_a_json_file));
         filePickerDialog.setDialogSelectionListener(selections -> {
             String fileContent = FileUtil.readFile(selections[0]);
-            if (fileContent.equals("")) {
+            if (fileContent.isEmpty()) {
                 SketchwareUtil.toastError(getString(R.string.the_selected_file_is_empty));
             } else if (fileContent.equals("[]")) {
                 SketchwareUtil.toastError(getString(R.string.the_selected_file_is_empty));
@@ -315,7 +315,7 @@ public class BlockSelectorActivity extends BaseAppCompatActivity implements View
         data.addAll(menu);
         FileUtil.writeFile(BLOCK_SELECTOR_MENUS_FILE.getAbsolutePath(), new Gson().toJson(data));
         _readFile();
-        if (data.size() != 0) {
+        if (!data.isEmpty()) {
             _showItem(0);
         }
         SketchwareUtil.toast(getString(R.string.successfully_imported_menu));

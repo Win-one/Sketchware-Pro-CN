@@ -213,14 +213,37 @@ public class ViewEditor extends RelativeLayout implements View.OnClickListener, 
     }
 
     private void showPaletteFavorite() {
-        paletteWidget.setVisibility(View.GONE);
-        paletteFavorite.setVisibility(View.VISIBLE);
+        paletteWidget.animate()
+                .alpha(0f)
+                .setDuration(100)
+                .withEndAction(() -> {
+                    paletteWidget.setVisibility(View.GONE);
+                    paletteFavorite.setAlpha(0f);
+                    paletteFavorite.setVisibility(View.VISIBLE);
+                    paletteFavorite.animate()
+                            .alpha(1f)
+                            .setDuration(100)
+                            .start();
+                })
+                .start();
     }
 
     private void showPaletteWidget() {
-        paletteWidget.setVisibility(View.VISIBLE);
-        paletteFavorite.setVisibility(View.GONE);
+        paletteFavorite.animate()
+                .alpha(0f)
+                .setDuration(100)
+                .withEndAction(() -> {
+                    paletteFavorite.setVisibility(View.GONE);
+                    paletteWidget.setAlpha(0f);
+                    paletteWidget.setVisibility(View.VISIBLE);
+                    paletteWidget.animate()
+                            .alpha(1f)
+                            .setDuration(100)
+                            .start();
+                })
+                .start();
     }
+
 
     @Override
     public void onClick(View view) {
@@ -369,7 +392,7 @@ public class ViewEditor extends RelativeLayout implements View.OnClickListener, 
                     if (areImagesAdded) {
                         bB.a(getContext(), xB.b().a(getContext(), R.string.view_widget_favorites_image_auto_added), bB.TOAST_NORMAL).show();
                     }
-                    if (arrayList.size() > 0) {
+                    if (!arrayList.isEmpty()) {
                         HashMap<String, String> hashMap = new HashMap<>();
                         viewPane.a(arrayList.get(0), (int) motionEvent.getRawX(), (int) motionEvent.getRawY());
                         for (ViewBean next : arrayList) {
@@ -379,7 +402,7 @@ public class ViewEditor extends RelativeLayout implements View.OnClickListener, 
                                 hashMap.put(next.id, next.id);
                             }
                             next.id = hashMap.get(next.id);
-                            if (arrayList.indexOf(next) != 0 && (str = next.parent) != null && str.length() > 0) {
+                            if (arrayList.indexOf(next) != 0 && (str = next.parent) != null && !str.isEmpty()) {
                                 next.parent = hashMap.get(next.parent);
                             }
                             jC.a(a).a(b, next);

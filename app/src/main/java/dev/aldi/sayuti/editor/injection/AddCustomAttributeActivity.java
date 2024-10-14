@@ -27,8 +27,8 @@ import java.util.Objects;
 import mod.SketchwareUtil;
 import mod.agus.jcoderz.lib.FileUtil;
 import mod.hey.studios.util.Helper;
-import mod.remaker.view.CustomAttributeView;
 import mod.remaker.util.ThemeUtils;
+import mod.remaker.view.CustomAttributeView;
 
 public class AddCustomAttributeActivity extends AppCompatActivity {
 
@@ -60,7 +60,7 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
             widgetType = getIntent().getStringExtra("widget_type");
 
             activityInjectionsFilePath = FileUtil.getExternalStorageDir() + "/.sketchware/data/" + sc_id + "/injection/appcompat/" + activityFilename;
-            if (!FileUtil.isExistFile(activityInjectionsFilePath) || FileUtil.readFile(activityInjectionsFilePath).equals("")) {
+            if (!FileUtil.isExistFile(activityInjectionsFilePath) || FileUtil.readFile(activityInjectionsFilePath).isEmpty()) {
                 activityInjections = new Gson().fromJson(AppCompatInjection.getDefaultActivityInjections(), Helper.TYPE_MAP_LIST);
             } else {
                 activityInjections = new Gson().fromJson(FileUtil.readFile(activityInjectionsFilePath), Helper.TYPE_MAP_LIST);

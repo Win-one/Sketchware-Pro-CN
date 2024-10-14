@@ -187,7 +187,6 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             View inflate = getLayoutInflater().inflate(R.layout.color_picker, null);
             Zx zx = new Zx(inflate, this, 0, true, false);
             zx.a(new PCP(binding.colour));
-            zx.setAnimationStyle(R.anim.abc_fade_in);
             zx.showAtLocation(inflate, Gravity.CENTER, 0, 0);
         });
 
@@ -464,7 +463,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         tempMap.put("name", binding.name.getText().toString());
         if (binding.type.getText().toString().equals("regular")) {
             tempMap.put("type", " ");
-        } else if (binding.type.getText().toString().equals("")) {
+        } else if (binding.type.getText().toString().isEmpty()) {
             tempMap.put("type", " ");
         } else {
             tempMap.put("type", binding.type.getText().toString());
@@ -486,7 +485,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
     private void insertBlockAt(int position) {
         HashMap<String, Object> tempMap = new HashMap<>();
         tempMap.put("name", binding.name.getText().toString());
-        if (binding.type.getText().toString().equals("regular") || binding.type.getText().toString().equals("")) {
+        if (binding.type.getText().toString().equals("regular") || binding.type.getText().toString().isEmpty()) {
             tempMap.put("type", " ");
         } else {
             tempMap.put("type", binding.type.getText().toString());
@@ -508,7 +507,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
     private void editBlock(int position) {
         HashMap<String, Object> tempMap = blocksList.get(position);
         tempMap.put("name", binding.name.getText().toString());
-        if (binding.type.getText().toString().equals("regular") || binding.type.getText().toString().equals("")) {
+        if (binding.type.getText().toString().equals("regular") || binding.type.getText().toString().isEmpty()) {
             tempMap.put("type", " ");
         } else {
             tempMap.put("type", binding.type.getText().toString());
