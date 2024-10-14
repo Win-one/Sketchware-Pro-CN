@@ -2722,5 +2722,7 @@ Please try again later"</string>
     <string name="no_major_changes_yet">No major changes yet</string>
     <string name="we_will_update_this_section_once_we_have_major_changes_to_share">We will update this section once we have major changes to share</string>
     <string name="create_new_view">Create new view</string>
+    <string name="either_enter_a_hex_color_code_or_pick_a_color_from_the_list_below">Either enter a hex color code or pick a color from the list below.</string>
+    <string name="pick_your_color">Pick your color</string>
 
 </resources>
