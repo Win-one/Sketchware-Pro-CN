@@ -176,6 +176,11 @@ public class ImportIconActivity extends BaseAppCompatActivity implements View.On
                 setIconColor(ICON_COLOR_WHITE);
             }
         });
+        switch (iconType) {
+            case ICON_COLOR_GREY -> iconsButtonGroup.check(R.id.btn_grey);
+            case ICON_COLOR_WHITE -> iconsButtonGroup.check(R.id.btn_white);
+            default -> iconsButtonGroup.check(R.id.btn_black);
+        }
     }
 
     @Override
@@ -295,18 +300,18 @@ public class ImportIconActivity extends BaseAppCompatActivity implements View.On
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             // if (position == selectedIconPosition) {
-                // holder.background.setBackgroundColor(
-                        // MaterialColors.getColor(holder.background, R.attr.colorSurfaceContainer));
+            // holder.background.setBackgroundColor(
+            // MaterialColors.getColor(holder.background, R.attr.colorSurfaceContainer));
             // } else {
-                // boolean isDarkTheme = isDarkThemeEnabled(holder.background.getContext());
-                // if (isDarkTheme && (iconType == ICON_COLOR_BLACK || iconType == ICON_COLOR_GREY)) {
-                    // holder.background.setBackgroundColor(
-                            // MaterialColors.getColor(holder.background, R.attr.colorSurfaceInverse));
-                // }
-                // if (!isDarkTheme && iconType == ICON_COLOR_WHITE) {
-                    // holder.background.setBackgroundColor(
-                            // MaterialColors.getColor(holder.background, R.attr.colorSurfaceInverse));
-                // }
+            // boolean isDarkTheme = isDarkThemeEnabled(holder.background.getContext());
+            // if (isDarkTheme && (iconType == ICON_COLOR_BLACK || iconType == ICON_COLOR_GREY)) {
+            // holder.background.setBackgroundColor(
+            // MaterialColors.getColor(holder.background, R.attr.colorSurfaceInverse));
+            // }
+            // if (!isDarkTheme && iconType == ICON_COLOR_WHITE) {
+            // holder.background.setBackgroundColor(
+            // MaterialColors.getColor(holder.background, R.attr.colorSurfaceInverse));
+            // }
             // }
 
             holder.name.setText(getItem(position).first);
