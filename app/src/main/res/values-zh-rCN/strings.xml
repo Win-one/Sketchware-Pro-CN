@@ -3541,6 +3541,7 @@
     <string name="create_new_view">创建新视图</string>
     <string name="either_enter_a_hex_color_code_or_pick_a_color_from_the_list_below">输入十六进制颜色代码或从下面的列表中选择一种颜色.</string>
     <string name="pick_your_color">选择您的颜色</string>
+    <string name="main_activity_cannot_be_deleted">无法删除Main Activity</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->
