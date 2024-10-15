@@ -4,11 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
-import androidx.activity.EdgeToEdge;
 
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.besome.sketch.lib.ui.PropertyOneLineItem;
@@ -23,7 +20,7 @@ import a.a.a.mB;
 import a.a.a.wB;
 import mod.hey.studios.util.Helper;
 
-public class ProgramInfoActivity extends BaseAppCompatActivity implements OnClickListener {
+public class ProgramInfoActivity extends BaseAppCompatActivity {
 
     private static final int ITEM_SYSTEM_INFORMATION = 1;
     private static final int ITEM_DOCS_LOG = 4;
@@ -31,39 +28,56 @@ public class ProgramInfoActivity extends BaseAppCompatActivity implements OnClic
     private static final int ITEM_DISCORD = 6;
     private static final int ITEM_TELEGRAM = 8;
     private static final int ITEM_OPEN_SOURCE_LICENSES = 15;
-    private static final int ITEM_LANGUAGE = 16;
     private static final int ITEM_SUGGEST_IDEAS = 17;
-    private ProgramInfoBinding binding;
 
+    private ProgramInfoBinding binding;
 
     private void addTwoLineItem(int key, int name, int description) {
         addTwoLineItem(key, getString(name), getString(description));
     }
 
+    private void addTwoLineItem(int key, int name, int description, boolean hideDivider) {
+        addTwoLineItem(key, getString(name), getString(description), hideDivider);
+    }
+
     private void addTwoLineItem(int key, String name, String description) {
+        addTwoLineItem(key, name, description, false);
+    }
+
+    private void addTwoLineItem(int key, String name, String description, boolean hideDivider) {
         PropertyTwoLineItem item = new PropertyTwoLineItem(this);
         item.setKey(key);
         item.setName(name);
         item.setDesc(description);
+        item.setHideDivider(hideDivider);
         binding.content.addView(item);
-        item.setOnClickListener(this);
+        item.setOnClickListener(this::handleItem);
     }
 
     private void addSingleLineItem(int key, int name) {
         addSingleLineItem(key, getString(name));
     }
 
+    private void addSingleLineItem(int key, int name, boolean hideDivider) {
+        addSingleLineItem(key, getString(name), hideDivider);
+    }
+
     private void addSingleLineItem(int key, String name) {
+        addSingleLineItem(key, name, false);
+    }
+
+    private void addSingleLineItem(int key, String name, boolean hideDivider) {
         PropertyOneLineItem item = new PropertyOneLineItem(this);
         item.setKey(key);
         item.setName(name);
+        item.setHideDivider(hideDivider);
         binding.content.addView(item);
         if (key == ITEM_SYSTEM_INFORMATION || key == ITEM_OPEN_SOURCE_LICENSES) {
-            item.setOnClickListener(this);
+            item.setOnClickListener(this::handleItem);
         }
     }
 
-    private void resetDialog() {
+    private void resetDialog(View view) {
         aB dialog = new aB(this);
         dialog.b(Helper.getResString(R.string.program_information_reset_system_title));
         dialog.a(R.drawable.rollback_96);
@@ -85,13 +99,8 @@ public class ProgramInfoActivity extends BaseAppCompatActivity implements OnClic
         dialog.show();
     }
 
-    @Override
-    public void onClick(View v) {
+    private void handleItem(View v) {
         if (!mB.a()) {
-            if (v.getId() == R.id.btn_app_init) {
-                resetDialog();
-            }
-
             int key;
             if (v instanceof PropertyOneLineItem) {
                 key = ((PropertyOneLineItem) v).getKey();
@@ -114,8 +123,6 @@ public class ProgramInfoActivity extends BaseAppCompatActivity implements OnClic
                     case ITEM_SUGGEST_IDEAS -> openUrl(getString(R.string.link_ideas_url));
                     case ITEM_TELEGRAM -> openUrl(getString(R.string.link_telegram_invite));
                     case ITEM_DISCORD -> openUrl(getString(R.string.link_discord_invite));
-                    case ITEM_LANGUAGE ->
-                            openUrl("https://github.com/Win-one/Sketchware-Pro/tree/material-one");
                 }
             }
         }
@@ -123,29 +130,26 @@ public class ProgramInfoActivity extends BaseAppCompatActivity implements OnClic
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
+
         binding = ProgramInfoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.toolbar.setTitle(Helper.getResString(R.string.main_drawer_title_program_information));
         binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-
-        binding.tvSketchVer.setText(GB.e(getApplicationContext()));
-        binding.btnAppInit.setOnClickListener(this);
-
-        binding.btnAppUpgrade.setOnClickListener(view -> {
+        binding.appVersion.setText(GB.e(getApplicationContext()));
+        binding.btnReset.setOnClickListener(this::resetDialog);
+        binding.btnUpgrade.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.link_github_release)));
             startActivity(intent);
         });
+
         addTwoLineItem(ITEM_DOCS_LOG, R.string.program_information_title_docs, R.string.link_docs_url);
         addTwoLineItem(ITEM_SUGGEST_IDEAS, R.string.program_information_title_suggest_ideas, R.string.link_ideas_url);
         addSingleLineItem(ITEM_SOCIAL_NETWORK, R.string.title_community);
         addTwoLineItem(ITEM_DISCORD, R.string.title_discord_community, R.string.link_discord_invite);
         addTwoLineItem(ITEM_TELEGRAM, R.string.title_telegram_community, R.string.link_telegram_invite);
-        addTwoLineItem(ITEM_LANGUAGE, getString(R.string.simplified_chinese), "Win-one");
         addSingleLineItem(ITEM_SYSTEM_INFORMATION, R.string.program_information_title_system_information);
-        addSingleLineItem(ITEM_OPEN_SOURCE_LICENSES, R.string.program_information_title_open_source_license);
+        addSingleLineItem(ITEM_OPEN_SOURCE_LICENSES, R.string.program_information_title_open_source_license, true);
     }
 
     private void toLicenseActivity() {
@@ -164,5 +168,4 @@ public class ProgramInfoActivity extends BaseAppCompatActivity implements OnClic
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
     }
-
 }
