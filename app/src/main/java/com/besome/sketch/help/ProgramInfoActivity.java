@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import androidx.activity.EdgeToEdge;
+
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.besome.sketch.lib.ui.PropertyOneLineItem;
 import com.besome.sketch.lib.ui.PropertyTwoLineItem;
@@ -28,6 +30,7 @@ public class ProgramInfoActivity extends BaseAppCompatActivity {
     private static final int ITEM_DISCORD = 6;
     private static final int ITEM_TELEGRAM = 8;
     private static final int ITEM_OPEN_SOURCE_LICENSES = 15;
+    private static final int ITEM_LANGUAGE = 16;
     private static final int ITEM_SUGGEST_IDEAS = 17;
 
     private ProgramInfoBinding binding;
@@ -123,6 +126,8 @@ public class ProgramInfoActivity extends BaseAppCompatActivity {
                     case ITEM_SUGGEST_IDEAS -> openUrl(getString(R.string.link_ideas_url));
                     case ITEM_TELEGRAM -> openUrl(getString(R.string.link_telegram_invite));
                     case ITEM_DISCORD -> openUrl(getString(R.string.link_discord_invite));
+                    case ITEM_LANGUAGE ->
+                            openUrl("https://github.com/Win-one/Sketchware-Pro/tree/material-one");
                 }
             }
         }
@@ -131,10 +136,11 @@ public class ProgramInfoActivity extends BaseAppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        EdgeToEdge.enable(this);
         binding = ProgramInfoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.toolbar.setTitle(Helper.getResString(R.string.main_drawer_title_program_information));
         binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
         binding.appVersion.setText(GB.e(getApplicationContext()));
         binding.btnReset.setOnClickListener(this::resetDialog);
@@ -148,6 +154,7 @@ public class ProgramInfoActivity extends BaseAppCompatActivity {
         addSingleLineItem(ITEM_SOCIAL_NETWORK, R.string.title_community);
         addTwoLineItem(ITEM_DISCORD, R.string.title_discord_community, R.string.link_discord_invite);
         addTwoLineItem(ITEM_TELEGRAM, R.string.title_telegram_community, R.string.link_telegram_invite);
+        addTwoLineItem(ITEM_LANGUAGE, getString(R.string.simplified_chinese), "Win-one");
         addSingleLineItem(ITEM_SYSTEM_INFORMATION, R.string.program_information_title_system_information);
         addSingleLineItem(ITEM_OPEN_SOURCE_LICENSES, R.string.program_information_title_open_source_license, true);
     }
