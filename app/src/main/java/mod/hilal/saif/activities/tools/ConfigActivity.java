@@ -203,6 +203,7 @@ public class ConfigActivity extends BaseAppCompatActivity {
                 binding.chipGroupTypes.setVisibility(View.GONE);
                 AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
                         .setView(binding.getRoot())
+                        .setIcon(R.drawable.ic_folder_48dp)
                         .setTitle(R.string.backup_directory)
                         .setMessage(R.string.directory_inside_internal_storage)
                         .setNegativeButton(R.string.common_word_cancel, null)
@@ -248,6 +249,7 @@ public class ConfigActivity extends BaseAppCompatActivity {
 
                 AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
                         .setView(binding.getRoot())
+                        .setIcon(R.drawable.ic_type_file)
                         .setTitle(R.string.backup_filename_format)
                         .setMessage(getString(R.string.this_defines_how_swb_backup_files_get_named) +
                                 "Available variables:\n" +
