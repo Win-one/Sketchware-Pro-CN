@@ -2199,12 +2199,10 @@ Please try again later"</string>
     <string name="review_firebase_config_title">Review</string>
     <string name="edit_view_properties_title">Edit Properties</string>
     <string name="search_in_palettes_dialog_title">Search palettes</string>
-    <string name="search">Search</string>
     <string name="cancel">Cancel</string>
     <string name="restore">Restore</string>
     <string name="searching">Searching…</string>
-    <string name="restoring">Restoring…</string>
-    <string name="search_error_message">Nothing found,\ntry again with something else</string>
+    <string name="search_error_message">Nothing found, try again with something else</string>
     <string name="search_header">"  Search…"</string>
     <string name="developer_tools_logcat_reader">Logcat Reader</string>
 
@@ -2629,7 +2627,7 @@ Please try again later"</string>
     <string name="finished_exporting_aab">Finished exporting AAB</string>
     <string name="you_can_find_the_generated_signed_aab_file">You can find the generated, signed AAB file at:\n</string>
     <string name="this_sketchware_pro_version_doesn_t_support_building_aabs">"This Sketchware Pro version doesn't support building AABs as it must work on "</string>
-    <string name="instead">" instead."</string>
+    <string name="instead">instead.</string>
     <string name="the_generated_aab_file_must_be_signed">The generated .aab file must be signed.\nCopy your keystore to /Internal storage/sketchware/keystore/release_key.jks and enter the alias\' password.</string>
     <string name="signing_mode">Signing mode</string>
     <string name="new_menu">New menu:</string>
@@ -2733,5 +2731,14 @@ Please try again later"</string>
     <string name="either_enter_a_hex_color_code_or_pick_a_color_from_the_list_below">Either enter a hex color code or pick a color from the list below.</string>
     <string name="pick_your_color">Pick your color</string>
     <string name="main_activity_cannot_be_deleted">Main activity cannot be deleted</string>
+    <string name="string_editor">String Editor</string>
+    <string name="you_have_unsaved_changes_are_you_sure_you_want_to_exit">You have unsaved changes. Are you sure you want to exit?</string>
+    <string name="add_a_new_string">Add a new string</string>
+    <string name="get_default_strings">Get default strings</string>
+    <string name="open_in_editor">Open in editor</string>
+    <string name="create_new_string">Create new string</string>
+    <string name="please_fill_in_all_fields">Please fill in all fields</string>
+    <string name="edit_string">Edit string</string>
+    <string name="block_preview_click_to_edit">Block preview (click to edit)</string>
 
 </resources>

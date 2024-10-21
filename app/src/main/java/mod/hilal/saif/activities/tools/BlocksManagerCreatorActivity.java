@@ -170,7 +170,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
                     } catch (Exception ignored) {
                     }
                     try {
-                        binding.spec.getEditableText().setSpan(new RelativeSizeSpan(-5),
+                        binding.spec.getEditableText().setSpan(new RelativeSizeSpan(1),
                                 matcher.start(), matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     } catch (Exception ignored) {
                     }

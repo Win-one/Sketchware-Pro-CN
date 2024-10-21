@@ -116,7 +116,7 @@ public class BlocksManager extends BaseAppCompatActivity {
 
     private void showBlockConfigurationDialog() {
         aB dialog = new aB(this);
-        dialog.a(R.drawable.ic_folder_48dp);
+        dialog.a(R.drawable.services_48);
         dialog.b(getString(R.string.block_configuration));
 
         DialogBlockConfigurationBinding dialogBinding = DialogBlockConfigurationBinding.inflate(getLayoutInflater());

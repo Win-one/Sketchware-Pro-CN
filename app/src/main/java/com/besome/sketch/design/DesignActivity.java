@@ -977,13 +977,13 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                     return;
                 }
 
-                onProgress("Extracting built-in libraries...");
+                onProgress(activity.getString(R.string.extracting_built_in_libraries));
                 BuiltInLibraries.extractCompileAssets(this);
                 if (canceled) {
                     return;
                 }
 
-                onProgress("AAPT2 is running...");
+                onProgress(activity.getString(R.string.aapt2_is_running));
                 builder.compileResources();
                 if (canceled) {
                     return;
@@ -994,7 +994,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                     return;
                 }
 
-                onProgress("Java is compiling...");
+                onProgress(activity.getString(R.string.java_is_compiling));
                 builder.compileJavaCode();
                 if (canceled) {
                     return;
@@ -1018,19 +1018,19 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                     return;
                 }
 
-                onProgress("Merging DEX files...");
+                onProgress(activity.getString(R.string.merging_dex_files));
                 builder.getDexFilesReady();
                 if (canceled) {
                     return;
                 }
 
-                onProgress("Building APK...");
+                onProgress(activity.getString(R.string.building_apk));
                 builder.buildApk();
                 if (canceled) {
                     return;
                 }
 
-                onProgress("Signing APK...");
+                onProgress(activity.getString(R.string.signing_apk));
                 builder.signDebugApk();
                 if (canceled) {
                     return;
@@ -1120,8 +1120,8 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                             canceled = true;
                         }
                         dialog.show();
-                        activity.runProject.setText("Canceling build...");
-                        onProgress("Canceling build...");
+                        activity.runProject.setText(R.string.canceling_build);
+                        onProgress(activity.getString(R.string.canceling_build));
                     }
                     cancelDialog.dismiss();
                 });
