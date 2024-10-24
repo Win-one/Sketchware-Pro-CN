@@ -3557,6 +3557,14 @@
     <string name="please_fill_in_all_fields">请填写所有字段</string>
     <string name="edit_string">编辑字符串</string>
     <string name="block_preview_click_to_edit">块预览(点击可编辑)</string>
+    <string name="project_name">项目名称</string>
+    <string name="description">描述</string>
+    <string name="this_is_still_a_basic_implementation_of_the_projects_store">这仍然是项目商店的基本实现.我们正在积极努力改进它.敬请期待!</string>
+    <string name="editor_s_choice">编辑推荐</string>
+    <string name="most_downloaded_projects">下载次数最多的项目</string>
+    <string name="recent_projects">最近的项目</string>
+    <string name="invalid_hex_color">无效的十六进制颜色</string>
+    <string name="invalid_block_params">无效的块参数</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

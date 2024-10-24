@@ -77,7 +77,7 @@ public class BlocksManager extends BaseAppCompatActivity {
         getSupportActionBar().setTitle(R.string.block_manager);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        toolbar.setNavigationOnClickListener(view -> getOnBackPressedDispatcher().onBackPressed());
         binding.background.addView(toolbar, 0);
 
         binding.fab.setOnClickListener(v -> showPaletteDialog(false, null, null, null, null));

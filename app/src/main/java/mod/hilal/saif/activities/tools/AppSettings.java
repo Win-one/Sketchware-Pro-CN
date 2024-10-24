@@ -52,7 +52,7 @@ public class AppSettings extends BaseAppCompatActivity {
         binding = PrefencesContentAppbarBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.topAppBar.setTitle(R.string.developer_tools);
-        binding.topAppBar.setNavigationOnClickListener(view -> onBackPressed());
+        binding.topAppBar.setNavigationOnClickListener(view -> getOnBackPressedDispatcher().onBackPressed());
         setupViews();
     }
 

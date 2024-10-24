@@ -2740,5 +2740,13 @@ Please try again later"</string>
     <string name="please_fill_in_all_fields">Please fill in all fields</string>
     <string name="edit_string">Edit string</string>
     <string name="block_preview_click_to_edit">Block preview (click to edit)</string>
+    <string name="project_name">Project name</string>
+    <string name="description">Description</string>
+    <string name="this_is_still_a_basic_implementation_of_the_projects_store">This is still a basic implementation of the projects store. We\'re actively working on improving it. Stay tuned!</string>
+    <string name="editor_s_choice">Editor\'s choice</string>
+    <string name="most_downloaded_projects">Most downloaded projects</string>
+    <string name="recent_projects">Recent projects</string>
+    <string name="invalid_hex_color">Invalid hex color</string>
+    <string name="invalid_block_params">Invalid block params</string>
 
 </resources>

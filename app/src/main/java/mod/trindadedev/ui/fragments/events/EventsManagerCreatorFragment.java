@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
@@ -181,11 +180,10 @@ public class EventsManagerCreatorFragment extends Fragment {
         if (isEdit) {
             binding.toolbar.setTitle(event_name);
         } else if (isActivityEvent) {
-            binding.toolbar.setTitle(R.string.create_a_new_activity_event);
+            binding.toolbar.setTitle(getString(R.string.create_a_new_activity_event));
         } else {
-            binding.toolbar.setTitle(lisName + R.string.create_a_new_event);
+            binding.toolbar.setTitle(lisName + getString(R.string.create_a_new_event));
         }
-        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(requireActivity()));
-        ((AppCompatActivity) requireActivity()).setSupportActionBar(binding.toolbar);
+        binding.toolbar.setNavigationOnClickListener(view -> getParentFragmentManager().popBackStack());
     }
 }
