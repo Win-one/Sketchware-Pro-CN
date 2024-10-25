@@ -26,6 +26,7 @@ import a.a.a.mB;
 import dev.chrisbanes.insetter.Insetter;
 import dev.chrisbanes.insetter.Side;
 import mod.hilal.saif.activities.tools.AppSettings;
+import mod.trindadedev.ui.activities.SettingsActivity;
 import pro.sketchware.activities.about.AboutActivity;
 
 public class MainDrawer extends NavigationView {

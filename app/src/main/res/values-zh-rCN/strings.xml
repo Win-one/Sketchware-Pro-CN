@@ -3565,6 +3565,8 @@
     <string name="recent_projects">最近的项目</string>
     <string name="invalid_hex_color">无效的十六进制颜色</string>
     <string name="invalid_block_params">无效的块参数</string>
+    <string name="strings_xml">strings.xml</string>
+    <string name="xml_strings">XML Strings</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

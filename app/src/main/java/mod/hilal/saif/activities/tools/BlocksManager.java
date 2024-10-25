@@ -335,9 +335,10 @@ public class BlocksManager extends BaseAppCompatActivity {
 
     private View.OnClickListener getSharedPaletteColorPickerShower(Dialog dialog, EditText storePickedResultIn) {
         return v -> {
+            final View view = getLayoutInflater().inflate(R.layout.color_picker, null);
             final Zx zx = new Zx(this, 0, true, false);
             zx.a(new PCP(this, storePickedResultIn, dialog));
-            zx.showAtLocation(v, Gravity.CENTER, 0, 0);
+            zx.showAtLocation(view, Gravity.CENTER, 0, 0);
             dialog.dismiss();
         };
     }
