@@ -122,7 +122,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
     private ImageView xmlLayoutOrientation;
     private boolean B;
     private int currentTabNumber;
-    private String sc_id;
+    public static String sc_id;
     private CustomViewPager viewPager;
     private CoordinatorLayout coordinatorLayout;
     private DrawerLayout drawer;
@@ -545,6 +545,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
     @Override
     public void onResume() {
         super.onResume();
+        reloadViewEditor();
         if (!isStoragePermissionGranted()) {
             finish();
         }
@@ -875,6 +876,13 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
             }
         }
         launchActivity(SrcViewerActivity.class, null, new Pair<>("current", current));
+    }
+
+    public void reloadViewEditor() {
+        if (viewPager.getCurrentItem() == 0
+                && viewTabAdapter != null) {
+            viewTabAdapter.i();
+        }
     }
 
     @SafeVarargs

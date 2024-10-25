@@ -79,7 +79,7 @@
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.SketchwarePro.SmallToolbar" />
         <activity
-            android:name="com.besome.sketch.MainActivity"
+            android:name="pro.sketchware.activities.main.activities.MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:theme="@style/Theme.SketchwarePro.Starting">
@@ -290,7 +290,7 @@
             android:name="mod.hilal.saif.activities.tools.AppSettings"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name="mod.ilyasse.activities.about.AboutActivity"
+            android:name="pro.sketchware.activities.about.AboutActivity"
             android:configChanges="orientation|screenSize" />
         <activity android:name="mod.jbk.editor.manage.library.ExcludeBuiltInLibrariesActivity" />
         <activity
@@ -303,7 +303,7 @@
             android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize" />
 
         <activity
-            android:name="com.besome.sketch.fragments.projects_store.ProjectPreviewActivity"
+            android:name="pro.sketchware.activities.main.fragments.projects_store.ProjectPreviewActivity"
             android:configChanges="orientation|screenSize" />
 
         <activity android:name="mod.trindadedev.ui.activities.SettingsActivity" />
