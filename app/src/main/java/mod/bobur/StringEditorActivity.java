@@ -28,6 +28,7 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -38,6 +39,7 @@ import mod.SketchwareUtil;
 import mod.agus.jcoderz.lib.FileUtil;
 import mod.hey.studios.code.SrcCodeEditor;
 import mod.hey.studios.code.SrcCodeEditorLegacy;
+import mod.hey.studios.editor.manage.block.v2.BlockLoader;
 import mod.hilal.saif.activities.tools.ConfigActivity;
 
 public class StringEditorActivity extends AppCompatActivity {
@@ -46,6 +48,7 @@ public class StringEditorActivity extends AppCompatActivity {
     private MaterialAlertDialogBuilder dialog;
     private StringEditorBinding binding;
     private RecyclerViewAdapter adapter;
+    private boolean isComingFromAnotherActivity = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +68,19 @@ public class StringEditorActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        convertXmlToListMap(FileUtil.readFile(getIntent().getStringExtra("content")), listmap);
-        adapter = new RecyclerViewAdapter(listmap);
-        binding.recyclerView.setAdapter(adapter);
         super.onResume();
+        if (!isComingFromAnotherActivity) {
+            convertXmlToListMap(FileUtil.readFile(getIntent().getStringExtra("content")), listmap);
+            adapter = new RecyclerViewAdapter(listmap);
+            binding.recyclerView.setAdapter(adapter);
+        }
+        isComingFromAnotherActivity = false;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isComingFromAnotherActivity = true;
     }
 
     @Override
@@ -77,10 +89,10 @@ public class StringEditorActivity extends AppCompatActivity {
                 .equals(replaceXml(convertListMapToXml(listmap))) || listmap.isEmpty()) {
             finish();
         } else {
-            dialog.setTitle("Warning")
-                    .setMessage("You have unsaved changes. Are you sure you want to exit?")
-                    .setPositiveButton("Exit", (dialog, which) -> super.onBackPressed())
-                    .setNegativeButton("Cancel", null)
+            dialog.setTitle(R.string.common_word_warning)
+                    .setMessage(R.string.you_have_unsaved_changes_are_you_sure_you_want_to_exit)
+                    .setPositiveButton(R.string.common_word_exit, (dialog, which) -> super.onBackPressed())
+                    .setNegativeButton(R.string.common_word_cancel, null)
                     .create()
                     .show();
         }
@@ -88,20 +100,20 @@ public class StringEditorActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        menu.add(0, 0, 0, "Add a new string")
+        menu.add(0, 0, 0, R.string.add_a_new_string)
                 .setIcon(R.drawable.ic_add_24)
                 .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
 
-        menu.add(0, 1, 0, "Save")
+        menu.add(0, 1, 0, R.string.common_word_save)
                 .setIcon(R.drawable.save_icon_24px)
                 .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         if (!checkDefaultString(getIntent().getStringExtra("content"))) {
-            menu.add(0, 2, 0, "Get default strings")
+            menu.add(0, 2, 0, R.string.get_default_strings)
                     .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_NEVER);
         }
 
-        menu.add(0, 3, 0, "Open in editor")
+        menu.add(0, 3, 0, R.string.open_in_editor)
                 .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_NEVER);
 
         return super.onCreateOptionsMenu(menu);
@@ -133,7 +145,7 @@ public class StringEditorActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void convertXmlToListMap(final String xmlString, final ArrayList<HashMap<String, Object>> listmap) {
+    public static void convertXmlToListMap(final String xmlString, final ArrayList<HashMap<String, Object>> listmap) {
         try {
             listmap.clear();
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -162,6 +174,15 @@ public class StringEditorActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static boolean isXmlStringsContains(ArrayList<HashMap<String, Object>> listMap, String value) {
+        for (Map<String, Object> map : listMap) {
+            if (map.containsKey("key") && value.equals(map.get("key"))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public String convertListMapToXml(final ArrayList<HashMap<String, Object>> listmap) {
@@ -204,19 +225,20 @@ public class StringEditorActivity extends AppCompatActivity {
 
     public void saveXml() {
         FileUtil.writeFile(getIntent().getStringExtra("content"), convertListMapToXml(listmap));
+        BlockLoader.refresh();
         SketchwareUtil.toast("Save completed", Toast.LENGTH_SHORT);
     }
 
     public void addStringDialog() {
         aB dialog = new aB(this);
         ViewStringEditorAddBinding binding = ViewStringEditorAddBinding.inflate(LayoutInflater.from(this));
-        dialog.b("Create new string");
-        dialog.b("Create", v1 -> {
+        dialog.b(getString(R.string.create_new_string));
+        dialog.b(getString(R.string.common_word_create), v1 -> {
             String key = Objects.requireNonNull(binding.stringKeyInput.getText()).toString();
             String value = Objects.requireNonNull(binding.stringValueInput.getText()).toString();
 
             if (key.isEmpty() || value.isEmpty()) {
-                SketchwareUtil.toast("Please fill in all fields", Toast.LENGTH_SHORT);
+                SketchwareUtil.toast(getString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT);
                 return;
             }
 
@@ -244,6 +266,7 @@ public class StringEditorActivity extends AppCompatActivity {
                 return;
             }
         }
+        listmap.add(map);
         adapter.notifyItemInserted(listmap.size() - 1);
     }
 
@@ -290,12 +313,12 @@ public class StringEditorActivity extends AppCompatActivity {
                 dialogBinding.stringKeyInput.setText((String) currentItem.get("key"));
                 dialogBinding.stringValueInput.setText((String) currentItem.get("text"));
 
-                dialog.b("Edit string");
-                dialog.b("Save", v1 -> {
+                dialog.b(getString(R.string.edit_string));
+                dialog.b(getString(R.string.common_word_save), v1 -> {
                     String keyInput = Objects.requireNonNull(dialogBinding.stringKeyInput.getText()).toString();
                     String valueInput = Objects.requireNonNull(dialogBinding.stringValueInput.getText()).toString();
                     if (keyInput.isEmpty() || valueInput.isEmpty()) {
-                        SketchwareUtil.toast("Please fill in all fields", Toast.LENGTH_SHORT);
+                        SketchwareUtil.toast(getString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT);
                         return;
                     }
                     if (keyInput.equals(key) && valueInput.equals(text)) {
@@ -308,7 +331,7 @@ public class StringEditorActivity extends AppCompatActivity {
                     dialog.dismiss();
                 });
 
-                dialog.configureDefaultButton("Delete", v1 -> {
+                dialog.configureDefaultButton(getString(R.string.common_word_delete), v1 -> {
                     data.remove(adapterPosition);
                     notifyItemRemoved(adapterPosition);
                     dialog.dismiss();

@@ -77,7 +77,7 @@ public class BlocksManager extends BaseAppCompatActivity {
         getSupportActionBar().setTitle(R.string.block_manager);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        toolbar.setNavigationOnClickListener(view -> getOnBackPressedDispatcher().onBackPressed());
         binding.background.addView(toolbar, 0);
 
         binding.fab.setOnClickListener(v -> showPaletteDialog(false, null, null, null, null));
@@ -116,7 +116,7 @@ public class BlocksManager extends BaseAppCompatActivity {
 
     private void showBlockConfigurationDialog() {
         aB dialog = new aB(this);
-        dialog.a(R.drawable.ic_folder_48dp);
+        dialog.a(R.drawable.services_48);
         dialog.b(getString(R.string.block_configuration));
 
         DialogBlockConfigurationBinding dialogBinding = DialogBlockConfigurationBinding.inflate(getLayoutInflater());
@@ -335,9 +335,10 @@ public class BlocksManager extends BaseAppCompatActivity {
 
     private View.OnClickListener getSharedPaletteColorPickerShower(Dialog dialog, EditText storePickedResultIn) {
         return v -> {
+            final View view = getLayoutInflater().inflate(R.layout.color_picker, null);
             final Zx zx = new Zx(this, 0, true, false);
             zx.a(new PCP(this, storePickedResultIn, dialog));
-            zx.showAtLocation(v, Gravity.CENTER, 0, 0);
+            zx.showAtLocation(view, Gravity.CENTER, 0, 0);
             dialog.dismiss();
         };
     }

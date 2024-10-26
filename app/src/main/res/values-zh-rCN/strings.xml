@@ -2417,8 +2417,8 @@
     <string name="shared_views_detail_message_dialog_delete_my_shared_view">要删除此视图吗?</string>
     <string name="shared_views_detail_message_already_liked_view">已经喜欢此视图</string>
 
-    <string name="shared_blocks_detail_title_block_detail">阻止细节</string>
-    <string name="shared_blocks_detail_see_more_blocks">查看组合块 %s</string>
+    <string name="shared_blocks_detail_title_block_detail">块详情</string>
+    <string name="shared_blocks_detail_see_more_blocks">查看组合块%s</string>
     <string name="shared_blocks_detail_title_dialog_delete_my_shared_blocks">删除共享块</string>
     <string name="shared_blocks_detail_message_dialog_delete_my_shared_blocks">要删除此块吗?</string>
     <string name="shared_blocks_detail_message_already_liked_blocks">已经喜欢此块</string>
@@ -2441,7 +2441,7 @@
     <string name="shared_collection_message_recommend_no_data">没有建议显示</string>
 
     <string name="shared_view_preview_title">查看预览</string>
-    <string name="shared_block_preview_title">阻止预览</string>
+    <string name="shared_block_preview_title">块预览</string>
 
     <string name="shared_collection_message_download_complete">下载完成</string>
     <string name="shared_collection_message_download_fail">下载失败</string>
@@ -2876,6 +2876,8 @@
     <string name="code_shrinker_full_mode_def">使用它，您可以配置要包含在R8/ProGuarding进程中的特定本地库. (注意:启用此选项将忽略您选择的本地库的DEX文件,并强制Sketchware Pro将它们编译为dex,从而使编译速度明显变慢.)</string>
     <string name="code_shrinker_generate_debug_files">生成调试文件</string>
 
+    <string name="search_error_message">未找到任何内容,请使用其他内容重试</string>
+    <string name="search_header">搜索…</string>
     <string name="developer_tools_logcat_reader">日志阅读器</string>
     <string name="title_besome_blog">Medium</string>
     <string name="title_community">社交网络</string>
@@ -3343,7 +3345,8 @@
     <string name="file_saved">文件已保存</string>
     <string name="error_your_code_contains_incorrectly_nested_parentheses">错误:您的代码包含不正确的嵌套括号</string>
     <string name="select_a_more_block">选择更多块</string>
-    <string name="search">搜索...</string>
+    <string name="search_in_palettes_dialog_title">搜索调色板</string>
+    <string name="search">搜索中...</string>
     <string name="this_is_a_simple_description">这是一个简单的描述</string>
     <string name="variable_name">变量名称</string>
     <string name="select_an_asset_file">选择asset文件</string>
@@ -3423,6 +3426,9 @@
     <string name="include_used_custom_blocks">包含已使用的自定义块</string>
     <string name="creating_backup">创建备份中...</string>
     <string name="successfully_created_backup_to">已成功创建备份到:</string>
+    <string name="cancel">取消</string>
+    <string name="restore">恢复</string>
+    <string name="searching">搜索中...</string>
     <string name="restoring">恢复中...</string>
     <string name="couldn_t_restore">无法恢复:</string>
     <string name="restored_successfully">恢复成功</string>
@@ -3492,7 +3498,7 @@
     <string name="name_cannot_be_empty">名称不能为空</string>
     <string name="color_cannot_be_empty">颜色不能为空</string>
     <string name="malformed_hexadecimal_color">格式错误的十六进制颜色</string>
-    <string name="block_embedded_code">阻止嵌入代码</string>
+    <string name="block_embedded_code">嵌入代码块</string>
     <string name="failed_to_sign_apk_with_zipsigner">无法使用zipsigner对APK进行签名:</string>
     <string name="custom_android_jar">自定义android.jar</string>
     <string name="classpath_separated_by">类路径 \'以:分隔\'</string>
@@ -3542,7 +3548,25 @@
     <string name="either_enter_a_hex_color_code_or_pick_a_color_from_the_list_below">输入十六进制颜色代码或从下面的列表中选择一种颜色.</string>
     <string name="pick_your_color">选择您的颜色</string>
     <string name="main_activity_cannot_be_deleted">无法删除Main Activity</string>
-    <string name="design_manager_message_service">您无法编辑服务</string>
+    <string name="string_editor">字符串编辑器</string>
+    <string name="you_have_unsaved_changes_are_you_sure_you_want_to_exit">您有未保存的更改.您确定要退出吗?</string>
+    <string name="add_a_new_string">添加新字符串</string>
+    <string name="get_default_strings">获取默认字符串</string>
+    <string name="open_in_editor">在编辑器中打开</string>
+    <string name="create_new_string">创建新字符串</string>
+    <string name="please_fill_in_all_fields">请填写所有字段</string>
+    <string name="edit_string">编辑字符串</string>
+    <string name="block_preview_click_to_edit">块预览(点击可编辑)</string>
+    <string name="project_name">项目名称</string>
+    <string name="description">描述</string>
+    <string name="this_is_still_a_basic_implementation_of_the_projects_store">这仍然是项目商店的基本实现.我们正在积极努力改进它.敬请期待!</string>
+    <string name="editor_s_choice">编辑推荐</string>
+    <string name="most_downloaded_projects">下载次数最多的项目</string>
+    <string name="recent_projects">最近的项目</string>
+    <string name="invalid_hex_color">无效的十六进制颜色</string>
+    <string name="invalid_block_params">无效的块参数</string>
+    <string name="strings_xml">strings.xml</string>
+    <string name="xml_strings">XML Strings</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->
