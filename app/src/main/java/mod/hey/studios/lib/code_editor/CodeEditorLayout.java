@@ -35,8 +35,7 @@ import java.util.regex.Matcher;
 
 import a.a.a.Lx;
 import a.a.a.wB;
-import mod.SketchwareUtil;
-import mod.hey.studios.util.Helper;
+import pro.sketchware.utility.SketchwareUtil;
 
 /**
  * A lightweight Code Editor with syntax highlighting, auto indentation, word wrap and lines.
