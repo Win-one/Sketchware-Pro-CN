@@ -3567,6 +3567,16 @@
     <string name="invalid_block_params">无效的块参数</string>
     <string name="strings_xml">strings.xml</string>
     <string name="xml_strings">XML Strings</string>
+    <string name="select_a_resstring">选择ResString</string>
+
+    <string name="create_new_widget">创建组件</string>
+    <string name="create">创建</string>
+    <string name="var_is_required">%s是必需的</string>
+    <string name="widget_type_title">组件类型</string>
+    <string name="new_class">或创建新类别</string>
+    <string name="add_to">添加到类别</string>
+    <string name="filter_icons">筛选图标</string>
+    <string name="filter">筛选</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

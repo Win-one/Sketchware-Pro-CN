@@ -592,7 +592,7 @@ public class ExtraMenuBean {
                 break;
 
             case "ResString":
-                title = "Select a ResString";
+                title = Helper.getResString(R.string.select_a_resstring);
 
                 String filePath = new FilePathUtil().getPathResource(sc_id) + "/values/strings.xml";
 

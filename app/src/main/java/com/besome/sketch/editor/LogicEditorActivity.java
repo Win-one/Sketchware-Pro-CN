@@ -126,7 +126,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
     private final int[] v = new int[2];
     public ProjectFileBean M;
     private PaletteSelector l;
-    private Toolbar k;
+    private Toolbar toolbar;
     public PaletteBlock m;
     public BlockPane o;
     private ArrayList<MoreBlockCollectionBean> pa;
@@ -1870,8 +1870,8 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
                     I();
                 }
             }
-            int id = v.getId();
-            if (id == R.id.btn_accept) {
+           int id = v.getId();
+            if (id == R.id.ok_button) {
                 setResult(Activity.RESULT_OK, new Intent());
                 finish();
             } else if (id == R.id.btn_cancel) {
@@ -1909,12 +1909,12 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
         M = (ProjectFileBean) parcelable;
         H = new DB(this, "P1");
         T = (int) wB.a(getBaseContext(), (float) T);
-        k = findViewById(R.id.toolbar);
-        setSupportActionBar(k);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        k.setNavigationOnClickListener(v -> {
+        toolbar.setNavigationOnClickListener(v -> {
             if (!mB.a()) {
                 onBackPressed();
             }

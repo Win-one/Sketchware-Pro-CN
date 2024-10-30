@@ -2759,5 +2759,8 @@ Please try again later"</string>
     <string name="widget_type_title">Widget type</string>
     <string name="new_class">Or create a new category</string>
     <string name="add_to">Add to category</string>
+    <string name="select_a_resstring">Select a ResString</string>
+    <string name="filter_icons">Filter icons</string>
+    <string name="filter">Filter</string>
 
 </resources>
