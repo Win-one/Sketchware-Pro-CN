@@ -1219,8 +1219,8 @@ You must enter the API key to operate the map normally."</string>
     <string name="design_manager_sound_title_apply_same_naming">Apply same naming style to other available sounds</string>
     <string name="design_manager_sound_title_edit_sound">Edit Sound</string>
     <string name="design_manager_sound_title_edit_sound_name">Edit Sound Name</string>
-    <string name="design_manager_tab_title_my_collection">My Collection</string>
-    <string name="design_manager_tab_title_this_project">This Project</string>
+    <string name="design_manager_tab_title_my_collection">My collection</string>
+    <string name="design_manager_tab_title_this_project">This project</string>
     <string name="design_manager_title_add_to_collection">Add to My Collection</string>
     <string name="design_manager_view_description_guide_create_activity">To create a new Activity, add it here</string>
     <string name="design_manager_view_description_guide_create_custom_view">Create a new Custom View here</string>
@@ -1365,6 +1365,7 @@ Do you want to continue?"</string>
     <string name="invalid_value_rule_3">Only use letters(a-z), numbers and Special characters(_)</string>
     <string name="invalid_value_rule_4">Only use small letters(a-z), numbers and special character(_)</string>
     <string name="invalid_value_rule_5">"Special letters(&amp;, &lt;, >, \", ') are not allowed"</string>
+    <string name="invalid_value_rule_6">Spaces aren\'t allowed</string>
     <string name="logic_block_favorites_delete_message">Are you sure you want to delete your saved block from My Collection? This action can not be undone.</string>
     <string name="logic_block_favorites_delete_title">Delete from My Collection</string>
     <string name="logic_block_favorites_save_guide">Saved blocks are added to My Collection and are accessible from all the projects.</string>
@@ -2751,5 +2752,12 @@ Please try again later"</string>
     <string name="invalid_block_params">Invalid block params</string>
     <string name="strings_xml">strings.xml</string>
     <string name="xml_strings">XML Strings</string>
+
+    <string name="create_new_widget">Create a widget</string>
+    <string name="create">Create</string>
+    <string name="var_is_required">%s is required</string>
+    <string name="widget_type_title">Widget type</string>
+    <string name="new_class">Or create a new category</string>
+    <string name="add_to">Add to category</string>
 
 </resources>
