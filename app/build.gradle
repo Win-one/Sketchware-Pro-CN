@@ -154,7 +154,8 @@ dependencies {
     //noinspection GradleDependency
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
     //noinspection GradleDependency
-    implementation 'com.squareup.okio:okio:3.9.0'
+    implementation "com.squareup.okio:okio:3.1.0"
+
     implementation "com.github.Cosmic-Ide:DependencyResolver:290880eb6c"
 
     minApi21Implementation "net.sf.proguard:proguard-base:6.2.2"
