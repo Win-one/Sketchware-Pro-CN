@@ -72,6 +72,6 @@
         android:layout_margin="16dp"
         android:onClick="showAddActivityDialog"
         android:text="@string/common_word_add_activtiy"
-        app:icon="@drawable/ic_add_24"
+        app:icon="@drawable/ic_add_white_24dp"
         tools:ignore="ContentDescription" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -3346,7 +3346,7 @@
     <string name="error_your_code_contains_incorrectly_nested_parentheses">错误:您的代码包含不正确的嵌套括号</string>
     <string name="select_a_more_block">选择更多块</string>
     <string name="search_in_palettes_dialog_title">搜索调色板</string>
-    <string name="search">搜索中...</string>
+    <string name="search">搜索</string>
     <string name="this_is_a_simple_description">这是一个简单的描述</string>
     <string name="variable_name">变量名称</string>
     <string name="select_an_asset_file">选择asset文件</string>
@@ -3577,6 +3577,15 @@
     <string name="add_to">添加到类别</string>
     <string name="filter_icons">筛选图标</string>
     <string name="filter">筛选</string>
+    <string name="common_word_style">样式</string>
+    <string name="selected_color">选择颜色</string>
+    <string name="enter_icon_name">输入图标名称</string>
+    <string name="this_icon_is_available_under_the_apache_licence_version">此图标在Apache许可证版本2.0下提供.点击阅读更多.</string>
+    <string name="color_editor_delete_color">删除颜色</string>
+    <string name="invalid_value_rule_6">不允许使用空格</string>
+    <string name="picker_color_xml_is_empty">Colors.xml为空</string>
+    <string name="major_changes">主要变化v6.4.0</string>
+    <string name="main_dialog_massage">自v6.3.0 修复以来,发生了重大变化,如果你想让你的项目仍然有效,了解它们都是非常重要的.\n\n您可以随时在关于Sketchware Pro页面上查看所有更改.</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->

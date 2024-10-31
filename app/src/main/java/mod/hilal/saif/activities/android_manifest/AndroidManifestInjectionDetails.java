@@ -27,10 +27,10 @@ import com.sketchware.remod.databinding.CustomDialogAttributeBinding;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.android_manifest.ActComponentsDialog;
 import mod.remaker.view.CustomAttributeView;
+import pro.sketchware.utility.FileUtil;
 
 public class AndroidManifestInjectionDetails extends BaseAppCompatActivity {
 
@@ -127,7 +127,7 @@ public class AndroidManifestInjectionDetails extends BaseAppCompatActivity {
     private void showAddDial() {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
         dialog.setTitle(type.equals("permission") ? getString(R.string.add_new_permission) : getString(R.string.add_new_attribute));
-        dialog.setIcon(R.drawable.ic_tune_24);
+        dialog.setIcon(R.drawable.ic_mtrl_tune);
         CustomDialogAttributeBinding attributeBinding = CustomDialogAttributeBinding.inflate(getLayoutInflater());
         dialog.setView(attributeBinding.getRoot());
         if (type.equals("permission")) {

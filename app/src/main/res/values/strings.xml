@@ -2206,7 +2206,7 @@ Please try again later"</string>
     <string name="restore">Restore</string>
     <string name="searching">Searching…</string>
     <string name="search_error_message">Nothing found, try again with something else</string>
-    <string name="search_header">"  Search…"</string>
+    <string name="search_header">Search…</string>
     <string name="developer_tools_logcat_reader">Logcat Reader</string>
 
     <string name="never_show_again">Never show again</string>
@@ -2537,7 +2537,7 @@ Please try again later"</string>
     <string name="file_saved">File saved</string>
     <string name="error_your_code_contains_incorrectly_nested_parentheses">Error: Your code contains incorrectly nested parentheses</string>
     <string name="select_a_more_block">Select a more block</string>
-    <string name="search">Search...</string>
+    <string name="search">Search</string>
     <string name="this_is_a_simple_description">This is a simple description</string>
     <string name="variable_name">Variable name</string>
     <string name="select_an_asset_file">Select an asset file</string>
@@ -2763,5 +2763,11 @@ Please try again later"</string>
     <string name="select_a_resstring">Select a ResString</string>
     <string name="filter_icons">Filter icons</string>
     <string name="filter">Filter</string>
+    <string name="common_word_style">Style</string>
+    <string name="selected_color">Selected color</string>
+    <string name="enter_icon_name">Enter icon name</string>
+    <string name="this_icon_is_available_under_the_apache_licence_version">This icon is available under the Apache Licence Version 2.0. Press to read more.</string>
+    <string name="major_changes">Major changes in v6.4.0</string>
+    <string name="main_dialog_massage">There have been major changes since v6.3.0 fix1, and it\'s very important to know them all if you want your projects to still work.\n\nYou can view all changes whenever you want at the About Sketchware Pro screen.</string>
 
 </resources>
