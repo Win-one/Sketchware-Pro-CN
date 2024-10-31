@@ -62,7 +62,7 @@
             android:layout_gravity="end|bottom"
             android:layout_margin="16dp"
             android:text="@string/myprojects_list_menu_title_create_a_new_project"
-            app:icon="@drawable/ic_add_24"
+            app:icon="@drawable/ic_mtrl_add"
             tools:ignore="ContentDescription" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -233,7 +233,7 @@ public class LogReaderActivity extends BaseAppCompatActivity {
         var builder = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.filter_by_package_name)
                 .setMessage(R.string.for_multiple_package_names)
-                .setIcon(R.drawable.ic_filter_24)
+                .setIcon(R.drawable.ic_mtrl_filter)
                 .setView(view)
                 .setPositiveButton(R.string.common_word_apply, (dialog, which) -> {
                     pkgFilter = dialogBinding.easyEdInput.getText().toString();

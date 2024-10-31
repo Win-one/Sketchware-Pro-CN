@@ -116,15 +116,17 @@ public class AppSettings extends BaseAppCompatActivity {
     }
 
     private void setupViews() {
-        createToolsView(R.drawable.block_96_blue, getString(R.string.block_manager), getString(R.string.manage_your_own_blocks_to_use_in_logic_editor), binding.content, new ActivityLauncher(new Intent(getApplicationContext(), BlocksManager.class)), false);
-        createToolsView(R.drawable.pull_down_48, getString(R.string.block_selector_menu_manager), getString(R.string.manage_your_own_block_selector_menus), binding.content, new ActivityLauncher(new Intent(getApplicationContext(), BlockSelectorActivity.class)), false);
-        createToolsView(R.drawable.collage_48, getString(R.string.component_manager), getString(R.string.manage_your_own_components), binding.content, new ActivityLauncher(new Intent(getApplicationContext(), ManageCustomComponentActivity.class)), false);
-        createToolsView(R.drawable.event_on_item_clicked_48dp, getString(R.string.event_manager), getString(R.string.manage_your_own_events), binding.content, openSettingsActivity(SettingsActivity.EVENTS_MANAGER_FRAGMENT), false);
-        createToolsView(R.drawable.colored_box_96, getString(R.string.local_library_manager), getString(R.string.manage_and_download_local_libraries), binding.content, new ActivityLauncher(new Intent(getApplicationContext(), ManageLocalLibraryActivity.class), new Pair<>("sc_id", "system")), false);
-        createToolsView(R.drawable.engineering_48, getString(R.string.mod_settings), getString(R.string.change_general_mod_settings), binding.content, new ActivityLauncher(new Intent(getApplicationContext(), ConfigActivity.class)), false);
-        createToolsView(R.drawable.ic_folder_48dp, getString(R.string.open_working_directory), getString(R.string.open_directory), binding.content, v -> openWorkingDirectory(), false);
-        createToolsView(R.drawable.ic_apk_color_96dp, getString(R.string.sign_an_apk_file_with_testkey), getString(R.string.sign_an_already_existing_apk_file), binding.content, v -> signApkFileDialog(), false);
-        createToolsView(R.drawable.icons8_app_components, getString(R.string.design_drawer_menu_title_logcat_reader), getString(R.string.design_drawer_menu_subtitle_logcat_reader), binding.content, new ActivityLauncher(new Intent(getApplicationContext(), LogReaderActivity.class)), true);
+        createToolsView(R.drawable.block_96_blue, "Block manager", "Manage your own blocks to use in Logic Editor", content, new ActivityLauncher(new Intent(getApplicationContext(), BlocksManager.class)), false);
+        createToolsView(R.drawable.pull_down_48, "Block selector menu manager", "Manage your own block selector menus", content, new ActivityLauncher(new Intent(getApplicationContext(), BlockSelectorActivity.class)), false);
+        createToolsView(R.drawable.collage_48, "Component manager", "Manage your own components", content, new ActivityLauncher(new Intent(getApplicationContext(), ManageCustomComponentActivity.class)), false);
+        createToolsView(R.drawable.event_on_item_clicked_48dp, "Event manager", "Manage your own events", content, openSettingsActivity(SettingsActivity.EVENTS_MANAGER_FRAGMENT), false);
+        createToolsView(R.drawable.colored_box_96, "Local library manager", "Manage and download local libraries", content, new ActivityLauncher(new Intent(getApplicationContext(), ManageLocalLibraryActivity.class), new Pair<>("sc_id", "system")), false);
+        createToolsView(R.drawable.engineering_48, "Mod settings", "Change general mod settings", content, new ActivityLauncher(new Intent(getApplicationContext(), ConfigActivity.class)), false);
+        createToolsView(R.drawable.icon_pallete, getString(R.string.settings_appearance), getString(R.string.settings_appearance_description), content, openSettingsActivity(SettingsActivity.SETTINGS_APPEARANCE_FRAGMENT), false);
+        createToolsView(R.mipmap.ic_type_folder, "Open working directory", "Open Sketchware Pro's directory and edit files in it", content, v -> openWorkingDirectory(), false);
+        createToolsView(R.drawable.ic_apk_color_96dp, "Sign an APK file with testkey", "Sign an already existing APK file with testkey and signature schemes up to V4", content, v -> signApkFileDialog(), false);
+        createToolsView(R.drawable.icons8_app_components, getString(R.string.design_drawer_menu_title_logcat_reader), getString(R.string.design_drawer_menu_subtitle_logcat_reader), content, new ActivityLauncher(new Intent(getApplicationContext(), LogReaderActivity.class)), false);
+        createToolsView(R.drawable.ic_settings_24, getString(R.string.main_drawer_title_system_settings), "Auto-save and vibrations", content, new ActivityLauncher(new Intent(getApplicationContext(), SystemSettingActivity.class)), true);
     }
 
     private View.OnClickListener openSettingsActivity(String fragmentTag) {

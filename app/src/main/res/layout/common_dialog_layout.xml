@@ -4,12 +4,11 @@
     android:id="@+id/common_dialog_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#66000000"
     android:clipChildren="false"
     android:clipToPadding="false"
     android:paddingLeft="24dp"
-    android:paddingRight="24dp"
-    android:paddingStart="24dp"
-    android:paddingEnd="24dp">
+    android:paddingRight="24dp">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:gravity="center|start"
+                    android:gravity="center|left"
                     android:orientation="horizontal"
                     android:padding="16dp">
 
@@ -52,8 +51,7 @@
                         android:layout_height="24dp"
                         android:layout_marginRight="8dp"
                         app:tint="?colorSecondary"
-                        tools:src="@drawable/ic_tune_24"
-                        android:layout_marginEnd="8dp" />
+                        tools:src="@drawable/ic_mtrl_tune" />
 
                     <TextView
                         android:id="@+id/common_dialog_tv_title"
@@ -93,12 +91,12 @@
                         android:paddingHorizontal="18dp"
                         android:paddingVertical="12dp"
                         android:textColor="?colorPrimary"
-                        tools:text="@string/common_word_defaults" />
+                        tools:text="Default" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center|end"
+                        android:gravity="center|right"
                         android:orientation="horizontal">
 
                         <TextView
@@ -112,7 +110,7 @@
                             android:paddingHorizontal="18dp"
                             android:paddingVertical="12dp"
                             android:textColor="?colorPrimary"
-                            tools:text="@string/common_word_cancel" />
+                            tools:text="Cancel" />
 
                         <TextView
                             android:id="@+id/common_dialog_ok_button"
@@ -124,7 +122,7 @@
                             android:paddingHorizontal="18dp"
                             android:paddingVertical="12dp"
                             android:textColor="?colorPrimary"
-                            tools:text="@string/common_word_okay" />
+                            tools:text="Okay" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

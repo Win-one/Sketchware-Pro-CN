@@ -268,7 +268,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
             aB confirmationDialog = new aB(this);
             confirmationDialog.b(getString(R.string.important_note));
             confirmationDialog.a(getString(R.string.the_generated_aab_file_must_be_signed));
-            confirmationDialog.a(R.drawable.ic_info_24);
+            confirmationDialog.a(R.drawable.ic_mtrl_info);
 
             confirmationDialog.b(getString(R.string.common_word_understood), v -> {
                 showAabSigningDialog();
@@ -280,7 +280,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
 
     private void showAabSigningDialog() {
         GetKeyStoreCredentialsDialog credentialsDialog = new GetKeyStoreCredentialsDialog(this,
-                R.drawable.ic_key_24, getString(R.string.sign_outputted_aab), getString(R.string.fill_in_the_keystore_details_to_sign_the_aab));
+                R.drawable.ic_mtrl_key, getString(R.string.sign_outputted_aab), getString(R.string.fill_in_the_keystore_details_to_sign_the_aab));
         credentialsDialog.setListener(credentials -> {
             BuildingAsyncTask task = new BuildingAsyncTask(this);
             task.enableAppBundleBuild();
@@ -340,7 +340,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
 
                     Note that this only signs your APK using signing scheme V1, to target Android 11+ for example, \
                     use a 3rd-party tool (for now).""");
-            confirmationDialog.a(R.drawable.ic_info_24);
+            confirmationDialog.a(R.drawable.ic_mtrl_info);
 
             confirmationDialog.b(getString(R.string.common_word_understood), v -> {
                 showApkSigningDialog();
@@ -352,7 +352,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
 
     private void showApkSigningDialog() {
         GetKeyStoreCredentialsDialog credentialsDialog = new GetKeyStoreCredentialsDialog(this,
-                R.drawable.ic_key_24,
+                R.drawable.ic_mtrl_key,
                 getString(R.string.sign_an_apk),
                 getString(R.string.fill_in_the_keystore_details_to_sign_the_apk) +
                         getString(R.string.if_you_don_t_have_a_keystore_you_can_use_a_test_key));

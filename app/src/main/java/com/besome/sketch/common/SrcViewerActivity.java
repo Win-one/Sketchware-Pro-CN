@@ -185,7 +185,7 @@ public class SrcViewerActivity extends BaseAppCompatActivity {
 
         new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.select_font_size)
-                .setIcon(R.drawable.ic_formattext_24)
+                .setIcon(R.drawable.ic_mtrl_formattext)
                 .setView(layout)
                 .setPositiveButton(R.string.common_word_apply, (dialog, which) -> {
                     sourceCodeFontSize = picker.getValue();
