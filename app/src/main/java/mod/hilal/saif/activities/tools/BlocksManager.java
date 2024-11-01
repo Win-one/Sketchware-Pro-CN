@@ -26,9 +26,6 @@ import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
-import pro.sketchware.R;
-import pro.sketchware.databinding.DialogBlockConfigurationBinding;
-import pro.sketchware.databinding.DialogPaletteBinding;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,12 +37,16 @@ import java.util.Map;
 
 import a.a.a.Zx;
 import a.a.a.aB;
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
-import pro.sketchware.lib.base.BaseTextWatcher;
 import mod.hey.studios.editor.manage.block.v2.BlockLoader;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.lib.PCP;
+import pro.sketchware.R;
+import pro.sketchware.databinding.BlocksManagerBinding;
+import pro.sketchware.databinding.DialogBlockConfigurationBinding;
+import pro.sketchware.databinding.DialogPaletteBinding;
+import pro.sketchware.lib.base.BaseTextWatcher;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class BlocksManager extends BaseAppCompatActivity {
 

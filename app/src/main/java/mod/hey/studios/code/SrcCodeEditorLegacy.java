@@ -8,12 +8,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import pro.sketchware.R;
-import com.sketchware.remod.databinding.ViewCodeBinding;
 
-import pro.sketchware.utility.FileUtil;
-import mod.hey.studios.lib.code_editor.CodeEditorLayout;
 import mod.hey.studios.lib.code_editor.ColorScheme;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ViewCodeBinding;
+import pro.sketchware.utility.FileUtil;
 
 /**
  * Legacy code editor

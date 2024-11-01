@@ -25,8 +25,6 @@ import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.besome.sketch.lib.base.CollapsibleViewHolder;
 import com.besome.sketch.lib.ui.CollapsibleButton;
 import com.google.gson.Gson;
-import pro.sketchware.R;
-import com.sketchware.remod.databinding.ManageCustomComponentBinding;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -38,12 +36,14 @@ import java.util.stream.Collectors;
 
 import a.a.a.aB;
 import a.a.a.wq;
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
 import mod.elfilibustero.sketch.editor.component.CollapsibleCustomComponentLayout;
 import mod.elfilibustero.sketch.lib.ui.SketchFilePickerDialog;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.components.ComponentsHandler;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ManageCustomComponentBinding;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class ManageCustomComponentActivity extends BaseAppCompatActivity {
 

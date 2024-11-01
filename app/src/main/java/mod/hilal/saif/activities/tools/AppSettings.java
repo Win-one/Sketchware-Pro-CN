@@ -24,9 +24,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.oneskyer.library.model.DialogConfigs;
 import com.oneskyer.library.model.DialogProperties;
 import com.oneskyer.library.view.FilePickerDialog;
-import pro.sketchware.R;
-import pro.sketchware.databinding.DialogSelectApkToSignBinding;
-import com.sketchware.remod.databinding.PrefencesContentAppbarBinding;
 
 import java.io.File;
 
@@ -38,6 +35,9 @@ import mod.hey.studios.code.SrcCodeEditorLegacy;
 import mod.hey.studios.util.Helper;
 import mod.khaled.logcat.LogReaderActivity;
 import mod.trindadedev.ui.activities.SettingsActivity;
+import pro.sketchware.R;
+import pro.sketchware.databinding.DialogSelectApkToSignBinding;
+import pro.sketchware.databinding.PrefencesContentAppbarBinding;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
 

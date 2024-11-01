@@ -18,12 +18,10 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-import pro.sketchware.R;
-import com.sketchware.remod.databinding.ViewCodeBinding;
-
-import pro.sketchware.utility.FileUtil;
-import mod.hey.studios.lib.code_editor.CodeEditorLayout;
 import mod.hey.studios.lib.code_editor.ColorScheme;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ViewCodeBinding;
+import pro.sketchware.utility.FileUtil;
 
 public class ProguardRulesDialog extends Dialog implements View.OnClickListener {
 

@@ -3,7 +3,6 @@ package pro.sketchware.blocks;
 import android.util.Pair;
 
 import com.besome.sketch.editor.LogicEditorActivity;
-import com.sketchware.remod.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +12,7 @@ import java.util.regex.Pattern;
 import a.a.a.eC;
 import a.a.a.jC;
 import mod.hilal.saif.activities.tools.ConfigActivity;
+import pro.sketchware.R;
 
 public class ExtraBlocks {
 

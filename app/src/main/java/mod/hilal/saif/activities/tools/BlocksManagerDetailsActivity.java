@@ -30,8 +30,6 @@ import com.google.gson.JsonParseException;
 import com.oneskyer.library.model.DialogConfigs;
 import com.oneskyer.library.model.DialogProperties;
 import com.oneskyer.library.view.FilePickerDialog;
-import pro.sketchware.R;
-import com.sketchware.remod.databinding.BlocksManagersDetailsBinding;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -39,9 +37,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
+import pro.sketchware.databinding.BlocksManagersDetailsBinding;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
 

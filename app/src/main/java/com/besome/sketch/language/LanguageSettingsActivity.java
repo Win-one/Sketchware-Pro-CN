@@ -4,17 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.besome.sketch.SketchApplication;
 import com.besome.sketch.language.util.MultiLanguageUtil;
 import com.besome.sketch.language.util.SpUtil;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import com.sketchware.remod.R;
-import com.sketchware.remod.databinding.ActivityLanguageSettingsBinding;
 
 import java.util.Locale;
 
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
+import pro.sketchware.SketchApplication;
 import pro.sketchware.activities.main.activities.MainActivity;
+import pro.sketchware.databinding.ActivityLanguageSettingsBinding;
 
 public class LanguageSettingsActivity extends BaseAppCompatActivity {
     private ActivityLanguageSettingsBinding binding;

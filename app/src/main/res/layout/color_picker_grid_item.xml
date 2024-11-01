@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:clickable="true"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:paddingTop="2dp"
         android:textSize="12sp" />
 
