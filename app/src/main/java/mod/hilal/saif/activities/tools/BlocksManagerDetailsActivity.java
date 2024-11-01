@@ -30,7 +30,7 @@ import com.google.gson.JsonParseException;
 import com.oneskyer.library.model.DialogConfigs;
 import com.oneskyer.library.model.DialogProperties;
 import com.oneskyer.library.view.FilePickerDialog;
-import com.sketchware.remod.R;
+import pro.sketchware.R;
 import com.sketchware.remod.databinding.BlocksManagersDetailsBinding;
 
 import java.io.File;

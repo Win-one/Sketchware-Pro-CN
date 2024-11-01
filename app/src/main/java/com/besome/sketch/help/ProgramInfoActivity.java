@@ -12,8 +12,8 @@ import androidx.activity.EdgeToEdge;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.besome.sketch.lib.ui.PropertyOneLineItem;
 import com.besome.sketch.lib.ui.PropertyTwoLineItem;
-import com.sketchware.remod.R;
-import com.sketchware.remod.databinding.ProgramInfoBinding;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ProgramInfoBinding;
 
 import a.a.a.GB;
 import a.a.a.aB;

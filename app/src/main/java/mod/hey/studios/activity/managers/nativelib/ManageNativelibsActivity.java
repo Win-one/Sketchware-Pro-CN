@@ -25,11 +25,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.oneskyer.library.model.DialogConfigs;
 import com.oneskyer.library.model.DialogProperties;
 import com.oneskyer.library.view.FilePickerDialog;
-import com.sketchware.remod.R;
-import com.sketchware.remod.databinding.DialogCreateNewFileLayoutBinding;
-import com.sketchware.remod.databinding.DialogInputLayoutBinding;
-import com.sketchware.remod.databinding.ManageFileBinding;
-import com.sketchware.remod.databinding.ManageJavaItemHsBinding;
+import pro.sketchware.R;
+import pro.sketchware.databinding.DialogCreateNewFileLayoutBinding;
+import pro.sketchware.databinding.DialogInputLayoutBinding;
+import pro.sketchware.databinding.ManageFileBinding;
+import pro.sketchware.databinding.ManageJavaItemHsBinding;
 
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 

@@ -16,9 +16,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
-import com.sketchware.remod.R;
-import com.sketchware.remod.databinding.AddCustomAttributeBinding;
-import com.sketchware.remod.databinding.CustomDialogAttributeBinding;
+import pro.sketchware.R;
+import pro.sketchware.databinding.AddCustomAttributeBinding;
+import pro.sketchware.databinding.CustomDialogAttributeBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;

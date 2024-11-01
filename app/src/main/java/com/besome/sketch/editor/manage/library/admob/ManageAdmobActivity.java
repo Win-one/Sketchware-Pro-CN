@@ -22,8 +22,8 @@ import com.besome.sketch.beans.AdTestDeviceBean;
 import com.besome.sketch.beans.ProjectLibraryBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.materialswitch.MaterialSwitch;
-import com.sketchware.remod.R;
-import com.sketchware.remod.databinding.ManageLibraryManageAdmobBinding;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ManageLibraryManageAdmobBinding;
 
 import java.util.ArrayList;
 

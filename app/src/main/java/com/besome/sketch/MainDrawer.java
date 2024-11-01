@@ -20,7 +20,7 @@ import com.besome.sketch.help.SystemSettingActivity;
 import com.besome.sketch.language.LanguageSettingsActivity;
 import com.besome.sketch.tools.NewKeyStoreActivity;
 import com.google.android.material.navigation.NavigationView;
-import com.sketchware.remod.R;
+import pro.sketchware.R;
 
 import a.a.a.mB;
 import dev.chrisbanes.insetter.Insetter;

@@ -18,7 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-import com.sketchware.remod.R;
+import pro.sketchware.R;
 import com.sketchware.remod.databinding.ViewCodeBinding;
 
 import pro.sketchware.utility.FileUtil;

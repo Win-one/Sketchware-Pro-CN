@@ -17,10 +17,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 import com.oneskyer.library.model.DialogProperties;
 import com.oneskyer.library.view.FilePickerDialog;
-import com.sketchware.remod.R;
-import com.sketchware.remod.databinding.DialogAddNewListenerBinding;
-import com.sketchware.remod.databinding.FragmentEventsManagerBinding;
-import com.sketchware.remod.databinding.LayoutEventItemBinding;
+import pro.sketchware.R;
+import pro.sketchware.databinding.DialogAddNewListenerBinding;
+import pro.sketchware.databinding.FragmentEventsManagerBinding;
+import pro.sketchware.databinding.LayoutEventItemBinding;
 
 import java.io.File;
 import java.util.ArrayList;

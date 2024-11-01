@@ -20,8 +20,8 @@ import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
-import com.sketchware.remod.R;
-import com.sketchware.remod.databinding.AddCustomAttributeBinding;
+import pro.sketchware.R;
+import pro.sketchware.databinding.AddCustomAttributeBinding;
 import com.sketchware.remod.databinding.CustomDialogAttributeBinding;
 
 import java.util.ArrayList;

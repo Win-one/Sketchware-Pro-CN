@@ -26,10 +26,9 @@ import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
-import com.sketchware.remod.R;
-import com.sketchware.remod.databinding.BlocksManagerBinding;
-import com.sketchware.remod.databinding.DialogBlockConfigurationBinding;
-import com.sketchware.remod.databinding.DialogPaletteBinding;
+import pro.sketchware.R;
+import pro.sketchware.databinding.DialogBlockConfigurationBinding;
+import pro.sketchware.databinding.DialogPaletteBinding;
 
 import java.io.File;
 import java.util.ArrayList;

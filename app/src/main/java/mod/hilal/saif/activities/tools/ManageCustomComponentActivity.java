@@ -25,7 +25,7 @@ import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.besome.sketch.lib.base.CollapsibleViewHolder;
 import com.besome.sketch.lib.ui.CollapsibleButton;
 import com.google.gson.Gson;
-import com.sketchware.remod.R;
+import pro.sketchware.R;
 import com.sketchware.remod.databinding.ManageCustomComponentBinding;
 
 import java.io.File;

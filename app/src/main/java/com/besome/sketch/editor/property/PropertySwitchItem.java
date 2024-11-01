@@ -7,7 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.materialswitch.MaterialSwitch;
-import com.sketchware.remod.R;
+import pro.sketchware.R;
 
 import a.a.a.wB;
 

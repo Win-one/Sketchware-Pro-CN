@@ -16,8 +16,8 @@ import pro.sketchware.activities.main.fragments.projects.ProjectsFragment;
 import com.oneskyer.library.model.DialogConfigs;
 import com.oneskyer.library.model.DialogProperties;
 import com.oneskyer.library.view.FilePickerDialog;
-import com.sketchware.remod.R;
-import com.sketchware.remod.databinding.ProgressMsgBoxBinding;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ProgressMsgBoxBinding;
 
 import java.io.File;
 import java.lang.ref.WeakReference;

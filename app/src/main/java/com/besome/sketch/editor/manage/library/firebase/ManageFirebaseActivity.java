@@ -25,7 +25,7 @@ import com.google.android.material.materialswitch.MaterialSwitch;
 import com.oneskyer.library.model.DialogConfigs;
 import com.oneskyer.library.model.DialogProperties;
 import com.oneskyer.library.view.FilePickerDialog;
-import com.sketchware.remod.R;
+import pro.sketchware.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

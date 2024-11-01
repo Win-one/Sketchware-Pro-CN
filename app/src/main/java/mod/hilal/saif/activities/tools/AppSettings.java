@@ -24,8 +24,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.oneskyer.library.model.DialogConfigs;
 import com.oneskyer.library.model.DialogProperties;
 import com.oneskyer.library.view.FilePickerDialog;
-import com.sketchware.remod.R;
-import com.sketchware.remod.databinding.DialogSelectApkToSignBinding;
+import pro.sketchware.R;
+import pro.sketchware.databinding.DialogSelectApkToSignBinding;
 import com.sketchware.remod.databinding.PrefencesContentAppbarBinding;
 
 import java.io.File;

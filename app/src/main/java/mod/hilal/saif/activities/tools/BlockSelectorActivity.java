@@ -26,8 +26,8 @@ import com.google.gson.JsonParseException;
 import com.oneskyer.library.model.DialogConfigs;
 import com.oneskyer.library.model.DialogProperties;
 import com.oneskyer.library.view.FilePickerDialog;
-import com.sketchware.remod.R;
-import com.sketchware.remod.databinding.MenuActivityBinding;
+import pro.sketchware.R;
+import pro.sketchware.databinding.MenuActivityBinding;
 
 import java.io.File;
 import java.util.ArrayList;
