@@ -2420,7 +2420,7 @@ Please try again later"</string>
     <string name="edit_value">Edit Value</string>
     <string name="palettes">Palettes:</string>
     <string name="properties">Properties</string>
-    <string name="parameters">Parameters</string>
+    <string name="parameters">Parameters(without % sign)</string>
     <string name="design">Design</string>
     <string name="code">Code</string>
     <string name="insert_block">Insert block</string>
@@ -2680,7 +2680,7 @@ Please try again later"</string>
     <string name="couldn_t_import_library">Couldn\'t import library! [</string>
     <string name="nothing_changed">Nothing changed</string>
     <string name="no_events">No events</string>
-    <string name="start_by_creating_an_new_one">Start by creating an new one</string>
+    <string name="start_by_creating_an_new_one">Start by creating a new one</string>
     <string name="imported_successfully">Imported successfully</string>
     <string name="name_cannot_be_empty">Name cannot be empty</string>
     <string name="color_cannot_be_empty">Color cannot be empty</string>
@@ -2770,5 +2770,8 @@ Please try again later"</string>
     <string name="this_icon_is_available_under_the_apache_licence_version">This icon is available under the Apache Licence Version 2.0. Press to read more.</string>
     <string name="major_changes">Major changes in v6.4.0</string>
     <string name="main_dialog_massage">There have been major changes since v6.3.0 fix1, and it\'s very important to know them all if you want your projects to still work.\n\nYou can view all changes whenever you want at the About Sketchware Pro screen.</string>
+    <string name="block_preview">Block preview</string>
+    <string name="block_import">Block import (e.g., android.view.View)</string>
+    <string name="enter_imports_line_by_line">Enter imports line by line</string>
 
 </resources>

@@ -3209,7 +3209,7 @@
     <string name="edit_value">编辑值</string>
     <string name="palettes">调色板:</string>
     <string name="properties">性能</string>
-    <string name="parameters">参数</string>
+    <string name="parameters">参数(不带%符号)</string>
     <string name="design">设计</string>
     <string name="code">代码</string>
     <string name="insert_block">插入块</string>
@@ -3568,6 +3568,7 @@
     <string name="strings_xml">strings.xml</string>
     <string name="xml_strings">XML Strings</string>
     <string name="select_a_resstring">选择ResString</string>
+    <string name="design_manager_view_title_add_activity">新活动</string>
 
     <string name="create_new_widget">创建组件</string>
     <string name="create">创建</string>
@@ -3586,6 +3587,9 @@
     <string name="picker_color_xml_is_empty">Colors.xml为空</string>
     <string name="major_changes">主要变化v6.4.0</string>
     <string name="main_dialog_massage">自v6.3.0 修复以来,发生了重大变化,如果你想让你的项目仍然有效,了解它们都是非常重要的.\n\n您可以随时在关于Sketchware Pro页面上查看所有更改.</string>
+    <string name="block_preview">块预览</string>
+    <string name="block_import">块导入 (e.g., android.view.View)</string>
+    <string name="enter_imports_line_by_line">逐行输入imports</string>
 
 </resources>
     <!--by：MOEYUUKO  https://www.moeyuuko.top github: https://github.com/MOEYUUKO/Sketchware_zh-cn  个人翻译 不与任何组织相关 请遵循Apache License -->
