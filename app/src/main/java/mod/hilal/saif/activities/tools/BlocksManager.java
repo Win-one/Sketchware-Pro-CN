@@ -1,6 +1,5 @@
 package mod.hilal.saif.activities.tools;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -41,12 +39,12 @@ import mod.hey.studios.editor.manage.block.v2.BlockLoader;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.lib.PCP;
 import pro.sketchware.R;
-import pro.sketchware.databinding.BlocksManagerBinding;
 import pro.sketchware.databinding.DialogBlockConfigurationBinding;
 import pro.sketchware.databinding.DialogPaletteBinding;
 import pro.sketchware.lib.base.BaseTextWatcher;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
+import pro.sketchware.databinding.BlocksManagerBinding;
 
 public class BlocksManager extends BaseAppCompatActivity {
 
@@ -334,14 +332,6 @@ public class BlocksManager extends BaseAppCompatActivity {
         refresh_list();
     }
 
-    private View.OnClickListener getSharedPaletteColorPickerShower(Dialog dialog, EditText storePickedResultIn) {
-        return v -> {
-            final Zx zx = new Zx(this, 0, true, false);
-            zx.a(new PCP(this, storePickedResultIn, dialog));
-            zx.showAtLocation(v, Gravity.CENTER, 0, 0);
-        };
-    }
-
 
     private void showPaletteDialog(boolean isEditing, Integer oldPosition, String oldName, String oldColor, Integer insertAtPosition) {
         aB dialog = new aB(this);
@@ -368,7 +358,11 @@ public class BlocksManager extends BaseAppCompatActivity {
             }
         });
 
-        binding.openColorPalette.setOnClickListener(getSharedPaletteColorPickerShower(dialog, binding.colorEditText));
+        binding.openColorPalette.setOnClickListener(v1 -> {
+            final Zx zx = new Zx(this, 0, true, false);
+            zx.a(new PCP(this, binding.colorEditText, dialog));
+            zx.showAtLocation(binding.openColorPalette, Gravity.CENTER, 0, 0);
+        });
 
         dialog.a(binding.getRoot());
 
