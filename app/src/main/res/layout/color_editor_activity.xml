@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:navigationIcon="?attr/homeAsUpIndicator"
-        app:title="Colors editor" />
+        app:title="@string/colors_editor" />
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/divider"
@@ -35,6 +35,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="20dp"
-        android:text="Add new color"
+        android:text="@string/add_new_color"
         app:icon="@drawable/ic_mtrl_add" />
 </RelativeLayout>

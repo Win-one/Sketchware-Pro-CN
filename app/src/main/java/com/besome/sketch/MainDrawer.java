@@ -16,14 +16,16 @@ import androidx.annotation.StringRes;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.besome.sketch.help.ProgramInfoActivity;
+import com.besome.sketch.help.SystemSettingActivity;
 import com.besome.sketch.tools.NewKeyStoreActivity;
 import com.google.android.material.navigation.NavigationView;
-import pro.sketchware.R;
 
 import a.a.a.mB;
 import dev.chrisbanes.insetter.Insetter;
 import dev.chrisbanes.insetter.Side;
 import mod.hilal.saif.activities.tools.AppSettings;
+import mod.trindadedev.ui.activities.SettingsActivity;
+import pro.sketchware.R;
 import pro.sketchware.activities.about.AboutActivity;
 
 public class MainDrawer extends NavigationView {
@@ -91,7 +93,21 @@ public class MainDrawer extends NavigationView {
             Intent intent = new Intent(activity, ProgramInfoActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             activity.startActivityForResult(intent, 105);
-        } else if (id == R.id.app_settings) {
+        } else if (id == R.id.system_settings) {
+            Intent intent = new Intent(activity, SystemSettingActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            activity.startActivity(intent);
+        } else if (id == R.id.language_settings) {
+            Intent intent = new Intent(activity, SettingsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.putExtra("fragment_tag", SettingsActivity.SETTINGS_LANGUAGE_FRAGMENT);
+            activity.startActivity(intent);
+        } else if (id == R.id.appearance_settings) {
+            Intent intent = new Intent(activity, SettingsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.putExtra("fragment_tag", SettingsActivity.SETTINGS_APPEARANCE_FRAGMENT);
+            activity.startActivity(intent);
+        } else if (id == R.id.developer_tools) {
             Intent intent = new Intent(activity, AppSettings.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             activity.startActivity(intent);

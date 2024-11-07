@@ -91,7 +91,7 @@
                         android:paddingHorizontal="18dp"
                         android:paddingVertical="12dp"
                         android:textColor="?colorPrimary"
-                        tools:text="Default" />
+                        tools:text="@string/common_word_default" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -110,7 +110,7 @@
                             android:paddingHorizontal="18dp"
                             android:paddingVertical="12dp"
                             android:textColor="?colorPrimary"
-                            tools:text="Cancel" />
+                            tools:text="@string/common_word_cancel" />
 
                         <TextView
                             android:id="@+id/common_dialog_ok_button"
@@ -122,7 +122,7 @@
                             android:paddingHorizontal="18dp"
                             android:paddingVertical="12dp"
                             android:textColor="?colorPrimary"
-                            tools:text="Okay" />
+                            tools:text="@string/common_word_okay" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

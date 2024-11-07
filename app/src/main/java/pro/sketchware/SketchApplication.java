@@ -7,18 +7,20 @@ import android.os.Process;
 import android.util.Log;
 
 import com.besome.sketch.tools.CollectErrorActivity;
+import com.hjq.language.MultiLanguages;
 
 import mod.trindadedev.manage.theme.ThemeManager;
 
 public class SketchApplication extends Application {
     private static Context mApplicationContext;
-
+    private static SketchApplication mInstance;
     public static Context getContext() {
         return mApplicationContext;
     }
 
     @Override
     public void onCreate() {
+        MultiLanguages.init(this);
         mApplicationContext = getApplicationContext();
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
             @Override
@@ -33,5 +35,18 @@ public class SketchApplication extends Application {
         });
         super.onCreate();
         ThemeManager.applyTheme(this, ThemeManager.getCurrentTheme(this));
+
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(MultiLanguages.attach(newBase));
+    }
+
+    public static Context getInstance() {
+        if (mInstance == null) {
+            mInstance = new SketchApplication();
+        }
+        return mInstance;
     }
 }

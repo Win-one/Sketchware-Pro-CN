@@ -12,7 +12,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.textfield.TextInputLayout;
-import pro.sketchware.R;
 
 import a.a.a.RB;
 import a.a.a.SB;
@@ -23,6 +22,7 @@ import a.a.a.iI;
 import a.a.a.mB;
 import a.a.a.wq;
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
 
 public class NewKeyStoreActivity extends BaseAppCompatActivity implements OnClickListener {
     private RB organizationValidator;
@@ -145,7 +145,7 @@ public class NewKeyStoreActivity extends BaseAppCompatActivity implements OnClic
         setSupportActionBar(toolbar);
         findViewById(R.id.layout_main_logo).setVisibility(View.GONE);
         getSupportActionBar().setTitle(Helper.getResString(R.string.myprojects_sign_apk_new_certificate_title_new_certificate));
-        getSupportActionBar().setSubtitle("Export path: " + wq.D);
+        getSupportActionBar().setSubtitle(getString(R.string.export_path) + wq.D);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));

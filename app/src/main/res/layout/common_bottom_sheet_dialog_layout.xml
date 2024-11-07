@@ -88,7 +88,7 @@
                     android:textColor="?colorPrimary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Default" />
+                    tools:text="@string/common_word_default" />
 
 
                 <TextView
@@ -104,7 +104,7 @@
                     android:textColor="?colorPrimary"
                     app:layout_constraintEnd_toStartOf="@+id/common_dialog_ok_button"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Cancel" />
+                    tools:text="@string/common_word_cancel" />
 
                 <TextView
                     android:id="@+id/common_dialog_ok_button"
@@ -117,7 +117,7 @@
                     android:textColor="?colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Okay" />
+                    tools:text="@string/common_word_okay" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

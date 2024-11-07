@@ -7,21 +7,20 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
-import pro.sketchware.R;
-import pro.sketchware.databinding.FragmentEventsManagerCreatorBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.activities.tools.IconSelectorDialog;
 import mod.jbk.util.OldResourceIdMapper;
+import pro.sketchware.R;
+import pro.sketchware.databinding.FragmentEventsManagerCreatorBinding;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class EventsManagerCreatorFragment extends Fragment {
 
@@ -125,11 +124,11 @@ public class EventsManagerCreatorFragment extends Fragment {
 
     private void save() {
         if (!filledIn()) {
-            SketchwareUtil.toast("Some required fields are empty!");
+            SketchwareUtil.toast(getString(R.string.some_required_fields_are_empty));
             return;
         }
         if (!OldResourceIdMapper.isValidIconId(binding.eventsCreatorIcon.getText().toString())) {
-            binding.eventsCreatorIconTil.setError("Invalid icon ID");
+            binding.eventsCreatorIconTil.setError(getString(R.string.invalid_icon_id));
             binding.eventsCreatorIcon.requestFocus();
             return;
         }
@@ -160,7 +159,7 @@ public class EventsManagerCreatorFragment extends Fragment {
             arrayList.add(hashMap);
         }
         FileUtil.writeFile(concat, new Gson().toJson(arrayList));
-        SketchwareUtil.toast("Saved");
+        SketchwareUtil.toast(getString(R.string.common_word_saved));
         getParentFragmentManager().popBackStack();
     }
 
@@ -181,11 +180,12 @@ public class EventsManagerCreatorFragment extends Fragment {
         if (isEdit) {
             binding.toolbar.setTitle(event_name);
         } else if (isActivityEvent) {
-            binding.toolbar.setTitle("Create a new activity event");
+            binding.toolbar.setTitle(R.string.create_a_new_activity_event);
         } else {
-            binding.toolbar.setTitle(lisName + "Create a new event");
+            binding.toolbar.setTitle(lisName + getString(R.string.create_a_new_event));
         }
-        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(requireActivity()));
-        ((AppCompatActivity) requireActivity()).setSupportActionBar(binding.toolbar);
+        binding.toolbar.setNavigationOnClickListener(v -> {
+            getParentFragmentManager().popBackStack();
+        });
     }
 }

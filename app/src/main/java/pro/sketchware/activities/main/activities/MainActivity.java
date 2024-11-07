@@ -28,16 +28,12 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import pro.sketchware.activities.main.fragments.projects.ProjectsFragment;
-import pro.sketchware.activities.main.fragments.projects_store.ProjectsStoreFragment;
 import com.besome.sketch.lib.base.BasePermissionAppCompatActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import pro.sketchware.R;
-import pro.sketchware.databinding.MainBinding;
 
 import java.io.File;
 import java.io.IOException;
@@ -53,16 +49,20 @@ import a.a.a.wq;
 import a.a.a.xB;
 import dev.chrisbanes.insetter.Insetter;
 import dev.chrisbanes.insetter.Side;
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.project.backup.BackupFactory;
 import mod.hey.studios.project.backup.BackupRestoreManager;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.activities.tools.ConfigActivity;
-import pro.sketchware.activities.about.AboutActivity;
-import pro.sketchware.lib.base.BottomSheetDialogView;
 import mod.jbk.util.LogUtil;
 import mod.tyron.backup.SingleCopyTask;
+import pro.sketchware.R;
+import pro.sketchware.activities.about.AboutActivity;
+import pro.sketchware.activities.main.fragments.projects.ProjectsFragment;
+import pro.sketchware.activities.main.fragments.projects_store.ProjectsStoreFragment;
+import pro.sketchware.databinding.MainBinding;
+import pro.sketchware.lib.base.BottomSheetDialogView;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class MainActivity extends BasePermissionAppCompatActivity {
     private final OnBackPressedCallback closeDrawer = new OnBackPressedCallback(true) {
@@ -258,10 +258,10 @@ public class MainActivity extends BasePermissionAppCompatActivity {
 
                             if (BackupFactory.zipContainsFile(path, "local_libs")) {
                                 new MaterialAlertDialogBuilder(MainActivity.this)
-                                        .setTitle("Warning")
+                                        .setTitle(R.string.code_shrinker_warning)
                                         .setMessage(BackupRestoreManager.getRestoreIntegratedLocalLibrariesMessage(false, -1, -1, null))
-                                        .setPositiveButton("Copy", (dialog, which) -> manager.doRestore(path, true))
-                                        .setNegativeButton("Don't copy", (dialog, which) -> manager.doRestore(path, false))
+                                        .setPositiveButton(R.string.common_word_copy, (dialog, which) -> manager.doRestore(path, true))
+                                        .setNegativeButton(R.string.don_t_copy, (dialog, which) -> manager.doRestore(path, false))
                                         .setNeutralButton(R.string.common_word_cancel, null)
                                         .show();
                             } else {
@@ -271,7 +271,7 @@ public class MainActivity extends BasePermissionAppCompatActivity {
                             // Clear intent so it doesn't duplicate
                             getIntent().setData(null);
                         } else {
-                            SketchwareUtil.toastError("Failed to copy backup file to temporary location: " + reason, Toast.LENGTH_LONG);
+                            SketchwareUtil.toastError(getString(R.string.failed_to_copy_backup_file_to_temporary_location) + reason, Toast.LENGTH_LONG);
                         }
                     }
                 }).copyFile(data);
@@ -288,7 +288,7 @@ public class MainActivity extends BasePermissionAppCompatActivity {
                 }
 
                 public void onFinish() {
-                    bottomSheetDialog.setPositiveButtonText("View changes");
+                    bottomSheetDialog.setPositiveButtonText(getString(R.string.view_changes));
                     bottomSheetDialog.getPositiveButton().setEnabled(true);
                 }
             };
@@ -372,8 +372,8 @@ public class MainActivity extends BasePermissionAppCompatActivity {
                     FileUtil.requestAllFilesAccessPermission(this);
                     dialog.dismiss();
                 });
-                dialog.a("Skip", Helper.getDialogDismissListener(dialog));
-                dialog.configureDefaultButton("Don't show anymore", v -> {
+                dialog.a(getString(R.string.common_word_skip), Helper.getDialogDismissListener(dialog));
+                dialog.configureDefaultButton(getString(R.string.don_t_show_anymore), v -> {
                     try {
                         if (!optOutFile.createNewFile())
                             throw new IOException("Failed to create file " + optOutFile);

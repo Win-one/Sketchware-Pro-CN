@@ -63,7 +63,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="4dp"
-                        android:text="Event properties"
+                        android:text="@string/event_properties"
                         android:textSize="16sp" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -210,7 +210,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="6dp"
-                        android:text="Create New Listener"
+                        android:text="@string/create_new_listener"
                         android:textSize="12sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -308,6 +308,7 @@
             android:id="@+id/events_creator_cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+
             android:layout_marginEnd="7dp"
             android:layout_weight="1"
             android:text="@string/common_word_cancel"

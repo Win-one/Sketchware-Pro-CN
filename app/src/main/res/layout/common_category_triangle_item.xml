@@ -28,7 +28,7 @@
             android:gravity="center"
             android:textAlignment="center"
             android:textSize="10sp"
-            tools:text="Activity" />
+            tools:text="@string/common_word_activity" />
     </LinearLayout>
 
     <View

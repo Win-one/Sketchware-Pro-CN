@@ -86,7 +86,7 @@ public class BlocksManager extends BaseAppCompatActivity {
 
         Toolbar toolbar = (Toolbar) getLayoutInflater().inflate(R.layout.toolbar_improved, background, false);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Block Manager");
+        getSupportActionBar().setTitle(R.string.block_manager);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
@@ -128,8 +128,8 @@ public class BlocksManager extends BaseAppCompatActivity {
 
     private void showBlockConfigurationDialog() {
         aB dialog = new aB(this);
-        dialog.a(R.drawable.ic_folder_48dp);
-        dialog.b("Block configuration");
+        dialog.a(R.drawable.services_48);
+        dialog.b(getString(R.string.block_configuration));
 
         DialogBlockConfigurationBinding dialogBinding = DialogBlockConfigurationBinding.inflate(getLayoutInflater());
 

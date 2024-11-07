@@ -21,11 +21,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.besome.sketch.beans.ProjectLibraryBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import com.github.angads25.filepicker.model.DialogConfigs;
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
 import com.google.android.material.materialswitch.MaterialSwitch;
-import pro.sketchware.R;
+import com.oneskyer.library.model.DialogConfigs;
+import com.oneskyer.library.model.DialogProperties;
+import com.oneskyer.library.view.FilePickerDialog;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,6 +34,7 @@ import a.a.a.GB;
 import a.a.a.aB;
 import a.a.a.bB;
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
 

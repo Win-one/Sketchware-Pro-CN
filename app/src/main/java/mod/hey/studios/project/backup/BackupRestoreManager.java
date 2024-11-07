@@ -3,22 +3,18 @@ package mod.hey.studios.project.backup;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.view.LayoutInflater;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import android.view.LayoutInflater;
 
 import androidx.appcompat.app.AlertDialog;
 
-import pro.sketchware.activities.main.fragments.projects.ProjectsFragment;
-
-import com.github.angads25.filepicker.model.DialogConfigs;
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
-
-import pro.sketchware.R;
-import pro.sketchware.databinding.ProgressMsgBoxBinding;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.oneskyer.library.model.DialogConfigs;
+import com.oneskyer.library.model.DialogProperties;
+import com.oneskyer.library.view.FilePickerDialog;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -26,11 +22,12 @@ import java.util.HashMap;
 
 import a.a.a.aB;
 import a.a.a.lC;
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.util.Helper;
-
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import pro.sketchware.R;
+import pro.sketchware.activities.main.fragments.projects.ProjectsFragment;
+import pro.sketchware.databinding.ProgressMsgBoxBinding;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class BackupRestoreManager {
 

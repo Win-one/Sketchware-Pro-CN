@@ -25,7 +25,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:navigationIcon="?attr/homeAsUpIndicator"
-                app:title="Last Compile Log" />
+                app:title="@string/last_compile_log" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -52,7 +52,7 @@
                 android:paddingBottom="48dp"
                 android:textSize="11sp"
                 android:typeface="monospace"
-                tools:text="Errors will show up here" />
+                tools:text="@string/errors_will_show_up_here" />
         </HorizontalScrollView>
     </androidx.core.widget.NestedScrollView>
 

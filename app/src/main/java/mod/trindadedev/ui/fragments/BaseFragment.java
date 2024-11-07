@@ -1,17 +1,22 @@
 package mod.trindadedev.ui.fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.transition.MaterialSharedAxis;
-import pro.sketchware.R;
 
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
+import pro.sketchware.SketchApplication;
 
 public class BaseFragment extends Fragment {
+    private Activity activity;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,5 +36,20 @@ public class BaseFragment extends Fragment {
                 .replace(R.id.settings_fragment_container, fragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    @Nullable
+    @Override
+    public Context getContext() {
+        if (activity == null) {
+            return SketchApplication.getInstance();
+        }
+        return activity;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        activity = getActivity();
     }
 }
