@@ -9,7 +9,7 @@ import android.util.Log;
 import com.besome.sketch.tools.CollectErrorActivity;
 import com.hjq.language.MultiLanguages;
 
-import mod.trindadedev.manage.theme.ThemeManager;
+import pro.sketchware.utility.theme.ThemeManager;
 
 public class SketchApplication extends Application {
     private static Context mApplicationContext;
