@@ -2156,7 +2156,6 @@ Please try again later"</string>
     <string name="local_library_manager_skip_downloading_dependencies">Skip downloading sub-dependencies</string>
     <string name="signatures_title">Signatures</string>
     <string name="settings_appearance">Appearance</string>
-    <string name="settings_appearance_description">Change the Sketchware appearance</string>
     <string name="settings_appearance_theme">Sketchware Theme</string>
     <string name="settings_appearance_theme_system">System default</string>
     <string name="settings_appearance_theme_light">Light theme</string>
@@ -2328,5 +2327,20 @@ Please try again later"</string>
     <string name="enable_block_text_input_highlighting">Enable block text input highlighting</string>
     <string name="enables_syntax_highlighting_while_editing_blocks_text_parameters">Enables syntax highlighting while editing blocks\' text parameters.</string>
     <string name="default_is_projectname_v_versionname_pkgname_versioncode_time">Default is \"$projectName v$versionName ($pkgName, $versionCode) $time(yyyy-MM-dd\'T\'HHmmss)\"</string>
+    <string name="new_selector">New selector</string>
+    <string name="edit_selector">Edit selector</string>
+    <string name="selector_name">Selector name</string>
+    <string name="selector_title">Selector title (ex: Select View:)</string>
+    <string name="an_item_with_this_name_already_exists">An item with this name already exists</string>
+    <string name="you_cannot_change_the_name_of_this_selector">You cannot change the name of this selector</string>
+    <string name="please_type_the_selector_s_name">Please type the selector\'s name</string>
+    <string name="please_type_the_selector_s_title">Please type the selector\'s title</string>
+    <string name="common_word_actions">Actions</string>
+    <string name="are_you_sure_you_want_to_delete_this_selector">Are you sure you want to delete this selector?</string>
+    <string name="common_word_attention">Attention</string>
+    <string name="select_json_selector_file">Select .json selector file</string>
+    <string name="exported_in">"Exported in "</string>
+    <string name="make_sure_you_select_a_file">Make sure you select a file that contains selector item(s).</string>
+    <string name="an_error_occurred_while_trying_to_get_the_selector">An error occurred while trying to get the selector</string>
 
 </resources>

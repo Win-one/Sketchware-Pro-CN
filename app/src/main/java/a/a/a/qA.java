@@ -6,23 +6,24 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.activity.OnBackPressedDispatcher;
-import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.transition.MaterialSharedAxis;
 
-import pro.sketchware.R;
-
 import dev.chrisbanes.insetter.Insetter;
+import pro.sketchware.R;
+import pro.sketchware.SketchApplication;
 
 public class qA extends Fragment {
 
-    public Activity a;
+    public Activity activity;
     @Deprecated
-    public Context b;
+    public Context context;
 
     public qA() {
     }
@@ -48,8 +49,10 @@ public class qA extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        a = getActivity();
-        b = a.getApplicationContext();
+        activity = getActivity();
+        if (activity != null) {
+            context = activity.getApplicationContext();
+        }
         setEnterTransition(new MaterialSharedAxis(MaterialSharedAxis.X, true));
         setReturnTransition(new MaterialSharedAxis(MaterialSharedAxis.X, false));
         setExitTransition(new MaterialSharedAxis(MaterialSharedAxis.X, true));
@@ -76,4 +79,18 @@ public class qA extends Fragment {
             .applyToView(root);
     }
 
+    @Nullable
+    @Override
+    public Context getContext() {
+        if (activity == null) {
+            return SketchApplication.getInstance();
+        }
+        return activity;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        activity = getActivity();
+    }
 }

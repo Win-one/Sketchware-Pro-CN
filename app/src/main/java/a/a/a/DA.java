@@ -33,7 +33,7 @@ public abstract class DA extends qA {
 
     public void d(int var1) {
         if (!Sp.a) {
-            aB dialog = new aB(super.a);
+            aB dialog = new aB(super.activity);
             dialog.b(xB.b().a(getContext(), R.string.common_message_permission_title_storage));
             dialog.a(R.drawable.break_warning_96_red);
             dialog.a(xB.b().a(getContext(), R.string.common_message_permission_storage));
@@ -60,7 +60,7 @@ public abstract class DA extends qA {
 
     public void e(int var1) {
         if (!Sp.a) {
-            aB dialog = new aB(super.a);
+            aB dialog = new aB(super.activity);
             dialog.b(xB.b().a(getContext(), R.string.common_message_permission_title_storage));
             dialog.a(R.drawable.break_warning_96_red);
             dialog.a(xB.b().a(getContext(), R.string.common_message_permission_storage1));

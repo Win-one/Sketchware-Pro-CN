@@ -76,6 +76,7 @@
     <string name="common_word_widget">小部件</string>
     <string name="common_word_block">块</string>
     <string name="common_word_variable">变量</string>
+    <string name="common_word_new">新建</string>
     <string name="common_message_insufficient_storage_space_title">存储空间不足</string>
     <string name="common_message_insufficient_storage_space">存储空间不足\n请腾出空间再试试</string>
     <string name="common_message_progress">进行中</string>
@@ -2503,11 +2504,15 @@
     <string name="local_library_manager_download_status">下载状态</string>
     <string name="settings_appearance">主题设置</string>
     <string name="signatures_title">签名</string>
-    <string name="settings_appearance_description">更改Sketchware主题</string>
     <string name="settings_appearance_theme">Sketchware主题</string>
     <string name="settings_appearance_theme_system">系统默认</string>
     <string name="settings_appearance_theme_light">浅色主题</string>
     <string name="settings_appearance_theme_dark">深色主题</string>
+    <string name="settings_events_manager">事件管理器</string>
+    <string name="settings_events_manager_activity_events">活动事件</string>
+    <string name="settings_events_manager_listeners">监听器</string>
+    <string name="settings_events_manager_details">事件管理器详细信息</string>
+    <string name="settings_block_selector">块选择器管理器</string>
     <string name="change_launcher_activity_dialog_title">启动器活动</string>
     <string name="common_word_add_activtiy">添加活动</string>
     <string name="delete_custom_activity_dialog_message">与%1$s相关的所有功能都将被删除.是否确定?</string>
@@ -2577,10 +2582,6 @@
     <string name="common_word_skip">跳过</string>
     <string name="don_t_show_anymore">不再显示</string>
     <string name="component_context_menu_title">组件菜单</string>
-    <string name="tools_events_manager">事件管理器</string>
-    <string name="tools_events_manager_activity_events">活动事件</string>
-    <string name="tools_events_manager_listeners">监听器</string>
-    <string name="tools_events_manager_details">事件管理器详细信息</string>
     <string name="export_path">导出路径:</string>
     <string name="some_required_fields_are_empty">某些必填字段为空!</string>
     <string name="create_a_new_activity_event">创建新的活动事件</string>
@@ -2648,5 +2649,20 @@
     <string name="enable_block_text_input_highlighting">启用块文本输入高亮显示</string>
     <string name="enables_syntax_highlighting_while_editing_blocks_text_parameters">在编辑块文本参数时启用语法高亮显示.</string>
     <string name="default_is_projectname_v_versionname_pkgname_versioncode_time">默认值为\"$projectName v$versionName ($pkgName, $versionCode) $time(yyyy-MM-dd\'T\'HHmmss)\"</string>
+    <string name="new_selector">新选择器</string>
+    <string name="edit_selector">编辑选择器</string>
+    <string name="selector_name">选择器名称</string>
+    <string name="selector_title">选择器标题(例如:Select View)</string>
+    <string name="an_item_with_this_name_already_exists">具有此名称的项目已存在</string>
+    <string name="you_cannot_change_the_name_of_this_selector">您无法更改此选择器的名称</string>
+    <string name="please_type_the_selector_s_name">请输入选择器的名称</string>
+    <string name="please_type_the_selector_s_title">请输入选择器的标题</string>
+    <string name="common_word_actions">动作</string>
+    <string name="are_you_sure_you_want_to_delete_this_selector">是否确定要删除此选择器?</string>
+    <string name="common_word_attention">注意</string>
+    <string name="select_json_selector_file">选择.json选择器文件</string>
+    <string name="exported_in">导出</string>
+    <string name="make_sure_you_select_a_file">确保选择包含选择器项的文件.</string>
+    <string name="an_error_occurred_while_trying_to_get_the_selector">尝试获取选择器时出错</string>
 
 </resources>

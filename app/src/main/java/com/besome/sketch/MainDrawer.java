@@ -24,9 +24,9 @@ import a.a.a.mB;
 import dev.chrisbanes.insetter.Insetter;
 import dev.chrisbanes.insetter.Side;
 import mod.hilal.saif.activities.tools.AppSettings;
-import mod.trindadedev.ui.activities.SettingsActivity;
 import pro.sketchware.R;
 import pro.sketchware.activities.about.AboutActivity;
+import pro.sketchware.activities.settings.SettingsActivity;
 
 public class MainDrawer extends NavigationView {
     private static final int DEF_STYLE_RES = R.style.Widget_SketchwarePro_NavigationView_Main;

@@ -39,8 +39,8 @@ public class SketchApplication extends Application {
     }
 
     @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(MultiLanguages.attach(newBase));
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(MultiLanguages.attach(base));
     }
 
     public static Context getInstance() {
