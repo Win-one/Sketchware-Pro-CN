@@ -301,14 +301,10 @@ public class MainActivity extends BasePermissionAppCompatActivity {
     @NonNull
     private BottomSheetDialogView getBottomSheetDialogView() {
         BottomSheetDialogView bottomSheetDialog = new BottomSheetDialogView(this);
-        bottomSheetDialog.setTitle("Major changes in v6.4.0");
-        bottomSheetDialog.setDescription("""
-                There have been major changes since v6.3.0 fix1, \
-                and it's very important to know them all if you want your projects to still work.
-                
-                You can view all changes whenever you want at the About Sketchware Pro screen.""");
+        bottomSheetDialog.setTitle(getString(R.string.major_changes_in_v6_4_0));
+        bottomSheetDialog.setDescription(getString(R.string.change_message));
 
-        bottomSheetDialog.setPositiveButton("View changes", (dialog, which) -> {
+        bottomSheetDialog.setPositiveButton(getString(R.string.view_changes), (dialog, which) -> {
             ConfigActivity.setSetting(ConfigActivity.SETTING_CRITICAL_UPDATE_REMINDER, true);
             Intent launcher = new Intent(this, AboutActivity.class);
             launcher.putExtra("select", "changelog");
@@ -364,10 +360,10 @@ public class MainActivity extends BasePermissionAppCompatActivity {
             if (!optOutFile.exists() && !granted) {
                 aB dialog = new aB(this);
                 dialog.a(R.drawable.ic_expire_48dp);
-                dialog.b("Android 11 storage access");
-                dialog.a("Starting with Android 11, Sketchware Pro needs a new permission to avoid " +
-                        "taking ages to build projects. Don't worry, we can't do more to storage than " +
-                        "with current granted permissions.");
+                dialog.b(getString(R.string.android_11_storage_access));
+                dialog.a(getString(R.string.starting_with_android_11) +
+                         getString(R.string.taking_ages_to_build_projects) +
+                         getString(R.string.with_current_granted_permissions));
                 dialog.b(Helper.getResString(R.string.common_word_settings), v -> {
                     FileUtil.requestAllFilesAccessPermission(this);
                     dialog.dismiss();

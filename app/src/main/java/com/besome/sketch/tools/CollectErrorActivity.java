@@ -37,12 +37,12 @@ public class CollectErrorActivity extends BaseAppCompatActivity {
 
             var dialog = new MaterialAlertDialogBuilder(this)
                     .setTitle(xB.b().a(getApplicationContext(), R.string.common_error_an_error_occurred))
-                    .setMessage("An error occurred while running Sketchware Pro. " +
-                            "Do you want to report this error log so that we can fix it? " +
-                            "No personal information will be included.")
-                    .setPositiveButton("Copy", null)
-                    .setNegativeButton("Cancel", (dialogInterface, which) -> finish())
-                    .setNeutralButton("Show error", null) // null to set proper onClick listeners later without dismissing the AlertDialog
+                    .setMessage(getString(R.string.an_error_occurred_while_running_sketchware_pro) +
+                            getString(R.string.do_you_want_to_report_this_error_log_so_that_we_can_fix_it) +
+                            getString(R.string.no_personal_information_will_be_included))
+                    .setPositiveButton(getString(R.string.common_word_copy), null)
+                    .setNegativeButton(R.string.common_word_cancel, (dialogInterface, which) -> finish())
+                    .setNeutralButton(R.string.show_error, null) // null to set proper onClick listeners later without dismissing the AlertDialog
                     .show();
 
             TextView messageView = dialog.findViewById(android.R.id.message);
@@ -75,7 +75,7 @@ public class CollectErrorActivity extends BaseAppCompatActivity {
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("error", deviceInfo + "\n\n```\n" + error + "\n```");
                 clipboard.setPrimaryClip(clip);
-                runOnUiThread(() -> SketchwareUtil.toast("Copied", Toast.LENGTH_LONG));
+                runOnUiThread(() -> SketchwareUtil.toast(getString(R.string.common_word_copied), Toast.LENGTH_LONG));
             });
         }
     }

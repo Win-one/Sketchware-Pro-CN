@@ -22,16 +22,13 @@ public class SketchApplication extends Application {
     public void onCreate() {
         MultiLanguages.init(this);
         mApplicationContext = getApplicationContext();
-        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            @Override
-            public void uncaughtException(Thread thread, Throwable throwable) {
-                Intent intent = new Intent(getApplicationContext(), CollectErrorActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.putExtra("error", Log.getStackTraceString(throwable));
-                startActivity(intent);
-                Process.killProcess(Process.myPid());
-                System.exit(1);
-            }
+        Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> {
+            Intent intent = new Intent(getApplicationContext(), CollectErrorActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra("error", Log.getStackTraceString(throwable));
+            startActivity(intent);
+            Process.killProcess(Process.myPid());
+            System.exit(1);
         });
         super.onCreate();
         ThemeManager.applyTheme(this, ThemeManager.getCurrentTheme(this));

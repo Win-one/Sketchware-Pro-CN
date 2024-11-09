@@ -81,7 +81,7 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
         ((ViewGroup) background).addView(toolbar, 0);
 
         fab_button.setOnClickListener(v -> {
@@ -144,6 +144,7 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (mode.equals("editor")) {
             mode = "normal";
             Parcelable savedState = block_list.onSaveInstanceState();

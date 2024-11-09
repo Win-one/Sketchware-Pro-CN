@@ -82,7 +82,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
 
         binding.name.addTextChangedListener(new BaseTextWatcher() {
             @Override
@@ -93,7 +93,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
                     binding.save.setEnabled(true);
                 } else if (!mode.equals("edit")) {
                     binding.nameLayout.setErrorEnabled(true);
-                    binding.nameLayout.setError("Block name already in use");
+                    binding.nameLayout.setError(getString(R.string.block_name_already_in_use));
                     binding.save.setEnabled(false);
                 } else {
                     HashMap<String, Object> savedBlocksListBlock = blocksList.get(blockPosition);
@@ -101,7 +101,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
 
                     if (!string.equals(blockNameObject)) {
                         binding.nameLayout.setErrorEnabled(true);
-                        binding.nameLayout.setError("Block name already in use");
+                        binding.nameLayout.setError(getString(R.string.block_name_already_in_use));
                         binding.save.setEnabled(false);
                     }
                 }
@@ -128,7 +128,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
                     "Header (h)"
             );
             AtomicInteger choice = new AtomicInteger();
-            new MaterialAlertDialogBuilder(this).setTitle("Block type")
+            new MaterialAlertDialogBuilder(this).setTitle(R.string.block_type)
                     .setSingleChoiceItems(choices.toArray(new String[0]),
                             types.indexOf(binding.type.getText().toString()), (dialog, which) -> choice.set(which))
                     .setPositiveButton(R.string.common_word_save, (dialog, which) -> binding.type.setText(types.get(choice.get())))
@@ -171,7 +171,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!PropertiesUtil.isHexColor(s.toString())) {
-                    binding.colourLay.setError("Invalid hex color");
+                    binding.colourLay.setError(getString(R.string.invalid_hex_color));
                 } else {
                     binding.colourLay.setError(null);
                 }
@@ -182,12 +182,12 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         binding.cancel.setOnClickListener(Helper.getBackPressedClickListener(this));
         binding.save.setOnClickListener(v -> {
             if (!PropertiesUtil.isHexColor(binding.colour.getText().toString())) {
-                SketchwareUtil.showMessage(getApplicationContext(), "Invalid hex color");
+                SketchwareUtil.showMessage(getApplicationContext(), getString(R.string.invalid_hex_color));
                 return;
             }
             Matcher matcher = PARAM_PATTERN.matcher(binding.spec.getText().toString());
             if (matcher.find()) {
-                SketchwareUtil.showMessage(getApplicationContext(), "Invalid block params");
+                SketchwareUtil.showMessage(getApplicationContext(), getString(R.string.invalid_block_params));
                 return;
             }
             if (binding.type.getText().toString().isEmpty()) {
@@ -306,14 +306,14 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         if (mode.equals("add")) {
             blockPosition = Integer.parseInt(getIntent().getStringExtra("pallet"));
             binding.colour.setText(palletColour);
-            getSupportActionBar().setTitle("Add a new block");
+            getSupportActionBar().setTitle(R.string.add_a_new_block);
             return;
         }
         blockPosition = Integer.parseInt(getIntent().getStringExtra("pos"));
         binding.colour.setText(palletColour);
-        getSupportActionBar().setTitle("Insert block");
+        getSupportActionBar().setTitle(R.string.insert_block);
         if (mode.equals("edit")) {
-            getSupportActionBar().setTitle("Edit block");
+            getSupportActionBar().setTitle(R.string.edit_block);
             fillUpInputs(blockPosition);
         }
     }
@@ -325,7 +325,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         if (nameObject instanceof String) {
             binding.name.setText((String) nameObject);
         } else {
-            binding.name.setError("Invalid name block data");
+            binding.name.setError(getString(R.string.invalid_name_block_data));
         }
 
         Object typeObject = block.get("type");
@@ -333,12 +333,12 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             String typeString = (String) typeObject;
 
             if (typeString.equals(" ")) {
-                binding.type.setText("regular");
+                binding.type.setText(R.string.regular);
             } else {
                 binding.type.setText(typeString);
             }
         } else {
-            binding.type.setError("Invalid type block data");
+            binding.type.setError(getString(R.string.invalid_type_block_data));
         }
 
         Object typeName = block.get("typeName");
@@ -346,7 +346,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             if (typeName instanceof String) {
                 binding.typename.setText((String) typeName);
             } else {
-                binding.typename.setError("Invalid typeName block data");
+                binding.typename.setError(getString(R.string.invalid_typename_block_data));
             }
         }
 
@@ -354,7 +354,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         if (specObject instanceof String) {
             binding.spec.setText((String) specObject);
         } else {
-            binding.spec.setError("Invalid spec block data");
+            binding.spec.setError(getString(R.string.invalid_spec_block_data));
         }
 
         Object spec2Object = block.get("spec2");
@@ -362,7 +362,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             if (spec2Object instanceof String) {
                 binding.spec2.setText((String) spec2Object);
             } else {
-                binding.spec2.setError("Invalid spec2 block data");
+                binding.spec2.setError(getString(R.string.invalid_spec2_block_data));
             }
         }
         
@@ -371,7 +371,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             if (importsObject instanceof String) {
                 binding.customImport.setText((String) importsObject);
             } else {
-                binding.customImport.setError("Invalid imports block data");
+                binding.customImport.setError(getString(R.string.invalid_imports_block_data));
             }
         }
 
@@ -380,7 +380,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             if (colorObject instanceof String) {
                 binding.colour.setText((String) colorObject);
             } else {
-                binding.colour.setError("Invalid color block data");
+                binding.colour.setError(getString(R.string.invalid_color_block_data));
             }
         } else {
             binding.colour.setText(palletColour);
@@ -390,7 +390,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         if (codeObject instanceof String) {
             binding.code.setText((String) codeObject);
         } else {
-            binding.code.setHint("(Invalid code block data)");
+            binding.code.setHint(R.string.invalid_code_block_data);
         }
     }
 
@@ -488,7 +488,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         tempMap.put("palette", blocksList.get(position).get("palette"));
         blocksList.add(position, tempMap);
         FileUtil.writeFile(path, new Gson().toJson(blocksList));
-        SketchwareUtil.toast("Saved");
+        SketchwareUtil.toast(getString(R.string.common_word_saved));
         finish();
     }
 
@@ -511,7 +511,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         }
         tempMap.put("code", binding.code.getText().toString());
         FileUtil.writeFile(path, new Gson().toJson(blocksList));
-        SketchwareUtil.toast("Saved");
+        SketchwareUtil.toast(getString(R.string.common_word_saved));
         finish();
     }
 }

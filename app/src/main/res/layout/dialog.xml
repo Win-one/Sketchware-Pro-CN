@@ -94,7 +94,7 @@
                 android:textColor="?colorPrimary"
                 app:backgroundTint="@color/transparent"
                 app:rippleColor="?colorControlHighlight"
-                tools:text="Default" />
+                tools:text="@string/common_word_default" />
 
             <android.widget.Space
                 android:layout_width="0dp"
@@ -116,7 +116,7 @@
                 android:textColor="?colorPrimary"
                 app:backgroundTint="@color/transparent"
                 app:rippleColor="?colorControlHighlight"
-                tools:text="Cancel" />
+                tools:text="@string/common_word_cancel" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/dialog_btn_yes"
@@ -133,7 +133,7 @@
                 android:textColor="?colorPrimary"
                 app:backgroundTint="@color/transparent"
                 app:rippleColor="?colorControlHighlight"
-                tools:text="Okay" />
+                tools:text="@string/common_word_okay" />
 
         </LinearLayout>
     </LinearLayout>

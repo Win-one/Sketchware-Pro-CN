@@ -48,7 +48,7 @@
                     android:marqueeRepeatLimit="marquee_forever"
                     android:scrollHorizontally="true"
                     android:singleLine="true"
-                    android:text="This is still a basic implementation of the projects store. We're actively working on improving it. Stay tuned!"
+                    android:text="@string/this_is_still_a_basic_implementation_of_the_projects_store"
                     android:textAppearance="?attr/textAppearanceBodyMedium" />
 
             </LinearLayout>
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Editor's choice"
+            android:text="@string/editor_s_choice"
             android:textAppearance="?attr/textAppearanceTitleMedium"
             android:textStyle="bold" />
 
@@ -77,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Most downloaded projects"
+            android:text="@string/most_downloaded_projects"
             android:textAppearance="?attr/textAppearanceTitleMedium"
             android:textStyle="bold" />
 
@@ -96,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Recent projects"
+            android:text="@string/recent_projects"
             android:textAppearance="?attr/textAppearanceTitleMedium"
             android:textStyle="bold" />
 

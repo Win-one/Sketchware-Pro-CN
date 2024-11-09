@@ -36,7 +36,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="4dp"
-                        android:text="Properties"
+                        android:text="@string/properties"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -123,7 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="4dp"
-                        android:text="Design"
+                        android:text="@string/design"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -174,7 +174,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="4dp"
-                        android:text="Parameters"
+                        android:text="@string/parameters"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="12sp" />
 
@@ -233,7 +233,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
                         android:padding="4dp"
-                        android:text="Block preview"
+                        android:text="@string/block_preview"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="12sp" />
 
@@ -269,7 +269,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="4dp"
-                        android:text="Block import (e.g., android.view.View)"
+                        android:text="@string/block_import"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -293,7 +293,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="4dp"
-                        android:text="Block embedded code"
+                        android:text="@string/block_embedded_code"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="16sp"
                         android:textStyle="bold" />

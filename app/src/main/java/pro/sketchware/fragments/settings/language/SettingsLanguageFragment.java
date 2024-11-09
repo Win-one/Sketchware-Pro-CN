@@ -1,5 +1,6 @@
 package pro.sketchware.fragments.settings.language;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +9,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.hjq.language.LocaleContract;
+import com.hjq.language.MultiLanguages;
+
+import java.util.Locale;
+
 import a.a.a.qA;
 import pro.sketchware.R;
+import pro.sketchware.activities.main.activities.MainActivity;
 import pro.sketchware.databinding.FragmentSettingsLanguageBinding;
-import pro.sketchware.utility.language.LanguageManager;
 
 public class SettingsLanguageFragment extends qA {
 
@@ -32,28 +38,28 @@ public class SettingsLanguageFragment extends qA {
     }
 
     private void configureLanguageController() {
-        switch (LanguageManager.getCurrentLanguage(requireContext())) {
-            case LanguageManager.LANGUAGE_CHINESE:
-                binding.toggleLanguage.check(R.id.language_chinese);
-                break;
-            case LanguageManager.LANGUAGE_ENGLISH:
-                binding.toggleLanguage.check(R.id.language_english);
-                break;
-            default:
-                binding.toggleLanguage.check(R.id.language_system);
-                break;
+        Locale locale = MultiLanguages.getAppLanguage(this.requireContext());
+        if (LocaleContract.getSimplifiedChineseLocale().equals(locale)) {
+            binding.toggleLanguage.check(R.id.language_chinese);
+        } else if (LocaleContract.getEnglishLocale().equals(locale)) {
+            binding.toggleLanguage.check(R.id.language_english);
+        } else {
+            binding.toggleLanguage.check(R.id.language_system);
         }
 
         binding.toggleLanguage.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
             if (isChecked) {
-                if (checkedId == R.id.language_chinese) {
-                    LanguageManager.applyLanguage(requireContext(), LanguageManager.LANGUAGE_CHINESE);
-                } else if (checkedId == R.id.language_system) {
-                    LanguageManager.applyLanguage(requireContext(), LanguageManager.LANGUAGE_SYSTEM);
+                boolean restart = false;
+                if (checkedId == R.id.language_system) {
+                    restart = MultiLanguages.clearAppLanguage(this.requireContext());
+                } else if (checkedId == R.id.language_chinese) {
+                    restart = MultiLanguages.setAppLanguage(this.requireContext(), LocaleContract.getSimplifiedChineseLocale());
                 } else if (checkedId == R.id.language_english) {
-                    LanguageManager.applyLanguage(requireContext(), LanguageManager.LANGUAGE_ENGLISH);
-                } else {
-                    LanguageManager.applyLanguage(requireContext(), LanguageManager.LANGUAGE_SYSTEM);
+                    restart = MultiLanguages.setAppLanguage(this.requireContext(), LocaleContract.getEnglishLocale());
+                }
+                if (restart) {
+                    startActivity(new Intent(this.requireContext(), MainActivity.class));
+                    requireActivity().getOnBackPressedDispatcher().onBackPressed();
                 }
             }
 
