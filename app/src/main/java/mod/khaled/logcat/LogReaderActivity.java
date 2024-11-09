@@ -141,10 +141,10 @@ public class LogReaderActivity extends BaseAppCompatActivity {
         binding.autoScrollSwitch.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             autoScroll = isChecked;
             if (autoScroll) {
-                binding.autoScrollSwitch.setText("Auto scroll enabled");
+                binding.autoScrollSwitch.setText(R.string.auto_scroll_enabled);
                 Objects.requireNonNull(binding.logsRecyclerView.getLayoutManager()).scrollToPosition(Objects.requireNonNull(binding.logsRecyclerView.getAdapter()).getItemCount() - 1);
             } else {
-                binding.autoScrollSwitch.setText("Auto scroll disabled");
+                binding.autoScrollSwitch.setText(R.string.auto_scroll_disabled);
             }
         });
 
@@ -236,21 +236,21 @@ public class LogReaderActivity extends BaseAppCompatActivity {
         dialogBinding.imgDelete.setVisibility(View.GONE);
 
         var builder = new MaterialAlertDialogBuilder(this)
-                .setTitle("Filter by package name")
-                .setMessage("For multiple package names, separate them with a comma (,).")
+                .setTitle(R.string.filter_by_package_name)
+                .setMessage(R.string.for_multiple_package_names_separate_them_with_a_comma)
                 .setIcon(R.drawable.ic_mtrl_filter)
                 .setView(view)
-                .setPositiveButton("Apply", (dialog, which) -> {
+                .setPositiveButton(R.string.common_word_apply, (dialog, which) -> {
                     pkgFilter = dialogBinding.easyEdInput.getText().toString();
                     pkgFilterList = new ArrayList<>(Arrays.asList(pkgFilter.split(",")));
                     binding.searchInput.setText(binding.searchInput.getText().toString());
                 })
-                .setNeutralButton("Reset", (dialog, which) -> {
+                .setNeutralButton(R.string.common_word_reset, (dialog, which) -> {
                     pkgFilter = "";
                     pkgFilterList.clear();
                     dialogBinding.easyEdInput.setText("");
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(R.string.common_word_cancel, null)
                 .create();
 
         builder.show();
@@ -416,7 +416,7 @@ public class LogReaderActivity extends BaseAppCompatActivity {
                 binding.dateHeader.setVisibility(View.GONE);
             }
             binding.getRoot().setOnLongClickListener(v -> {
-                SketchwareUtil.toast("Copied to clipboard");
+                SketchwareUtil.toast(getString(R.string.copied_to_clipboard));
                 ((ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("clipboard", data.get(position).get("logRaw").toString()));
                 return true;
             });

@@ -134,7 +134,7 @@ public class AddFontActivity extends BaseDialogActivity implements View.OnClickL
                 try {
                     Typeface typeface = Typeface.createFromFile(tempFontFile);
                     if (typeface.equals(Typeface.DEFAULT)) {
-                        SketchwareUtil.toastError("Warning: Font doesn't seem to be valid");
+                        SketchwareUtil.toastError(getString(R.string.warning_font_doesn_t_seem_to_be_valid));
                         return;
                     }
                     validFontPicked = true;

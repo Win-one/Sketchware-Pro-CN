@@ -282,7 +282,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:textAppearance="?attr/textAppearanceBodyMedium"
-                            android:text="Export AAB (Android App Bundle)"
+                            android:text="@string/export_aab_android_app_bundle"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -291,7 +291,7 @@
                         android:id="@+id/export_aab_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Export AAB"
+                        android:text="@string/export_aab"
                         android:textSize="14sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

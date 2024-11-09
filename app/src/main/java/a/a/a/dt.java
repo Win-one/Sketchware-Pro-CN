@@ -111,7 +111,7 @@ public class dt extends LinearLayout {
                 } else {
                     customVariableInvalid = !s.isEmpty();
                 }
-                binding.tiParameter.setError("Invalid format");
+                binding.tiParameter.setError(Helper.getResString(R.string.invalid_format));
                 binding.tiParameter.setErrorEnabled(customVariableInvalid);
             }
         });

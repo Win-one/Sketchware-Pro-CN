@@ -37,7 +37,7 @@
         android:layout_marginHorizontal="15dp"
         android:layout_marginVertical="8dp"
         android:gravity="center"
-        android:text="Dismiss"
+        android:text="@string/common_word_dismiss"
         android:textAllCaps="false"
         android:textColor="?colorPrimary"
         app:backgroundTint="?android:colorBackground"

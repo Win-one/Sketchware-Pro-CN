@@ -215,7 +215,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:gravity="center"
-                            android:text="@string/version_code"
+                            android:text="@string/common_word_project_information_version_code"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -256,7 +256,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:gravity="center"
-                            android:text="Version name"
+                            android:text="@string/myprojects_settings_version_control_title_name"
                             android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>

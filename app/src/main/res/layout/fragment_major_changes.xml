@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:text="No major changes yet"
+        android:text="@string/no_major_changes_yet"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -29,6 +29,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:gravity="center"
-        android:text="We will update this section once we have major changes to share"
+        android:text="@string/we_will_update_this_section_once_we_have_major_changes_to_share"
         android:textSize="14sp" />
 </LinearLayout>
