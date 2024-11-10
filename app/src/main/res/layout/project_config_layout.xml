@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:layout_marginTop="12dp"
-            android:text="Java version"
+            android:text="@string/java_version"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -72,21 +72,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Hide warnings in error log" />
+            android:text="@string/hide_warnings_in_error_log" />
 
         <CheckBox
             android:id="@+id/cb_no_http_legacy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Don't include http-legacy-28.dex" />
+            android:text="@string/don_t_include_http_legacy_28_dex" />
 
         <CheckBox
             android:id="@+id/cb_enable_logcat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Enable debug logcat logs viewable in Logcat Reader. Not enabled in exported AABs/APKs." />
+            android:text="@string/enable_debug_logcat_logs_viewable_in_logcat_reader" />
 
     </LinearLayout>
 </ScrollView>

@@ -435,7 +435,7 @@ public class MainActivity extends BasePermissionAppCompatActivity {
                 oB.a(getApplicationContext(), "localization/strings.xml", wq.m());
             }
         } catch (Exception e) {
-            String message = "Couldn't extract default strings to storage";
+            String message = getString(R.string.couldn_t_extract_default_strings_to_storage);
             SketchwareUtil.toastError(message + ": " + e.getMessage());
             LogUtil.e("MainActivity", message, e);
         }

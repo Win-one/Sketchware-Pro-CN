@@ -1909,8 +1909,8 @@ Please try again after adding at least one collection."</string>
     <string name="share_view_message_uploading_view_data">Uploading View Data</string>
     <string name="share_view_review_information_step_desc">Please review the information below. If they are all correct, click on \"Share\"..</string>
     <string name="share_view_review_information_step_name">Review Information</string>
-    <string name="share_view_select_favorite_view_message_favorite_view">"Please select a view you'd like to share"</string>
-    <string name="share_view_select_favorite_view_step_desc">"Select view you'd like to share"</string>
+    <string name="share_view_select_favorite_view_message_favorite_view">Please select a view you\'d like to share</string>
+    <string name="share_view_select_favorite_view_step_desc">Select view you\'d like to share</string>
     <string name="share_view_select_favorite_view_step_name">Select View</string>
     <string name="share_view_select_required_images_step_desc">Select image needed for this view</string>
     <string name="share_view_select_required_images_step_name">Select Image</string>
@@ -2410,7 +2410,6 @@ Please try again later"</string>
     <string name="apk_doesn_t_exist_anymore">APK doesn\'t exist anymore</string>
     <string name="generating_source_code">Generating source code...</string>
     <string name="please_wait">Please wait</string>
-    <string name="common_word_dismiss">Dismiss</string>
     <string name="failed_to_generate_source">Failed to generate source.</string>
     <string name="building_apk_file">Building APK file...</string>
     <string name="deleting_temporary_files">Deleting temporary files...</string>
@@ -2569,7 +2568,18 @@ Please try again later"</string>
     <string name="remove_permanently">Remove permanently</string>
     <string name="move_to_recycle_bin">Move to recycle bin</string>
     <string name="manage_block">Manage Block</string>
-
-    <string name="used_custom_blocks">Used Custom Blocks</string>
+    <string name="java_version">Java version</string>
+    <string name="hide_warnings_in_error_log">Hide warnings in error log</string>
+    <string name="don_t_include_http_legacy_28_dex">Don\'t include http-legacy-28.dex</string>
+    <string name="enable_debug_logcat_logs_viewable_in_logcat_reader">Enable debug logcat logs viewable in Logcat Reader. Not enabled in exported AABs/APKs.</string>
+    <string name="note_that_this_option_may_cause_issues">Note that this option may cause issues if RequestNetwork component is used</string>
+    <string name="back_up">Back up</string>
+    <string name="config">Config</string>
+    <string name="active">Active</string>
+    <string name="inactive">Inactive</string>
+    <string name="edit_color">Edit color</string>
+    <string name="please_fill_in_all_fields">Please fill in all fields</string>
+    <string name="please_enter_a_valid_hex_color">Please enter a valid HEX color</string>
+    <string name="couldn_t_extract_default_strings_to_storage">Couldn\'t extract default strings to storage</string>
 
 </resources>

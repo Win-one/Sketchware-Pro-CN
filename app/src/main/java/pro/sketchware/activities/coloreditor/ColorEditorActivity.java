@@ -12,10 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import pro.sketchware.R;
-import pro.sketchware.databinding.ColorEditorActivityBinding;
-import pro.sketchware.databinding.ColorEditorAddBinding;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
@@ -35,8 +31,11 @@ import mod.elfilibustero.sketch.lib.utils.PropertiesUtil;
 import mod.hey.studios.code.SrcCodeEditor;
 import mod.hey.studios.code.SrcCodeEditorLegacy;
 import mod.hilal.saif.activities.tools.ConfigActivity;
+import pro.sketchware.R;
 import pro.sketchware.activities.coloreditor.adapters.ColorsAdapter;
 import pro.sketchware.activities.coloreditor.models.ColorItem;
+import pro.sketchware.databinding.ColorEditorActivityBinding;
+import pro.sketchware.databinding.ColorEditorAddBinding;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
 import pro.sketchware.utility.XmlUtil;
@@ -260,22 +259,22 @@ public class ColorEditorActivity extends AppCompatActivity {
             dialogBinding.colorKeyInput.setText(colorItem.getColorName());
             dialogBinding.colorValueInput.setText(colorItem.getColorValue().replace("#", ""));
             dialogBinding.colorPreview.setBackgroundColor(PropertiesUtil.parseColor(colorItem.getColorValue()));
-            dialog.b("Edit color");
+            dialog.b(getString(R.string.edit_color));
         } else {
-            dialog.b("Add new color");
+            dialog.b(getString(R.string.add_new_color));
             dialogBinding.colorPreview.setBackgroundColor(0xFFFFFF);
         }
 
-        dialog.b("Save", v1 -> {
+        dialog.b(getString(R.string.common_word_save), v1 -> {
             String key = Objects.requireNonNull(dialogBinding.colorKeyInput.getText()).toString();
             String value = Objects.requireNonNull(dialogBinding.colorValueInput.getText()).toString();
 
             if (key.isEmpty() || value.isEmpty()) {
-                SketchwareUtil.toast("Please fill in all fields", Toast.LENGTH_SHORT);
+                SketchwareUtil.toast(getString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT);
                 return;
             }
             if (value.length() != 6 && value.length() != 8) {
-                SketchwareUtil.toast("Please enter a valid HEX color", Toast.LENGTH_SHORT);
+                SketchwareUtil.toast(getString(R.string.please_enter_a_valid_hex_color), Toast.LENGTH_SHORT);
                 return;
             }
             if (colorItem != null) {
@@ -305,7 +304,7 @@ public class ColorEditorActivity extends AppCompatActivity {
         });
 
         if (colorItem != null) {
-            dialog.configureDefaultButton("Delete", v1 -> {
+            dialog.configureDefaultButton(getString(R.string.common_word_delete), v1 -> {
                 colorList.remove(position);
                 adapter.notifyItemRemoved(position);
                 dialog.dismiss();

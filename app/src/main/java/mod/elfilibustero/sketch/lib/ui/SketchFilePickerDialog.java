@@ -13,16 +13,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import pro.sketchware.R;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import a.a.a.aB;
-import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
+import pro.sketchware.utility.FileUtil;
 
 public class SketchFilePickerDialog extends aB {
     private final Activity activity;
@@ -112,14 +111,14 @@ public class SketchFilePickerDialog extends aB {
                 loadFiles(file, fileList, adapter);
             }
         });
-        b("Select", v -> {
+        b(Helper.getResString(R.string.common_word_select), v -> {
             if (filePath != null && !filePath.isDirectory()) {
                 if (onFileSelectedListener != null) {
                     onFileSelectedListener.onFileSelected(this, filePath);
                 }
             }
         });
-        a("Cancel", Helper.getDialogDismissListener(this));
+        a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(this));
     }
 
     private void loadFiles(File directory, List<File> fileList, FileAdapter adapter) {

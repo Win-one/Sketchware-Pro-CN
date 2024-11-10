@@ -29,7 +29,6 @@ import java.util.concurrent.Executors;
 import a.a.a.aB;
 import a.a.a.qA;
 import mod.elfilibustero.sketch.lib.ui.SketchFilePickerDialog;
-import mod.hey.studios.util.Helper;
 import pro.sketchware.R;
 import pro.sketchware.databinding.DialogBlockConfigurationBinding;
 import pro.sketchware.databinding.DialogSelectorActionsBinding;
@@ -71,7 +70,7 @@ public class BlockSelectorManagerFragment extends qA {
                 selectors.add(
                         new Selector(
                                 "typeview",
-                                Helper.getResString(R.string.select_typeview),
+                                "Select typeview:",
                                 getTypeViewList()
                         )
                 );
