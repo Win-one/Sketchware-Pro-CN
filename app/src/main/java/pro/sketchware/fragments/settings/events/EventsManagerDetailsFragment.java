@@ -11,19 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 
-import pro.sketchware.R;
-import pro.sketchware.databinding.FragmentEventsManagerDetailsBinding;
-import pro.sketchware.databinding.LayoutEventItemBinding;
-import pro.sketchware.utility.FileUtil;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+import a.a.a.qA;
 import mod.hey.studios.util.Helper;
 import mod.jbk.util.OldResourceIdMapper;
-
-import a.a.a.qA;
+import pro.sketchware.R;
+import pro.sketchware.databinding.FragmentEventsManagerDetailsBinding;
+import pro.sketchware.databinding.LayoutEventItemBinding;
+import pro.sketchware.utility.FileUtil;
 
 public class EventsManagerDetailsFragment extends qA {
 
@@ -122,7 +120,7 @@ public class EventsManagerDetailsFragment extends qA {
 
             holder.binding.eventTitle.setText((String) item.get("name"));
             if ("".equals(dataArray.get(position).get("var"))) {
-                holder.binding.eventSubtitle.setText("Activity event");
+                holder.binding.eventSubtitle.setText(R.string.activity_event);
             } else {
                 holder.binding.eventSubtitle.setText((String) dataArray.get(position).get("var"));
             }
@@ -146,9 +144,9 @@ public class EventsManagerDetailsFragment extends qA {
             holder.binding.eventCard.setOnLongClickListener(v -> {
                 new MaterialAlertDialogBuilder(requireContext())
                         .setTitle((String) dataArray.get(position).get("name"))
-                        .setMessage("Delete this event?")
-                        .setPositiveButton("Delete", (dialog, i) -> deleteItem(position))
-                        .setNeutralButton("Edit", (dialog, i) -> {
+                        .setMessage(R.string.delete_this_event)
+                        .setPositiveButton(R.string.common_word_delete, (dialog, i) -> deleteItem(position))
+                        .setNeutralButton(R.string.common_word_edit, (dialog, i) -> {
                             Bundle args = new Bundle();
                             args.putString("lis_name", listName);
                             args.putString("event", (String) dataArray.get(position).get("name"));
@@ -165,7 +163,7 @@ public class EventsManagerDetailsFragment extends qA {
                             fragment.setArguments(args);
                             openFragment(fragment);
                         })
-                        .setNegativeButton("Cancel", (di, i) -> di.dismiss())
+                        .setNegativeButton(R.string.common_word_cancel, (di, i) -> di.dismiss())
                         .show();
                 return true;
             });

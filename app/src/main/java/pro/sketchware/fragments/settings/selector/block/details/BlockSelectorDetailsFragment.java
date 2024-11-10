@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -11,19 +12,18 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import pro.sketchware.databinding.FragmentBlockSelectorManagerBinding;
-import pro.sketchware.databinding.DialogAddCustomActivityBinding;
-import pro.sketchware.databinding.DialogSelectorActionsBinding;
-
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
-import pro.sketchware.fragments.settings.selector.block.Selector;
-import pro.sketchware.fragments.settings.selector.block.BlockSelectorConsts;
-
 import java.util.List;
 
 import a.a.a.aB;
 import a.a.a.qA;
+import pro.sketchware.R;
+import pro.sketchware.databinding.DialogAddCustomActivityBinding;
+import pro.sketchware.databinding.DialogSelectorActionsBinding;
+import pro.sketchware.databinding.FragmentBlockSelectorManagerBinding;
+import pro.sketchware.fragments.settings.selector.block.BlockSelectorConsts;
+import pro.sketchware.fragments.settings.selector.block.Selector;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class BlockSelectorDetailsFragment extends qA {
 
@@ -69,8 +69,8 @@ public class BlockSelectorDetailsFragment extends qA {
         }
 
         aB dialog = new aB(requireActivity());
-        dialog.b("New Selector Item");
-        dialog.b("Create", v -> {
+        dialog.b(getString(R.string.new_selector_item));
+        dialog.b(getString(R.string.common_word_create), v -> {
           String newItem = dialogBinding.activityNameInput.getText().toString();
             if (newItem != null && !newItem.isEmpty()) {
                 if (!isEdit) {
@@ -83,7 +83,7 @@ public class BlockSelectorDetailsFragment extends qA {
             }
             dialog.dismiss();
         });
-        dialog.a("Cancel", v -> dialog.dismiss());
+        dialog.a(getString(R.string.common_word_cancel), v -> dialog.dismiss());
         dialog.a(dialogBinding.getRoot());
         dialog.show();
     }
@@ -92,7 +92,7 @@ public class BlockSelectorDetailsFragment extends qA {
         DialogSelectorActionsBinding dialogBinding = DialogSelectorActionsBinding.inflate(LayoutInflater.from(requireContext()));
 
         aB dialog = new aB(requireActivity());
-        dialog.b("Actions");
+        dialog.b(getString(R.string.actions));
         dialog.a(dialogBinding.getRoot());
 
         dialogBinding.edit.setOnClickListener(v -> {
@@ -105,7 +105,7 @@ public class BlockSelectorDetailsFragment extends qA {
         dialogBinding.delete.setOnClickListener(v -> {
             dialog.dismiss();
             showConfirmationDialog(
-                "Are you sure you want to delete this Selector Item?",
+                    getString(R.string.are_you_sure_you_want_to_delete_this_selector_item),
                 confirmDialog -> {
                     selectors.get(index).getData().remove(indexA);
                     saveAll();
@@ -121,10 +121,10 @@ public class BlockSelectorDetailsFragment extends qA {
 
     private void showConfirmationDialog(String message, OnDialogClickListener onConfirm, OnDialogClickListener onCancel) {
         aB dialog = new aB(requireActivity());
-        dialog.b("Attention");
+        dialog.b(getString(R.string.attention));
         dialog.a(message);
-        dialog.b("Yes", v -> onConfirm.onClick(dialog));
-        dialog.a("Cancel", v -> onCancel.onClick(dialog));
+        dialog.b(getString(R.string.common_word_yes), v -> onConfirm.onClick(dialog));
+        dialog.a(getString(R.string.common_word_cancel), v -> onCancel.onClick(dialog));
 
         dialog.show();
     }
@@ -132,7 +132,7 @@ public class BlockSelectorDetailsFragment extends qA {
     private void saveAll() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         FileUtil.writeFile(BlockSelectorConsts.BLOCK_SELECTORS_FILE.getAbsolutePath(), gson.toJson(selectors));
-        SketchwareUtil.toast("Saved!");
+        SketchwareUtil.toast(getString(R.string.common_word_saved));
     }
 
     @Override

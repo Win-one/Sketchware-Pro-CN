@@ -26,7 +26,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:navigationIcon="?attr/homeAsUpIndicator"
-                app:title="Permissions Manager" />
+                app:title="@string/permissions_manager" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <LinearLayout
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:hint="Search for permissions"
+                android:hint="@string/search_for_permissions"
                 android:importantForAutofill="noExcludeDescendants"
                 app:boxCornerRadiusBottomEnd="50dp"
                 app:boxCornerRadiusBottomStart="50dp"
@@ -66,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:insetBottom="0dp"
-                android:text="Reset"
+                android:text="@string/common_word_reset"
                 app:icon="@drawable/ic_mtrl_reset"
                 app:iconGravity="textStart"
                 app:iconSize="20dp" />
@@ -97,6 +97,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="20dp"
-        android:text="Scroll to the top"
+        android:text="@string/scroll_to_the_top"
         app:icon="@drawable/ic_arrow_drop_up_grey600_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

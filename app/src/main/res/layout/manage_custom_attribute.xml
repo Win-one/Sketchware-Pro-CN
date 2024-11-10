@@ -23,7 +23,7 @@ android:fitsSystemWindows="true">
             android:layout_height="?attr/actionBarSize"
             app:layout_collapseMode="pin"
             app:navigationIcon="?attr/homeAsUpIndicator"
-            app:title="AppCompat Injection Manager" />
+            app:title="@string/appcompat_injection_manager" />
     </com.google.android.material.appbar.CollapsingToolbarLayout>
 </com.google.android.material.appbar.AppBarLayout>
     <ListView

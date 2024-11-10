@@ -18,8 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
-import pro.sketchware.databinding.ManageLocallibrariesBinding;
-import pro.sketchware.databinding.ViewItemLocalLibBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,11 +25,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.build.BuildSettings;
 import mod.hey.studios.util.Helper;
 import mod.jbk.util.AddMarginOnApplyWindowInsetsListener;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ManageLocallibrariesBinding;
+import pro.sketchware.databinding.ViewItemLocalLibBinding;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class ManageLocalLibraryActivity extends AppCompatActivity implements View.OnClickListener {
     private boolean notAssociatedWithProject = false;
@@ -226,10 +227,10 @@ public class ManageLocalLibraryActivity extends AppCompatActivity implements Vie
 
             binding.imgDelete.setOnClickListener(v -> {
                 PopupMenu popupMenu = new PopupMenu(ManageLocalLibraryActivity.this, v);
-                popupMenu.getMenu().add(Menu.NONE, Menu.NONE, Menu.NONE, "Delete");
+                popupMenu.getMenu().add(Menu.NONE, Menu.NONE, Menu.NONE, R.string.common_word_delete);
                 popupMenu.setOnMenuItemClickListener(menuItem -> {
                     FileUtil.deleteFile(local_libs_path.concat(binding.checkboxContent.getText().toString()));
-                    SketchwareUtil.toast("Deleted successfully");
+                    SketchwareUtil.toast(getString(R.string.deleted_successfully));
                     loadFiles();
                     return true;
                 });

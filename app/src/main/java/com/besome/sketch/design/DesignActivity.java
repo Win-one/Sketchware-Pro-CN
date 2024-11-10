@@ -5,7 +5,6 @@ import static pro.sketchware.utility.SketchwareUtil.getDip;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
@@ -53,8 +52,6 @@ import com.besome.sketch.tools.CompileLogActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
-import pro.sketchware.R;
-import pro.sketchware.databinding.ProgressMsgBoxBinding;
 import com.topjohnwu.superuser.Shell;
 
 import java.io.File;
@@ -114,9 +111,11 @@ import mod.jbk.diagnostic.CompileErrorSaver;
 import mod.jbk.diagnostic.MissingFileException;
 import mod.jbk.util.LogUtil;
 import mod.khaled.logcat.LogReaderActivity;
-import pro.sketchware.utility.apk.ApkSignatures;
-import pro.sketchware.utility.SketchwareUtil;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ProgressMsgBoxBinding;
 import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
+import pro.sketchware.utility.apk.ApkSignatures;
 
 public class DesignActivity extends BaseAppCompatActivity implements View.OnClickListener {
     private ImageView xmlLayoutOrientation;
@@ -301,6 +300,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (drawer.isDrawerOpen(GravityCompat.END)) {
             drawer.closeDrawer(GravityCompat.END);
         } else if (viewTabAdapter.g()) {

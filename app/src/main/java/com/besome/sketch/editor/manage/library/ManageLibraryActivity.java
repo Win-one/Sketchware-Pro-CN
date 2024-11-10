@@ -21,7 +21,6 @@ import com.besome.sketch.editor.manage.library.compat.ManageCompatActivity;
 import com.besome.sketch.editor.manage.library.firebase.ManageFirebaseActivity;
 import com.besome.sketch.editor.manage.library.googlemap.ManageGoogleMapActivity;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import pro.sketchware.R;
 
 import java.lang.ref.WeakReference;
 
@@ -32,6 +31,7 @@ import a.a.a.mB;
 import mod.hey.studios.util.Helper;
 import mod.jbk.editor.manage.library.ExcludeBuiltInLibrariesActivity;
 import mod.jbk.editor.manage.library.ExcludeBuiltInLibrariesLibraryItemView;
+import pro.sketchware.R;
 
 public class ManageLibraryActivity extends BaseAppCompatActivity implements View.OnClickListener {
 
@@ -68,7 +68,7 @@ public class ManageLibraryActivity extends BaseAppCompatActivity implements View
 
         if (libraryItemView instanceof ExcludeBuiltInLibrariesLibraryItemView) {
             TextView title = findViewById(R.id.title);
-            title.setText("Advanced");
+            title.setText(R.string.common_word_advanced);
             ((ViewGroup) title.getParent()).removeView(title);
             libraryItemLayout.addView(title);
         }
@@ -197,6 +197,7 @@ public class ManageLibraryActivity extends BaseAppCompatActivity implements View
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         k();
         try {
             new Handler().postDelayed(() -> new SaveLibraryTask(this).execute(), 500L);

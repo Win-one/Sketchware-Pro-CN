@@ -245,7 +245,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center|left"
-                    android:text="Rewarded Ad"
+                    android:text="@string/design_library_admob_title_rewarded"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="16sp" />
 

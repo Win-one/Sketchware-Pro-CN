@@ -17,17 +17,16 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.activity.EdgeToEdge;
 
+import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.besome.sketch.lib.base.CollapsibleViewHolder;
 import com.besome.sketch.lib.ui.CollapsibleButton;
-import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.card.MaterialCardView;
 import com.google.gson.Gson;
-import pro.sketchware.R;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -39,12 +38,13 @@ import java.util.stream.Collectors;
 
 import a.a.a.aB;
 import a.a.a.wq;
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
 import mod.elfilibustero.sketch.editor.component.CollapsibleCustomComponentLayout;
 import mod.elfilibustero.sketch.lib.ui.SketchFilePickerDialog;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.components.ComponentsHandler;
+import pro.sketchware.R;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class ManageCustomComponentActivity extends BaseAppCompatActivity {
 
@@ -86,7 +86,7 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, "Import");
+        menu.add(0, 0, 0, R.string.common_word_import);
         return super.onCreateOptionsMenu(menu);
     }
 

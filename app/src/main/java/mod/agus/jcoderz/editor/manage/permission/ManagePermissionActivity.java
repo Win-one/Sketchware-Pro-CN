@@ -15,23 +15,21 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+
+import mod.hey.studios.util.Helper;
+import mod.jbk.util.AddMarginOnApplyWindowInsetsListener;
 import pro.sketchware.R;
 import pro.sketchware.databinding.ManagePermissionBinding;
 import pro.sketchware.databinding.ViewItemPermissionBinding;
-
-import com.besome.sketch.lib.base.BaseAppCompatActivity;
-
-import java.util.ArrayList;
-
 import pro.sketchware.utility.FilePathUtil;
 import pro.sketchware.utility.FileResConfig;
 import pro.sketchware.utility.FileUtil;
-import mod.hey.studios.util.Helper;
-import mod.jbk.util.AddMarginOnApplyWindowInsetsListener;
 
 public class ManagePermissionActivity extends BaseAppCompatActivity {
     private PermissionsAdapter adapter;
@@ -114,9 +112,9 @@ public class ManagePermissionActivity extends BaseAppCompatActivity {
         var scrollToTopButton = binding.scrollToTopButton;
         MaterialButton resetPermissions = findViewById(R.id.resetPermissions);
         resetPermissions.setOnClickListener(view -> new AlertDialog.Builder(ManagePermissionActivity.this)
-                .setTitle("Reset permissions")
-                .setMessage("Are you sure you want to reset all permissions? This cannot be undone!")
-                .setPositiveButton("Reset", (dialog, which) -> {
+                .setTitle(R.string.reset_permissions)
+                .setMessage(R.string.are_you_sure_you_want_to_reset_all_permissions_this_cannot_be_undone)
+                .setPositiveButton(R.string.common_word_reset, (dialog, which) -> {
                     FileUtil.writeFile(new FilePathUtil().getPathPermission(numProj), "[]");
                     //As FileResConfig only refreshes permissions during <init>()V, this is required.
                     frc = new FileResConfig(numProj);

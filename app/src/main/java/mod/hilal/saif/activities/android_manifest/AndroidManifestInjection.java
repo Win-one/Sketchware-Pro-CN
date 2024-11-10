@@ -19,13 +19,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
 import com.besome.sketch.editor.manage.library.LibraryItemView;
+import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
-import pro.sketchware.R;
-import pro.sketchware.databinding.ProgressMsgBoxBinding;
-import com.besome.sketch.lib.base.BaseAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,12 +33,8 @@ import a.a.a.aB;
 import a.a.a.jC;
 import a.a.a.wB;
 import a.a.a.yq;
-
 import io.github.rosemoe.sora.widget.CodeEditor;
 import io.github.rosemoe.sora.widget.component.Magnifier;
-
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.code.SrcCodeEditor;
 import mod.hey.studios.code.SrcCodeEditorLegacy;
 import mod.hey.studios.util.Helper;
@@ -49,6 +43,10 @@ import mod.hilal.saif.android_manifest.AndroidManifestInjector;
 import mod.jbk.code.CodeEditorColorSchemes;
 import mod.jbk.code.CodeEditorLanguages;
 import mod.remaker.view.CustomAttributeView;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ProgressMsgBoxBinding;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 @SuppressLint("SetTextI18n")
 public class AndroidManifestInjection extends BaseAppCompatActivity {
@@ -351,8 +349,8 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("AndroidManifest Manager");
-        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        getSupportActionBar().setTitle(R.string.androidmanifest_manager);
+        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

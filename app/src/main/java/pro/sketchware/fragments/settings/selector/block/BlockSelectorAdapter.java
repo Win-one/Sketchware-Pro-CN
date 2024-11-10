@@ -1,7 +1,7 @@
 package pro.sketchware.fragments.settings.selector.block;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -98,6 +98,7 @@ public class BlockSelectorAdapter extends ListAdapter<Selector, BlockSelectorAda
             return oldItem.getName().equals(newItem.getName());
         }
 
+       @SuppressLint("DiffUtilEquals")
         @Override
         public boolean areContentsTheSame(@NonNull Selector oldItem, @NonNull Selector newItem) {
             return oldItem.equals(newItem);

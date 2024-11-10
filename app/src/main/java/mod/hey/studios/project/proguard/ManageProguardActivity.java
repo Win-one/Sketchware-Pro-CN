@@ -1,28 +1,22 @@
 package mod.hey.studios.project.proguard;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import pro.sketchware.R;
-
-import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.materialswitch.MaterialSwitch;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import mod.agus.jcoderz.editor.manage.library.locallibrary.ManageLocalLibrary;
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
 
 public class ManageProguardActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
@@ -63,7 +57,7 @@ public class ManageProguardActivity extends AppCompatActivity implements View.On
         }
 
         MaterialAlertDialogBuilder bld = new MaterialAlertDialogBuilder(this);
-        bld.setTitle("Select Local libraries");
+        bld.setTitle(R.string.select_local_libraries);
         bld.setMultiChoiceItems(libraries, enabledLibraries, (dialog, which, isChecked) -> enabledLibraries[which] = isChecked);
         bld.setPositiveButton(R.string.common_word_save, (dialog, which) -> {
 
@@ -132,7 +126,7 @@ public class ManageProguardActivity extends AppCompatActivity implements View.On
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Code Shrinking Manager");
-        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        getSupportActionBar().setTitle(R.string.code_shrinking_manager);
+        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
     }
 }

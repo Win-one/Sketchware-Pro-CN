@@ -13,12 +13,13 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.besome.sketch.beans.BlockBean;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import pro.sketchware.databinding.ViewUsedCustomBlocksBinding;
 
 import java.util.ArrayList;
 
 import a.a.a.Rs;
 import mod.hey.studios.editor.manage.block.v2.BlockLoader;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ViewUsedCustomBlocksBinding;
 
 public class CustomBlocksDialog {
     public static void show(Activity context, String sc_id) {
@@ -41,7 +42,7 @@ public class CustomBlocksDialog {
         }
 
         var dialogBuilder = new MaterialAlertDialogBuilder(context)
-                .setTitle("Used Custom Blocks")
+                .setTitle(R.string.used_custom_blocks)
                 .setMessage(subtitle);
         if (!list.isEmpty()) dialogBuilder.setView(dialogBinding.getRoot());
 

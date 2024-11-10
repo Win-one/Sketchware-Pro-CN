@@ -124,11 +124,11 @@ public class EventsManagerCreatorFragment extends qA {
 
     private void save() {
         if (!filledIn()) {
-            SketchwareUtil.toast("Some required fields are empty!");
+            SketchwareUtil.toast(getString(R.string.some_required_fields_are_empty));
             return;
         }
         if (!OldResourceIdMapper.isValidIconId(binding.eventsCreatorIcon.getText().toString())) {
-            binding.eventsCreatorIconTil.setError("Invalid icon ID");
+            binding.eventsCreatorIconTil.setError(getString(R.string.invalid_icon_id));
             binding.eventsCreatorIcon.requestFocus();
             return;
         }
@@ -159,7 +159,7 @@ public class EventsManagerCreatorFragment extends qA {
             arrayList.add(hashMap);
         }
         FileUtil.writeFile(concat, new Gson().toJson(arrayList));
-        SketchwareUtil.toast("Saved");
+        SketchwareUtil.toast(getString(R.string.common_word_saved));
         getParentFragmentManager().popBackStack();
     }
 
@@ -180,10 +180,10 @@ public class EventsManagerCreatorFragment extends qA {
         if (isEdit) {
             binding.toolbar.setTitle(event_name);
         } else if (isActivityEvent) {
-            binding.toolbar.setTitle("Create a new activity event");
+            binding.toolbar.setTitle(R.string.create_a_new_activity_event);
         } else {
-            binding.toolbar.setTitle(lisName + "Create a new event");
+            binding.toolbar.setTitle(lisName + R.string.create_a_new_event);
         }
-        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this.activity));
+        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this.a));
     }
 }

@@ -21,9 +21,9 @@ import pro.sketchware.SketchApplication;
 
 public class qA extends Fragment {
 
-    public Activity activity;
+    public Activity a;
     @Deprecated
-    public Context context;
+    public Context b;
 
     public qA() {
     }
@@ -49,9 +49,9 @@ public class qA extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = getActivity();
-        if (activity != null) {
-            context = activity.getApplicationContext();
+        a = getActivity();
+        if (a != null) {
+            b = a.getApplicationContext();
         }
         setEnterTransition(new MaterialSharedAxis(MaterialSharedAxis.X, true));
         setReturnTransition(new MaterialSharedAxis(MaterialSharedAxis.X, false));
@@ -82,15 +82,15 @@ public class qA extends Fragment {
     @Nullable
     @Override
     public Context getContext() {
-        if (activity == null) {
+        if (a == null) {
             return SketchApplication.getInstance();
         }
-        return activity;
+        return a;
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        activity = getActivity();
+        a = getActivity();
     }
 }

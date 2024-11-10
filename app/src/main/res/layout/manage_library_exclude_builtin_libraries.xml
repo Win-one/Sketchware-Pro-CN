@@ -85,7 +85,7 @@
                         android:gravity="left"
                         android:textColor="#ff757575"
                         android:textSize="14sp"
-                        tools:text="This might break your project if you don't know what you're doing!" />
+                        tools:text="@string/this_might_break_your_project" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -109,7 +109,7 @@
                         android:textColor="?colorControlNormal"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        tools:text="Excluded built-in libraries" />
+                        tools:text="@string/excluded_built_in_libraries" />
                 </LinearLayout>
 
                 <com.google.android.material.card.MaterialCardView

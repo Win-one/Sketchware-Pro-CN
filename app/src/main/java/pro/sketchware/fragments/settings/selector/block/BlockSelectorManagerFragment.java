@@ -70,7 +70,7 @@ public class BlockSelectorManagerFragment extends qA {
                 selectors.add(
                         new Selector(
                                 "typeview",
-                                "Select typeview:",
+                                getString(R.string.select_typeview),
                                 getTypeViewList()
                         )
                 );

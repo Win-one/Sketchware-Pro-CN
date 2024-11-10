@@ -8,15 +8,15 @@ import android.widget.BaseAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import pro.sketchware.R;
-import pro.sketchware.databinding.ManageCustomAttributeBinding;
-
 import java.util.LinkedList;
 import java.util.List;
 
 import dev.aldi.sayuti.editor.injection.AddCustomAttributeActivity;
 import dev.aldi.sayuti.editor.injection.AppCompatInjection;
+import mod.hey.studios.util.Helper;
 import mod.remaker.view.CustomAttributeView;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ManageCustomAttributeBinding;
 
 public class ManageCustomAttributeActivity extends AppCompatActivity {
 
@@ -29,7 +29,7 @@ public class ManageCustomAttributeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ManageCustomAttributeBinding binding = ManageCustomAttributeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.topAppBar.setNavigationOnClickListener(view -> onBackPressed());
+        binding.topAppBar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
 
         if (getIntent().hasExtra("sc_id") && getIntent().hasExtra("file_name")) {
             sc_id = getIntent().getStringExtra("sc_id");
