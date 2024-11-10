@@ -259,15 +259,15 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
     }
 
     public static String getItemTitle() {
-        return "Exclude built-in libraries";
+        return Helper.getResString(R.string.exclude_built_in_libraries);
     }
 
     public static String getDefaultItemDescription() {
-        return "Use custom Library versions";
+        return Helper.getResString(R.string.use_custom_library_versions);
     }
 
     public static String getSelectedLibrariesItemDescription() {
-        return "%1$d/%2$d built-in libraries excluded";
+        return Helper.getResString(R.string.built_in_libraries_excluded);
     }
 
     private void showSelectBuiltInLibrariesDialog() {

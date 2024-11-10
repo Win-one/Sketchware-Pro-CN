@@ -17,7 +17,7 @@
             android:layout_height="?attr/collapsingToolbarLayoutMediumSize"
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:title="Appearance settings">
+            app:title="@string/appearance_settings">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:text="Theme settings"
+                android:text="@string/theme_settings"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textColor="?attr/colorPrimary"
                 android:textStyle="bold" />
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Choose how your app looks"
+                android:text="@string/choose_how_your_app_looks"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:textColor="?attr/colorOnSurfaceVariant" />
 
@@ -95,7 +95,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="System default"
+                            android:text="@string/settings_appearance_theme_system"
                             android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textStyle="bold" />
 
@@ -103,7 +103,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Follow system theme settings"
+                            android:text="@string/follow_system_theme_settings"
                             android:textAppearance="?attr/textAppearanceBodyMedium"
                             android:textColor="?attr/colorOnSurfaceVariant" />
                     </LinearLayout>
@@ -159,7 +159,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="12dp"
-                                android:text="Light"
+                                android:text="@string/settings_appearance_theme_light"
                                 android:textAppearance="?attr/textAppearanceBodyLarge" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -194,7 +194,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="12dp"
-                                android:text="Dark"
+                                android:text="@string/settings_appearance_theme_dark"
                                 android:textAppearance="?attr/textAppearanceBodyLarge" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>

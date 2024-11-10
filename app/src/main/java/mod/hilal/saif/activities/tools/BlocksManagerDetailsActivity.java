@@ -219,13 +219,13 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
         blocks_path = getIntent().getStringExtra("dirB");
         _refreshLists();
         if (palette == -1) {
-            getSupportActionBar().setTitle("Recycle Bin");
+            getSupportActionBar().setTitle(R.string.recycle_bin);
             fab_button.setVisibility(View.GONE);
         } else {
             Object paletteName = pallet_list.get(palette - 9).get("name");
 
             if (paletteName instanceof String) {
-                getSupportActionBar().setTitle("Manage Block");
+                getSupportActionBar().setTitle(R.string.manage_block);
                 getSupportActionBar().setSubtitle((String) paletteName);
             }
         }

@@ -1,17 +1,18 @@
 package mod.jbk.editor.manage.library;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import androidx.annotation.Nullable;
 
 import com.besome.sketch.beans.ProjectLibraryBean;
 import com.besome.sketch.editor.manage.library.LibraryItemView;
-import pro.sketchware.R;
 
 import java.util.List;
 
 import mod.jbk.build.BuiltInLibraries;
 
+@SuppressLint("ViewConstructor")
 public class ExcludeBuiltInLibrariesLibraryItemView extends LibraryItemView {
     private final String sc_id;
 

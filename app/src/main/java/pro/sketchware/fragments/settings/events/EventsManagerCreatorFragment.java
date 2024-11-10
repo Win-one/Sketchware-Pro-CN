@@ -182,7 +182,7 @@ public class EventsManagerCreatorFragment extends qA {
         } else if (isActivityEvent) {
             binding.toolbar.setTitle(R.string.create_a_new_activity_event);
         } else {
-            binding.toolbar.setTitle(lisName + R.string.create_a_new_event);
+            binding.toolbar.setTitle(lisName + getString(R.string.create_a_new_event));
         }
         binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this.a));
     }

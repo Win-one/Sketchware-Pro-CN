@@ -59,7 +59,7 @@ public class SettingsLanguageFragment extends qA {
                 }
                 if (restart) {
                     startActivity(new Intent(this.requireContext(), MainActivity.class));
-                    requireActivity().getOnBackPressedDispatcher().onBackPressed();
+                    requireActivity().finish();
                 }
             }
 
