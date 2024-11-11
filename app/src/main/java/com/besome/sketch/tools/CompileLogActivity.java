@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -16,17 +17,16 @@ import androidx.activity.EdgeToEdge;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import pro.sketchware.databinding.CompileLogBinding;
-
-import com.besome.sketch.lib.base.BaseAppCompatActivity;
-
-import pro.sketchware.utility.SketchwareUtil;
 import mod.hey.studios.util.CompileLogHelper;
 import mod.hey.studios.util.Helper;
 import mod.jbk.diagnostic.CompileErrorSaver;
 import mod.jbk.util.AddMarginOnApplyWindowInsetsListener;
+import pro.sketchware.R;
+import pro.sketchware.databinding.CompileLogBinding;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class CompileLogActivity extends BaseAppCompatActivity {
 
@@ -54,9 +54,9 @@ public class CompileLogActivity extends BaseAppCompatActivity {
         binding.topAppBar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
 
         if (getIntent().getBooleanExtra("showingLastError", false)) {
-            binding.topAppBar.setTitle("Last compile log");
+            binding.topAppBar.setTitle(R.string.last_compile_log);
         } else {
-            binding.topAppBar.setTitle("Compile log");
+            binding.topAppBar.setTitle(R.string.compile_log);
         }
 
         String sc_id = getIntent().getStringExtra("sc_id");
@@ -72,35 +72,31 @@ public class CompileLogActivity extends BaseAppCompatActivity {
                 if (compileErrorSaver.logFileExists()) {
                     compileErrorSaver.deleteSavedLogs();
                     getIntent().removeExtra("error");
-                    SketchwareUtil.toast("Compile logs have been cleared.");
+                    SketchwareUtil.toast(getString(R.string.compile_logs_have_been_cleared));
                 } else {
-                    SketchwareUtil.toast("No compile logs found.");
+                    SketchwareUtil.toast(getString(R.string.no_compile_logs_found));
                 }
 
                 setErrorText();
             });
         }
 
-        final String wrapTextLabel = "Wrap text";
-        final String monospacedFontLabel = "Monospaced font";
-        final String fontSizeLabel = "Font size";
-
         PopupMenu options = new PopupMenu(this, binding.formatButton);
-        options.getMenu().add(wrapTextLabel).setCheckable(true).setChecked(getWrappedTextPreference());
-        options.getMenu().add(monospacedFontLabel).setCheckable(true).setChecked(getMonospacedFontPreference());
-        options.getMenu().add(fontSizeLabel);
+        options.getMenu().add(Menu.NONE, 0, Menu.NONE, getString(R.string.wrap_text)).setCheckable(true).setChecked(getWrappedTextPreference());
+        options.getMenu().add(Menu.NONE, 1, Menu.NONE, getString(R.string.monospaced_font)).setCheckable(true).setChecked(getMonospacedFontPreference());
+        options.getMenu().add(Menu.NONE, 2, Menu.NONE, getString(R.string.font_size));
 
         options.setOnMenuItemClickListener(menuItem -> {
-            switch (menuItem.getTitle().toString()) {
-                case wrapTextLabel -> {
+            switch (menuItem.getItemId()) {
+                case 0 -> {
                     menuItem.setChecked(!menuItem.isChecked());
                     toggleWrapText(menuItem.isChecked());
                 }
-                case monospacedFontLabel -> {
+                case 1 -> {
                     menuItem.setChecked(!menuItem.isChecked());
                     toggleMonospacedText(menuItem.isChecked());
                 }
-                case fontSizeLabel -> changeFontSizeDialog();
+                case 2 -> changeFontSizeDialog();
                 default -> {
                     return false;
                 }
@@ -194,9 +190,9 @@ public class CompileLogActivity extends BaseAppCompatActivity {
                 Gravity.CENTER));
 
         new MaterialAlertDialogBuilder(this)
-                .setTitle("Select font size")
+                .setTitle(R.string.select_font_size)
                 .setView(layout)
-                .setPositiveButton("Save", (dialog, which) -> {
+                .setPositiveButton(R.string.common_word_save, (dialog, which) -> {
                     logViewerPreferences.edit().putInt(PREFERENCE_FONT_SIZE, picker.getValue()).apply();
 
                     binding.tvCompileLog.setTextSize((float) picker.getValue());

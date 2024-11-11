@@ -231,7 +231,7 @@ public class SrcCodeEditor extends AppCompatActivity {
     public void save() {
         beforeContent = editor.getText().toString();
         FileUtil.writeFile(getIntent().getStringExtra("content"), beforeContent);
-        SketchwareUtil.toast("Saved");
+        SketchwareUtil.toast(getString(R.string.common_word_saved));
     }
 
     @Override

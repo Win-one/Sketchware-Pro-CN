@@ -40,13 +40,14 @@ import javax.crypto.spec.SecretKeySpec;
 
 import a.a.a.lC;
 import a.a.a.yB;
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.editor.manage.block.ExtraBlockInfo;
 import mod.hey.studios.editor.manage.block.v2.BlockLoader;
 import mod.hey.studios.project.custom_blocks.CustomBlocksManager;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.activities.tools.ConfigActivity;
+import pro.sketchware.R;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class BackupFactory {
     public static final String EXTENSION = "swb";
@@ -298,7 +299,7 @@ public class BackupFactory {
                 finalFileName = finalFileName.replaceFirst(Pattern.quote(Objects.requireNonNull(matcher.group(0))), getFormattedDateFrom(matcher.group(1)));
             }
         } catch (Exception ignored) {
-            SketchwareUtil.toastError("Failed To Parse Custom Filename For Backup. Using default");
+            SketchwareUtil.toastError(Helper.getResString(R.string.failed_to_parse_custom_filename_for_backup_using_default));
             // Example name: InternalDemo v1.0 (com.jbk.internal.demo, 1) 2021-12-31T125827
             finalFileName = projectNameOnly + " v" + versionName + " (" + pkgName + ", " + versionCode + ") " + getFormattedDateFrom("yyyy-M-dd'T'HHmmss");
         }

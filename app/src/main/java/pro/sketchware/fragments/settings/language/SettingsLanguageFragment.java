@@ -1,5 +1,6 @@
 package pro.sketchware.fragments.settings.language;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
+import com.google.android.material.card.MaterialCardView;
 import com.hjq.language.LocaleContract;
 import com.hjq.language.MultiLanguages;
 
@@ -19,13 +20,13 @@ import pro.sketchware.R;
 import pro.sketchware.activities.main.activities.MainActivity;
 import pro.sketchware.databinding.FragmentSettingsLanguageBinding;
 
-public class SettingsLanguageFragment extends qA {
-
+public class SettingsLanguageFragment extends qA implements View.OnClickListener {
     private FragmentSettingsLanguageBinding binding;
+    private MaterialCardView selectedLanguageCard;
+    private boolean restart = false;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSettingsLanguageBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -33,36 +34,100 @@ public class SettingsLanguageFragment extends qA {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        configureToolbar(binding.topAppBar);
-        configureLanguageController();
+        setupToolbar();
+        initializeLanguageSettings();
+        binding.switchSystem.setOnClickListener(this);
+        binding.languageChinese.setOnClickListener(this);
+        binding.languageEnglish.setOnClickListener(this);
+        binding.switchSystem.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            setLanguageCardsEnabled(!isChecked);
+            if (isChecked) {
+                restart = MultiLanguages.clearAppLanguage(this.requireContext());
+            }
+            checkStart();
+        });
     }
 
-    private void configureLanguageController() {
+    private void setupToolbar() {
+        binding.toolbar.setNavigationOnClickListener(v -> {
+            if (requireActivity().getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                requireActivity().getSupportFragmentManager().popBackStack();
+            } else {
+                requireActivity().getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
+    }
+
+    private void initializeLanguageSettings() {
+        boolean isSystemLanguage = MultiLanguages.isSystemLanguage(requireContext());
+        binding.switchSystem.setChecked(isSystemLanguage);
+        updateLanguageCardSelection();
+        setLanguageCardsEnabled(!isSystemLanguage);
+    }
+
+    private void updateLanguageCardSelection() {
+        unselectSelectedLanguageCard();
+        MaterialCardView newSelection;
         Locale locale = MultiLanguages.getAppLanguage(this.requireContext());
         if (LocaleContract.getSimplifiedChineseLocale().equals(locale)) {
-            binding.toggleLanguage.check(R.id.language_chinese);
+            newSelection = binding.languageChinese;
         } else if (LocaleContract.getEnglishLocale().equals(locale)) {
-            binding.toggleLanguage.check(R.id.language_english);
+            newSelection = binding.languageEnglish;
         } else {
-            binding.toggleLanguage.check(R.id.language_system);
+            newSelection = null;
         }
+        if (newSelection != null && !binding.switchSystem.isChecked()) {
+            newSelection.setChecked(true);
+            selectedLanguageCard = newSelection;
+        }
+    }
 
-        binding.toggleLanguage.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
-            if (isChecked) {
-                boolean restart = false;
-                if (checkedId == R.id.language_system) {
-                    restart = MultiLanguages.clearAppLanguage(this.requireContext());
-                } else if (checkedId == R.id.language_chinese) {
-                    restart = MultiLanguages.setAppLanguage(this.requireContext(), LocaleContract.getSimplifiedChineseLocale());
-                } else if (checkedId == R.id.language_english) {
-                    restart = MultiLanguages.setAppLanguage(this.requireContext(), LocaleContract.getEnglishLocale());
-                }
-                if (restart) {
-                    startActivity(new Intent(this.requireContext(), MainActivity.class));
-                    requireActivity().finish();
-                }
+    private void unselectSelectedLanguageCard() {
+        if (selectedLanguageCard != null) {
+            selectedLanguageCard.setChecked(false);
+            selectedLanguageCard = null;
+        }
+    }
+
+    private void setLanguageCardsEnabled(boolean enabled) {
+        binding.languageChinese.setEnabled(enabled);
+        binding.languageEnglish.setEnabled(enabled);
+
+        float alpha = enabled ? 1.0f : 0.5f;
+        binding.languageChinese.animate().alpha(alpha).start();
+        binding.languageEnglish.animate().alpha(alpha).start();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if (id == R.id.language_system) {
+            binding.switchSystem.setChecked(!binding.switchSystem.isChecked());
+        } else if (id == R.id.language_chinese) {
+            if (!binding.switchSystem.isChecked()) {
+                restart = MultiLanguages.setAppLanguage(this.requireContext(), LocaleContract.getSimplifiedChineseLocale());
+                updateLanguageCardSelection();
             }
+        } else if (id == R.id.language_english) {
+            if (!binding.switchSystem.isChecked()) {
+                restart = MultiLanguages.setAppLanguage(this.requireContext(), LocaleContract.getEnglishLocale());
+                updateLanguageCardSelection();
+            }
+        }
+        checkStart();
+    }
 
-        });
+    @SuppressLint("ResourceType")
+    private void checkStart() {
+        if (restart) {
+            startActivity(new Intent(this.requireContext(), MainActivity.class));
+            requireActivity().finish();
+        }
     }
 }

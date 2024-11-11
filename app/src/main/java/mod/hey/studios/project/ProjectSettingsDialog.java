@@ -6,11 +6,10 @@ import static com.besome.sketch.Config.VAR_DEFAULT_TARGET_SDK_VERSION;
 import android.app.Activity;
 import android.view.View;
 
-import pro.sketchware.R;
-import pro.sketchware.databinding.DialogProjectSettingsBinding;
-
 import a.a.a.aB;
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
+import pro.sketchware.databinding.DialogProjectSettingsBinding;
 
 public class ProjectSettingsDialog {
 
@@ -25,7 +24,7 @@ public class ProjectSettingsDialog {
     public void show() {
         aB dialog = new aB(activity);
         dialog.a(R.drawable.services_48);
-        dialog.b("Project configurations");
+        dialog.b(activity.getString(R.string.project_configurations));
 
         DialogProjectSettingsBinding binding = DialogProjectSettingsBinding.inflate(activity.getLayoutInflater());
 

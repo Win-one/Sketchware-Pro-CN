@@ -24,7 +24,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.besome.sketch.beans.ProjectFileBean;
 import com.besome.sketch.editor.LogicEditorActivity;
 import com.google.android.material.textfield.TextInputLayout;
-import pro.sketchware.R;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -37,12 +36,13 @@ import a.a.a.bB;
 import a.a.a.eC;
 import a.a.a.jC;
 import a.a.a.uq;
-import pro.sketchware.utility.SketchwareUtil;
 import mod.elfilibustero.sketch.lib.utils.CustomVariableUtil;
 import mod.elfilibustero.sketch.lib.valid.VariableModifierValidator;
 import mod.elfilibustero.sketch.lib.valid.VariableTypeValidator;
-import pro.sketchware.menu.ExtraMenuBean;
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
+import pro.sketchware.menu.ExtraMenuBean;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class LogicClickListener implements View.OnClickListener {
 
@@ -95,7 +95,7 @@ public class LogicClickListener implements View.OnClickListener {
     private void addCustomVariable() {
         aB dialog = new aB(logicEditor);
         dialog.a(R.drawable.abc_96_color);
-        dialog.b("Add a new custom variable");
+        dialog.b(Helper.getResString(R.string.add_a_new_custom_variable));
 
         LinearLayout root = new LinearLayout(logicEditor);
         root.setOrientation(LinearLayout.VERTICAL);
@@ -149,7 +149,7 @@ public class LogicClickListener implements View.OnClickListener {
             } else {
                 typeLayout.requestFocus();
                 if (variableType.isEmpty()) {
-                    typeLayout.setError("Type can't be empty");
+                    typeLayout.setError(Helper.getResString(R.string.type_can_t_be_empty));
                 }
                 return;
             }
@@ -159,7 +159,7 @@ public class LogicClickListener implements View.OnClickListener {
             } else {
                 nameLayout.requestFocus();
                 if (variableName.isEmpty()) {
-                    nameLayout.setError("Name can't be empty");
+                    nameLayout.setError(Helper.getResString(R.string.name_can_t_be_empty));
                 }
                 return;
             }
@@ -238,7 +238,7 @@ public class LogicClickListener implements View.OnClickListener {
     private void addCustomList() {
         aB dialog = new aB(logicEditor);
         dialog.a(R.drawable.add_96_blue);
-        dialog.b("Add a new custom List");
+        dialog.b(Helper.getResString(R.string.add_a_new_custom_list));
 
         LinearLayout root = new LinearLayout(logicEditor);
         root.setOrientation(LinearLayout.VERTICAL);
@@ -268,16 +268,16 @@ public class LogicClickListener implements View.OnClickListener {
                 typeLayout.setError(null);
             } else {
                 if (validName) typeLayout.requestFocus();
-                typeLayout.setError("Type can't be empty");
+                typeLayout.setError(Helper.getResString(R.string.type_can_t_be_empty));
             }
 
             CharSequence nameError = nameLayout.getError();
-            if (nameError == null || "Name can't be empty".contentEquals(nameError)) {
+            if (nameError == null || Helper.getResString(R.string.name_can_t_be_empty).contentEquals(nameError)) {
                 if (validName) {
                     nameLayout.setError(null);
                 } else {
                     nameLayout.requestFocus();
-                    nameLayout.setError("Name can't be empty");
+                    nameLayout.setError(Helper.getResString(R.string.name_can_t_be_empty));
                 }
             }
 

@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:gravity="center"
-            android:text="Awesome, no bugs to fix!"
+            android:text="@string/awesome_no_bugs_to_fix"
             android:textSize="20sp" />
 
         <TextView
@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:text="Let's continue working on the project"
+            android:text="@string/let_s_continue_working_on_the_project"
             android:textSize="14sp" />
     </LinearLayout>
 

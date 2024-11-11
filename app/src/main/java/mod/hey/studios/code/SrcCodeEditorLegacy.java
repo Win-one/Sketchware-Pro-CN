@@ -9,11 +9,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import pro.sketchware.R;
-
-import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.lib.code_editor.CodeEditorLayout;
 import mod.hey.studios.lib.code_editor.ColorScheme;
+import pro.sketchware.R;
+import pro.sketchware.utility.FileUtil;
 
 /**
  * Legacy code editor
@@ -66,21 +65,21 @@ public class SrcCodeEditorLegacy extends Activity {
         boolean exitConfirmationDialogEnabled = sp.getBoolean("exit_confirmation_dialog", false);
         if (exitConfirmationDialogEnabled) {
             new AlertDialog.Builder(this)
-                    .setTitle("Save Changes?")
-                    .setMessage("Do you want to save your changes? If not, the file will be reverted.")
+                    .setTitle(R.string.save_changes)
+                    .setMessage(R.string.do_you_want_to_save_your_changes_if_not_the_file_will_be_reverted)
                     .setPositiveButton(R.string.common_word_save, (dialog, which) -> {
                         FileUtil.writeFile(getIntent().getStringExtra("content"), codeEditor.getText());
-                        Toast.makeText(this, "File saved", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, R.string.file_saved, Toast.LENGTH_SHORT).show();
                         finish();
                     })
-                    .setNeutralButton("Discard", (dialog, which) -> finish())
+                    .setNeutralButton(R.string.common_word_discard, (dialog, which) -> finish())
                     .setNegativeButton(R.string.common_word_cancel, null)
                     .show();
         } else {
             super.onBackPressed();
 
             FileUtil.writeFile(getIntent().getStringExtra("content"), codeEditor.getText());
-            Toast.makeText(this, "File saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.file_saved, Toast.LENGTH_SHORT).show();
         }
     }
 
