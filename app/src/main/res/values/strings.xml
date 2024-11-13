@@ -2657,5 +2657,9 @@ Please try again later"</string>
     <string name="if_you_don_t_have_a_keystore_you_can_use_a_test_key">If you don\'t have a keystore, you can use a test key.</string>
     <string name="couldn_t_delete_file">Couldn\'t delete file</string>
     <string name="finished_exporting_aab">Finished exporting AAB</string>
+    <string name="common_word_type">Type</string>
+    <string name="screen_orientation">Screen orientation</string>
+    <string name="keyboard_settings">Keyboard settings</string>
+    <string name="create_view">Create view</string>
 
 </resources>

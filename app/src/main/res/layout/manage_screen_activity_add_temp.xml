@@ -169,7 +169,7 @@
                     android:id="@+id/ed_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter name"
+                    android:hint="@string/enter_a_name"
                     android:imeOptions="actionDone"
                     android:inputType="text"
                     android:lines="1" />
@@ -212,7 +212,7 @@
                             android:layout_marginTop="1dp"
                             android:layout_marginBottom="2dp"
                             android:layout_toEndOf="@+id/tipIcon"
-                            android:text="Important note"
+                            android:text="@string/important_note"
                             android:textColor="?attr/colorPrimary"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -240,7 +240,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
-                        android:text="Type"
+                        android:text="@string/common_word_type"
                         android:textColor="?colorPrimary" />
 
                     <HorizontalScrollView
@@ -303,7 +303,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
-                        android:text="Screen orientation"
+                        android:text="@string/screen_orientation"
                         android:textColor="?colorPrimary" />
 
 
@@ -356,7 +356,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
-                        android:text="Keyboard settings"
+                        android:text="@string/keyboard_settings"
                         android:textColor="?colorPrimary" />
 
                     <com.google.android.material.button.MaterialButtonToggleGroup
@@ -416,7 +416,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
-            android:text="Cancel" />
+            android:text="@string/common_word_cancel" />
 
         <Button
             android:id="@+id/btn_save"
@@ -425,7 +425,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:text="Save" />
+            android:text="@string/common_word_save" />
 
     </LinearLayout>
 </RelativeLayout>

@@ -18,8 +18,6 @@ import com.besome.sketch.beans.ProjectFileBean;
 import com.besome.sketch.beans.ViewBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.button.MaterialButtonToggleGroup;
-import pro.sketchware.R;
-import pro.sketchware.databinding.ManageScreenActivityAddTempBinding;
 
 import java.util.ArrayList;
 
@@ -29,6 +27,8 @@ import a.a.a.rq;
 import a.a.a.uq;
 import a.a.a.wB;
 import a.a.a.xB;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ManageScreenActivityAddTempBinding;
 
 public class AddViewActivity extends BaseAppCompatActivity {
 
@@ -181,7 +181,7 @@ public class AddViewActivity extends BaseAppCompatActivity {
         binding = ManageScreenActivityAddTempBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.toolbar.setTitle("Create new");
+        binding.toolbar.setTitle(R.string.create_view);
         binding.toolbar.setNavigationOnClickListener(v -> finish());
 
         Intent intent1 = getIntent();
@@ -189,7 +189,7 @@ public class AddViewActivity extends BaseAppCompatActivity {
         requestCode = intent1.getIntExtra("request_code", 264);
         projectFileBean = intent1.getParcelableExtra("project_file");
         if (projectFileBean != null) {
-            binding.toolbar.setTitle("Edit " + projectFileBean.fileName);
+            binding.toolbar.setTitle(getString(R.string.common_word_edit) + projectFileBean.fileName);
         }
 
         featuresAdapter = new FeaturesAdapter();

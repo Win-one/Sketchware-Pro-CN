@@ -14,7 +14,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.tabs.TabLayout;
-import pro.sketchware.R;
 
 import java.lang.ref.WeakReference;
 
@@ -24,6 +23,7 @@ import a.a.a.St;
 import a.a.a.Zt;
 import a.a.a.mB;
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
 
 public class ManageFontActivity extends BaseAppCompatActivity {
 
@@ -46,6 +46,7 @@ public class ManageFontActivity extends BaseAppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (myCollectionFontsFragment.l) {
             myCollectionFontsFragment.a(false);
         } else {

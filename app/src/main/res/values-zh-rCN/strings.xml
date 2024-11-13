@@ -2979,5 +2979,9 @@
     <string name="if_you_don_t_have_a_keystore_you_can_use_a_test_key">如果您没有密钥库，则可以使用测试密钥.</string>
     <string name="couldn_t_delete_file">无法删除文件</string>
     <string name="finished_exporting_aab">已完成AAB导出</string>
+    <string name="common_word_type">类型</string>
+    <string name="screen_orientation">屏幕方向</string>
+    <string name="keyboard_settings">键盘设置</string>
+    <string name="create_view">新建视图</string>
 
 </resources>
