@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +15,6 @@ import androidx.appcompat.widget.Toolbar;
 import com.besome.sketch.beans.ProjectLibraryBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.materialswitch.MaterialSwitch;
-import pro.sketchware.R;
 
 import a.a.a.GB;
 import a.a.a.aB;
@@ -25,6 +23,7 @@ import a.a.a.iC;
 import a.a.a.mB;
 import mod.hey.studios.util.Helper;
 import mod.jbk.editor.manage.library.LibrarySettingsImporter;
+import pro.sketchware.R;
 
 public class ManageGoogleMapActivity extends BaseAppCompatActivity implements View.OnClickListener {
     private String sc_id;
@@ -119,7 +118,7 @@ public class ManageGoogleMapActivity extends BaseAppCompatActivity implements Vi
             googleMapLibraryBean = savedInstanceState.getParcelable("google_map");
         }
 
-        getSupportActionBar().setTitle("GoogleMap Settings");
+        getSupportActionBar().setTitle(R.string.googlemap_settings);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));

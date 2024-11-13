@@ -2627,5 +2627,35 @@ Please try again later"</string>
     <string name="couldn_t_restore">Couldn\'t restore:</string>
     <string name="restored_successfully">Restored successfully</string>
     <string name="restored_successfully_refresh_to_see_the_project">Restored successfully. Refresh to see the project</string>
+    <string name="you_haven_t_used_any_custom_blocks_in_this_project">You haven\'t used any custom blocks in this project.</string>
+    <string name="you_have_used">You have used </string>
+    <string name="custom_block_s_in_this_project">custom block(s) in this project.</string>
+    <string name="import_custom_blocks_to">Import Custom blocks to</string>
+    <string name="create_new_palette">Create new palette</string>
+    <string name="blocks_imported">Blocks imported!</string>
+    <string name="invalid_hexadecimal_color">Invalid hexadecimal color</string>
+    <string name="failed_to_get_custom_blocks">Failed to get Custom Blocks :</string>
+    <string name="none_selected_tap_here_to_configure">None selected. Tap here to configure.</string>
+    <string name="appcompat_and_design">AppCompat and Design</string>
+    <string name="googlemap_settings">GoogleMap Settings</string>
+    <string name="font_name">Font name</string>
+    <string name="common_word_clear">Clear</string>
+    <string name="add_to_my_collection">Add to my collection</string>
+    <string name="enter_sound_name">Enter sound name</string>
+    <string name="add_sound">Add Sound</string>
+    <string name="file_name">File name</string>
+    <string name="can_t_generate_app_bundle">Can\'t generate App Bundle</string>
+    <string name="this_sketchware_pro_version_doesn_t_support_building_aabs">This Sketchware Pro version doesn\'t support building AABs as it must work on</string>
+    <string name="android_7_1_1_and_earlier_use_sketchware_pro">Android 7.1.1 and earlier. Use Sketchware Pro</string>
+    <string name="instead">instead.</string>
+    <string name="important_note">Important note</string>
+    <string name="common_word_understood">Understood</string>
+    <string name="sign_outputted_aab">Sign outputted AAB</string>
+    <string name="fill_in_the_keystore_details_to_sign_the_aab">Fill in the keystore details to sign the AAB.</string>
+    <string name="sign_an_apk">Sign an APK</string>
+    <string name="fill_in_the_keystore_details_to_sign_the_apk">Fill in the keystore details to sign the APK.</string>
+    <string name="if_you_don_t_have_a_keystore_you_can_use_a_test_key">If you don\'t have a keystore, you can use a test key.</string>
+    <string name="couldn_t_delete_file">Couldn\'t delete file</string>
+    <string name="finished_exporting_aab">Finished exporting AAB</string>
 
 </resources>

@@ -126,8 +126,10 @@ public class SettingsLanguageFragment extends qA implements View.OnClickListener
     @SuppressLint("ResourceType")
     private void checkStart() {
         if (restart) {
-            startActivity(new Intent(this.requireContext(), MainActivity.class));
-            requireActivity().finish();
+            Intent intent = new Intent(this.requireContext(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            this.requireContext().startActivity(intent);
+            this.requireActivity().finish();
         }
     }
 }

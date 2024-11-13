@@ -2,24 +2,25 @@ package mod.hey.studios.project.custom_blocks;
 
 import android.os.Environment;
 
-import a.a.a.eC;
-import a.a.a.hC;
-import a.a.a.jC;
-import a.a.a.kq;
-
 import com.besome.sketch.beans.BlockBean;
 import com.besome.sketch.beans.ProjectFileBean;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
-import mod.hey.studios.editor.manage.block.ExtraBlockInfo;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
+
+import a.a.a.eC;
+import a.a.a.hC;
+import a.a.a.jC;
+import a.a.a.kq;
+import mod.hey.studios.editor.manage.block.ExtraBlockInfo;
+import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class CustomBlocksManager {
     final String sc_id;
@@ -90,7 +91,7 @@ public class CustomBlocksManager {
                         new TypeToken<ArrayList<ExtraBlockInfo>>() {
                         }.getType());
             } catch (Exception e) {
-                SketchwareUtil.toastError("Failed to get Custom Blocks : " + e.getMessage());
+                SketchwareUtil.toastError(Helper.getResString(R.string.failed_to_get_custom_blocks) + e.getMessage());
             }
         }
         

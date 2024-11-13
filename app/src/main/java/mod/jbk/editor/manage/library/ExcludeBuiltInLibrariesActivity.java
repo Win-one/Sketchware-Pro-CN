@@ -168,7 +168,7 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
                 .map(BuiltInLibraries.BuiltInLibrary::getName)
                 .collect(Collectors.joining(", "));
         if (libraries.isEmpty()) {
-            libraries = "None selected. Tap here to configure.";
+            libraries = getString(R.string.none_selected_tap_here_to_configure);
         }
         preview.setText(libraries);
     }

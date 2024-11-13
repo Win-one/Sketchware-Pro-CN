@@ -2949,5 +2949,35 @@
     <string name="couldn_t_restore">无法恢复:</string>
     <string name="restored_successfully">恢复成功</string>
     <string name="restored_successfully_refresh_to_see_the_project">已成功恢复.刷新以查看项目</string>
+    <string name="you_haven_t_used_any_custom_blocks_in_this_project">您尚未在此项目中使用任何自定义块.</string>
+    <string name="you_have_used">您已使用</string>
+    <string name="custom_block_s_in_this_project">个自定义块在项目中.</string>
+    <string name="import_custom_blocks_to">将自定义块导入到</string>
+    <string name="create_new_palette">创建新调色板</string>
+    <string name="blocks_imported">块已导入!</string>
+    <string name="invalid_hexadecimal_color">无效的十六进制颜色</string>
+    <string name="failed_to_get_custom_blocks">无法获取自定义块: </string>
+    <string name="none_selected_tap_here_to_configure">未选择任何内容.点击此处进行配置.</string>
+    <string name="appcompat_and_design">应用程序兼容和设计</string>
+    <string name="googlemap_settings">谷歌地图设置</string>
+    <string name="font_name">字体名称</string>
+    <string name="common_word_clear">清除</string>
+    <string name="add_to_my_collection">添加到我的收藏</string>
+    <string name="enter_sound_name">输入声音名称</string>
+    <string name="add_sound">添加声音</string>
+    <string name="file_name">文件名称</string>
+    <string name="can_t_generate_app_bundle">无法生成应用程序捆绑包</string>
+    <string name="this_sketchware_pro_version_doesn_t_support_building_aabs">此Sketchware Pro版本不支持构建AAB,因为它必须在</string>
+    <string name="android_7_1_1_and_earlier_use_sketchware_pro">Android 7.1.1及更新版本.使用Sketchware Pro</string>
+    <string name="instead">替代.</string>
+    <string name="important_note">重要提示</string>
+    <string name="common_word_understood">明白</string>
+    <string name="sign_outputted_aab">签名输出的AAB</string>
+    <string name="fill_in_the_keystore_details_to_sign_the_aab">填写密钥库详细信息以对AAB进行签名.</string>
+    <string name="sign_an_apk">签名APK</string>
+    <string name="fill_in_the_keystore_details_to_sign_the_apk">填写密钥库详细信息以对APK进行签名.</string>
+    <string name="if_you_don_t_have_a_keystore_you_can_use_a_test_key">如果您没有密钥库，则可以使用测试密钥.</string>
+    <string name="couldn_t_delete_file">无法删除文件</string>
+    <string name="finished_exporting_aab">已完成AAB导出</string>
 
 </resources>

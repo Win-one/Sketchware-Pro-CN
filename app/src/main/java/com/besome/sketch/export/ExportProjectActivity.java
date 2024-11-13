@@ -19,8 +19,6 @@ import androidx.core.content.FileProvider;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import pro.sketchware.BuildConfig;
-import pro.sketchware.R;
 
 import org.spongycastle.jce.provider.BouncyCastleProvider;
 
@@ -47,9 +45,6 @@ import a.a.a.yq;
 import kellinwood.security.zipsigner.ZipSigner;
 import kellinwood.security.zipsigner.optional.CustomKeySigner;
 import kellinwood.security.zipsigner.optional.LoadKeystoreException;
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FilePathUtil;
-import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.compiler.kotlin.KotlinCompilerBridge;
 import mod.hey.studios.project.proguard.ProguardHandler;
 import mod.hey.studios.project.stringfog.StringfogHandler;
@@ -59,6 +54,11 @@ import mod.jbk.build.BuiltInLibraries;
 import mod.jbk.build.compiler.bundle.AppBundleCompiler;
 import mod.jbk.export.GetKeyStoreCredentialsDialog;
 import mod.jbk.util.TestkeySignBridge;
+import pro.sketchware.BuildConfig;
+import pro.sketchware.R;
+import pro.sketchware.utility.FilePathUtil;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class ExportProjectActivity extends BaseAppCompatActivity {
 
@@ -256,21 +256,21 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
             if (BuildConfig.FLAVOR.equals(BuildConfig.FLAVOR_NAME_WITHOUT_AABS)) {
                 aB dialog = new aB(this);
                 dialog.a(R.drawable.break_warning_96_red);
-                dialog.b("Can't generate App Bundle");
-                dialog.a("This Sketchware Pro version doesn't support building AABs as it must work on " +
-                        "Android 7.1.1 and earlier. Use Sketchware Pro " + BuildConfig.VERSION_NAME_WITHOUT_FLAVOR + "-" +
-                        BuildConfig.FLAVOR_NAME_WITH_AABS + " instead.");
+                dialog.b(getString(R.string.can_t_generate_app_bundle));
+                dialog.a(getString(R.string.this_sketchware_pro_version_doesn_t_support_building_aabs) +
+                        getString(R.string.android_7_1_1_and_earlier_use_sketchware_pro) + BuildConfig.VERSION_NAME_WITHOUT_FLAVOR + "-" +
+                        BuildConfig.FLAVOR_NAME_WITH_AABS + getString(R.string.instead));
                 dialog.b(Helper.getResString(R.string.common_word_close), Helper.getDialogDismissListener(dialog));
                 dialog.show();
                 return;
             }
 
             aB confirmationDialog = new aB(this);
-            confirmationDialog.b("Important note");
+            confirmationDialog.b(getString(R.string.important_note));
             confirmationDialog.a("The generated .aab file must be signed.\nCopy your keystore to /Internal storage/sketchware/keystore/release_key.jks and enter the alias' password.");
             confirmationDialog.a(R.drawable.ic_mtrl_info);
 
-            confirmationDialog.b("Understood", v -> {
+            confirmationDialog.b(getString(R.string.common_word_understood), v -> {
                 showAabSigningDialog();
                 confirmationDialog.dismiss();
             });
@@ -280,7 +280,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
 
     private void showAabSigningDialog() {
         GetKeyStoreCredentialsDialog credentialsDialog = new GetKeyStoreCredentialsDialog(this,
-                R.drawable.ic_mtrl_key, "Sign outputted AAB", "Fill in the keystore details to sign the AAB.");
+                R.drawable.ic_mtrl_key, getString(R.string.sign_outputted_aab), getString(R.string.fill_in_the_keystore_details_to_sign_the_aab));
         credentialsDialog.setListener(credentials -> {
             BuildingAsyncTask task = new BuildingAsyncTask(this);
             task.enableAppBundleBuild();
@@ -333,7 +333,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
 
         sign_apk_button.setOnClickListener(view -> {
             aB confirmationDialog = new aB(this);
-            confirmationDialog.b("Important note");
+            confirmationDialog.b(getString(R.string.important_note));
             confirmationDialog.a("""
                     To sign an APK, you need a keystore. Use your already created one, and copy it to \
                     /Internal storage/sketchware/keystore/release_key.jks and enter the alias's password.
@@ -342,7 +342,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
                     use a 3rd-party tool (for now).""");
             confirmationDialog.a(R.drawable.ic_mtrl_info);
 
-            confirmationDialog.b("Understood", v -> {
+            confirmationDialog.b(getString(R.string.common_word_understood), v -> {
                 showApkSigningDialog();
                 confirmationDialog.dismiss();
             });
@@ -353,9 +353,9 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
     private void showApkSigningDialog() {
         GetKeyStoreCredentialsDialog credentialsDialog = new GetKeyStoreCredentialsDialog(this,
                 R.drawable.ic_mtrl_key,
-                "Sign an APK",
-                "Fill in the keystore details to sign the APK. " +
-                        "If you don't have a keystore, you can use a test key.");
+                getString(R.string.sign_an_apk),
+                getString(R.string.fill_in_the_keystore_details_to_sign_the_apk) +
+                        getString(R.string.if_you_don_t_have_a_keystore_you_can_use_a_test_key));
         credentialsDialog.setListener(credentials -> {
             sign_apk_button.setVisibility(View.GONE);
             sign_apk_output_stage.setVisibility(View.GONE);
@@ -467,7 +467,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
             String sc_id = activity.get().sc_id;
 
             try {
-                publishProgress("Deleting temporary files...");
+                publishProgress(Helper.getResString(R.string.deleting_temporary_files));
                 FileUtil.deleteFile(project_metadata.projectMyscPath);
 
                 publishProgress(Helper.getResString(R.string.design_run_title_ready_to_build));
@@ -493,7 +493,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
                 File outputFile = new File(getCorrectResultFilename(project_metadata.releaseApkPath));
                 if (outputFile.exists()) {
                     if (!outputFile.delete()) {
-                        throw new IllegalStateException("Couldn't delete file " + outputFile.getAbsolutePath());
+                        throw new IllegalStateException(Helper.getResString(R.string.couldn_t_delete_file) + outputFile.getAbsolutePath());
                     }
                 }
                 project_metadata.c(a);
@@ -738,7 +738,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
             if (buildingAppBundle && new File(Environment.getExternalStorageDirectory(), "sketchware" + File.separator + "signed_aab" + File.separator + aabFilename).exists()) {
                 aB dialog = new aB(activity.get());
                 dialog.a(R.drawable.open_box_48);
-                dialog.b("Finished exporting AAB");
+                dialog.b(Helper.getResString(R.string.finished_exporting_aab));
                 dialog.a("You can find the generated, signed AAB file at:\n" +
                         "/Internal storage/sketchware/signed_aab/" + aabFilename);
                 dialog.b(Helper.getResString(R.string.common_word_ok), Helper.getDialogDismissListener(dialog));
