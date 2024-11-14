@@ -15,20 +15,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
-import pro.sketchware.R;
-import pro.sketchware.databinding.AddCustomAttributeBinding;
-import pro.sketchware.databinding.CustomDialogAttributeBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.util.Helper;
 import mod.remaker.util.ThemeUtils;
 import mod.remaker.view.CustomAttributeView;
+import pro.sketchware.R;
+import pro.sketchware.databinding.AddCustomAttributeBinding;
+import pro.sketchware.databinding.CustomDialogAttributeBinding;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class AddCustomAttributeActivity extends AppCompatActivity {
 
@@ -74,7 +74,7 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
 
     private void dialog(String type, int position) {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
-        dialog.setTitle(type.equals("create") ? "Add new attribute" : "Edit attribute");
+        dialog.setTitle(type.equals("create") ? getString(R.string.add_new_attribute) : getString(R.string.edit_attribute));
         CustomDialogAttributeBinding attributeBinding = CustomDialogAttributeBinding.inflate(getLayoutInflater());
         dialog.setView(attributeBinding.getRoot());
 
@@ -96,10 +96,10 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
                     map.put("type", widgetType);
                     map.put("value", newValue);
                     activityInjections.add(map);
-                    SketchwareUtil.toast("Added");
+                    SketchwareUtil.toast(getString(R.string.common_word_added));
                 } else if (type.equals("edit")) {
                     activityInjections.get(position).put("value", newValue);
-                    SketchwareUtil.toast("Saved");
+                    SketchwareUtil.toast(getString(R.string.common_word_saved));
                 }
                 binding.addAttrListview.setAdapter(new CustomAdapter(activityInjections));
                 ((BaseAdapter) binding.addAttrListview.getAdapter()).notifyDataSetChanged();
@@ -166,9 +166,9 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
             attributeView.getImageView().setRotation(90);
             attributeView.getImageView().setOnClickListener(v -> {
                 PopupMenu popupMenu = new PopupMenu(AddCustomAttributeActivity.this, attributeView.getImageView());
-                popupMenu.getMenu().add(Menu.NONE, 0, Menu.NONE, "Edit");
+                popupMenu.getMenu().add(Menu.NONE, 0, Menu.NONE, R.string.common_word_edit);
                 if (!hasAttribute("layout_height", value) || !hasAttribute("layout_width", value)) {
-                    popupMenu.getMenu().add(Menu.NONE, 1, Menu.NONE, "Delete");
+                    popupMenu.getMenu().add(Menu.NONE, 1, Menu.NONE, R.string.common_word_delete);
                 }
                 popupMenu.setOnMenuItemClickListener(item -> {
                     int originalPosition = injections.indexOf(filtered.get(position));
@@ -181,7 +181,7 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
                             filtered.remove(position);
                             FileUtil.writeFile(activityInjectionsFilePath, new Gson().toJson(injections));
                             notifyDataSetChanged();
-                            SketchwareUtil.toast("Deleted successfully");
+                            SketchwareUtil.toast(getString(R.string.deleted_successfully));
                         }
                     }
                     return true;

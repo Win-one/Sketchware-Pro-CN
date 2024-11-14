@@ -2757,7 +2757,7 @@
     <string name="use_materialcomponents">使用MaterialComponents</string>
     <string name="this_will_replace_e_g_button_with_materialbutton">这将用MaterialButton替换 Button等,请注意!</string>
     <string name="enter_icon_name">输入图标名称</string>
-    <string name="this_icon_is_available_under_the_apache_licence">此图标在Apache许可证版本2.0下提供.点击阅读更多.</string>
+    <string name="this_icon_is_available_under_the_apache_licence">此图标在Apache Licence Version 2.0下提供.点击阅读更多.</string>
     <string name="selected_apk">已选择的APK</string>
     <string name="apk_path_will_appear_here">APK路径将在此处显示</string>
     <string name="export_aab_android_app_bundle">导出AAB(Android App Bundle)</string>
@@ -2983,5 +2983,33 @@
     <string name="screen_orientation">屏幕方向</string>
     <string name="keyboard_settings">键盘设置</string>
     <string name="create_view">新建视图</string>
+    <string name="if_you_re_creating_a_file_make_sure_to_add_an_extension">如果要创建文件,请确保添加扩展名.</string>
+    <string name="select_an_asset_file">选择asset文件</string>
+    <string name="couldn_t_import_file">无法导入文件! [</string>
+    <string name="add_new_attribute">添加新属性</string>
+    <string name="edit_attribute">编辑属性</string>
+    <string name="common_word_added">已添加</string>
+    <string name="error_m_must_be_followed_by_param_at_position">错误:\'%m\'必须在位置后跟\'.param\'</string>
+    <string name="select_a_json_file">选择JSON文件</string>
+    <string name="invalid_json_file">JSON文件无效</string>
+    <string name="successfully_exported_blocks_to">已成功将块导出到:\n</string>
+    <string name="invalid_name_of_palette">调色板名称无效 #</string>
+    <string name="invalid_palette_entry_in_block">块中的调色板条目无效 #</string>
+    <string name="delete_permanently">永久删除</string>
+    <string name="insert_above">在上方插入</string>
+    <string name="duplicate">复制</string>
+    <string name="move_to_palette">移动到调色板</string>
+    <string name="invalid_color_of_palette">调色板的颜色无效 #</string>
+    <string name="delete_block">删除块?</string>
+    <string name="are_you_sure_you_want_to_delete_this_block">是否确定要删除此块?</string>
+    <string name="invalid_name_of_custom_block_palette">自定义块调色板的名称无效 #</string>
+    <string name="restore_to">还原到</string>
+    <string name="move_to">移至</string>
+    <string name="common_word_move">移动</string>
+    <string name="invalid_name_entry_of_custom_block">自定义块的名称条目无效 #</string>
+    <string name="in_blocks_to_import">在要导入的块中</string>
+    <string name="import_blocks">导入块</string>
+    <string name="imported_successfully">导入成功</string>
+    <string name="common_word_reverse">交换</string>
 
 </resources>

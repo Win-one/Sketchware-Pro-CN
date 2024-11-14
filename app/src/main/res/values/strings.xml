@@ -2661,5 +2661,33 @@ Please try again later"</string>
     <string name="screen_orientation">Screen orientation</string>
     <string name="keyboard_settings">Keyboard settings</string>
     <string name="create_view">Create view</string>
+    <string name="if_you_re_creating_a_file_make_sure_to_add_an_extension">If you\'re creating a file, make sure to add an extension.</string>
+    <string name="select_an_asset_file">Select an asset file</string>
+    <string name="couldn_t_import_file">Couldn\'t import file! [</string>
+    <string name="add_new_attribute">Add new attribute</string>
+    <string name="edit_attribute">Edit attribute</string>
+    <string name="common_word_added">Added</string>
+    <string name="error_m_must_be_followed_by_param_at_position">Error: \'%m\' must be followed by \'.param\' at position</string>
+    <string name="select_a_json_file">Select a JSON file</string>
+    <string name="invalid_json_file">Invalid JSON file</string>
+    <string name="successfully_exported_blocks_to">Successfully exported blocks to:\n</string>
+    <string name="invalid_name_of_palette">Invalid name of palette #</string>
+    <string name="invalid_palette_entry_in_block">Invalid palette entry in block #</string>
+    <string name="delete_permanently">Delete permanently</string>
+    <string name="insert_above">Insert above</string>
+    <string name="duplicate">Duplicate</string>
+    <string name="move_to_palette">Move to palette</string>
+    <string name="invalid_color_of_palette">Invalid color of palette #</string>
+    <string name="delete_block">Delete block?</string>
+    <string name="are_you_sure_you_want_to_delete_this_block">Are you sure you want to delete this block?</string>
+    <string name="invalid_name_of_custom_block_palette">Invalid name of Custom Block palette #</string>
+    <string name="restore_to">Restore to</string>
+    <string name="move_to">Move to</string>
+    <string name="common_word_move">Move</string>
+    <string name="invalid_name_entry_of_custom_block">Invalid name entry of Custom Block #</string>
+    <string name="in_blocks_to_import">" in Blocks to import"</string>
+    <string name="import_blocks">Import blocks</string>
+    <string name="imported_successfully">Imported successfully</string>
+    <string name="common_word_reverse">Reverse</string>
 
 </resources>

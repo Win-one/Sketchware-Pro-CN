@@ -1,5 +1,6 @@
 package mod.hilal.saif.activities.tools;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -21,8 +22,6 @@ import com.google.android.material.color.MaterialColors;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
-import pro.sketchware.R;
-import pro.sketchware.databinding.BlocksManagerCreatorBinding;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,13 +34,15 @@ import java.util.regex.Pattern;
 
 import a.a.a.Rs;
 import a.a.a.Zx;
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
 import mod.elfilibustero.sketch.lib.utils.PropertiesUtil;
-import pro.sketchware.lib.highlighter.SimpleHighlighter;
-import pro.sketchware.lib.base.BaseTextWatcher;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.lib.PCP;
+import pro.sketchware.R;
+import pro.sketchware.databinding.BlocksManagerCreatorBinding;
+import pro.sketchware.lib.base.BaseTextWatcher;
+import pro.sketchware.lib.highlighter.SimpleHighlighter;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
 
@@ -77,6 +78,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
         binding = null;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void initialize() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -432,7 +434,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
             if (matcher.find()) {
                 int position = matcher.end();
                 //Unable to resolve this error because the Rs class still undecompiled.
-                block.setText("Error: '%m' must be followed by '.param' at position " + position);
+                block.setText(getString(R.string.error_m_must_be_followed_by_param_at_position) + position);
             } else {
                 block.setText(e.toString());
             }
