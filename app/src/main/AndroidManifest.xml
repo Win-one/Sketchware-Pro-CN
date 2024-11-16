@@ -21,13 +21,14 @@
         android:name=".SketchApplication"
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.SketchwarePro"
         android:usesCleartextTraffic="true"
-        tools:targetApi="p">
+        tools:targetApi="tiramisu">
 
         <provider
             android:name="androidx.core.content.FileProvider"

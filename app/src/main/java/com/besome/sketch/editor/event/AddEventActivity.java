@@ -1,15 +1,5 @@
 package com.besome.sketch.editor.event;
 
-import a.a.a.bB;
-import a.a.a.dt;
-import a.a.a.gB;
-import a.a.a.jC;
-import a.a.a.mB;
-import a.a.a.oq;
-import a.a.a.rs;
-import a.a.a.wB;
-import a.a.a.xB;
-
 import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,10 +25,20 @@ import com.besome.sketch.beans.EventBean;
 import com.besome.sketch.beans.ProjectFileBean;
 import com.besome.sketch.beans.ViewBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import pro.sketchware.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import a.a.a.bB;
+import a.a.a.dt;
+import a.a.a.gB;
+import a.a.a.jC;
+import a.a.a.mB;
+import a.a.a.oq;
+import a.a.a.rs;
+import a.a.a.wB;
+import a.a.a.xB;
+import pro.sketchware.R;
 
 public class AddEventActivity extends BaseAppCompatActivity implements View.OnClickListener {
     private ArrayList<EventBean> addableDrawerViewEvents;
@@ -438,7 +438,7 @@ public class AddEventActivity extends BaseAppCompatActivity implements View.OnCl
             holder.img_icon.setImageResource(EventBean.getEventIconResource(event.eventType, event.targetType));
             int eventType = event.eventType;
             if (eventType == EventBean.EVENT_TYPE_ACTIVITY) {
-                holder.tv_target_type.setText("Activity");
+                holder.tv_target_type.setText(R.string.common_word_activity);
                 holder.events_preview.setVisibility(View.GONE);
             } else if (eventType == EventBean.EVENT_TYPE_VIEW) {
                 holder.tv_target_type.setText(ViewBean.getViewTypeName(event.targetType));

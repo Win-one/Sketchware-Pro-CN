@@ -16,8 +16,6 @@ import com.besome.sketch.beans.BlockBean;
 import com.besome.sketch.beans.MoreBlockCollectionBean;
 import com.besome.sketch.editor.logic.BlockPane;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import pro.sketchware.R;
-import pro.sketchware.databinding.ManageCollectionShowBlockBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +29,8 @@ import a.a.a.Ts;
 import a.a.a.bB;
 import mod.hey.studios.util.Helper;
 import mod.jbk.util.BlockUtil;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ManageCollectionShowBlockBinding;
 import pro.sketchware.tools.ImageFactory;
 import pro.sketchware.utility.SketchwareUtil;
 
@@ -177,7 +177,7 @@ public class ShowMoreBlockCollectionActivity extends BaseAppCompatActivity imple
             addBlocks(moreBlock.blocks);
             resizeBottomViews();
         } else {
-            SketchwareUtil.toastError("Can't open corrupt More Block");
+            SketchwareUtil.toastError(getString(R.string.can_t_open_corrupt_more_block));
             finish();
         }
     }
@@ -188,7 +188,7 @@ public class ShowMoreBlockCollectionActivity extends BaseAppCompatActivity imple
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuItem saveImageItem = menu.add(0, 12, 0, "Save image");
+        MenuItem saveImageItem = menu.add(0, 12, 0, R.string.save_image);
         saveImageItem.setIcon(R.drawable.full_image_48);
         saveImageItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
@@ -201,7 +201,7 @@ public class ShowMoreBlockCollectionActivity extends BaseAppCompatActivity imple
             if (ImageFactory.saveBitmap(binding.editor.getChildAt(0), moreBlockName).exists()) {
                 SketchwareUtil.toast("Saved image to /Internal storage/sketchware/saved_block/" + moreBlockName + ".png!");
             } else {
-                SketchwareUtil.toastError("Couldn't save image");
+                SketchwareUtil.toastError(getString(R.string.couldn_t_save_image));
             }
         }
 

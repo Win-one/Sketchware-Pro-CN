@@ -64,7 +64,6 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
-import pro.sketchware.R;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -110,7 +109,6 @@ import io.github.rosemoe.sora.widget.CodeEditor;
 import io.github.rosemoe.sora.widget.component.Magnifier;
 import io.github.rosemoe.sora.widget.schemes.EditorColorScheme;
 import io.github.rosemoe.sora.widget.schemes.SchemeDarcula;
-import pro.sketchware.menu.ExtraMenuBean;
 import mod.hey.studios.editor.view.IdGenerator;
 import mod.hey.studios.moreblock.ReturnMoreblockManager;
 import mod.hey.studios.moreblock.importer.MoreblockImporterDialog;
@@ -118,6 +116,8 @@ import mod.hey.studios.util.Helper;
 import mod.hilal.saif.asd.asdforall.AsdAllEditor;
 import mod.jbk.editor.manage.MoreblockImporter;
 import mod.jbk.util.BlockUtil;
+import pro.sketchware.R;
+import pro.sketchware.menu.ExtraMenuBean;
 
 @SuppressLint({"ClickableViewAccessibility", "RtlHardcoded", "SetTextI18n", "DefaultLocale"})
 public class LogicEditorActivity extends BaseAppCompatActivity implements View.OnClickListener, Vs, View.OnTouchListener, MoreblockImporterDialog.CallBack {
@@ -1332,7 +1332,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
         linearLayout.addView(name);
         TextView preview = new TextView(this);
         preview.setLayoutParams(layoutParams);
-        preview.setText("Preview");
+        preview.setText(R.string.common_word_preview);
 
         Typeface typeface;
         if (fontName.equalsIgnoreCase("default_font")) {
@@ -1342,7 +1342,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
                 typeface = Typeface.createFromFile(jC.d(B).d(fontName));
             } catch (RuntimeException e) {
                 typeface = Typeface.DEFAULT;
-                preview.setText("Couldn't load font");
+                preview.setText(R.string.couldn_t_load_font);
             }
         }
 
@@ -1517,7 +1517,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
         }
 
         dialog.a(customView);
-        dialog.configureDefaultButton("Code Editor", v -> {
+        dialog.configureDefaultButton(getString(R.string.code_editor), v -> {
             AsdAllEditor editor = new AsdAllEditor(this);
             editor.setCon(ss.getArgValue().toString());
             editor.show();
@@ -1800,6 +1800,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (ia) {
             g(false);
             return;
@@ -2430,7 +2431,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
         }
 
         var dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle("Source code")
+                .setTitle(R.string.source_code)
                 .setPositiveButton(R.string.common_word_close, null)
                 .create();
 
@@ -2492,7 +2493,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
 
         @Override
         public void b() {
-            publishProgress("Now saving..");
+            publishProgress(Helper.getResString(R.string.now_saving));
             activity.get().E();
         }
     }

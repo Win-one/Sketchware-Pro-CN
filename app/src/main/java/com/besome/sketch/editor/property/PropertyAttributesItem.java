@@ -127,7 +127,7 @@ public class PropertyAttributesItem extends LinearLayout implements View.OnClick
                 ((TextView) findViewById(R.id.tv_title)).setText(Helper.getResString(identifier));
                 return;
             }
-            tvValue.setText("Configure parent attributes");
+            tvValue.setText(R.string.configure_parent_attributes);
             imgLeftIcon.setImageResource(icon);
         }
     }
@@ -194,13 +194,13 @@ public class PropertyAttributesItem extends LinearLayout implements View.OnClick
                 }
             }
             new MaterialAlertDialogBuilder(getContext())
-                    .setTitle("Choose an attributes")
+                    .setTitle(R.string.choose_an_attributes)
                     .setAdapter(
                             new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, list), (d, w) -> {
                                 var attr = list.get(w);
                                 if (RELATIVE_IDS.contains(attr)) {
                                     new MaterialAlertDialogBuilder(getContext())
-                                            .setTitle("Choose an id")
+                                            .setTitle(R.string.choose_an_id)
                                             .setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, ids), (d2, w2) -> {
                                                 var id = ids.get(w2);
                                                 if (isItLegalState(id, attr)) {
@@ -212,14 +212,14 @@ public class PropertyAttributesItem extends LinearLayout implements View.OnClick
                                                     SketchwareUtil.toastError("IllegalStateException : Circular dependencies cannot exist in RelativeLayout");
                                                 }
                                             })
-                                            .setNegativeButton("Cancel", (d2, which) -> d.dismiss())
+                                            .setNegativeButton(R.string.common_word_cancel, (d2, which) -> d.dismiss())
                                             .show();
                                 } else {
                                     value.put(attr, "false");
                                     adapter.submitList(new ArrayList<>(value.keySet()));
                                 }
                             })
-                    .setNegativeButton("Cancel", (d, which) -> d.dismiss())
+                    .setNegativeButton(R.string.common_word_cancel, (d, which) -> d.dismiss())
                     .show();
         });
     }
@@ -297,7 +297,7 @@ public class PropertyAttributesItem extends LinearLayout implements View.OnClick
                     var filteredIds = new ArrayList<>(ids);
                     filteredIds.remove(value.get(attr));
                     new MaterialAlertDialogBuilder(getContext())
-                            .setTitle("Choose an id")
+                            .setTitle(R.string.choose_an_id)
                             .setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, filteredIds), (d, w) -> {
                                 var id = filteredIds.get(w);
                                 value.put(attr, id);
@@ -305,21 +305,21 @@ public class PropertyAttributesItem extends LinearLayout implements View.OnClick
                                 if (valueChangeListener != null)
                                     valueChangeListener.a(key, value);
                             })
-                            .setNegativeButton("Cancel", (d, which) -> d.dismiss())
+                            .setNegativeButton(R.string.common_word_cancel, (d, which) -> d.dismiss())
                             .show();
                 });
                 itemView.setOnLongClickListener(v -> {
                     var dialog = new aB((Activity) getContext());
-                    dialog.b("Delete");
-                    dialog.a("Are you sure you want to delete " + attr + "?");
-                    dialog.b("Yes", view -> {
+                    dialog.b(Helper.getResString(R.string.common_word_delete));
+                    dialog.a(Helper.getResString(R.string.are_you_sure_you_want_to_delete) + attr + "?");
+                    dialog.b(Helper.getResString(R.string.common_word_yes), view -> {
                         value.remove(attr);
                         if (valueChangeListener != null)
                             valueChangeListener.a(key, value);
                         submitList(new ArrayList<>(value.keySet()));
                         dialog.dismiss();
                     });
-                    dialog.a("No", view -> dialog.dismiss());
+                    dialog.a(Helper.getResString(R.string.common_word_no), view -> dialog.dismiss());
                     dialog.show();
                     return true;
                 });
@@ -346,9 +346,9 @@ public class PropertyAttributesItem extends LinearLayout implements View.OnClick
                 });
                 itemView.setOnLongClickListener(v -> {
                     var dialog = new aB((Activity) getContext());
-                    dialog.b("Delete");
-                    dialog.a("Are you sure you want to delete " + attr + "?");
-                    dialog.b("Yes", view -> {
+                    dialog.b(Helper.getResString(R.string.common_word_delete));
+                    dialog.a(Helper.getResString(R.string.are_you_sure_you_want_to_delete) + attr + "?");
+                    dialog.b(Helper.getResString(R.string.common_word_yes), view -> {
                         value.remove(attr);
                         if (valueChangeListener != null)
                             valueChangeListener.a(key, value);
@@ -356,7 +356,7 @@ public class PropertyAttributesItem extends LinearLayout implements View.OnClick
                         dialog.dismiss();
                     });
 
-                    dialog.a("No", view -> dialog.dismiss());
+                    dialog.a(Helper.getResString(R.string.common_word_no), view -> dialog.dismiss());
                     dialog.show();
                     return true;
                 });

@@ -15,22 +15,23 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
+import a.a.a.Ox;
 import a.a.a.jC;
 import a.a.a.jq;
 import a.a.a.kq;
-import a.a.a.Ox;
-import pro.sketchware.utility.SketchwareUtil;
 import mod.agus.jcoderz.beans.ViewBeans;
-import pro.sketchware.utility.FilePathUtil;
-import pro.sketchware.utility.FileResConfig;
-import pro.sketchware.utility.FileUtil;
 import mod.elfilibustero.sketch.lib.utils.CustomVariableUtil;
-import pro.sketchware.blocks.ExtraBlocks;
-import pro.sketchware.control.logic.LogicClickListener;
 import mod.hey.studios.editor.view.IdGenerator;
 import mod.hey.studios.moreblock.ReturnMoreblockManager;
+import mod.hey.studios.util.Helper;
 import mod.hilal.saif.activities.tools.ConfigActivity;
 import mod.hilal.saif.blocks.BlocksHandler;
+import pro.sketchware.R;
+import pro.sketchware.blocks.ExtraBlocks;
+import pro.sketchware.control.logic.LogicClickListener;
+import pro.sketchware.utility.FileResConfig;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class ExtraPaletteBlock {
 
@@ -412,16 +413,16 @@ public class ExtraPaletteBlock {
                 }
                 return;
             case 0:
-                logicEditor.b("Add variable", "variableAdd");
-                logicEditor.b("Add custom variable", "variableAddNew", clickListener);
-                logicEditor.b("Remove variable", "variableRemove", clickListener);
+                logicEditor.b(Helper.getResString(R.string.add_variable), "variableAdd");
+                logicEditor.b(Helper.getResString(R.string.add_custom_variable), "variableAddNew", clickListener);
+                logicEditor.b(Helper.getResString(R.string.remove_variable), "variableRemove", clickListener);
                 variables();
                 return;
 
             case 1:
-                logicEditor.b("Add list", "listAdd");
-                logicEditor.b("Add custom List", "listAddCustom", clickListener);
-                logicEditor.b("Remove list", "listRemove", clickListener);
+                logicEditor.b(Helper.getResString(R.string.add_list), "listAdd");
+                logicEditor.b(Helper.getResString(R.string.add_custom_list), "listAddCustom", clickListener);
+                logicEditor.b(Helper.getResString(R.string.remove_list), "listRemove", clickListener);
                 list();
                 return;
 
@@ -934,7 +935,7 @@ public class ExtraPaletteBlock {
             return;
 
             case 7:
-                logicEditor.b("Add component", "componentAdd");
+                logicEditor.b(Helper.getResString(R.string.add_component), "componentAdd");
                 logicEditor.a(" ", "changeStatebarColour");
                 logicEditor.a(" ", "LightStatusBar");
                 logicEditor.a(" ", "showKeyboard");
@@ -1172,8 +1173,8 @@ public class ExtraPaletteBlock {
                 return;
 
             case 8:
-                logicEditor.b("Create", "blockAdd");
-                logicEditor.b("Import From Collection", "blockImport");
+                logicEditor.b(Helper.getResString(R.string.common_word_create), "blockAdd");
+                logicEditor.b(Helper.getResString(R.string.import_from_collection), "blockImport");
                 if (ConfigActivity.isSettingEnabled(ConfigActivity.SETTING_SHOW_BUILT_IN_BLOCKS)) {
                     logicEditor.a(" ", "customToast");
                     logicEditor.a(" ", "customToastWithIcon");
