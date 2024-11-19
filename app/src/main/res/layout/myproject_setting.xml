@@ -274,7 +274,7 @@
 
         <Button
             android:id="@+id/cancel"
-            style="?attr/materialButtonOutlinedStyle"
+            app:backgroundTint="?attr/colorAccent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

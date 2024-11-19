@@ -248,7 +248,7 @@
 
         <Button
             android:id="@+id/btn_console"
-            style="?attr/materialButtonOutlinedStyle"
+            app:backgroundTint="?attr/colorAccent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="@string/design_library_firebase_button_goto_firebase_console" />

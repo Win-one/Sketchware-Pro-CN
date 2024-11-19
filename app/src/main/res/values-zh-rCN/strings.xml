@@ -3047,5 +3047,10 @@
     <string name="remove_list">删除列表</string>
     <string name="add_component">添加组件</string>
     <string name="import_from_collection">从集合导入</string>
+    <string name="common_word_style">样式</string>
+    <string name="selected_color">所选颜色</string>
+    <string name="component_name">组件名称</string>
+    <string name="optional">自选</string>
+    <string name="no_component_available">无可用组件</string>
 
 </resources>

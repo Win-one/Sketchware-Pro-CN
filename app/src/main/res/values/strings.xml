@@ -2725,5 +2725,10 @@ Please try again later"</string>
     <string name="remove_list">Remove list</string>
     <string name="add_component">Add component</string>
     <string name="import_from_collection">Import From Collection</string>
+    <string name="common_word_style">Style</string>
+    <string name="selected_color">Selected color</string>
+    <string name="component_name">Component name</string>
+    <string name="optional">Optional</string>
+    <string name="no_component_available">No component available</string>
 
 </resources>

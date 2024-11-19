@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="16dp"
     android:layout_marginBottom="16dp"
     android:animateLayoutChanges="true"
@@ -37,7 +38,7 @@
                 android:textColor="?attr/colorPrimary"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                tools:text="Component name" />
+                tools:text="@string/component_name" />
         </LinearLayout>
 
         <View
@@ -132,7 +133,7 @@
                     android:layout_marginRight="24dp"
                     android:importantForAutofill="noExcludeDescendants">
 
-                    <EditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ed_input"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -153,7 +154,7 @@
                     android:visibility="gone"
                     tools:visibility="visible">
 
-                    <EditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ed_input_filename"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -174,7 +175,7 @@
                     android:visibility="gone"
                     tools:visibility="visible">
 
-                    <EditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ed_input_firebase_path"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -213,7 +214,7 @@
                         android:layout_weight="1"
                         android:importantForAutofill="noExcludeDescendants">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/ed_input_file_picker"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -252,14 +253,14 @@
             android:layout_alignParentBottom="true"
             android:padding="16dp">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/docs_button"
-                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:backgroundTint="?attr/colorAccent"
                 android:layout_marginEnd="8dp" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/add_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

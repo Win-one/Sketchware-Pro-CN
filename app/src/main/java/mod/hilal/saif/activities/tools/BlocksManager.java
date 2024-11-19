@@ -8,23 +8,15 @@ import android.text.Editable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.Toolbar;
-
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
@@ -42,6 +34,7 @@ import mod.hey.studios.editor.manage.block.v2.BlockLoader;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.lib.PCP;
 import pro.sketchware.R;
+import pro.sketchware.databinding.BlocksManagerBinding;
 import pro.sketchware.databinding.DialogBlockConfigurationBinding;
 import pro.sketchware.databinding.DialogPaletteBinding;
 import pro.sketchware.lib.base.BaseTextWatcher;
@@ -54,22 +47,14 @@ public class BlocksManager extends BaseAppCompatActivity {
     private String blocks_dir = "";
     private String pallet_dir = "";
     private ArrayList<HashMap<String, Object>> pallet_listmap = new ArrayList<>();
+    private BlocksManagerBinding binding;
 
-    private TextView recycle_sub;
-    private ListView list_pallete;
-    private LinearLayout background;
-    private MaterialCardView recycle_bin_card;
 
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
-        setContentView(R.layout.blocks_manager);
-
-        background = findViewById(R.id.background);
-        recycle_sub = findViewById(R.id.recycle_sub);
-        list_pallete = findViewById(R.id.list_pallete);
-        recycle_bin_card = findViewById(R.id.recycle_bin_card);
-
+        binding = BlocksManagerBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         initialize();
         initializeLogic();
     }
@@ -82,23 +67,22 @@ public class BlocksManager extends BaseAppCompatActivity {
     }
 
     private void initialize() {
-        FloatingActionButton _fab = findViewById(R.id.fab);
-
-        Toolbar toolbar = (Toolbar) getLayoutInflater().inflate(R.layout.toolbar_improved, background, false);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.block_manager);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-        background.addView(toolbar, 0);
-
-        _fab.setOnClickListener(v -> showPaletteDialog(false, null, null, null, null));
+        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        binding.toolbar.setOnMenuItemClickListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.block_menus) {
+                showBlockConfigurationDialog();
+                return true;
+            }
+            return false;
+        });
+        binding.fab.setOnClickListener(v -> showPaletteDialog(false, null, null, null, null));
     }
 
     private void initializeLogic() {
         readSettings();
         refresh_list();
-        _recycleBin(recycle_bin_card);
+        _recycleBin(binding.recycleBinCard);
     }
 
     @Override
@@ -107,23 +91,6 @@ public class BlocksManager extends BaseAppCompatActivity {
 
         readSettings();
         refresh_list();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Settings").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_settings)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem menuItem) {
-        String title = menuItem.getTitle().toString();
-        if (title.equals("Settings")) {
-            showBlockConfigurationDialog();
-        } else {
-            return false;
-        }
-        return super.onOptionsItemSelected(menuItem);
     }
 
     private void showBlockConfigurationDialog() {
@@ -208,12 +175,12 @@ public class BlocksManager extends BaseAppCompatActivity {
             pallet_listmap = new ArrayList<>();
         }
 
-        Parcelable savedState = list_pallete.onSaveInstanceState();
-        list_pallete.setAdapter(new PaletteAdapter(pallet_listmap));
-        ((BaseAdapter) list_pallete.getAdapter()).notifyDataSetChanged();
-        list_pallete.onRestoreInstanceState(savedState);
+        Parcelable savedState = binding.listPallete.onSaveInstanceState();
+        binding.listPallete.setAdapter(new PaletteAdapter(pallet_listmap));
+        ((BaseAdapter) binding.listPallete.getAdapter()).notifyDataSetChanged();
+        binding.listPallete.onRestoreInstanceState(savedState);
 
-        recycle_sub.setText(getString(R.string.blocks) + (long) (getN(-1)));
+        binding.recycleSub.setText(getString(R.string.blocks) + (long) (getN(-1)));
     }
 
     private double getN(final double _p) {
@@ -230,24 +197,24 @@ public class BlocksManager extends BaseAppCompatActivity {
         if (_p > 0) {
             Collections.swap(pallet_listmap, (int) (_p), (int) (_p + -1));
 
-            Parcelable savedState = list_pallete.onSaveInstanceState();
+            Parcelable savedState = binding.listPallete.onSaveInstanceState();
             FileUtil.writeFile(pallet_dir, new Gson().toJson(pallet_listmap));
             _swapRelatedBlocks(_p + 9, _p + 8);
             readSettings();
             refresh_list();
-            list_pallete.onRestoreInstanceState(savedState);
+            binding.listPallete.onRestoreInstanceState(savedState);
         }
     }
 
     private void _recycleBin(final View _v) {
-        recycle_bin_card.setOnClickListener(v -> {
+        binding.recycleBinCard.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), BlocksManagerDetailsActivity.class);
             intent.putExtra("position", "-1");
             intent.putExtra("dirB", blocks_dir);
             intent.putExtra("dirP", pallet_dir);
             startActivity(intent);
         });
-        recycle_bin_card.setOnLongClickListener(v -> {
+        binding.recycleBinCard.setOnLongClickListener(v -> {
             new MaterialAlertDialogBuilder(this)
                     .setTitle(getString(R.string.recycle_bin))
                     .setMessage(getString(R.string.are_you_sure_you_want_to_empty_the_recycle_bin) +
@@ -263,12 +230,12 @@ public class BlocksManager extends BaseAppCompatActivity {
         if (_p < (pallet_listmap.size() - 1)) {
             Collections.swap(pallet_listmap, (int) (_p), (int) (_p + 1));
             {
-                Parcelable savedState = list_pallete.onSaveInstanceState();
+                Parcelable savedState = binding.listPallete.onSaveInstanceState();
                 FileUtil.writeFile(pallet_dir, new Gson().toJson(pallet_listmap));
                 _swapRelatedBlocks(_p + 9, _p + 10);
                 readSettings();
                 refresh_list();
-                list_pallete.onRestoreInstanceState(savedState);
+                binding.listPallete.onRestoreInstanceState(savedState);
             }
         }
     }
@@ -473,7 +440,7 @@ public class BlocksManager extends BaseAppCompatActivity {
 
             title.setText(pallet_listmap.get(position).get("name").toString());
             sub.setText(getString(R.string.blocks) + (long) (getN(position + 9)));
-            recycle_sub.setText(getString(R.string.blocks) + (long) (getN(-1)));
+            binding.recycleSub.setText(getString(R.string.blocks) + (long) (getN(-1)));
 
             int backgroundColor;
             String paletteColorValue = (String) palettes.get(position).get("color");
