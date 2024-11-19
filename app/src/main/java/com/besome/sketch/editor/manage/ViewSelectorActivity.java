@@ -200,12 +200,12 @@ public class ViewSelectorActivity extends BaseAppCompatActivity {
             if (isChecked) {
                 if (checkedId == R.id.option_view) {
                     selectedTab = TAB_ACTIVITY;
-                    binding.optionView.setTextColor(R.attr.titleTextColor);
+                    binding.optionView.setTextColor(androidx.appcompat.R.attr.titleTextColor);
                     binding.optionCustomView.setTextColor(Color.parseColor("#FFFFFF"));
                 } else if (checkedId == R.id.option_custom_view) {
                     selectedTab = TAB_CUSTOM_VIEW;
                     binding.optionView.setTextColor(Color.parseColor("#FFFFFF"));
-                    binding.optionCustomView.setTextColor(R.attr.titleTextColor);
+                    binding.optionCustomView.setTextColor(androidx.appcompat.R.attr.titleTextColor);
                 }
                 viewSelectorAdapter.notifyDataSetChanged();
                 binding.emptyMessage.setVisibility(viewSelectorAdapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);

@@ -14,7 +14,6 @@ import android.util.TypedValue;
 import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import pro.sketchware.R;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -29,6 +28,7 @@ import a.a.a.aB;
 import a.a.a.bB;
 import mod.hey.studios.util.Helper;
 import mod.jbk.util.LogUtil;
+import pro.sketchware.R;
 
 public class SketchwareUtil {
 
@@ -159,7 +159,7 @@ public class SketchwareUtil {
         dialog.b("Couldn't get " + componentLabel);
         dialog.a("Failed to parse " + componentLabel + " from file " + json + ". Fix by renaming old file to " + json.getName() + ".bak? " +
                 "If not, no " + componentLabel + " will be used.");
-        dialog.b("Rename", v -> {
+        dialog.b(Helper.getResString(R.string.common_word_rename), v -> {
             FileUtil.renameFile(json.getAbsolutePath(), json.getAbsolutePath() + ".bak");
             afterRenameLogic.accept(null);
             dialog.dismiss();
@@ -173,7 +173,7 @@ public class SketchwareUtil {
         builder.setTitle(Helper.getResString(R.string.common_error_an_error_occurred));
         builder.setIcon(R.drawable.ic_mtrl_warning);
         builder.setMessage(errorMessage);
-        builder.setPositiveButton("Okay", null);
+        builder.setPositiveButton(Helper.getResString(R.string.common_word_okay), null);
         builder.show();
     }
 }

@@ -94,7 +94,7 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                 intent.putExtra("pallet", String.valueOf(palette));
                 startActivity(intent);
             } else {
-                SketchwareUtil.toastError("Invalid color of palette #" + (palette - 9));
+                SketchwareUtil.toastError(getString(R.string.invalid_color_of_palette) + (palette - 9));
             }
         });
     }

@@ -36,7 +36,7 @@ public class MainDrawer extends NavigationView {
     }
 
     public MainDrawer(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, R.attr.navigationViewStyle);
+        this(context, attrs, com.google.android.material.R.attr.navigationViewStyle);
     }
 
     public MainDrawer(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {

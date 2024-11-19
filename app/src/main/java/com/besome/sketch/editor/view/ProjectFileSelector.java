@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.besome.sketch.beans.ProjectFileBean;
 import com.besome.sketch.design.DesignActivity;
 import com.besome.sketch.editor.manage.ViewSelectorActivity;
-import pro.sketchware.R;
 
 import a.a.a.aB;
 import a.a.a.by;
@@ -29,6 +28,7 @@ import a.a.a.jC;
 import a.a.a.mB;
 import a.a.a.wB;
 import a.a.a.xB;
+import pro.sketchware.R;
 
 public class ProjectFileSelector extends LinearLayout implements View.OnClickListener {
     private String sc_id;
@@ -143,7 +143,7 @@ public class ProjectFileSelector extends LinearLayout implements View.OnClickLis
         initializeDropdown(context);
         setGravity(Gravity.CENTER_VERTICAL);
         TypedValue background = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.selectableItemBackground, background, true);
+        context.getTheme().resolveAttribute(androidx.appcompat.R.attr.selectableItemBackground, background, true);
         setBackgroundResource(background.resourceId);
         setOnClickListener(this);
         currentFileType = 0;

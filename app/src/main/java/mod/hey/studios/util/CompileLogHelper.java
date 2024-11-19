@@ -1,7 +1,6 @@
 package mod.hey.studios.util;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -9,10 +8,11 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 
 import com.google.android.material.color.MaterialColors;
-import pro.sketchware.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import pro.sketchware.R;
 
 public class CompileLogHelper {
     private static final String TAG = "CompileLogHelper";
@@ -21,7 +21,7 @@ public class CompileLogHelper {
     private static final Pattern XML_PATTERN = Pattern.compile("error:", Pattern.MULTILINE);
 
     public static SpannableString getColoredLogs(Context context, String logs) {
-        int errorColor = MaterialColors.getColor(context, R.attr.colorError, TAG);
+        int errorColor = MaterialColors.getColor(context, androidx.appcompat.R.attr.colorError, TAG);
         int warningColor = MaterialColors.getColor(context, R.attr.colorAmber, TAG);
 
         SpannableString spannable = new SpannableString(logs);

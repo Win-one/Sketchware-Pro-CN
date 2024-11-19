@@ -614,8 +614,8 @@ public class OldResourceIdMapper {
             case 2131165789 -> R.drawable.ic_mode_comment_grey600_24dp;
             case 2131165790 -> R.drawable.ic_more_vert_grey600_24dp;
             case 2131165791 -> R.drawable.ic_more_vert_white_24dp;
-            case 2131165792 -> R.drawable.ic_mtrl_chip_checked_black;
-            case 2131165793 -> R.drawable.ic_mtrl_chip_checked_circle;
+            case 2131165792 -> com.google.android.material.R.drawable.ic_mtrl_chip_checked_black;
+            case 2131165793 -> com.google.android.material.R.drawable.ic_mtrl_chip_checked_circle;
             case 2131165794 -> R.drawable.ic_mtrl_chip_close_circle;
             case 2131165795 -> R.drawable.ic_music_primary_24dp;
             case 2131165796 -> R.drawable.ic_my_library_music_black_36dp;
@@ -817,8 +817,8 @@ public class OldResourceIdMapper {
             case 2131165993 -> R.drawable.notification_bg_normal;
             case 2131165994 -> R.drawable.notification_bg_normal_pressed;
             case 2131165995 -> R.drawable.notification_icon_background;
-            case 2131165996 -> R.drawable.notification_template_icon_bg;
-            case 2131165997 -> R.drawable.notification_template_icon_low_bg;
+            case 2131165996 -> androidx.core.R.drawable.notification_template_icon_bg;
+            case 2131165997 -> androidx.core.R.drawable.notification_template_icon_low_bg;
             case 2131165998 -> R.drawable.notification_tile_bg;
             case 2131165999 -> R.drawable.notify_panel_notification_icon_bg;
             case 2131166000 -> R.drawable.numbers_48;

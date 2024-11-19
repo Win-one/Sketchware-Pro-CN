@@ -7,9 +7,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.besome.sketch.tools.QuizBoard;
-import pro.sketchware.R;
 
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
 
 public class BuildingDialog extends Dialog {
 
@@ -34,7 +34,7 @@ public class BuildingDialog extends Dialog {
         tvProgress = findViewById(R.id.tv_progress);
         tvProgress.setText(Helper.getResString(R.string.common_message_loading));
 
-        getWindow().getAttributes().windowAnimations = R.style.Animation_Design_BottomSheetDialog;
+        getWindow().getAttributes().windowAnimations = com.google.android.material.R.style.Animation_Design_BottomSheetDialog;
     }
 
     public void setProgress(String text) {

@@ -153,7 +153,7 @@ public class AddCustomAttributeActivity extends AppCompatActivity {
             CustomAttributeView attributeView = new CustomAttributeView(parent.getContext());
 
             int violet = ThemeUtils.getColor(attributeView, R.attr.colorViolet);
-            int onSurface = ThemeUtils.getColor(attributeView, R.attr.colorOnSurface);
+            int onSurface = ThemeUtils.getColor(attributeView, com.google.android.material.R.attr.colorOnSurface);
             int green = ThemeUtils.getColor(attributeView, R.attr.colorGreen);
 
             String value = getItem(position).get("value").toString();

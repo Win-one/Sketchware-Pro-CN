@@ -1,11 +1,8 @@
 package com.besome.sketch.editor.view;
 
 import android.animation.ObjectAnimator;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.text.InputType;
 import android.util.AttributeSet;
@@ -28,7 +25,6 @@ import com.besome.sketch.editor.property.ViewPropertyItems;
 import com.besome.sketch.lib.ui.CustomHorizontalScrollView;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.color.MaterialColors;
-import pro.sketchware.R;
 
 import java.util.ArrayList;
 
@@ -46,6 +42,7 @@ import a.a.a.jC;
 import a.a.a.mB;
 import a.a.a.wB;
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
 
 public class ViewProperty extends LinearLayout implements Kw {
 
@@ -445,11 +442,11 @@ public class ViewProperty extends LinearLayout implements Kw {
 
         private void configure(int imageResId, int propertyNameResId) {
             propertyMenuItem.setVisibility(VISIBLE);
-            propertyMenuItem.setCardBackgroundColor(MaterialColors.getColor(this, R.attr.colorPrimaryContainer));
+            propertyMenuItem.setCardBackgroundColor(MaterialColors.getColor(this, com.google.android.material.R.attr.colorPrimaryContainer));
             icon.setImageResource(imageResId);
-            icon.setColorFilter(MaterialColors.getColor(this, R.attr.colorOnPrimaryContainer), PorterDuff.Mode.SRC_ATOP);
+            icon.setColorFilter(MaterialColors.getColor(this, com.google.android.material.R.attr.colorOnPrimaryContainer), PorterDuff.Mode.SRC_ATOP);
             title.setText(Helper.getResString(propertyNameResId));
-            title.setTextColor(MaterialColors.getColor(this, R.attr.colorOnPrimaryContainer));
+            title.setTextColor(MaterialColors.getColor(this, com.google.android.material.R.attr.colorOnPrimaryContainer));
             setOnClickListener(this);
         }
 

@@ -1,5 +1,6 @@
 package a.a.a;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.DrawableRes;
 
 import com.google.android.material.button.MaterialButton;
+
 import pro.sketchware.R;
 
 /**
@@ -94,6 +96,7 @@ public class aB extends Dialog {
         this.msgIsSelectable = msgIsSelectable;
     }
 
+    @SuppressLint("PrivateResource")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
