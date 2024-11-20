@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -15,15 +17,17 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.activity.EdgeToEdge;
 
-import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.besome.sketch.lib.base.CollapsibleViewHolder;
 import com.besome.sketch.lib.ui.CollapsibleButton;
+import com.besome.sketch.lib.base.BaseAppCompatActivity;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.card.MaterialCardView;
 import com.google.gson.Gson;
+import pro.sketchware.R;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,14 +39,12 @@ import java.util.stream.Collectors;
 
 import a.a.a.aB;
 import a.a.a.wq;
+import pro.sketchware.utility.SketchwareUtil;
+import pro.sketchware.utility.FileUtil;
 import mod.elfilibustero.sketch.editor.component.CollapsibleCustomComponentLayout;
 import mod.elfilibustero.sketch.lib.ui.SketchFilePickerDialog;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.components.ComponentsHandler;
-import pro.sketchware.R;
-import pro.sketchware.databinding.ManageCustomComponentBinding;
-import pro.sketchware.utility.FileUtil;
-import pro.sketchware.utility.SketchwareUtil;
 
 public class ManageCustomComponentActivity extends BaseAppCompatActivity {
 
@@ -50,36 +52,52 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
 
     private static final String COMPONENT_EXPORT_DIR = wq.getExtraDataExport() + "/components/";
     private static final String COMPONENT_DIR = wq.getCustomComponent();
-    private ManageCustomComponentBinding binding;
+
+    private TextView tv_guide;
+    private RecyclerView componentView;
 
     @Override
     public void onCreate(Bundle _savedInstanceState) {
         EdgeToEdge.enable(this);
         super.onCreate(_savedInstanceState);
-        binding = ManageCustomComponentBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.manage_custom_component);
+        handleInsetts(findViewById(R.id.root));
         init();
     }
 
     private void init() {
-        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-        binding.fab.setOnClickListener(_view ->
-                startActivity(new Intent(getApplicationContext(), AddCustomComponentActivity.class)));
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
 
-        binding.toolbar.setOnMenuItemClickListener(item -> {
-            int itemId = item.getItemId();
-            if (itemId == R.id.import_component_menus) {
-                showFilePickerDialog();
-                return true;
-            }
-            return false;
-        });
+        tv_guide = findViewById(R.id.tv_guide);
+        componentView = findViewById(R.id.list);
+
+        findViewById(R.id.fab).setOnClickListener(_view ->
+                startActivity(new Intent(getApplicationContext(), AddCustomComponentActivity.class)));
     }
 
     @Override
     public void onResume() {
         super.onResume();
         readSettings();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0, 0, 0, "Import");
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == 0) {
+            showFilePickerDialog();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -92,8 +110,8 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
         if (FileUtil.isExistFile(COMPONENT_DIR)) {
             readComponents(COMPONENT_DIR);
         } else {
-            binding.noContentLayout.setVisibility(View.VISIBLE);
-            binding.list.setVisibility(View.GONE);
+            tv_guide.setVisibility(View.VISIBLE);
+            componentView.setVisibility(View.GONE);
         }
     }
 
@@ -101,16 +119,16 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
         componentsList = new Gson().fromJson(FileUtil.readFile(_path), Helper.TYPE_MAP_LIST);
         if (componentsList != null && !componentsList.isEmpty()) {
             ComponentsAdapter adapter = new ComponentsAdapter(componentsList);
-            Parcelable state = binding.list.getLayoutManager().onSaveInstanceState();
-            binding.list.setAdapter(adapter);
-            binding.list.getLayoutManager().onRestoreInstanceState(state);
+            Parcelable state = componentView.getLayoutManager().onSaveInstanceState();
+            componentView.setAdapter(adapter);
+            componentView.getLayoutManager().onRestoreInstanceState(state);
             adapter.notifyDataSetChanged();
-            binding.list.setVisibility(View.VISIBLE);
-            binding.noContentLayout.setVisibility(View.GONE);
+            componentView.setVisibility(View.VISIBLE);
+            tv_guide.setVisibility(View.GONE);
             return;
         }
-        binding.noContentLayout.setVisibility(View.VISIBLE);
-        binding.list.setVisibility(View.GONE);
+        tv_guide.setVisibility(View.VISIBLE);
+        componentView.setVisibility(View.GONE);
     }
 
     private void showFilePickerDialog() {

@@ -113,8 +113,8 @@ public class ManageFontActivity extends BaseAppCompatActivity {
 
         public TabLayoutAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
-            labels[0] = Helper.getResString(R.string.design_manager_tab_title_this_project).toUpperCase();
-            labels[1] = Helper.getResString(R.string.design_manager_tab_title_my_collection).toUpperCase();
+            labels[0] = Helper.getResString(R.string.design_manager_tab_title_this_project);
+            labels[1] = Helper.getResString(R.string.design_manager_tab_title_my_collection);
         }
 
         @Override
