@@ -315,7 +315,7 @@ public class BlocksManager extends BaseAppCompatActivity {
 
     private void showPaletteDialog(boolean isEditing, Integer oldPosition, String oldName, String oldColor, Integer insertAtPosition) {
         aB dialog = new aB(this);
-        dialog.a(R.drawable.icon_style_white_96);
+        dialog.a(R.drawable.ic_mtrl_palette);
         dialog.b(!isEditing ? getString(R.string.create_a_new_palette) : getString(R.string.edit_palette));
 
         DialogPaletteBinding binding = DialogPaletteBinding.inflate(getLayoutInflater());

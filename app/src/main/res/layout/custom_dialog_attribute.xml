@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:hint="res">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_res"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         android:layout_marginTop="16dp"
         android:hint="attr">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_attr"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -39,7 +39,7 @@
         android:layout_marginTop="16dp"
         android:hint="value">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
