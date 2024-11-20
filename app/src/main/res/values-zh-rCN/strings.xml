@@ -3052,5 +3052,16 @@
     <string name="component_name">组件名称</string>
     <string name="optional">自选</string>
     <string name="no_component_available">无可用组件</string>
+    <string name="running_stringfog">加密字符串运行中...</string>
+    <string name="paste">粘贴</string>
+    <string name="switch_language">切换语言</string>
+    <string name="switch_theme">切换主题</string>
+    <string name="currently_not_supported_sorry">抱歉,目前不支持!</string>
+    <string name="you_have_unsaved_changes_are_you_sure_you_want_to_exit">您有未保存的更改.您确定要退出吗?</string>
+    <string name="add_a_new_string">添加新字符串</string>
+    <string name="get_default_strings">获取默认字符串</string>
+    <string name="open_in_editor">在编辑器中打开</string>
+    <string name="create_new_string">创建新字符串</string>
+    <string name="edit_string">编辑字符串</string>
 
 </resources>

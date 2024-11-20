@@ -5,9 +5,10 @@ import com.google.gson.Gson;
 import java.util.HashMap;
 
 import a.a.a.ProjectBuilder;
-import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.util.Helper;
 import mod.jbk.build.BuildProgressReceiver;
+import pro.sketchware.R;
+import pro.sketchware.utility.FileUtil;
 
 public class StringfogHandler {
 
@@ -60,7 +61,7 @@ public class StringfogHandler {
      */
     public void start(BuildProgressReceiver progressReceiver, ProjectBuilder builder) {
         if (isStringfogEnabled()) {
-            progressReceiver.onProgress("Running StringFog...");
+            progressReceiver.onProgress(Helper.getResString(R.string.running_stringfog));
             builder.runStringfog();
         }
     }

@@ -2730,5 +2730,16 @@ Please try again later"</string>
     <string name="component_name">Component name</string>
     <string name="optional">Optional</string>
     <string name="no_component_available">No component available</string>
+    <string name="running_stringfog">Running StringFog...</string>
+    <string name="paste">Paste</string>
+    <string name="switch_language">Switch language</string>
+    <string name="switch_theme">Switch theme</string>
+    <string name="currently_not_supported_sorry">Currently not supported, sorry!</string>
+    <string name="you_have_unsaved_changes_are_you_sure_you_want_to_exit">You have unsaved changes. Are you sure you want to exit?</string>
+    <string name="add_a_new_string">Add a new string</string>
+    <string name="get_default_strings">Get default strings</string>
+    <string name="open_in_editor">Open in editor</string>
+    <string name="create_new_string">Create new string</string>
+    <string name="edit_string">Edit string</string>
 
 </resources>

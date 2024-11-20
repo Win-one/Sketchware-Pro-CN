@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.besome.sketch.editor.LogicEditorActivity;
-import pro.sketchware.R;
 
 import a.a.a.Ss;
 import mod.hey.studios.lib.code_editor.CodeEditorEditText;
@@ -25,6 +24,7 @@ import mod.hey.studios.lib.code_editor.CodeEditorLayout;
 import mod.hey.studios.lib.code_editor.ColorScheme;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.asd.DialogButtonGradientDrawable;
+import pro.sketchware.R;
 
 public class AsdAllEditor extends Dialog {
 
@@ -65,7 +65,7 @@ public class AsdAllEditor extends Dialog {
                         Color.WHITE,
                         Color.WHITE));
         title = findViewById(R.id.text_title);
-        title.setText("Code Editor");
+        title.setText(R.string.code_editor);
         addControl();
         getWindow().setLayout(
                 WindowManager.LayoutParams.MATCH_PARENT,
