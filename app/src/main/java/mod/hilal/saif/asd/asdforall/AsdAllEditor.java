@@ -126,7 +126,7 @@ public class AsdAllEditor extends Dialog {
         if (code_editor.dark_theme) {
             cancel.setBackgroundColor(0xff333333);
         } else {
-            cancel.setBackgroundColor(0xff008dcd);
+            cancel.setBackgroundColor(0xff445e91);
         }
         cancel.setTextSize(15.0f);
         linearLayout.addView(cancel);
@@ -155,7 +155,7 @@ public class AsdAllEditor extends Dialog {
         if (code_editor.dark_theme) {
             save.setBackgroundColor(0xff333333);
         } else {
-            save.setBackgroundColor(0xff008dcd);
+            save.setBackgroundColor(0xff445e91);
         }
         save.setTextSize(15.0f);
         linearLayout.addView(save);
@@ -174,13 +174,13 @@ public class AsdAllEditor extends Dialog {
             save.setBackground(new DialogButtonGradientDrawable()
                     .getIns((int) getDip(4),
                             0,
-                            0xff2196f3,
-                            0xff2196f3));
+                            0xff445e91,
+                            0xff445e91));
             cancel.setBackground(new DialogButtonGradientDrawable()
                     .getIns((int) getDip(4),
                             0,
-                            0xff2196f3,
-                            0xff2196f3));
+                            0xff445e91,
+                            0xff445e91));
         }
         save.setElevation(getDip(1));
         cancel.setElevation(getDip(1));
@@ -206,13 +206,13 @@ public class AsdAllEditor extends Dialog {
                     save.setBackground(new DialogButtonGradientDrawable()
                             .getIns((int) getDip(4),
                                     0,
-                                    0xff2196f3,
-                                    0xff2196f3));
+                                    0xff445e91,
+                                    0xff445e91));
                     cancel.setBackground(new DialogButtonGradientDrawable()
                             .getIns((int) getDip(4),
                                     0,
-                                    0xff2196f3,
-                                    0xff2196f3));
+                                    0xff445e91,
+                                    0xff445e91));
                 }
                 handler.postDelayed(this, 500);
             }

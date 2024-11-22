@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?colorSurface"
@@ -8,7 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="?attr/colorSurface"
+        android:background="?attr/colorPrimaryInverse"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="4dp"
@@ -26,13 +27,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/code_editor"
+                android:textColor="#ffffff"
                 android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UTF-8"
-                android:textColor="?attr/colorOnSurfaceVariant" />
+                android:textColor="#ffffff" />
         </LinearLayout>
 
         <ImageView
@@ -41,7 +43,8 @@
             android:layout_height="38dp"
             android:padding="6dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_mtrl_undo" />
+            android:src="@drawable/ic_mtrl_undo"
+            app:tint="#ffffff" />
 
         <ImageView
             android:id="@+id/menu_view_redo"
@@ -50,7 +53,8 @@
             android:layout_marginLeft="8dp"
             android:padding="6dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_mtrl_redo" />
+            android:src="@drawable/ic_mtrl_redo"
+            app:tint="#ffffff" />
 
         <ImageView
             android:id="@+id/save"
@@ -59,7 +63,8 @@
             android:layout_marginLeft="8dp"
             android:padding="6dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_mtrl_save" />
+            android:src="@drawable/ic_mtrl_save"
+            app:tint="#ffffff" />
 
         <ImageView
             android:id="@+id/more"
@@ -68,7 +73,8 @@
             android:layout_marginLeft="8dp"
             android:padding="6dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_mtrl_more_vertical" />
+            android:src="@drawable/ic_mtrl_more_vertical"
+            app:tint="#ffffff" />
     </LinearLayout>
 
     <io.github.rosemoe.sora.widget.CodeEditor

@@ -2743,5 +2743,15 @@ Please try again later"</string>
     <string name="open_in_editor">Open in editor</string>
     <string name="create_new_string">Create new string</string>
     <string name="edit_string">Edit string</string>
+    <string name="complete_brackets">Complete brackets</string>
+    <string name="dark_theme">Dark theme</string>
+    <string name="exit_confirmation">Exit confirmation</string>
+    <string name="error_your_code_contains_incorrectly_nested_parentheses">Error: Your code contains incorrectly nested parentheses</string>
+    <string name="edit_value">Edit Value</string>
+    <string name="attributes_for_all_activities">Attributes for all activities</string>
+    <string name="application_attributes">Application Attributes</string>
+    <string name="application_permissions">Application Permissions</string>
+    <string name="delete_this_attribute">Delete this attribute?</string>
+    <string name="add_new_permission">Add new permission</string>
 
 </resources>

@@ -11,8 +11,6 @@ import android.os.Bundle;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -74,12 +72,6 @@ public class SrcCodeEditor extends AppCompatActivity {
     private String beforeContent;
 
     public static int languageId;
-
-    private ImageView save;
-    private ImageView more;
-    private TextView file_title;
-    private ImageView menu_view_undo;
-    private ImageView menu_view_redo;
     private CodeEditor editor;
     private MaterialToolbar toolbar;
 

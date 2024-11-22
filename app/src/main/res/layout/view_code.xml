@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:background="?attr/colorPrimaryInverse"
         android:paddingLeft="8dp"
         android:paddingTop="8dp"
         android:paddingRight="4dp"
@@ -21,6 +22,7 @@
             android:padding="4dp"
             android:textSize="15sp"
             android:textStyle="bold"
+            android:textColor="#ffffff"
             tools:text="TestClass.java" />
 
         <View
@@ -36,6 +38,7 @@
             android:padding="4dp"
             android:text="+"
             android:textSize="18sp"
+            android:textColor="#ffffff"
             android:textStyle="bold" />
 
         <TextView
@@ -46,6 +49,7 @@
             android:padding="4dp"
             android:text="-"
             android:textSize="18sp"
+            android:textColor="#ffffff"
             android:textStyle="bold" />
 
         <ImageView
@@ -54,7 +58,7 @@
             android:layout_height="40dp"
             android:padding="10dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_mtrl_more_vertical" />
+            android:src="@drawable/ic_more_vert_white_24dp" />
     </LinearLayout>
 
     <mod.hey.studios.lib.code_editor.CodeEditorLayout

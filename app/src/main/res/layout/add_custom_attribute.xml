@@ -28,18 +28,13 @@
 
             <TextView
                 android:id="@+id/tx_toolbar_title"
+                style="@style/TextAppearance.Material3.TitleLarge"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:gravity="center|start"
-                android:paddingStart="10dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="8dp"
-                android:paddingBottom="6dp"
-                android:text="Title"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:text="Title"/>
 
             <ImageView
                 android:id="@+id/ig_toolbar_load_file"

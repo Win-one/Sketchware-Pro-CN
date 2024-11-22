@@ -3063,5 +3063,15 @@
     <string name="open_in_editor">在编辑器中打开</string>
     <string name="create_new_string">创建新字符串</string>
     <string name="edit_string">编辑字符串</string>
+    <string name="complete_brackets">完整括号</string>
+    <string name="dark_theme">深色主题</string>
+    <string name="exit_confirmation">退出确认</string>
+    <string name="error_your_code_contains_incorrectly_nested_parentheses">错误:您的代码包含嵌套不正确的括号</string>
+    <string name="edit_value">编辑值</string>
+    <string name="attributes_for_all_activities">所有活动的属性</string>
+    <string name="application_attributes">应用程序属性</string>
+    <string name="application_permissions">应用程序权限</string>
+    <string name="delete_this_attribute">删除此属性?</string>
+    <string name="add_new_permission">添加新权限</string>
 
 </resources>
