@@ -16,6 +16,7 @@ public class aB extends AlertDialog {
     public String dialogTitleText = "";
     public String dialogMessageText = "";
     public boolean msgIsSelectable = false;
+    public boolean canDismissDialogOnDefaultBtnClicked = true;
     public View dialogCustomView;
     public String dialogDefaultText = "Default";
     public View.OnClickListener dialogDefaultListener = null;
@@ -81,6 +82,10 @@ public class aB extends AlertDialog {
         dialogDefaultListener = defaultListener;
     }
 
+    public void setDismissOnDefaultButtonClick(boolean dismissOnDefaultClick) {
+        canDismissDialogOnDefaultBtnClicked = dismissOnDefaultClick;
+    }
+
     public void setMessageIsSelectable(boolean msgIsSelectable) {
         this.msgIsSelectable = msgIsSelectable;
     }
@@ -132,7 +137,9 @@ public class aB extends AlertDialog {
             Button neutralButton = dialog.getButton(AlertDialog.BUTTON_NEUTRAL);
             neutralButton.setOnClickListener(v -> {
                 dialogDefaultListener.onClick(v);
-                dialog.dismiss();
+                if (canDismissDialogOnDefaultBtnClicked) {
+                    dialog.dismiss();
+                }
             });
         }
 

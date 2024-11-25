@@ -3,6 +3,7 @@ package com.besome.sketch.editor.property;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -134,12 +135,17 @@ public class PropertyIndentItem extends RelativeLayout implements View.OnClickLi
     }
 
     private void showDialog() {
+        String propertyType = tvName.getText().toString();
+
         aB dialog = new aB((Activity) getContext());
-        dialog.b(tvName.getText().toString());
+        dialog.b(propertyType);
         dialog.a(icon);
 
         PropertyPopupInputIndentBinding binding = PropertyPopupInputIndentBinding.inflate(LayoutInflater.from(getContext()));
         View view = binding.getRoot();
+
+        binding.tiAll.setHint(String.format(Helper.getResString(R.string.property_enter_value), propertyType.toLowerCase()));
+        binding.chkPtyAll.setText(String.format("%s on all sides", propertyType));
 
         TB ti_all = new TB(context, binding.tiAll, 0, 999);
         TB ti_left = new TB(context, binding.tiLeft, 0, 999);
@@ -193,7 +199,21 @@ public class PropertyIndentItem extends RelativeLayout implements View.OnClickLi
                 ti_bottom.a(binding.etAll.getText().toString());
             }
         });
-
+        
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            binding.tvDpAll.setVisibility(View.GONE);
+            binding.tvDpBottom.setVisibility(View.GONE);
+            binding.tvDpLeft.setVisibility(View.GONE);
+            binding.tvDpRight.setVisibility(View.GONE);
+            binding.tvDpTop.setVisibility(View.GONE);
+            
+            binding.tiAll.setSuffixText("dp");
+            binding.tiBottom.setSuffixText("dp");
+            binding.tiLeft.setSuffixText("dp");
+            binding.tiRight.setSuffixText("dp");
+            binding.tiTop.setSuffixText("dp");
+        }
+        
         dialog.a(view);
         dialog.b(Helper.getResString(R.string.common_word_save), v -> {
             if (binding.chkPtyAll.isChecked()) {
@@ -223,5 +243,4 @@ public class PropertyIndentItem extends RelativeLayout implements View.OnClickLi
         dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
         dialog.show();
     }
-
 }

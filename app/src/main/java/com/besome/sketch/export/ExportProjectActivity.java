@@ -193,7 +193,16 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
             builder.buildBuiltInLibraryInformation();
             project_metadata.b(hCVar, eCVar, iCVar, builder.getBuiltInLibraryManager());
             if (yB.a(lC.b(sc_id), "custom_icon")) {
-                project_metadata.a(wq.e() + File.separator + sc_id + File.separator + "icon.png");
+                project_metadata.aa(wq.e() + File.separator + sc_id + File.separator + "mipmaps");
+                if (yB.a(lC.b(sc_id), "isIconAdaptive", false)) {
+                    project_metadata.cf("""
+                            <?xml version="1.0" encoding="utf-8"?>
+                            <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android" >
+                            <background android:drawable="@mipmap/ic_launcher_background"/>
+                            <foreground android:drawable="@mipmap/ic_launcher_foreground"/>
+                            <monochrome android:drawable="@mipmap/ic_launcher_monochrome"/>
+                            </adaptive-icon>""");
+                }
             }
             project_metadata.a();
             kCVar.b(project_metadata.resDirectoryPath + File.separator + "drawable-xhdpi");
@@ -337,7 +346,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
             confirmationDialog.a("""
                     To sign an APK, you need a keystore. Use your already created one, and copy it to \
                     /Internal storage/sketchware/keystore/release_key.jks and enter the alias's password.
-
+                    
                     Note that this only signs your APK using signing scheme V1, to target Android 11+ for example, \
                     use a 3rd-party tool (for now).""");
             confirmationDialog.a(R.drawable.ic_mtrl_info);
@@ -507,7 +516,16 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
                     return;
                 }
                 if (yB.a(lC.b(sc_id), "custom_icon")) {
-                    project_metadata.a(wq.e() + File.separator + sc_id + File.separator + "icon.png");
+                    project_metadata.aa(wq.e() + File.separator + sc_id + File.separator + "mipmaps");
+                    if (yB.a(lC.b(sc_id), "isIconAdaptive", false)) {
+                        project_metadata.cf("""
+                                <?xml version="1.0" encoding="utf-8"?>
+                                <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android" >
+                                <background android:drawable="@mipmap/ic_launcher_background"/>
+                                <foreground android:drawable="@mipmap/ic_launcher_foreground"/>
+                                <monochrome android:drawable="@mipmap/ic_launcher_monochrome"/>
+                                </adaptive-icon>""");
+                    }
                 }
                 project_metadata.a();
                 kCVar.b(project_metadata.resDirectoryPath + File.separator + "drawable-xhdpi");

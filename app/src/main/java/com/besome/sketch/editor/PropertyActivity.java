@@ -30,7 +30,6 @@ import com.besome.sketch.editor.manage.image.ManageImageActivity;
 import com.besome.sketch.editor.property.ViewPropertyItems;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.besome.sketch.lib.ui.CustomScrollView;
-import pro.sketchware.R;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -41,7 +40,9 @@ import a.a.a.jC;
 import a.a.a.mB;
 import a.a.a.ro;
 import a.a.a.tx;
+import mod.hey.studios.project.ProjectSettings;
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
 
 public class PropertyActivity extends BaseAppCompatActivity implements Kw {
 
@@ -162,11 +163,11 @@ public class PropertyActivity extends BaseAppCompatActivity implements Kw {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.property);
-
-	content = findViewById(R.id.content);
-	layoutAds = findViewById(R.id.layout_ads);
-	scrollView = findViewById(R.id.scroll_view);
-	propertyGroupList = findViewById(R.id.property_group_list);
+        
+        content = findViewById(R.id.content);
+        layoutAds = findViewById(R.id.layout_ads);
+        scrollView = findViewById(R.id.scroll_view);
+        propertyGroupList = findViewById(R.id.property_group_list);
 
         if (!j()) {
             finish();
@@ -180,7 +181,7 @@ public class PropertyActivity extends BaseAppCompatActivity implements Kw {
         getSupportActionBar().setTitle(Helper.getResString(R.string.edit_view_properties_title));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         propertyGroups.add(1);
         propertyGroups.add(2);
@@ -230,6 +231,7 @@ public class PropertyActivity extends BaseAppCompatActivity implements Kw {
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         propertyItems = new ViewPropertyItems(this);
+        propertyItems.setProjectSettings(new ProjectSettings(sc_id));
         propertyItems.setOrientation(LinearLayout.VERTICAL);
         l();
     }

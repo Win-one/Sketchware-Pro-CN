@@ -23,10 +23,9 @@ import mod.agus.jcoderz.beans.ViewBeans;
 import mod.elfilibustero.sketch.lib.utils.CustomVariableUtil;
 import mod.hey.studios.editor.view.IdGenerator;
 import mod.hey.studios.moreblock.ReturnMoreblockManager;
-import mod.hey.studios.util.Helper;
 import mod.hilal.saif.activities.tools.ConfigActivity;
 import mod.hilal.saif.blocks.BlocksHandler;
-import pro.sketchware.R;
+import mod.pranav.viewbinding.ViewBindingBuilder;
 import pro.sketchware.blocks.ExtraBlocks;
 import pro.sketchware.control.logic.LogicClickListener;
 import pro.sketchware.utility.FileResConfig;
@@ -46,8 +45,9 @@ public class ExtraPaletteBlock {
     private final HashMap<String, Object> mapSave = new HashMap<>();
     private final ProjectFileBean projectFile;
     public LogicEditorActivity logicEditor;
+    private final Boolean isViewBindingEnabled;
 
-    public ExtraPaletteBlock(LogicEditorActivity logicEditorActivity) {
+    public ExtraPaletteBlock(LogicEditorActivity logicEditorActivity, Boolean isViewBindingEnabled) {
         logicEditor = logicEditorActivity;
         eventName = logicEditorActivity.D;
 
@@ -55,6 +55,7 @@ public class ExtraPaletteBlock {
         javaName = projectFile.getJavaName();
         xmlName = projectFile.getXmlName();
         sc_id = logicEditor.B;
+        this.isViewBindingEnabled = isViewBindingEnabled;
 
         frc = new FileResConfig(sc_id);
         extraBlocks = new ExtraBlocks(logicEditor);
@@ -267,7 +268,7 @@ public class ExtraPaletteBlock {
 
                     if (!customView.convert.equals("include")) {
                         String typeName = customView.convert.isEmpty() ? ViewBean.getViewTypeName(customView.type) : IdGenerator.getLastPath(customView.convert);
-                        logicEditor.a(customView.id, "v", typeName, "getVar").setTag(customView.id);
+                        logicEditor.a(customView.id, "v", typeName, "getVar").setTag(isViewBindingEnabled ? "binding." + ViewBindingBuilder.generateId(customView.id) : customView.id);
                     }
                 }
             }
@@ -290,7 +291,7 @@ public class ExtraPaletteBlock {
             if (!view.convert.equals("include")) {
                 if (!toNotAdd.contains("android:id")) {
                     String typeName = view.convert.isEmpty() ? ViewBean.getViewTypeName(view.type) : IdGenerator.getLastPath(view.convert);
-                    logicEditor.a(view.id, "v", typeName, "getVar").setTag(view.id);
+                    logicEditor.a(isViewBindingEnabled ? "binding." + ViewBindingBuilder.generateId(view.id) : view.id, "v", typeName, "getVar").setTag(isViewBindingEnabled ? "binding." + ViewBindingBuilder.generateId(view.id) : view.id);
                 }
             }
         }
@@ -310,7 +311,7 @@ public class ExtraPaletteBlock {
                     if (!drawerView.convert.equals("include")) {
                         String id = "_drawer_" + drawerView.id;
                         String typeName = drawerView.convert.isEmpty() ? ViewBean.getViewTypeName(drawerView.type) : IdGenerator.getLastPath(drawerView.convert);
-                        logicEditor.a(id, "v", typeName, "getVar").setTag(id);
+                        logicEditor.a(isViewBindingEnabled ? "binding.drawer." + ViewBindingBuilder.generateId(id) : id, "v", typeName, "getVar").setTag(id);
                     }
                 }
             }
@@ -417,16 +418,16 @@ public class ExtraPaletteBlock {
                 }
                 return;
             case 0:
-                logicEditor.b(Helper.getResString(R.string.add_variable), "variableAdd");
-                logicEditor.b(Helper.getResString(R.string.add_custom_variable), "variableAddNew", clickListener);
-                logicEditor.b(Helper.getResString(R.string.remove_variable), "variableRemove", clickListener);
+                logicEditor.b("Add variable", "variableAdd");
+                logicEditor.b("Add custom variable", "variableAddNew", clickListener);
+                logicEditor.b("Remove variable", "variableRemove", clickListener);
                 variables();
                 return;
 
             case 1:
-                logicEditor.b(Helper.getResString(R.string.add_list), "listAdd");
-                logicEditor.b(Helper.getResString(R.string.add_custom_list), "listAddCustom", clickListener);
-                logicEditor.b(Helper.getResString(R.string.remove_list), "listRemove", clickListener);
+                logicEditor.b("Add list", "listAdd");
+                logicEditor.b("Add custom List", "listAddCustom", clickListener);
+                logicEditor.b("Remove list", "listRemove", clickListener);
                 list();
                 return;
 
@@ -939,7 +940,7 @@ public class ExtraPaletteBlock {
             return;
 
             case 7:
-                logicEditor.b(Helper.getResString(R.string.add_component), "componentAdd");
+                logicEditor.b("Add component", "componentAdd");
                 logicEditor.a(" ", "changeStatebarColour");
                 logicEditor.a(" ", "LightStatusBar");
                 logicEditor.a(" ", "showKeyboard");
@@ -1177,8 +1178,8 @@ public class ExtraPaletteBlock {
                 return;
 
             case 8:
-                logicEditor.b(Helper.getResString(R.string.common_word_create), "blockAdd");
-                logicEditor.b(Helper.getResString(R.string.import_from_collection), "blockImport");
+                logicEditor.b("Create", "blockAdd");
+                logicEditor.b("Import From Collection", "blockImport");
                 if (ConfigActivity.isSettingEnabled(ConfigActivity.SETTING_SHOW_BUILT_IN_BLOCKS)) {
                     logicEditor.a(" ", "customToast");
                     logicEditor.a(" ", "customToastWithIcon");

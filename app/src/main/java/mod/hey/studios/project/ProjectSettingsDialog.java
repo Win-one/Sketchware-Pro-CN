@@ -32,11 +32,14 @@ public class ProjectSettingsDialog {
         binding.etTargetSdkVersion.setText(settings.getValue(ProjectSettings.SETTING_TARGET_SDK_VERSION, String.valueOf(VAR_DEFAULT_TARGET_SDK_VERSION)));
         binding.etApplicationClassName.setText(settings.getValue(ProjectSettings.SETTING_APPLICATION_CLASS, ".SketchApplication"));
 
+        binding.enableViewbinding.setChecked(
+                settings.getValue(ProjectSettings.SETTING_ENABLE_VIEWBINDING, "false").equals("true"));
         binding.cbRemoveOldMethods.setChecked(
                 settings.getValue(ProjectSettings.SETTING_DISABLE_OLD_METHODS, "false").equals("true"));
         binding.cbUseNewMaterialComponentsAppTheme.setChecked(
                 settings.getValue(ProjectSettings.SETTING_ENABLE_BRIDGELESS_THEMES, "false").equals("true"));
 
+        binding.enableViewbinding.setTag(ProjectSettings.SETTING_ENABLE_VIEWBINDING);
         binding.etMinimumSdkVersion.setTag(ProjectSettings.SETTING_MINIMUM_SDK_VERSION);
         binding.etTargetSdkVersion.setTag(ProjectSettings.SETTING_TARGET_SDK_VERSION);
         binding.etApplicationClassName.setTag(ProjectSettings.SETTING_APPLICATION_CLASS);
@@ -49,6 +52,7 @@ public class ProjectSettingsDialog {
                 binding.etMinimumSdkVersion,
                 binding.etTargetSdkVersion,
                 binding.etApplicationClassName,
+                binding.enableViewbinding,
                 binding.cbRemoveOldMethods,
                 binding.cbUseNewMaterialComponentsAppTheme
         };

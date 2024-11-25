@@ -6,11 +6,11 @@ import android.view.View;
 
 import com.besome.sketch.beans.ProjectLibraryBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ManageLibraryManageCompatBinding;
 
 import a.a.a.aB;
 import mod.hey.studios.util.Helper;
-import pro.sketchware.R;
-import pro.sketchware.databinding.ManageLibraryManageCompatBinding;
 
 public class ManageCompatActivity extends BaseAppCompatActivity implements View.OnClickListener {
 
@@ -79,7 +79,6 @@ public class ManageCompatActivity extends BaseAppCompatActivity implements View.
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle(Helper.getResString(R.string.design_library_title_appcompat_and_design));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));

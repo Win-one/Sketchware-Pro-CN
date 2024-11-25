@@ -1,6 +1,7 @@
 package pro.sketchware.activities.coloreditor;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Xml;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -42,20 +44,115 @@ import pro.sketchware.utility.XmlUtil;
 
 public class ColorEditorActivity extends AppCompatActivity {
 
+    private static final int MENU_SAVE = 0;
+    private static final int MENU_OPEN_IN_EDITOR = 1;
+    private static String contentPath;
     private final ArrayList<ColorItem> colorList = new ArrayList<>();
     private boolean isGoingToEditor;
     private ColorEditorActivityBinding binding;
     private ColorsAdapter adapter;
     private Activity activity;
-
     private Zx colorpicker;
-
-    private String contentPath;
     private String title;
     private String xmlPath;
 
-    private static final int MENU_SAVE = 0;
-    private static final int MENU_OPEN_IN_EDITOR = 1;
+    public static String getColorValue(Context context, String colorValue, int referencingLimit) {
+        if (colorValue == null || referencingLimit <= 0) {
+            return null;
+        }
+
+        if (colorValue.startsWith("#")) {
+            return colorValue;
+        }
+
+        if (colorValue.startsWith("@color/")) {
+            return getColorValueFromXml(context, colorValue.substring(7), referencingLimit - 1);
+
+        } else if (colorValue.startsWith("@android:color/")) {
+            return getColorValueFromSystem(colorValue, context);
+        }
+        return "#ffffff";
+    }
+
+    public static String getColorValueFromSystem(String colorValue, Context context) {
+        String colorName = colorValue.substring(15);
+        int colorId = context.getResources().getIdentifier(colorName, "color", "android");
+        try {
+            int colorInt = ContextCompat.getColor(context, colorId);
+            return String.format("#%06X", (0xFFFFFF & colorInt));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "#ffffff";
+        }
+    }
+
+    private static String getColorValueFromXml(Context context, String colorName, int referencingLimit) {
+        try {
+            String clrXml = FileUtil.readFileIfExist(contentPath);
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            XmlPullParser parser = factory.newPullParser();
+            parser.setInput(new StringReader(clrXml));
+            int eventType = parser.getEventType();
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                if (eventType == XmlPullParser.START_TAG && "color".equals(parser.getName())) {
+                    String nameAttribute = parser.getAttributeValue(null, "name");
+                    if (colorName.equals(nameAttribute)) {
+                        String colorValue = parser.nextText().trim();
+                        if (colorValue.startsWith("@")) {
+                            return getColorValue(context, colorValue, referencingLimit - 1);
+                        } else {
+                            return colorValue;
+                        }
+                    }
+                }
+                eventType = parser.next();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String convertListToXml(ArrayList<ColorItem> colorList) {
+        try {
+            XmlSerializer xmlSerializer = Xml.newSerializer();
+            StringWriter stringWriter = new StringWriter();
+
+            xmlSerializer.setOutput(stringWriter);
+            xmlSerializer.startDocument("UTF-8", true);
+            xmlSerializer.text("\n");
+            xmlSerializer.startTag(null, "resources");
+            xmlSerializer.text("\n");
+
+            for (ColorItem colorItem : colorList) {
+                xmlSerializer.startTag(null, "color");
+                xmlSerializer.attribute(null, "name", colorItem.getColorName());
+                xmlSerializer.text(colorItem.getColorValue());
+                xmlSerializer.endTag(null, "color");
+                xmlSerializer.text("\n");
+            }
+
+            xmlSerializer.endTag(null, "resources");
+            xmlSerializer.text("\n");
+            xmlSerializer.endDocument();
+
+            return stringWriter.toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static boolean isValidHexColor(String colorStr) {
+        if (colorStr == null) {
+            return false;
+        }
+        Pattern pattern = Pattern.compile("^#([a-fA-F0-9]{1,8})");
+        Matcher matcher = pattern.matcher(colorStr);
+        return matcher.matches();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,7 +280,7 @@ public class ColorEditorActivity extends AppCompatActivity {
                         break;
                     case XmlPullParser.END_TAG:
                         if ("color".equals(tagName)) {
-                            if (colorName != null && isValidHexColor(colorValue)) {
+                            if ((colorName != null) && isValidHexColor(getColorValue(getApplicationContext(), colorValue, 4))) {
                                 colorList.add(new ColorItem(colorName, colorValue));
                             }
                         }
@@ -194,46 +291,6 @@ public class ColorEditorActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static String convertListToXml(ArrayList<ColorItem> colorList) {
-        try {
-            XmlSerializer xmlSerializer = Xml.newSerializer();
-            StringWriter stringWriter = new StringWriter();
-
-            xmlSerializer.setOutput(stringWriter);
-            xmlSerializer.startDocument("UTF-8", true);
-            xmlSerializer.text("\n");
-            xmlSerializer.startTag(null, "resources");
-            xmlSerializer.text("\n");
-
-            for (ColorItem colorItem : colorList) {
-                xmlSerializer.startTag(null, "color");
-                xmlSerializer.attribute(null, "name", colorItem.getColorName());
-                xmlSerializer.text(colorItem.getColorValue());
-                xmlSerializer.endTag(null, "color");
-                xmlSerializer.text("\n");
-            }
-
-            xmlSerializer.endTag(null, "resources");
-            xmlSerializer.text("\n");
-            xmlSerializer.endDocument();
-
-            return stringWriter.toString();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static boolean isValidHexColor(String colorStr) {
-        if (colorStr == null) {
-            return false;
-        }
-        Pattern pattern = Pattern.compile("^#([a-fA-F0-9]{1,8})");
-        Matcher matcher = pattern.matcher(colorStr);
-        return matcher.matches();
     }
 
     public void showDeleteDialog(int position) {
@@ -257,29 +314,52 @@ public class ColorEditorActivity extends AppCompatActivity {
 
         if (colorItem != null) {
             dialogBinding.colorKeyInput.setText(colorItem.getColorName());
-            dialogBinding.colorValueInput.setText(colorItem.getColorValue().replace("#", ""));
-            dialogBinding.colorPreview.setBackgroundColor(PropertiesUtil.parseColor(colorItem.getColorValue()));
-            dialog.b(getString(R.string.edit_color));
+            dialogBinding.colorPreview.setBackgroundColor(PropertiesUtil.parseColor(getColorValue(activity.getApplicationContext(), colorItem.getColorValue(), 3)));
+
+            if (colorItem.getColorValue().startsWith("@")) {
+                dialogBinding.colorValueInput.setText(colorItem.getColorValue().replace("@", ""));
+                dialogBinding.hash.setText("@");
+                dialogBinding.colorValueInput.setEnabled(false);
+                dialogBinding.hash.setEnabled(false);
+                dialogBinding.colorValueInputLayout.setError(null);
+            } else {
+                dialogBinding.colorValueInput.setText(colorItem.getColorValue().replace("#", ""));
+                dialogBinding.hash.setText("#");
+
+            }
+
+            dialog.b("Edit color");
+
         } else {
-            dialog.b(getString(R.string.add_new_color));
+            dialog.b("Add new color");
             dialogBinding.colorPreview.setBackgroundColor(0xFFFFFF);
         }
 
-        dialog.b(getString(R.string.common_word_save), v1 -> {
+        dialog.b("Save", v1 -> {
             String key = Objects.requireNonNull(dialogBinding.colorKeyInput.getText()).toString();
             String value = Objects.requireNonNull(dialogBinding.colorValueInput.getText()).toString();
 
             if (key.isEmpty() || value.isEmpty()) {
-                SketchwareUtil.toast(getString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT);
+                SketchwareUtil.toast("Please fill in all fields", Toast.LENGTH_SHORT);
                 return;
             }
-            if (value.length() != 6 && value.length() != 8) {
-                SketchwareUtil.toast(getString(R.string.please_enter_a_valid_hex_color), Toast.LENGTH_SHORT);
+
+            if (value.startsWith("#")) {
+                if (!isValidHexColor(value)) {
+                    SketchwareUtil.toast("Please enter a valid HEX color", Toast.LENGTH_SHORT);
+                }
                 return;
             }
+
             if (colorItem != null) {
                 colorItem.setColorName(key);
-                colorItem.setColorValue("#" + value);
+
+                if (dialogBinding.hash.equals("@")) {
+                    colorItem.setColorValue("@" + value);
+                } else {
+                    colorItem.setColorValue("#" + value);
+                }
+
                 adapter.notifyItemChanged(position);
             } else {
                 addColor(key, value);
@@ -294,6 +374,9 @@ public class ColorEditorActivity extends AppCompatActivity {
                     String selectedColorHex = "#" + String.format("%06X", colorInt & 0x00FFFFFF);
                     dialogBinding.colorPreviewCard.setCardBackgroundColor(PropertiesUtil.parseColor(selectedColorHex));
                     dialogBinding.colorValueInput.setText(selectedColorHex.replace("#", ""));
+                    dialogBinding.colorValueInput.setEnabled(true);
+                    dialogBinding.hash.setEnabled(true);
+                    dialogBinding.hash.setText("#");
                 }
 
                 @Override
@@ -304,7 +387,7 @@ public class ColorEditorActivity extends AppCompatActivity {
         });
 
         if (colorItem != null) {
-            dialog.configureDefaultButton(getString(R.string.common_word_delete), v1 -> {
+            dialog.configureDefaultButton("Delete", v1 -> {
                 colorList.remove(position);
                 adapter.notifyItemRemoved(position);
                 dialog.dismiss();

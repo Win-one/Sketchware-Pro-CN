@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/common_word_project_information_version_name"
                 android:imeOptions="actionNext"
-                android:inputType="numberDecimal"
+                android:digits="0123456789."
                 android:textSize="13sp" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>

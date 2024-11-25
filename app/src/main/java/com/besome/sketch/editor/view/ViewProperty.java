@@ -41,6 +41,7 @@ import a.a.a.bB;
 import a.a.a.jC;
 import a.a.a.mB;
 import a.a.a.wB;
+import mod.hey.studios.project.ProjectSettings;
 import mod.hey.studios.util.Helper;
 import pro.sketchware.R;
 
@@ -282,6 +283,7 @@ public class ViewProperty extends LinearLayout implements Kw {
     public void a(String sc_id, ProjectFileBean projectFileBean) {
         this.sc_id = sc_id;
         projectFile = projectFileBean;
+        viewPropertyItems.setProjectSettings(new ProjectSettings(sc_id));
     }
 
     public void a(String str) {

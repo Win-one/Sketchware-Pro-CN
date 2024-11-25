@@ -19,13 +19,12 @@ import com.besome.sketch.beans.LayoutBean;
 import com.besome.sketch.beans.ProjectFileBean;
 import com.besome.sketch.beans.ViewBean;
 import com.besome.sketch.editor.manage.image.ManageImageActivity;
-import pro.sketchware.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map.Entry;
 import java.util.List;
+import java.util.Map.Entry;
 
 import a.a.a.Cx;
 import a.a.a.Gx;
@@ -39,6 +38,9 @@ import a.a.a.mB;
 import a.a.a.oq;
 import a.a.a.tx;
 import a.a.a.xB;
+import mod.hey.studios.project.ProjectSettings;
+import mod.pranav.viewbinding.ViewBindingBuilder;
+import pro.sketchware.R;
 
 public class ViewPropertyItems extends LinearLayout implements Kw, View.OnClickListener {
     private String sc_id;
@@ -47,6 +49,7 @@ public class ViewPropertyItems extends LinearLayout implements Kw, View.OnClickL
     private Lw d;
     private ProjectFileBean e;
     private final HashMap<String, View> f = new HashMap<>();
+    private ProjectSettings settings;
 
     public ViewPropertyItems(Context var1) {
         super(var1);
@@ -189,7 +192,7 @@ public class ViewPropertyItems extends LinearLayout implements Kw, View.OnClickL
             colorItem.setOnPropertyValueChangeListener(this);
             f.put(name, colorItem);
         } else {
-            colorItem.setValue(value2,value);;
+            colorItem.setValue(value2,value);
         }
         addView(colorItem);
     }
@@ -825,13 +828,14 @@ public class ViewPropertyItems extends LinearLayout implements Kw, View.OnClickL
         }
 
         if (!bean.id.equals(bean.preId)) {
+            boolean viewBinding = settings.getValue(ProjectSettings.SETTING_ENABLE_VIEWBINDING,  "false").equals("true");
             for (ViewBean viewBean : jC.a(sc_id).d(e.getXmlName())) {
                 if (viewBean.parent.equals(bean.preId)) {
                     viewBean.parent = bean.id;
                 }
             }
 
-            if (e.fileType == 0) {
+            if (e.fileType == ProjectFileBean.PROJECT_FILE_TYPE_ACTIVITY) {
                 for (EventBean eventBean : jC.a(sc_id).g(e.getJavaName())) {
                     if (eventBean.targetId.equals(bean.preId)) {
                         eventBean.targetId = bean.id;
@@ -884,14 +888,15 @@ public class ViewPropertyItems extends LinearLayout implements Kw, View.OnClickL
                     if (blockBeans != null) {
                         for (BlockBean blockBean : blockBeans) {
                             Gx classInfo = blockBean.getClassInfo();
-                            if (classInfo != null && classInfo.d() && blockBean.spec.equals(bean.preId)) {
-                                blockBean.spec = bean.id;
+
+                            if (classInfo != null && classInfo.d() && blockBean.spec.equals(viewBinding ? "binding." + ViewBindingBuilder.generateId(bean.preId) : bean.preId)) {
+                                blockBean.spec = viewBinding ? "binding." + ViewBindingBuilder.generateId(bean.id) : bean.id;
                             } else {
                                 ArrayList<Gx> paramClassInfo = blockBean.getParamClassInfo();
                                 if (paramClassInfo != null && !paramClassInfo.isEmpty()) {
                                     for (int i = 0; i < paramClassInfo.size(); ++i) {
-                                        if (paramClassInfo.get(i).d() && blockBean.parameters.get(i).equals(bean.preId)) {
-                                            blockBean.parameters.set(i, bean.id);
+                                        if (paramClassInfo.get(i).d() && blockBean.parameters.get(i).equals(viewBinding ? "binding." + ViewBindingBuilder.generateId(bean.preId) : bean.preId)) {
+                                            blockBean.parameters.set(i, viewBinding ? "binding." + ViewBindingBuilder.generateId(bean.id) : bean.id);
                                         }
                                     }
                                 }
@@ -919,14 +924,15 @@ public class ViewPropertyItems extends LinearLayout implements Kw, View.OnClickL
                     if (blockBeans != null) {
                         for (BlockBean blockBean : blockBeans) {
                             Gx classInfo = blockBean.getClassInfo();
-                            if (classInfo != null && classInfo.d() && blockBean.spec.equals(bean.preId)) {
-                                blockBean.spec = bean.id;
+
+                            if (classInfo != null && classInfo.d() && blockBean.spec.equals(viewBinding ? "binding." + ViewBindingBuilder.generateId(bean.preId) : bean.preId)) {
+                                blockBean.spec = viewBinding ? "binding." + ViewBindingBuilder.generateId(bean.id) : bean.id;
                             } else {
                                 ArrayList<Gx> paramClassInfo = blockBean.getParamClassInfo();
                                 if (paramClassInfo != null && !paramClassInfo.isEmpty()) {
                                     for (int i = 0; i < paramClassInfo.size(); ++i) {
-                                        if (paramClassInfo.get(i).d() && blockBean.parameters.get(i).equals(bean.preId)) {
-                                            blockBean.parameters.set(i, bean.id);
+                                        if (paramClassInfo.get(i).d() && blockBean.parameters.get(i).equals(viewBinding ? "binding." + ViewBindingBuilder.generateId(bean.preId) : bean.preId)) {
+                                            blockBean.parameters.set(i, viewBinding ? "binding." + ViewBindingBuilder.generateId(bean.id) : bean.id);
                                         }
                                     }
                                 }
@@ -976,6 +982,11 @@ public class ViewPropertyItems extends LinearLayout implements Kw, View.OnClickL
                 }
             }
         }
+    }
+
+
+    public void setProjectSettings(ProjectSettings settings) {
+        this.settings = settings;
     }
 
     public void setOnPropertyValueChangedListener(Lw listener) {
