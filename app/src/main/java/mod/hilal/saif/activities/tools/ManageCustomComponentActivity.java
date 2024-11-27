@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.activity.EdgeToEdge;
 
@@ -30,6 +31,7 @@ import com.github.angads25.filepicker.view.FilePickerDialog;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.card.MaterialCardView;
 import com.google.gson.Gson;
+
 import pro.sketchware.R;
 
 import java.io.File;
@@ -56,7 +58,7 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
     private static final String COMPONENT_EXPORT_DIR = wq.getExtraDataExport() + "/components/";
     private static final String COMPONENT_DIR = wq.getCustomComponent();
 
-    private TextView tv_guide;
+    private LinearLayout noContentLayout;
     private RecyclerView componentView;
 
     @Override
@@ -70,12 +72,16 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
 
     private void init() {
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
         toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-
-        tv_guide = findViewById(R.id.tv_guide);
+        toolbar.setOnMenuItemClickListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.block_menus) {
+                showFilePickerDialog();
+                return true;
+            }
+            return false;
+        });
+        noContentLayout = findViewById(R.id.noContentLayout);
         componentView = findViewById(R.id.list);
 
         findViewById(R.id.fab).setOnClickListener(_view ->
@@ -89,21 +95,6 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, "Import");
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == 0) {
-            showFilePickerDialog();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onStop() {
         super.onStop();
         ComponentsHandler.refreshCachedCustomComponents();
@@ -113,7 +104,7 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
         if (FileUtil.isExistFile(COMPONENT_DIR)) {
             readComponents(COMPONENT_DIR);
         } else {
-            tv_guide.setVisibility(View.VISIBLE);
+            noContentLayout.setVisibility(View.VISIBLE);
             componentView.setVisibility(View.GONE);
         }
     }
@@ -127,10 +118,10 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
             componentView.getLayoutManager().onRestoreInstanceState(state);
             adapter.notifyDataSetChanged();
             componentView.setVisibility(View.VISIBLE);
-            tv_guide.setVisibility(View.GONE);
+            noContentLayout.setVisibility(View.GONE);
             return;
         }
-        tv_guide.setVisibility(View.VISIBLE);
+        noContentLayout.setVisibility(View.VISIBLE);
         componentView.setVisibility(View.GONE);
     }
 
@@ -146,7 +137,7 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
 
         FilePickerDialog pickerDialog = new FilePickerDialog(this, properties, R.style.RoundedCornersDialog);
 
-        pickerDialog.setTitle("Select .json selector file");
+        pickerDialog.setTitle(R.string.select_json_selector_file);
         pickerDialog.setDialogSelectionListener(selections -> selectComponentToImport(selections[0]));
 
         pickerDialog.show();

@@ -27,9 +27,6 @@ import java.util.regex.Pattern;
 import mod.hey.studios.util.Helper;
 import mod.remaker.util.ThemeUtils;
 import mod.remaker.view.CustomAttributeView;
-import pro.sketchware.R;
-import pro.sketchware.databinding.AddCustomAttributeBinding;
-import pro.sketchware.databinding.CustomDialogAttributeBinding;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
 

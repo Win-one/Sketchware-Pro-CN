@@ -45,7 +45,7 @@
                 android:id="@+id/searchInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Search for libraries"
+                android:hint="@string/search_for_libraries"
                 android:importantForAutofill="noExcludeDescendants"
                 app:boxCornerRadiusBottomEnd="50dp"
                 app:boxCornerRadiusBottomStart="50dp"
@@ -64,11 +64,10 @@
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/contentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <!-- add padding top 8dp when search is implemented -->
@@ -80,7 +79,7 @@
             android:paddingBottom="120dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/view_item_local_lib" />
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
         android:id="@+id/noContentLayout"

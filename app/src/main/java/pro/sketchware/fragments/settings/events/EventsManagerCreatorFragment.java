@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.ComponentActivity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -184,6 +185,8 @@ public class EventsManagerCreatorFragment extends qA {
         } else {
             binding.toolbar.setTitle(lisName + getString(R.string.create_a_new_event));
         }
-        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this.a));
+        binding.toolbar.setNavigationOnClickListener(v -> {
+            getParentFragmentManager().popBackStack();
+        });
     }
 }

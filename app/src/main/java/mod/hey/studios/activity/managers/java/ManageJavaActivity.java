@@ -24,11 +24,11 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
+import com.github.angads25.filepicker.model.DialogConfigs;
+import com.github.angads25.filepicker.model.DialogProperties;
+import com.github.angads25.filepicker.view.FilePickerDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
-import com.oneskyer.library.model.DialogConfigs;
-import com.oneskyer.library.model.DialogProperties;
-import com.oneskyer.library.view.FilePickerDialog;
 
 import java.io.File;
 import java.util.ArrayList;

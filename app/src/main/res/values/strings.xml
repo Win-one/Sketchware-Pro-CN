@@ -2460,7 +2460,6 @@ Please try again later"</string>
     <string name="filter">Filter</string>
     <string name="string_editor">String Editor</string>
     <string name="now_processing">Now processing...</string>
-    <string name="library_manager">Library Manager</string>
     <string name="design_library_admob_title_rewarded">Rewarded Ad</string>
     <string name="this_might_break_your_project">This might break your project if you don\'t know what you\'re doing!</string>
     <string name="excluded_built_in_libraries">Excluded built-in libraries</string>
@@ -2759,5 +2758,19 @@ Please try again later"</string>
     <string name="application_permissions">Application Permissions</string>
     <string name="delete_this_attribute">Delete this attribute?</string>
     <string name="add_new_permission">Add new permission</string>
+    <string name="sign_apk_with_testkey">Sign APK with testkey</string>
+    <string name="cancel_button_label">Cancel</string>
+    <string name="choose_button_label">Select</string>
+    <string name="error_dir_access">Directory cannot be accessed</string>
+    <string name="label_parent_directory">Parent Directory</string>
+    <string name="last_edit">Last edited: </string>
+    <string name="manage_custom_attribute">Manage Custom Attribute</string>
+    <string name="search_for_libraries">Search for libraries</string>
+    <string name="you_have_to_reopen_the_project_for_the_changes_to_take_effect">You have to reopen the project for the changes to take effect</string>
+    <string name="note_that_this_option_may_cause_issues_if_requestnetwork_component_is_used">Note that this option may cause issues if RequestNetwork component is used</string>
+    <string name="add_new_string">Add new String</string>
+    <string name="remove_string_s">Remove String(s)</string>
+    <string name="open_string_editor">Open String editor</string>
+    <string name="enable_building_the_project_in_the_background">Enable building the project in the background</string>
 
 </resources>
