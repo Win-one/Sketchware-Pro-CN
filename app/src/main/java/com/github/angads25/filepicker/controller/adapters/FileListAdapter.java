@@ -119,8 +119,8 @@ public class FileListAdapter extends BaseAdapter{
         }
         holder.type_icon.setContentDescription(item.getFilename());
         holder.name.setText(item.getFilename());
-        SimpleDateFormat sdate = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        SimpleDateFormat stime = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
+        SimpleDateFormat sdate = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+        SimpleDateFormat stime = new SimpleDateFormat("HH:mm", Locale.getDefault());
         Date date = new Date(item.getTime());
         if(i==0&&item.getFilename().startsWith(context.getString(R.string.label_parent_dir))) {
             holder.type.setText(R.string.label_parent_directory);
@@ -140,23 +140,20 @@ public class FileListAdapter extends BaseAdapter{
             }
         }
         
-        holder.fmark.setOnCheckedChangedListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(MaterialCheckbox checkbox, boolean isChecked) {
-                item.setMarked(isChecked);
-                if (item.isMarked()) {
-                    if(properties.selection_mode == DialogConfigs.MULTI_MODE) {
-                        MarkedItemList.addSelectedItem(item);
-                    }
-                    else {
-                        MarkedItemList.addSingleFile(item);
-                    }
+        holder.fmark.setOnCheckedChangedListener((checkbox, isChecked) -> {
+            item.setMarked(isChecked);
+            if (item.isMarked()) {
+                if(properties.selection_mode == DialogConfigs.MULTI_MODE) {
+                    MarkedItemList.addSelectedItem(item);
                 }
                 else {
-                    MarkedItemList.removeSelectedItem(item.getLocation());
+                    MarkedItemList.addSingleFile(item);
                 }
-                notifyItemChecked.notifyCheckBoxIsClicked();
             }
+            else {
+                MarkedItemList.removeSelectedItem(item.getLocation());
+            }
+            notifyItemChecked.notifyCheckBoxIsClicked();
         });
         return view;
     }
@@ -167,10 +164,10 @@ public class FileListAdapter extends BaseAdapter{
         MaterialCheckbox fmark;
 
         ViewHolder(View itemView) {
-            name=(TextView)itemView.findViewById(R.id.fname);
-            type=(TextView)itemView.findViewById(R.id.ftype);
-            type_icon=(ImageView)itemView.findViewById(R.id.image_type);
-            fmark=(MaterialCheckbox) itemView.findViewById(R.id.file_mark);
+            name= itemView.findViewById(R.id.fname);
+            type= itemView.findViewById(R.id.ftype);
+            type_icon= itemView.findViewById(R.id.image_type);
+            fmark= itemView.findViewById(R.id.file_mark);
         }
     }
 

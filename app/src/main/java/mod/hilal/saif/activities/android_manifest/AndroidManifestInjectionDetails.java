@@ -222,7 +222,7 @@ public class AndroidManifestInjectionDetails extends BaseAppCompatActivity {
 
             try {
                 int violet = ThemeUtils.getColor(attributeView, R.attr.colorViolet);
-                int onSurface = ThemeUtils.getColor(attributeView, R.attr.colorOnSurface);
+                int onSurface = ThemeUtils.getColor(attributeView, com.google.android.material.R.attr.colorOnSurface);
                 int green = ThemeUtils.getColor(attributeView, R.attr.colorGreen);
 
                 SpannableString spannableString = new SpannableString((String) _data.get(position).get("value"));
