@@ -2772,5 +2772,7 @@ Please try again later"</string>
     <string name="remove_string_s">Remove String(s)</string>
     <string name="open_string_editor">Open String editor</string>
     <string name="enable_building_the_project_in_the_background">Enable building the project in the background</string>
+    <string name="external_libraries">External libraries</string>
+    <string name="select_json_file">Select json file</string>
 
 </resources>

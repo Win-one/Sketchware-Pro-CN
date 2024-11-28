@@ -30,6 +30,8 @@ import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import pro.sketchware.R;
+
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
@@ -48,12 +50,11 @@ import java.util.stream.Collectors;
 
 import a.a.a.MA;
 import a.a.a.aB;
+import pro.sketchware.utility.SketchwareUtil;
+import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.util.Helper;
 import mod.jbk.build.BuiltInLibraries;
 import mod.jbk.util.LogUtil;
-import pro.sketchware.R;
-import pro.sketchware.utility.FileUtil;
-import pro.sketchware.utility.SketchwareUtil;
 
 public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
     private static final String TAG = "ExcludeBuiltInLibraries";
@@ -123,12 +124,14 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (config.first.equals(isExcludingEnabled) && config.second.equals(excludedLibraries)) {
-            super.onBackPressed();
+        if (config != null) {
+            if (config.first.equals(isExcludingEnabled) && config.second.equals(excludedLibraries)) {
+                super.onBackPressed();
+            }
         } else {
             k();
             try {
-                new Handler(Looper.myLooper()).postDelayed(() ->
+                new Handler(Objects.requireNonNull(Looper.myLooper())).postDelayed(() ->
                         new SaveConfigTask(this).execute(), 500);
             } catch (Exception e) {
                 onSaveError(e);
@@ -282,10 +285,10 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
         dialog.b(getString(R.string.select_built_in_libraries));
         RecyclerView list = new RecyclerView(this);
         list.setPadding(
-            (int) getDip(20),
-            (int) getDip(8),
-            (int) getDip(20),
-            (int) getDip(0)
+                (int) getDip(20),
+                (int) getDip(8),
+                (int) getDip(20),
+                (int) getDip(0)
         );
 
         // magic to initialize scrollbars even without android:scrollbars defined in XML

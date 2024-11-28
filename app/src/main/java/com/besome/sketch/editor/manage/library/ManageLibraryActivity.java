@@ -76,14 +76,14 @@ public class ManageLibraryActivity extends BaseAppCompatActivity implements View
 
         if (libraryItemView instanceof ExcludeBuiltInLibrariesLibraryItemView) {
             TextView title = findViewById(R.id.title);
-            title.setText("Advanced");
+            title.setText(R.string.common_word_advanced);
             ((ViewGroup) title.getParent()).removeView(title);
             libraryItemLayout.addView(title);
         } else if (libraryBean.libType == ProjectLibraryBean.PROJECT_LIB_TYPE_LOCAL_LIB || libraryBean.libType == ProjectLibraryBean.PROJECT_LIB_TYPE_NATIVE_LIB) {
             libraryItemView.setHideEnabled();
             if (externalLib == null) {
                 externalLib = findViewById(R.id.external_lib);
-                externalLib.setText("External libraries");
+                externalLib.setText(R.string.external_libraries);
                 ((ViewGroup) externalLib.getParent()).removeView(externalLib);
                 libraryItemLayout.addView(externalLib);
             }
@@ -220,6 +220,7 @@ public class ManageLibraryActivity extends BaseAppCompatActivity implements View
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         k();
         try {
             new Handler().postDelayed(() -> new SaveLibraryTask(this).execute(), 500L);
@@ -281,10 +282,6 @@ public class ManageLibraryActivity extends BaseAppCompatActivity implements View
 
         setContentView(R.layout.manage_library);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(Helper.getResString(R.string.design_actionbar_title_library));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
         toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
         libraryItemLayout = findViewById(R.id.contents);
     }
