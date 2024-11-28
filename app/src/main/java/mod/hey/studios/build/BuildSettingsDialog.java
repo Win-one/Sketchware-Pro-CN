@@ -135,9 +135,6 @@ public class BuildSettingsDialog {
         checkBox.setChecked(value.equals("true"));
 
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (key.equals(SETTING_ENABLE_BACKGROUND_BUILDING)) {
-                SketchwareUtil.toast(Helper.getResString(R.string.you_have_to_reopen_the_project_for_the_changes_to_take_effect));
-            }
             if (isChecked) {
                 if (key.equals(SETTING_NO_HTTP_LEGACY)) {
                     SketchwareUtil.toast(Helper.getResString(R.string.note_that_this_option_may_cause_issues_if_requestnetwork_component_is_used));

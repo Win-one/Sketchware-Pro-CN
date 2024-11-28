@@ -282,7 +282,11 @@ public class ManageLibraryActivity extends BaseAppCompatActivity implements View
 
         setContentView(R.layout.manage_library);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(Helper.getResString(R.string.design_actionbar_title_library));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
         libraryItemLayout = findViewById(R.id.contents);
     }
 

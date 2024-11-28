@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.besome.sketch.beans.BlockBean;
 import com.besome.sketch.beans.ViewBean;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.gson.Gson;
 
 import a.a.a.eC;
 import a.a.a.jC;
@@ -95,8 +96,11 @@ public class StringEditorActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (replaceXml(FileUtil.readFile(getIntent().getStringExtra("content")))
-                .equals(replaceXml(convertListMapToXml(listmap))) || listmap.isEmpty()) {
+        ArrayList<HashMap<String, Object>> cache = new ArrayList<>();
+        convertXmlToListMap(FileUtil.readFile(getIntent().getStringExtra("content")), cache);
+        String cacheString = new Gson().toJson(cache);
+        String cacheListmap = new Gson().toJson(listmap);
+        if (cacheListmap.equals(cacheString) || listmap.isEmpty()) {
             setResult(RESULT_OK);
             finish();
         } else {
@@ -182,7 +186,6 @@ public class StringEditorActivity extends AppCompatActivity {
                     }
                     map.put("key", key);
                     map.put("text", value);
-                    map.put("translatable", translatable);
                     listmap.add(map);
                 }
             }

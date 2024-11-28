@@ -1754,6 +1754,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
                 if (!toNotAdd.contains("android:id") && viewBean.getClassInfo().a(ss.getClassInfo().a())) {
                     viewGroup.addView(d(typeName, viewBean.id));
                 }
+                ExtraMenuBean.setupSearchView(customView, viewGroup);
             }
         }
 

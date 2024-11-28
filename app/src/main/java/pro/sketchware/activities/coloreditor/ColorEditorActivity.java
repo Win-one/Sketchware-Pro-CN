@@ -302,6 +302,7 @@ public class ColorEditorActivity extends AppCompatActivity {
         dialog.b(xB.b().a(activity, R.string.common_word_delete), v -> {
             colorList.remove(position);
             adapter.notifyItemRemoved(position);
+            adapter.notifyItemRangeChanged(position, colorList.size());
             dialog.dismiss();
         });
         dialog.a(xB.b().a(activity, R.string.common_word_cancel), v -> dialog.dismiss());
@@ -355,7 +356,7 @@ public class ColorEditorActivity extends AppCompatActivity {
             if (colorItem != null) {
                 colorItem.setColorName(key);
 
-                if (dialogBinding.hash.equals("@")) {
+                if (dialogBinding.hash.getText().equals("@")) {
                     colorItem.setColorValue("@" + value);
                 } else {
                     colorItem.setColorValue("#" + value);
@@ -391,6 +392,7 @@ public class ColorEditorActivity extends AppCompatActivity {
             dialog.configureDefaultButton(getString(R.string.common_word_delete), v1 -> {
                 colorList.remove(position);
                 adapter.notifyItemRemoved(position);
+                adapter.notifyItemRangeChanged(position, colorList.size());
                 dialog.dismiss();
             });
         }
