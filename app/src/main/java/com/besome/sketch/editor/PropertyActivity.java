@@ -155,6 +155,7 @@ public class PropertyActivity extends BaseAppCompatActivity implements Kw {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         propertyItems.i(viewBean);
         o();
     }

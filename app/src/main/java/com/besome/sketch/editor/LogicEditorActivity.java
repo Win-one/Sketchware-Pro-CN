@@ -137,8 +137,6 @@ import pro.sketchware.utility.FilePathUtil;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
 import pro.sketchware.utility.SvgUtils;
-import pro.sketchware.R;
-import pro.sketchware.menu.ExtraMenuBean;
 
 @SuppressLint({"ClickableViewAccessibility", "RtlHardcoded", "SetTextI18n", "DefaultLocale"})
 public class LogicEditorActivity extends BaseAppCompatActivity implements View.OnClickListener, Vs, View.OnTouchListener, MoreblockImporterDialog.CallBack {
@@ -353,8 +351,8 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
     private void showAddNewXmlStringDialog() {
         aB dialog = new aB(this);
         ViewStringEditorAddBinding binding = ViewStringEditorAddBinding.inflate(LayoutInflater.from(this));
-        dialog.b("Create new string");
-        dialog.b("Create", v1 -> {
+        dialog.b(getString(R.string.create_new_string));
+        dialog.b(getString(R.string.common_word_create), v1 -> {
 
             String filePath = new FilePathUtil().getPathResource(B) + "/values/strings.xml";
             ArrayList<HashMap<String, Object>> StringsListMap = new ArrayList<>();
@@ -371,7 +369,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
             }
 
             if (key.isEmpty() || value.isEmpty()) {
-                SketchwareUtil.toastError("Please fill in all fields");
+                SketchwareUtil.toastError(Helper.getResString(R.string.please_fill_in_all_fields));
                 return;
             }
 

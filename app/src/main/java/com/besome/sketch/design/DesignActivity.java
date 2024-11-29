@@ -324,6 +324,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                 showSaveBeforeQuittingDialog();
             }
         }
+        super.onBackPressed();
     }
 
     private void saveChangesAndCloseProject() {
@@ -349,13 +350,13 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                 PopupMenu popupMenu = new PopupMenu(this, buildSettings);
                 Menu menu = popupMenu.getMenu();
 
-                menu.add(Menu.NONE, 1, Menu.NONE, "Build Settings");
-                menu.add(Menu.NONE, 2, Menu.NONE, "Clean temporary files");
-                menu.add(Menu.NONE, 3, Menu.NONE, "Show last compile error");
-                menu.add(Menu.NONE, 5, Menu.NONE, "Show source code");
+                menu.add(Menu.NONE, 1, Menu.NONE, R.string.build_settings);
+                menu.add(Menu.NONE, 2, Menu.NONE, R.string.clean_temporary_files);
+                menu.add(Menu.NONE, 3, Menu.NONE, R.string.show_last_compile_error);
+                menu.add(Menu.NONE, 5, Menu.NONE, R.string.show_source_code);
                 if (FileUtil.isExistFile(q.finalToInstallApkPath)) {
-                    menu.add(Menu.NONE, 4, Menu.NONE, "Install last built APK");
-                    menu.add(Menu.NONE, 6, Menu.NONE, "Show Apk signatures");
+                    menu.add(Menu.NONE, 4, Menu.NONE, R.string.install_last_built_apk);
+                    menu.add(Menu.NONE, 6, Menu.NONE, R.string.show_apk_signatures);
                 }
 
                 popupMenu.setOnMenuItemClickListener(item -> {
@@ -364,14 +365,14 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                         case 2 -> new Thread(() -> {
                             FileUtil.deleteFile(q.projectMyscPath);
                             runOnUiThread(() ->
-                                    SketchwareUtil.toast("Done cleaning temporary files!"));
+                                    SketchwareUtil.toast(Helper.getResString(R.string.done_cleaning_temporary_files)));
                         }).start();
                         case 3 -> new CompileErrorSaver(sc_id).showLastErrors(this);
                         case 4 -> {
                             if (FileUtil.isExistFile(q.finalToInstallApkPath)) {
                                 installBuiltApk();
                             } else {
-                                SketchwareUtil.toast("APK doesn't exist anymore");
+                                SketchwareUtil.toast(Helper.getResString(R.string.apk_doesn_t_exist_anymore));
                             }
                         }
                         case 5 -> showCurrentActivitySrcCode();
@@ -714,9 +715,9 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
 
     private void showCurrentActivitySrcCode() {
         ProgressMsgBoxBinding loadingDialogBinding = ProgressMsgBoxBinding.inflate(getLayoutInflater());
-        loadingDialogBinding.tvProgress.setText("Generating source code...");
+        loadingDialogBinding.tvProgress.setText(R.string.generating_source_code);
         var loadingDialog = new MaterialAlertDialogBuilder(this)
-                .setTitle("Please wait")
+                .setTitle(R.string.please_wait)
                 .setCancelable(false)
                 .setView(loadingDialogBinding.getRoot())
                 .create();
@@ -729,7 +730,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
             var dialogBuilder = new MaterialAlertDialogBuilder(this)
                     .setTitle(filename)
                     .setCancelable(false)
-                    .setPositiveButton("Dismiss", null);
+                    .setPositiveButton(R.string.common_word_dismiss, null);
 
             runOnUiThread(() -> {
                 if (isFinishing()) return;
@@ -739,7 +740,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                 editor.setTypefaceText(Typeface.MONOSPACE);
                 editor.setEditable(false);
                 editor.setTextSize(14);
-                editor.setText(!source.isEmpty() ? source : "Failed to generate source.");
+                editor.setText(!source.isEmpty() ? source : getString(R.string.failed_to_generate_source));
                 editor.getComponent(Magnifier.class).setWithinEditorForcibly(true);
 
                 if (filename.endsWith(".xml")) {
@@ -965,7 +966,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
             if (activity == null) return;
 
             activity.runOnUiThread(() -> {
-                activity.runProject.setText("Building APK file...");
+                activity.runProject.setText(R.string.building_apk_file);
                 activity.runProject.setClickable(false);
                 activity.r.a("P1I10", true);
                 activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -986,7 +987,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
             try {
                 var q = activity.q;
                 var sc_id = DesignActivity.sc_id;
-                onProgress("Deleting temporary files...");
+                onProgress(Helper.getResString(R.string.deleting_temporary_files));
                 FileUtil.deleteFile(q.projectMyscPath);
 
                 q.c(activity.getApplicationContext());
@@ -1006,8 +1007,8 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                         q.a(wq.e() + File.separator + sc_id + File.separator + "icon.png");
                     }
                 }
-                
-                onProgress("Generating source code...");
+
+                onProgress(Helper.getResString(R.string.generating_source_code));
                 kC kC = jC.d(sc_id);
                 kC.b(q.resDirectoryPath + File.separator + "drawable-xhdpi");
                 kC = jC.d(sc_id);
@@ -1105,23 +1106,23 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
 
                     aB dialog = new aB(activity);
                     if (isMissingDirectory) {
-                        dialog.b("Missing directory detected");
+                        dialog.b(Helper.getResString(R.string.missing_directory_detected));
                         dialog.a("A directory important for building is missing. " +
                                 "Sketchware Pro can try creating " + e.getMissingFile().getAbsolutePath() +
                                 " if you'd like to.");
-                        dialog.configureDefaultButton("Create", v -> {
+                        dialog.configureDefaultButton(Helper.getResString(R.string.common_word_create), v -> {
                             dialog.dismiss();
                             if (!e.getMissingFile().mkdirs()) {
                                 SketchwareUtil.toastError("Failed to create directory / directories!");
                             }
                         });
                     } else {
-                        dialog.b("Missing file detected");
+                        dialog.b(Helper.getResString(R.string.missing_directory_detected));
                         dialog.a("A file needed for building is missing. " +
                                 "Put the correct file back to " + e.getMissingFile().getAbsolutePath() +
                                 " and try building again.");
                     }
-                    dialog.b("Dismiss", Helper.getDialogDismissListener(dialog));
+                    dialog.b(Helper.getResString(R.string.common_word_dismiss), Helper.getDialogDismissListener(dialog));
                     dialog.show();
                 });
             } catch (zy zy) {
@@ -1192,8 +1193,8 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                                 canceled = true;
                             }
                             dialog.show();
-                            activity.runProject.setText("Canceling build...");
-                            onProgress("Canceling build...");
+                            activity.runProject.setText(R.string.canceling_build);
+                            onProgress(Helper.getResString(R.string.canceling_build));
                         }
                         cancelDialog.dismiss();
                     });
@@ -1248,11 +1249,11 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(activity, CHANNEL_ID)
                         .setSmallIcon(R.drawable.ic_mtrl_code)
-                        .setContentTitle("Building project")
-                        .setContentText("Starting build...")
+                        .setContentTitle(Helper.getResString(R.string.building_project))
+                        .setContentText(Helper.getResString(R.string.starting_build))
                         .setOngoing(true)
                         .setProgress(0, 0, true)
-                        .addAction(R.drawable.ic_cancel_white_96dp, "Cancel build", getCancelPendingIntent());
+                        .addAction(R.drawable.ic_cancel_white_96dp, Helper.getResString(R.string.cancel_build), getCancelPendingIntent());
 
                 notificationManager.notify(notificationId, builder.build());
                 isShowingNotification = true;
@@ -1265,11 +1266,11 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(activity, CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_mtrl_code)
-                    .setContentTitle("Building project")
+                    .setContentTitle(Helper.getResString(R.string.building_project))
                     .setContentText(progress)
                     .setOngoing(true)
                     .setProgress(0, 0, true)
-                    .addAction(R.drawable.ic_cancel_white_96dp, "Cancel Build", getCancelPendingIntent());
+                    .addAction(R.drawable.ic_cancel_white_96dp, Helper.getResString(R.string.cancel_build), getCancelPendingIntent());
 
             notificationManager.notify(notificationId, builder.build());
         }

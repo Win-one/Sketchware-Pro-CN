@@ -2774,5 +2774,13 @@ Please try again later"</string>
     <string name="enable_building_the_project_in_the_background">Enable building the project in the background</string>
     <string name="external_libraries">External libraries</string>
     <string name="select_json_file">Select json file</string>
+    <string name="building_project">Building project</string>
+    <string name="starting_build">Starting build...</string>
+    <string name="cancel_build">Cancel build</string>
+    <string name="an_error_occurred">An error occurred! [</string>
+    <string name="invalid_block_name_entry">(Invalid block name entry)</string>
+    <string name="invalid_block_spec_entry">(Invalid block spec entry)</string>
+    <string name="invalid_color_entry_in_block">Invalid color entry in block #</string>
+    <string name="invalid_color_in_custom_block_palette">Invalid color in Custom Block palette #</string>
 
 </resources>

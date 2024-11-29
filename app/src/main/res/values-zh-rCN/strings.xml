@@ -3094,4 +3094,12 @@
     <string name="enable_building_the_project_in_the_background">启用在后台构建项目</string>
     <string name="external_libraries">外部库</string>
     <string name="select_json_file">选择json文件</string>
+    <string name="building_project">构建项目</string>
+    <string name="starting_build">开始构建...</string>
+    <string name="cancel_build">取消构建</string>
+    <string name="an_error_occurred">发生错误! [</string>
+    <string name="invalid_block_name_entry">(无效的块名称条目)</string>
+    <string name="invalid_block_spec_entry">(无效的块规范条目)</string>
+    <string name="invalid_color_entry_in_block">块中的颜色输入无效 #</string>
+    <string name="invalid_color_in_custom_block_palette">自定义块调色板中的颜色无效 #</string>
 </resources>
