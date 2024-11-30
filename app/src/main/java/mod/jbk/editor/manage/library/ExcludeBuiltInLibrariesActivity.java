@@ -29,7 +29,6 @@ import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import pro.sketchware.R;
 
 import java.io.File;
@@ -85,15 +84,15 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.exclude_built_in_libraries);
+        getSupportActionBar().setTitle("Exclude built-in libraries");
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
 
         TextView enable = findViewById(R.id.tv_enable);
         enable.setText(Helper.getResString(R.string.design_library_settings_title_enabled));
         TextView warning = findViewById(R.id.tv_desc);
-        warning.setText(R.string.this_might_break_your_project_if_you_don_t_know_what_you_re_doing);
+        warning.setText("This might break your project if you don't know what you're doing!");
         TextView label = findViewById(R.id.tv_title);
-        label.setText(R.string.exclude_built_in_libraries);
+        label.setText("Excluded built-in libraries");
 
         LinearLayout excludedLibraries = findViewById(R.id.item);
         excludedLibraries.setOnClickListener(v -> showSelectBuiltInLibrariesDialog());
@@ -129,7 +128,7 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
         } else {
             k();
             try {
-                new Handler(Objects.requireNonNull(Looper.myLooper())).postDelayed(() ->
+                new Handler(Looper.myLooper()).postDelayed(() ->
                         new SaveConfigTask(this).execute(), 500);
             } catch (Exception e) {
                 onSaveError(e);
@@ -176,7 +175,7 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
                 .map(BuiltInLibraries.BuiltInLibrary::getName)
                 .collect(Collectors.joining(", "));
         if (libraries.isEmpty()) {
-            libraries = getString(R.string.none_selected_tap_here_to_configure);
+            libraries = "None selected. Tap here to configure.";
         }
         preview.setText(libraries);
     }
@@ -185,7 +184,7 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
         aB dialog = new aB(this);
         dialog.a(R.drawable.rollback_96);
         dialog.b(Helper.getResString(R.string.common_word_reset));
-        dialog.a(getString(R.string.reset_excluded_built_in_libraries_this_action_cannot_be_undone));
+        dialog.a("Reset excluded built-in libraries? This action cannot be undone.");
         dialog.b(Helper.getResString(R.string.common_word_reset), v -> {
             saveConfig(sc_id, false, Collections.emptyList());
             enabled.setChecked(false);
@@ -267,26 +266,26 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
     }
 
     public static String getItemTitle() {
-        return Helper.getResString(R.string.exclude_built_in_libraries);
+        return "Exclude built-in libraries";
     }
 
     public static String getDefaultItemDescription() {
-        return Helper.getResString(R.string.use_custom_library_versions);
+        return "Use custom Library versions";
     }
 
     public static String getSelectedLibrariesItemDescription() {
-        return Helper.getResString(R.string.built_in_libraries_excluded);
+        return "%1$d/%2$d built-in libraries excluded";
     }
 
     private void showSelectBuiltInLibrariesDialog() {
         aB dialog = new aB(this);
-        dialog.b(getString(R.string.select_built_in_libraries));
+        dialog.b("Select built-in libraries");
         RecyclerView list = new RecyclerView(this);
         list.setPadding(
-                (int) getDip(20),
-                (int) getDip(8),
-                (int) getDip(20),
-                (int) getDip(0)
+            (int) getDip(20),
+            (int) getDip(8),
+            (int) getDip(20),
+            (int) getDip(0)
         );
 
         // magic to initialize scrollbars even without android:scrollbars defined in XML

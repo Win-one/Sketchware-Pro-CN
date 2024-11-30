@@ -22,7 +22,6 @@ import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
 
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -44,7 +43,6 @@ import a.a.a.oB;
 import a.a.a.wB;
 import a.a.a.wq;
 import a.a.a.yB;
-import mod.hey.studios.project.ProjectSettings;
 import mod.hey.studios.util.Helper;
 import mod.hey.studios.util.ProjectFile;
 import mod.hilal.saif.activities.tools.ConfigActivity;
@@ -53,7 +51,6 @@ import pro.sketchware.activities.iconcreator.IconCreatorActivity;
 import pro.sketchware.control.VersionDialog;
 import pro.sketchware.databinding.MyprojectSettingBinding;
 import pro.sketchware.utility.FileUtil;
-import pro.sketchware.utility.SketchwareUtil;
 
 public class MyProjectSettingActivity extends BaseAppCompatActivity implements View.OnClickListener {
 
@@ -133,12 +130,12 @@ public class MyProjectSettingActivity extends BaseAppCompatActivity implements V
         }
         if (updatingExistingProject) {
             /* Set the dialog's title & save button label */
-            binding.toolbar.setTitle(getString(R.string.project_settings));
+            binding.toolbar.setTitle("Project Settings");
             HashMap<String, Object> metadata = lC.b(sc_id);
             binding.etPackageName.setText(yB.c(metadata, "my_sc_pkg_name"));
             binding.etProjectName.setText(yB.c(metadata, "my_ws_name"));
             binding.etAppName.setText(yB.c(metadata, "my_app_name"));
-            binding.okButton.setText(R.string.save_changes);
+            binding.okButton.setText("Save changes");
             projectVersionCode = parseInt(yB.c(metadata, "sc_ver_code"), 1);
             parseVersion(yB.c(metadata, "sc_ver_name"));
             binding.verCode.setText(yB.c(metadata, "sc_ver_code"));
@@ -507,8 +504,6 @@ public class MyProjectSettingActivity extends BaseAppCompatActivity implements V
                 lC.a(sc_id, data);
                 wq.a(getApplicationContext(), sc_id);
                 new oB().b(wq.b(sc_id));
-                ProjectSettings projectSettings = new ProjectSettings(sc_id);
-                projectSettings.setValue(ProjectSettings.SETTING_ENABLE_VIEWBINDING, "true");
             }
             try {
                 FileUtil.deleteFile(getTempIconsFolderPath("mipmaps" + File.separator));

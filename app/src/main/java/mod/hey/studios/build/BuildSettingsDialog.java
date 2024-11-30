@@ -18,7 +18,6 @@ import android.widget.RadioGroup;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import mod.hey.studios.util.Helper;
 import pro.sketchware.R;
 import pro.sketchware.databinding.ProjectConfigLayoutBinding;
 import pro.sketchware.utility.SketchwareUtil;
@@ -88,9 +87,9 @@ public class BuildSettingsDialog {
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity);
         builder.setIcon(R.drawable.ic_mtrl_tune);
-        builder.setTitle(R.string.build_settings);
-        builder.setPositiveButton(R.string.common_word_save, (d, which) -> settings.setValues(views));
-        builder.setNegativeButton(R.string.common_word_cancel, null);
+        builder.setTitle("Build Settings");
+        builder.setPositiveButton("Save", (d, which) -> settings.setValues(views));
+        builder.setNegativeButton("Cancel", null);
         builder.setView(binding.getRoot());
         builder.show();
     }
@@ -137,7 +136,7 @@ public class BuildSettingsDialog {
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 if (key.equals(SETTING_NO_HTTP_LEGACY)) {
-                    SketchwareUtil.toast(Helper.getResString(R.string.note_that_this_option_may_cause_issues_if_requestnetwork_component_is_used));
+                    SketchwareUtil.toast("Note that this option may cause issues if RequestNetwork component is used");
                 }
             }
         });

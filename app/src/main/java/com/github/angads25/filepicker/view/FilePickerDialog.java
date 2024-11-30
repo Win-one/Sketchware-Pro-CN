@@ -40,7 +40,6 @@ import com.github.angads25.filepicker.model.MarkedItemList;
 import com.github.angads25.filepicker.utils.ExtensionFilter;
 import com.github.angads25.filepicker.utils.Utility;
 import com.github.angads25.filepicker.widget.MaterialCheckbox;
-import com.google.android.material.button.MaterialButton;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -53,7 +52,8 @@ import java.util.List;
  */
 
 public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickListener {
-    private Context context;
+    public static final int EXTERNAL_READ_PERMISSION_GRANT = 112;
+    private final Context context;
     private ListView listView;
     private TextView dname, dir_path, title;
     private DialogProperties properties;
@@ -61,12 +61,10 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
     private ArrayList<FileListItem> internalList;
     private ExtensionFilter filter;
     private FileListAdapter mFileListAdapter;
-    private MaterialButton select;
-    private String titleStr = null;
-    private String positiveBtnNameStr = null;
-    private String negativeBtnNameStr = null;
-
-    public static final int EXTERNAL_READ_PERMISSION_GRANT = 112;
+    private Button select;
+    private String titleStr;
+    private String positiveBtnNameStr;
+    private String negativeBtnNameStr;
 
     public FilePickerDialog(Context context) {
         super(context);
@@ -93,7 +91,6 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -107,7 +104,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
         dname = findViewById(R.id.dname);
         title = findViewById(R.id.title);
         dir_path = findViewById(R.id.dir_path);
-        MaterialButton cancel = findViewById(R.id.cancel);
+        Button cancel = findViewById(R.id.cancel);
         if (negativeBtnNameStr != null) {
             cancel.setText(negativeBtnNameStr);
         }
@@ -115,7 +112,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
             /*  Select Button is clicked. Get the array of all selected items
              *  from MarkedItemList singleton.
              */
-            String paths[] = MarkedItemList.getSelectedPaths();
+            String[] paths = MarkedItemList.getSelectedPaths();
             //NullPointerException fixed in v1.0.2
             if (callbacks != null) {
                 callbacks.onSelectedFilePaths(paths);
@@ -150,7 +147,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
         //Title method added in version 1.0.5
         setTitle();
     }
-    
+
     private void setTitle() {
         if (title == null || dname == null) {
             return;
@@ -178,8 +175,8 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
         super.onStart();
         positiveBtnNameStr = (
                 positiveBtnNameStr == null ?
-                context.getResources().getString(R.string.choose_button_label) :
-                positiveBtnNameStr
+                        context.getResources().getString(R.string.choose_button_label) :
+                        positiveBtnNameStr
         );
         select.setText(positiveBtnNameStr);
         if (Utility.checkStorageAccessPermissions(context)) {
@@ -284,7 +281,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
     }
 
     public void markFiles(List<String> paths) {
-        if (paths != null && paths.size() > 0) {
+        if (paths != null && !paths.isEmpty()) {
             if (properties.selection_mode == DialogConfigs.SINGLE_MODE) {
                 File temp = new File(paths.get(0));
                 switch (properties.selection_type) {
@@ -326,9 +323,9 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
                 }
             } else {
                 for (String path : paths) {
+                    File temp = new File(path);
                     switch (properties.selection_type) {
                         case DialogConfigs.DIR_SELECT:
-                            File temp = new File(path);
                             if (temp.exists() && temp.isDirectory()) {
                                 FileListItem item = new FileListItem();
                                 item.setFilename(temp.getName());
@@ -396,7 +393,7 @@ public class FilePickerDialog extends Dialog implements AdapterView.OnItemClickL
     public void onBackPressed() {
         //currentDirName is dependent on dname
         String currentDirName = dname.getText().toString();
-        if (internalList.size() > 0) {
+        if (!internalList.isEmpty()) {
             FileListItem fitem = internalList.get(0);
             File currLoc = new File(fitem.getLocation());
             if (currentDirName.equals(properties.root.getName()) ||

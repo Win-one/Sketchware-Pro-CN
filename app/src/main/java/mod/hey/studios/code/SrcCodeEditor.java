@@ -21,9 +21,6 @@ import androidx.appcompat.content.res.AppCompatResources;
 
 import com.google.android.material.appbar.MaterialToolbar;
 
-import mod.remaker.util.ThemeUtils;
-import pro.sketchware.R;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -58,11 +55,13 @@ import io.github.rosemoe.sora.widget.schemes.SchemeEclipse;
 import io.github.rosemoe.sora.widget.schemes.SchemeGitHub;
 import io.github.rosemoe.sora.widget.schemes.SchemeNotepadXX;
 import io.github.rosemoe.sora.widget.schemes.SchemeVS2019;
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.util.Helper;
 import mod.jbk.code.CodeEditorColorSchemes;
 import mod.jbk.code.CodeEditorLanguages;
+import pro.sketchware.R;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
+import pro.sketchware.utility.ThemeUtils;
 
 public class SrcCodeEditor extends AppCompatActivity {
     public static final List<Pair<String, Class<? extends EditorColorScheme>>> KNOWN_COLOR_SCHEMES = List.of(
@@ -237,7 +236,7 @@ public class SrcCodeEditor extends AppCompatActivity {
     public void save() {
         beforeContent = editor.getText().toString();
         FileUtil.writeFile(getIntent().getStringExtra("content"), beforeContent);
-        SketchwareUtil.toast(Helper.getResString(R.string.common_word_saved));
+        SketchwareUtil.toast("Saved");
     }
 
     @Override
@@ -268,32 +267,33 @@ public class SrcCodeEditor extends AppCompatActivity {
             SharedPreferences local_pref = getSharedPreferences("hsce", Activity.MODE_PRIVATE);
             Menu toolbarMenu = toolbar.getMenu();
             toolbarMenu.clear();
-            toolbarMenu.add(Menu.NONE, 0, Menu.NONE, "Undo").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_undo)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-            toolbarMenu.add(Menu.NONE, 1, Menu.NONE, "Redo").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_redo)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-            toolbarMenu.add(Menu.NONE, 2, Menu.NONE, "Save").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_save)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-            toolbarMenu.add(Menu.NONE, 3, Menu.NONE, R.string.find_replace);
-            toolbarMenu.add(Menu.NONE, 4, Menu.NONE, R.string.word_wrap).setCheckable(true).setChecked(local_pref.getBoolean("act_ww", false));
-            toolbarMenu.add(Menu.NONE, 5, Menu.NONE, R.string.pretty_print);
-            toolbarMenu.add(Menu.NONE, 6, Menu.NONE, R.string.select_language);
-            toolbarMenu.add(Menu.NONE, 7, Menu.NONE, R.string.select_theme);
-            toolbarMenu.add(Menu.NONE, 8, Menu.NONE, R.string.auto_complete).setCheckable(true).setChecked(local_pref.getBoolean("act_ac", true));
-            toolbarMenu.add(Menu.NONE, 9, Menu.NONE, R.string.auto_complete_symbol_pair).setCheckable(true).setChecked(local_pref.getBoolean("act_acsp", true));
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Undo").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_undo)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Redo").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_redo)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Save").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_save)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Find & Replace");
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Word wrap").setCheckable(true).setChecked(local_pref.getBoolean("act_ww", false));
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Pretty print");
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Select language");
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Select theme");
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Auto complete").setCheckable(true).setChecked(local_pref.getBoolean("act_ac", true));
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Auto complete symbol pair").setCheckable(true).setChecked(local_pref.getBoolean("act_acsp", true));
 
             toolbar.setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()) {
-                    case 0:
+                String title1 = item.getTitle().toString();
+                switch (title1) {
+                    case "Undo":
                         editor.undo();
                         break;
 
-                    case 1:
+                    case "Redo":
                         editor.redo();
                         break;
 
-                    case 2:
+                    case "Save":
                         save();
                         break;
 
-                    case 5:
+                    case "Pretty print":
                         if (getIntent().hasExtra("java")) {
                             StringBuilder b = new StringBuilder();
 
@@ -312,7 +312,7 @@ public class SrcCodeEditor extends AppCompatActivity {
                                 ss = Lx.j(ss, true);
                             } catch (Exception e) {
                                 err = true;
-                                SketchwareUtil.toastError(Helper.getResString(R.string.your_code_contains_incorrectly_nested_parentheses));
+                                SketchwareUtil.toastError("Your code contains incorrectly nested parentheses");
                             }
 
                             if (!err) editor.setText(ss);
@@ -323,26 +323,26 @@ public class SrcCodeEditor extends AppCompatActivity {
                             if (format != null) {
                                 editor.setText(format);
                             } else {
-                                SketchwareUtil.toastError(Helper.getResString(R.string.failed_to_format_xml_file), Toast.LENGTH_LONG);
+                                SketchwareUtil.toastError("Failed to format XML file", Toast.LENGTH_LONG);
                             }
                         } else {
-                            SketchwareUtil.toast(Helper.getResString(R.string.only_java_and_xml_files_can_be_formatted));
+                            SketchwareUtil.toast("Only Java and XML files can be formatted");
                         }
                         break;
 
-                    case 6:
+                    case "Select language":
                         showSwitchLanguageDialog(this, editor, (dialog, which) -> {
                             selectLanguage(editor, which);
                             dialog.dismiss();
                         });
                         break;
 
-                    case 3:
+                    case "Find & Replace":
                         editor.getSearcher().stopSearch();
                         editor.beginSearchMode();
                         break;
 
-                    case 7:
+                    case "Select theme":
                         showSwitchThemeDialog(this, editor, (dialog, which) -> {
                             selectTheme(editor, which);
                             pref.edit().putInt("act_theme", which).apply();
@@ -350,21 +350,21 @@ public class SrcCodeEditor extends AppCompatActivity {
                         });
                         break;
 
-                    case 4:
+                    case "Word wrap":
                         item.setChecked(!item.isChecked());
                         editor.setWordwrap(item.isChecked());
 
                         pref.edit().putBoolean("act_ww", item.isChecked()).apply();
                         break;
 
-                    case 9:
+                    case "Auto complete symbol pair":
                         item.setChecked(!item.isChecked());
                         editor.getProps().symbolPairAutoCompletion = item.isChecked();
 
                         pref.edit().putBoolean("act_acsp", item.isChecked()).apply();
                         break;
 
-                    case 8:
+                    case "Auto complete":
                         item.setChecked(!item.isChecked());
 
                         editor.getComponent(EditorAutoCompletion.class).setEnabled(item.isChecked());
@@ -400,7 +400,7 @@ public class SrcCodeEditor extends AppCompatActivity {
                 .map(pair -> pair.first)
                 .toArray(String[]::new);
         new AlertDialog.Builder(activity)
-                .setTitle(R.string.select_theme)
+                .setTitle("Select Theme")
                 .setSingleChoiceItems(themeItems, selectedThemeIndex, listener)
                 .setNegativeButton(R.string.common_word_cancel, null)
                 .show();
@@ -414,7 +414,7 @@ public class SrcCodeEditor extends AppCompatActivity {
         };
 
         new AlertDialog.Builder(activity)
-                .setTitle(R.string.select_language)
+                .setTitle("Select Language")
                 .setSingleChoiceItems(languagesList, languageId, listener)
                 .setNegativeButton(R.string.common_word_cancel, null)
                 .show();

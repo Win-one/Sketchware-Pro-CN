@@ -67,7 +67,7 @@ public class BackupRestoreManager {
 
         aB dialog = new aB(act);
         dialog.a(R.drawable.ic_backup);
-        dialog.b(Helper.getResString(R.string.backup_options));
+        dialog.b("Backup Options");
 
         LinearLayout checkboxContainer = new LinearLayout(act);
         checkboxContainer.setOrientation(LinearLayout.VERTICAL);
@@ -99,7 +99,7 @@ public class BackupRestoreManager {
 
         CheckBox includeLocalLibraries = new CheckBox(act);
         includeLocalLibraries.setTag(localLibrariesTag);
-        includeLocalLibraries.setText(R.string.include_used_local_libraries);
+        includeLocalLibraries.setText("Include used Local libraries");
         includeLocalLibraries.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -108,7 +108,7 @@ public class BackupRestoreManager {
 
         CheckBox includeUsedCustomBlocks = new CheckBox(act);
         includeUsedCustomBlocks.setTag(customBlocksTag);
-        includeUsedCustomBlocks.setText(R.string.include_used_custom_blocks);
+        includeUsedCustomBlocks.setText("Include used Custom Blocks");
         includeUsedCustomBlocks.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -116,7 +116,7 @@ public class BackupRestoreManager {
         checkboxContainer.addView(includeUsedCustomBlocks);
 
         dialog.a(checkboxContainer);
-        dialog.b(Helper.getResString(R.string.back_up), v -> {
+        dialog.b("Back up", v -> {
             dialog.dismiss();
             doBackup(sc_id, project_name);
         });
@@ -141,7 +141,7 @@ public class BackupRestoreManager {
         properties.extensions = new String[]{BackupFactory.EXTENSION};
 
         FilePickerDialog fpd = new FilePickerDialog(act, properties, R.style.RoundedCornersDialog);
-        fpd.setTitle(R.string.select_backups_to_restore + BackupFactory.EXTENSION + ")");
+        fpd.setTitle("Select backups to restore (" + BackupFactory.EXTENSION + ")");
         fpd.setDialogSelectionListener(files -> {
             for (int i = 0; i < files.length; i++) {
                 String backupFilePath = files[i];
@@ -150,11 +150,11 @@ public class BackupRestoreManager {
                     boolean restoringMultipleBackups = files.length > 1;
 
                     new MaterialAlertDialogBuilder(act)
-                         .setTitle(R.string.common_word_warning)
+                         .setTitle("Warning")
                          .setMessage(getRestoreIntegratedLocalLibrariesMessage(restoringMultipleBackups, i, files.length,
                                FileUtil.getFileNameNoExtension(backupFilePath)))
-                         .setPositiveButton(R.string.common_word_copy, (dialog, which) -> doRestore(backupFilePath, true))
-                         .setNegativeButton(R.string.don_t_copy, (dialog, which) -> doRestore(backupFilePath, false))
+                         .setPositiveButton("Copy", (dialog, which) -> doRestore(backupFilePath, true))
+                         .setNegativeButton("Don't copy", (dialog, which) -> doRestore(backupFilePath, false))
                          .setNeutralButton(R.string.common_word_cancel, null)
                          .show();
 
@@ -190,9 +190,9 @@ public class BackupRestoreManager {
         @Override
         protected void onPreExecute() {
             ProgressMsgBoxBinding loadingDialogBinding = ProgressMsgBoxBinding.inflate(LayoutInflater.from(activityWeakReference.get()));
-            loadingDialogBinding.tvProgress.setText(R.string.creating_backup);
+            loadingDialogBinding.tvProgress.setText("Creating backup...");
             dlg = new MaterialAlertDialogBuilder(activityWeakReference.get())
-                  .setTitle(R.string.please_wait)
+                  .setTitle("Please wait")
                   .setCancelable(false)
                   .setView(loadingDialogBinding.getRoot())
                   .create();
@@ -215,7 +215,7 @@ public class BackupRestoreManager {
             dlg.dismiss();
 
             if (bm.getOutFile() != null) {
-                SketchwareUtil.toast(Helper.getResString(R.string.successfully_created_backup_to) + bm.getOutFile().getAbsolutePath());
+                SketchwareUtil.toast("Successfully created backup to: " + bm.getOutFile().getAbsolutePath());
             } else {
                 SketchwareUtil.toastError("Error: " + bm.error, Toast.LENGTH_LONG);
             }
@@ -242,9 +242,9 @@ public class BackupRestoreManager {
         @Override
         protected void onPreExecute() {
             ProgressMsgBoxBinding loadingDialogBinding = ProgressMsgBoxBinding.inflate(LayoutInflater.from(activityWeakReference.get()));
-            loadingDialogBinding.tvProgress.setText(R.string.restoring);
+            loadingDialogBinding.tvProgress.setText("Restoring...");
             dlg = new MaterialAlertDialogBuilder(activityWeakReference.get())
-                  .setTitle(R.string.please_wait)
+                  .setTitle("Please wait")
                   .setCancelable(false)
                   .setView(loadingDialogBinding.getRoot())
                   .create();
@@ -271,12 +271,12 @@ public class BackupRestoreManager {
             dlg.dismiss();
 
             if (!bm.isRestoreSuccess() || error) {
-                SketchwareUtil.toastError(R.string.couldn_t_restore + bm.error, Toast.LENGTH_LONG);
+                SketchwareUtil.toastError("Couldn't restore: " + bm.error, Toast.LENGTH_LONG);
             } else if (projectsFragment != null) {
                 projectsFragment.refreshProjectsList();
-                SketchwareUtil.toast(Helper.getResString(R.string.restored_successfully));
+                SketchwareUtil.toast("Restored successfully");
             } else {
-                SketchwareUtil.toast(Helper.getResString(R.string.restored_successfully_refresh_to_see_the_project), Toast.LENGTH_LONG);
+                SketchwareUtil.toast("Restored successfully. Refresh to see the project", Toast.LENGTH_LONG);
             }
         }
     }

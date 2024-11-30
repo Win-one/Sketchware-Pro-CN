@@ -32,7 +32,6 @@ import a.a.a.xB;
 import mod.elfilibustero.sketch.lib.utils.PropertiesUtil;
 import mod.hey.studios.code.SrcCodeEditor;
 import mod.hey.studios.code.SrcCodeEditorLegacy;
-import mod.hey.studios.util.Helper;
 import mod.hilal.saif.activities.tools.ConfigActivity;
 import pro.sketchware.R;
 import pro.sketchware.activities.coloreditor.adapters.ColorsAdapter;
@@ -330,25 +329,25 @@ public class ColorEditorActivity extends AppCompatActivity {
 
             }
 
-            dialog.b(getString(R.string.colors_editor));
+            dialog.b("Edit color");
 
         } else {
-            dialog.b(getString(R.string.add_new_color));
+            dialog.b("Add new color");
             dialogBinding.colorPreview.setBackgroundColor(0xFFFFFF);
         }
 
-        dialog.b(getString(R.string.common_word_save), v1 -> {
+        dialog.b("Save", v1 -> {
             String key = Objects.requireNonNull(dialogBinding.colorKeyInput.getText()).toString();
             String value = Objects.requireNonNull(dialogBinding.colorValueInput.getText()).toString();
 
             if (key.isEmpty() || value.isEmpty()) {
-                SketchwareUtil.toast(Helper.getResString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT);
+                SketchwareUtil.toast("Please fill in all fields", Toast.LENGTH_SHORT);
                 return;
             }
 
             if (value.startsWith("#")) {
                 if (!isValidHexColor(value)) {
-                    SketchwareUtil.toast(Helper.getResString(R.string.please_enter_a_valid_hex_color), Toast.LENGTH_SHORT);
+                    SketchwareUtil.toast("Please enter a valid HEX color", Toast.LENGTH_SHORT);
                 }
                 return;
             }
@@ -389,7 +388,7 @@ public class ColorEditorActivity extends AppCompatActivity {
         });
 
         if (colorItem != null) {
-            dialog.configureDefaultButton(getString(R.string.common_word_delete), v1 -> {
+            dialog.configureDefaultButton("Delete", v1 -> {
                 colorList.remove(position);
                 adapter.notifyItemRemoved(position);
                 adapter.notifyItemRangeChanged(position, colorList.size());

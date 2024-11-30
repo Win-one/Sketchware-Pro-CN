@@ -2789,5 +2789,6 @@ Please try again later"</string>
     <string name="appcompat_message">\?</string>
     <string name="release_to_delete">Release to delete</string>
     <string name="language_information">Language Information</string>
+    <string name="property_enter_value">Enter %s value</string>
 
 </resources>
