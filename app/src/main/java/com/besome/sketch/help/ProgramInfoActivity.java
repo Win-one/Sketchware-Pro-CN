@@ -23,6 +23,7 @@ import pro.sketchware.databinding.ProgramInfoBinding;
 public class ProgramInfoActivity extends BaseAppCompatActivity {
 
     private static final int ITEM_SYSTEM_INFORMATION = 1;
+    private static final int ITEM_LANGUAGE_INFORMATION = 2;
     private static final int ITEM_DOCS_LOG = 4;
     private static final int ITEM_SOCIAL_NETWORK = 5;
     private static final int ITEM_DISCORD = 6;
@@ -123,6 +124,8 @@ public class ProgramInfoActivity extends BaseAppCompatActivity {
                     case ITEM_SUGGEST_IDEAS -> openUrl(getString(R.string.link_ideas_url));
                     case ITEM_TELEGRAM -> openUrl(getString(R.string.link_telegram_invite));
                     case ITEM_DISCORD -> openUrl(getString(R.string.link_discord_invite));
+                    case ITEM_LANGUAGE_INFORMATION ->
+                            openUrl("https://github.com/Win-one/Sketchware-Pro-CN/tree/mine");
                 }
             }
         }
@@ -151,6 +154,7 @@ public class ProgramInfoActivity extends BaseAppCompatActivity {
         addTwoLineItem(ITEM_TELEGRAM, R.string.title_telegram_community, R.string.link_telegram_invite);
         addSingleLineItem(ITEM_SYSTEM_INFORMATION, R.string.program_information_title_system_information);
         addSingleLineItem(ITEM_OPEN_SOURCE_LICENSES, R.string.program_information_title_open_source_license, true);
+        addTwoLineItem(ITEM_LANGUAGE_INFORMATION, getString(R.string.language_information), "https://github.com/Win-one/Sketchware-Pro-CN/tree/mine");
     }
 
     private void toLicenseActivity() {

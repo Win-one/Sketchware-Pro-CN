@@ -2542,7 +2542,6 @@ Please try again later"</string>
     <string name="permissions_manager">Permissions Manager</string>
     <string name="search_for_permissions">Search for permissions</string>
     <string name="scroll_to_the_top">Scroll to the top</string>
-    <string name="appcompat_injection_manager">AppCompat Injection Manager</string>
     <string name="use_custom_library_versions">Use custom Library versions</string>
     <string name="built_in_libraries_excluded">%1$d/%2$d built-in libraries excluded</string>
     <string name="theme_settings">Theme settings</string>
@@ -2561,7 +2560,7 @@ Please try again later"</string>
     <string name="start_by_creating_a_new_one">Start by creating a new one</string>
     <string name="no_events">No events</string>
     <string name="blocks">Blocks:</string>
-    <string name="are_you_sure_you_want_to_empty_the_recycle_bin">"Are you sure you want to empty the recycle bin? "</string>
+    <string name="are_you_sure_you_want_to_empty_the_recycle_bin">Are you sure you want to empty the recycle bin?</string>
     <string name="blocks_inside_will_be_deleted_permanently_you_cannot_recover_them">Blocks inside will be deleted PERMANENTLY, you CANNOT recover them!</string>
     <string name="create_a_new_palette">Create a new palette</string>
     <string name="edit_palette">Edit palette</string>
@@ -2782,5 +2781,13 @@ Please try again later"</string>
     <string name="invalid_block_spec_entry">(Invalid block spec entry)</string>
     <string name="invalid_color_entry_in_block">Invalid color entry in block #</string>
     <string name="invalid_color_in_custom_block_palette">Invalid color in Custom Block palette #</string>
+    <string name="appcompat_manager">AppCompat Manager</string>
+    <string name="are_you_sure_you_want_to_reset_appcompat_attributes_for">Are you sure you want to reset appcompat attributes for</string>
+    <string name="no_appcompat_options_are_currently_available_in_this_activity">No AppCompat options are currently available in this activity.</string>
+    <string name="this_feature_is_currently_disabled_enabled_appcompat_in_the_library_manager_to_use_it">This feature is currently disabled. Enabled appcompat in the library manager to use it.</string>
+    <string name="you_re_not_currently_in_the_activity_layout">You\'re not currently in the Activity layout.</string>
+    <string name="appcompat_message">\?</string>
+    <string name="release_to_delete">Release to delete</string>
+    <string name="language_information">Language Information</string>
 
 </resources>

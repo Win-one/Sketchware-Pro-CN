@@ -13,13 +13,12 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import mod.remaker.util.ThemeUtils;
+import java.util.HashMap;
 
+import mod.remaker.util.ThemeUtils;
 import pro.sketchware.R;
 import pro.sketchware.databinding.CustomViewAttributeBinding;
 import pro.sketchware.listeners.ItemClickListener;
-
-import java.util.HashMap;
 
 public class AppCompatAdapter
         extends ListAdapter<HashMap<String, Object>, AppCompatAdapter.ViewHolder> {
@@ -76,7 +75,7 @@ public class AppCompatAdapter
 
         void bind(HashMap<String, Object> item) {
             int violet = ThemeUtils.getColor(itemView, R.attr.colorViolet);
-            int onSurface = ThemeUtils.getColor(itemView, R.attr.colorOnSurface);
+            int onSurface = ThemeUtils.getColor(itemView, com.google.android.material.R.attr.colorOnSurface);
             int green = ThemeUtils.getColor(itemView, R.attr.colorGreen);
 
             String value = item.get("value").toString();

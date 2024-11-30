@@ -1,9 +1,9 @@
 package com.besome.sketch.editor.view;
 
 
-import static pro.sketchware.widgets.WidgetsCreatorManager.showWidgetsCreatorDialog;
 import static pro.sketchware.widgets.WidgetsCreatorManager.deleteWidgetMap;
 import static pro.sketchware.widgets.WidgetsCreatorManager.generateCustomWidgetId;
+import static pro.sketchware.widgets.WidgetsCreatorManager.showWidgetsCreatorDialog;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
@@ -43,7 +43,6 @@ import com.besome.sketch.editor.view.palette.IconLinearVertical;
 import com.besome.sketch.editor.view.palette.IconMapView;
 import com.besome.sketch.editor.view.palette.PaletteFavorite;
 import com.besome.sketch.editor.view.palette.PaletteWidget;
-import pro.sketchware.R;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -66,9 +65,10 @@ import a.a.a.uy;
 import a.a.a.wB;
 import a.a.a.wq;
 import a.a.a.xB;
-import pro.sketchware.widgets.WidgetsCreatorManager;
 import mod.hey.studios.util.Helper;
 import mod.hey.studios.util.ProjectFile;
+import pro.sketchware.R;
+import pro.sketchware.widgets.WidgetsCreatorManager;
 
 @SuppressLint({"ClickableViewAccessibility", "SetTextI18n"})
 public class ViewEditor extends RelativeLayout implements View.OnClickListener, View.OnTouchListener {
@@ -991,7 +991,7 @@ public class ViewEditor extends RelativeLayout implements View.OnClickListener, 
         } else {
             rippleRound(deleteView, "#696969", "#ffffff", 200);
         }
-        deleteText.setText(D ? "Release to delete" : "Drag here to delete");
+        deleteText.setText(D ? Helper.getResString(R.string.release_to_delete) : Helper.getResString(R.string.drag_here_to_delete));
     }
 
     private void rippleRound(View view, String focus, String pressed, double round) {

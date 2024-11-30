@@ -196,7 +196,7 @@
     <string name="design_library_title_appcompat">程序兼容性</string>
     <string name="design_library_title_appcompat_and_design">应用程序兼容和设计</string>
     <string name="design_library_message_confirm_uncheck_appcompat_and_design">现有的抽屉布局和FAB将被删除.继续?</string>
-    <string name="design_library_description_appcompat_and_design">抽屉布局,浮动行动按钮 </string>
+    <string name="design_library_description_appcompat_and_design">抽屉布局,浮动操作按钮 </string>
     <string name="design_library_description_firebase">使用Firebase数据库和身份验证</string>
     <string name="design_library_message_slow_down_compilation_time">启用库可能会减慢某些设备上的编译速度.</string>
     <string name="design_library_appcompat_description">激活此兼容库可让您将抽屉布局和浮动操作按钮添加到活动中.</string>
@@ -2854,7 +2854,6 @@
     <string name="permissions_manager">权限管理</string>
     <string name="search_for_permissions">搜索权限</string>
     <string name="scroll_to_the_top">滚动到顶部</string>
-    <string name="appcompat_injection_manager">应用兼容管理</string>
     <string name="use_custom_library_versions">使用自定义库版本</string>
     <string name="built_in_libraries_excluded">%1$d/%2$d个内置库被排除</string>
     <string name="theme_settings">主题设置</string>
@@ -3102,4 +3101,12 @@
     <string name="invalid_block_spec_entry">(无效的块规范条目)</string>
     <string name="invalid_color_entry_in_block">块中的颜色输入无效 #</string>
     <string name="invalid_color_in_custom_block_palette">自定义块调色板中的颜色无效 #</string>
+    <string name="appcompat_manager">应用兼容管理</string>
+    <string name="are_you_sure_you_want_to_reset_appcompat_attributes_for">您确定要重置</string>
+    <string name="no_appcompat_options_are_currently_available_in_this_activity">此活动中当前没有可用的应用兼容选项.</string>
+    <string name="this_feature_is_currently_disabled_enabled_appcompat_in_the_library_manager_to_use_it">此功能当前已禁用.在库管理器中启用了应用兼容以使用它.</string>
+    <string name="you_re_not_currently_in_the_activity_layout">您当前不在活动布局中.</string>
+    <string name="appcompat_message">的应用兼容属性?</string>
+    <string name="release_to_delete">释放以删除</string>
+    <string name="language_information">语言信息</string>
 </resources>
