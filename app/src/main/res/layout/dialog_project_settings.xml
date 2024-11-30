@@ -74,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="0dp"
-                    android:text="Enable ViewBinding"
+                    android:text="@string/enable_viewbinding"
                     android:textStyle="bold" />
 
                 <TextView
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="26dp"
-                    android:text="This will enable ViewBinding in your project. Note: It will require changes on older projects"
+                    android:text="@string/this_will_enable_viewbinding_in_your_project"
                     android:textColor="?android:attr/textColorSecondary" />
 
             </LinearLayout>

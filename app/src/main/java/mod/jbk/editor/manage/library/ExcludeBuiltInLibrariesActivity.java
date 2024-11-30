@@ -29,7 +29,6 @@ import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import pro.sketchware.R;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -49,11 +48,12 @@ import java.util.stream.Collectors;
 
 import a.a.a.MA;
 import a.a.a.aB;
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.util.Helper;
 import mod.jbk.build.BuiltInLibraries;
 import mod.jbk.util.LogUtil;
+import pro.sketchware.R;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
     private static final String TAG = "ExcludeBuiltInLibraries";
@@ -84,15 +84,15 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Exclude built-in libraries");
+        getSupportActionBar().setTitle(R.string.exclude_built_in_libraries);
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
 
         TextView enable = findViewById(R.id.tv_enable);
         enable.setText(Helper.getResString(R.string.design_library_settings_title_enabled));
         TextView warning = findViewById(R.id.tv_desc);
-        warning.setText("This might break your project if you don't know what you're doing!");
+        warning.setText(R.string.this_might_break_your_project_if_you_don_t_know_what_you_re_doing);
         TextView label = findViewById(R.id.tv_title);
-        label.setText("Excluded built-in libraries");
+        label.setText(R.string.exclude_built_in_libraries);
 
         LinearLayout excludedLibraries = findViewById(R.id.item);
         excludedLibraries.setOnClickListener(v -> showSelectBuiltInLibrariesDialog());
@@ -128,7 +128,7 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
         } else {
             k();
             try {
-                new Handler(Looper.myLooper()).postDelayed(() ->
+                new Handler(Objects.requireNonNull(Looper.myLooper())).postDelayed(() ->
                         new SaveConfigTask(this).execute(), 500);
             } catch (Exception e) {
                 onSaveError(e);
@@ -175,7 +175,7 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
                 .map(BuiltInLibraries.BuiltInLibrary::getName)
                 .collect(Collectors.joining(", "));
         if (libraries.isEmpty()) {
-            libraries = "None selected. Tap here to configure.";
+            libraries = getString(R.string.none_selected_tap_here_to_configure);
         }
         preview.setText(libraries);
     }
@@ -184,7 +184,7 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
         aB dialog = new aB(this);
         dialog.a(R.drawable.rollback_96);
         dialog.b(Helper.getResString(R.string.common_word_reset));
-        dialog.a("Reset excluded built-in libraries? This action cannot be undone.");
+        dialog.a(getString(R.string.reset_excluded_built_in_libraries_this_action_cannot_be_undone));
         dialog.b(Helper.getResString(R.string.common_word_reset), v -> {
             saveConfig(sc_id, false, Collections.emptyList());
             enabled.setChecked(false);
@@ -266,20 +266,20 @@ public class ExcludeBuiltInLibrariesActivity extends BaseAppCompatActivity {
     }
 
     public static String getItemTitle() {
-        return "Exclude built-in libraries";
+        return Helper.getResString(R.string.exclude_built_in_libraries);
     }
 
     public static String getDefaultItemDescription() {
-        return "Use custom Library versions";
+        return Helper.getResString(R.string.use_custom_library_versions);
     }
 
     public static String getSelectedLibrariesItemDescription() {
-        return "%1$d/%2$d built-in libraries excluded";
+        return Helper.getResString(R.string.built_in_libraries_excluded);
     }
 
     private void showSelectBuiltInLibrariesDialog() {
         aB dialog = new aB(this);
-        dialog.b("Select built-in libraries");
+        dialog.b(getString(R.string.select_built_in_libraries));
         RecyclerView list = new RecyclerView(this);
         list.setPadding(
             (int) getDip(20),

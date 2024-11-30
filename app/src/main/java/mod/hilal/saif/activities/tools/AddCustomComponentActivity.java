@@ -12,12 +12,11 @@ import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 
+import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.github.angads25.filepicker.model.DialogConfigs;
 import com.github.angads25.filepicker.model.DialogProperties;
 import com.github.angads25.filepicker.view.FilePickerDialog;
 import com.google.gson.Gson;
-import pro.sketchware.R;
-import pro.sketchware.databinding.ManageCustomComponentAddBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,13 +25,14 @@ import java.util.stream.Collectors;
 
 import a.a.a.aB;
 import a.a.a.wq;
-import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
-import pro.sketchware.tools.ComponentHelper;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.components.ComponentsHandler;
 import mod.jbk.util.OldResourceIdMapper;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ManageCustomComponentAddBinding;
+import pro.sketchware.tools.ComponentHelper;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class AddCustomComponentActivity extends BaseAppCompatActivity implements View.OnClickListener {
 
@@ -75,7 +75,7 @@ public class AddCustomComponentActivity extends BaseAppCompatActivity implements
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, "Import");
+        menu.add(0, 0, 0, R.string.common_word_import);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -194,7 +194,7 @@ public class AddCustomComponentActivity extends BaseAppCompatActivity implements
 
         FilePickerDialog pickerDialog = new FilePickerDialog(this, properties, R.style.RoundedCornersDialog);
 
-        pickerDialog.setTitle("Select json file");
+        pickerDialog.setTitle(getString(R.string.select_json_file));
         pickerDialog.setDialogSelectionListener(selections -> selectComponentToImport(selections[0]));
 
         pickerDialog.show();

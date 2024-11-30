@@ -2789,6 +2789,13 @@ Please try again later"</string>
     <string name="appcompat_message">\?</string>
     <string name="release_to_delete">Release to delete</string>
     <string name="language_information">Language Information</string>
-    <string name="property_enter_value">Enter %s value</string>
+    <string name="chinese_simplified_language_information">Chinese Simplified Language Information, Author:Win-one</string>
+    <string name="select_an_icon">Select an icon</string>
+    <string name="enable_viewbinding">Enable ViewBinding</string>
+    <string name="this_will_enable_viewbinding_in_your_project">This will enable ViewBinding in your project. Note: It will require changes on older projects</string>
+    <string name="show_compile_log">Show compile log</string>
+    <string name="package_installed_successfully">Package installed successfully!</string>
+    <string name="couldn_t_launch_project">Couldn\'t launch project, either not installed or not with launcher activity.</string>
+    <string name="no_root_access_granted">No root access granted. Continuing using default package install prompt.</string>
 
 </resources>

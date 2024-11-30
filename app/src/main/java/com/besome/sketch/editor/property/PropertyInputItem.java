@@ -44,10 +44,10 @@ import a.a.a.uq;
 import a.a.a.wB;
 import a.a.a.yB;
 import mod.hey.studios.util.Helper;
-import pro.sketchware.utility.ThemeUtils;
 import pro.sketchware.R;
 import pro.sketchware.databinding.PropertyPopupInputTextBinding;
 import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.ThemeUtils;
 
 @SuppressLint("ViewConstructor")
 public class PropertyInputItem extends RelativeLayout implements View.OnClickListener {
@@ -242,7 +242,7 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
             lengthValidator = new SB(context, binding.tiInput, 0, maxValue);
             binding.tiAutoCompleteInput.setVisibility(View.GONE);
             int violet = ThemeUtils.getColor(binding.edInput, R.attr.colorViolet);
-            int onSurface = ThemeUtils.getColor(binding.edInput, R.attr.colorOnSurface);
+            int onSurface = ThemeUtils.getColor(binding.edInput, com.google.android.material.R.attr.colorOnSurface);
             int green = ThemeUtils.getColor(binding.edInput, R.attr.colorGreen);
             // Set highlight for XML
             binding.edInput.addTextChangedListener(new TextWatcher() {

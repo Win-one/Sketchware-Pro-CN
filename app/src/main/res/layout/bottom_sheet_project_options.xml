@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
-        android:text="Project settings"
+        android:text="@string/project_settings"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_weight="1"
-            android:text="Change project settings"
+            android:text="@string/change_project_settings"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_weight="1"
-            android:text="Backup project"
+            android:text="@string/backup_project"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_weight="1"
-            android:text="Export/Sign"
+            android:text="@string/export_sign"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -172,7 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_weight="1"
-            android:text="Project configuration"
+            android:text="@string/project_configuration"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -215,7 +215,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_weight="1"
-            android:text="Delete project"
+            android:text="@string/delete_project"
             android:textColor="?colorError"
             android:textSize="16sp"
             android:textStyle="bold" />

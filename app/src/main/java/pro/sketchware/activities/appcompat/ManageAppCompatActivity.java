@@ -10,9 +10,6 @@ import android.widget.PopupMenu;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.content.res.AppCompatResources;
 
-import a.a.a.jC;
-import a.a.a.mB;
-
 import com.besome.sketch.beans.ProjectFileBean;
 import com.besome.sketch.beans.ProjectLibraryBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
@@ -20,10 +17,15 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
+
+import a.a.a.jC;
+import a.a.a.mB;
 import dev.aldi.sayuti.editor.injection.AppCompatInjection;
-
 import mod.hey.studios.util.Helper;
-
 import pro.sketchware.R;
 import pro.sketchware.activities.appcompat.adapters.AppCompatAdapter;
 import pro.sketchware.databinding.CustomDialogAttributeBinding;
@@ -31,11 +33,6 @@ import pro.sketchware.databinding.ManageAppCompatBinding;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
 import pro.sketchware.utility.UI;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
 
 public class ManageAppCompatActivity extends BaseAppCompatActivity {
 
@@ -62,7 +59,7 @@ public class ManageAppCompatActivity extends BaseAppCompatActivity {
         binding = ManageAppCompatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle("AppCompat Manager");
+        getSupportActionBar().setTitle(R.string.appcompat_manager);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         UI.addSystemWindowInsetToPadding(binding.list, false, false, false, true);
@@ -99,8 +96,8 @@ public class ManageAppCompatActivity extends BaseAppCompatActivity {
         adapter.setOnItemClickListener(
                 item -> {
                     PopupMenu popupMenu = new PopupMenu(ManageAppCompatActivity.this, item.first);
-                    popupMenu.getMenu().add(Menu.NONE, 0, Menu.NONE, "Edit");
-                    popupMenu.getMenu().add(Menu.NONE, 1, Menu.NONE, "Delete");
+                    popupMenu.getMenu().add(Menu.NONE, 0, Menu.NONE, R.string.common_word_edit);
+                    popupMenu.getMenu().add(Menu.NONE, 1, Menu.NONE, R.string.common_word_delete);
                     popupMenu.setOnMenuItemClickListener(
                             itemMenu -> {
                                 int position = adapter.getCurrentList().indexOf(item.second);
@@ -156,7 +153,7 @@ public class ManageAppCompatActivity extends BaseAppCompatActivity {
                     appCompats.add("NavigationDrawer");
                 }
                 if (appCompats.isEmpty()) {
-                    setNote("No AppCompat options are currently available in this activity.");
+                    setNote(getString(R.string.no_appcompat_options_are_currently_available_in_this_activity));
                 } else {
                     for (int i = 0; i < appCompats.size(); i++) {
                         TabLayout.Tab tab = binding.tabLayout.newTab();
@@ -169,10 +166,10 @@ public class ManageAppCompatActivity extends BaseAppCompatActivity {
                 }
             } else {
                 setNote(
-                        "This feature is currently disabled. Enabled appcompat in the library manager to use it.");
+                        getString(R.string.this_feature_is_currently_disabled_enabled_appcompat_in_the_library_manager_to_use_it));
             }
         } else {
-            setNote("You're not currently in the Activity layout.");
+            setNote(getString(R.string.you_re_not_currently_in_the_activity_layout));
         }
     }
 
@@ -198,7 +195,7 @@ public class ManageAppCompatActivity extends BaseAppCompatActivity {
                 MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
                 dialog.setTitle(R.string.common_word_reset);
                 dialog.setMessage(
-                        "Are you sure you want to reset appcompat attributes for " + filename + "?");
+                        getString(R.string.are_you_sure_you_want_to_reset_appcompat_attributes_for) + filename + getString(R.string.appcompat_message));
                 dialog.setPositiveButton(
                         R.string.common_word_yes,
                         (d, w) -> {
@@ -250,7 +247,7 @@ public class ManageAppCompatActivity extends BaseAppCompatActivity {
 
     private void dialog(String type, int position) {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
-        dialog.setTitle(type.equals("create") ? "Add new attribute" : "Edit attribute");
+        dialog.setTitle(type.equals("create") ? getString(R.string.add_new_attribute) : getString(R.string.edit_attribute));
         CustomDialogAttributeBinding attributeBinding =
                 CustomDialogAttributeBinding.inflate(getLayoutInflater());
         dialog.setView(attributeBinding.getRoot());
@@ -283,13 +280,13 @@ public class ManageAppCompatActivity extends BaseAppCompatActivity {
                         map.put("value", newValue);
                         if (type.equals("create")) {
                             activityInjections.add(map);
-                            SketchwareUtil.toast("Added");
+                            SketchwareUtil.toast(getString(R.string.common_word_added));
                         } else if (type.equals("edit")) {
                             if (position != -1) {
                                 activityInjections.remove(position);
                                 activityInjections.add(position, map);
                             }
-                            SketchwareUtil.toast("Saved");
+                            SketchwareUtil.toast(getString(R.string.common_word_saved));
                         }
                         dialog1.dismiss();
                         FileUtil.writeFile(path, new Gson().toJson(activityInjections));

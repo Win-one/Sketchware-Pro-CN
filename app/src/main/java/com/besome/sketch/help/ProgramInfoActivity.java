@@ -154,7 +154,7 @@ public class ProgramInfoActivity extends BaseAppCompatActivity {
         addTwoLineItem(ITEM_TELEGRAM, R.string.title_telegram_community, R.string.link_telegram_invite);
         addSingleLineItem(ITEM_SYSTEM_INFORMATION, R.string.program_information_title_system_information);
         addSingleLineItem(ITEM_OPEN_SOURCE_LICENSES, R.string.program_information_title_open_source_license, true);
-        addTwoLineItem(ITEM_LANGUAGE_INFORMATION, getString(R.string.language_information), "https://github.com/Win-one/Sketchware-Pro-CN/tree/mine");
+        addTwoLineItem(ITEM_LANGUAGE_INFORMATION, getString(R.string.language_information), getString(R.string.chinese_simplified_language_information));
     }
 
     private void toLicenseActivity() {

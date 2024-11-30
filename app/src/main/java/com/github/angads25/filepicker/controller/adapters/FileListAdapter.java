@@ -112,8 +112,8 @@ public class FileListAdapter extends BaseAdapter {
         }
         holder.type_icon.setContentDescription(item.getFilename());
         holder.name.setText(item.getFilename());
-        SimpleDateFormat sdate = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        SimpleDateFormat stime = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
+        SimpleDateFormat sdate = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+        SimpleDateFormat stime = new SimpleDateFormat("HH:mm", Locale.getDefault());
         Date date = new Date(item.getTime());
         if (position == 0 && item.getFilename().startsWith(context.getString(R.string.label_parent_dir))) {
             holder.type.setText(R.string.label_parent_directory);

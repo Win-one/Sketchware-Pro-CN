@@ -2768,8 +2768,8 @@
     <string name="open_project">打开项目</string>
     <string name="read_more">阅读更多</string>
     <string name="stringfog_manager">加密字符串管理</string>
-    <string name="common_word_activated">启动</string>
-    <string name="activating_stringfog_will_encrypt_the_strings_in_compilation_time">激活StringFog将在编译时加密字符串,这将使您的应用更难进行逆向工程.</string>
+    <string name="common_word_activated">启用</string>
+    <string name="activating_stringfog_will_encrypt_the_strings_in_compilation_time">激活加密字符串将在编译时加密字符串,这将使您的应用更难进行逆向工程.</string>
     <string name="filter">筛选</string>
     <string name="string_editor">字符串编辑器</string>
     <string name="now_processing">正在处理...</string>
@@ -3109,4 +3109,12 @@
     <string name="appcompat_message">的应用兼容属性?</string>
     <string name="release_to_delete">释放以删除</string>
     <string name="language_information">语言信息</string>
+    <string name="chinese_simplified_language_information">简体中文信息,作者:Win-one</string>
+    <string name="select_an_icon">选择图标</string>
+    <string name="enable_viewbinding">启用ViewBinding</string>
+    <string name="this_will_enable_viewbinding_in_your_project">这将在您的项目中启用ViewBinding.注意:它将需要对较旧的项目进行更改</string>
+    <string name="show_compile_log">显示编译日志</string>
+    <string name="package_installed_successfully">包安装成功!</string>
+    <string name="couldn_t_launch_project">无法启动项目,未安装或未使用Launcher活动启动.</string>
+    <string name="no_root_access_granted">未授予root访问权限.继续使用默认包安装提示符.</string>
 </resources>
