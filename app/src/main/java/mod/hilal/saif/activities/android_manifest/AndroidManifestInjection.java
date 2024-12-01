@@ -345,27 +345,15 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
 
     private void setupCustomToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.androidmanifest_manager);
-        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Show Manifest Source").setIcon(getDrawable(R.drawable.ic_mtrl_code)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        String title = menuItem.getTitle().toString();
-        if (title.equals("Show Manifest Source")) {
-            showQuickManifestSourceDialog();
-        } else {
+        toolbar.setNavigationOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+        toolbar.setOnMenuItemClickListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.manifest_menus) {
+                showQuickManifestSourceDialog();
+                return true;
+            }
             return false;
-        }
-        return super.onOptionsItemSelected(menuItem);
+        });
     }
 
     private void showQuickManifestSourceDialog() {

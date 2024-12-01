@@ -109,7 +109,7 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
         properties.error_dir = externalStorageDir;
         properties.offset = externalStorageDir;
         properties.extensions = new String[]{"json"};
-        FilePickerDialog filePickerDialog = new FilePickerDialog(this, properties);
+        FilePickerDialog filePickerDialog = new FilePickerDialog(this, properties, R.style.RoundedCornersDialog);
         filePickerDialog.setTitle(R.string.select_a_json_file);
         filePickerDialog.setDialogSelectionListener(selections -> {
             if (FileUtil.readFile(selections[0]).isEmpty()) {

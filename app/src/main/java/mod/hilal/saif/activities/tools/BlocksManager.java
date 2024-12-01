@@ -70,7 +70,7 @@ public class BlocksManager extends BaseAppCompatActivity {
     }
 
     private void initialize() {
-        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        binding.toolbar.setNavigationOnClickListener(v ->getOnBackPressedDispatcher().onBackPressed());
         binding.toolbar.setOnMenuItemClickListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.block_menus) {

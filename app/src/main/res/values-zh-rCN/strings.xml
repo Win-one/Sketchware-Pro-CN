@@ -2531,7 +2531,6 @@
     <string name="xml_strings">XML Strings</string>
     <string name="design_manager_view_title_add_activity">新活动</string>
     <string name="create_new_widget">创建组件</string>
-    <string name="create">创建</string>
     <string name="var_is_required">%s是必需的</string>
     <string name="widget_type_title">组件类型</string>
     <string name="new_class">或创建新类别</string>
@@ -3117,4 +3116,12 @@
     <string name="package_installed_successfully">包安装成功!</string>
     <string name="couldn_t_launch_project">无法启动项目,未安装或未使用Launcher活动启动.</string>
     <string name="no_root_access_granted">未授予root访问权限.继续使用默认包安装提示符.</string>
+    <string name="enter_the_name_of_the_new_folder">输入新文件夹的名称</string>
+    <string name="folder_name">文件夹名称</string>
+    <string name="invalid_folder_name">文件夹名称无效</string>
+    <string name="folder_already_exists">文件夹已存在</string>
+    <string name="created_folder_successfully">已成功创建文件夹</string>
+    <string name="select_a_native_library_so">选择原生库(.so)</string>
+    <string name="couldn_t_import_library">无法导入库! [</string>
+    <string name="nothing_changed">什么都没有改变</string>
 </resources>

@@ -2799,5 +2799,13 @@ Please try again later"</string>
     <string name="package_installed_successfully">Package installed successfully!</string>
     <string name="couldn_t_launch_project">Couldn\'t launch project, either not installed or not with launcher activity.</string>
     <string name="no_root_access_granted">No root access granted. Continuing using default package install prompt.</string>
+    <string name="enter_the_name_of_the_new_folder">Enter the name of the new folder</string>
+    <string name="folder_name">Folder name</string>
+    <string name="invalid_folder_name">Invalid folder name</string>
+    <string name="folder_already_exists">Folder already exists</string>
+    <string name="created_folder_successfully">Created folder successfully</string>
+    <string name="select_a_native_library_so">Select a native library (.so)</string>
+    <string name="couldn_t_import_library">Couldn\'t import library! [</string>
+    <string name="nothing_changed">Nothing changed</string>
 
 </resources>

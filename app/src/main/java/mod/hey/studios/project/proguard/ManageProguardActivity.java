@@ -123,10 +123,6 @@ public class ManageProguardActivity extends AppCompatActivity implements View.On
 
     private void _initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(R.string.code_shrinking_manager);
-        toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
+        toolbar.setNavigationOnClickListener(v ->getOnBackPressedDispatcher().onBackPressed());
     }
 }

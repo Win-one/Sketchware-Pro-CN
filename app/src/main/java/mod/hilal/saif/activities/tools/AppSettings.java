@@ -67,7 +67,7 @@ public class AppSettings extends BaseAppCompatActivity {
         properties.root = getFilesDir().getParentFile();
         properties.error_dir = getExternalCacheDir();
         properties.extensions = null;
-        FilePickerDialog dialog = new FilePickerDialog(this, properties);
+        FilePickerDialog dialog = new FilePickerDialog(this, properties, R.style.RoundedCornersDialog);
         dialog.setTitle(getString(R.string.select_an_entry_to_modify));
         dialog.setDialogSelectionListener(files -> {
             final boolean isDirectory = new File(files[0]).isDirectory();
