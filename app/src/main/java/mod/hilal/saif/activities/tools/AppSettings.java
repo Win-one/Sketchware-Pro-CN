@@ -67,7 +67,7 @@ public class AppSettings extends BaseAppCompatActivity {
         properties.root = getFilesDir().getParentFile();
         properties.error_dir = getExternalCacheDir();
         properties.extensions = null;
-        FilePickerDialog dialog = new FilePickerDialog(this, properties, R.style.RoundedCornersDialog);
+        FilePickerDialog dialog = new FilePickerDialog(this, properties);
         dialog.setTitle(getString(R.string.select_an_entry_to_modify));
         dialog.setDialogSelectionListener(files -> {
             final boolean isDirectory = new File(files[0]).isDirectory();
@@ -170,7 +170,7 @@ public class AppSettings extends BaseAppCompatActivity {
             properties.selection_mode = DialogConfigs.SINGLE_MODE;
             properties.selection_type = DialogConfigs.FILE_SELECT;
             properties.extensions = new String[]{"apk"};
-            FilePickerDialog dialog = new FilePickerDialog(this, properties, R.style.RoundedCornersDialog);
+            FilePickerDialog dialog = new FilePickerDialog(this, properties);
             dialog.setDialogSelectionListener(files -> {
                 isAPKSelected[0] = true;
                 apk_path_txt.setText(files[0]);

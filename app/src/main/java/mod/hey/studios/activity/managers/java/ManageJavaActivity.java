@@ -278,7 +278,7 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
         properties.offset = Environment.getExternalStorageDirectory();
         properties.extensions = new String[]{"java", "kt"};
 
-        FilePickerDialog pickerDialog = new FilePickerDialog(this, properties, R.style.RoundedCornersDialog);
+        FilePickerDialog pickerDialog = new FilePickerDialog(this, properties);
 
         pickerDialog.setTitle(getString(R.string.select_java_kotlin_file_s));
         pickerDialog.setDialogSelectionListener(selections -> {
