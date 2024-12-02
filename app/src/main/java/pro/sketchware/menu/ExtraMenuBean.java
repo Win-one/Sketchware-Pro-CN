@@ -497,42 +497,42 @@ public class ExtraMenuBean {
                 break;
 
             case "fragmentAdapter":
-                title = "Select a FragmentAdapter Component";
+                title = Helper.getResString(R.string.select_a_fragmentadapter_component);
                 menus = getComponentMenus(ComponentBean.COMPONENT_TYPE_FRAGMENT_ADAPTER);
                 break;
 
             case "phoneauth":
-                title = "Select a FirebasePhone Component";
+                title = Helper.getResString(R.string.select_a_firebasephone_component);
                 menus = getComponentMenus(ComponentBean.COMPONENT_TYPE_FIREBASE_AUTH_PHONE);
                 break;
 
             case "dynamiclink":
-                title = "Select a DynamicLink Component";
+                title = Helper.getResString(R.string.select_a_dynamiclink_component);
                 menus = getComponentMenus(ComponentBean.COMPONENT_TYPE_FIREBASE_DYNAMIC_LINKS);
                 break;
 
             case "cloudmessage":
-                title = "Select a CloudMessage Component";
+                title = Helper.getResString(R.string.select_a_cloudmessage_component);
                 menus = getComponentMenus(ComponentBean.COMPONENT_TYPE_FIREBASE_CLOUD_MESSAGE);
                 break;
 
             case "googlelogin":
-                title = "Select a FirebaseGoogle Component";
+                title = Helper.getResString(R.string.select_a_firebasegoogle_component);
                 menus = getComponentMenus(ComponentBean.COMPONENT_TYPE_FIREBASE_AUTH_GOOGLE_LOGIN);
                 break;
 
             case "onesignal":
-                title = "Select a OneSignal Component";
+                title = Helper.getResString(R.string.select_a_onesignal_component);
                 menus = getComponentMenus(ComponentBean.COMPONENT_TYPE_ONESIGNAL);
                 break;
 
             case "fbadbanner":
-                title = "Select an FBAdsBanner Component";
+                title = Helper.getResString(R.string.select_an_fbadsbanner_component);
                 menus = getComponentMenus(ComponentBean.COMPONENT_TYPE_FACEBOOK_ADS_BANNER);
                 break;
 
             case "fbadinterstitial":
-                title = "Select an FBAdsInterstitial Component";
+                title = Helper.getResString(R.string.select_an_fbadsinterstitial_component);
                 menus = getComponentMenus(ComponentBean.COMPONENT_TYPE_FACEBOOK_ADS_INTERSTITIAL);
                 break;
 
@@ -552,14 +552,14 @@ public class ExtraMenuBean {
                 break;
 
             case "service":
-                title = "Select a Background Service";
+                title = Helper.getResString(R.string.select_a_background_service);
                 if (FileUtil.isExistFile(fpu.getManifestService(sc_id))) {
                     menus = frc.getServiceManifestList();
                 }
                 break;
 
             case "broadcast":
-                title = "Select a Broadcast Receiver";
+                title = Helper.getResString(R.string.select_a_broadcast_receiver);
                 if (FileUtil.isExistFile(fpu.getManifestBroadcast(sc_id))) {
                     menus = frc.getBroadcastManifestList();
                 }
@@ -583,7 +583,7 @@ public class ExtraMenuBean {
                     }
                     if (!activityMenu.isEmpty()) {
                         TextView txt = new TextView(logicEditor);
-                        txt.setText("Custom Activities");
+                        txt.setText(R.string.custom_activities);
                         txt.setPadding((int) getDip(2), (int) getDip(4), (int) getDip(4), (int) getDip(4));
                         txt.setTextSize(14f);
                         viewGroup.addView(txt);
@@ -596,28 +596,28 @@ public class ExtraMenuBean {
                 break;
 
             case "customViews":
-                title = "Select a Custom View";
+                title = Helper.getResString(R.string.select_a_custom_view);
                 for (ProjectFileBean projectFileBean : jC.b(sc_id).c()) {
                     menus.add(projectFileBean.fileName);
                 }
                 break;
 
             case "SignButtonColor":
-                title = "Select a SignInButton Color";
+                title = Helper.getResString(R.string.select_a_signinbutton_color);
                 menus.add("COLOR_AUTO");
                 menus.add("COLOR_DARK");
                 menus.add("COLOR_LIGHT");
                 break;
 
             case "SignButtonSize":
-                title = "Select SignInButton Size";
+                title = Helper.getResString(R.string.select_signinbutton_size);
                 menus.add("SIZE_ICON_ONLY");
                 menus.add("SIZE_STANDARD");
                 menus.add("SIZE_WIDE");
                 break;
 
             case "ResString":
-                title = "Select a ResString";
+                title = Helper.getResString(R.string.select_a_resstring);
 
                 String filePath = FileUtil.getExternalStorageDir().concat("/.sketchware/data/").concat(sc_id.concat("/files/resource/values/strings.xml"));
                 ArrayList<HashMap<String, Object>> StringsListMap = new ArrayList<>();
@@ -771,7 +771,7 @@ public class ExtraMenuBean {
             dialog.dismiss();
         });
         dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
-        dialog.configureDefaultButton("Code Editor", v -> {
+        dialog.configureDefaultButton(Helper.getResString(R.string.code_editor), v -> {
             AsdAllEditor editor = new AsdAllEditor(logicEditor);
             editor.setCon(menu.getArgValue().toString());
             editor.show();
@@ -820,7 +820,7 @@ public class ExtraMenuBean {
             dialog.dismiss();
         });
         dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
-        dialog.configureDefaultButton("Code Editor", v -> {
+        dialog.configureDefaultButton(Helper.getResString(R.string.code_editor), v -> {
             if (ConfigActivity.isLegacyCeEnabled()) {
                 AsdOldDialog asdOldDialog = new AsdOldDialog(logicEditor);
                 asdOldDialog.setCon(edittext.getText().toString());
@@ -847,7 +847,7 @@ public class ExtraMenuBean {
         mProperty.selection_type = DialogConfigs.FILE_AND_DIR_SELECT;
         String path;
         if (menuName.equals("Assets")) {
-            fpd.setTitle("Select an Asset");
+            fpd.setTitle(Helper.getResString(R.string.select_an_asset));
             path = String.format(ASSETS_PATH, sc_id);
             markedPath.add(0, path + ss.getArgValue().toString());
             fpd.markFiles(markedPath);
@@ -856,7 +856,7 @@ public class ExtraMenuBean {
             String[] strArr = path.split("/");
             splitter = strArr[strArr.length - 1];
         } else if (menuName.equals("NativeLib")) {
-            fpd.setTitle("Select a Native library");
+            fpd.setTitle(Helper.getResString(R.string.select_a_native_library));
             path = String.format(NATIVE_PATH, sc_id);
             markedPath.add(0, path + ss.getArgValue().toString());
             fpd.markFiles(markedPath);

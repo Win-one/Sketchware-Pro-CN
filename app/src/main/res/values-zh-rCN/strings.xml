@@ -8,6 +8,7 @@
     <string name="common_word_change">更改</string>
     <string name="common_word_close">关闭</string>
     <string name="common_word_copy">复制</string>
+    <string name="common_word_duplicate">复制</string>
     <string name="common_word_delete">删除</string>
     <string name="common_word_edit">编辑</string>
     <string name="common_word_exit">退出</string>
@@ -2530,7 +2531,10 @@
     <string name="strings_xml">strings.xml</string>
     <string name="xml_strings">XML Strings</string>
     <string name="design_manager_view_title_add_activity">新活动</string>
-    <string name="create_new_widget">创建组件</string>
+    <string name="create_new_widget">创建部件</string>
+    <string name="import_widgets">导入部件</string>
+    <string name="export_widgets">导出部件</string>
+    <string name="widget_editor">编辑部件</string>
     <string name="var_is_required">%s是必需的</string>
     <string name="widget_type_title">组件类型</string>
     <string name="new_class">或创建新类别</string>

@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="?attr/colorPrimaryInverse"
+        android:background="@color/md_theme_dark_background"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="4dp"

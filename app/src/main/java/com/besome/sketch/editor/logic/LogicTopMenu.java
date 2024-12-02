@@ -7,11 +7,9 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 
+import a.a.a.xB;
 import pro.sketchware.R;
 import pro.sketchware.databinding.LogicEditorTopMenuBinding;
-
-import a.a.a.xB;
-import pro.sketchware.utility.ThemeUtils;
 
 public class LogicTopMenu extends LinearLayout {
 
@@ -42,7 +40,7 @@ public class LogicTopMenu extends LinearLayout {
         binding.tvFavorite.setText(xB.b().a(getContext(), R.string.common_word_collection));
         binding.tvDetail.setText(xB.b().a(getContext(), R.string.common_word_detail));
         TypedValue typedValue = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.colorSurfaceContainerHigh, typedValue, true);
+        context.getTheme().resolveAttribute(com.google.android.material.R.attr.colorSurfaceContainerHigh, typedValue, true);
         colorSurfaceContainerHigh = typedValue.data;
         colorDefault = getResources().getColor(R.color.view_property_tab_deactive_text);
         colorOnDrag = Color.WHITE;

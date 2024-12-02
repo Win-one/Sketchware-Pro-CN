@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:background="?attr/colorPrimaryInverse"
+        android:background="@color/md_theme_dark_background"
         android:paddingLeft="8dp"
         android:paddingTop="8dp"
         android:paddingRight="4dp"
