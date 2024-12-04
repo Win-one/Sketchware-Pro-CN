@@ -269,22 +269,12 @@ public class SrcCodeEditor extends AppCompatActivity {
             SharedPreferences local_pref = getSharedPreferences("hsce", Activity.MODE_PRIVATE);
             Menu toolbarMenu = toolbar.getMenu();
             toolbarMenu.clear();
-            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Undo").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_undo)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Redo").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_redo)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Save").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_save)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-            if (isFileInLayoutFolder() && getIntent().hasExtra("sc_id")) {
-                toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Layout Preview");
-            }
-            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Find & Replace");
-            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Word wrap").setCheckable(true).setChecked(local_pref.getBoolean("act_ww", false));
-            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Pretty print");
-            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Select language");
-            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Select theme");
-            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Auto complete").setCheckable(true).setChecked(local_pref.getBoolean("act_ac", true));
-            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Auto complete symbol pair").setCheckable(true).setChecked(local_pref.getBoolean("act_acsp", true));
             toolbarMenu.add(Menu.NONE, 0, Menu.NONE, "Undo").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_undo)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
             toolbarMenu.add(Menu.NONE, 1, Menu.NONE, "Redo").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_redo)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
             toolbarMenu.add(Menu.NONE, 2, Menu.NONE, "Save").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_save)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            if (isFileInLayoutFolder() && getIntent().hasExtra("sc_id")) {
+                toolbarMenu.add(Menu.NONE, 10, Menu.NONE, R.string.layout_preview);
+            }
             toolbarMenu.add(Menu.NONE, 3, Menu.NONE, R.string.find_replace);
             toolbarMenu.add(Menu.NONE, 4, Menu.NONE, R.string.word_wrap).setCheckable(true).setChecked(local_pref.getBoolean("act_ww", false));
             toolbarMenu.add(Menu.NONE, 5, Menu.NONE, R.string.pretty_print);
@@ -385,7 +375,7 @@ public class SrcCodeEditor extends AppCompatActivity {
                         pref.edit().putBoolean("act_ac", item.isChecked()).apply();
                         break;
 
-                    case "Layout Preview":
+                    case 10:
                         toLayoutPreview();
                         break;
 

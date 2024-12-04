@@ -4,20 +4,20 @@ import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 
-import a.a.a.jC;
-import a.a.a.mB;
-import a.a.a.sy;
-
 import com.besome.sketch.beans.ViewBean;
 import com.besome.sketch.editor.view.ViewPane;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 
+import java.util.ArrayList;
+
+import a.a.a.jC;
+import a.a.a.mB;
+import a.a.a.sy;
+import pro.sketchware.R;
 import pro.sketchware.databinding.ActivityLayoutPreviewBinding;
 import pro.sketchware.tools.ViewBeanParser;
 import pro.sketchware.utility.SketchwareUtil;
 import pro.sketchware.utility.UI;
-
-import java.util.ArrayList;
 
 public class LayoutPreviewActivity extends BaseAppCompatActivity {
 
@@ -35,7 +35,7 @@ public class LayoutPreviewActivity extends BaseAppCompatActivity {
         setContentView(binding.getRoot());
         var toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Layout Preview");
+        getSupportActionBar().setTitle(R.string.layout_preview);
         getSupportActionBar().setSubtitle(getIntent().getStringExtra("title"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
@@ -64,7 +64,7 @@ public class LayoutPreviewActivity extends BaseAppCompatActivity {
                 SketchwareUtil.toastError(e.toString());
             }
         } else {
-            SketchwareUtil.toastError("content is null");
+            SketchwareUtil.toastError(getString(R.string.content_is_null));
         }
     }
 

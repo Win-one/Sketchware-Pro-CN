@@ -2808,5 +2808,11 @@ Please try again later"</string>
     <string name="select_a_native_library_so">Select a native library (.so)</string>
     <string name="couldn_t_import_library">Couldn\'t import library! [</string>
     <string name="nothing_changed">Nothing changed</string>
+    <string name="layout_preview">Layout Preview</string>
+    <string name="content_is_null">content is null</string>
+    <string name="use_appcompat_manager_to_modify_attributes_for_coordinatorlayout">Use AppCompat Manager to modify attributes for CoordinatorLayout, Toolbar, and other appcompat layout/widget.</string>
+    <string name="edit_appcompat">Edit AppCompat</string>
+    <string name="reload_color_schemes">Reload color schemes</string>
+    <string name="direct_code_editor">Direct code editor</string>
 
 </resources>

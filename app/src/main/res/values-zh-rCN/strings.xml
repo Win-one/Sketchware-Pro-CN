@@ -3128,4 +3128,10 @@
     <string name="select_a_native_library_so">选择原生库(.so)</string>
     <string name="couldn_t_import_library">无法导入库! [</string>
     <string name="nothing_changed">什么都没有改变</string>
+    <string name="layout_preview">布局预览</string>
+    <string name="content_is_null">内容为空</string>
+    <string name="use_appcompat_manager_to_modify_attributes_for_coordinatorlayout">使用应用兼容管理修改CoordinatorLayout,Toolbar和其他应用兼容布局/部件的属性.</string>
+    <string name="edit_appcompat">编辑应用兼容性</string>
+    <string name="reload_color_schemes">重新加载配色方案</string>
+    <string name="direct_code_editor">直达代码编辑器</string>
 </resources>

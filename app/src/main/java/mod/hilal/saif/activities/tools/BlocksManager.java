@@ -18,8 +18,8 @@ import android.widget.TextView;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
@@ -70,7 +70,7 @@ public class BlocksManager extends BaseAppCompatActivity {
     }
 
     private void initialize() {
-        binding.toolbar.setNavigationOnClickListener(v ->getOnBackPressedDispatcher().onBackPressed());
+        binding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
         binding.toolbar.setOnMenuItemClickListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.block_menus) {
