@@ -27,6 +27,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -59,6 +60,7 @@ import mod.hey.studios.util.Helper;
 import mod.jbk.code.CodeEditorColorSchemes;
 import mod.jbk.code.CodeEditorLanguages;
 import pro.sketchware.R;
+import pro.sketchware.activities.preview.LayoutPreviewActivity;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
 import pro.sketchware.utility.ThemeUtils;
@@ -267,6 +269,19 @@ public class SrcCodeEditor extends AppCompatActivity {
             SharedPreferences local_pref = getSharedPreferences("hsce", Activity.MODE_PRIVATE);
             Menu toolbarMenu = toolbar.getMenu();
             toolbarMenu.clear();
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Undo").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_undo)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Redo").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_redo)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Save").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_save)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            if (isFileInLayoutFolder() && getIntent().hasExtra("sc_id")) {
+                toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Layout Preview");
+            }
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Find & Replace");
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Word wrap").setCheckable(true).setChecked(local_pref.getBoolean("act_ww", false));
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Pretty print");
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Select language");
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Select theme");
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Auto complete").setCheckable(true).setChecked(local_pref.getBoolean("act_ac", true));
+            toolbarMenu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Auto complete symbol pair").setCheckable(true).setChecked(local_pref.getBoolean("act_acsp", true));
             toolbarMenu.add(Menu.NONE, 0, Menu.NONE, "Undo").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_undo)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
             toolbarMenu.add(Menu.NONE, 1, Menu.NONE, "Redo").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_redo)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
             toolbarMenu.add(Menu.NONE, 2, Menu.NONE, "Save").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_save)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -370,6 +385,10 @@ public class SrcCodeEditor extends AppCompatActivity {
                         pref.edit().putBoolean("act_ac", item.isChecked()).apply();
                         break;
 
+                    case "Layout Preview":
+                        toLayoutPreview();
+                        break;
+
                     default:
                         return false;
                 }
@@ -421,5 +440,24 @@ public class SrcCodeEditor extends AppCompatActivity {
     public static boolean isDarkModeEnabled(Context context) {
         int nightModeFlags = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    private boolean isFileInLayoutFolder() {
+        String content = getIntent().getStringExtra("content");
+        if (content != null) {
+            File file = new File(content);
+            if (content.contains("/resource/layout/")) {
+                String layoutFolder = file.getParent();
+                return layoutFolder != null && layoutFolder.endsWith("/resource/layout");
+            }
+        }
+        return false;
+    }
+
+    private void toLayoutPreview() {
+        Intent intent = new Intent(getApplicationContext(), LayoutPreviewActivity.class);
+        intent.putExtras(getIntent());
+        intent.putExtra("xml", editor.getText().toString());
+        startActivity(intent);
     }
 }

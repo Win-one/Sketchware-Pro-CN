@@ -356,6 +356,9 @@ public class ManageResourceActivity extends BaseAppCompatActivity {
             intent.putExtra("title", Uri.parse(frc.listFileResource.get(position)).getLastPathSegment());
             intent.putExtra("content", frc.listFileResource.get(position));
             intent.putExtra("xml", "");
+            if (getIntent().hasExtra("sc_id")) {
+                intent.putExtra("sc_id", getIntent().getStringExtra("sc_id"));
+            }
             startActivity(intent);
         } else {
             SketchwareUtil.toast(Helper.getResString(R.string.only_xml_files_can_be_edited));
