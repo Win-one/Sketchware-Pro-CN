@@ -74,7 +74,7 @@
     <string name="common_word_image">图片</string>
     <string name="common_word_sound">音频</string>
     <string name="common_word_font">字体</string>
-    <string name="common_word_widget">小部件</string>
+    <string name="common_word_widget">部件</string>
     <string name="common_word_block">块</string>
     <string name="common_word_variable">变量</string>
     <string name="common_word_new">新建</string>
@@ -276,16 +276,16 @@
     <string name="design_manager_image_import_icon_button_white">白色</string>
     <string name="design_manager_block_detail_actionbar_title">块细节</string>
     <string name="design_manager_block_hint_enter_block_name">输出块名称</string>
-    <string name="design_manager_widget_title_actionbar_title">小部件详细信息</string>
-    <string name="design_manager_widget_hint_enter_widget_name">输入小部件名称</string>
+    <string name="design_manager_widget_title_actionbar_title">部件详细信息</string>
+    <string name="design_manager_widget_hint_enter_widget_name">输入部件名称</string>
     <string name="design_property_recent_message_nodata">最近使用的属性将被显示</string>
-    <string name="view_panel_title_widgets">小部件</string>
+    <string name="view_panel_title_widgets">部件</string>
     <string name="view_panel_title_layouts">布局</string>
     <string name="view_panel_title_properties">属性</string>
-    <string name="view_widget_favorites_save_title">将小部件保存到我的收藏夹</string>
-    <string name="view_widget_favorites_save_guide">保存的小部件保存到我的收藏夹并可从所有项目访问</string>
+    <string name="view_widget_favorites_save_title">将部件保存到我的收藏夹</string>
+    <string name="view_widget_favorites_save_guide">保存的部件保存到我的收藏夹并可从所有项目访问</string>
     <string name="view_widget_favorites_delete_title">从我的收藏中删除</string>
-    <string name="view_widget_favorites_delete_message">您确定要删除我的收藏中保存的小部件吗?此操作无法撤消.</string>
+    <string name="view_widget_favorites_delete_message">您确定要删除我的收藏中保存的部件吗?此操作无法撤消.</string>
     <string name="event_title_add_new_event">添加新事件</string>
     <string name="event_title_add_new_component">添加新组件</string>
     <string name="event_message_new_event">新事件添加</string>
@@ -383,7 +383,7 @@
     <string name="logic_variable_type_list_number">数字列表(List Number)</string>
     <string name="logic_variable_type_list_string">字符串列表(List String)</string>
     <string name="logic_variable_type_list_map">集合列表(List Map)</string>
-    <string name="logic_editor_title_select_view">选择小部件</string>
+    <string name="logic_editor_title_select_view">选择部件</string>
     <string name="logic_editor_title_select_image">选择图像</string>
     <string name="logic_editor_title_select_image_background">选择背景图片</string>
     <string name="logic_editor_title_select_sound">选择声音</string>
@@ -544,7 +544,7 @@
     <string name="system_information_developer_options">开发者选项</string>
     <string name="system_settings_title_setting_vibration">振动</string>
     <string name="system_settings_title_automatically_save">自动保存</string>
-    <string name="system_settings_description_setting_vibration">当小部件或块被长时间按下时震动</string>
+    <string name="system_settings_description_setting_vibration">当部件或块被长时间按下时震动</string>
     <string name="system_settings_description_automatically_save">当您退出项目时自动保存</string>
     <string name="invalid_component">无效组件</string>
     <string name="invalid_value_min_lenth">至少使用 %d 字母 </string>
@@ -1780,7 +1780,7 @@
     <string name="design_library_admob_button_goto_console">打开AdMob控制台</string>
     <string name="design_library_admob_button_goto_setting">打开AdMob设置</string>
     <string name="design_library_admob_description">AdMob是Google提供的移动广告平台. 通过添加AdMob从您的应用中获利.</string>
-    <string name="design_library_admob_dialog_description_confirm_uncheck">如果取消选中AdMob选项,则会删除现有的AdMob小部件和组件. 你确定你要继续吗？</string>
+    <string name="design_library_admob_dialog_description_confirm_uncheck">如果取消选中AdMob选项,则会删除现有的AdMob部件和组件. 你确定你要继续吗？</string>
     <string name="design_library_admob_setting_step1_title">添加广告单元</string>
     <string name="design_library_admob_setting_step1_desc">首先,您需要在AdMob控制台中创建广告单元. 手动添加创建的广告单元或链接您的AdMob帐户.</string>
 
@@ -2104,8 +2104,8 @@
     <string name="share_view_message_uploading_view_data">正在上传视图数据</string>
     <string name="share_block_message_uploading_block_data">上传块数据</string>
     <string name="common_message_selected_file_empty">所选文件为空</string>
-    <string name="view_widget_favorites_image_auto_added">窗口小部件中使用的图像将添加到此项目中.</string>
-    <string name="view_widget_favorites_save_guide_new">如果保存此窗口小部件,此窗口小部件将添加到窗口小部件集合中,此窗口小部件中使用的图像将自动添加到图像集合中. 保存的小部件可用于所有项目.</string>
+    <string name="view_widget_favorites_image_auto_added">部件中使用的图像将添加到此项目中.</string>
+    <string name="view_widget_favorites_save_guide_new">如果您保存此部件,此部件将添加到部件集合中,此部件中使用的图像将自动添加到图像集合中.保存的部件可用于所有项目.</string>
     <string name="shared_collection_message_update_soon">此功能将很快更新. 请等待下一次更新.</string>
     <string name="shared_views_detail_message_add_collection_complete">添加收藏完成.如果视图具有所需图像,则会自动将所需图像添加到图像集中,您可以直接在项目中使用包含所需图像的视图.</string>
     <string name="shared_collection_detail_title_dialog_add_collection_complete">添加收藏完成</string>
