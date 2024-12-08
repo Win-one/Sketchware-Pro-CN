@@ -2819,5 +2819,14 @@ Please try again later"</string>
     <string name="edit_appcompat">Edit AppCompat</string>
     <string name="reload_color_schemes">Reload color schemes</string>
     <string name="direct_code_editor">Direct code editor</string>
+    <string name="generating_view_binding">Generating view binding...</string>
+    <string name="xml_command_manager">XML Command Manager</string>
+    <string name="select_an_xml">Select an XML</string>
+    <string name="add_new_command">Add new command</string>
+    <string name="edit_command">Edit command</string>
+    <string name="xml_name_is_required">XML name is required</string>
+    <string name="reference_is_required">reference is required</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="would_you_like_to_enable_the_new_xml">Would you like to enable the new XML Command? It will speed up XML generation and compilation, but this change cannot be undone. Don’t worry, your previous changes with the XML Command Block will transfered here so it will remain unaffected.</string>
 
 </resources>

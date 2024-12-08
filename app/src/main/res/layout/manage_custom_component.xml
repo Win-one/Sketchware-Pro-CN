@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 app:layout_collapseMode="pin"
-                app:menu="@menu/block_menu"
+                app:menu="@menu/component_menu"
                 app:navigationIcon="@drawable/abc_ic_ab_back_material"
                 app:title="@string/developer_tools_component_manager" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>

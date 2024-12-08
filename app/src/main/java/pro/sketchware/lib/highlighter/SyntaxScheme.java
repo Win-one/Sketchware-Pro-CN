@@ -116,7 +116,7 @@ public class SyntaxScheme {
     public static void setXMLHighlighter(EditText editText) {
 
         int violet = ThemeUtils.getColor(editText, R.attr.colorViolet);
-        int onSurface = ThemeUtils.getColor(editText, R.attr.colorOnSurface);
+        int onSurface = ThemeUtils.getColor(editText, com.google.android.material.R.attr.colorOnSurface);
         int green = ThemeUtils.getColor(editText, R.attr.colorGreen);
         editText.addTextChangedListener(new TextWatcher() {
             @Override

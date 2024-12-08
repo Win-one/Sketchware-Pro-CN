@@ -17,15 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.color.MaterialColors;
 
+import java.util.ArrayList;
+
 import a.a.a.aB;
 import a.a.a.mB;
 import mod.hey.studios.util.Helper;
 import pro.sketchware.R;
-import pro.sketchware.databinding.AboutTeamviewBinding;
-
-import java.util.ArrayList;
-
 import pro.sketchware.activities.about.models.AboutResponseModel;
+import pro.sketchware.databinding.AboutTeamviewBinding;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
 
@@ -81,11 +80,11 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
         int activeBackgroundColor;
         int activeBackgroundTextColor;
         if (member.isActive()) {
-            holder.binding.tvStatus.setText("Active");
+            holder.binding.tvStatus.setText(R.string.active);
             activeBackgroundColor = MaterialColors.getColor(holder.binding.tvStatus, R.attr.colorCoolGreenContainer);
             activeBackgroundTextColor = MaterialColors.getColor(holder.binding.tvStatus, R.attr.colorOnCoolGreenContainer);
         } else {
-            holder.binding.tvStatus.setText("Inactive");
+            holder.binding.tvStatus.setText(R.string.inactive);
             activeBackgroundColor = MaterialColors.getColor(holder.binding.tvStatus, R.attr.colorAmberContainer);
             activeBackgroundTextColor = MaterialColors.getColor(holder.binding.tvStatus, R.attr.colorOnAmberContainer);
         }

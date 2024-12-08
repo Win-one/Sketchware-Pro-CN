@@ -1084,19 +1084,19 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                     return;
                 }
 
-                onProgress("Extracting built-in libraries...");
+                onProgress(Helper.getResString(R.string.extracting_built_in_libraries));
                 BuiltInLibraries.extractCompileAssets(this);
                 if (canceled) {
                     return;
                 }
 
-                onProgress("AAPT2 is running...");
+                onProgress(Helper.getResString(R.string.aapt2_is_running));
                 builder.compileResources();
                 if (canceled) {
                     return;
                 }
 
-                onProgress("Generating view binding...");
+                onProgress(Helper.getResString(R.string.generating_view_binding));
                 builder.generateViewBinding();
                 if (canceled) {
                     return;
@@ -1107,7 +1107,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                     return;
                 }
 
-                onProgress("Java is compiling...");
+                onProgress(Helper.getResString(R.string.java_is_compiling));
                 builder.compileJavaCode();
                 if (canceled) {
                     return;
@@ -1131,19 +1131,19 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                     return;
                 }
 
-                onProgress("Merging DEX files...");
+                onProgress(Helper.getResString(R.string.merging_dex_files));
                 builder.getDexFilesReady();
                 if (canceled) {
                     return;
                 }
 
-                onProgress("Building APK...");
+                onProgress(Helper.getResString(R.string.building_apk));
                 builder.buildApk();
                 if (canceled) {
                     return;
                 }
 
-                onProgress("Signing APK...");
+                onProgress(Helper.getResString(R.string.signing_apk));
                 builder.signDebugApk();
                 if (canceled) {
                     return;

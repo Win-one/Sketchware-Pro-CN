@@ -16,13 +16,6 @@ import android.widget.PopupMenu;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
 
-import a.a.a.Jx;
-import a.a.a.hC;
-import a.a.a.jC;
-import a.a.a.mB;
-import a.a.a.wq;
-import a.a.a.yq;
-
 import com.besome.sketch.beans.ProjectFileBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -30,18 +23,25 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 
-import io.github.rosemoe.sora.langs.java.JavaLanguage;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.concurrent.Executors;
+
+import a.a.a.Jx;
+import a.a.a.hC;
+import a.a.a.jC;
+import a.a.a.mB;
+import a.a.a.wq;
+import a.a.a.yq;
 import io.github.rosemoe.sora.widget.CodeEditor;
 import io.github.rosemoe.sora.widget.component.Magnifier;
-import io.github.rosemoe.sora.widget.schemes.EditorColorScheme;
-import io.github.rosemoe.sora.widget.schemes.SchemeDarcula;
-
 import mod.hey.studios.project.ProjectSettings;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.blocks.CommandBlock;
 import mod.jbk.code.CodeEditorColorSchemes;
 import mod.jbk.code.CodeEditorLanguages;
-
 import pro.sketchware.R;
 import pro.sketchware.activities.editor.command.adapters.XMLCommandAdapter;
 import pro.sketchware.databinding.ManageXmlCommandAddBinding;
@@ -50,12 +50,6 @@ import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
 import pro.sketchware.utility.ThemeUtils;
 import pro.sketchware.utility.UI;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.concurrent.Executors;
 
 public class ManageXMLCommandActivity extends BaseAppCompatActivity {
 
@@ -83,7 +77,7 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
         binding = ManageXmlCommandBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle("XML Command Manager");
+        getSupportActionBar().setTitle(R.string.xml_command_manager);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         UI.addSystemWindowInsetToPadding(binding.list, false, false, false, true);
@@ -111,11 +105,11 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
                     int position = item.second;
                     PopupMenu popupMenu = new PopupMenu(ManageXMLCommandActivity.this, item.first);
                     var menu = popupMenu.getMenu();
-                    menu.add(Menu.NONE, 0, Menu.NONE, "Edit");
-                    menu.add(Menu.NONE, 1, Menu.NONE, "Delete");
-                    if (position != 0) menu.add(Menu.NONE, 2, Menu.NONE, "Move up");
+                    menu.add(Menu.NONE, 0, Menu.NONE, R.string.common_word_edit);
+                    menu.add(Menu.NONE, 1, Menu.NONE, R.string.common_word_delete);
+                    if (position != 0) menu.add(Menu.NONE, 2, Menu.NONE, R.string.move_up);
                     if (position != adapter.getItemCount() - 1)
-                        menu.add(Menu.NONE, 3, Menu.NONE, "Move down");
+                        menu.add(Menu.NONE, 3, Menu.NONE, R.string.move_down);
 
                     popupMenu.setOnMenuItemClickListener(
                             itemMenu -> {
@@ -135,7 +129,7 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
                                     MaterialAlertDialogBuilder dialog =
                                             new MaterialAlertDialogBuilder(this);
                                     dialog.setTitle(R.string.common_word_delete);
-                                    dialog.setMessage("Are you sure you want to delete this item?");
+                                    dialog.setMessage(R.string.are_you_sure_you_want_to_delete_this_item);
                                     dialog.setPositiveButton(
                                             R.string.common_word_yes,
                                             (d, w) -> {
@@ -173,7 +167,7 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
         switch (item.getItemId()) {
             case 0 -> {
                 new MaterialAlertDialogBuilder(this)
-                        .setTitle("Select an XML")
+                        .setTitle(R.string.select_an_xml)
                         .setAdapter(
                                 new ArrayAdapter<String>(
                                         this, android.R.layout.simple_list_item_1, xmlFiles),
@@ -214,7 +208,7 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
                     }
                 });
         dialog.show();
-        binding.title.setText(!edit ? "Add new command" : "Edit command");
+        binding.title.setText(!edit ? getString(R.string.add_new_command) : getString(R.string.edit_command));
 
         if (edit) {
             var command = commands.get(position);
@@ -246,11 +240,11 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
                     var reference = binding.reference.getText().toString();
                     var command = binding.command.getText().toString();
                     if (TextUtils.isEmpty(xmlName)) {
-                        SketchwareUtil.toastError("XML name is required");
+                        SketchwareUtil.toastError(getString(R.string.xml_name_is_required));
                         return;
                     }
                     if (TextUtils.isEmpty(reference)) {
-                        SketchwareUtil.toastError("reference is required");
+                        SketchwareUtil.toastError(getString(R.string.reference_is_required));
                         return;
                     }
                     HashMap<String, Object> map = new HashMap<>();
@@ -286,9 +280,9 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
 
     private void showConfirmationDialog() {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
-        dialog.setTitle("Confirmation");
+        dialog.setTitle(R.string.confirmation);
         dialog.setMessage(
-                "Would you like to enable the new XML Command? It will speed up XML generation and compilation, but this change cannot be undone. Don’t worry, your previous changes with the XML Command Block will transfered here so it will remain unaffected.");
+                R.string.would_you_like_to_enable_the_new_xml);
         dialog.setPositiveButton(
                 R.string.common_word_yes,
                 (d, w) -> {
@@ -319,7 +313,7 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
                                     new MaterialAlertDialogBuilder(this)
                                             .setTitle(filename)
                                             .setCancelable(false)
-                                            .setPositiveButton("Dismiss", null);
+                                            .setPositiveButton(R.string.common_word_dismiss, null);
 
                             runOnUiThread(
                                     () -> {
@@ -333,7 +327,7 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
                                         editor.setText(
                                                 !source.isEmpty()
                                                         ? source
-                                                        : "Failed to generate source.");
+                                                        : getString(R.string.failed_to_generate_source));
                                         editor.getComponent(Magnifier.class)
                                                 .setWithinEditorForcibly(true);
 
