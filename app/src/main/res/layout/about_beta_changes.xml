@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_date_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -17,17 +17,14 @@
         android:text="@string/about_team_title"
         android:textAppearance="?attr/textAppearanceLabelLarge"
         android:textStyle="bold"
-        tools:text="Main contributors" />
+        tools:text="Today Changes" />
 
     <LinearLayout
-        android:id="@+id/member_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
         android:gravity="center_vertical"
-        android:clickable="true"
-        android:background="?selectableItemBackground"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -62,10 +59,51 @@
             android:gravity="center_vertical"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:id="@+id/status_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tv_user_name"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="3dp"
+                android:orientation="horizontal"
+                android:paddingRight="4dp">
+
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:background="#676767"
+                    android:focusable="false"
+                    android:gravity="center"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="1dp"
+                    android:textColor="#FFF"
+                    android:textSize="11sp"
+                    tools:text="Core Team" />
+
+                <TextView
+                    android:id="@+id/update_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#676767"
+                    android:focusable="false"
+                    android:gravity="center"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="1dp"
+                    android:textColor="#FFF"
+                    android:textSize="11sp"
+                    tools:text="New update" />
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="false"
+                android:layout_toLeftOf="@id/status_layout"
                 android:paddingLeft="8dp"
                 android:paddingTop="8dp"
                 android:paddingRight="8dp"
@@ -85,23 +123,8 @@
                 android:paddingRight="8dp"
                 android:paddingBottom="8dp"
                 android:textAppearance="?attr/textAppearanceBodySmall"
-                tools:text="Their description" />
+                tools:text="Their commit description" />
 
-            <TextView
-                android:id="@+id/tv_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tv_user_name"
-                android:layout_marginBottom="3dp"
-                android:layout_toEndOf="@+id/tv_user_name"
-                android:background="#676767"
-                android:focusable="false"
-                android:gravity="center"
-                android:paddingHorizontal="6dp"
-                android:paddingVertical="1dp"
-                android:textColor="#FFF"
-                android:textSize="11sp"
-                tools:text="status" />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

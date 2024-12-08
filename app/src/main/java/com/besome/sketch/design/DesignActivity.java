@@ -121,6 +121,7 @@ import mod.jbk.util.LogUtil;
 import mod.khaled.logcat.LogReaderActivity;
 import pro.sketchware.R;
 import pro.sketchware.activities.appcompat.ManageAppCompatActivity;
+import pro.sketchware.activities.editor.command.ManageXMLCommandActivity;
 import pro.sketchware.activities.editor.view.ViewCodeEditorActivity;
 import pro.sketchware.databinding.ProgressMsgBoxBinding;
 import pro.sketchware.utility.FileUtil;
@@ -364,6 +365,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                 PopupMenu popupMenu = new PopupMenu(this, buildSettings);
                 Menu menu = popupMenu.getMenu();
 
+                var isViewTab = viewPager.getCurrentItem() == 0;
                 menu.add(Menu.NONE, 1, Menu.NONE, R.string.build_settings);
                 menu.add(Menu.NONE, 2, Menu.NONE, R.string.clean_temporary_files);
                 menu.add(Menu.NONE, 3, Menu.NONE, R.string.show_last_compile_error);
@@ -372,7 +374,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                     menu.add(Menu.NONE, 4, Menu.NONE, R.string.install_last_built_apk);
                     menu.add(Menu.NONE, 6, Menu.NONE, R.string.show_apk_signatures);
                 }
-                if (viewPager.getCurrentItem() == 0) {
+                if (isViewTab) {
                     menu.add(Menu.NONE, 7, Menu.NONE, R.string.direct_code_editor);
                 }
 
@@ -952,6 +954,13 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
             }
         }
         launchActivity(SrcViewerActivity.class, null, new Pair<>("current", current));
+    }
+
+    /**
+     * Opens {@link ManageXMLCommandActivity}.
+     */
+    void toXMLCommandManager() {
+        launchActivity(ManageXMLCommandActivity.class, null);
     }
 
     @SafeVarargs
