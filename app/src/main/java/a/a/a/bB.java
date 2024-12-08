@@ -1,15 +1,18 @@
 package a.a.a;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import pro.sketchware.R;
+import androidx.core.content.ContextCompat;
 
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
 
 public class bB {
 
@@ -27,7 +30,12 @@ public class bB {
     public static Toast a(Context context, CharSequence charSequence, int duration, int gravity, float xOffset, float yOffset) {
         View inflate = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_toast, null);
         LinearLayout linearLayout = inflate.findViewById(R.id.custom_toast_container);
+        ImageView imageView = inflate.findViewById(R.id.iv_toast);
+        imageView.setImageResource(R.drawable.ic_normal);
         ((TextView) inflate.findViewById(R.id.tv_stoast)).setText(charSequence.toString());
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(inflate, "translationY", 0, 40, -20, 0, 10, -5, 0);
+        objectAnimator.setDuration(1000);
+        objectAnimator.start();
         Toast toast = new Toast(context);
         toast.setDuration(duration);
         toast.setGravity(
@@ -44,14 +52,22 @@ public class bB {
             View inflate = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_toast, null);
             LinearLayout linearLayout = inflate.findViewById(R.id.custom_toast_container);
             TextView textView = inflate.findViewById(R.id.tv_stoast);
+            ImageView imageView = inflate.findViewById(R.id.iv_toast);
             if (toastType != TOAST_WARNING) {
+                imageView.setColorFilter(ContextCompat.getColor(context, R.color.scolor_black_01));
+                imageView.setImageResource(R.drawable.ic_normal);
                 linearLayout.setBackgroundResource(R.drawable.bg_toast_normal);
                 textView.setTextColor(context.getResources().getColor(R.color.scolor_black_01));
             } else {
+                imageView.setColorFilter(ContextCompat.getColor(context, R.color.scolor_red_02));
+                imageView.setImageResource(R.drawable.ic_error);
                 linearLayout.setBackgroundResource(R.drawable.bg_toast_warning);
                 textView.setTextColor(context.getResources().getColor(R.color.scolor_red_02));
             }
             textView.setText(charSequence.toString());
+            ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(inflate, "translationY", 0, 40, -20, 0, 10, -5, 0);
+            objectAnimator.setDuration(1000);
+            objectAnimator.start();
             Toast toast = new Toast(context);
             toast.setDuration(duration);
             toast.setGravity(
