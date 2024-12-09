@@ -3148,4 +3148,7 @@
     <string name="reference_is_required">需要参考资料</string>
     <string name="confirmation">确认</string>
     <string name="would_you_like_to_enable_the_new_xml">是否要启用新的XML命令?它将加快XML的生成和编译,但此更改无法撤消. 别担心,您之前对XML命令块的更改将在此处传输,因此它不会受到影响.</string>
+    <string name="advanced_version_control">高级版本控制</string>
+    <string name="invalid_version_code">版本代码无效</string>
+    <string name="invalid_version_name">版本名称无效</string>
 </resources>

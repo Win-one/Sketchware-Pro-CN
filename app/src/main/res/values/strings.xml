@@ -2828,5 +2828,8 @@ Please try again later"</string>
     <string name="reference_is_required">reference is required</string>
     <string name="confirmation">Confirmation</string>
     <string name="would_you_like_to_enable_the_new_xml">Would you like to enable the new XML Command? It will speed up XML generation and compilation, but this change cannot be undone. Don’t worry, your previous changes with the XML Command Block will transfered here so it will remain unaffected.</string>
+    <string name="advanced_version_control">Advanced Version Control</string>
+    <string name="invalid_version_code">Invalid Version Code</string>
+    <string name="invalid_version_name">Invalid Version Name</string>
 
 </resources>

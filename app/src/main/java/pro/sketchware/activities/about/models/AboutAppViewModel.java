@@ -25,34 +25,35 @@ public class AboutAppViewModel extends ViewModel {
     }
 
     public void setTeamMembers(ArrayList<AboutResponseModel.TeamMember> teamMembers) {
-        ArrayList<AboutResponseModel.TeamMember> coreTeamActive = new ArrayList<>();
-        ArrayList<AboutResponseModel.TeamMember> coreTeamInactive = new ArrayList<>();
-        ArrayList<AboutResponseModel.TeamMember> activeContributors = new ArrayList<>();
-        ArrayList<AboutResponseModel.TeamMember> inactiveContributors = new ArrayList<>();
+        if (teamMembers != null) {
+            ArrayList<AboutResponseModel.TeamMember> coreTeamActive = new ArrayList<>();
+            ArrayList<AboutResponseModel.TeamMember> coreTeamInactive = new ArrayList<>();
+            ArrayList<AboutResponseModel.TeamMember> activeContributors = new ArrayList<>();
+            ArrayList<AboutResponseModel.TeamMember> inactiveContributors = new ArrayList<>();
 
-        for (AboutResponseModel.TeamMember member : teamMembers) {
-            if (member.isCoreTeamMember()) {
-                if (member.isActive()) {
-                    coreTeamActive.add(member);
+            for (AboutResponseModel.TeamMember member : teamMembers) {
+                if (member.isCoreTeamMember()) {
+                    if (member.isActive()) {
+                        coreTeamActive.add(member);
+                    } else {
+                        coreTeamInactive.add(member);
+                    }
+                } else if (member.isActive()) {
+                    activeContributors.add(member);
                 } else {
-                    coreTeamInactive.add(member);
+                    inactiveContributors.add(member);
                 }
-            } else if (member.isActive()) {
-                activeContributors.add(member);
-            } else {
-                inactiveContributors.add(member);
             }
+
+            ArrayList<AboutResponseModel.TeamMember> sortedTeamMembers = new ArrayList<>();
+            sortedTeamMembers.addAll(coreTeamActive);
+            sortedTeamMembers.addAll(coreTeamInactive);
+            sortedTeamMembers.addAll(activeContributors);
+            sortedTeamMembers.addAll(inactiveContributors);
+
+            this.teamMembers.setValue(sortedTeamMembers);
         }
-
-        ArrayList<AboutResponseModel.TeamMember> sortedTeamMembers = new ArrayList<>();
-        sortedTeamMembers.addAll(coreTeamActive);
-        sortedTeamMembers.addAll(coreTeamInactive);
-        sortedTeamMembers.addAll(activeContributors);
-        sortedTeamMembers.addAll(inactiveContributors);
-
-        this.teamMembers.setValue(sortedTeamMembers);
     }
-
 
 
     public ArrayList<String> getCoreTeamMembers() {
@@ -72,7 +73,9 @@ public class AboutAppViewModel extends ViewModel {
     }
 
     public void setChangelog(ArrayList<AboutResponseModel.ChangeLogs> changelog) {
-        this.changelog.setValue(changelog);
+        if (changelog != null) {
+            this.changelog.setValue(changelog);
+        }
     }
 
     public LiveData<ArrayList<AboutResponseModel.CommitDetails>> getCommitDetailsList() {
@@ -80,6 +83,8 @@ public class AboutAppViewModel extends ViewModel {
     }
 
     public void setCommitDetailsList(ArrayList<AboutResponseModel.CommitDetails> newCommitDetails) {
-        commitDetailsList.setValue(newCommitDetails);
+        if (newCommitDetails != null) {
+            commitDetailsList.setValue(newCommitDetails);
+        }
     }
 }

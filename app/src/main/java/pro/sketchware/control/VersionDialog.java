@@ -4,13 +4,13 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 
 import com.besome.sketch.projects.MyProjectSettingActivity;
-import pro.sketchware.R;
-import pro.sketchware.databinding.DialogAdvancedVersionControlBinding;
 
 import a.a.a.aB;
 import a.a.a.mB;
-import pro.sketchware.lib.validator.VersionNamePostfixValidator;
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
+import pro.sketchware.databinding.DialogAdvancedVersionControlBinding;
+import pro.sketchware.lib.validator.VersionNamePostfixValidator;
 
 public class VersionDialog {
     private final MyProjectSettingActivity activity;
@@ -25,7 +25,7 @@ public class VersionDialog {
     public void show() {
         final aB dialog = new aB(activity);
         dialog.a(R.drawable.numbers_48);
-        dialog.b("Advanced Version Control");
+        dialog.b(Helper.getResString(R.string.advanced_version_control));
 
         binding.versionCode.setText(String.valueOf(Integer.parseInt(activity.binding.verCode.getText().toString())));
         binding.versionName1.setText(activity.binding.verName.getText().toString().split(" ")[0]);
@@ -44,13 +44,13 @@ public class VersionDialog {
             if (validVerCode) {
                 binding.versionCode.setError(null);
             } else {
-                binding.versionCode.setError("Invalid Version Code");
+                binding.versionCode.setError(Helper.getResString(R.string.invalid_version_code));
             }
 
             if (validVerName) {
                 binding.versionName1.setError(null);
             } else {
-                binding.versionName1.setError("Invalid Version Name");
+                binding.versionName1.setError(Helper.getResString(R.string.invalid_version_name));
             }
 
             if (!mB.a() && validVerCode && validVerName) {

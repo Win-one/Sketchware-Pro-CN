@@ -71,7 +71,7 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
         toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
         toolbar.setOnMenuItemClickListener(item -> {
             int itemId = item.getItemId();
-            if (itemId == R.id.block_menus) {
+            if (itemId == R.id.import_component_menus) {
                 showFilePickerDialog();
                 return true;
             }
