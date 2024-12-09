@@ -2831,5 +2831,6 @@ Please try again later"</string>
     <string name="advanced_version_control">Advanced Version Control</string>
     <string name="invalid_version_code">Invalid Version Code</string>
     <string name="invalid_version_name">Invalid Version Name</string>
+    <string name="select_a_more_block">Select a more block</string>
 
 </resources>

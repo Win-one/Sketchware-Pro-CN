@@ -13,15 +13,15 @@ import android.widget.SearchView;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.besome.sketch.beans.MoreBlockCollectionBean;
-import pro.sketchware.R;
-import pro.sketchware.databinding.ManageCollectionPopupImportMoreBlockListItemBinding;
 
 import java.util.ArrayList;
 
 import a.a.a.aB;
-import pro.sketchware.utility.SketchwareUtil;
 import mod.hey.studios.util.Helper;
 import mod.jbk.util.BlockUtil;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ManageCollectionPopupImportMoreBlockListItemBinding;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class MoreblockImporterDialog extends aB {
 
@@ -35,12 +35,12 @@ public class MoreblockImporterDialog extends aB {
 
         Adapter la = new Adapter();
 
-        b("Select a more block");
+        b(Helper.getResString(R.string.select_a_more_block));
         a(R.drawable.more_block_96dp);
 
         SearchView searchView = new SearchView(act);
 
-        searchView.setQueryHint("Search...");
+        searchView.setQueryHint(Helper.getResString(R.string.search));
         searchView.setIconifiedByDefault(false);
         searchView.setFocusable(false);
         searchView.setFocusableInTouchMode(true);
@@ -118,7 +118,7 @@ public class MoreblockImporterDialog extends aB {
             MoreBlockCollectionBean selectedBean = la.getSelectedItem();
 
             if (selectedBean == null) {
-                SketchwareUtil.toastError("Select a more block");
+                SketchwareUtil.toastError(Helper.getResString(R.string.select_a_more_block));
             } else {
                 callback.onSelected(selectedBean);
                 dismiss();

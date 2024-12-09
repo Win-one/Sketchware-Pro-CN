@@ -13,11 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 
-import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.besome.sketch.beans.SrcCodeBean;
 import com.besome.sketch.ctrls.CommonSpinnerItem;
+import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import pro.sketchware.R;
 
 import java.util.ArrayList;
 
@@ -32,6 +31,7 @@ import io.github.rosemoe.sora.widget.schemes.SchemeDarcula;
 import mod.hey.studios.util.Helper;
 import mod.jbk.code.CodeEditorColorSchemes;
 import mod.jbk.code.CodeEditorLanguages;
+import pro.sketchware.R;
 
 public class SrcViewerActivity extends BaseAppCompatActivity {
 
@@ -184,10 +184,10 @@ public class SrcViewerActivity extends BaseAppCompatActivity {
                 Gravity.CENTER));
 
         new MaterialAlertDialogBuilder(this)
-                .setTitle("Select font size")
+                .setTitle(R.string.select_font_size)
                 .setIcon(R.drawable.ic_mtrl_formattext)
                 .setView(layout)
-                .setPositiveButton("Apply", (dialog, which) -> {
+                .setPositiveButton(R.string.common_word_apply, (dialog, which) -> {
                     sourceCodeFontSize = picker.getValue();
                     codeViewer.setTextSize(sourceCodeFontSize);
                 })

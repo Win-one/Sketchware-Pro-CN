@@ -7,8 +7,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:paddingHorizontal="20dp"
+        android:paddingTop="10dp"
+        android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_android_jar"
@@ -57,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
-            android:text="Java version"
+            android:text="@string/java_version"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -72,28 +73,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Hide warnings in error log" />
+            android:text="@string/hide_warnings_in_error_log" />
 
         <CheckBox
             android:id="@+id/cb_no_http_legacy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Don't include http-legacy-28.dex" />
+            android:text="@string/don_t_include_http_legacy_28_dex" />
 
         <CheckBox
             android:id="@+id/cb_enable_logcat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Enable debug logcat logs viewable in Logcat Reader. Not enabled in exported AABs/APKs." />
+            android:text="@string/enable_debug_logcat_logs_viewable_in_logcat_reader" />
 
         <CheckBox
             android:id="@+id/cb_enable_background_build"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Enable building the project in the background" />
+            android:text="@string/enable_building_the_project_in_the_background" />
 
     </LinearLayout>
 </ScrollView>

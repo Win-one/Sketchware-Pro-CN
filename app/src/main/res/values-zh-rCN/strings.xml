@@ -3151,4 +3151,5 @@
     <string name="advanced_version_control">高级版本控制</string>
     <string name="invalid_version_code">版本代码无效</string>
     <string name="invalid_version_name">版本名称无效</string>
+    <string name="select_a_more_block">选择更多块</string>
 </resources>

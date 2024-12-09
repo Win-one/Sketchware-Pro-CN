@@ -1,6 +1,5 @@
 package mod.agus.jcoderz.editor.manage.permission;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.Editable;
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
@@ -112,16 +110,16 @@ public class ManagePermissionActivity extends BaseAppCompatActivity {
     public void initButtons() {
         binding.resetPermissions.setOnClickListener(view -> {
             new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.reset_permissions)
-                .setMessage(R.string.are_you_sure_you_want_to_reset_all_permissions_this_cannot_be_undone)
-                .setPositiveButton(R.string.common_word_reset, (dialog, which) -> {
-                    FileUtil.writeFile(new FilePathUtil().getPathPermission(numProj), "[]");
-                    //As FileResConfig only refreshes permissions during <init>()V, this is required.
-                    frc = new FileResConfig(numProj);
-                    setItems();
-                })
-                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
-                .show();
+                    .setTitle(R.string.reset_permissions)
+                    .setMessage(R.string.are_you_sure_you_want_to_reset_all_permissions_this_cannot_be_undone)
+                    .setPositiveButton(R.string.common_word_reset, (dialog, which) -> {
+                        FileUtil.writeFile(new FilePathUtil().getPathPermission(numProj), "[]");
+                        //As FileResConfig only refreshes permissions during <init>()V, this is required.
+                        frc = new FileResConfig(numProj);
+                        setItems();
+                    })
+                    .setNegativeButton(R.string.common_word_cancel, (dialog, which) -> dialog.dismiss())
+                    .show();
         });
         binding.scrollToTopButton.setOnClickListener(view -> {
             binding.scrollToTopButton.hide();
