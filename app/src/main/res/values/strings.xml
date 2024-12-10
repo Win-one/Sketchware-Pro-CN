@@ -2818,7 +2818,7 @@ Please try again later"</string>
     <string name="use_appcompat_manager_to_modify_attributes_for_coordinatorlayout">Use AppCompat Manager to modify attributes for CoordinatorLayout, Toolbar, and other appcompat layout/widget.</string>
     <string name="edit_appcompat">Edit AppCompat</string>
     <string name="reload_color_schemes">Reload color schemes</string>
-    <string name="direct_code_editor">Direct code editor</string>
+    <string name="direct_xml_editor">Direct XML editor</string>
     <string name="generating_view_binding">Generating view binding...</string>
     <string name="xml_command_manager">XML Command Manager</string>
     <string name="select_an_xml">Select an XML</string>
@@ -2832,5 +2832,12 @@ Please try again later"</string>
     <string name="invalid_version_code">Invalid Version Code</string>
     <string name="invalid_version_name">Invalid Version Name</string>
     <string name="select_a_more_block">Select a more block</string>
+    <string name="please_select_at_least_one_block_to_import">Please Select at least one block to import</string>
+    <string name="this_block_is_missing">This block is Missing</string>
+    <string name="this_block_already_exists_in_your_collection">This block already exists in your collection</string>
+    <string name="xml_editor">XML Editor</string>
+    <string name="no_changes_to_save">No changes to save</string>
+    <string name="circular_dependency_found_in">Circular dependency found in \"</string>
+    <string name="please_resolve_the_issue_before_saving">Please resolve the issue before saving</string>
 
 </resources>

@@ -17,23 +17,22 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiConsumer;
+
+import a.a.a.Rs;
 import a.a.a.Zx;
+import a.a.a.aB;
 import mod.hey.studios.editor.manage.block.ExtraBlockInfo;
+import mod.hey.studios.editor.manage.block.v2.BlockLoader;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.activities.tools.ConfigActivity;
 import pro.sketchware.R;
 import pro.sketchware.databinding.DialogPaletteBinding;
 import pro.sketchware.databinding.ItemCustomBlockBinding;
 import pro.sketchware.databinding.ViewUsedCustomBlocksBinding;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.BiConsumer;
-
-import a.a.a.aB;
-import a.a.a.Rs;
-import mod.hey.studios.editor.manage.block.v2.BlockLoader;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
 
@@ -49,14 +48,14 @@ public class CustomBlocksDialog {
         aB dialog = new aB(context);
         dialog.b(Helper.getResString(R.string.used_custom_blocks));
 
-        String subtitle = "You haven't used any custom blocks in this project.";
+        String subtitle = Helper.getResString(R.string.you_haven_t_used_any_custom_blocks_in_this_project);
 
         CustomBlocksManager customBlocksManager = new CustomBlocksManager(sc_id);
 
         ArrayList<BlockBean> customBlocks = customBlocksManager.getUsedBlocks();
 
         if (!customBlocks.isEmpty()) {
-            subtitle = "You have used " + customBlocks.size() + " custom block(s) in this project.";
+            subtitle = Helper.getResString(R.string.you_have_used) + customBlocks.size() + Helper.getResString(R.string.custom_block_s_in_this_project);
 
             dialogBinding.recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
@@ -77,7 +76,7 @@ public class CustomBlocksDialog {
                 }
 
                 if (selectedBeans.isEmpty()) {
-                    SketchwareUtil.toastError("Please Select at least one block to import");
+                    SketchwareUtil.toastError(Helper.getResString(R.string.please_select_at_least_one_block_to_import));
                     return;
                 }
 
@@ -114,18 +113,18 @@ public class CustomBlocksDialog {
         AtomicInteger selectedPalette = new AtomicInteger(paletteList.size() - 1);
 
         new MaterialAlertDialogBuilder(context)
-                .setTitle("Import Custom blocks to")
+                .setTitle(R.string.import_custom_blocks_to)
                 .setSingleChoiceItems(paletteNames.toArray(new String[0]), selectedPalette.get(), (dialog, which) -> selectedPalette.set(which))
-                .setNegativeButton("Create new palette", (dialog, which) -> {
+                .setNegativeButton(R.string.create_new_palette, (dialog, which) -> {
                     showCreatePaletteDialog(context, paletteList, paletteDir, customBlocksManager, list, blocksList, allBlocksList, blocksDir);
                     dialog.dismiss();
                 })
-                .setPositiveButton("Import", (dialog, which) -> {
+                .setPositiveButton(R.string.common_word_import, (dialog, which) -> {
                     addBlocksToList(customBlocksManager, list, blocksList, selectedPalette.get() + 9);
                     allBlocksList.addAll(blocksList);
                     FileUtil.writeFile(blocksDir, new Gson().toJson(allBlocksList));
                     BlockLoader.refresh();
-                    SketchwareUtil.toast("Blocks imported!");
+                    SketchwareUtil.toast(Helper.getResString(R.string.blocks_imported));
                 })
                 .show();
     }
@@ -154,7 +153,7 @@ public class CustomBlocksDialog {
 
         aB dialog = new aB((Activity) context);
         dialog.a(R.drawable.icon_style_white_96);
-        dialog.b("Create a new palette");
+        dialog.b(Helper.getResString(R.string.create_a_new_palette));
 
         DialogPaletteBinding binding = DialogPaletteBinding.inflate(((Activity) context).getLayoutInflater());
 
@@ -190,7 +189,7 @@ public class CustomBlocksDialog {
             allBlocksList.addAll(blocksList);
             FileUtil.writeFile(blocksDir, new Gson().toJson(allBlocksList));
             BlockLoader.refresh();
-            SketchwareUtil.toast("Blocks imported!");
+            SketchwareUtil.toast(Helper.getResString(R.string.blocks_imported));
             dialog.dismiss();
         });
         dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
@@ -199,19 +198,19 @@ public class CustomBlocksDialog {
 
     private boolean validateInput(DialogPaletteBinding binding, String name, String color) {
         if (name.isEmpty()) {
-            binding.name.setError("Name cannot be empty");
+            binding.name.setError(Helper.getResString(R.string.name_can_t_be_empty));
             binding.name.requestFocus();
             return false;
         }
         if (color.isEmpty()) {
-            binding.color.setError("Color cannot be empty");
+            binding.color.setError(Helper.getResString(R.string.color_cannot_be_empty));
             binding.color.requestFocus();
             return false;
         }
         try {
             Color.parseColor(color);
         } catch (IllegalArgumentException e) {
-            binding.color.setError("Invalid hexadecimal color");
+            binding.color.setError(Helper.getResString(R.string.invalid_hexadecimal_color));
             binding.color.requestFocus();
             return false;
         }
@@ -312,9 +311,9 @@ public class CustomBlocksDialog {
                     if (canImport) {
                         binding.checkBox.setChecked(!binding.checkBox.isChecked());
                     } else if (blockInfo.equals("Missing")) {
-                        SketchwareUtil.toastError("This block is Missing");
+                        SketchwareUtil.toastError(Helper.getResString(R.string.this_block_is_missing));
                     } else {
-                        SketchwareUtil.toastError("This block already exists in your collection");
+                        SketchwareUtil.toastError(Helper.getResString(R.string.this_block_already_exists_in_your_collection));
                     }
                 });
             }

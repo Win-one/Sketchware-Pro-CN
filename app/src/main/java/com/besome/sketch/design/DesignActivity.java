@@ -375,7 +375,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                     menu.add(Menu.NONE, 6, Menu.NONE, R.string.show_apk_signatures);
                 }
                 if (isViewTab) {
-                    menu.add(Menu.NONE, 7, Menu.NONE, R.string.direct_code_editor);
+                    menu.add(Menu.NONE, 7, Menu.NONE, R.string.direct_xml_editor);
                 }
 
                 popupMenu.setOnMenuItemClickListener(item -> {
@@ -859,7 +859,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
      * Shows a {@link CustomBlocksDialog}.
      */
     void toCustomBlocksViewer() {
-        CustomBlocksDialog.show(this, sc_id);
+        new CustomBlocksDialog().show(this, sc_id);
     }
 
     /**

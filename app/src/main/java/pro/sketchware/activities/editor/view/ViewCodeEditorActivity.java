@@ -14,22 +14,19 @@ import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.content.res.AppCompatResources;
 
-import a.a.a.aB;
-import a.a.a.cC;
-import a.a.a.jC;
-
 import com.besome.sketch.beans.HistoryViewBean;
 import com.besome.sketch.beans.ProjectFileBean;
 import com.besome.sketch.beans.ProjectLibraryBean;
 import com.besome.sketch.beans.ViewBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 
+import a.a.a.aB;
+import a.a.a.cC;
+import a.a.a.jC;
 import io.github.rosemoe.sora.widget.CodeEditor;
-
 import mod.hey.studios.util.Helper;
 import mod.jbk.code.CodeEditorColorSchemes;
 import mod.jbk.code.CodeEditorLanguages;
-
 import pro.sketchware.R;
 import pro.sketchware.activities.appcompat.ManageAppCompatActivity;
 import pro.sketchware.activities.preview.LayoutPreviewActivity;
@@ -111,7 +108,7 @@ public class ViewCodeEditorActivity extends BaseAppCompatActivity {
         projectLibrary = jC.c(sc_id).c();
         getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle("XML Editor");
+        getSupportActionBar().setTitle(R.string.xml_editor);
         getSupportActionBar().setSubtitle(title);
         binding.toolbar.setNavigationOnClickListener(v -> {
             if (onBackPressedCallback.isEnabled()) {
@@ -126,7 +123,7 @@ public class ViewCodeEditorActivity extends BaseAppCompatActivity {
         loadColorScheme();
         if (projectFile.fileType == ProjectFileBean.PROJECT_FILE_TYPE_ACTIVITY
                 && projectLibrary.isEnabled()) {
-            setNote("Use AppCompat Manager to modify attributes for CoordinatorLayout, Toolbar, and other appcompat layout/widget.");
+            setNote(getString(R.string.use_appcompat_manager_to_modify_attributes_for_coordinatorlayout));
         }
         binding.close.setOnClickListener(v -> {
             prefs.edit().putInt("note_" + sc_id, 1).apply();
@@ -154,10 +151,10 @@ public class ViewCodeEditorActivity extends BaseAppCompatActivity {
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         if (projectFile.fileType == ProjectFileBean.PROJECT_FILE_TYPE_ACTIVITY
                 && projectLibrary.isEnabled()) {
-            menu.add(Menu.NONE, 3, Menu.NONE, "Edit AppCompat");
+            menu.add(Menu.NONE, 3, Menu.NONE, R.string.edit_appcompat);
         }
-        menu.add(Menu.NONE, 4, Menu.NONE, "Reload color schemes");
-        menu.add(Menu.NONE, 5, Menu.NONE, "Layout Preview");
+        menu.add(Menu.NONE, 4, Menu.NONE, R.string.reload_color_schemes);
+        menu.add(Menu.NONE, 5, Menu.NONE, R.string.layout_preview);
         return true;
     }
 
@@ -255,8 +252,8 @@ public class ViewCodeEditorActivity extends BaseAppCompatActivity {
                     for (String attr : viewBean.parentAttributes.keySet()) {
                         String targetId = viewBean.parentAttributes.get(attr);
                         if (!detector.isLegalAttribute(targetId, attr)) {
-                            SketchwareUtil.toastError("Circular dependency found in \"" + viewBean.name + "\"\n" +
-                                    "Please resolve the issue before saving");
+                            SketchwareUtil.toastError(getString(R.string.circular_dependency_found_in) + viewBean.name + "\"\n" +
+                                    getString(R.string.please_resolve_the_issue_before_saving));
                             return;
                         }
                     }
@@ -267,9 +264,9 @@ public class ViewCodeEditorActivity extends BaseAppCompatActivity {
                 if (!isEdited) {
                     isEdited = true;
                 }
-                SketchwareUtil.toast("Saved");
+                SketchwareUtil.toast(Helper.getResString(R.string.common_word_saved));
             } else {
-                SketchwareUtil.toast("No changes to save");
+                SketchwareUtil.toast(getString(R.string.no_changes_to_save));
             }
         } catch (Exception e) {
             SketchwareUtil.toastError(e.toString());

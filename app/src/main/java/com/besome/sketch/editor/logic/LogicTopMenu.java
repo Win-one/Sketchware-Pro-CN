@@ -50,7 +50,7 @@ public class LogicTopMenu extends LinearLayout {
         binding.tvFavorite.setText(Helper.getResString(R.string.common_word_collection));
         binding.tvDetail.setText(Helper.getResString(R.string.common_word_detail));
 
-        colorSurfaceContainerHigh = ThemeUtils.getColor(this, R.attr.colorSurfaceContainerHigh);
+        colorSurfaceContainerHigh = ThemeUtils.getColor(this, com.google.android.material.R.attr.colorSurfaceContainerHigh);
         colorDefault = ContextCompat.getColor(context, R.color.view_property_tab_deactive_text);
         colorOnDrag = ContextCompat.getColor(context, android.R.color.white);
     }

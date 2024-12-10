@@ -3134,7 +3134,7 @@
     <string name="use_appcompat_manager_to_modify_attributes_for_coordinatorlayout">使用应用兼容管理修改CoordinatorLayout,Toolbar和其他应用兼容布局/部件的属性.</string>
     <string name="edit_appcompat">编辑应用兼容性</string>
     <string name="reload_color_schemes">重新加载配色方案</string>
-    <string name="direct_code_editor">直达代码编辑器</string>
+    <string name="direct_xml_editor">XML编辑器</string>
     <string name="link_github_commits_url"><![CDATA[https://api.github.com/repos/Sketchware-Pro/Sketchware-Pro/commits?per_page=%s&page=%s]]></string>
     <string name="github_api_error_message">出了点问题.请稍候,然后重试.</string>
     <string name="github_api_date_unavailable">日期不可用</string>
@@ -3152,4 +3152,11 @@
     <string name="invalid_version_code">版本代码无效</string>
     <string name="invalid_version_name">版本名称无效</string>
     <string name="select_a_more_block">选择更多块</string>
+    <string name="please_select_at_least_one_block_to_import">请至少选择一个区块进行导入</string>
+    <string name="this_block_is_missing">此块缺失</string>
+    <string name="this_block_already_exists_in_your_collection">此块已存在于您的集合中</string>
+    <string name="xml_editor">XML编辑器</string>
+    <string name="no_changes_to_save">无需保存任何更改</string>
+    <string name="circular_dependency_found_in">找到循环依赖关系在\"</string>
+    <string name="please_resolve_the_issue_before_saving">请在保存前解决问题</string>
 </resources>
