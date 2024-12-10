@@ -3,7 +3,7 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:paddingTop="20dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -17,16 +17,13 @@
             android:id="@+id/tv_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/scolor_blue_01"
-            android:textSize="12dp" />
+            android:layout_gravity="center_horizontal" />
 
         <NumberPicker
             android:id="@+id/version_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:focusable="false"
-            android:theme="@style/NumberPickerText" />
+            android:focusable="false" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,9 +37,7 @@
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/scolor_blue_01"
-            android:textSize="12dp" />
+            android:layout_gravity="center_horizontal" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -53,24 +48,20 @@
                 android:id="@+id/version_name1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:focusable="false"
-                android:theme="@style/NumberPickerText" />
+                android:focusable="false" />
 
             <TextView
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="8dp"
-                android:text="."
-                android:textColor="#ff757575"
-                android:textSize="18dp" />
+                android:text="." />
 
             <NumberPicker
                 android:id="@+id/version_name2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:focusable="false"
-                android:theme="@style/NumberPickerText" />
+                android:focusable="false" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
