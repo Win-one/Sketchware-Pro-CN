@@ -270,7 +270,7 @@ public class ExtraPaletteBlock {
 
                     if (!customView.convert.equals("include")) {
                         String typeName = customView.convert.isEmpty() ? ViewBean.getViewTypeName(customView.type) : IdGenerator.getLastPath(customView.convert);
-                        logicEditor.a(customView.id, "v", typeName, "getVar").setTag(isViewBindingEnabled ? "binding." + ViewBindingBuilder.generateId(customView.id) : customView.id);
+                        logicEditor.a(customView.id, "v", typeName, "getVar").setTag(isViewBindingEnabled ? "binding." + ViewBindingBuilder.generateParameterFromId(customView.id) : customView.id);
                     }
                 }
             }
@@ -293,7 +293,7 @@ public class ExtraPaletteBlock {
             if (!view.convert.equals("include")) {
                 if (!toNotAdd.contains("android:id")) {
                     String typeName = view.convert.isEmpty() ? ViewBean.getViewTypeName(view.type) : IdGenerator.getLastPath(view.convert);
-                    logicEditor.a(isViewBindingEnabled ? "binding." + ViewBindingBuilder.generateId(view.id) : view.id, "v", typeName, "getVar").setTag(isViewBindingEnabled ? "binding." + ViewBindingBuilder.generateId(view.id) : view.id);
+                    logicEditor.a(isViewBindingEnabled ? "binding." + ViewBindingBuilder.generateParameterFromId(view.id) : view.id, "v", typeName, "getVar").setTag(isViewBindingEnabled ? "binding." + ViewBindingBuilder.generateParameterFromId(view.id) : view.id);
                 }
             }
         }
@@ -313,7 +313,7 @@ public class ExtraPaletteBlock {
                     if (!drawerView.convert.equals("include")) {
                         String id = "_drawer_" + drawerView.id;
                         String typeName = drawerView.convert.isEmpty() ? ViewBean.getViewTypeName(drawerView.type) : IdGenerator.getLastPath(drawerView.convert);
-                        logicEditor.a(isViewBindingEnabled ? "binding.drawer." + ViewBindingBuilder.generateId(id) : id, "v", typeName, "getVar").setTag(id);
+                        logicEditor.a(isViewBindingEnabled ? "binding.drawer." + ViewBindingBuilder.generateParameterFromId(id) : id, "v", typeName, "getVar").setTag(id);
                     }
                 }
             }

@@ -770,7 +770,9 @@ public class Jx {
 
                 if (!isViewBindingEnabled) {
                     fields.add("private FloatingActionButton _fab;");
-                    initializeMethodCode.add("_fab = findViewById(R.id._fab);");
+                    initializeMethodCode.add("_fab = " +
+                            (projectFileBean.fileName.contains("_fragment") ? "_view." : "") +
+                            "findViewById(R.id._fab);");
                 }
             }
             if (projectFileBean.hasActivityOption(ProjectFileBean.OPTION_ACTIVITY_DRAWER) && !projectFileBean.fileName.contains("_fragment")) {
@@ -848,11 +850,11 @@ public class Jx {
             String adapterLogic = new Fx(projectFileBean.getActivityName(), buildConfig, projectDataManager.a(projectFileBean.getJavaName(), eventName), isViewBindingEnabled).a();
             String adapterCode;
             if (viewBean.type == ViewBeans.VIEW_TYPE_LAYOUT_VIEWPAGER) {
-                adapterCode = Lx.pagerAdapter(ox, viewBean.id, viewBean.customView, projectDataManager.d(xmlName), adapterLogic);
+                adapterCode = Lx.pagerAdapter(ox, viewBean.id, viewBean.customView, projectDataManager.d(xmlName), adapterLogic, isViewBindingEnabled);
             } else if (viewBean.type == ViewBeans.VIEW_TYPE_WIDGET_RECYCLERVIEW) {
-                adapterCode = Lx.recyclerViewAdapter(ox, viewBean.id, viewBean.customView, projectDataManager.d(xmlName), adapterLogic);
+                adapterCode = Lx.recyclerViewAdapter(ox, viewBean.id, viewBean.customView, projectDataManager.d(xmlName), adapterLogic, isViewBindingEnabled);
             } else {
-                adapterCode = Lx.getListAdapterCode(ox, viewBean.id, viewBean.customView, projectDataManager.d(xmlName), adapterLogic);
+                adapterCode = Lx.getListAdapterCode(ox, viewBean.id, viewBean.customView, projectDataManager.d(xmlName), adapterLogic, isViewBindingEnabled);
             }
             adapterClasses.add(adapterCode);
         }

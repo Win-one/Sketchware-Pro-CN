@@ -32,7 +32,7 @@ public class NewKeyStoreActivity extends BaseAppCompatActivity implements OnClic
     private RB commonNameValidator;
     private RB organizationalUnitValidator;
     private iI E;
-    private int validityInYears = 25;
+    private final int validityInYears = 25;
     private EditText alias;
     private EditText password;
     private EditText passwordConfirm;
