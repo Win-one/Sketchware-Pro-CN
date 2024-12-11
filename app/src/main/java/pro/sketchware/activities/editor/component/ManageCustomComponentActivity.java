@@ -1,4 +1,4 @@
-package mod.hilal.saif.activities.tools;
+package pro.sketchware.activities.editor.component;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,9 +40,15 @@ import java.util.stream.Collectors;
 import a.a.a.aB;
 import a.a.a.wq;
 import mod.elfilibustero.sketch.editor.component.CollapsibleCustomComponentLayout;
+
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.components.ComponentsHandler;
 import mod.jbk.util.OldResourceIdMapper;
+import pro.sketchware.R;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
+import mod.jbk.util.OldResourceIdMapper;
+
 import pro.sketchware.R;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
