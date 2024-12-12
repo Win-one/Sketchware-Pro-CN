@@ -1,5 +1,6 @@
 package a.a.a;
 
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -33,9 +34,13 @@ public class bB {
         ImageView imageView = inflate.findViewById(R.id.iv_toast);
         imageView.setImageResource(R.drawable.ic_normal);
         ((TextView) inflate.findViewById(R.id.tv_stoast)).setText(charSequence.toString());
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(inflate, "translationY", 0, 40, -20, 0, 10, -5, 0);
-        objectAnimator.setDuration(1000);
-        objectAnimator.start();
+        ObjectAnimator objectAnimator1 = ObjectAnimator.ofFloat(inflate, "scaleX", 1.1f, 1.0f);
+        ObjectAnimator objectAnimator2 = ObjectAnimator.ofFloat(inflate, "scaleY", 1.1f, 1.0f);
+        ObjectAnimator objectAnimator3 = ObjectAnimator.ofFloat(inflate, "alpha", 0, 1);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(objectAnimator1, objectAnimator2, objectAnimator3);
+        animatorSet.setDuration(1000);
+        animatorSet.start();
         Toast toast = new Toast(context);
         toast.setDuration(duration);
         toast.setGravity(
@@ -57,17 +62,21 @@ public class bB {
                 imageView.setColorFilter(ContextCompat.getColor(context, R.color.scolor_black_01));
                 imageView.setImageResource(R.drawable.ic_normal);
                 linearLayout.setBackgroundResource(R.drawable.bg_toast_normal);
-                textView.setTextColor(context.getResources().getColor(R.color.scolor_black_01));
+                textView.setTextColor(ContextCompat.getColor(context, R.color.scolor_black_01));
             } else {
                 imageView.setColorFilter(ContextCompat.getColor(context, R.color.scolor_red_02));
                 imageView.setImageResource(R.drawable.ic_error);
                 linearLayout.setBackgroundResource(R.drawable.bg_toast_warning);
-                textView.setTextColor(context.getResources().getColor(R.color.scolor_red_02));
+                textView.setTextColor(ContextCompat.getColor(context, R.color.scolor_red_02));
             }
             textView.setText(charSequence.toString());
-            ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(inflate, "translationY", 0, 40, -20, 0, 10, -5, 0);
-            objectAnimator.setDuration(1000);
-            objectAnimator.start();
+            ObjectAnimator objectAnimator1 = ObjectAnimator.ofFloat(inflate, "scaleX", 1.1f, 1.0f);
+            ObjectAnimator objectAnimator2 = ObjectAnimator.ofFloat(inflate, "scaleY", 1.1f, 1.0f);
+            ObjectAnimator objectAnimator3 = ObjectAnimator.ofFloat(inflate, "alpha", 0, 1);
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.playTogether(objectAnimator1, objectAnimator2, objectAnimator3);
+            animatorSet.setDuration(1000);
+            animatorSet.start();
             Toast toast = new Toast(context);
             toast.setDuration(duration);
             toast.setGravity(
