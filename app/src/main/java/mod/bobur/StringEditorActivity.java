@@ -3,11 +3,13 @@ package mod.bobur;
 import static com.besome.sketch.design.DesignActivity.sc_id;
 import static com.besome.sketch.editor.LogicEditorActivity.getAllJavaFileNames;
 import static com.besome.sketch.editor.LogicEditorActivity.getAllXmlFileNames;
+
 import static pro.sketchware.utility.XmlUtil.replaceXml;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -16,24 +18,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import a.a.a.aB;
+import a.a.a.eC;
+import a.a.a.jC;
+
 import com.besome.sketch.beans.BlockBean;
 import com.besome.sketch.beans.ViewBean;
+import com.besome.sketch.editor.logic.PaletteSelector.SimpleTextWatcher;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 
-import a.a.a.eC;
-import a.a.a.jC;
+import mod.hey.studios.code.SrcCodeEditor;
+import mod.hey.studios.code.SrcCodeEditorLegacy;
 import mod.hey.studios.util.Helper;
-import pro.sketchware.R;
-import pro.sketchware.databinding.StringEditorBinding;
-import pro.sketchware.databinding.StringEditorItemBinding;
-import pro.sketchware.databinding.ViewStringEditorAddBinding;
+import mod.hilal.saif.activities.tools.ConfigActivity;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+
+import pro.sketchware.R;
+import pro.sketchware.databinding.StringEditorBinding;
+import pro.sketchware.databinding.StringEditorItemBinding;
+import pro.sketchware.databinding.ViewStringEditorAddBinding;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
+import pro.sketchware.utility.XmlUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -45,19 +57,6 @@ import java.util.Objects;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
-import a.a.a.aB;
-import mod.hey.studios.code.SrcCodeEditor;
-import mod.hey.studios.code.SrcCodeEditorLegacy;
-import mod.hey.studios.util.Helper;
-import mod.hilal.saif.activities.tools.ConfigActivity;
-import pro.sketchware.R;
-import pro.sketchware.databinding.StringEditorBinding;
-import pro.sketchware.databinding.StringEditorItemBinding;
-import pro.sketchware.databinding.ViewStringEditorAddBinding;
-import pro.sketchware.utility.FileUtil;
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.XmlUtil;
 
 public class StringEditorActivity extends AppCompatActivity {
 
@@ -104,10 +103,10 @@ public class StringEditorActivity extends AppCompatActivity {
             setResult(RESULT_OK);
             finish();
         } else {
-            dialog.setTitle(R.string.common_word_warning)
-                    .setMessage(R.string.you_have_unsaved_changes_are_you_sure_you_want_to_exit)
-                    .setPositiveButton(R.string.common_word_exit, (dialog, which) -> super.onBackPressed())
-                    .setNegativeButton(R.string.common_word_cancel, null)
+            dialog.setTitle("Warning")
+                    .setMessage("You have unsaved changes. Are you sure you want to exit?")
+                    .setPositiveButton("Exit", (dialog, which) -> super.onBackPressed())
+                    .setNegativeButton("Cancel", null)
                     .create()
                     .show();
         }
@@ -119,20 +118,23 @@ public class StringEditorActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        menu.add(0, 0, 0, R.string.add_a_new_string)
+        menu.add(0, 0, 0, "Add a new string")
                 .setIcon(R.drawable.ic_mtrl_add)
                 .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
 
-        menu.add(0, 1, 0, R.string.common_word_save)
+        menu.add(0, 1, 0, "Save")
                 .setIcon(R.drawable.ic_mtrl_save)
                 .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         if (!checkDefaultString(getIntent().getStringExtra("content"))) {
-            menu.add(0, 2, 0, R.string.get_default_strings)
+            menu.add(0, 2, 0, "Get default strings")
                     .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_NEVER);
         }
 
-        menu.add(0, 3, 0, R.string.open_in_editor)
+        menu.add(0, 3, 0, "Open in editor")
+                .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_NEVER);
+        
+        menu.add(0, 4, 0, "Search")
                 .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_NEVER);
 
         return super.onCreateOptionsMenu(menu);
@@ -149,6 +151,7 @@ public class StringEditorActivity extends AppCompatActivity {
             convertXmlToListMap(FileUtil.readFile(getDefaultStringPath(Objects.requireNonNull(getIntent().getStringExtra("content")))), listmap);
             adapter.notifyDataSetChanged();
         } else if (id == 3) {
+            isComingFromSrcCodeEditor = true;
             XmlUtil.saveXml(getIntent().getStringExtra("content"),convertListMapToXml(listmap));
             Intent intent = new Intent();
             if (ConfigActivity.isLegacyCeEnabled()) {
@@ -160,6 +163,8 @@ public class StringEditorActivity extends AppCompatActivity {
             intent.putExtra("content", getIntent().getStringExtra("content"));
             intent.putExtra("xml", getIntent().getStringExtra("xml"));
             startActivity(intent);
+        } else if (id == 4) {
+            showSearchDialog();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -233,28 +238,47 @@ public class StringEditorActivity extends AppCompatActivity {
                 .replace("\r", "&#13;");
     }
 
-    public void addStringDialog() {
+    private void addStringDialog() {
         aB dialog = new aB(this);
         ViewStringEditorAddBinding binding = ViewStringEditorAddBinding.inflate(LayoutInflater.from(this));
-        dialog.b(getString(R.string.create_new_string));
-        dialog.b(getString(R.string.common_word_create), v1 -> {
+        dialog.b("Create new string");
+        dialog.b("Create", v1 -> {
             String key = Objects.requireNonNull(binding.stringKeyInput.getText()).toString();
             String value = Objects.requireNonNull(binding.stringValueInput.getText()).toString();
-
+            
             if (key.isEmpty() || value.isEmpty()) {
-                SketchwareUtil.toast(Helper.getResString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT);
+                SketchwareUtil.toast("Please fill in all fields", Toast.LENGTH_SHORT);
                 return;
             }
-
+            
             if (isXmlStringsContains(listmap, key)) {
                 binding.stringKeyInputLayout.setError("\"" + key + "\" is already exist");
                 return;
             }
-
             addString(key, value);
             dialog.dismiss();
         });
         dialog.a(getString(R.string.cancel), v1 -> dialog.dismiss());
+        dialog.a(binding.getRoot());
+        dialog.show();
+    }
+    
+    private void showSearchDialog() {
+        var dialog = new aB(this);
+        var binding = ViewStringEditorAddBinding.inflate(LayoutInflater.from(this));
+        binding.stringValueInputLayout.setVisibility(View.GONE);
+        binding.stringKeyInputLayout.setHint("Search...");
+        // text watcher to search in the adapter using filter func 
+        binding.stringKeyInput.addTextChangedListener(
+            new SimpleTextWatcher(s -> adapter.filter(s.toString()))
+        );
+        dialog.b("Search for String");
+        dialog.configureDefaultButton("Restore", v -> {
+            //make it empty to restore the originalData
+            adapter.filter("");
+            dialog.dismiss();
+        });
+        dialog.a(getString(R.string.cancel), v -> dialog.dismiss());
         dialog.a(binding.getRoot());
         dialog.show();
     }
@@ -278,7 +302,7 @@ public class StringEditorActivity extends AppCompatActivity {
         listmap.add(map);
         adapter.notifyItemInserted(listmap.size() - 1);
     }
-
+    
     public boolean checkDefaultString(final String path) {
         File file = new File(path);
         String parentFolder = Objects.requireNonNull(file.getParentFile()).getName();
@@ -291,73 +315,96 @@ public class StringEditorActivity extends AppCompatActivity {
 
     public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-        private final ArrayList<HashMap<String, Object>> data;
+        private final ArrayList<HashMap<String, Object>> originalData;
+        private ArrayList<HashMap<String, Object>> filteredData;
 
         public RecyclerViewAdapter(ArrayList<HashMap<String, Object>> data) {
-            this.data = data;
+            this.originalData = new ArrayList<>(data);
+            this.filteredData = data;
         }
 
         @NonNull
         @Override
-        public RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            StringEditorItemBinding itemBinding = StringEditorItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        public RecyclerViewAdapter.ViewHolder onCreateViewHolder(
+                @NonNull ViewGroup parent, int viewType) {
+            StringEditorItemBinding itemBinding =
+                    StringEditorItemBinding.inflate(
+                            LayoutInflater.from(parent.getContext()), parent, false);
             return new ViewHolder(itemBinding);
         }
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerViewAdapter.ViewHolder holder, int position) {
-            HashMap<String, Object> item = data.get(position);
+            HashMap<String, Object> item = filteredData.get(position);
             String key = (String) item.get("key");
             String text = (String) item.get("text");
             holder.binding.textInputLayout.setHint(key);
             holder.binding.editText.setText(text);
 
-            holder.binding.editText.setOnClickListener(v -> {
-                int adapterPosition = holder.getAdapterPosition();
-                HashMap<String, Object> currentItem = data.get(adapterPosition);
+            holder.binding.editText.setOnClickListener(
+                    v -> {
+                        int adapterPosition = holder.getAdapterPosition();
+                        HashMap<String, Object> currentItem = filteredData.get(adapterPosition);
 
-                aB dialog = new aB(StringEditorActivity.this);
-                ViewStringEditorAddBinding dialogBinding = ViewStringEditorAddBinding.inflate(LayoutInflater.from(StringEditorActivity.this));
+                        aB dialog = new aB(StringEditorActivity.this);
+                        ViewStringEditorAddBinding dialogBinding =
+                                ViewStringEditorAddBinding.inflate(
+                                        LayoutInflater.from(StringEditorActivity.this));
 
-                dialogBinding.stringKeyInput.setText((String) currentItem.get("key"));
-                dialogBinding.stringValueInput.setText((String) currentItem.get("text"));
+                        dialogBinding.stringKeyInput.setText((String) currentItem.get("key"));
+                        dialogBinding.stringValueInput.setText((String) currentItem.get("text"));
 
-                dialog.b(getString(R.string.edit_string));
-                dialog.b(getString(R.string.common_word_save), v1 -> {
-                    String keyInput = Objects.requireNonNull(dialogBinding.stringKeyInput.getText()).toString();
-                    String valueInput = Objects.requireNonNull(dialogBinding.stringValueInput.getText()).toString();
-                    if (keyInput.isEmpty() || valueInput.isEmpty()) {
-                        SketchwareUtil.toast(Helper.getResString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT);
-                        return;
-                    }
-                    if (keyInput.equals(key) && valueInput.equals(text)) {
-                        dialog.dismiss();
-                        return;
-                    }
-                    currentItem.put("key", keyInput);
-                    currentItem.put("text", valueInput);
-                    notifyItemChanged(adapterPosition);
-                    dialog.dismiss();
-                });
+                        dialog.b("Edit string");
+                        dialog.b(
+                                "Save",
+                                v1 -> {
+                                    String keyInput =
+                                            Objects.requireNonNull(
+                                                            dialogBinding.stringKeyInput.getText())
+                                                    .toString();
+                                    String valueInput =
+                                            Objects.requireNonNull(
+                                                            dialogBinding.stringValueInput
+                                                                    .getText())
+                                                    .toString();
+                                    if (keyInput.isEmpty() || valueInput.isEmpty()) {
+                                        SketchwareUtil.toast(
+                                                "Please fill in all fields", Toast.LENGTH_SHORT);
+                                        return;
+                                    }
+                                    if (keyInput.equals(key) && valueInput.equals(text)) {
+                                        dialog.dismiss();
+                                        return;
+                                    }
+                                    currentItem.put("key", keyInput);
+                                    currentItem.put("text", valueInput);
+                                    notifyItemChanged(adapterPosition);
+                                    dialog.dismiss();
+                                });
 
-                dialog.configureDefaultButton(getString(R.string.common_word_delete), v1 -> {
-                    if (isXmlStringUsed(key)) {
-                        SketchwareUtil.toastError(Helper.getResString(R.string.logic_editor_title_remove_xml_string_error));
-                    } else {
-                        data.remove(adapterPosition);
-                        notifyItemRemoved(adapterPosition);
-                        dialog.dismiss();
-                    }
-                });
-                dialog.a(getString(R.string.cancel), v1 -> dialog.dismiss());
-                dialog.a(dialogBinding.getRoot());
-                dialog.show();
-            });
+                        dialog.configureDefaultButton(
+                                "Delete",
+                                v1 -> {
+                                    if (isXmlStringUsed(key)) {
+                                        SketchwareUtil.toastError(
+                                                Helper.getResString(
+                                                        R.string
+                                                                .logic_editor_title_remove_xml_string_error));
+                                    } else {
+                                        filteredData.remove(adapterPosition);
+                                        notifyItemRemoved(adapterPosition);
+                                        dialog.dismiss();
+                                    }
+                                });
+                        dialog.a(getString(R.string.cancel), v1 -> dialog.dismiss());
+                        dialog.a(dialogBinding.getRoot());
+                        dialog.show();
+                    });
         }
 
         @Override
         public int getItemCount() {
-            return data.size();
+            return filteredData.size();
         }
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -367,6 +414,28 @@ public class StringEditorActivity extends AppCompatActivity {
                 super(binding.getRoot());
                 this.binding = binding;
             }
+        }
+
+        /**
+         * Filters the data based on the query.
+         *
+         * @param query The search query.
+         */
+        public void filter(String query) {
+            if (query == null || query.isEmpty()) {
+                filteredData = new ArrayList<>(originalData);
+            } else {
+                filteredData = new ArrayList<>();
+                for (HashMap<String, Object> item : originalData) {
+                    String key = (String) item.get("key");
+                    String text = (String) item.get("text");
+                    if ((key != null && key.toLowerCase().contains(query.toLowerCase()))
+                            || (text != null && text.toLowerCase().contains(query.toLowerCase()))) {
+                        filteredData.add(item);
+                    }
+                }
+            }
+            notifyDataSetChanged();
         }
 
         public boolean isXmlStringUsed(String key) {
