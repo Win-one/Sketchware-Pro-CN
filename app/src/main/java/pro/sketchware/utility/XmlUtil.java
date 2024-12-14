@@ -2,6 +2,9 @@ package pro.sketchware.utility;
 
 import android.widget.Toast;
 
+import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
+
 public class XmlUtil {
     public static String replaceXml(final String text) {
         return text.replace("<?xml version=\"1.0\" encoding=\"utf-8\"?>", "")
@@ -14,7 +17,7 @@ public class XmlUtil {
 
     public static void saveXml(String path, String xml) {
         FileUtil.writeFile(path, xml);
-        SketchwareUtil.toast("Save completed", Toast.LENGTH_SHORT);
+        SketchwareUtil.toast(Helper.getResString(R.string.save_completed), Toast.LENGTH_SHORT);
     }
 
 }

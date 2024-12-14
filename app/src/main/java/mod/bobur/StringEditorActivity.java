@@ -4,8 +4,6 @@ import static com.besome.sketch.design.DesignActivity.sc_id;
 import static com.besome.sketch.editor.LogicEditorActivity.getAllJavaFileNames;
 import static com.besome.sketch.editor.LogicEditorActivity.getAllXmlFileNames;
 
-import static pro.sketchware.utility.XmlUtil.replaceXml;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,34 +16,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import a.a.a.aB;
-import a.a.a.eC;
-import a.a.a.jC;
-
 import com.besome.sketch.beans.BlockBean;
 import com.besome.sketch.beans.ViewBean;
 import com.besome.sketch.editor.logic.PaletteSelector.SimpleTextWatcher;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 
-import mod.hey.studios.code.SrcCodeEditor;
-import mod.hey.studios.code.SrcCodeEditorLegacy;
-import mod.hey.studios.util.Helper;
-import mod.hilal.saif.activities.tools.ConfigActivity;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-
-import pro.sketchware.R;
-import pro.sketchware.databinding.StringEditorBinding;
-import pro.sketchware.databinding.StringEditorItemBinding;
-import pro.sketchware.databinding.ViewStringEditorAddBinding;
-import pro.sketchware.utility.FileUtil;
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.XmlUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -57,6 +38,21 @@ import java.util.Objects;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
+import a.a.a.aB;
+import a.a.a.eC;
+import a.a.a.jC;
+import mod.hey.studios.code.SrcCodeEditor;
+import mod.hey.studios.code.SrcCodeEditorLegacy;
+import mod.hey.studios.util.Helper;
+import mod.hilal.saif.activities.tools.ConfigActivity;
+import pro.sketchware.R;
+import pro.sketchware.databinding.StringEditorBinding;
+import pro.sketchware.databinding.StringEditorItemBinding;
+import pro.sketchware.databinding.ViewStringEditorAddBinding;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
+import pro.sketchware.utility.XmlUtil;
 
 public class StringEditorActivity extends AppCompatActivity {
 
@@ -103,10 +99,10 @@ public class StringEditorActivity extends AppCompatActivity {
             setResult(RESULT_OK);
             finish();
         } else {
-            dialog.setTitle("Warning")
-                    .setMessage("You have unsaved changes. Are you sure you want to exit?")
-                    .setPositiveButton("Exit", (dialog, which) -> super.onBackPressed())
-                    .setNegativeButton("Cancel", null)
+            dialog.setTitle(R.string.common_word_warning)
+                    .setMessage(R.string.you_have_unsaved_changes_are_you_sure_you_want_to_exit)
+                    .setPositiveButton(R.string.common_word_exit, (dialog, which) -> super.onBackPressed())
+                    .setNegativeButton(R.string.common_word_cancel, null)
                     .create()
                     .show();
         }
@@ -118,23 +114,23 @@ public class StringEditorActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        menu.add(0, 0, 0, "Add a new string")
+        menu.add(0, 0, 0, R.string.add_a_new_string)
                 .setIcon(R.drawable.ic_mtrl_add)
                 .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
 
-        menu.add(0, 1, 0, "Save")
+        menu.add(0, 1, 0, R.string.common_word_save)
                 .setIcon(R.drawable.ic_mtrl_save)
                 .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         if (!checkDefaultString(getIntent().getStringExtra("content"))) {
-            menu.add(0, 2, 0, "Get default strings")
+            menu.add(0, 2, 0, R.string.get_default_strings)
                     .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_NEVER);
         }
 
-        menu.add(0, 3, 0, "Open in editor")
+        menu.add(0, 3, 0, R.string.open_in_editor)
                 .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_NEVER);
-        
-        menu.add(0, 4, 0, "Search")
+
+        menu.add(0, 4, 0, R.string.search)
                 .setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_NEVER);
 
         return super.onCreateOptionsMenu(menu);
@@ -241,13 +237,13 @@ public class StringEditorActivity extends AppCompatActivity {
     private void addStringDialog() {
         aB dialog = new aB(this);
         ViewStringEditorAddBinding binding = ViewStringEditorAddBinding.inflate(LayoutInflater.from(this));
-        dialog.b("Create new string");
-        dialog.b("Create", v1 -> {
+        dialog.b(getString(R.string.create_new_string));
+        dialog.b(getString(R.string.common_word_create), v1 -> {
             String key = Objects.requireNonNull(binding.stringKeyInput.getText()).toString();
             String value = Objects.requireNonNull(binding.stringValueInput.getText()).toString();
             
             if (key.isEmpty() || value.isEmpty()) {
-                SketchwareUtil.toast("Please fill in all fields", Toast.LENGTH_SHORT);
+                SketchwareUtil.toast(Helper.getResString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT);
                 return;
             }
             
@@ -267,13 +263,13 @@ public class StringEditorActivity extends AppCompatActivity {
         var dialog = new aB(this);
         var binding = ViewStringEditorAddBinding.inflate(LayoutInflater.from(this));
         binding.stringValueInputLayout.setVisibility(View.GONE);
-        binding.stringKeyInputLayout.setHint("Search...");
+        binding.stringKeyInputLayout.setHint(R.string.search);
         // text watcher to search in the adapter using filter func 
         binding.stringKeyInput.addTextChangedListener(
             new SimpleTextWatcher(s -> adapter.filter(s.toString()))
         );
-        dialog.b("Search for String");
-        dialog.configureDefaultButton("Restore", v -> {
+        dialog.b(getString(R.string.search_for_string));
+        dialog.configureDefaultButton(getString(R.string.common_word_restore), v -> {
             //make it empty to restore the originalData
             adapter.filter("");
             dialog.dismiss();
@@ -354,9 +350,9 @@ public class StringEditorActivity extends AppCompatActivity {
                         dialogBinding.stringKeyInput.setText((String) currentItem.get("key"));
                         dialogBinding.stringValueInput.setText((String) currentItem.get("text"));
 
-                        dialog.b("Edit string");
+                        dialog.b(getString(R.string.edit_string));
                         dialog.b(
-                                "Save",
+                                getString(R.string.common_word_save),
                                 v1 -> {
                                     String keyInput =
                                             Objects.requireNonNull(
@@ -369,7 +365,7 @@ public class StringEditorActivity extends AppCompatActivity {
                                                     .toString();
                                     if (keyInput.isEmpty() || valueInput.isEmpty()) {
                                         SketchwareUtil.toast(
-                                                "Please fill in all fields", Toast.LENGTH_SHORT);
+                                                getString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT);
                                         return;
                                     }
                                     if (keyInput.equals(key) && valueInput.equals(text)) {
@@ -383,7 +379,7 @@ public class StringEditorActivity extends AppCompatActivity {
                                 });
 
                         dialog.configureDefaultButton(
-                                "Delete",
+                                getString(R.string.common_word_delete),
                                 v1 -> {
                                     if (isXmlStringUsed(key)) {
                                         SketchwareUtil.toastError(

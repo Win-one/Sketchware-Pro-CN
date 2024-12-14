@@ -3159,4 +3159,6 @@
     <string name="no_changes_to_save">无需保存任何更改</string>
     <string name="circular_dependency_found_in">找到循环依赖关系在\"</string>
     <string name="please_resolve_the_issue_before_saving">请在保存前解决问题</string>
+    <string name="search_for_string">搜索字符串</string>
+    <string name="save_completed">保存已完成</string>
 </resources>

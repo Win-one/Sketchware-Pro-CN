@@ -2839,5 +2839,7 @@ Please try again later"</string>
     <string name="no_changes_to_save">No changes to save</string>
     <string name="circular_dependency_found_in">Circular dependency found in \"</string>
     <string name="please_resolve_the_issue_before_saving">Please resolve the issue before saving</string>
+    <string name="search_for_string">Search for String</string>
+    <string name="save_completed">Save completed</string>
 
 </resources>
