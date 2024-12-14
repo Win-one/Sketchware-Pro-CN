@@ -3161,4 +3161,5 @@
     <string name="please_resolve_the_issue_before_saving">请在保存前解决问题</string>
     <string name="search_for_string">搜索字符串</string>
     <string name="save_completed">保存已完成</string>
+    <string name="the_generated_aab_file_must_be_signed">生成的.aab文件必须签名.\n将密钥库复制到/Internal storage/sketchware/keystore/release_key.jks并输入别名密码.</string>
 </resources>

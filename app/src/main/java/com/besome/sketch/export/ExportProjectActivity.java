@@ -276,7 +276,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
 
             aB confirmationDialog = new aB(this);
             confirmationDialog.b(getString(R.string.important_note));
-            confirmationDialog.a("The generated .aab file must be signed.\nCopy your keystore to /Internal storage/sketchware/keystore/release_key.jks and enter the alias' password.");
+            confirmationDialog.a(getString(R.string.the_generated_aab_file_must_be_signed));
             confirmationDialog.a(R.drawable.ic_mtrl_info);
 
             confirmationDialog.b(getString(R.string.common_word_understood), v -> {

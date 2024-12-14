@@ -2841,5 +2841,6 @@ Please try again later"</string>
     <string name="please_resolve_the_issue_before_saving">Please resolve the issue before saving</string>
     <string name="search_for_string">Search for String</string>
     <string name="save_completed">Save completed</string>
+    <string name="the_generated_aab_file_must_be_signed">The generated .aab file must be signed.\nCopy your keystore to /Internal storage/sketchware/keystore/release_key.jks and enter the alias\' password.</string>
 
 </resources>
