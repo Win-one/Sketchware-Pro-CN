@@ -2842,5 +2842,25 @@ Please try again later"</string>
     <string name="search_for_string">Search for String</string>
     <string name="save_completed">Save completed</string>
     <string name="the_generated_aab_file_must_be_signed">The generated .aab file must be signed.\nCopy your keystore to /Internal storage/sketchware/keystore/release_key.jks and enter the alias\' password.</string>
+    <string name="background_type">Background Type</string>
+    <string name="color">Color</string>
+    <string name="gradient">Gradient</string>
+    <string name="gradient_direction">Gradient Direction</string>
+    <string name="effects">Effects</string>
+    <string name="score_effect">Score effect</string>
+    <string name="textures">Textures</string>
+    <string name="adaptive_icon">Adaptive Icon</string>
+    <string name="badge_background_color">Badge background color</string>
+    <string name="badge_text">Badge text</string>
+    <string name="other">Other</string>
+    <string name="horizontal_position">horizontal position</string>
+    <string name="vertical_position">Vertical position</string>
+    <string name="size">Size</string>
+    <string name="opacity">Opacity</string>
+    <string name="scale">Scale</string>
+    <string name="rotation">Rotation</string>
+    <string name="corners">Corners</string>
+    <string name="image">Image</string>
+    <string name="text">Text</string>
 
 </resources>

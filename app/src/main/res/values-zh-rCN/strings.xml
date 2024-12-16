@@ -3162,4 +3162,24 @@
     <string name="search_for_string">搜索字符串</string>
     <string name="save_completed">保存已完成</string>
     <string name="the_generated_aab_file_must_be_signed">生成的.aab文件必须签名.\n将密钥库复制到/Internal storage/sketchware/keystore/release_key.jks并输入别名密码.</string>
+    <string name="background_type">背景类型</string>
+    <string name="color">颜色</string>
+    <string name="gradient">渐变</string>
+    <string name="gradient_direction">渐变方向</string>
+    <string name="effects">效果</string>
+    <string name="score_effect">分数效果</string>
+    <string name="textures">纹理</string>
+    <string name="adaptive_icon">自适应图标</string>
+    <string name="badge_background_color">标识背景颜色</string>
+    <string name="badge_text">标识文本</string>
+    <string name="other">其它</string>
+    <string name="horizontal_position">水平位置</string>
+    <string name="vertical_position">垂直位置</string>
+    <string name="size">尺寸</string>
+    <string name="opacity">透明度</string>
+    <string name="scale">比例</string>
+    <string name="rotation">旋转</string>
+    <string name="corners">边角</string>
+    <string name="image">图像</string>
+    <string name="text">文本</string>
 </resources>
