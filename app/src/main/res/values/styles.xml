@@ -28,6 +28,12 @@
         <item name="android:minHeight">3dp</item>
     </style>
 
+    <style name="NumberPickerText" parent="@style/Theme.Material3.Light.Dialog.Alert">
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColorHighlight">#ffeeeeee</item>
+    </style>
+
     <style name="SoundProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
         <item name="android:maxHeight">5dp</item>
         <item name="android:indeterminateOnly">false</item>
