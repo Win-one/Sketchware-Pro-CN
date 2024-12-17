@@ -28,7 +28,7 @@
         <item name="android:minHeight">3dp</item>
     </style>
 
-    <style name="NumberPickerText" parent="@style/Theme.Material3.Light.Dialog.Alert">
+    <style name="NumberPickerText" parent="@style/Theme.Material3.DayNight.Dialog.Alert">
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColorHighlight">#ffeeeeee</item>

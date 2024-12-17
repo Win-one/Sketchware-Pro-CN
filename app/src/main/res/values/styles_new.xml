@@ -91,7 +91,7 @@
     </style>
 
     <!--    AutoCompleteTextInputEditTextStyle    -->
-    <style name="TextInputEditTextStyle" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+    <style name="TextInputEditTextStyle" parent="Widget.Material3.TextInputEditText.OutlinedBox">
         <item name="android:gravity">center_vertical</item>
         <item name="android:imeOptions">actionNext</item>
         <item name="android:padding">8dp</item>

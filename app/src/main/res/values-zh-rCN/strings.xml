@@ -74,7 +74,7 @@
     <string name="common_word_image">图片</string>
     <string name="common_word_sound">音频</string>
     <string name="common_word_font">字体</string>
-    <string name="common_word_widget">部件</string>
+    <string name="common_word_widget">小部件</string>
     <string name="common_word_block">块</string>
     <string name="common_word_variable">变量</string>
     <string name="common_word_new">新建</string>
@@ -220,7 +220,7 @@
     <string name="design_library_firebase_button_goto_firebase_authentication">转到Firebase身份验证</string>
     <string name="design_library_firebase_button_goto_firebase_storage">转到Firebase存储</string>
     <string name="design_library_firebase_description_about_firebase">Firebase实时数据库是Google基于云的NoSQL数据库,您可以在其中实时保存和同步数据.</string>
-    <string name="design_library_guide_setup_first">为了使用此组件,您必须首先在库管理器中设置.</string>
+    <string name="design_library_guide_setup_first">为了使用此组件,您必须首先在库管理中设置.</string>
     <string name="design_library_firebase_guide_setup_first">为了使用此组件,您必须先在Firebase设置中设置API密钥.</string>
     <string name="design_library_firebase_guide_path_example">从根开始的路径.\nex)\"users/username\"</string>
     <string name="design_library_firebase_message_id_fill_out">项目ID,应用程序ID和API密钥必须填写.</string>
@@ -277,16 +277,16 @@
     <string name="design_manager_image_import_icon_button_white">白色</string>
     <string name="design_manager_block_detail_actionbar_title">块细节</string>
     <string name="design_manager_block_hint_enter_block_name">输出块名称</string>
-    <string name="design_manager_widget_title_actionbar_title">部件详细信息</string>
-    <string name="design_manager_widget_hint_enter_widget_name">输入部件名称</string>
+    <string name="design_manager_widget_title_actionbar_title">小部件详细信息</string>
+    <string name="design_manager_widget_hint_enter_widget_name">输入小部件名称</string>
     <string name="design_property_recent_message_nodata">最近使用的属性将被显示</string>
-    <string name="view_panel_title_widgets">部件</string>
+    <string name="view_panel_title_widgets">小部件</string>
     <string name="view_panel_title_layouts">布局</string>
     <string name="view_panel_title_properties">属性</string>
-    <string name="view_widget_favorites_save_title">将部件保存到我的收藏夹</string>
-    <string name="view_widget_favorites_save_guide">保存的部件保存到我的收藏夹并可从所有项目访问</string>
+    <string name="view_widget_favorites_save_title">将小部件保存到我的收藏夹</string>
+    <string name="view_widget_favorites_save_guide">保存的小部件保存到我的收藏夹并可从所有项目访问</string>
     <string name="view_widget_favorites_delete_title">从我的收藏中删除</string>
-    <string name="view_widget_favorites_delete_message">您确定要删除我的收藏中保存的部件吗?此操作无法撤消.</string>
+    <string name="view_widget_favorites_delete_message">您确定要删除我的收藏中保存的小部件吗?此操作无法撤消.</string>
     <string name="event_title_add_new_event">添加新事件</string>
     <string name="event_title_add_new_component">添加新组件</string>
     <string name="event_message_new_event">新事件添加</string>
@@ -384,7 +384,7 @@
     <string name="logic_variable_type_list_number">数字列表(List Number)</string>
     <string name="logic_variable_type_list_string">字符串列表(List String)</string>
     <string name="logic_variable_type_list_map">集合列表(List Map)</string>
-    <string name="logic_editor_title_select_view">选择部件</string>
+    <string name="logic_editor_title_select_view">选择小部件</string>
     <string name="logic_editor_title_select_image">选择图像</string>
     <string name="logic_editor_title_select_image_background">选择背景图片</string>
     <string name="logic_editor_title_select_sound">选择声音</string>
@@ -545,7 +545,7 @@
     <string name="system_information_developer_options">开发者选项</string>
     <string name="system_settings_title_setting_vibration">振动</string>
     <string name="system_settings_title_automatically_save">自动保存</string>
-    <string name="system_settings_description_setting_vibration">当部件或块被长时间按下时震动</string>
+    <string name="system_settings_description_setting_vibration">当长按小部件或块时振动</string>
     <string name="system_settings_description_automatically_save">当您退出项目时自动保存</string>
     <string name="invalid_component">无效组件</string>
     <string name="invalid_value_min_lenth">至少使用 %d 字母 </string>
@@ -1823,8 +1823,8 @@
     <string name="design_library_admob_dialog_delete_test_device_title">删除测试设备</string>
     <string name="design_library_admob_dialog_confirm_delete_test_device">您即将删除所选的测试设备ID. 你确定？</string>
 
-    <string name="design_library_admob_component_setup_first">要使用此组件,您必须首先在库管理器中设置设置.</string>
-    <string name="design_library_admob_widget_setup_first">要使用此小组件,您必须首先在库管理器中设置设置.</string>
+    <string name="design_library_admob_component_setup_first">要使用此组件,您必须首先在库管理中设置.</string>
+    <string name="design_library_admob_widget_setup_first">要使用此小部件,您必须首先在库管理中设置.</string>
 
     <string name="design_library_admob_message_no_unit_id">没有要显示的广告单元ID</string>
     <string name="design_library_admob_message_no_test_device">没有要显示的测试设备ID</string>
@@ -2105,9 +2105,9 @@
     <string name="share_view_message_uploading_view_data">正在上传视图数据</string>
     <string name="share_block_message_uploading_block_data">上传块数据</string>
     <string name="common_message_selected_file_empty">所选文件为空</string>
-    <string name="view_widget_favorites_image_auto_added">部件中使用的图像将添加到此项目中.</string>
-    <string name="view_widget_favorites_save_guide_new">如果您保存此部件,此部件将添加到部件集合中,此部件中使用的图像将自动添加到图像集合中.保存的部件可用于所有项目.</string>
-    <string name="shared_collection_message_update_soon">此功能将很快更新. 请等待下一次更新.</string>
+    <string name="view_widget_favorites_image_auto_added">小部件中使用的图像将添加到此项目中.</string>
+    <string name="view_widget_favorites_save_guide_new">如果您保存此小部件,此小部件将添加到小部件集合中,此小部件中使用的图像将自动添加到图像集合中.保存的小部件可用于所有项目.</string>
+    <string name="shared_collection_message_update_soon">此功能将很快更新.请等待下一次更新.</string>
     <string name="shared_views_detail_message_add_collection_complete">添加收藏完成.如果视图具有所需图像,则会自动将所需图像添加到图像集中,您可以直接在项目中使用包含所需图像的视图.</string>
     <string name="shared_collection_detail_title_dialog_add_collection_complete">添加收藏完成</string>
     <string name="block_set_hint_head">将</string>
@@ -2134,7 +2134,7 @@
     <string name="shared_blocks_list_title_my_shared_more_blocks">我的共享组合块</string>
     <string name="shared_blocks_list_title_other_user_shared_more_blocks">%s 的组合块共享</string>
     <string name="shared_blocks_detail_title_more_block_detail">组合块的细节</string>
-    <string name="shared_blocks_detail_see_more_more_blocks">查看更多 %s 共享的组合块</string>
+    <string name="shared_blocks_detail_see_more_more_blocks">查看更多%s共享的组合块</string>
     <string name="shared_blocks_detail_title_dialog_delete_my_shared_more_blocks">删除共享组合块</string>
     <string name="shared_blocks_detail_message_dialog_delete_my_shared_more_blocks">你想删除这个组合块吗？</string>
     <string name="shared_blocks_detail_message_already_liked_more_blocks">已经喜欢组合块</string>
@@ -2149,7 +2149,7 @@
     <string name="share_collection_select_required_collection_message_no_data">没有收集分享。</string>
     <string name="sign_apk_desc_generate_apk_file">点击下面的签署按钮,生成一个APK文件！</string>
     <string name="sign_apk_title_export_apk_file">生成APK文件完成</string>
-    <string name="sign_apk_desc_export_apk_file">APK文件已生成. APK文件在下面的保存目录中生成. 请检查保存目录.</string>
+    <string name="sign_apk_desc_export_apk_file">APK文件已生成.APK文件在下面的保存目录中生成. 请检查保存目录.</string>
     <string name="sign_apk_title_apk_file_save_path">保存目录</string>
     <string name="event_on_connected">当连接上</string>
     <string name="event_on_data_received">当收到数据</string>
@@ -2532,10 +2532,10 @@
     <string name="strings_xml">strings.xml</string>
     <string name="xml_strings">XML Strings</string>
     <string name="design_manager_view_title_add_activity">新活动</string>
-    <string name="create_new_widget">创建部件</string>
-    <string name="import_widgets">导入部件</string>
-    <string name="export_widgets">导出部件</string>
-    <string name="widget_editor">编辑部件</string>
+    <string name="create_new_widget">创建小部件</string>
+    <string name="import_widgets">导入小部件</string>
+    <string name="export_widgets">导出小部件</string>
+    <string name="widget_editor">编辑小部件</string>
     <string name="var_is_required">%s是必需的</string>
     <string name="widget_type_title">组件类型</string>
     <string name="new_class">或创建新类别</string>
@@ -3108,7 +3108,7 @@
     <string name="appcompat_manager">应用兼容管理</string>
     <string name="are_you_sure_you_want_to_reset_appcompat_attributes_for">您确定要重置</string>
     <string name="no_appcompat_options_are_currently_available_in_this_activity">此活动中当前没有可用的应用兼容选项.</string>
-    <string name="this_feature_is_currently_disabled_enabled_appcompat_in_the_library_manager_to_use_it">此功能当前已禁用.在库管理器中启用了应用兼容以使用它.</string>
+    <string name="this_feature_is_currently_disabled_enabled_appcompat_in_the_library_manager_to_use_it">此功能当前已禁用.在库管理中启用应用兼容以使用它.</string>
     <string name="you_re_not_currently_in_the_activity_layout">您当前不在活动布局中.</string>
     <string name="appcompat_message">的应用兼容属性?</string>
     <string name="release_to_delete">释放以删除</string>
@@ -3131,7 +3131,7 @@
     <string name="nothing_changed">什么都没有改变</string>
     <string name="layout_preview">布局预览</string>
     <string name="content_is_null">内容为空</string>
-    <string name="use_appcompat_manager_to_modify_attributes_for_coordinatorlayout">使用应用兼容管理修改CoordinatorLayout,Toolbar和其他应用兼容布局/部件的属性.</string>
+    <string name="use_appcompat_manager_to_modify_attributes_for_coordinatorlayout">使用应用兼容管理修改CoordinatorLayout,Toolbar和其他应用兼容布局/小部件的属性.</string>
     <string name="edit_appcompat">编辑应用兼容性</string>
     <string name="reload_color_schemes">重新加载配色方案</string>
     <string name="direct_xml_editor">XML编辑器</string>
