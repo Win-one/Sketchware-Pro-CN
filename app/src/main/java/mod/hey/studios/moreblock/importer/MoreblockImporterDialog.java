@@ -15,11 +15,9 @@ import com.besome.sketch.beans.MoreBlockCollectionBean;
 
 import java.util.ArrayList;
 
+import a.a.a.aB;
 import mod.hey.studios.util.Helper;
 import mod.jbk.util.BlockUtil;
-
-import a.a.a.aB;
-
 import pro.sketchware.R;
 import pro.sketchware.databinding.ManageCollectionPopupImportMoreBlockListItemBinding;
 import pro.sketchware.databinding.SearchWithRecyclerViewBinding;
@@ -38,7 +36,7 @@ public class MoreblockImporterDialog extends aB {
         moreBlockCollectionList = new ArrayList<>(beanList);
         adapter = new MoreBlockAdapter(moreBlockCollectionList);
 
-        b("Select a more block");
+        b(Helper.getResString(R.string.select_a_more_block));
         a(R.drawable.more_block_96dp);
 
         binding.searchInput.addTextChangedListener(new TextWatcher() {
@@ -62,7 +60,7 @@ public class MoreblockImporterDialog extends aB {
             MoreBlockCollectionBean selectedBean = adapter.getSelectedItem();
 
             if (selectedBean == null) {
-                SketchwareUtil.toastError("Select a more block");
+                SketchwareUtil.toastError(Helper.getResString(R.string.select_a_more_block));
             } else {
                 callback.onSelected(selectedBean);
                 dismiss();

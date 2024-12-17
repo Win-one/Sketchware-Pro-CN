@@ -3135,7 +3135,7 @@
     <string name="edit_appcompat">编辑应用兼容性</string>
     <string name="reload_color_schemes">重新加载配色方案</string>
     <string name="direct_xml_editor">XML编辑器</string>
-    <string name="link_github_commits_url"><![CDATA[https://api.github.com/repos/Sketchware-Pro/Sketchware-Pro/commits?per_page=%s&page=%s]]></string>
+    <string name="link_github_commits_url" formatted="false"><![CDATA[https://api.github.com/repos/Sketchware-Pro/Sketchware-Pro/commits?per_page=%s&page=%s]]></string>
     <string name="github_api_error_message">出了点问题.请稍候,然后重试.</string>
     <string name="github_api_date_unavailable">日期不可用</string>
     <string name="design_drawer_menu_description_xml_command">修改内置XML文件.</string>
