@@ -2,8 +2,6 @@ package mod.hilal.saif.activities.tools;
 
 import static com.besome.sketch.editor.view.ViewEditor.shakeView;
 
-import static pro.sketchware.utility.SketchwareUtil.dpToPx;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -19,9 +17,8 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 
-import a.a.a.aB;
-
 import com.besome.sketch.editor.manage.library.LibraryItemView;
+import com.besome.sketch.help.SystemSettingActivity;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.github.angads25.filepicker.model.DialogConfigs;
 import com.github.angads25.filepicker.model.DialogProperties;
@@ -29,32 +26,29 @@ import com.github.angads25.filepicker.view.FilePickerDialog;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import dev.aldi.sayuti.editor.manage.ManageLocalLibraryActivity;
-
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
+import a.a.a.aB;
+import dev.aldi.sayuti.editor.manage.ManageLocalLibraryActivity;
 import kellinwood.security.zipsigner.ZipSigner;
-
 import mod.alucard.tn.apksigner.ApkSigner;
 import mod.hey.studios.code.SrcCodeEditorLegacy;
 import mod.hey.studios.util.Helper;
 import mod.khaled.logcat.LogReaderActivity;
-import pro.sketchware.R;
-
 import pro.sketchware.R;
 import pro.sketchware.activities.editor.component.ManageCustomComponentActivity;
 import pro.sketchware.activities.settings.SettingsActivity;
 import pro.sketchware.databinding.DialogSelectApkToSignBinding;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.databinding.DialogSelectApkToSignBinding;
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
 
 public class AppSettings extends BaseAppCompatActivity {
 
     private LinearLayout content;
     private MaterialToolbar topAppBar;
+    private final List<LibraryItemView> preferences = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,9 +59,9 @@ public class AppSettings extends BaseAppCompatActivity {
         content = findViewById(R.id.content);
         topAppBar = findViewById(R.id.topAppBar);
 
-        topAppBar.setTitle(R.string.developer_tools);
+        topAppBar.setTitle("Settings");
         topAppBar.setNavigationOnClickListener(view -> onBackPressed());
-        setupViews();
+        setupPreferences();
     }
 
     private void openWorkingDirectory() {
@@ -78,16 +72,16 @@ public class AppSettings extends BaseAppCompatActivity {
         properties.error_dir = getExternalCacheDir();
         properties.extensions = null;
         FilePickerDialog dialog = new FilePickerDialog(this, properties, R.style.RoundedCornersDialog);
-        dialog.setTitle(getString(R.string.select_an_entry_to_modify));
+        dialog.setTitle("Select an entry to modify");
         dialog.setDialogSelectionListener(files -> {
             final boolean isDirectory = new File(files[0]).isDirectory();
             if (files.length > 1 || isDirectory) {
                 new MaterialAlertDialogBuilder(this)
-                        .setTitle(R.string.select_an_action)
-                        .setSingleChoiceItems(new String[]{getString(R.string.common_word_delete)}, -1, (actionDialog, which) -> {
+                        .setTitle("Select an action")
+                        .setSingleChoiceItems(new String[]{"Delete"}, -1, (actionDialog, which) -> {
                             new MaterialAlertDialogBuilder(this)
-                                    .setTitle(getString(R.string.common_word_delete) + (isDirectory ? getString(R.string.common_word_folder) : getString(R.string.common_word_file)) + "?")
-                                    .setMessage(getString(R.string.are_you_sure_you_want_to_delete_this) + (isDirectory ? getString(R.string.common_word_folder) : getString(R.string.common_word_file)) + getString(R.string.permanently_this_cannot_be_undone))
+                                    .setTitle("Delete " + (isDirectory ? "folder" : "file") + "?")
+                                    .setMessage("Are you sure you want to delete this " + (isDirectory ? "folder" : "file") + " permanently? This cannot be undone.")
                                     .setPositiveButton(R.string.common_word_delete, (deleteConfirmationDialog, pressedButton) -> {
                                         for (String file : files) {
                                             FileUtil.deleteFile(file);
@@ -101,8 +95,8 @@ public class AppSettings extends BaseAppCompatActivity {
                         .show();
             } else {
                 new MaterialAlertDialogBuilder(this)
-                        .setTitle(R.string.select_an_action)
-                        .setSingleChoiceItems(new String[]{getString(R.string.common_word_edit), getString(R.string.common_word_delete)}, -1, (actionDialog, which) -> {
+                        .setTitle("Select an action")
+                        .setSingleChoiceItems(new String[]{"Edit", "Delete"}, -1, (actionDialog, which) -> {
                             switch (which) {
                                 case 0 -> {
                                     Intent intent = new Intent(getApplicationContext(), ConfigActivity.isLegacyCeEnabled() ?
@@ -114,8 +108,8 @@ public class AppSettings extends BaseAppCompatActivity {
                                     startActivity(intent);
                                 }
                                 case 1 -> new MaterialAlertDialogBuilder(this)
-                                        .setTitle(R.string.delete_file)
-                                        .setMessage(R.string.are_you_sure_you_want_to_delete_this_file_permanently_this_cannot_be_undone)
+                                        .setTitle("Delete file?")
+                                        .setMessage("Are you sure you want to delete this file permanently? This cannot be undone.")
                                         .setPositiveButton(R.string.common_word_delete, (deleteDialog, pressedButton) ->
                                                 FileUtil.deleteFile(files[0]))
                                         .setNegativeButton(R.string.common_word_cancel, null)
@@ -129,16 +123,19 @@ public class AppSettings extends BaseAppCompatActivity {
         dialog.show();
     }
 
-    private void setupViews() {
-        createToolsView(R.drawable.ic_mtrl_block, getString(R.string.block_manager), getString(R.string.manage_your_own_blocks_to_use_in_logic_editor), content, new ActivityLauncher(new Intent(getApplicationContext(), BlocksManager.class)), false);
-        createToolsView(R.drawable.ic_mtrl_checklist, getString(R.string.block_selector_menu_manager), getString(R.string.manage_your_own_block_selector_menus), content, openSettingsActivity(SettingsActivity.BLOCK_SELECTOR_MANAGER_FRAGMENT), false);
-        createToolsView(R.drawable.ic_mtrl_grid, getString(R.string.component_manager), getString(R.string.manage_your_own_components), content, new ActivityLauncher(new Intent(getApplicationContext(), ManageCustomComponentActivity.class)), false);
-        createToolsView(R.drawable.ic_mtrl_click, getString(R.string.event_manager), getString(R.string.manage_your_own_events), content, openSettingsActivity(SettingsActivity.EVENTS_MANAGER_FRAGMENT), false);
-        createToolsView(R.drawable.ic_mtrl_box, getString(R.string.local_library_manager), getString(R.string.manage_and_download_local_libraries), content, new ActivityLauncher(new Intent(getApplicationContext(), ManageLocalLibraryActivity.class), new Pair<>("sc_id", "system")), false);
-        createToolsView(R.drawable.ic_mtrl_settings, getString(R.string.mod_settings), getString(R.string.change_general_mod_settings), content, new ActivityLauncher(new Intent(getApplicationContext(), ConfigActivity.class)), false);
-        createToolsView(R.drawable.ic_mtrl_folder, getString(R.string.open_working_directory), getString(R.string.open_sketchware_pro_s_directory_and_edit_files_in_it), content, v -> openWorkingDirectory(), false);
-        createToolsView(R.drawable.ic_mtrl_apk_document, getString(R.string.sign_an_apk_file_with_testkey), getString(R.string.sign_an_already_existing_apk_file), content, v -> signApkFileDialog(), false);
-        createToolsView(R.drawable.ic_mtrl_article, getString(R.string.design_drawer_menu_title_logcat_reader), getString(R.string.design_drawer_menu_subtitle_logcat_reader), content, new ActivityLauncher(new Intent(getApplicationContext(), LogReaderActivity.class)), false);
+    private void setupPreferences() {
+        preferences.add(createPreference(R.drawable.ic_mtrl_block, "Block manager", "Manage your own blocks to use in Logic Editor", new ActivityLauncher(new Intent(getApplicationContext(), BlocksManager.class))));
+        preferences.add(createPreference(R.drawable.ic_mtrl_pull_down, "Block selector menu manager", "Manage your own block selector menus", openSettingsActivity(SettingsActivity.BLOCK_SELECTOR_MANAGER_FRAGMENT)));
+        preferences.add(createPreference(R.drawable.ic_mtrl_component, "Component manager", "Manage your own components", new ActivityLauncher(new Intent(getApplicationContext(), ManageCustomComponentActivity.class))));
+        preferences.add(createPreference(R.drawable.ic_mtrl_list, "Event manager", "Manage your own events", openSettingsActivity(SettingsActivity.EVENTS_MANAGER_FRAGMENT)));
+        preferences.add(createPreference(R.drawable.ic_mtrl_box, "Local library manager", "Manage and download local libraries", new ActivityLauncher(new Intent(getApplicationContext(), ManageLocalLibraryActivity.class), new Pair<>("sc_id", "system"))));
+        preferences.add(createPreference(R.drawable.ic_mtrl_settings_applications, "Mod settings", "Change general mod settings", new ActivityLauncher(new Intent(getApplicationContext(), ConfigActivity.class))));
+        preferences.add(createPreference(R.drawable.ic_mtrl_palette, getString(R.string.settings_appearance), getString(R.string.settings_appearance_description), openSettingsActivity(SettingsActivity.SETTINGS_APPEARANCE_FRAGMENT)));
+        preferences.add(createPreference(R.drawable.ic_mtrl_folder, "Open working directory", "Open Sketchware Pro's directory and edit files in it", v -> openWorkingDirectory()));
+        preferences.add(createPreference(R.drawable.ic_mtrl_apk_document, "Sign an APK file with testkey", "Sign an already existing APK file with testkey and signature schemes up to V4", v -> signApkFileDialog()));
+        preferences.add(createPreference(R.drawable.ic_mtrl_article, getString(R.string.design_drawer_menu_title_logcat_reader), getString(R.string.design_drawer_menu_subtitle_logcat_reader), new ActivityLauncher(new Intent(getApplicationContext(), LogReaderActivity.class))));
+        preferences.add(createPreference(R.drawable.ic_mtrl_settings, getString(R.string.main_drawer_title_system_settings), "Auto-save and vibrations", new ActivityLauncher(new Intent(getApplicationContext(), SystemSettingActivity.class))));
+        preferences.forEach(preference -> content.addView(preference));
     }
     
     private View.OnClickListener openSettingsActivity(String fragmentTag) {
@@ -149,27 +146,20 @@ public class AppSettings extends BaseAppCompatActivity {
         };
     }
 
-    private void createToolsView(int icon, String title, String desc, LinearLayout toView, View.OnClickListener listener, boolean lastItem) {
-        LibraryItemView item = new LibraryItemView(this);
-        item.enabled.setVisibility(View.GONE);
-        item.icon.setImageResource(icon);
-        item.title.setText(title);
-        item.description.setText(desc);
-        toView.addView(item);
-        item.setOnClickListener(listener);
-        LinearLayout.LayoutParams itemParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                0.0f
-        );
-        itemParams.bottomMargin = lastItem ? dpToPx(25) : dpToPx(0);
-        item.setLayoutParams(itemParams);
+    private LibraryItemView createPreference(int icon, String title, String desc, View.OnClickListener listener) {
+        LibraryItemView preference = new LibraryItemView(this);
+        preference.enabled.setVisibility(View.GONE);
+        preference.icon.setImageResource(icon);
+        preference.title.setText(title);
+        preference.description.setText(desc);
+        preference.setOnClickListener(listener);
+        return preference;
     }
 
     private void signApkFileDialog() {
         final boolean[] isAPKSelected = {false};
         aB apkPathDialog = new aB(this);
-        apkPathDialog.b(getString(R.string.sign_apk_with_testkey));
+        apkPathDialog.b("Sign APK with testkey");
 
         DialogSelectApkToSignBinding binding = DialogSelectApkToSignBinding.inflate(getLayoutInflater());
         View testkey_root = binding.getRoot();
@@ -188,9 +178,9 @@ public class AppSettings extends BaseAppCompatActivity {
             dialog.show();
         });
 
-        apkPathDialog.b(getString(R.string.common_word_continue), v -> {
+        apkPathDialog.b("Continue", v -> {
             if (!isAPKSelected[0]) {
-                SketchwareUtil.toast(getString(R.string.please_select_an_apk_file_to_sign), Toast.LENGTH_SHORT);
+                SketchwareUtil.toast("Please select an APK file to sign", Toast.LENGTH_SHORT);
                 shakeView(binding.selectFile);
                 return;
             }
@@ -202,11 +192,11 @@ public class AppSettings extends BaseAppCompatActivity {
             if (new File(output_apk_path).exists()) {
                 aB confirmOverwrite = new aB(this);
                 confirmOverwrite.a(R.drawable.color_save_as_new_96);
-                confirmOverwrite.b(getString(R.string.file_exists));
-                confirmOverwrite.a(getString(R.string.an_apk_named) + output_apk_file_name + " already exists at /sketchware/signed_apk/.  Overwrite it?");
+                confirmOverwrite.b("File exists");
+                confirmOverwrite.a("An APK named " + output_apk_file_name + " already exists at /sketchware/signed_apk/.  Overwrite it?");
 
                 confirmOverwrite.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(confirmOverwrite));
-                confirmOverwrite.b(getString(R.string.common_word_overwrite), view -> {
+                confirmOverwrite.b("Overwrite", view -> {
                     confirmOverwrite.dismiss();
                     signApkFileWithDialog(input_apk_path, output_apk_path, true,
                             null, null, null, null);
@@ -235,7 +225,7 @@ public class AppSettings extends BaseAppCompatActivity {
         scroll_view.addView(tv_log);
         layout_quiz.addView(scroll_view);
 
-        tv_progress.setText(R.string.signing_apk);
+        tv_progress.setText("Signing APK...");
 
         AlertDialog building_dialog = new MaterialAlertDialogBuilder(this)
                 .setView(building_root)
@@ -259,8 +249,8 @@ public class AppSettings extends BaseAppCompatActivity {
                             zipSigner.setKeymode(ZipSigner.KEY_TESTKEY);
                             zipSigner.signZip(inputApkPath, outputApkPath);
                         } catch (Exception e) {
-                            tv_progress.setText(R.string.an_error_occurred_check_the_log_for_more_details);
-                            tv_log.setText(getString(R.string.failed_to_sign_apk_with_zipsigner) + e);
+                            tv_progress.setText("An error occurred. Check the log for more details.");
+                            tv_log.setText("Failed to sign APK with zipsigner: " + e);
                         }
                     }
                 } else {
@@ -269,13 +259,13 @@ public class AppSettings extends BaseAppCompatActivity {
                 }
 
                 runOnUiThread(() -> {
-                    if (callback.errorCount.get() == 0) {
+                    if (ApkSigner.LogCallback.errorCount.get() == 0) {
                         building_dialog.dismiss();
-                        SketchwareUtil.toast(getString(R.string.successfully_saved_signed_apk)
+                        SketchwareUtil.toast("Successfully saved signed APK to: /Internal storage/sketchware/signed_apk/"
                                         + Uri.fromFile(new File(outputApkPath)).getLastPathSegment(),
                                 Toast.LENGTH_LONG);
                     } else {
-                        tv_progress.setText(R.string.an_error_occurred_check_the_log_for_more_details);
+                        tv_progress.setText("An error occurred. Check the log for more details.");
                     }
                 });
             }

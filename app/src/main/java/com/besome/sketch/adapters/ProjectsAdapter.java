@@ -14,8 +14,12 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.besome.sketch.export.ExportProjectActivity;
+import pro.sketchware.activities.main.fragments.projects.ProjectsFragment;
 import com.besome.sketch.projects.MyProjectSettingActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import pro.sketchware.R;
+import pro.sketchware.databinding.BottomSheetProjectOptionsBinding;
+import pro.sketchware.databinding.MyprojectsItemBinding;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -32,10 +36,6 @@ import a.a.a.yB;
 import mod.hey.studios.project.ProjectSettingsDialog;
 import mod.hey.studios.project.backup.BackupRestoreManager;
 import mod.hey.studios.util.Helper;
-import pro.sketchware.R;
-import pro.sketchware.activities.main.fragments.projects.ProjectsFragment;
-import pro.sketchware.databinding.BottomSheetProjectOptionsBinding;
-import pro.sketchware.databinding.MyprojectsItemBinding;
 
 public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.ProjectViewHolder> {
     private final ProjectsFragment projectsFragment;
@@ -236,7 +236,6 @@ public class ProjectsAdapter extends RecyclerView.Adapter<ProjectsAdapter.Projec
         BottomSheetDialog projectOptionsBSD = new BottomSheetDialog(activity);
         BottomSheetProjectOptionsBinding binding = BottomSheetProjectOptionsBinding.inflate(LayoutInflater.from(activity));
         projectOptionsBSD.setContentView(binding.getRoot());
-        projectOptionsBSD.getWindow().findViewById(com.google.android.material.R.id.design_bottom_sheet).setBackgroundResource(android.R.color.transparent);
 
         binding.projectSettings.setOnClickListener(v -> {
             toProjectSettingOrRequestPermission(projectMap, position);

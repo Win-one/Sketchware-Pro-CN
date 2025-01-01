@@ -1,5 +1,7 @@
 package mod.khaled.logcat;
 
+import static pro.sketchware.utility.FileUtil.createNewFileIfNotPresent;
+
 import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -8,21 +10,16 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.activity.BackEventCompat;
 import androidx.activity.EdgeToEdge;
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import pro.sketchware.R;
@@ -32,9 +29,14 @@ import pro.sketchware.databinding.ViewLogcatItemBinding;
 
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,36 +50,13 @@ public class LogReaderActivity extends BaseAppCompatActivity {
     private final BroadcastReceiver logger = new Logger();
     private final Pattern logPattern = Pattern.compile("^(.*\\d) ([VADEIW]) (.*): (.*)");
     private String pkgFilter = "";
+    private String packageName = "pro.sketchware";
     private boolean autoScroll = true;
 
     private final ArrayList<HashMap<String, Object>> mainList = new ArrayList<>();
     private ArrayList<String> pkgFilterList = new ArrayList<>();
 
     private ActivityLogcatreaderBinding binding;
-    private BottomSheetBehavior<View> persistentBottomSheetBehavior;
-
-    private final OnBackPressedCallback persistentBottomSheetBackCallback =
-            new OnBackPressedCallback(/* enabled= */ false) {
-                @Override
-                public void handleOnBackStarted(@NonNull BackEventCompat backEvent) {
-                    persistentBottomSheetBehavior.startBackProgress(backEvent);
-                }
-
-                @Override
-                public void handleOnBackProgressed(@NonNull BackEventCompat backEvent) {
-                    persistentBottomSheetBehavior.updateBackProgress(backEvent);
-                }
-
-                @Override
-                public void handleOnBackPressed() {
-                    persistentBottomSheetBehavior.handleBackInvoked();
-                }
-
-                @Override
-                public void handleOnBackCancelled() {
-                    persistentBottomSheetBehavior.cancelBackProgress();
-                }
-            };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,65 +75,28 @@ public class LogReaderActivity extends BaseAppCompatActivity {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("pro.sketchware.ACTION_NEW_DEBUG_LOG");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            registerReceiver(logger, intentFilter, Context.RECEIVER_NOT_EXPORTED);
+            registerReceiver(logger, intentFilter, Context.RECEIVER_EXPORTED);
         } else {
             registerReceiver(logger, intentFilter);
         }
 
-        final View decorView = getWindow().getDecorView();
-        ViewCompat.setOnApplyWindowInsetsListener(decorView, (v, insets) -> {
-            Insets systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-
-            binding.appBarLayout.setPadding(
-                    binding.appBarLayout.getPaddingLeft(),
-                    systemBarsInsets.top,
-                    binding.appBarLayout.getPaddingRight(),
-                    binding.appBarLayout.getPaddingBottom());
-
-            binding.optionsSheet.setPadding(
-                    binding.optionsSheet.getPaddingLeft(),
-                    binding.optionsSheet.getPaddingTop(),
-                    binding.optionsSheet.getPaddingRight(),
-                    systemBarsInsets.bottom);
-
-            persistentBottomSheetBehavior.setPeekHeight(
-                    getResources().getDimensionPixelSize(R.dimen.logcat_bottom_sheet_peek_height) + systemBarsInsets.bottom,
-                    true);
-            return WindowInsetsCompat.CONSUMED;
-        });
-
-        persistentBottomSheetBehavior = BottomSheetBehavior.from(binding.optionsSheet);
-        persistentBottomSheetBehavior.addBottomSheetCallback(createBottomSheetCallback());
-
-        binding.optionsSheet.post(() -> {
-            if (persistentBottomSheetBehavior != null) {
-                persistentBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-            }
-
-            int state = persistentBottomSheetBehavior.getState();
-            updateBackHandlingEnabled(state);
-        });
-        setupBackHandling();
-
         binding.topAppBar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-
-        binding.autoScrollSwitch.setOnCheckedChangeListener((compoundButton, isChecked) -> {
-            autoScroll = isChecked;
-            if (autoScroll) {
-                binding.autoScrollSwitch.setText(R.string.auto_scroll_enabled);
-                Objects.requireNonNull(binding.logsRecyclerView.getLayoutManager()).scrollToPosition(Objects.requireNonNull(binding.logsRecyclerView.getAdapter()).getItemCount() - 1);
-            } else {
-                binding.autoScrollSwitch.setText(R.string.auto_scroll_disabled);
+        binding.topAppBar.setOnMenuItemClickListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.action_clear) {
+                mainList.clear();
+                ((Adapter) binding.logsRecyclerView.getAdapter()).deleteAll();
+            } else if (id == R.id.action_auto_scroll) {
+                autoScroll = !item.isChecked();
+                if (autoScroll) {
+                    binding.logsRecyclerView.getLayoutManager().scrollToPosition(binding.logsRecyclerView.getAdapter().getItemCount() - 1);
+                }
+            } else if (id == R.id.action_filter) {
+                showFilterDialog();
+            } else if (id == R.id.action_export) {
+                exportLogcat(mainList);
             }
-        });
-
-        binding.scrollSwitchLayout.setOnClickListener(view -> binding.autoScrollSwitch.performClick());
-
-        binding.filterSwitchLayout.setOnClickListener(view -> showFilterDialog());
-
-        binding.clearSwitchLayout.setOnClickListener(view -> {
-            mainList.clear();
-            ((Adapter) Objects.requireNonNull(binding.logsRecyclerView.getAdapter())).deleteAll();
+            return true;
         });
 
         binding.searchInput.addTextChangedListener(new BaseTextWatcher() {
@@ -182,79 +124,54 @@ public class LogReaderActivity extends BaseAppCompatActivity {
         });
     }
 
-    private void setupBackHandling() {
-        getOnBackPressedDispatcher().addCallback(this, persistentBottomSheetBackCallback);
-        persistentBottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                updateBackHandlingEnabled(newState);
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-            }
-        });
-    }
-
-    private void updateBackHandlingEnabled(int state) {
-        switch (state) {
-            case BottomSheetBehavior.STATE_EXPANDED, BottomSheetBehavior.STATE_HALF_EXPANDED ->
-                    persistentBottomSheetBackCallback.setEnabled(true);
-            case BottomSheetBehavior.STATE_COLLAPSED, BottomSheetBehavior.STATE_HIDDEN ->
-                    persistentBottomSheetBackCallback.setEnabled(false);
-            default -> {
-            }
-        }
-    }
-
-    private BottomSheetBehavior.BottomSheetCallback createBottomSheetCallback() {
-        return new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    binding.dimView.setOnClickListener(view -> persistentBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED));
-                    binding.dimView.setClickable(true);
-                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    binding.dimView.setOnClickListener(null);
-                    binding.dimView.setClickable(false);
-                }
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                binding.dimView.setAlpha(slideOffset);
-            }
-        };
-    }
-
     void showFilterDialog() {
-        persistentBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-
         var dialogBinding = EasyDeleteEdittextBinding.inflate(getLayoutInflater());
         View view = dialogBinding.getRoot();
 
         dialogBinding.imgDelete.setVisibility(View.GONE);
 
         var builder = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.filter_by_package_name)
-                .setMessage(R.string.for_multiple_package_names_separate_them_with_a_comma)
+                .setTitle("Filter by package name")
+                .setMessage("For multiple package names, separate them with a comma (,).")
                 .setIcon(R.drawable.ic_mtrl_filter)
                 .setView(view)
-                .setPositiveButton(R.string.common_word_apply, (dialog, which) -> {
+                .setPositiveButton("Apply", (dialog, which) -> {
                     pkgFilter = dialogBinding.easyEdInput.getText().toString();
                     pkgFilterList = new ArrayList<>(Arrays.asList(pkgFilter.split(",")));
                     binding.searchInput.setText(binding.searchInput.getText().toString());
                 })
-                .setNeutralButton(R.string.common_word_reset, (dialog, which) -> {
+                .setNeutralButton("Reset", (dialog, which) -> {
                     pkgFilter = "";
                     pkgFilterList.clear();
                     dialogBinding.easyEdInput.setText("");
                 })
-                .setNegativeButton(R.string.common_word_cancel, null)
+                .setNegativeButton("Cancel", null)
                 .create();
 
         builder.show();
     }
+
+    private void exportLogcat(ArrayList<HashMap<String, Object>> logs){
+        try {
+            File file = new File(Environment.getExternalStorageDirectory(),".sketchware/logcat/" + packageName +"_"+ Calendar.getInstance(Locale.ENGLISH).getTimeInMillis() + ".txt");
+            createNewFileIfNotPresent(file.getAbsolutePath());
+            FileWriter writer = new FileWriter(file);
+            for (int i = 0; i < logs.size(); i++) {
+                String date = Objects.requireNonNull(logs.get(i).get("date")).toString();
+                String type = Objects.requireNonNull(logs.get(i).get("type")).toString();
+                String tag = Objects.requireNonNull(logs.get(i).get("header")).toString();
+                String body = Objects.requireNonNull(logs.get(i).get("body")).toString();
+
+                writer.write( date + " " +  type + " " + tag + " " + body + "\n");
+            }
+            writer.close();
+            SketchwareUtil.toast("Logcat exported successfully");
+
+        } catch (IOException ex) {
+            SketchwareUtil.toastError("Something went wrong!");
+        }
+    }
+    
 
     private class Logger extends BroadcastReceiver {
 
@@ -264,6 +181,7 @@ public class LogReaderActivity extends BaseAppCompatActivity {
             if (intent.hasExtra("log") && (intent.getStringExtra("log") != null)) {
                 if (intent.hasExtra("packageName")) {
                     map.put("pkgName", intent.getStringExtra("packageName"));
+                    packageName = intent.getStringExtra("packageName");
                 }
                 map.put("logRaw", intent.getStringExtra("log"));
                 if (intent.getStringExtra("log") == null) return;
@@ -327,22 +245,13 @@ public class LogReaderActivity extends BaseAppCompatActivity {
                 binding.appBarLayout.setExpanded(false);
             }
 
-            if (!data.isEmpty()) {
-                if (persistentBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
-                    persistentBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    persistentBottomSheetBehavior.setHideable(false);
-                }
-                binding.noContentLayout.setVisibility(View.GONE);
-            } else {
-                binding.noContentLayout.setVisibility(View.VISIBLE);
-            }
+            binding.noContentLayout.setVisibility(data.isEmpty() ? View.VISIBLE : View.GONE);
         }
 
         public void deleteAll() {
             data.clear();
             binding.logsRecyclerView.getAdapter().notifyDataSetChanged();
             binding.noContentLayout.setVisibility(View.VISIBLE);
-            persistentBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
 
         public Adapter(ArrayList<HashMap<String, Object>> data) {
@@ -416,7 +325,7 @@ public class LogReaderActivity extends BaseAppCompatActivity {
                 binding.dateHeader.setVisibility(View.GONE);
             }
             binding.getRoot().setOnLongClickListener(v -> {
-                SketchwareUtil.toast(getString(R.string.copied_to_clipboard));
+                SketchwareUtil.toast("Copied to clipboard");
                 ((ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("clipboard", data.get(position).get("logRaw").toString()));
                 return true;
             });

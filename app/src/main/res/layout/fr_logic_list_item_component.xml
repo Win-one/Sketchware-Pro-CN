@@ -1,12 +1,11 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="?attr/materialCardViewElevatedStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="8dp"
-    android:layout_marginTop="8dp"
-    app:cardBackgroundColor="?colorSurfaceContainer"
-    app:strokeWidth="0dp">
+    android:layout_marginVertical="6dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -102,7 +101,8 @@
             <com.besome.sketch.editor.component.CollapsibleComponentLayout
                 android:id="@+id/component_option"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:tint="?colorOnError"/>
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

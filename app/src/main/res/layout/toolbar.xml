@@ -1,4 +1,4 @@
-<com.google.android.material.appbar.MaterialToolbar xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     style="@style/Widget.Material3.Toolbar.Surface"
@@ -18,4 +18,5 @@
         android:scaleType="fitCenter"
         android:src="@drawable/top_title_logo"
         app:tint="?attr/colorPrimary" />
-</com.google.android.material.appbar.MaterialToolbar>
+
+</androidx.appcompat.widget.Toolbar>

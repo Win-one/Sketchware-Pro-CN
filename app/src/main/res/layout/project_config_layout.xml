@@ -7,9 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        android:paddingTop="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_android_jar"
@@ -58,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
-            android:text="@string/java_version"
+            android:text="Java version"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -73,28 +72,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="@string/hide_warnings_in_error_log" />
+            android:text="Hide warnings in error log" />
 
         <CheckBox
             android:id="@+id/cb_no_http_legacy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="@string/don_t_include_http_legacy_28_dex" />
+            android:text="Don't include http-legacy-28.dex" />
 
         <CheckBox
             android:id="@+id/cb_enable_logcat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="@string/enable_debug_logcat_logs_viewable_in_logcat_reader" />
-
-        <CheckBox
-            android:id="@+id/cb_enable_background_build"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/enable_building_the_project_in_the_background" />
+            android:text="Enable debug logcat logs viewable in Logcat Reader. Not enabled in exported AABs/APKs." />
 
     </LinearLayout>
 </ScrollView>
