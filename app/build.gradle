@@ -115,7 +115,7 @@ dependencies {
     implementation "androidx.viewpager:viewpager:1.0.0"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation "com.google.android.material:material:1.13.0-alpha09"
-    implementation "com.airbnb.android:lottie:6.5.2"
+    implementation "com.airbnb.android:lottie:6.6.0"
     implementation "com.google.android.flexbox:flexbox:3.0.0"
 
     implementation "androidx.annotation:annotation:1.9.1"
@@ -133,6 +133,7 @@ dependencies {
 
     implementation "de.hdodenhof:circleimageview:3.1.0"
     implementation "com.github.angads25:filepicker:1.1.1"
+    implementation 'com.github.getActivity:MultiLanguages:9.3'
 
     implementation 'io.coil-kt:coil:2.0.0'
     implementation 'io.coil-kt:coil-svg:2.0.0'
@@ -165,7 +166,7 @@ dependencies {
 
     //noinspection GradleDependency
     minApi21Implementation "org.eclipse.jdt:ecj:3.13.0"
-    minApi26Implementation "org.eclipse.jdt:ecj:3.26.0"
+    minApi26Implementation "org.eclipse.jdt:ecj:3.39.0"
 
     minApi26Implementation "com.github.Cosmic-IDE:kotlinc-android:f49c67a8c0"
 

@@ -2866,5 +2866,6 @@ Please try again later"</string>
     <string name="text">Text</string>
 
     <string name="code_viewer">Code Viewer</string>
+    <string name="no_palettes">No palettes</string>
 
 </resources>
