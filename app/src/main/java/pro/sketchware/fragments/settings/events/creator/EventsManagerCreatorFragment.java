@@ -1,27 +1,30 @@
 package pro.sketchware.fragments.settings.events.creator;
 
+import static pro.sketchware.utility.GsonUtils.getGson;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.activity.ComponentActivity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
-import com.google.gson.Gson;
+import pro.sketchware.R;
+import pro.sketchware.databinding.FragmentEventsManagerCreatorBinding;
+import pro.sketchware.utility.SketchwareUtil;
+import pro.sketchware.utility.FileUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import a.a.a.qA;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.activities.tools.IconSelectorDialog;
 import mod.jbk.util.OldResourceIdMapper;
-import pro.sketchware.R;
-import pro.sketchware.databinding.FragmentEventsManagerCreatorBinding;
-import pro.sketchware.utility.FileUtil;
-import pro.sketchware.utility.SketchwareUtil;
+
+import a.a.a.qA;
 
 public class EventsManagerCreatorFragment extends qA {
 
@@ -125,18 +128,18 @@ public class EventsManagerCreatorFragment extends qA {
 
     private void save() {
         if (!filledIn()) {
-            SketchwareUtil.toast(getString(R.string.some_required_fields_are_empty));
+            SketchwareUtil.toast("Some required fields are empty!");
             return;
         }
         if (!OldResourceIdMapper.isValidIconId(binding.eventsCreatorIcon.getText().toString())) {
-            binding.eventsCreatorIconTil.setError(getString(R.string.invalid_icon_id));
+            binding.eventsCreatorIconTil.setError("Invalid icon ID");
             binding.eventsCreatorIcon.requestFocus();
             return;
         }
         ArrayList<HashMap<String, Object>> arrayList;
         String concat = FileUtil.getExternalStorageDir().concat("/.sketchware/data/system/events.json");
         if (FileUtil.isExistFile(concat)) {
-            arrayList = new Gson().fromJson(FileUtil.readFile(concat), Helper.TYPE_MAP_LIST);
+            arrayList = getGson().fromJson(FileUtil.readFile(concat), Helper.TYPE_MAP_LIST);
         } else {
             arrayList = new ArrayList<>();
         }
@@ -159,15 +162,15 @@ public class EventsManagerCreatorFragment extends qA {
         if (!isEdit) {
             arrayList.add(hashMap);
         }
-        FileUtil.writeFile(concat, new Gson().toJson(arrayList));
-        SketchwareUtil.toast(getString(R.string.common_word_saved));
+        FileUtil.writeFile(concat, getGson().toJson(arrayList));
+        SketchwareUtil.toast("Saved");
         getParentFragmentManager().popBackStack();
     }
 
     private int figureP(String str) {
         String concat = FileUtil.getExternalStorageDir().concat("/.sketchware/data/system/events.json");
         if (FileUtil.isExistFile(concat)) {
-            ArrayList<HashMap<String, Object>> arrayList = new Gson().fromJson(FileUtil.readFile(concat), Helper.TYPE_MAP_LIST);
+            ArrayList<HashMap<String, Object>> arrayList = getGson().fromJson(FileUtil.readFile(concat), Helper.TYPE_MAP_LIST);
             for (int i = 0; i < arrayList.size(); i++) {
                 if (str.equals(arrayList.get(i).get("name"))) {
                     return i;
@@ -181,12 +184,11 @@ public class EventsManagerCreatorFragment extends qA {
         if (isEdit) {
             binding.toolbar.setTitle(event_name);
         } else if (isActivityEvent) {
-            binding.toolbar.setTitle(R.string.create_a_new_activity_event);
+            binding.toolbar.setTitle("Create a new activity event");
         } else {
-            binding.toolbar.setTitle(lisName + getString(R.string.create_a_new_event));
+            binding.toolbar.setTitle(lisName + "Create a new event");
         }
-        binding.toolbar.setNavigationOnClickListener(v -> {
-            getParentFragmentManager().popBackStack();
-        });
+        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(requireActivity()));
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(binding.toolbar);
     }
 }

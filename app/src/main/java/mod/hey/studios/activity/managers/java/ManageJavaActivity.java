@@ -19,16 +19,21 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.github.angads25.filepicker.model.DialogConfigs;
 import com.github.angads25.filepicker.model.DialogProperties;
 import com.github.angads25.filepicker.view.FilePickerDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
+
+import pro.sketchware.R;
+import pro.sketchware.databinding.DialogCreateNewFileLayoutBinding;
+import pro.sketchware.databinding.DialogInputLayoutBinding;
+import pro.sketchware.databinding.ManageFileBinding;
+import pro.sketchware.databinding.ManageJavaItemHsBinding;
+
+import com.besome.sketch.lib.base.BaseAppCompatActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -37,19 +42,12 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import mod.hey.studios.code.SrcCodeEditorLegacy;
-import mod.hey.studios.util.Helper;
-import mod.hilal.saif.activities.tools.ConfigActivity;
-import mod.jbk.util.AddMarginOnApplyWindowInsetsListener;
-import pro.sketchware.R;
-import pro.sketchware.databinding.DialogCreateNewFileLayoutBinding;
-import pro.sketchware.databinding.DialogInputLayoutBinding;
-import pro.sketchware.databinding.ManageFileBinding;
-import pro.sketchware.databinding.ManageJavaItemHsBinding;
+import pro.sketchware.utility.SketchwareUtil;
 import pro.sketchware.utility.FilePathUtil;
 import pro.sketchware.utility.FileResConfig;
 import pro.sketchware.utility.FileUtil;
-import pro.sketchware.utility.SketchwareUtil;
+import mod.hey.studios.code.SrcCodeEditor;
+import mod.hey.studios.util.Helper;
 
 public class ManageJavaActivity extends BaseAppCompatActivity {
 
@@ -138,7 +136,7 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
 
     private void setupUI() {
         binding.topAppBar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-        binding.topAppBar.setTitle(R.string.java_kotlin_manager);
+        binding.topAppBar.setTitle("Java/Kotlin Manager");
         binding.showOptionsButton.setOnClickListener(view -> hideShowOptionsButton(false));
         binding.closeButton.setOnClickListener(view -> hideShowOptionsButton(true));
         binding.createNewButton.setOnClickListener(v -> {
@@ -150,8 +148,6 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
             hideShowOptionsButton(true);
         });
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.createNewButton,
-                new AddMarginOnApplyWindowInsetsListener(WindowInsetsCompat.Type.navigationBars(), WindowInsetsCompat.CONSUMED));
     }
 
     private void hideShowOptionsButton(boolean isHide) {
@@ -194,10 +190,10 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
 
         var dialog = new MaterialAlertDialogBuilder(this)
                 .setView(dialogBinding.getRoot())
-                .setTitle(R.string.create_new)
-                .setMessage(R.string.file_extension_will_be_added_automatically)
-                .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
-                .setPositiveButton(R.string.common_word_create, null)
+                .setTitle("Create new")
+                .setMessage("File extension will be added automatically based on the file type you select")
+                .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton("Create", null)
                 .create();
 
         dialog.setOnShowListener(dialogInterface -> {
@@ -207,7 +203,7 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
             Button positiveButton = ((androidx.appcompat.app.AlertDialog) dialogInterface).getButton(DialogInterface.BUTTON_POSITIVE);
             positiveButton.setOnClickListener(view -> {
                 if (inputText.getText().toString().isEmpty()) {
-                    SketchwareUtil.toastError(getString(R.string.invalid_file_name));
+                    SketchwareUtil.toastError("Invalid file name");
                     return;
                 }
 
@@ -232,11 +228,11 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
                 } else if (checkedChipId == R.id.chip_folder) {
                     FileUtil.makeDir(new File(current_path, name).getAbsolutePath());
                     refresh();
-                    SketchwareUtil.toast(getString(R.string.folder_was_created_successfully));
+                    SketchwareUtil.toast("Folder was created successfully");
                     dialog.dismiss();
                     return;
                 } else {
-                    SketchwareUtil.toast(getString(R.string.select_a_file_type));
+                    SketchwareUtil.toast("Select a file type");
                     return;
                 }
 
@@ -249,7 +245,7 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
 
                 FileUtil.writeFile(new File(current_path, name + extension).getAbsolutePath(), newFileContent);
                 refresh();
-                SketchwareUtil.toast(getString(R.string.file_was_created_successfully));
+                SketchwareUtil.toast("File was created successfully");
                 dialog.dismiss();
             });
 
@@ -280,7 +276,7 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
 
         FilePickerDialog pickerDialog = new FilePickerDialog(this, properties, R.style.RoundedCornersDialog);
 
-        pickerDialog.setTitle(getString(R.string.select_java_kotlin_file_s));
+        pickerDialog.setTitle("Select Java/Kotlin file(s)");
         pickerDialog.setDialogSelectionListener(selections -> {
 
             for (String path : selections) {
@@ -317,16 +313,16 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
         var renameOccurrencesCheckBox = dialogBinding.renameOccurrencesCheckBox;
 
         var dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.common_word_rename + filesAdapter.getFileName(position))
+                .setTitle("Rename " + filesAdapter.getFileName(position))
                 .setView(dialogBinding.getRoot())
-                .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
-                .setPositiveButton(R.string.common_word_rename, (dialogInterface, i) -> {
+                .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton("Rename", (dialogInterface, i) -> {
                     if (!inputText.getText().toString().isEmpty()) {
                         if (!filesAdapter.isFolder(position)) {
                             if (frc.getJavaManifestList().contains(filesAdapter.getFullName(position))) {
                                 frc.getJavaManifestList().remove(filesAdapter.getFullName(position));
                                 FileUtil.writeFile(fpu.getManifestJava(sc_id), new Gson().toJson(frc.listJavaManifest));
-                                SketchwareUtil.toast(getString(R.string.note_removed_activity_from_manifest));
+                                SketchwareUtil.toast("NOTE: Removed Activity from manifest");
                             }
 
                             if (renameOccurrencesCheckBox.isChecked()) {
@@ -339,7 +335,7 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
 
                         FileUtil.renameFile(filesAdapter.getItem(position), new File(current_path, inputText.getText().toString()).getAbsolutePath());
                         refresh();
-                        SketchwareUtil.toast(getString(R.string.renamed_successfully));
+                        SketchwareUtil.toast("Renamed successfully");
                     }
                     dialogInterface.dismiss();
                 })
@@ -364,10 +360,10 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
         boolean isInManifest = frc.getJavaManifestList().contains(filesAdapter.getFullName(position));
 
         new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.common_word_delete + filesAdapter.getFileName(position) + "?")
-                .setMessage(R.string.are_you_sure_you_want_to_delete_this + (filesAdapter.isFolder(position) ? "folder" : "file") + "? "
-                        + (isInManifest ? getString(R.string.this_will_also_remove_it_from_androidmanifest) : "")
-                        + getString(R.string.this_action_cannot_be_undone))
+                .setTitle("Delete " + filesAdapter.getFileName(position) + "?")
+                .setMessage("Are you sure you want to delete this " + (filesAdapter.isFolder(position) ? "folder" : "file") + "? "
+                        + (isInManifest ? "This will also remove it from AndroidManifest. " : "")
+                        + "This action cannot be undone.")
                 .setPositiveButton(R.string.common_word_delete, (dialog, which) -> {
                     if (!filesAdapter.isFolder(position) && isInManifest) {
                         frc.getJavaManifestList().remove(filesAdapter.getFullName(position));
@@ -376,7 +372,7 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
 
                     FileUtil.deleteFile(filesAdapter.getItem(position));
                     refresh();
-                    SketchwareUtil.toast(getString(R.string.deleted_successfully));
+                    SketchwareUtil.toast("Deleted successfully");
                 })
                 .setNegativeButton(R.string.common_word_cancel, null)
                 .create()
@@ -507,13 +503,7 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
 
         public void goEditFile(int position) {
             Intent intent = new Intent();
-
-            if (ConfigActivity.isLegacyCeEnabled()) {
-                intent.setClass(getApplicationContext(), SrcCodeEditorLegacy.class);
-            } else {
-                intent.setClass(getApplicationContext(), mod.hey.studios.code.SrcCodeEditor.class);
-            }
-
+            intent.setClass(getApplicationContext(), SrcCodeEditor.class);
             intent.putExtra("java", "");
             intent.putExtra("title", getFileName(position));
             intent.putExtra("content", getItem(position));
@@ -533,60 +523,60 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
 
             if (!isFolder(position)) {
                 if (isActivityInManifest) {
-                    popupMenuMenu.add(Menu.NONE, 0, Menu.NONE, R.string.remove_activity_from_manifest);
+                    popupMenuMenu.add("Remove Activity from manifest");
                 } else if (!isServiceInManifest) {
-                    popupMenuMenu.add(Menu.NONE, 1, Menu.NONE, R.string.add_as_activity_to_manifest);
+                    popupMenuMenu.add("Add as Activity to manifest");
                 }
 
                 if (isServiceInManifest) {
-                    popupMenuMenu.add(Menu.NONE, 2, Menu.NONE, R.string.remove_service_from_manifest);
+                    popupMenuMenu.add("Remove Service from manifest");
                 } else if (!isActivityInManifest) {
-                    popupMenuMenu.add(Menu.NONE, 3, Menu.NONE, R.string.add_as_service_to_manifest);
+                    popupMenuMenu.add("Add as Service to manifest");
                 }
 
-                popupMenuMenu.add(Menu.NONE, 4, Menu.NONE, R.string.common_word_edit);
-                popupMenuMenu.add(Menu.NONE, 5, Menu.NONE, R.string.edit_with);
+                popupMenuMenu.add("Edit");
+                popupMenuMenu.add("Edit with...");
             }
 
-            popupMenuMenu.add(Menu.NONE, 6, Menu.NONE, R.string.common_word_rename);
-            popupMenuMenu.add(Menu.NONE, 7, Menu.NONE, R.string.common_word_delete);
+            popupMenuMenu.add("Rename");
+            popupMenuMenu.add("Delete");
 
             popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()) {
-                    case 1 -> {
+                switch (item.getTitle().toString()) {
+                    case "Add as Activity to manifest" -> {
                         frc.getJavaManifestList().add(getFullName(position));
                         FileUtil.writeFile(fpu.getManifestJava(sc_id), new Gson().toJson(frc.listJavaManifest));
-                        SketchwareUtil.toast(getString(R.string.successfully_added) + getFileNameWoExt(position) + getString(R.string.as_activity_to_androidmanifest));
+                        SketchwareUtil.toast("Successfully added " + getFileNameWoExt(position) + " as Activity to AndroidManifest");
                     }
-                    case 0 -> {
+                    case "Remove Activity from manifest" -> {
                         if (frc.getJavaManifestList().remove(getFullName(position))) {
                             FileUtil.writeFile(fpu.getManifestJava(sc_id), new Gson().toJson(frc.listJavaManifest));
-                            SketchwareUtil.toast(getString(R.string.successfully_removed_activity) + getFileNameWoExt(position) + getString(R.string.from_androidmanifest));
+                            SketchwareUtil.toast("Successfully removed Activity " + getFileNameWoExt(position) + " from AndroidManifest");
                         } else {
-                            SketchwareUtil.toast(getString(R.string.activity_was_not_defined_in_androidmanifest));
+                            SketchwareUtil.toast("Activity was not defined in AndroidManifest.");
                         }
                     }
-                    case 3 -> {
+                    case "Add as Service to manifest" -> {
                         frc.getServiceManifestList().add(getFullName(position));
                         FileUtil.writeFile(fpu.getManifestService(sc_id), new Gson().toJson(frc.listServiceManifest));
-                        SketchwareUtil.toast(getString(R.string.successfully_added) + getFileNameWoExt(position) + getString(R.string.as_service_to_androidmanifest));
+                        SketchwareUtil.toast("Successfully added " + getFileNameWoExt(position) + " as Service to AndroidManifest");
                     }
-                    case 2 -> {
+                    case "Remove Service from manifest" -> {
                         if (frc.getServiceManifestList().remove(getFullName(position))) {
                             FileUtil.writeFile(fpu.getManifestService(sc_id), new Gson().toJson(frc.listServiceManifest));
-                            SketchwareUtil.toast(getString(R.string.successfully_removed_service) + getFileNameWoExt(position) + getString(R.string.from_androidmanifest));
+                            SketchwareUtil.toast("Successfully removed Service " + getFileNameWoExt(position) + " from AndroidManifest");
                         } else {
-                            SketchwareUtil.toast(getString(R.string.service_was_not_defined_in_androidmanifest));
+                            SketchwareUtil.toast("Service was not defined in AndroidManifest.");
                         }
                     }
-                    case 4 -> goEditFile(position);
-                    case 5 -> {
+                    case "Edit" -> goEditFile(position);
+                    case "Edit with..." -> {
                         Intent launchIntent = new Intent(Intent.ACTION_VIEW);
                         launchIntent.setDataAndType(Uri.fromFile(new File(getItem(position))), "text/plain");
                         startActivity(launchIntent);
                     }
-                    case 6 -> showRenameDialog(position);
-                    case 7 -> showDeleteDialog(position);
+                    case "Rename" -> showRenameDialog(position);
+                    case "Delete" -> showDeleteDialog(position);
                     default -> {
                         return false;
                     }

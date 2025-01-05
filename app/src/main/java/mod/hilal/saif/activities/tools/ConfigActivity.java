@@ -1,5 +1,7 @@
 package mod.hilal.saif.activities.tools;
 
+import static pro.sketchware.utility.GsonUtils.getGson;
+
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
@@ -16,13 +18,17 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.annotations.NonNull;
+
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
+
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
+
 import com.topjohnwu.superuser.Shell;
+
+import dev.chrisbanes.insetter.Insetter;
 
 import java.io.File;
 import java.util.Arrays;
@@ -30,14 +36,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import dev.chrisbanes.insetter.Insetter;
-import mod.hey.studios.util.Helper;
-import mod.jbk.util.LogUtil;
 import pro.sketchware.R;
 import pro.sketchware.databinding.DialogCreateNewFileLayoutBinding;
 import pro.sketchware.databinding.PreferenceActivityBinding;
-import pro.sketchware.utility.FileUtil;
+
 import pro.sketchware.utility.SketchwareUtil;
+import pro.sketchware.utility.FileUtil;
+
+import mod.hey.studios.util.Helper;
+import mod.jbk.util.LogUtil;
 
 public class ConfigActivity extends BaseAppCompatActivity {
 
@@ -47,7 +54,6 @@ public class ConfigActivity extends BaseAppCompatActivity {
     public static final String SETTING_ROOT_AUTO_INSTALL_PROJECTS = "root-auto-install-projects";
     public static final String SETTING_ROOT_AUTO_OPEN_AFTER_INSTALLING = "root-auto-open-after-installing";
     public static final String SETTING_BACKUP_FILENAME = "backup-filename";
-    public static final String SETTING_LEGACY_CODE_EDITOR = "legacy-ce";
     public static final String SETTING_SHOW_BUILT_IN_BLOCKS = "built-in-blocks";
     public static final String SETTING_SHOW_EVERY_SINGLE_BLOCK = "show-every-single-block";
     public static final String SETTING_USE_NEW_VERSION_CONTROL = "use-new-version-control";
@@ -67,7 +73,7 @@ public class ConfigActivity extends BaseAppCompatActivity {
                 .applyToView(binding.getRoot());
         setContentView(binding.getRoot());
 
-        binding.topAppBar.setTitle(R.string.mod_settings);
+        binding.topAppBar.setTitle("App Settings");
         binding.topAppBar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
         var fragment = new PreferenceFragment();
         fragment.setSnackbarView(binding.getRoot());
@@ -99,10 +105,6 @@ public class ConfigActivity extends BaseAppCompatActivity {
         return DataStore.getInstance().getString(SETTING_BACKUP_FILENAME, "$projectName v$versionName ($pkgName, $versionCode) $time(yyyy-MM-dd'T'HHmmss)");
     }
 
-    public static boolean isLegacyCeEnabled() {
-        return DataStore.getInstance().getBoolean(SETTING_LEGACY_CODE_EDITOR, false);
-    }
-
     public static boolean isSettingEnabled(String keyName) {
         return DataStore.getInstance().getBoolean(keyName, false);
     }
@@ -127,7 +129,7 @@ public class ConfigActivity extends BaseAppCompatActivity {
             Exception toLog;
 
             try {
-                settings = new Gson().fromJson(FileUtil.readFile(SETTINGS_FILE.getAbsolutePath()), Helper.TYPE_MAP);
+                settings = getGson().fromJson(FileUtil.readFile(SETTINGS_FILE.getAbsolutePath()), Helper.TYPE_MAP);
 
                 if (settings != null) {
                     return settings;
@@ -140,7 +142,7 @@ public class ConfigActivity extends BaseAppCompatActivity {
                 // fall-through to shared error handler
             }
 
-            SketchwareUtil.toastError(Helper.getResString(R.string.couldn_t_parse_mod_settings_restoring_defaults));
+            SketchwareUtil.toastError("Couldn't parse Mod Settings! Restoring defaults.");
             LogUtil.e("ConfigActivity", "Failed to parse Mod Settings.", toLog);
         }
         settings = new HashMap<>();
@@ -154,7 +156,6 @@ public class ConfigActivity extends BaseAppCompatActivity {
 
         List<String> keys = Arrays.asList(SETTING_ALWAYS_SHOW_BLOCKS,
                 SETTING_BACKUP_DIRECTORY,
-                SETTING_LEGACY_CODE_EDITOR,
                 SETTING_ROOT_AUTO_INSTALL_PROJECTS,
                 SETTING_ROOT_AUTO_OPEN_AFTER_INSTALLING,
                 SETTING_SHOW_BUILT_IN_BLOCKS,
@@ -167,12 +168,12 @@ public class ConfigActivity extends BaseAppCompatActivity {
         for (String key : keys) {
             settings.put(key, getDefaultValue(key));
         }
-        FileUtil.writeFile(SETTINGS_FILE.getAbsolutePath(), new Gson().toJson(settings));
+        FileUtil.writeFile(SETTINGS_FILE.getAbsolutePath(), getGson().toJson(settings));
     }
 
     public static Object getDefaultValue(String key) {
         return switch (key) {
-            case SETTING_ALWAYS_SHOW_BLOCKS, SETTING_LEGACY_CODE_EDITOR,
+            case SETTING_ALWAYS_SHOW_BLOCKS,
                  SETTING_ROOT_AUTO_INSTALL_PROJECTS, SETTING_SHOW_BUILT_IN_BLOCKS,
                  SETTING_SHOW_EVERY_SINGLE_BLOCK, SETTING_USE_NEW_VERSION_CONTROL,
                  SETTING_USE_ASD_HIGHLIGHTER -> false;
@@ -203,8 +204,8 @@ public class ConfigActivity extends BaseAppCompatActivity {
                 binding.chipGroupTypes.setVisibility(View.GONE);
                 AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
                         .setView(binding.getRoot())
-                        .setTitle(R.string.backup_directory)
-                        .setMessage(R.string.directory_inside_internal_storage)
+                        .setTitle("Backup directory")
+                        .setMessage("Directory inside /Internal storage/, e.g. .sketchware/backups")
                         .setNegativeButton(R.string.common_word_cancel, null)
                         .setPositiveButton(R.string.common_word_save, null)
                         .create();
@@ -231,7 +232,7 @@ public class ConfigActivity extends BaseAppCompatActivity {
                 if (installWithRoot.isChecked()) {
                     Shell.getShell(shell -> {
                         if (!shell.isRoot()) {
-                            Snackbar.make(snackbarView, R.string.couldn_t_acquire_root_access, BaseTransientBottomBar.LENGTH_SHORT).show();
+                            Snackbar.make(snackbarView, "Couldn't acquire root access", BaseTransientBottomBar.LENGTH_SHORT).show();
                             installWithRoot.setChecked(false);
                         }
                     });
@@ -248,7 +249,7 @@ public class ConfigActivity extends BaseAppCompatActivity {
 
                 AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
                         .setView(binding.getRoot())
-                        .setTitle(R.string.backup_filename_format)
+                        .setTitle("Backup filename format")
                         .setMessage("This defines how SWB backup files get named.\n" +
                                 "Available variables:\n" +
                                 " - $projectName - Project name\n" +
@@ -263,7 +264,7 @@ public class ConfigActivity extends BaseAppCompatActivity {
                         .setPositiveButton(R.string.common_word_save, null)
                         .setNeutralButton(R.string.common_word_reset, (dialogInterface, which) -> {
                             getDataStore().putString(SETTING_BACKUP_FILENAME, null);
-                            Snackbar.make(snackbarView, R.string.reset_to_default_complete, BaseTransientBottomBar.LENGTH_SHORT).show();
+                            Snackbar.make(snackbarView, "Reset to default complete.", BaseTransientBottomBar.LENGTH_SHORT).show();
                         })
                         .create();
 
@@ -319,7 +320,7 @@ public class ConfigActivity extends BaseAppCompatActivity {
          * since there's no automatic persist. Meaning, every write, unless they are in batches.
          */
         public void persist() {
-            FileUtil.writeFile(SETTINGS_FILE.getAbsolutePath(), new Gson().toJson(settings));
+            FileUtil.writeFile(SETTINGS_FILE.getAbsolutePath(), getGson().toJson(settings));
         }
 
         @Override
