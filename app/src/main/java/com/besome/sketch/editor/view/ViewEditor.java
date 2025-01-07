@@ -43,8 +43,6 @@ import com.besome.sketch.editor.view.palette.IconMapView;
 import com.besome.sketch.editor.view.palette.PaletteFavorite;
 import com.besome.sketch.editor.view.palette.PaletteWidget;
 
-import pro.sketchware.R;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,11 +64,11 @@ import a.a.a.uy;
 import a.a.a.wB;
 import a.a.a.wq;
 import a.a.a.xB;
-
-import pro.sketchware.widgets.IconCustomWidget;
-import pro.sketchware.widgets.WidgetsCreatorManager;
 import mod.hey.studios.util.Helper;
 import mod.hey.studios.util.ProjectFile;
+import pro.sketchware.R;
+import pro.sketchware.widgets.IconCustomWidget;
+import pro.sketchware.widgets.WidgetsCreatorManager;
 
 @SuppressLint({"ClickableViewAccessibility", "SetTextI18n"})
 public class ViewEditor extends RelativeLayout implements View.OnClickListener, View.OnTouchListener {
@@ -1022,8 +1020,8 @@ public class ViewEditor extends RelativeLayout implements View.OnClickListener, 
     }
 
     private void initialDeleteViewUi() {
-        int focus = getColor(deleteView, R.attr.colorSurfaceInverse);
-        int pressed = getColor(deleteView, R.attr.colorOnSurfaceVariant);
+        int focus = getColor(deleteView, com.google.android.material.R.attr.colorSurfaceInverse);
+        int pressed = getColor(deleteView, com.google.android.material.R.attr.colorOnSurfaceVariant);
         rippleRound(deleteView, focus, pressed, 200);
     }
 

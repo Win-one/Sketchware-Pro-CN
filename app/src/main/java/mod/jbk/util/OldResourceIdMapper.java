@@ -616,7 +616,7 @@ public class OldResourceIdMapper {
             case 2131165791 -> R.drawable.ic_more_vert_white_24dp;
             case 2131165792 -> com.google.android.material.R.drawable.ic_mtrl_chip_checked_black;
             case 2131165793 -> com.google.android.material.R.drawable.ic_mtrl_chip_checked_circle;
-            case 2131165794 -> R.drawable.ic_mtrl_chip_close_circle;
+            case 2131165794, 2131166408 -> R.drawable.ic_mtrl_chip_close_circle;
             case 2131165795 -> R.drawable.ic_music_primary_24dp;
             case 2131165796 -> R.drawable.ic_my_library_music_black_36dp;
             case 2131165797 -> R.drawable.ic_my_library_music_grey600_24dp;
@@ -1214,12 +1214,8 @@ public class OldResourceIdMapper {
             case 2131166400 -> R.drawable.ic_mtrl_chat;
             case 2131166401 -> R.drawable.ic_mtrl_check;
             case 2131166402 -> R.drawable.ic_mtrl_checkbox;
-            case 2131166403 -> R.drawable.ic_mtrl_checked_circle;
             case 2131166404 -> R.drawable.ic_mtrl_checklist;
             case 2131166405 -> R.drawable.ic_mtrl_chevron_right_24;
-            case 2131166406 -> R.drawable.ic_mtrl_chip_checked_black;
-            case 2131166407 -> R.drawable.ic_mtrl_chip_checked_circle;
-            case 2131166408 -> R.drawable.ic_mtrl_chip_close_circle;
             case 2131166409 -> R.drawable.ic_mtrl_circle;
             case 2131166410 -> R.drawable.ic_mtrl_circle_small;
             case 2131166411 -> R.drawable.ic_mtrl_clear_all;

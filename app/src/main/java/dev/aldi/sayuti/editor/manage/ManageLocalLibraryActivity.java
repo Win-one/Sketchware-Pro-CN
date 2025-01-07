@@ -30,21 +30,19 @@ import com.google.gson.Gson;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import a.a.a.MA;
+import a.a.a.mB;
 import mod.hey.studios.build.BuildSettings;
-
 import pro.sketchware.R;
 import pro.sketchware.databinding.ManageLocallibrariesBinding;
 import pro.sketchware.databinding.ViewItemLocalLibBinding;
 import pro.sketchware.databinding.ViewItemLocalLibSearchBinding;
 import pro.sketchware.utility.SketchwareUtil;
-
-import a.a.a.MA;
-import a.a.a.mB;
 
 public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
     private ArrayList<HashMap<String, Object>> projectUsedLibs;
@@ -131,7 +129,7 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
                     deleteSelectedLocalLibraries(adapter.getLocalLibraries());
 
                     runOnUiThread(() -> {
-                        SketchwareUtil.toast("Deleted successfully");
+                        SketchwareUtil.toast(getString(R.string.deleted_successfully));
                         runLoadLocalLibrariesTask();
                         adapter.isSelectionModeEnabled = false;
                         collapseContextualToolbar();

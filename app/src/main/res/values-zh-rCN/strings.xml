@@ -3186,4 +3186,6 @@
     <string name="block_move_to_bin">移动到回收站</string>
     <string name="code_viewer">代码查看器</string>
     <string name="no_palettes">无调色板</string>
+    <string name="download_a_dependency">下载依赖项</string>
+    <string name="enter_a_dependency">输入依赖项</string>
 </resources>

@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="10dp"
-        android:text="Project Settings"
+        android:text="@string/project_settings"
         android:textAppearance="?attr/textAppearanceTitleLarge" />
 
     <LinearLayout
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:gravity="center_vertical"
-            android:text="Change project settings"
+            android:text="@string/change_project_settings"
             android:textAppearance="?attr/textAppearanceBodyLarge"
             app:drawableEndCompat="@drawable/ic_mtrl_arrow_right" />
 
@@ -68,12 +68,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:gravity="center_vertical"
-            android:text="Backup project"
+            android:text="@string/backup_project"
             android:textAppearance="?attr/textAppearanceBodyLarge"
             app:drawableEndCompat="@drawable/ic_mtrl_arrow_right" />
 
     </LinearLayout>
-    9
 
     <LinearLayout
         android:id="@+id/export_sign"
@@ -97,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:gravity="center_vertical"
-            android:text="Export/Sign"
+            android:text="@string/export_sign"
             android:textAppearance="?attr/textAppearanceBodyLarge"
             app:drawableEndCompat="@drawable/ic_mtrl_arrow_right" />
 
@@ -125,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:gravity="center_vertical"
-            android:text="Project configuration"
+            android:text="@string/project_configuration"
             android:textAppearance="?attr/textAppearanceBodyLarge"
             app:drawableEndCompat="@drawable/ic_mtrl_arrow_right" />
 
@@ -154,7 +153,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:gravity="center_vertical"
-            android:text="Delete project"
+            android:text="@string/delete_project"
             android:textAppearance="?attr/textAppearanceBodyLarge"
             android:textColor="?attr/colorError"
             app:drawableEndCompat="@drawable/ic_mtrl_arrow_right" />
