@@ -2869,5 +2869,9 @@ Please try again later"</string>
     <string name="no_palettes">No palettes</string>
     <string name="download_a_dependency">Download a dependency</string>
     <string name="enter_a_dependency">Enter a dependency</string>
+    <string name="this_defines_how_swb_backup_files_get_named">This defines how SWB backup files get named.\n</string>
+    <string name="successfully_exported_events_to">Successfully exported events to:\n</string>
+    <string name="invalid_androidmanifest_attribute_injection_value_in_attribute">Invalid AndroidManifest attribute injection value in attribute #</string>
+    <string name="invalid_androidmanifest_attribute_injection_name_in_attribute">Invalid AndroidManifest attribute injection name in attribute #</string>
 
 </resources>

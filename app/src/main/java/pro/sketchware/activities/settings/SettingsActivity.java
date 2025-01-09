@@ -31,13 +31,17 @@ public class SettingsActivity extends BaseAppCompatActivity {
         setContentView(binding.getRoot());
 
         String fragmentTag = getIntent().getStringExtra(FRAGMENT_TAG_EXTRA);
-        Fragment fragment = switch (fragmentTag) {
-            case SETTINGS_APPEARANCE_FRAGMENT -> new SettingsAppearanceFragment();
-            case SETTINGS_LANGUAGE_FRAGMENT -> new SettingsLanguageFragment();
-            case EVENTS_MANAGER_FRAGMENT -> new EventsManagerFragment();
-            case BLOCK_SELECTOR_MANAGER_FRAGMENT -> new BlockSelectorManagerFragment();
-            default -> throw new IllegalArgumentException("Unknown fragment tag: " + fragmentTag);
-        };
+        Fragment fragment = null;
+        if (fragmentTag != null) {
+            fragment = switch (fragmentTag) {
+                case SETTINGS_APPEARANCE_FRAGMENT -> new SettingsAppearanceFragment();
+                case SETTINGS_LANGUAGE_FRAGMENT -> new SettingsLanguageFragment();
+                case EVENTS_MANAGER_FRAGMENT -> new EventsManagerFragment();
+                case BLOCK_SELECTOR_MANAGER_FRAGMENT -> new BlockSelectorManagerFragment();
+                default ->
+                        throw new IllegalArgumentException("Unknown fragment tag: " + fragmentTag);
+            };
+        }
 
         openFragment(fragment);
     }

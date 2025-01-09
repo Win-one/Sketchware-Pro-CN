@@ -90,11 +90,6 @@ public class BlocksManager extends BaseAppCompatActivity {
     private void initialize() {
         activity = this;
 
-        setSupportActionBar(binding.toolbar);
-
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         binding.toolbar.setNavigationOnClickListener(view -> getOnBackPressedDispatcher().onBackPressed());
         binding.toolbar.setOnMenuItemClickListener(item -> {
             int itemId = item.getItemId();

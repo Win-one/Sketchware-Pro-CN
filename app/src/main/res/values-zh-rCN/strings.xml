@@ -3188,4 +3188,8 @@
     <string name="no_palettes">无调色板</string>
     <string name="download_a_dependency">下载依赖项</string>
     <string name="enter_a_dependency">输入依赖项</string>
+    <string name="this_defines_how_swb_backup_files_get_named">这定义了SWB备份文件的命名方式.\n</string>
+    <string name="successfully_exported_events_to">已成功将事件导出到:\n</string>
+    <string name="invalid_androidmanifest_attribute_injection_value_in_attribute">属性中的AndroidManifest属性注入值无效 #</string>
+    <string name="invalid_androidmanifest_attribute_injection_name_in_attribute">属性中的AndroidManifest属性注入名称无效 #</string>
 </resources>

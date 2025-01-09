@@ -111,7 +111,7 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
         binding.librariesList.setAdapter(adapter);
         binding.searchList.setAdapter(searchAdapter);
 
-        binding.searchBar.setNavigationOnClickListener(v -> {
+        binding.topAppBar.setNavigationOnClickListener(v -> {
             if (!mB.a()) {
                 onBackPressed();
             }
