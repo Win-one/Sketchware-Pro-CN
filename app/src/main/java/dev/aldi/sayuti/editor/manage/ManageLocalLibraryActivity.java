@@ -30,19 +30,22 @@ import com.google.gson.Gson;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import a.a.a.MA;
-import a.a.a.mB;
 import mod.hey.studios.build.BuildSettings;
+
 import pro.sketchware.R;
 import pro.sketchware.databinding.ManageLocallibrariesBinding;
 import pro.sketchware.databinding.ViewItemLocalLibBinding;
 import pro.sketchware.databinding.ViewItemLocalLibSearchBinding;
 import pro.sketchware.utility.SketchwareUtil;
+
+import a.a.a.MA;
+import a.a.a.mB;
 
 public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
     private ArrayList<HashMap<String, Object>> projectUsedLibs;
@@ -111,7 +114,7 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
         binding.librariesList.setAdapter(adapter);
         binding.searchList.setAdapter(searchAdapter);
 
-        binding.topAppBar.setNavigationOnClickListener(v -> {
+        binding.searchBar.setNavigationOnClickListener(v -> {
             if (!mB.a()) {
                 onBackPressed();
             }
@@ -125,16 +128,19 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
                 binding.contextualToolbar.setTitle(String.valueOf(getSelectedLocalLibrariesCount()));
                 return true;
             } else if (id == R.id.action_delete_selected_local_libraries) {
-                new Thread(() -> {
+                k();
+                Executors.newSingleThreadExecutor().execute(() -> {
                     deleteSelectedLocalLibraries(adapter.getLocalLibraries());
 
                     runOnUiThread(() -> {
-                        SketchwareUtil.toast(getString(R.string.deleted_successfully));
-                        runLoadLocalLibrariesTask();
+                        h();
+                        SketchwareUtil.toast("Deleted successfully");
                         adapter.isSelectionModeEnabled = false;
+                        adapter.notifyDataSetChanged();
                         collapseContextualToolbar();
                     });
-                }).start();
+                });
+
                 return true;
             }
             return false;
@@ -298,7 +304,7 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
             binding.card.setOnClickListener(v -> {
                 if (isSelectionModeEnabled) {
                     toggleLocalLibrary(binding.card, library, onLocalLibrarySelectedStateChangedListener);
-                } else {
+                } else if (!notAssociatedWithProject) {
                     binding.materialSwitch.performClick();
                 }
             });
@@ -313,12 +319,13 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
                 return true;
             });
 
-            binding.materialSwitch.setOnClickListener(v -> {
-                onItemClicked(binding, library.getName());
-            });
-
             binding.materialSwitch.setChecked(false);
             if (!notAssociatedWithProject) {
+
+                binding.materialSwitch.setOnClickListener(v -> {
+                    onItemClicked(binding, library.getName());
+                });
+
                 for (Map<String, Object> libraryMap : projectUsedLibs) {
                     if (library.getName().equals(libraryMap.get("name").toString())) {
                         binding.materialSwitch.setChecked(true);
@@ -422,17 +429,18 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
             binding.librarySize.setText(library.getSize());
             binding.libraryName.setSelected(true);
 
-            binding.getRoot().setOnClickListener(v -> {
-                binding.materialSwitch.performClick();
-            });
-
-            binding.materialSwitch.setOnClickListener(v -> {
-                onItemClicked(binding, library.getName());
-                adapter.notifyItemChanged(position);
-            });
-
             binding.materialSwitch.setChecked(false);
             if (!notAssociatedWithProject) {
+
+                binding.getRoot().setOnClickListener(v -> {
+                    binding.materialSwitch.performClick();
+                });
+
+                binding.materialSwitch.setOnClickListener(v -> {
+                    onItemClicked(binding, library.getName());
+                    adapter.notifyItemChanged(position);
+                });
+
                 for (Map<String, Object> libraryMap : projectUsedLibs) {
                     if (library.getName().equals(libraryMap.get("name").toString())) {
                         binding.materialSwitch.setChecked(true);
