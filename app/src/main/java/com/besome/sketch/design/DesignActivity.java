@@ -302,7 +302,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
      */
     private void indicateCompileErrorOccurred(String error) {
         new CompileErrorSaver(sc_id).writeLogsToFile(error);
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, "Show compile log", Snackbar.LENGTH_INDEFINITE);
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, R.string.show_compile_log, Snackbar.LENGTH_INDEFINITE);
         snackbar.setAction(Helper.getResString(R.string.common_word_show), v -> {
             if (!mB.a()) {
                 snackbar.dismiss();
@@ -357,7 +357,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                                 }
                             }
                         } else {
-                            String sharedErrorMessage = "Failed to install package, result code: " + result.getCode() + ". ";
+                            String sharedErrorMessage = getString(R.string.failed_to_install_package_result_code) + result.getCode() + ". ";
                             SketchwareUtil.toastError(sharedErrorMessage + "Logs are available in /Internal storage/.sketchware/debug.txt", Toast.LENGTH_LONG);
                             LogUtil.e("DesignActivity", sharedErrorMessage + "stdout: " + stdout + ", stderr: " + stderr);
                         }
@@ -450,13 +450,13 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
         BottomAppBar bottomAppBar = findViewById(R.id.bottom_app_bar);
         bottomAppBar.setOverflowIcon(ContextCompat.getDrawable(this,  R.drawable.sorting_options));
         bottomMenu = bottomAppBar.getMenu();
-        bottomMenu.add(Menu.NONE, 1, Menu.NONE, "Build Settings");
-        bottomMenu.add(Menu.NONE, 2, Menu.NONE, "Clean temporary files").setVisible(false);
-        bottomMenu.add(Menu.NONE, 3, Menu.NONE, "Show last compile error");
-        bottomMenu.add(Menu.NONE, 5, Menu.NONE, "Show source code");
-        bottomMenu.add(Menu.NONE, 4, Menu.NONE, "Install last built APK").setVisible(false);
-        bottomMenu.add(Menu.NONE, 6, Menu.NONE, "Show Apk signatures").setVisible(false);
-        directXmlEditorMenu = bottomMenu.add(Menu.NONE, 7, Menu.NONE, "Direct XML editor");
+        bottomMenu.add(Menu.NONE, 1, Menu.NONE, R.string.build_settings);
+        bottomMenu.add(Menu.NONE, 2, Menu.NONE, R.string.clean_temporary_files).setVisible(false);
+        bottomMenu.add(Menu.NONE, 3, Menu.NONE, R.string.show_last_compile_error);
+        bottomMenu.add(Menu.NONE, 5, Menu.NONE, R.string.show_source_code);
+        bottomMenu.add(Menu.NONE, 4, Menu.NONE, R.string.install_last_built_apk).setVisible(false);
+        bottomMenu.add(Menu.NONE, 6, Menu.NONE, R.string.show_apk_signatures).setVisible(false);
+        directXmlEditorMenu = bottomMenu.add(Menu.NONE, 7, Menu.NONE, R.string.direct_xml_editor);
 
         bottomAppBar.setOnMenuItemClickListener(
                 item -> {
@@ -470,7 +470,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                                     runOnUiThread(
                                             () ->
                                                     SketchwareUtil.toast(
-                                                            "Done cleaning temporary files!"));
+                                                            Helper.getResString(R.string.done_cleaning_temporary_files)));
                                 })
                                 .start();
                         case 3 -> new CompileErrorSaver(sc_id).showLastErrors(this);
@@ -478,7 +478,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                             if (FileUtil.isExistFile(q.finalToInstallApkPath)) {
                                 installBuiltApk();
                             } else {
-                                SketchwareUtil.toast("APK doesn't exist anymore");
+                                SketchwareUtil.toast(Helper.getResString(R.string.apk_doesn_t_exist_anymore));
                             }
                         }
                         case 5 -> showCurrentActivitySrcCode();
@@ -790,9 +790,9 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
     private void showCurrentActivitySrcCode() {
         if (projectFile == null) return; 
         var loadingDialogBinding = ProgressMsgBoxBinding.inflate(getLayoutInflater());
-        loadingDialogBinding.tvProgress.setText("Generating source code...");
+        loadingDialogBinding.tvProgress.setText(getString(R.string.generating_source_code));
         var loadingDialog = new MaterialAlertDialogBuilder(this)
-            .setTitle("Please wait")
+                .setTitle(R.string.please_wait)
             .setCancelable(false)
             .setView(loadingDialogBinding.getRoot())
             .create();
@@ -806,7 +806,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                 if (isFinishing()) return;
                 loadingDialog.dismiss();
                 if (source.isEmpty()) {
-                    Toast.makeText(this, "Failed to generate source.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.failed_to_generate_source, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 var intent = new Intent(this, CodeViewerActivity.class);
@@ -1211,7 +1211,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                     aB dialog = new aB(activity);
                     if (isMissingDirectory) {
                         dialog.b(Helper.getResString(R.string.missing_directory_detected));
-                        dialog.a("A directory important for building is missing. " +
+                        dialog.a(Helper.getResString(R.string.a_directory_important_for_building_is_missing) +
                                 "Sketchware Pro can try creating " + e.getMissingFile().getAbsolutePath() +
                                 " if you'd like to.");
                         dialog.configureDefaultButton(Helper.getResString(R.string.common_word_create), v -> {
@@ -1222,11 +1222,11 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                         });
                     } else {
                         dialog.b(Helper.getResString(R.string.missing_directory_detected));
-                        dialog.a("A file needed for building is missing. " +
+                        dialog.a(Helper.getResString(R.string.a_file_needed_for_building_is_missing) +
                                 "Put the correct file back to " + e.getMissingFile().getAbsolutePath() +
                                 " and try building again.");
                     }
-                    dialog.b("Dismiss", Helper.getDialogDismissListener(dialog));
+                    dialog.b(Helper.getResString(R.string.common_word_dismiss), Helper.getDialogDismissListener(dialog));
                     dialog.show();
                 });
             } catch (zy zy) {

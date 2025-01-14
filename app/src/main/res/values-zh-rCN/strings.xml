@@ -3185,11 +3185,20 @@
     <string name="common_message_no_item_delete">没有要删除的项目</string>
     <string name="block_move_to_bin">移动到回收站</string>
     <string name="code_viewer">代码查看器</string>
-    <string name="no_palettes">无调色板</string>
+    <string name="no_palettes">没有调色板</string>
     <string name="download_a_dependency">下载依赖项</string>
     <string name="enter_a_dependency">输入依赖项</string>
     <string name="this_defines_how_swb_backup_files_get_named">这定义了SWB备份文件的命名方式.\n</string>
     <string name="successfully_exported_events_to">已成功将事件导出到:\n</string>
     <string name="invalid_androidmanifest_attribute_injection_value_in_attribute">属性中的AndroidManifest属性注入值无效 #</string>
     <string name="invalid_androidmanifest_attribute_injection_name_in_attribute">属性中的AndroidManifest属性注入名称无效 #</string>
+    <string name="failed_to_install_package_result_code">安装包失败,结果代码:</string>
+    <string name="a_directory_important_for_building_is_missing">缺少对构建很重要的目录.</string>
+    <string name="a_file_needed_for_building_is_missing">缺少构建所需的文件.</string>
+    <string name="no_options_are_found">No options are found.</string>
+    <string name="appcompat_is_disabled">AppCompat is disabled.</string>
+    <string name="please_enable_appcompat_in_the_library_manager_to_use_it">请在库管理中启用应用兼容以使用它.</string>
+    <string name="not_available">不可用.</string>
+    <string name="logcat_exported_successfully">日志导出成功</string>
+    <string name="something_went_wrong">出错了!</string>
 </resources>

@@ -2873,5 +2873,14 @@ Please try again later"</string>
     <string name="successfully_exported_events_to">Successfully exported events to:\n</string>
     <string name="invalid_androidmanifest_attribute_injection_value_in_attribute">Invalid AndroidManifest attribute injection value in attribute #</string>
     <string name="invalid_androidmanifest_attribute_injection_name_in_attribute">Invalid AndroidManifest attribute injection name in attribute #</string>
+    <string name="failed_to_install_package_result_code">Failed to install package, result code:</string>
+    <string name="a_directory_important_for_building_is_missing">A directory important for building is missing.</string>
+    <string name="a_file_needed_for_building_is_missing">A file needed for building is missing.</string>
+    <string name="no_options_are_found">No options are found.</string>
+    <string name="appcompat_is_disabled">AppCompat is disabled.</string>
+    <string name="please_enable_appcompat_in_the_library_manager_to_use_it">Please enable AppCompat in the Library Manager to use it.</string>
+    <string name="not_available">Not available.</string>
+    <string name="logcat_exported_successfully">Logcat exported successfully</string>
+    <string name="something_went_wrong">Something went wrong!</string>
 
 </resources>

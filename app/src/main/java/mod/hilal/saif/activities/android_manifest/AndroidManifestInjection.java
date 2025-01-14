@@ -1,7 +1,7 @@
 package mod.hilal.saif.activities.android_manifest;
 
-import static pro.sketchware.utility.SketchwareUtil.getDip;
 import static pro.sketchware.utility.GsonUtils.getGson;
+import static pro.sketchware.utility.SketchwareUtil.getDip;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -37,7 +37,6 @@ import io.github.rosemoe.sora.widget.CodeEditor;
 import io.github.rosemoe.sora.widget.component.Magnifier;
 import mod.hey.studios.code.SrcCodeEditor;
 import mod.hey.studios.util.Helper;
-import mod.hilal.saif.activities.tools.ConfigActivity;
 import mod.hilal.saif.android_manifest.AndroidManifestInjector;
 import mod.jbk.code.CodeEditorColorSchemes;
 import mod.jbk.code.CodeEditorLanguages;
@@ -109,8 +108,8 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         List<LibraryItemView> options = new ArrayList<>();
 
         options.add(createOption(
-                "Application",
-                "Default properties for the app",
+                getString(R.string.application),
+                getString(R.string.default_properties_for_the_app),
                 R.drawable.icons8_app_attrs,
                 v -> {
                     Intent intent = new Intent();
@@ -122,8 +121,8 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
                 }
         ));
         options.add(createOption(
-                "Permissions",
-                "Add custom Permissions to the app",
+                getString(R.string.permissions),
+                getString(R.string.add_custom_permissions_to_the_app),
                 R.drawable.event_on_signin_complete_48dp,
                 v -> {
                     Intent intent = new Intent();
@@ -135,14 +134,14 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
                 }
         ));
         options.add(createOption(
-                "Launcher Activity",
-                "Change the default Launcher Activity",
+                getString(R.string.launcher_activity),
+                getString(R.string.change_the_default_launcher_activity),
                 R.drawable.recycling_48,
                 v -> showLauncherActDialog(AndroidManifestInjector.getLauncherActivity(sc_id))
         ));
         options.add(createOption(
-                "All Activities",
-                "Add attributes for all Activities",
+                getString(R.string.all_activities),
+                getString(R.string.add_attributes_for_all_activities),
                 R.drawable.icons8_all_activities_attrs,
                 v -> {
                     Intent intent = new Intent();
@@ -154,8 +153,8 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
                 }
         ));
         options.add(createOption(
-                "App Components",
-                "Add extra components",
+                getString(R.string.app_components),
+                getString(R.string.add_extra_components),
                 R.drawable.icons8_app_components,
                 v -> showAppComponentDialog()
         ));
@@ -188,7 +187,8 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         intent.putExtra("content", APP_COMPONENTS_PATH);
         intent.putExtra("xml", "");
         intent.putExtra("disableHeader", "");
-        intent.putExtra("title", "App Components");
+        String title = getString(R.string.app_components);
+        intent.putExtra("title", title);
         startActivity(intent);
     }
 
@@ -206,10 +206,10 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         dialog.b(Helper.getResString(R.string.common_word_save), v -> {
             if (!activity_name_input.getText().toString().trim().isEmpty()) {
                 AndroidManifestInjector.setLauncherActivity(sc_id, activity_name_input.getText().toString());
-                SketchwareUtil.toast("Saved");
+                SketchwareUtil.toast(getString(R.string.common_word_saved));
                 dialog.dismiss();
             } else {
-                activity_name_input.setError("Enter activity name");
+                activity_name_input.setError(getString(R.string.enter_activity_name));
             }
         });
         dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
@@ -231,10 +231,10 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         dialog.b(Helper.getResString(R.string.common_word_save), v -> {
             if (!activity_name_input.getText().toString().trim().isEmpty()) {
                 addNewActivity(activity_name_input.getText().toString());
-                SketchwareUtil.toast("New Activity added");
+                SketchwareUtil.toast(getString(R.string.new_activity_added));
                 dialog.dismiss();
             } else {
-                activity_name_input.setError("Enter activity name");
+                activity_name_input.setError(getString(R.string.enter_activity_name));
             }
         });
         dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
@@ -335,7 +335,7 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         FileUtil.writeFile(path, getGson().toJson(data));
         refreshList();
         removeComponents(activity_name);
-        SketchwareUtil.toast("Activity removed");
+        SketchwareUtil.toast(getString(R.string.activity_removed));
     }
 
     private void removeComponents(String str) {
@@ -381,9 +381,9 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
 
     private void showQuickManifestSourceDialog() {
         ProgressMsgBoxBinding loadingDialogBinding = ProgressMsgBoxBinding.inflate(getLayoutInflater());
-        loadingDialogBinding.tvProgress.setText("Generating source code...");
+        loadingDialogBinding.tvProgress.setText(R.string.generating_source_code);
         var loadingDialog = new MaterialAlertDialogBuilder(this)
-                .setTitle("Please wait")
+                .setTitle(R.string.please_wait)
                 .setCancelable(false)
                 .setView(loadingDialogBinding.getRoot())
                 .create();
@@ -394,7 +394,7 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
 
             var dialogBuilder = new MaterialAlertDialogBuilder(this)
                     .setTitle("AndroidManifest.xml")
-                    .setPositiveButton("Dismiss", null);
+                    .setPositiveButton(getString(R.string.common_word_dismiss), null);
 
             runOnUiThread(() -> {
                 if (isFinishing()) return;
@@ -405,7 +405,7 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
                 editor.setEditable(false);
                 editor.setEditorLanguage(CodeEditorLanguages.loadTextMateLanguage(CodeEditorLanguages.SCOPE_NAME_XML));
                 editor.setTextSize(14);
-                editor.setText(!source.isEmpty() ? source : "Failed to generate source.");
+                editor.setText(!source.isEmpty() ? source : Helper.getResString(R.string.failed_to_generate_source));
                 editor.getComponent(Magnifier.class).setWithinEditorForcibly(true);
 
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {

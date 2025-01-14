@@ -3,7 +3,6 @@ package com.besome.sketch.editor;
 import static mod.bobur.StringEditorActivity.convertListMapToXml;
 import static mod.bobur.StringEditorActivity.convertXmlToListMap;
 import static mod.bobur.StringEditorActivity.isXmlStringsContains;
-import static pro.sketchware.utility.SketchwareUtil.getDip;
 import static pro.sketchware.widgets.WidgetsCreatorManager.clearErrorOnTextChanged;
 
 import android.animation.ObjectAnimator;
@@ -72,7 +71,6 @@ import com.besome.sketch.editor.view.ViewDummy;
 import com.besome.sketch.editor.view.ViewLogicEditor;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.bumptech.glide.Glide;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -91,7 +89,6 @@ import a.a.a.DB;
 import a.a.a.FB;
 import a.a.a.Fx;
 import a.a.a.GB;
-import a.a.a.Lx;
 import a.a.a.MA;
 import a.a.a.Mp;
 import a.a.a.NB;
@@ -130,16 +127,16 @@ import mod.jbk.editor.manage.MoreblockImporter;
 import mod.jbk.util.BlockUtil;
 import mod.pranav.viewbinding.ViewBindingBuilder;
 import pro.sketchware.R;
+import pro.sketchware.activities.editor.view.CodeViewerActivity;
 import pro.sketchware.databinding.ImagePickerItemBinding;
-import pro.sketchware.databinding.SearchWithRecyclerViewBinding;
 import pro.sketchware.databinding.PropertyPopupSelectorSingleBinding;
+import pro.sketchware.databinding.SearchWithRecyclerViewBinding;
 import pro.sketchware.databinding.ViewStringEditorAddBinding;
 import pro.sketchware.menu.ExtraMenuBean;
 import pro.sketchware.utility.FilePathUtil;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
 import pro.sketchware.utility.SvgUtils;
-import pro.sketchware.activities.editor.view.CodeViewerActivity;
 
 @SuppressLint({"ClickableViewAccessibility", "RtlHardcoded", "SetTextI18n", "DefaultLocale"})
 public class LogicEditorActivity extends BaseAppCompatActivity implements View.OnClickListener, Vs, View.OnTouchListener, MoreblockImporterDialog.CallBack {
@@ -354,8 +351,8 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
     private void showAddNewXmlStringDialog() {
         aB dialog = new aB(this);
         ViewStringEditorAddBinding binding = ViewStringEditorAddBinding.inflate(LayoutInflater.from(this));
-        dialog.b("Create new string");
-        dialog.b("Create", v1 -> {
+        dialog.b(getString(R.string.create_new_string));
+        dialog.b(getString(R.string.common_word_create), v1 -> {
 
             String filePath = new FilePathUtil().getPathResource(B) + "/values/strings.xml";
             ArrayList<HashMap<String, Object>> StringsListMap = new ArrayList<>();
@@ -372,7 +369,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
             }
 
             if (key.isEmpty() || value.isEmpty()) {
-                SketchwareUtil.toastError("Please fill in all fields");
+                SketchwareUtil.toastError(Helper.getResString(R.string.please_fill_in_all_fields));
                 return;
             }
 
@@ -1640,7 +1637,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
         linearLayout.addView(name);
         TextView preview = new TextView(this);
         preview.setLayoutParams(layoutParams);
-        preview.setText("Preview");
+        preview.setText(R.string.common_word_preview);
 
         Typeface typeface;
         if (fontName.equalsIgnoreCase("default_font")) {
@@ -1650,7 +1647,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
                 typeface = Typeface.createFromFile(jC.d(B).d(fontName));
             } catch (RuntimeException e) {
                 typeface = Typeface.DEFAULT;
-                preview.setText("Couldn't load font");
+                preview.setText(R.string.couldn_t_load_font);
             }
         }
 
@@ -1845,7 +1842,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
         }
 
         dialog.a(customView);
-        dialog.configureDefaultButton("Code Editor", v -> {
+        dialog.configureDefaultButton(getString(R.string.code_editor), v -> {
             AsdDialog editor = new AsdDialog(this);
             editor.setCon(ss.getArgValue().toString());
             editor.show();
@@ -2119,6 +2116,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (ia) {
             g(false);
             return;
@@ -2186,6 +2184,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
         g(configuration.orientation);
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

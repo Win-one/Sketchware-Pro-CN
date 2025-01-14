@@ -20,14 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
-import pro.sketchware.R;
-import pro.sketchware.databinding.ActivityLogcatreaderBinding;
-import pro.sketchware.databinding.EasyDeleteEdittextBinding;
-import pro.sketchware.databinding.ViewLogcatItemBinding;
-
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -41,9 +35,13 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.lib.base.BaseTextWatcher;
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ActivityLogcatreaderBinding;
+import pro.sketchware.databinding.EasyDeleteEdittextBinding;
+import pro.sketchware.databinding.ViewLogcatItemBinding;
+import pro.sketchware.lib.base.BaseTextWatcher;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class LogReaderActivity extends BaseAppCompatActivity {
 
@@ -137,21 +135,21 @@ public class LogReaderActivity extends BaseAppCompatActivity {
         dialogBinding.imgDelete.setVisibility(View.GONE);
 
         var builder = new MaterialAlertDialogBuilder(this)
-                .setTitle("Filter by package name")
-                .setMessage("For multiple package names, separate them with a comma (,).")
+                .setTitle(R.string.filter_by_package_name)
+                .setMessage(R.string.for_multiple_package_names_separate_them_with_a_comma)
                 .setIcon(R.drawable.ic_mtrl_filter)
                 .setView(view)
-                .setPositiveButton("Apply", (dialog, which) -> {
+                .setPositiveButton(R.string.common_word_apply, (dialog, which) -> {
                     pkgFilter = dialogBinding.easyEdInput.getText().toString();
                     pkgFilterList = new ArrayList<>(Arrays.asList(pkgFilter.split(",")));
                     binding.searchInput.setText(binding.searchInput.getText().toString());
                 })
-                .setNeutralButton("Reset", (dialog, which) -> {
+                .setNeutralButton(R.string.common_word_reset, (dialog, which) -> {
                     pkgFilter = "";
                     pkgFilterList.clear();
                     dialogBinding.easyEdInput.setText("");
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(R.string.common_word_cancel, null)
                 .create();
 
         builder.show();
@@ -171,10 +169,10 @@ public class LogReaderActivity extends BaseAppCompatActivity {
                 writer.write( date + " " +  type + " " + tag + " " + body + "\n");
             }
             writer.close();
-            SketchwareUtil.toast("Logcat exported successfully");
+            SketchwareUtil.toast(getString(R.string.logcat_exported_successfully));
 
         } catch (IOException ex) {
-            SketchwareUtil.toastError("Something went wrong!");
+            SketchwareUtil.toastError(getString(R.string.something_went_wrong));
         }
     }
     
