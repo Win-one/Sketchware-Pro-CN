@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         app:menu="@menu/menu_code_editor_hs"
         app:subtitle="UTF-8"
-        app:title="Code Editor" />
+        app:title="@string/code_editor" />
 
     <io.github.rosemoe.sora.widget.CodeEditor
         android:id="@+id/editor"

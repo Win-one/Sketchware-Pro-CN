@@ -1,7 +1,5 @@
 package com.besome.sketch.design;
 
-import static pro.sketchware.utility.SketchwareUtil.getDip;
-
 import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -10,7 +8,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,7 +29,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.NotificationCompat;
@@ -97,11 +93,6 @@ import a.a.a.yB;
 import a.a.a.yq;
 import a.a.a.zy;
 import dev.chrisbanes.insetter.Insetter;
-import io.github.rosemoe.sora.langs.java.JavaLanguage;
-import io.github.rosemoe.sora.widget.CodeEditor;
-import io.github.rosemoe.sora.widget.component.Magnifier;
-import io.github.rosemoe.sora.widget.schemes.EditorColorScheme;
-import io.github.rosemoe.sora.widget.schemes.SchemeDarcula;
 import mod.agus.jcoderz.editor.manage.permission.ManagePermissionActivity;
 import mod.agus.jcoderz.editor.manage.resource.ManageResourceActivity;
 import mod.hey.studios.activity.managers.assets.ManageAssetsActivity;
@@ -119,8 +110,6 @@ import mod.hilal.saif.activities.android_manifest.AndroidManifestInjection;
 import mod.hilal.saif.activities.tools.ConfigActivity;
 import mod.jbk.build.BuildProgressReceiver;
 import mod.jbk.build.BuiltInLibraries;
-import mod.jbk.code.CodeEditorColorSchemes;
-import mod.jbk.code.CodeEditorLanguages;
 import mod.jbk.diagnostic.CompileErrorSaver;
 import mod.jbk.diagnostic.MissingFileException;
 import mod.jbk.util.LogUtil;
@@ -128,13 +117,12 @@ import mod.khaled.logcat.LogReaderActivity;
 import pro.sketchware.R;
 import pro.sketchware.activities.appcompat.ManageAppCompatActivity;
 import pro.sketchware.activities.editor.command.ManageXMLCommandActivity;
+import pro.sketchware.activities.editor.view.CodeViewerActivity;
 import pro.sketchware.activities.editor.view.ViewCodeEditorActivity;
 import pro.sketchware.databinding.ProgressMsgBoxBinding;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.ThemeUtils;
 import pro.sketchware.utility.apk.ApkSignatures;
-import pro.sketchware.activities.editor.view.CodeViewerActivity;
 
 public class DesignActivity extends BaseAppCompatActivity implements View.OnClickListener {
     public static String sc_id;
@@ -359,13 +347,13 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
 
                     Shell.cmd("cat " + apkUri + " | pm install -S " + length).to(stdout, stderr).submit(result -> {
                         if (result.isSuccess()) {
-                            SketchwareUtil.toast("Package installed successfully!");
+                            SketchwareUtil.toast(getString(R.string.package_installed_successfully));
                             if (ConfigActivity.isSettingEnabled(ConfigActivity.SETTING_ROOT_AUTO_OPEN_AFTER_INSTALLING)) {
                                 Intent launcher = getPackageManager().getLaunchIntentForPackage(q.packageName);
                                 if (launcher != null) {
                                     startActivity(launcher);
                                 } else {
-                                    SketchwareUtil.toastError("Couldn't launch project, either not installed or not with launcher activity.");
+                                    SketchwareUtil.toastError(getString(R.string.couldn_t_launch_project));
                                 }
                             }
                         } else {
@@ -375,7 +363,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                         }
                     });
                 } else {
-                    SketchwareUtil.toastError("No root access granted. Continuing using default package install prompt.");
+                    SketchwareUtil.toastError(getString(R.string.no_root_access_granted));
                     requestPackageInstallerInstall();
                 }
             });
@@ -399,6 +387,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (drawer.isDrawerOpen(GravityCompat.END)) {
             drawer.closeDrawer(GravityCompat.END);
         } else if (viewTabAdapter.g()) {
@@ -1102,7 +1091,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
             try {
                 var q = activity.q;
                 var sc_id = DesignActivity.sc_id;
-                onProgress("Deleting temporary files...", 1);
+                onProgress(Helper.getResString(R.string.deleting_temporary_files), 1);
                 FileUtil.deleteFile(q.projectMyscPath);
 
                 q.c(activity.getApplicationContext());
@@ -1123,7 +1112,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                     }
                 }
 
-                onProgress("Generating source code...", 2);
+                onProgress(Helper.getResString(R.string.generating_source_code), 2);
                 kC kC = jC.d(sc_id);
                 kC.b(q.resDirectoryPath + File.separator + "drawable-xhdpi");
                 kC = jC.d(sc_id);
@@ -1147,19 +1136,19 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                     return;
                 }
 
-                onProgress("Extracting built-in libraries...", 3);
+                onProgress(Helper.getResString(R.string.extracting_built_in_libraries), 3);
                 BuiltInLibraries.extractCompileAssets(this);
                 if (canceled) {
                     return;
                 }
 
-                onProgress("AAPT2 is running...", 8);
+                onProgress(Helper.getResString(R.string.aapt2_is_running), 8);
                 builder.compileResources();
                 if (canceled) {
                     return;
                 }
 
-                onProgress("Generating view binding...", 11);
+                onProgress(Helper.getResString(R.string.generating_view_binding), 11);
                 builder.generateViewBinding();
                 if (canceled) {
                     return;
@@ -1170,7 +1159,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                     return;
                 }
 
-                onProgress("Java is compiling...", 13);
+                onProgress(Helper.getResString(R.string.java_is_compiling), 13);
                 builder.compileJavaCode();
                 if (canceled) {
                     return;
@@ -1194,19 +1183,19 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
                     return;
                 }
 
-                onProgress("Merging DEX files...", 18);
+                onProgress(Helper.getResString(R.string.merging_dex_files), 17);
                 builder.getDexFilesReady();
                 if (canceled) {
                     return;
                 }
 
-                onProgress("Building APK...", 19);
+                onProgress(Helper.getResString(R.string.building_apk), 19);
                 builder.buildApk();
                 if (canceled) {
                     return;
                 }
 
-                onProgress("Signing APK...", 20);
+                onProgress(Helper.getResString(R.string.signing_apk), 20);
                 builder.signDebugApk();
                 if (canceled) {
                     return;
@@ -1221,18 +1210,18 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
 
                     aB dialog = new aB(activity);
                     if (isMissingDirectory) {
-                        dialog.b("Missing directory detected");
+                        dialog.b(Helper.getResString(R.string.missing_directory_detected));
                         dialog.a("A directory important for building is missing. " +
                                 "Sketchware Pro can try creating " + e.getMissingFile().getAbsolutePath() +
                                 " if you'd like to.");
-                        dialog.configureDefaultButton("Create", v -> {
+                        dialog.configureDefaultButton(Helper.getResString(R.string.common_word_create), v -> {
                             dialog.dismiss();
                             if (!e.getMissingFile().mkdirs()) {
                                 SketchwareUtil.toastError("Failed to create directory / directories!");
                             }
                         });
                     } else {
-                        dialog.b("Missing file detected");
+                        dialog.b(Helper.getResString(R.string.missing_directory_detected));
                         dialog.a("A file needed for building is missing. " +
                                 "Put the correct file back to " + e.getMissingFile().getAbsolutePath() +
                                 " and try building again.");
@@ -1293,7 +1282,7 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
 
         public void cancelBuild() {
             canceled = true;
-            onProgress("Canceling build...", -1);
+            onProgress(Helper.getResString(R.string.canceling_build), -1);
             if (isShowingNotification) {
                 notificationManager.cancel(notificationId);
                 isShowingNotification = false;
@@ -1315,11 +1304,11 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(activity, CHANNEL_ID)
                         .setSmallIcon(R.drawable.ic_mtrl_code)
-                        .setContentTitle("Building project")
-                        .setContentText("Starting build...")
+                        .setContentTitle(Helper.getResString(R.string.building_project))
+                        .setContentText(Helper.getResString(R.string.starting_build))
                         .setOngoing(true)
                         .setProgress(0, 0, true)
-                        .addAction(R.drawable.ic_cancel_white_96dp, "Cancel build", getCancelPendingIntent());
+                        .addAction(R.drawable.ic_cancel_white_96dp, Helper.getResString(R.string.cancel_build), getCancelPendingIntent());
 
                 notificationManager.notify(notificationId, builder.build());
                 isShowingNotification = true;
@@ -1332,11 +1321,11 @@ public class DesignActivity extends BaseAppCompatActivity implements View.OnClic
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(activity, CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_mtrl_code)
-                    .setContentTitle("Building project")
+                    .setContentTitle(Helper.getResString(R.string.building_project))
                     .setContentText(progress)
                     .setOngoing(true)
                     .setProgress(0, 0, true)
-                    .addAction(R.drawable.ic_cancel_white_96dp, "Cancel Build", getCancelPendingIntent());
+                    .addAction(R.drawable.ic_cancel_white_96dp, Helper.getResString(R.string.cancel_build), getCancelPendingIntent());
 
             notificationManager.notify(notificationId, builder.build());
         }
