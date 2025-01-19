@@ -5,13 +5,13 @@
     <item
         android:id="@+id/action_auto_scroll"
         android:checkable="true"
-        android:title="Auto scroll"
+        android:title="@string/auto_scroll"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_filter"
         android:icon="@drawable/ic_mtrl_filter"
-        android:title="Filter by package name"
+        android:title="@string/filter_by_package_name"
         app:showAsAction="never" />
 
     <item

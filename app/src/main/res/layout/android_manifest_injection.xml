@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-            <include layout="@layout/toolbar_improved" />
+        <include layout="@layout/toolbar_improved" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
@@ -42,7 +42,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:text="Activities"
+                    android:text="@string/activities"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?attr/colorPrimary" />
             </LinearLayout>

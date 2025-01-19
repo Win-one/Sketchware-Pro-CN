@@ -18,7 +18,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.besome.sketch.beans.ProjectLibraryBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import pro.sketchware.R;
 
 import a.a.a.GB;
 import a.a.a.aB;
@@ -32,6 +31,7 @@ import a.a.a.nv;
 import a.a.a.xB;
 import mod.hey.studios.util.Helper;
 import mod.jbk.editor.manage.library.LibrarySettingsImporter;
+import pro.sketchware.R;
 
 public class FirebaseActivity extends BaseAppCompatActivity implements View.OnClickListener {
     private static final int STEP_1 = 0;
@@ -152,6 +152,7 @@ public class FirebaseActivity extends BaseAppCompatActivity implements View.OnCl
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (stepNumber > STEP_1) {
             setStep(--stepNumber);
         } else {

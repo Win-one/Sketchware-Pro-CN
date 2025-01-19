@@ -329,7 +329,7 @@ public class LogReaderActivity extends BaseAppCompatActivity {
                 binding.dateHeader.setVisibility(View.GONE);
             }
             binding.getRoot().setOnLongClickListener(v -> {
-                SketchwareUtil.toast("Copied to clipboard");
+                SketchwareUtil.toast(getString(R.string.copied_to_clipboard));
                 ((ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("clipboard", data.get(position).get("logRaw").toString()));
                 return true;
             });

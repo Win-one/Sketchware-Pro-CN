@@ -9,21 +9,18 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 
-import a.a.a.ProjectBuilder;
-import a.a.a.bB;
-import a.a.a.jC;
-import a.a.a.yq;
-
-import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.besome.sketch.beans.SrcCodeBean;
 import com.besome.sketch.ctrls.CommonSpinnerItem;
-
+import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 
+import a.a.a.ProjectBuilder;
+import a.a.a.bB;
+import a.a.a.jC;
+import a.a.a.yq;
 import mod.hey.studios.util.Helper;
-
 import pro.sketchware.R;
 import pro.sketchware.databinding.SrcViewerBinding;
 import pro.sketchware.utility.EditorUtils;
@@ -135,10 +132,10 @@ public class SrcViewerActivity extends BaseAppCompatActivity {
                 Gravity.CENTER));
 
         new MaterialAlertDialogBuilder(this)
-                .setTitle("Select font size")
+                .setTitle(R.string.select_font_size)
                 .setIcon(R.drawable.ic_mtrl_formattext)
                 .setView(layout)
-                .setPositiveButton("Apply", (dialog, which) -> {
+                .setPositiveButton(R.string.common_word_apply, (dialog, which) -> {
                     editorFontSize = picker.getValue();
                     binding.editor.setTextSize(editorFontSize);
                 })

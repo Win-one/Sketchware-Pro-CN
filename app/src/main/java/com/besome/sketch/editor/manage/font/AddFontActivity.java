@@ -12,19 +12,19 @@ import android.widget.Toast;
 
 import com.besome.sketch.beans.ProjectResourceBean;
 import com.besome.sketch.lib.base.BaseDialogActivity;
-import pro.sketchware.R;
-import pro.sketchware.databinding.ManageFontAddBinding;
 
 import a.a.a.Np;
-import pro.sketchware.lib.validator.WB2;
 import a.a.a.bB;
 import a.a.a.mB;
 import a.a.a.uq;
 import a.a.a.yy;
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.util.Helper;
 import mod.jbk.util.LogUtil;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ManageFontAddBinding;
+import pro.sketchware.lib.validator.WB2;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class AddFontActivity extends BaseDialogActivity implements View.OnClickListener {
 
@@ -149,11 +149,11 @@ public class AddFontActivity extends BaseDialogActivity implements View.OnClickL
                     e.printStackTrace();
                     validFontPicked = false;
                     binding.fontPreviewView.setVisibility(View.GONE);
-                    SketchwareUtil.toast("Couldn't load font: " + e.getMessage());
+                    SketchwareUtil.toast(Helper.getResString(R.string.couldn_t_load_font) + e.getMessage());
                     LogUtil.e("AddFontActivity", "Failed to load font", e);
                 }
             }, e -> {
-                SketchwareUtil.toastError("Error while loading font: " + e.getMessage());
+                SketchwareUtil.toastError(getString(R.string.error_while_loading_font) + e.getMessage());
                 e.printStackTrace();
                 LogUtil.e("AddFontActivity", "Failed to load font", e);
             });

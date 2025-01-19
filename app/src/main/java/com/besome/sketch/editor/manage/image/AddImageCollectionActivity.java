@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.besome.sketch.beans.ProjectResourceBean;
 import com.besome.sketch.lib.base.BaseDialogActivity;
 import com.besome.sketch.lib.ui.EasyDeleteEditText;
-import pro.sketchware.R;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -35,6 +34,8 @@ import a.a.a.uq;
 import a.a.a.wq;
 import a.a.a.xB;
 import a.a.a.yy;
+import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
 
 public class AddImageCollectionActivity extends BaseDialogActivity implements View.OnClickListener {
 
@@ -290,7 +291,7 @@ public class AddImageCollectionActivity extends BaseDialogActivity implements Vi
         public void b() throws By {
             var activity = this.activity.get();
             try {
-                publishProgress("Now processing..");
+                publishProgress(Helper.getResString(R.string.now_processing));
                 if (!activity.editing) {
                     var image = new ProjectResourceBean(ProjectResourceBean.PROJECT_RES_TYPE_FILE,
                             activity.ed_input_edittext.getText().toString().trim(), activity.imageFilePath);

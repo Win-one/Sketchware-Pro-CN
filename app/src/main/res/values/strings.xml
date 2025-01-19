@@ -2882,5 +2882,9 @@ Please try again later"</string>
     <string name="not_available">Not available.</string>
     <string name="logcat_exported_successfully">Logcat exported successfully</string>
     <string name="something_went_wrong">Something went wrong!</string>
+    <string name="error_while_loading_font">Error while loading font:</string>
+    <string name="error_while_loading_sound">Error while loading sound:</string>
+    <string name="select_your_google_services_json">Select your google-services.json</string>
+    <string name="auto_scroll">Auto scroll</string>
 
 </resources>

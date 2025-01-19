@@ -25,7 +25,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import pro.sketchware.R;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,9 +38,10 @@ import a.a.a.WB;
 import a.a.a.bB;
 import a.a.a.uq;
 import a.a.a.yy;
-import pro.sketchware.utility.SketchwareUtil;
-import pro.sketchware.utility.FileUtil;
 import mod.jbk.util.LogUtil;
+import pro.sketchware.R;
+import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class AddSoundActivity extends BaseDialogActivity implements View.OnClickListener {
     private static final int REQUEST_CODE_SOUND_PICKER = 218;
@@ -253,7 +253,7 @@ public class AddSoundActivity extends BaseDialogActivity implements View.OnClick
                             finish();
                         }
                     }, e -> {
-                        SketchwareUtil.toastError("Error while loading sound: " + e.getMessage());
+                        SketchwareUtil.toastError(getString(R.string.error_while_loading_sound) + e.getMessage());
                         LogUtil.e("AddSoundActivity", "Failed to load sound", e);
                     });
         }

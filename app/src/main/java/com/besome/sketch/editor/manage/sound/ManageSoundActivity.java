@@ -40,6 +40,7 @@ public class ManageSoundActivity extends BaseAppCompatActivity implements ViewPa
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         if (projectSounds.isSelecting) {
             projectSounds.setSelecting(false);
         } else if (collectionSounds.isSelecting()) {
