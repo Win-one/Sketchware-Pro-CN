@@ -103,7 +103,6 @@ public class EventsManagerFragment extends qA {
 
         var dialog = new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(existingListener == null ? getString(R.string.new_listener) : getString(R.string.edit_listener))
-                .setMessage(R.string.type_info_of_the_listener)
                 .setView(listenerBinding.getRoot())
                 .setPositiveButton(R.string.common_word_save, (di, i) -> {
                     String listenerName = listenerBinding.listenerName.getText().toString();

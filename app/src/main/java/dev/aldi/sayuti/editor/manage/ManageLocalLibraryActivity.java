@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 
 import java.lang.ref.WeakReference;
@@ -39,6 +40,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import a.a.a.MA;
 import a.a.a.mB;
 import mod.hey.studios.build.BuildSettings;
+
+import mod.hey.studios.util.Helper;
 import pro.sketchware.R;
 import pro.sketchware.databinding.ManageLocallibrariesBinding;
 import pro.sketchware.databinding.ViewItemLocalLibBinding;
@@ -128,8 +131,7 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
             } else if (id == R.id.action_delete_selected_local_libraries) {
                 k();
                 Executors.newSingleThreadExecutor().execute(() -> {
-                    deleteSelectedLocalLibraries(adapter.getLocalLibraries());
-
+                    deleteSelectedLocalLibraries(scId, adapter.getLocalLibraries(), projectUsedLibs);
                     runOnUiThread(() -> {
                         h();
                         SketchwareUtil.toast(getString(R.string.deleted_successfully));
@@ -278,6 +280,15 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
         }
     }
 
+    private boolean isUsedLibrary(String libraryName) {
+        for (Map<String, Object> libraryMap : projectUsedLibs) {
+            if (libraryName.equals(libraryMap.get("name").toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.ViewHolder> {
         private final List<LocalLibrary> localLibraries = new ArrayList<>();
         public boolean isSelectionModeEnabled;
@@ -350,6 +361,19 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
             bindSelectedState(card, library);
             if (onLocalLibrarySelectedStateChangedListener != null) {
                 onLocalLibrarySelectedStateChangedListener.invoke(library);
+            }
+            if (library.isSelected() && isUsedLibrary(library.getName())) {
+                new MaterialAlertDialogBuilder(ManageLocalLibraryActivity.this)
+                        .setTitle("Warning")
+                        .setMessage("This library \"" + library.getName() + "\" already used in your project, removing it may break your project\rDo you want to continue removing it?")
+                        .setPositiveButton(Helper.getResString(R.string.common_word_yes), (dialog, which) -> {
+                            dialog.dismiss();
+                        })
+                        .setNegativeButton(Helper.getResString(R.string.common_word_cancel), (dialog, which) -> {
+                            toggleLocalLibrary(card, library, onLocalLibrarySelectedStateChangedListener);
+                            dialog.dismiss();
+                        })
+                        .show();
             }
         }
 

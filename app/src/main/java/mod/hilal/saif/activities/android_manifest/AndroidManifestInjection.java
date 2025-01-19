@@ -1,7 +1,7 @@
 package mod.hilal.saif.activities.android_manifest;
 
-import static pro.sketchware.utility.GsonUtils.getGson;
 import static pro.sketchware.utility.SketchwareUtil.getDip;
+import static pro.sketchware.utility.GsonUtils.getGson;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -37,6 +37,7 @@ import io.github.rosemoe.sora.widget.CodeEditor;
 import io.github.rosemoe.sora.widget.component.Magnifier;
 import mod.hey.studios.code.SrcCodeEditor;
 import mod.hey.studios.util.Helper;
+import mod.hilal.saif.activities.tools.ConfigActivity;
 import mod.hilal.saif.android_manifest.AndroidManifestInjector;
 import mod.jbk.code.CodeEditorColorSchemes;
 import mod.jbk.code.CodeEditorLanguages;
@@ -110,7 +111,7 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         options.add(createOption(
                 getString(R.string.application),
                 getString(R.string.default_properties_for_the_app),
-                R.drawable.icons8_app_attrs,
+                R.drawable.ic_mtrl_settings_applications,
                 v -> {
                     Intent intent = new Intent();
                     intent.setClass(getApplicationContext(), AndroidManifestInjectionDetails.class);
@@ -123,7 +124,7 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         options.add(createOption(
                 getString(R.string.permissions),
                 getString(R.string.add_custom_permissions_to_the_app),
-                R.drawable.event_on_signin_complete_48dp,
+                R.drawable.ic_mtrl_shield_check,
                 v -> {
                     Intent intent = new Intent();
                     intent.setClass(getApplicationContext(), AndroidManifestInjectionDetails.class);
@@ -136,13 +137,13 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         options.add(createOption(
                 getString(R.string.launcher_activity),
                 getString(R.string.change_the_default_launcher_activity),
-                R.drawable.recycling_48,
+                R.drawable.ic_mtrl_login,
                 v -> showLauncherActDialog(AndroidManifestInjector.getLauncherActivity(sc_id))
         ));
         options.add(createOption(
                 getString(R.string.all_activities),
                 getString(R.string.add_attributes_for_all_activities),
-                R.drawable.icons8_all_activities_attrs,
+                R.drawable.ic_mtrl_frame_source,
                 v -> {
                     Intent intent = new Intent();
                     intent.setClass(getApplicationContext(), AndroidManifestInjectionDetails.class);
@@ -155,7 +156,7 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         options.add(createOption(
                 getString(R.string.app_components),
                 getString(R.string.add_extra_components),
-                R.drawable.icons8_app_components,
+                R.drawable.ic_mtrl_component,
                 v -> showAppComponentDialog()
         ));
 

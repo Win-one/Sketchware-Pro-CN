@@ -71,7 +71,7 @@ public class EventsManagerCreatorFragment extends qA {
         if (isEdit) {
             fillUp();
         }
-
+        binding.toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
         return view;
     }
 
