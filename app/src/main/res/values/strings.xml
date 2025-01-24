@@ -2886,5 +2886,7 @@ Please try again later"</string>
     <string name="error_while_loading_sound">Error while loading sound:</string>
     <string name="select_your_google_services_json">Select your google-services.json</string>
     <string name="auto_scroll">Auto scroll</string>
+    <string name="this_library">This library \"</string>
+    <string name="already_used_in_your_project">\"already used in your project, removing it may break your project\rDo you want to continue removing it?</string>
 
 </resources>

@@ -16,40 +16,40 @@
 
     <item
         android:id="@+id/action_paste"
-        android:title="Paste"
+        android:title="@string/paste"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_word_wrap"
         android:checkable="true"
-        android:title="Word wrap"
+        android:title="@string/word_wrap"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_pretty_print"
-        android:title="Pretty print"
+        android:title="@string/pretty_print"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_switch_language"
-        android:title="Switch language"
+        android:title="@string/switch_language"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_switch_theme"
-        android:title="Switch theme"
+        android:title="@string/switch_theme"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_autocomplete"
         android:checkable="true"
-        android:title="Auto complete"
+        android:title="@string/auto_complete"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_autocomplete_symbol_pair"
         android:checkable="true"
-        android:title="Auto complete symbol pair"
+        android:title="@string/auto_complete_symbol_pair"
         app:showAsAction="never" />
 
 </menu>

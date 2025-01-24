@@ -3205,4 +3205,6 @@
     <string name="error_while_loading_sound">加载声音时出错:</string>
     <string name="select_your_google_services_json">选择您的google-services.json</string>
     <string name="auto_scroll">自动滚动</string>
+    <string name="this_library">这个库 \"</string>
+    <string name="already_used_in_your_project">\"已在您的项目中使用,删除它可能会破坏您的项目是否要继续删除它?</string>
 </resources>

@@ -90,13 +90,13 @@ public class AsdDialog extends Dialog implements DialogInterface.OnDismissListen
                     code = Lx.j(code, true);
                 } catch (Exception e) {
                     failed = true;
-                    SketchwareUtil.toastError("Your code contains incorrectly nested parentheses");
+                    SketchwareUtil.toastError(Helper.getResString(R.string.your_code_contains_incorrectly_nested_parentheses));
                 }
                 if (!failed) {
                     codeEditor.setText(code);
                 }
             } else if (id == R.id.action_switch_language) {
-                SketchwareUtil.toast("Currently not supported, sorry!");
+                SketchwareUtil.toast(Helper.getResString(R.string.currently_not_supported_sorry));
             } else if (id == R.id.action_switch_theme) {
                 SrcCodeEditor.showSwitchThemeDialog(act, codeEditor, (dialog, which) -> {
                     SrcCodeEditor.selectTheme(codeEditor, which);
@@ -104,15 +104,15 @@ public class AsdDialog extends Dialog implements DialogInterface.OnDismissListen
                     if (isDark()) {
                         lin.setBackgroundColor(0xff292929);
                         save.setBackground(new DialogButtonGradientDrawable()
-                                .getIns((int) getDip(4), 0, 0xff333333, 0xff333333));
+                                .getIns((int) getDip(25), 0, 0xff333333, 0xff333333));
                         cancel.setBackground(new DialogButtonGradientDrawable()
-                                .getIns((int) getDip(4), 0, 0xff333333, 0xff333333));
+                                .getIns((int) getDip(25), 0, 0xff333333, 0xff333333));
                     } else {
                         lin.setBackgroundColor(Color.WHITE);
                         save.setBackground(new DialogButtonGradientDrawable()
-                                .getIns((int) getDip(4), 0, 0xff2196f3, 0xff2196f3));
+                                .getIns((int) getDip(25), 0, 0xff2196f3, 0xff2196f3));
                         cancel.setBackground(new DialogButtonGradientDrawable()
-                                .getIns((int) getDip(4), 0, 0xff2196f3, 0xff2196f3));
+                                .getIns((int) getDip(25), 0, 0xff2196f3, 0xff2196f3));
                     }
                     dialog.dismiss();
                 });
@@ -234,23 +234,23 @@ public class AsdDialog extends Dialog implements DialogInterface.OnDismissListen
         lin.addView(save);
         if (isDark()) {
             save.setBackground(new DialogButtonGradientDrawable()
-                    .getIns(getDip(4),
+                    .getIns(getDip(25),
                             0,
                             0xff333333,
                             0xff333333));
             cancel.setBackground(new DialogButtonGradientDrawable()
-                    .getIns(getDip(4),
+                    .getIns(getDip(25),
                             0,
                             0xff333333,
                             0xff333333));
         } else {
             save.setBackground(new DialogButtonGradientDrawable()
-                    .getIns(getDip(4),
+                    .getIns(getDip(25),
                             0,
                             0xff2196f3,
                             0xff2196f3));
             cancel.setBackground(new DialogButtonGradientDrawable()
-                    .getIns(getDip(4),
+                    .getIns(getDip(25),
                             0,
                             0xff2196f3,
                             0xff2196f3));
