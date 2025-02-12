@@ -20,27 +20,30 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.github.angads25.filepicker.model.DialogConfigs;
 import com.github.angads25.filepicker.model.DialogProperties;
 import com.github.angads25.filepicker.view.FilePickerDialog;
+
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import mod.hey.studios.util.Helper;
-import mod.jbk.util.AddMarginOnApplyWindowInsetsListener;
 import pro.sketchware.R;
 import pro.sketchware.databinding.DialogCreateNewFileLayoutBinding;
 import pro.sketchware.databinding.DialogInputLayoutBinding;
 import pro.sketchware.databinding.ManageFileBinding;
 import pro.sketchware.databinding.ManageJavaItemHsBinding;
+
+import com.besome.sketch.lib.base.BaseAppCompatActivity;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import pro.sketchware.utility.SketchwareUtil;
 import pro.sketchware.utility.FilePathUtil;
 import pro.sketchware.utility.FileResConfig;
 import pro.sketchware.utility.FileUtil;
-import pro.sketchware.utility.SketchwareUtil;
+import mod.hey.studios.util.Helper;
+import mod.jbk.util.AddMarginOnApplyWindowInsetsListener;
 
 public class ManageNativelibsActivity extends BaseAppCompatActivity implements View.OnClickListener {
     private FilePickerDialog filePicker;
@@ -100,15 +103,15 @@ public class ManageNativelibsActivity extends BaseAppCompatActivity implements V
 
     private void handleFab() {
         if (isInMainDirectory()) {
-            binding.showOptionsButton.setText(R.string.new_folder);
+            binding.showOptionsButton.setText("New folder");
         } else {
-            binding.showOptionsButton.setText(R.string.import_library);
+            binding.showOptionsButton.setText("Import library");
         }
     }
 
     private void setupUI() {
         binding.topAppBar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-        binding.topAppBar.setTitle(R.string.native_library_manager);
+        binding.topAppBar.setTitle("Native Library Manager");
 
         binding.showOptionsButton.setOnClickListener(view -> hideShowOptionsButton(false));
         binding.closeButton.setOnClickListener(view -> hideShowOptionsButton(true));
@@ -165,14 +168,14 @@ public class ManageNativelibsActivity extends BaseAppCompatActivity implements V
 
         var dialog = new MaterialAlertDialogBuilder(this)
                 .setView(dialogBinding.getRoot())
-                .setTitle(R.string.create_a_new_folder)
-                .setMessage(R.string.enter_the_name_of_the_new_folder)
-                .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
-                .setPositiveButton(R.string.common_word_create, null)
+                .setTitle("Create a new folder")
+                .setMessage("Enter the name of the new folder")
+                .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton("Create", null)
                 .create();
 
         dialogBinding.chipGroupTypes.setVisibility(View.GONE);
-        textInputLayout.setHint(R.string.folder_name);
+        textInputLayout.setHint("Folder name");
 
         inputText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -193,10 +196,10 @@ public class ManageNativelibsActivity extends BaseAppCompatActivity implements V
         dialog.setOnShowListener(dialogInterface -> {
             Button positiveButton = ((AlertDialog) dialogInterface).getButton(DialogInterface.BUTTON_POSITIVE);
             positiveButton.setOnClickListener(view -> {
-                String name = inputText.getText().toString();
+                String name = Helper.getText(inputText);
 
                 if (name.isEmpty()) {
-                    textInputLayout.setError(getString(R.string.invalid_folder_name));
+                    textInputLayout.setError("Invalid folder name");
                     return;
                 }
                 textInputLayout.setError(null);
@@ -204,14 +207,14 @@ public class ManageNativelibsActivity extends BaseAppCompatActivity implements V
                 String path = fpu.getPathNativelibs(numProj) + "/" + name;
 
                 if (FileUtil.isExistFile(path)) {
-                    textInputLayout.setError(getString(R.string.folder_already_exists));
+                    textInputLayout.setError("Folder already exists");
                     return;
                 }
                 textInputLayout.setError(null);
 
                 FileUtil.makeDir(path);
                 handleAdapter(nativeLibrariesPath);
-                SketchwareUtil.toast(getString(R.string.created_folder_successfully));
+                SketchwareUtil.toast("Created folder successfully");
 
                 dialog.dismiss();
             });
@@ -239,13 +242,13 @@ public class ManageNativelibsActivity extends BaseAppCompatActivity implements V
         properties.extensions = new String[]{"so"};
 
         filePicker = new FilePickerDialog(this, properties, R.style.RoundedCornersDialog);
-        filePicker.setTitle(getString(R.string.select_a_native_library_so));
+        filePicker.setTitle("Select a native library (.so)");
         filePicker.setDialogSelectionListener(selections -> {
             for (String path : selections) {
                 try {
                     FileUtil.copyDirectory(new File(path), new File(nativeLibrariesPath + File.separator + Uri.parse(path).getLastPathSegment()));
                 } catch (IOException e) {
-                    SketchwareUtil.toastError(getString(R.string.couldn_t_import_library) + e.getMessage() + "]");
+                    SketchwareUtil.toastError("Couldn't import library! [" + e.getMessage() + "]");
                 }
             }
 
@@ -259,21 +262,21 @@ public class ManageNativelibsActivity extends BaseAppCompatActivity implements V
         var inputText = dialogBinding.inputText;
 
         var dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.common_word_rename)
+                .setTitle("Rename")
                 .setView(dialogBinding.getRoot())
-                .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
-                .setPositiveButton(R.string.common_word_rename, (dialogInterface, i) -> {
-                    String newName = inputText.getText().toString();
+                .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton("Rename", (dialogInterface, i) -> {
+                    String newName = Helper.getText(inputText);
                     if (!newName.isEmpty()) {
                         if (FileUtil.renameFile(path, path.substring(0, path.lastIndexOf(File.separator)) + File.separator + newName)) {
-                            SketchwareUtil.toast(getString(R.string.renamed_successfully));
+                            SketchwareUtil.toast("Renamed successfully");
                         } else {
-                            SketchwareUtil.toastError(getString(R.string.renaming_failed));
+                            SketchwareUtil.toastError("Renaming failed");
                         }
                         handleAdapter(nativeLibrariesPath);
                         handleFab();
                     } else {
-                        SketchwareUtil.toast(getString(R.string.nothing_changed));
+                        SketchwareUtil.toast("Nothing changed");
                     }
                     dialogInterface.dismiss();
                 })
@@ -328,12 +331,13 @@ public class ManageNativelibsActivity extends BaseAppCompatActivity implements V
                 menu.getMenu().getItem(2).setVisible(false);
 
                 menu.setOnMenuItemClickListener(item -> {
-                    switch (item.getItemId()) {
-                        case R.id.delete -> {
+                    String title = item.getTitle().toString();
+                    switch (title) {
+                        case "Delete" -> {
                             FileUtil.deleteFile(frc.listFileNativeLibs.get(position));
                             handleAdapter(nativeLibrariesPath);
                         }
-                        case R.id.rename -> showRenameDialog(frc.listFileNativeLibs.get(position));
+                        case "Rename" -> showRenameDialog(frc.listFileNativeLibs.get(position));
                         default -> {
                             return false;
                         }
@@ -347,11 +351,11 @@ public class ManageNativelibsActivity extends BaseAppCompatActivity implements V
             binding.getRoot().setOnLongClickListener((View.OnLongClickListener) view -> {
                 if (FileUtil.isDirectory(frc.listFileNativeLibs.get(position))) {
                     PopupMenu menu = new PopupMenu(ManageNativelibsActivity.this, view);
-                    menu.getMenu().add(R.string.common_word_delete);
+                    menu.getMenu().add("Delete");
                     menu.setOnMenuItemClickListener(item -> {
                         FileUtil.deleteFile(frc.listFileNativeLibs.get(position));
                         handleAdapter(nativeLibrariesPath);
-                        SketchwareUtil.toast(getString(R.string.common_word_deleted));
+                        SketchwareUtil.toast("Deleted");
 
                         return true;
                     });

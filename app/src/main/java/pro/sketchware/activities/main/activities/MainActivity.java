@@ -28,12 +28,16 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import pro.sketchware.activities.main.fragments.projects.ProjectsFragment;
+import pro.sketchware.activities.main.fragments.projects_store.ProjectsStoreFragment;
 import com.besome.sketch.lib.base.BasePermissionAppCompatActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import pro.sketchware.R;
+import pro.sketchware.databinding.MainBinding;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,20 +53,16 @@ import a.a.a.wq;
 import a.a.a.xB;
 import dev.chrisbanes.insetter.Insetter;
 import dev.chrisbanes.insetter.Side;
+import pro.sketchware.utility.SketchwareUtil;
+import pro.sketchware.utility.FileUtil;
 import mod.hey.studios.project.backup.BackupFactory;
 import mod.hey.studios.project.backup.BackupRestoreManager;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.activities.tools.ConfigActivity;
+import pro.sketchware.activities.about.AboutActivity;
+import pro.sketchware.lib.base.BottomSheetDialogView;
 import mod.jbk.util.LogUtil;
 import mod.tyron.backup.SingleCopyTask;
-import pro.sketchware.R;
-import pro.sketchware.activities.about.AboutActivity;
-import pro.sketchware.activities.main.fragments.projects.ProjectsFragment;
-import pro.sketchware.activities.main.fragments.projects_store.ProjectsStoreFragment;
-import pro.sketchware.databinding.MainBinding;
-import pro.sketchware.lib.base.BottomSheetDialogView;
-import pro.sketchware.utility.FileUtil;
-import pro.sketchware.utility.SketchwareUtil;
 
 public class MainActivity extends BasePermissionAppCompatActivity {
     private final OnBackPressedCallback closeDrawer = new OnBackPressedCallback(true) {
@@ -258,10 +258,10 @@ public class MainActivity extends BasePermissionAppCompatActivity {
 
                             if (BackupFactory.zipContainsFile(path, "local_libs")) {
                                 new MaterialAlertDialogBuilder(MainActivity.this)
-                                        .setTitle(R.string.code_shrinker_warning)
+                                        .setTitle("Warning")
                                         .setMessage(BackupRestoreManager.getRestoreIntegratedLocalLibrariesMessage(false, -1, -1, null))
-                                        .setPositiveButton(R.string.common_word_copy, (dialog, which) -> manager.doRestore(path, true))
-                                        .setNegativeButton(R.string.don_t_copy, (dialog, which) -> manager.doRestore(path, false))
+                                        .setPositiveButton("Copy", (dialog, which) -> manager.doRestore(path, true))
+                                        .setNegativeButton("Don't copy", (dialog, which) -> manager.doRestore(path, false))
                                         .setNeutralButton(R.string.common_word_cancel, null)
                                         .show();
                             } else {
@@ -271,7 +271,7 @@ public class MainActivity extends BasePermissionAppCompatActivity {
                             // Clear intent so it doesn't duplicate
                             getIntent().setData(null);
                         } else {
-                            SketchwareUtil.toastError(getString(R.string.failed_to_copy_backup_file_to_temporary_location) + reason, Toast.LENGTH_LONG);
+                            SketchwareUtil.toastError("Failed to copy backup file to temporary location: " + reason, Toast.LENGTH_LONG);
                         }
                     }
                 }).copyFile(data);
@@ -288,7 +288,7 @@ public class MainActivity extends BasePermissionAppCompatActivity {
                 }
 
                 public void onFinish() {
-                    bottomSheetDialog.setPositiveButtonText(getString(R.string.view_changes));
+                    bottomSheetDialog.setPositiveButtonText("View changes");
                     bottomSheetDialog.getPositiveButton().setEnabled(true);
                 }
             };
@@ -301,10 +301,14 @@ public class MainActivity extends BasePermissionAppCompatActivity {
     @NonNull
     private BottomSheetDialogView getBottomSheetDialogView() {
         BottomSheetDialogView bottomSheetDialog = new BottomSheetDialogView(this);
-        bottomSheetDialog.setTitle(getString(R.string.major_changes_in_v6_4_0));
-        bottomSheetDialog.setDescription(getString(R.string.change_message));
+        bottomSheetDialog.setTitle("Major changes in v7.0.0");
+        bottomSheetDialog.setDescription("""
+                There have been major changes since v6.3.0 fix1, \
+                and it's very important to know them all if you want your projects to still work.
+                
+                You can view all changes whenever you want at the About Sketchware Pro screen.""");
 
-        bottomSheetDialog.setPositiveButton(getString(R.string.view_changes), (dialog, which) -> {
+        bottomSheetDialog.setPositiveButton("View changes", (dialog, which) -> {
             ConfigActivity.setSetting(ConfigActivity.SETTING_CRITICAL_UPDATE_REMINDER, true);
             Intent launcher = new Intent(this, AboutActivity.class);
             launcher.putExtra("select", "changelog");
@@ -360,16 +364,16 @@ public class MainActivity extends BasePermissionAppCompatActivity {
             if (!optOutFile.exists() && !granted) {
                 aB dialog = new aB(this);
                 dialog.a(R.drawable.ic_expire_48dp);
-                dialog.b(getString(R.string.android_11_storage_access));
-                dialog.a(getString(R.string.starting_with_android_11) +
-                         getString(R.string.taking_ages_to_build_projects) +
-                         getString(R.string.with_current_granted_permissions));
+                dialog.b("Android 11 storage access");
+                dialog.a("Starting with Android 11, Sketchware Pro needs a new permission to avoid " +
+                        "taking ages to build projects. Don't worry, we can't do more to storage than " +
+                        "with current granted permissions.");
                 dialog.b(Helper.getResString(R.string.common_word_settings), v -> {
                     FileUtil.requestAllFilesAccessPermission(this);
                     dialog.dismiss();
                 });
-                dialog.a(getString(R.string.common_word_skip), Helper.getDialogDismissListener(dialog));
-                dialog.configureDefaultButton(getString(R.string.don_t_show_anymore), v -> {
+                dialog.a("Skip", Helper.getDialogDismissListener(dialog));
+                dialog.configureDefaultButton("Don't show anymore", v -> {
                     try {
                         if (!optOutFile.createNewFile())
                             throw new IOException("Failed to create file " + optOutFile);
@@ -435,7 +439,7 @@ public class MainActivity extends BasePermissionAppCompatActivity {
                 oB.a(getApplicationContext(), "localization/strings.xml", wq.m());
             }
         } catch (Exception e) {
-            String message = getString(R.string.couldn_t_extract_default_strings_to_storage);
+            String message = "Couldn't extract default strings to storage";
             SketchwareUtil.toastError(message + ": " + e.getMessage());
             LogUtil.e("MainActivity", message, e);
         }

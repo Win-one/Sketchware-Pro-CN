@@ -9,18 +9,22 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import pro.sketchware.R;
+import pro.sketchware.databinding.FragmentEventsManagerCreatorBinding;
+import pro.sketchware.utility.SketchwareUtil;
+import pro.sketchware.utility.FileUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import a.a.a.qA;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.activities.tools.IconSelectorDialog;
 import mod.jbk.util.OldResourceIdMapper;
-import pro.sketchware.R;
-import pro.sketchware.databinding.FragmentEventsManagerCreatorBinding;
-import pro.sketchware.utility.FileUtil;
-import pro.sketchware.utility.SketchwareUtil;
+
+import a.a.a.qA;
 
 public class EventsManagerCreatorFragment extends qA {
 
@@ -87,15 +91,15 @@ public class EventsManagerCreatorFragment extends qA {
 
     private boolean filledIn() {
         if (isActivityEvent) {
-            return !binding.eventsCreatorEventname.getText().toString().isEmpty()
-                    && !binding.eventsCreatorSpec.getText().toString().isEmpty()
-                    && !binding.eventsCreatorCode.getText().toString().isEmpty();
+            return !Helper.getText(binding.eventsCreatorEventname).isEmpty()
+                    && !Helper.getText(binding.eventsCreatorSpec).isEmpty()
+                    && !Helper.getText(binding.eventsCreatorCode).isEmpty();
         } else {
-            return !binding.eventsCreatorEventname.getText().toString().isEmpty()
-                    && !binding.eventsCreatorVarname.getText().toString().isEmpty()
-                    && !binding.eventsCreatorIcon.getText().toString().isEmpty()
-                    && !binding.eventsCreatorSpec.getText().toString().isEmpty()
-                    && !binding.eventsCreatorCode.getText().toString().isEmpty();
+            return !Helper.getText(binding.eventsCreatorEventname).isEmpty()
+                    && !Helper.getText(binding.eventsCreatorVarname).isEmpty()
+                    && !Helper.getText(binding.eventsCreatorIcon).isEmpty()
+                    && !Helper.getText(binding.eventsCreatorSpec).isEmpty()
+                    && !Helper.getText(binding.eventsCreatorCode).isEmpty();
         }
     }
 
@@ -124,11 +128,11 @@ public class EventsManagerCreatorFragment extends qA {
 
     private void save() {
         if (!filledIn()) {
-            SketchwareUtil.toast(getString(R.string.some_required_fields_are_empty));
+            SketchwareUtil.toast("Some required fields are empty!");
             return;
         }
-        if (!OldResourceIdMapper.isValidIconId(binding.eventsCreatorIcon.getText().toString())) {
-            binding.eventsCreatorIconTil.setError(getString(R.string.invalid_icon_id));
+        if (!OldResourceIdMapper.isValidIconId(Helper.getText(binding.eventsCreatorIcon))) {
+            binding.eventsCreatorIconTil.setError("Invalid icon ID");
             binding.eventsCreatorIcon.requestFocus();
             return;
         }
@@ -143,23 +147,23 @@ public class EventsManagerCreatorFragment extends qA {
         if (isEdit) {
             hashMap = arrayList.get(figureP(_name));
         }
-        hashMap.put("name", binding.eventsCreatorEventname.getText().toString());
-        hashMap.put("var", binding.eventsCreatorVarname.getText().toString());
+        hashMap.put("name", Helper.getText(binding.eventsCreatorEventname));
+        hashMap.put("var", Helper.getText(binding.eventsCreatorVarname));
         if (isActivityEvent) {
             hashMap.put("listener", "");
         } else {
             hashMap.put("listener", lisName);
         }
-        hashMap.put("icon", binding.eventsCreatorIcon.getText().toString());
-        hashMap.put("description", binding.eventsCreatorDesc.getText().toString());
-        hashMap.put("parameters", binding.eventsCreatorParams.getText().toString());
-        hashMap.put("code", binding.eventsCreatorCode.getText().toString());
-        hashMap.put("headerSpec", binding.eventsCreatorSpec.getText().toString());
+        hashMap.put("icon", Helper.getText(binding.eventsCreatorIcon));
+        hashMap.put("description", Helper.getText(binding.eventsCreatorDesc));
+        hashMap.put("parameters", Helper.getText(binding.eventsCreatorParams));
+        hashMap.put("code", Helper.getText(binding.eventsCreatorCode));
+        hashMap.put("headerSpec", Helper.getText(binding.eventsCreatorSpec));
         if (!isEdit) {
             arrayList.add(hashMap);
         }
         FileUtil.writeFile(concat, getGson().toJson(arrayList));
-        SketchwareUtil.toast(getString(R.string.common_word_saved));
+        SketchwareUtil.toast("Saved");
         getParentFragmentManager().popBackStack();
     }
 
@@ -180,12 +184,11 @@ public class EventsManagerCreatorFragment extends qA {
         if (isEdit) {
             binding.toolbar.setTitle(event_name);
         } else if (isActivityEvent) {
-            binding.toolbar.setTitle(R.string.create_a_new_activity_event);
+            binding.toolbar.setTitle("Create a new activity event");
         } else {
-            binding.toolbar.setTitle(lisName + getString(R.string.create_a_new_event));
+            binding.toolbar.setTitle(lisName + "Create a new event");
         }
-        binding.toolbar.setNavigationOnClickListener(view -> {
-            getParentFragmentManager().popBackStack();
-        });
+        binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(requireActivity()));
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(binding.toolbar);
     }
 }

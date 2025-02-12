@@ -18,6 +18,9 @@ import com.besome.sketch.beans.ProjectResourceBean;
 import com.besome.sketch.lib.base.BaseDialogActivity;
 import com.besome.sketch.lib.ui.EasyDeleteEditText;
 
+import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
+
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -34,8 +37,6 @@ import a.a.a.uq;
 import a.a.a.wq;
 import a.a.a.xB;
 import a.a.a.yy;
-import mod.hey.studios.util.Helper;
-import pro.sketchware.R;
 
 public class AddImageCollectionActivity extends BaseDialogActivity implements View.OnClickListener {
 
@@ -291,10 +292,10 @@ public class AddImageCollectionActivity extends BaseDialogActivity implements Vi
         public void b() throws By {
             var activity = this.activity.get();
             try {
-                publishProgress(Helper.getResString(R.string.now_processing));
+                publishProgress("Now processing..");
                 if (!activity.editing) {
                     var image = new ProjectResourceBean(ProjectResourceBean.PROJECT_RES_TYPE_FILE,
-                            activity.ed_input_edittext.getText().toString().trim(), activity.imageFilePath);
+                            Helper.getText(activity.ed_input_edittext).trim(), activity.imageFilePath);
                     image.savedPos = 1;
                     image.isNew = true;
                     image.rotate = activity.imageRotationDegrees;
@@ -302,7 +303,7 @@ public class AddImageCollectionActivity extends BaseDialogActivity implements Vi
                     image.flipHorizontal = activity.imageScaleX;
                     Op.g().a(activity.sc_id, image);
                 } else {
-                    Op.g().a(activity.editTarget, activity.ed_input_edittext.getText().toString(), false);
+                    Op.g().a(activity.editTarget, Helper.getText(activity.ed_input_edittext), false);
                 }
             } catch (Exception e) {
                 // the bytecode's lying

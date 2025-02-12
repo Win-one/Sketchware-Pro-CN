@@ -18,12 +18,17 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.annotations.NonNull;
+
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
+
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonParseException;
+
 import com.topjohnwu.superuser.Shell;
+
+import dev.chrisbanes.insetter.Insetter;
 
 import java.io.File;
 import java.util.Arrays;
@@ -31,14 +36,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import dev.chrisbanes.insetter.Insetter;
-import mod.hey.studios.util.Helper;
-import mod.jbk.util.LogUtil;
 import pro.sketchware.R;
 import pro.sketchware.databinding.DialogCreateNewFileLayoutBinding;
 import pro.sketchware.databinding.PreferenceActivityBinding;
-import pro.sketchware.utility.FileUtil;
+
 import pro.sketchware.utility.SketchwareUtil;
+import pro.sketchware.utility.FileUtil;
+
+import mod.hey.studios.util.Helper;
+import mod.jbk.util.LogUtil;
 
 public class ConfigActivity extends BaseAppCompatActivity {
 
@@ -67,7 +73,7 @@ public class ConfigActivity extends BaseAppCompatActivity {
                 .applyToView(binding.getRoot());
         setContentView(binding.getRoot());
 
-        binding.topAppBar.setTitle(R.string.mod_settings);
+        binding.topAppBar.setTitle("App Settings");
         binding.topAppBar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
         var fragment = new PreferenceFragment();
         fragment.setSnackbarView(binding.getRoot());
@@ -136,8 +142,8 @@ public class ConfigActivity extends BaseAppCompatActivity {
                 // fall-through to shared error handler
             }
 
-            SketchwareUtil.toastError(Helper.getResString(R.string.couldn_t_parse_mod_settings_restoring_defaults));
-            LogUtil.e("ConfigActivity", "Failed to parse Mod Settings.", toLog);
+            SketchwareUtil.toastError("Couldn't parse App Settings! Restoring defaults.");
+            LogUtil.e("ConfigActivity", "Failed to parse App Settings.", toLog);
         }
         settings = new HashMap<>();
         restoreDefaultSettings(settings);
@@ -198,8 +204,8 @@ public class ConfigActivity extends BaseAppCompatActivity {
                 binding.chipGroupTypes.setVisibility(View.GONE);
                 AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
                         .setView(binding.getRoot())
-                        .setTitle(R.string.backup_directory)
-                        .setMessage(R.string.directory_inside_internal_storage)
+                        .setTitle("Backup directory")
+                        .setMessage("Directory inside /Internal storage/, e.g. .sketchware/backups")
                         .setNegativeButton(R.string.common_word_cancel, null)
                         .setPositiveButton(R.string.common_word_save, null)
                         .create();
@@ -209,7 +215,7 @@ public class ConfigActivity extends BaseAppCompatActivity {
                             Helper.getDialogDismissListener(dialogInterface));
                     Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
                     positiveButton.setOnClickListener(view -> {
-                        getDataStore().putString(SETTING_BACKUP_DIRECTORY, binding.inputText.getText().toString());
+                        getDataStore().putString(SETTING_BACKUP_DIRECTORY, Helper.getText(binding.inputText));
                         dialog.dismiss();
                     });
 
@@ -243,8 +249,8 @@ public class ConfigActivity extends BaseAppCompatActivity {
 
                 AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
                         .setView(binding.getRoot())
-                        .setTitle(R.string.backup_filename_format)
-                        .setMessage(getString(R.string.this_defines_how_swb_backup_files_get_named) +
+                        .setTitle("Backup filename format")
+                        .setMessage("This defines how SWB backup files get named.\n" +
                                 "Available variables:\n" +
                                 " - $projectName - Project name\n" +
                                 " - $versionCode - App version code\n" +
@@ -258,7 +264,7 @@ public class ConfigActivity extends BaseAppCompatActivity {
                         .setPositiveButton(R.string.common_word_save, null)
                         .setNeutralButton(R.string.common_word_reset, (dialogInterface, which) -> {
                             getDataStore().putString(SETTING_BACKUP_FILENAME, null);
-                            Snackbar.make(snackbarView, R.string.reset_to_default_complete, BaseTransientBottomBar.LENGTH_SHORT).show();
+                            Snackbar.make(snackbarView, "Reset to default complete.", BaseTransientBottomBar.LENGTH_SHORT).show();
                         })
                         .create();
 
@@ -267,7 +273,7 @@ public class ConfigActivity extends BaseAppCompatActivity {
                             Helper.getDialogDismissListener(dialog));
                     Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
                     positiveButton.setOnClickListener(view -> {
-                        getDataStore().putString(SETTING_BACKUP_FILENAME, binding.inputText.getText().toString());
+                        getDataStore().putString(SETTING_BACKUP_FILENAME, Helper.getText(binding.inputText));
                         dialog.dismiss();
                     });
                     dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);

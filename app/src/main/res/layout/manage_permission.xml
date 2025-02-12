@@ -19,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             app:menu="@menu/permission_manager_menu"
             app:navigationIcon="?attr/homeAsUpIndicator"
-            app:title="@string/permissions_manager" />
+            app:title="Permissions Manager" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="@string/search_for_permissions"
+                android:hint="Search for permissions"
                 android:importantForAutofill="noExcludeDescendants"
                 app:boxBackgroundMode="outline"
                 app:startIconDrawable="@drawable/ic_mtrl_search">
@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="20dp"
-        android:text="@string/scroll_to_the_top"
+        android:layout_marginBottom="10dp"
+        android:text="Scroll to the top"
         app:icon="@drawable/ic_arrow_drop_up_grey600_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

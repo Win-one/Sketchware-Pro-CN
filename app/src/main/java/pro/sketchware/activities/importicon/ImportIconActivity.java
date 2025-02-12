@@ -29,6 +29,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
+import pro.sketchware.databinding.DialogFilterIconsLayoutBinding;
+import pro.sketchware.databinding.DialogSaveIconBinding;
+import pro.sketchware.databinding.ImportIconBinding;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -48,11 +54,7 @@ import a.a.a.mB;
 import a.a.a.oB;
 import a.a.a.uq;
 import a.a.a.wq;
-import pro.sketchware.R;
 import pro.sketchware.activities.importicon.adapters.IconAdapter;
-import pro.sketchware.databinding.DialogFilterIconsLayoutBinding;
-import pro.sketchware.databinding.DialogSaveIconBinding;
-import pro.sketchware.databinding.ImportIconBinding;
 import pro.sketchware.utility.SvgUtils;
 
 public class ImportIconActivity extends BaseAppCompatActivity implements IconAdapter.OnIconSelectedListener {
@@ -182,7 +184,7 @@ public class ImportIconActivity extends BaseAppCompatActivity implements IconAda
         getMenuInflater().inflate(R.menu.menu_import_icon, menu);
         search = menu.findItem(R.id.menu_find);
         searchView = (SearchView) search.getActionView();
-        searchView.setQueryHint(getString(R.string.common_word_search));
+        searchView.setQueryHint("Search");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -278,9 +280,9 @@ public class ImportIconActivity extends BaseAppCompatActivity implements IconAda
 
         var dialog = new MaterialAlertDialogBuilder(this)
                 .setView(dialogBinding.getRoot())
-                .setTitle(R.string.filter_icons)
-                .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
-                .setPositiveButton(R.string.common_word_apply, null)
+                .setTitle("Filter icons")
+                .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton("Apply", null)
                 .create();
         dialog.setView(dialogBinding.getRoot());
 
@@ -379,9 +381,9 @@ public class ImportIconActivity extends BaseAppCompatActivity implements IconAda
 
         var dialog = new MaterialAlertDialogBuilder(this)
                 .setView(dialogBinding.getRoot())
-                .setTitle(R.string.common_word_save)
-                .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
-                .setPositiveButton(R.string.common_word_save, null)
+                .setTitle("Save")
+                .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton("Save", null)
                 .create();
 
         dialog.setOnShowListener(dialogInterface -> {
@@ -390,7 +392,7 @@ public class ImportIconActivity extends BaseAppCompatActivity implements IconAda
                 if (iconNameValidator.b() && selectedIconPosition >= 0) {
                     String resFullname = adapter.getCurrentList().get(selectedIconPosition).second + File.separator + selected_icon_type + ".svg";
                     Intent intent = new Intent();
-                    intent.putExtra("iconName", dialogBinding.inputText.getText().toString());
+                    intent.putExtra("iconName", Helper.getText(dialogBinding.inputText));
                     intent.putExtra("iconPath", resFullname);
 
                     intent.putExtra("iconColor", selected_color);

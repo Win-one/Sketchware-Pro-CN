@@ -289,7 +289,7 @@ public class CodeEditorLayout extends LinearLayout implements TextWatcher {
     }
 
     public String getText() {
-        return editText.getText().toString();
+        return Helper.getText(editText);
     }
 
     public void setText(CharSequence c) {
