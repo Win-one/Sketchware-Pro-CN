@@ -2888,5 +2888,7 @@ Please try again later"</string>
     <string name="auto_scroll">Auto scroll</string>
     <string name="this_library">This library \"</string>
     <string name="already_used_in_your_project">\"already used in your project, removing it may break your project\rDo you want to continue removing it?</string>
+    <string name="couldn_t_parse_app_settings_restoring_defaults">Couldn\'t parse App Settings! Restoring defaults.</string>
+    <string name="successfully_exported_event_to">Successfully exported event to:\n</string>
 
 </resources>

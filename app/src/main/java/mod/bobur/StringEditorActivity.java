@@ -115,6 +115,7 @@ public class StringEditorActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         ArrayList<HashMap<String, Object>> cache = new ArrayList<>();
         convertXmlToListMap(FileUtil.readFile(getIntent().getStringExtra("content")), cache);
         String cacheString = new Gson().toJson(cache);
@@ -262,13 +263,13 @@ public class StringEditorActivity extends AppCompatActivity {
     private void addStringDialog() {
         aB dialog = new aB(this);
         ViewStringEditorAddBinding binding = ViewStringEditorAddBinding.inflate(LayoutInflater.from(this));
-        dialog.b("Create new string");
-        dialog.b("Create", v1 -> {
+        dialog.b(getString(R.string.create_new_string));
+        dialog.b(getString(R.string.common_word_create), v1 -> {
             String key = Objects.requireNonNull(binding.stringKeyInput.getText()).toString();
             String value = Objects.requireNonNull(binding.stringValueInput.getText()).toString();
 
             if (key.isEmpty() || value.isEmpty()) {
-                SketchwareUtil.toast("Please fill in all fields", Toast.LENGTH_SHORT);
+                SketchwareUtil.toast(Helper.getResString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT);
                 return;
             }
 
@@ -354,9 +355,8 @@ public class StringEditorActivity extends AppCompatActivity {
                         dialogBinding.stringKeyInput.setText((String) currentItem.get("key"));
                         dialogBinding.stringValueInput.setText((String) currentItem.get("text"));
 
-                        dialog.b("Edit string");
-                        dialog.b(
-                                "Save",
+                        dialog.b(getString(R.string.edit_string));
+                        dialog.b(getString(R.string.common_word_save),
                                 v1 -> {
                                     String keyInput =
                                             Objects.requireNonNull(
@@ -368,8 +368,7 @@ public class StringEditorActivity extends AppCompatActivity {
                                                                     .getText())
                                                     .toString();
                                     if (keyInput.isEmpty() || valueInput.isEmpty()) {
-                                        SketchwareUtil.toast(
-                                                "Please fill in all fields", Toast.LENGTH_SHORT);
+                                        SketchwareUtil.toast(getString(R.string.please_fill_in_all_fields), Toast.LENGTH_SHORT);
                                         return;
                                     }
                                     if (keyInput.equals(key) && valueInput.equals(text)) {
@@ -380,8 +379,7 @@ public class StringEditorActivity extends AppCompatActivity {
                                     notifyItemChanged(adapterPosition);
                                 });
 
-                        dialog.configureDefaultButton(
-                                "Delete",
+                        dialog.configureDefaultButton(getString(R.string.common_word_delete),
                                 v1 -> {
                                     if (isXmlStringUsed(key)) {
                                         SketchwareUtil.toastError(

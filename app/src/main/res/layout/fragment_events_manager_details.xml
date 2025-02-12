@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="No events"
+            android:text="@string/no_events"
             android:textColor="?attr/colorOnSurface"
             android:textSize="20sp" />
 
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:gravity="center"
-            android:text="Start by creating a new one"
+            android:text="@string/start_by_creating_a_new_one"
             android:textColor="?attr/colorOnSurface"
             android:textSize="14sp" />
 

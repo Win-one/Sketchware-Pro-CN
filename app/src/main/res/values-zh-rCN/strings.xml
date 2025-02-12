@@ -3207,4 +3207,6 @@
     <string name="auto_scroll">自动滚动</string>
     <string name="this_library">这个库 \"</string>
     <string name="already_used_in_your_project">\"已在您的项目中使用,删除它可能会破坏您的项目是否要继续删除它?</string>
+    <string name="couldn_t_parse_app_settings_restoring_defaults">无法解析系统设置!恢复默认值.</string>
+    <string name="successfully_exported_event_to">已成功将事件导出到:\n</string>
 </resources>
