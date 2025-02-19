@@ -3167,7 +3167,7 @@
     <string name="gradient">渐变</string>
     <string name="gradient_direction">渐变方向</string>
     <string name="effects">效果</string>
-    <string name="score_effect">分数效果</string>
+    <string name="score_effect">分级效果</string>
     <string name="textures">纹理</string>
     <string name="adaptive_icon">自适应图标</string>
     <string name="badge_background_color">标识背景颜色</string>
@@ -3179,7 +3179,7 @@
     <string name="opacity">透明度</string>
     <string name="scale">比例</string>
     <string name="rotation">旋转</string>
-    <string name="corners">边角</string>
+    <string name="corners">圆角</string>
     <string name="image">图像</string>
     <string name="text">文本</string>
     <string name="common_message_no_item_delete">没有要删除的项目</string>
@@ -3209,4 +3209,5 @@
     <string name="already_used_in_your_project">\"已在您的项目中使用,删除它可能会破坏您的项目是否要继续删除它?</string>
     <string name="couldn_t_parse_app_settings_restoring_defaults">无法解析系统设置!恢复默认值.</string>
     <string name="successfully_exported_event_to">已成功将事件导出到:\n</string>
+    <string name="block_name">块名称</string>
 </resources>
