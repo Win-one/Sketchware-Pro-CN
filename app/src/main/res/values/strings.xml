@@ -2866,6 +2866,7 @@ Please try again later"</string>
     <string name="text">Text</string>
 
     <string name="code_viewer">Code Viewer</string>
+    <string name="block_name">Block Name</string>
     <string name="no_palettes">No palettes</string>
     <string name="download_a_dependency">Download a dependency</string>
     <string name="enter_a_dependency">Enter a dependency</string>
