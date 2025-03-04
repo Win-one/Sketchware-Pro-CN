@@ -5,20 +5,21 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.materialswitch.MaterialSwitch;
+
+import mod.agus.jcoderz.editor.manage.library.locallibrary.ManageLocalLibrary;
+
+import pro.sketchware.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import mod.agus.jcoderz.editor.manage.library.locallibrary.ManageLocalLibrary;
-import mod.hey.studios.util.Helper;
-import pro.sketchware.R;
-
-public class ManageProguardActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class ManageProguardActivity extends BaseAppCompatActivity
+        implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private ProguardHandler pg;
     private MaterialSwitch sw_pg_enabled;
@@ -57,20 +58,24 @@ public class ManageProguardActivity extends AppCompatActivity implements View.On
         }
 
         MaterialAlertDialogBuilder bld = new MaterialAlertDialogBuilder(this);
-        bld.setTitle(R.string.select_local_libraries);
-        bld.setMultiChoiceItems(libraries, enabledLibraries, (dialog, which, isChecked) -> enabledLibraries[which] = isChecked);
-        bld.setPositiveButton(R.string.common_word_save, (dialog, which) -> {
+        bld.setTitle("Select Local libraries");
+        bld.setMultiChoiceItems(
+                libraries,
+                enabledLibraries,
+                (dialog, which, isChecked) -> enabledLibraries[which] = isChecked);
+        bld.setPositiveButton(
+                R.string.common_word_save,
+                (dialog, which) -> {
+                    ArrayList<String> finalList = new ArrayList<>();
 
-            ArrayList<String> finalList = new ArrayList<>();
+                    for (int i = 0; i < libraries.length; i++) {
+                        if (enabledLibraries[i]) {
+                            finalList.add(libraries[i]);
+                        }
+                    }
 
-            for (int i = 0; i < libraries.length; i++) {
-                if (enabledLibraries[i]) {
-                    finalList.add(libraries[i]);
-                }
-            }
-            
-            pg.setProguardFMLibs(finalList);
-        });
+                    pg.setProguardFMLibs(finalList);
+                });
         bld.setNegativeButton(R.string.common_word_cancel, null);
         bld.create().show();
     }
@@ -88,7 +93,7 @@ public class ManageProguardActivity extends AppCompatActivity implements View.On
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manage_proguard);
 
@@ -123,6 +128,10 @@ public class ManageProguardActivity extends AppCompatActivity implements View.On
 
     private void _initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setNavigationOnClickListener(v ->getOnBackPressedDispatcher().onBackPressed());
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Code Shrinking Manager");
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
     }
 }

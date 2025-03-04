@@ -27,6 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.exifinterface.media.ExifInterface;
 
+import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.besome.sketch.projects.MyProjectSettingActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -41,18 +42,17 @@ import a.a.a.iB;
 import a.a.a.wq;
 import mod.hey.studios.util.Helper;
 import pro.sketchware.R;
-import pro.sketchware.databinding.IconCreatorActivityBinding;
+import pro.sketchware.databinding.ActivityIconCreatorBinding;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
 
-
-public class IconCreatorActivity extends AppCompatActivity {
+public class IconCreatorActivity extends BaseAppCompatActivity {
 
     private static final int REQUEST_CODE_PICK_CROPPED_ICON = 216;
     private static final int REQUEST_CODE_PICK_ICON = 207;
     static float cardRadius = 20;
     Intent intent;
-    private IconCreatorActivityBinding binding;
+    private ActivityIconCreatorBinding binding;
     private GradientDrawable.Orientation gradDirection = GradientDrawable.Orientation.BOTTOM_TOP;
     private int bgClr = 0xffffff;
     private int badgeClr = 0x000000;
@@ -135,9 +135,9 @@ public class IconCreatorActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = IconCreatorActivityBinding.inflate(getLayoutInflater());
+        binding = ActivityIconCreatorBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initialize();
     }
@@ -553,7 +553,6 @@ public class IconCreatorActivity extends AppCompatActivity {
 
 
     }
-
 
     private String getIconPath(String folder, String fileName) {
         return wq.e() + File.separator + sc_id + File.separator + "temp_icons" + File.separator + folder + File.separator + fileName;

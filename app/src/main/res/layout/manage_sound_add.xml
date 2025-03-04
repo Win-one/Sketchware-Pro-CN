@@ -36,15 +36,16 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_music_primary_24dp" />
+                    android:src="@drawable/ic_mtrl_music"
+                    app:tint="?colorPrimary" />
 
                 <TextView
                     android:id="@+id/tv_add_sound"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:text="@string/add_sound"
-                    android:textColor="#ff7d7d7d"
+                    android:text="Add Sound"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="12sp" />
             </LinearLayout>
         </RelativeLayout>
@@ -73,7 +74,7 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/file_name" />
+                tools:text="File name" />
 
             <ImageView
                 android:id="@+id/play"
@@ -131,13 +132,13 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
         android:layout_marginTop="14dp"
+        android:hint="Enter sound name"
         android:importantForAutofill="noExcludeDescendants">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/enter_sound_name"
             android:imeOptions="actionDone"
             android:inputType="text"
             android:lines="1" />
@@ -147,5 +148,5 @@
         android:id="@+id/chk_collection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/design_manager_title_add_to_collection" />
+        android:text="Add to my collection" />
 </LinearLayout>

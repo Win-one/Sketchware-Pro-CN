@@ -118,7 +118,7 @@ public class ViewProperty extends LinearLayout implements Kw {
             showAllShower.setInterpolator(new DecelerateInterpolator());
         }
         if (showAllHider == null) {
-            showAllHider = ObjectAnimator.ofFloat(layoutPropertySeeAll, View.TRANSLATION_Y, wB.a(getContext(), 84.0f));
+            showAllHider = ObjectAnimator.ofFloat(layoutPropertySeeAll, View.TRANSLATION_Y, wB.a(getContext(), 100.0f));
             showAllHider.setDuration(200L);
             showAllHider.setInterpolator(new DecelerateInterpolator());
         }
@@ -149,6 +149,7 @@ public class ViewProperty extends LinearLayout implements Kw {
             if (selectedGroupId == 0) {
                 propertyLayout.setVisibility(VISIBLE);
                 layoutPropertySeeAll.setVisibility(VISIBLE);
+                viewPropertyItems.setProjectFileBean(projectFile);
                 viewPropertyItems.a(sc_id, viewBean);
                 a(viewBean);
                 viewEvent.setVisibility(GONE);

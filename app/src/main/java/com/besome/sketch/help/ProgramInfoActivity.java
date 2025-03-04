@@ -10,6 +10,8 @@ import android.widget.RadioGroup;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.besome.sketch.lib.ui.PropertyOneLineItem;
 import com.besome.sketch.lib.ui.PropertyTwoLineItem;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ProgramInfoBinding;
 
 import a.a.a.GB;
 import a.a.a.aB;
@@ -17,13 +19,10 @@ import a.a.a.bB;
 import a.a.a.mB;
 import a.a.a.wB;
 import mod.hey.studios.util.Helper;
-import pro.sketchware.R;
-import pro.sketchware.databinding.ProgramInfoBinding;
 
 public class ProgramInfoActivity extends BaseAppCompatActivity {
 
     private static final int ITEM_SYSTEM_INFORMATION = 1;
-    private static final int ITEM_LANGUAGE_INFORMATION = 2;
     private static final int ITEM_DOCS_LOG = 4;
     private static final int ITEM_SOCIAL_NETWORK = 5;
     private static final int ITEM_DISCORD = 6;
@@ -34,11 +33,11 @@ public class ProgramInfoActivity extends BaseAppCompatActivity {
     private ProgramInfoBinding binding;
 
     private void addTwoLineItem(int key, int name, int description) {
-        addTwoLineItem(key, getString(name), getString(description));
+        addTwoLineItem(key, Helper.getResString(name), Helper.getResString(description));
     }
 
     private void addTwoLineItem(int key, int name, int description, boolean hideDivider) {
-        addTwoLineItem(key, getString(name), getString(description), hideDivider);
+        addTwoLineItem(key, Helper.getResString(name), Helper.getResString(description), hideDivider);
     }
 
     private void addTwoLineItem(int key, String name, String description) {
@@ -56,11 +55,11 @@ public class ProgramInfoActivity extends BaseAppCompatActivity {
     }
 
     private void addSingleLineItem(int key, int name) {
-        addSingleLineItem(key, getString(name));
+        addSingleLineItem(key, Helper.getResString(name));
     }
 
     private void addSingleLineItem(int key, int name, boolean hideDivider) {
-        addSingleLineItem(key, getString(name), hideDivider);
+        addSingleLineItem(key, Helper.getResString(name), hideDivider);
     }
 
     private void addSingleLineItem(int key, String name) {
@@ -120,12 +119,10 @@ public class ProgramInfoActivity extends BaseAppCompatActivity {
             if (v instanceof PropertyTwoLineItem) {
                 key = ((PropertyTwoLineItem) v).getKey();
                 switch (key) {
-                    case ITEM_DOCS_LOG -> openUrl(getString(R.string.link_docs_url));
-                    case ITEM_SUGGEST_IDEAS -> openUrl(getString(R.string.link_ideas_url));
-                    case ITEM_TELEGRAM -> openUrl(getString(R.string.link_telegram_invite));
-                    case ITEM_DISCORD -> openUrl(getString(R.string.link_discord_invite));
-                    case ITEM_LANGUAGE_INFORMATION ->
-                            openUrl("https://github.com/Win-one/Sketchware-Pro-CN/tree/mine");
+                    case ITEM_DOCS_LOG -> openUrl(Helper.getResString(R.string.link_docs_url));
+                    case ITEM_SUGGEST_IDEAS -> openUrl(Helper.getResString(R.string.link_ideas_url));
+                    case ITEM_TELEGRAM -> openUrl(Helper.getResString(R.string.link_telegram_invite));
+                    case ITEM_DISCORD -> openUrl(Helper.getResString(R.string.link_discord_invite));
                 }
             }
         }
@@ -139,11 +136,10 @@ public class ProgramInfoActivity extends BaseAppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-        binding.toolbar.setTitle(R.string.app_information);
         binding.appVersion.setText(GB.e(getApplicationContext()));
         binding.btnReset.setOnClickListener(this::resetDialog);
         binding.btnUpgrade.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.link_github_release)));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Helper.getResString(R.string.link_github_release)));
             startActivity(intent);
         });
 
@@ -154,7 +150,6 @@ public class ProgramInfoActivity extends BaseAppCompatActivity {
         addTwoLineItem(ITEM_TELEGRAM, R.string.title_telegram_community, R.string.link_telegram_invite);
         addSingleLineItem(ITEM_SYSTEM_INFORMATION, R.string.program_information_title_system_information);
         addSingleLineItem(ITEM_OPEN_SOURCE_LICENSES, R.string.program_information_title_open_source_license, true);
-        addTwoLineItem(ITEM_LANGUAGE_INFORMATION, getString(R.string.language_information), getString(R.string.chinese_simplified_language_information));
     }
 
     private void toLicenseActivity() {
