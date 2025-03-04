@@ -111,15 +111,15 @@ public class ManagePermissionActivity extends BaseAppCompatActivity {
         binding.toolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.action_reset) {
                 new MaterialAlertDialogBuilder(this)
-                        .setTitle("Reset permissions")
-                        .setMessage("Are you sure you want to reset all permissions? This cannot be undone!")
-                        .setPositiveButton("Reset", (dialog, which) -> {
+                        .setTitle(R.string.reset_permissions)
+                        .setMessage(R.string.are_you_sure_you_want_to_reset_all_permissions_this_cannot_be_undone)
+                        .setPositiveButton(R.string.common_word_reset, (dialog, which) -> {
                             FileUtil.writeFile(new FilePathUtil().getPathPermission(numProj), "[]");
                             //As FileResConfig only refreshes permissions during <init>()V, this is required.
                             frc = new FileResConfig(numProj);
                             setItems();
                         })
-                        .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                        .setNegativeButton(R.string.common_word_cancel, (dialog, which) -> dialog.dismiss())
                         .show();
             }
             return true;

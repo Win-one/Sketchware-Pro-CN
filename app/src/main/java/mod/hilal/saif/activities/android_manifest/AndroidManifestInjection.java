@@ -104,8 +104,8 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
 
         options.add(
                 createOption(
-                        "Application",
-                        "Default properties for the app",
+                        getString(R.string.application),
+                        getString(R.string.default_properties_for_the_app),
                         R.drawable.ic_mtrl_settings_applications,
                         v -> {
                             Intent intent = new Intent();
@@ -118,8 +118,8 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
                         }));
         options.add(
                 createOption(
-                        "Permissions",
-                        "Add custom Permissions to the app",
+                        getString(R.string.permissions),
+                        getString(R.string.add_custom_permissions_to_the_app),
                         R.drawable.ic_mtrl_shield_check,
                         v -> {
                             Intent intent = new Intent();
@@ -132,16 +132,16 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
                         }));
         options.add(
                 createOption(
-                        "Launcher Activity",
-                        "Change the default Launcher Activity",
+                        getString(R.string.launcher_activity),
+                        getString(R.string.change_the_default_launcher_activity),
                         R.drawable.ic_mtrl_login,
                         v ->
                                 showLauncherActDialog(
                                         AndroidManifestInjector.getLauncherActivity(sc_id))));
         options.add(
                 createOption(
-                        "All Activities",
-                        "Add attributes for all Activities",
+                        getString(R.string.all_activities),
+                        getString(R.string.add_attributes_for_all_activities),
                         R.drawable.ic_mtrl_frame_source,
                         v -> {
                             Intent intent = new Intent();
@@ -154,8 +154,8 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
                         }));
         options.add(
                 createOption(
-                        "App Components",
-                        "Add extra components",
+                        getString(R.string.app_components),
+                        getString(R.string.add_extra_components),
                         R.drawable.ic_mtrl_component,
                         v -> showAppComponentDialog()));
 
@@ -186,7 +186,8 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         intent.putExtra("content", APP_COMPONENTS_PATH);
         intent.putExtra("xml", "");
         intent.putExtra("disableHeader", "");
-        intent.putExtra("title", "App Components");
+        String title = getString(R.string.app_components);
+        intent.putExtra("title", title);
         startActivity(intent);
     }
 
@@ -207,10 +208,10 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
                     if (!Helper.getText(activity_name_input).trim().isEmpty()) {
                         AndroidManifestInjector.setLauncherActivity(
                                 sc_id, Helper.getText(activity_name_input));
-                        SketchwareUtil.toast("Saved");
+                        SketchwareUtil.toast(getString(R.string.common_word_save));
                         dialog.dismiss();
                     } else {
-                        activity_name_input.setError("Enter activity name");
+                        activity_name_input.setError(getString(R.string.enter_activity_name));
                     }
                 });
         dialog.a(
@@ -236,10 +237,10 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
                 v -> {
                     if (!Helper.getText(activity_name_input).trim().isEmpty()) {
                         addNewActivity(Helper.getText(activity_name_input));
-                        SketchwareUtil.toast("New Activity added");
+                        SketchwareUtil.toast(getString(R.string.new_activity_added));
                         dialog.dismiss();
                     } else {
-                        activity_name_input.setError("Enter activity name");
+                        activity_name_input.setError(getString(R.string.enter_activity_name));
                     }
                 });
         dialog.a(
@@ -359,7 +360,7 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         FileUtil.writeFile(path, getGson().toJson(data));
         refreshList();
         removeComponents(activity_name);
-        SketchwareUtil.toast("Activity removed");
+        SketchwareUtil.toast(getString(R.string.activity_removed));
     }
 
     private void removeComponents(String str) {
@@ -387,7 +388,7 @@ public class AndroidManifestInjection extends BaseAppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("AndroidManifest Manager");
+        getSupportActionBar().setTitle(R.string.androidmanifest_manager);
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
     }
 

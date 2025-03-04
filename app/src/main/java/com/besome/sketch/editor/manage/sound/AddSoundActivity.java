@@ -255,7 +255,7 @@ public class AddSoundActivity extends BaseDialogActivity implements View.OnClick
                             finish();
                         }
                     }, e -> {
-                        SketchwareUtil.toastError("Error while loading sound: " + e.getMessage());
+                        SketchwareUtil.toastError(getString(R.string.error_while_loading_sound) + e.getMessage());
                         LogUtil.e("AddSoundActivity", "Failed to load sound", e);
                     });
         }
