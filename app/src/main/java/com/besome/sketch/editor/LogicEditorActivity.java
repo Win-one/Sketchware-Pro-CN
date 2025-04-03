@@ -1662,7 +1662,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
         }
         RadioButton radioButton = new RadioButton(this);
         radioButton.setText(type + " : " + id);
-        radioButton.setTag(isViewBindingEnabled ? "binding." + id : id);
+        radioButton.setTag(id);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (wB.a(this, 1.0f) * 40.0f));
         radioButton.setGravity(Gravity.CENTER | Gravity.LEFT);
         radioButton.setLayoutParams(layoutParams);
@@ -1788,7 +1788,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
                 i2 = width - ((int) wB.a(this, 320.0f));
                 a2 = ViewGroup.LayoutParams.MATCH_PARENT;
             } else {
-                a2 = (width - GB.f(getContext())) - ((int) wB.a(this, 264.0f));
+                a2 = n.getHeight() - K.getHeight();
             }
             layoutParams = new LinearLayout.LayoutParams(i2, a2);
         } else {
@@ -2232,6 +2232,7 @@ public class LogicEditorActivity extends BaseAppCompatActivity implements View.O
         openBlocksMenuButton.setOnClickListener(v -> e(!X));
         logicTopMenu = findViewById(R.id.top_menu);
         O = findViewById(R.id.right_drawer);
+        findViewById(R.id.search_header).setOnClickListener(v -> paletteSelector.showSearchDialog());
         extraPaletteBlock = new ExtraPaletteBlock(this, isViewBindingEnabled);
     }
 

@@ -144,38 +144,38 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="4dp"
-                        android:text="@string/background_type"
+                        android:text="Background Type"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                        <com.google.android.material.button.MaterialButtonToggleGroup
-                            android:id="@+id/bg_type"
-                            android:layout_width="match_parent"
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/bg_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        app:checkedButton="@id/bg_color"
+                        app:selectionRequired="true"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/bg_color"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="4dp"
-                            android:layout_marginTop="10dp"
-                            android:gravity="center"
-                            app:checkedButton="@id/bg_color"
-                            app:selectionRequired="true"
-                            app:singleSelection="true">
+                            android:text="Color"
+                            android:layout_weight="1"/>
 
-                            <Button
-                                android:id="@+id/bg_color"
-                                style="?attr/materialButtonOutlinedStyle"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="@string/color"
-                                android:layout_weight="1"/>
-
-                            <Button
-                                android:id="@+id/bg_gradient"
-                                style="?attr/materialButtonOutlinedStyle"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="@string/gradient"
-                                android:layout_weight="1"/>
-                        </com.google.android.material.button.MaterialButtonToggleGroup>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/bg_gradient"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Gradient"
+                            android:layout_weight="1"/>
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
 
 
                     <LinearLayout
@@ -261,7 +261,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:padding="4dp"
-                            android:text="@string/gradient_direction"
+                            android:text="Gradient Direction"
                             android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textSize="12sp" />
 
@@ -271,6 +271,7 @@
                             android:layout_height="wrap_content"
                             app:checkedChip="@+id/chip_top"
                             app:chipSpacingHorizontal="5dp"
+                            app:selectionRequired="true"
                             app:singleSelection="true">
 
                             <com.google.android.material.chip.Chip
@@ -348,7 +349,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="4dp"
-                        android:text="@string/effects"
+                        android:text="Effects"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -358,14 +359,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:checked="false"
-                        android:text="@string/score_effect" />
+                        android:text="Score effect" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/texture_check"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:checked="false"
-                        android:text="@string/textures" />
+                        android:text="Textures" />
 
                     <LinearLayout
                         android:id="@+id/texture_cont"
@@ -391,29 +392,28 @@
                                 app:selectionRequired="true"
                                 app:singleSelection="true">
 
-                                <Button
+                                <com.google.android.material.button.MaterialButton
                                     android:id="@+id/texture1"
                                     style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     app:icon="@drawable/pattern_tech" />
 
-
-                                <Button
+                                <com.google.android.material.button.MaterialButton
                                     android:id="@+id/texture2"
                                     style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     app:icon="@drawable/pattern_seq" />
 
-                                <Button
+                                <com.google.android.material.button.MaterialButton
                                     android:id="@+id/texture3"
                                     style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     app:icon="@drawable/pattern_waves" />
 
-                                <Button
+                                <com.google.android.material.button.MaterialButton
                                     android:id="@+id/texture4"
                                     style="@style/Widget.App.Button.OutlinedButton.IconOnly"
                                     android:layout_width="wrap_content"
@@ -428,7 +428,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:padding="4dp"
-                            android:text="@string/color"
+                            android:text="Color"
                             android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textSize="12sp" />
 
@@ -454,7 +454,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:padding="4dp"
-                            android:text="@string/opacity"
+                            android:text="Opacity"
                             android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textSize="12sp" />
 
@@ -491,7 +491,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:padding="4dp"
-                            android:text="@string/scale"
+                            android:text="Scale"
                             android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textSize="12sp" />
 
@@ -528,7 +528,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:padding="4dp"
-                            android:text="@string/rotation"
+                            android:text="Rotation"
                             android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textSize="12sp" />
 
@@ -583,7 +583,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="4dp"
-                        android:text="@string/corners"
+                        android:text="Corners"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -637,7 +637,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="4dp"
-                        android:text="@string/image"
+                        android:text="Image"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -647,7 +647,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="4dp"
-                        android:text="@string/color"
+                        android:text="Color"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="12sp" />
 
@@ -674,7 +674,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="4dp"
-                        android:text="@string/size"
+                        android:text="Size"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="12sp" />
 
@@ -712,7 +712,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="4dp"
-                        android:text="@string/vertical_position"
+                        android:text="Vertical position"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="12sp" />
 
@@ -750,7 +750,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="4dp"
-                        android:text="@string/horizontal_position"
+                        android:text="horizontal position"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="12sp" />
 
@@ -810,7 +810,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="10dp"
                             android:gravity="center_vertical"
-                            android:hint="@string/text"
+                            android:hint="Text"
                             android:importantForAutofill="noExcludeDescendants"
                             app:layout_constraintEnd_toStartOf="@+id/txt_color_preview_card"
                             app:layout_constraintStart_toStartOf="parent"
@@ -851,7 +851,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="4dp"
-                        android:text="@string/size"
+                        android:text="Size"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="12sp" />
 
@@ -888,7 +888,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="4dp"
-                        android:text="@string/vertical_position"
+                        android:text="Vertical position"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="12sp" />
 
@@ -926,7 +926,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="4dp"
-                        android:text="@string/horizontal_position"
+                        android:text="horizontal position"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="12sp" />
 
@@ -981,7 +981,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="4dp"
-                        android:text="@string/other"
+                        android:text="Other"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -998,7 +998,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="10dp"
                             android:gravity="center_vertical"
-                            android:hint="@string/badge_text"
+                            android:hint="Badge text"
                             android:importantForAutofill="noExcludeDescendants"
                             app:layout_constraintEnd_toStartOf="@+id/badge_txt_color_preview_card"
                             app:layout_constraintStart_toStartOf="parent"
@@ -1036,7 +1036,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="4dp"
-                        android:text="@string/badge_background_color"
+                        android:text="Badge background color"
                         android:textAppearance="?attr/textAppearanceBodyLarge"
                         android:textSize="12sp" />
 
@@ -1063,7 +1063,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:checked="false"
-                        android:text="@string/adaptive_icon" />
+                        android:text="Adaptive Icon" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

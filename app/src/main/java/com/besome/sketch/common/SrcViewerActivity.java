@@ -9,6 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
 import com.besome.sketch.beans.SrcCodeBean;
 import com.besome.sketch.ctrls.CommonSpinnerItem;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
@@ -30,7 +34,7 @@ public class SrcViewerActivity extends BaseAppCompatActivity {
     private SrcViewerBinding binding;
     private String sc_id;
     private ArrayList<SrcCodeBean> sourceCodeBeans;
-    
+
     private String currentFileName;
     private int editorFontSize = 12;
 
@@ -41,7 +45,13 @@ public class SrcViewerActivity extends BaseAppCompatActivity {
         setContentView(binding.getRoot());
         currentFileName = getIntent().hasExtra("current") ? getIntent().getStringExtra("current") : "";
         sc_id = (savedInstanceState != null) ? savedInstanceState.getString("sc_id") : getIntent().getStringExtra("sc_id");
-        
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(v.getPaddingLeft(), systemBars.top, v.getPaddingRight(), systemBars.bottom);
+            return insets;
+        });
+
         configureEditor();
 
         binding.changeFontSize.setOnClickListener((v -> showChangeFontSizeDialog()));
@@ -65,7 +75,7 @@ public class SrcViewerActivity extends BaseAppCompatActivity {
         });
 
         k(); // show loading
-        
+
         new Thread(() -> {
             var yq = new yq(getBaseContext(), sc_id);
             var fileManager = jC.b(sc_id);
@@ -98,13 +108,13 @@ public class SrcViewerActivity extends BaseAppCompatActivity {
             }
         }).start();
     }
-    
+
     private void configureEditor() {
         binding.editor.setTypefaceText(EditorUtils.getTypeface(this));
         binding.editor.setEditable(false);
         binding.editor.setTextSize(editorFontSize);
         binding.editor.setPinLineNumber(true);
-        
+
         if (currentFileName.endsWith(".xml")) {
             EditorUtils.loadXmlConfig(binding.editor);
         } else {
@@ -132,10 +142,10 @@ public class SrcViewerActivity extends BaseAppCompatActivity {
                 Gravity.CENTER));
 
         new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.select_font_size)
+                .setTitle("Select font size")
                 .setIcon(R.drawable.ic_mtrl_formattext)
                 .setView(layout)
-                .setPositiveButton(R.string.common_word_apply, (dialog, which) -> {
+                .setPositiveButton("Apply", (dialog, which) -> {
                     editorFontSize = picker.getValue();
                     binding.editor.setTextSize(editorFontSize);
                 })

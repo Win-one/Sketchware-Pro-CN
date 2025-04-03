@@ -30,9 +30,7 @@ import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import a.a.a.GB;
-import a.a.a.LB;
 import a.a.a.MA;
-import a.a.a.UB;
 import a.a.a.VB;
 import a.a.a.Zx;
 import a.a.a.aB;
@@ -51,6 +49,8 @@ import pro.sketchware.R;
 import pro.sketchware.activities.iconcreator.IconCreatorActivity;
 import pro.sketchware.control.VersionDialog;
 import pro.sketchware.databinding.MyprojectSettingBinding;
+import pro.sketchware.lib.validator.AppNameValidator;
+import pro.sketchware.lib.validator.PackageNameValidator;
 import pro.sketchware.utility.FileUtil;
 
 public class MyProjectSettingActivity extends BaseAppCompatActivity implements View.OnClickListener {
@@ -61,9 +61,9 @@ public class MyProjectSettingActivity extends BaseAppCompatActivity implements V
     private final String[] themeColorKeys = {"color_accent", "color_primary", "color_primary_dark", "color_control_highlight", "color_control_normal"};
     private final String[] themeColorLabels = {"colorAccent", "colorPrimary", "colorPrimaryDark", "colorControlHighlight", "colorControlNormal"};
     private final int[] projectThemeColors = new int[themeColorKeys.length];
-    private UB projectPackageNameValidator;
+    private PackageNameValidator projectPackageNameValidator;
     private VB projectNameValidator;
-    private LB projectAppNameValidator;
+    private AppNameValidator projectAppNameValidator;
     private boolean projectHasCustomIcon = false;
     private boolean updatingExistingProject = false;
     private int projectVersionCode = 1;
@@ -101,8 +101,8 @@ public class MyProjectSettingActivity extends BaseAppCompatActivity implements V
         binding.tilPackageName.setHint(Helper.getResString(R.string.myprojects_settings_hint_enter_package_name));
         binding.tilProjectName.setHint(Helper.getResString(R.string.myprojects_settings_hint_enter_project_name));
 
-        projectAppNameValidator = new LB(getApplicationContext(), binding.tilAppName);
-        projectPackageNameValidator = new UB(getApplicationContext(), binding.tilPackageName);
+        projectAppNameValidator = new AppNameValidator(getApplicationContext(), binding.tilAppName);
+        projectPackageNameValidator = new PackageNameValidator(getApplicationContext(), binding.tilPackageName);
         projectNameValidator = new VB(getApplicationContext(), binding.tilProjectName);
         binding.tilPackageName.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
@@ -505,7 +505,10 @@ public class MyProjectSettingActivity extends BaseAppCompatActivity implements V
                 lC.a(sc_id, data);
                 wq.a(getApplicationContext(), sc_id);
                 new oB().b(wq.b(sc_id));
-                new ProjectSettings(sc_id).setValue(ProjectSettings.SETTING_NEW_XML_COMMAND, ProjectSettings.SETTING_GENERIC_VALUE_TRUE);
+                final ProjectSettings projectSettings = new ProjectSettings(sc_id);
+                projectSettings.setValue(ProjectSettings.SETTING_NEW_XML_COMMAND, ProjectSettings.SETTING_GENERIC_VALUE_TRUE);
+                projectSettings.setValue(ProjectSettings.SETTING_ENABLE_VIEWBINDING, ProjectSettings.SETTING_GENERIC_VALUE_TRUE);
+
             }
             try {
                 FileUtil.deleteFile(getTempIconsFolderPath("mipmaps" + File.separator));

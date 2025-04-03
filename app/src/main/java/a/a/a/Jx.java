@@ -166,7 +166,7 @@ public class Jx {
     /**
      * @return Generated Java code of the current View (not Widget)
      */
-    public String generateCode() {
+    public String generateCode(boolean exportingProject) {
         boolean isDialogFragment = projectFileBean.fileName.contains("_dialog_fragment");
         boolean isBottomDialogFragment = projectFileBean.fileName.contains("_bottomdialog_fragment");
         boolean isFragment = projectFileBean.fileName.contains("_fragment");
@@ -217,6 +217,9 @@ public class Jx {
             }
             addImport("android.Manifest");
             addImport("android.content.pm.PackageManager");
+        }
+        if (exportingProject && isViewBindingEnabled) {
+            addImport(packageName + ".databinding.*");
         }
 
         removeExtraImports();
@@ -1032,21 +1035,37 @@ public class Jx {
         for (Pair<Integer, String> next2 : projectDataManager.j(javaName)) {
             lists.add(getListDeclarationAndAddImports(next2.first, next2.second));
         }
-        if (!isViewBindingEnabled) {
-            for (ViewBean viewBean : projectDataManager.d(projectFileBean.getXmlName())) {
-                if (!viewBean.convert.equals("include")) {
-                    Set<String> toNotAdd = ox.readAttributesToReplace(viewBean);
-                    if (!toNotAdd.contains("android:id")) {
+        for (ViewBean viewBean : projectDataManager.d(projectFileBean.getXmlName())) {
+            if (!viewBean.convert.equals("include")) {
+                Set<String> toNotAdd = ox.readAttributesToReplace(viewBean);
+                if (!toNotAdd.contains("android:id")) {
+                    if (isViewBindingEnabled) {
+                        if (!requireImports(viewBean)) continue;
+                        String viewType = WIDGET_NAME_PATTERN.matcher(viewBean.convert).replaceAll("");
+                        if (viewType.isEmpty()) {
+                            viewType = viewBean.getClassInfo().a();
+                        }
+                        addImports(mq.getImportsByTypeName(viewType, viewBean.convert));
+                    } else {
                         views.add(getViewDeclarationAndAddImports(viewBean));
                     }
                 }
             }
+        }
 
-            if (projectFileBean.hasActivityOption(ProjectFileBean.OPTION_ACTIVITY_DRAWER)) {
-                for (ViewBean viewBean : projectDataManager.d(projectFileBean.getDrawerXmlName())) {
-                    if (!viewBean.convert.equals("include")) {
-                        Set<String> toNotAdd = ox.readAttributesToReplace(viewBean);
-                        if (!toNotAdd.contains("android:id")) {
+        if (projectFileBean.hasActivityOption(ProjectFileBean.OPTION_ACTIVITY_DRAWER)) {
+            for (ViewBean viewBean : projectDataManager.d(projectFileBean.getDrawerXmlName())) {
+                if (!viewBean.convert.equals("include")) {
+                    Set<String> toNotAdd = ox.readAttributesToReplace(viewBean);
+                    if (!toNotAdd.contains("android:id")) {
+                        if (isViewBindingEnabled) {
+                            if (!requireImports(viewBean)) continue;
+                            String viewType = WIDGET_NAME_PATTERN.matcher(viewBean.convert).replaceAll("");
+                            if (viewType.isEmpty()) {
+                                viewType = viewBean.getClassInfo().a();
+                            }
+                            addImports(mq.getImportsByTypeName(viewType, null));
+                        } else {
                             views.add(getDrawerViewDeclarationAndAddImports(viewBean));
                         }
                     }
@@ -1101,6 +1120,26 @@ public class Jx {
         if (hasRewardedVideoAd) {
             fieldsWithStaticInitializers.add(Lx.getComponentFieldCode("RewardedVideoAd"));
         }
+    }
+
+    private boolean requireImports(ViewBean viewBean) {
+        return switch (viewBean.type) {
+            case ViewBean.VIEW_TYPE_WIDGET_LISTVIEW,
+                 ViewBeans.VIEW_TYPE_WIDGET_RECYCLERVIEW,
+                 ViewBeans.VIEW_TYPE_LAYOUT_BOTTOMNAVIGATIONVIEW,
+                 ViewBean.VIEW_TYPE_WIDGET_SPINNER,
+                 ViewBean.VIEW_TYPE_WIDGET_WEBVIEW,
+                 ViewBean.VIEW_TYPE_WIDGET_ADVIEW,
+                 ViewBean.VIEW_TYPE_WIDGET_MAPVIEW,
+                 ViewBeans.VIEW_TYPE_LAYOUT_SWIPEREFRESHLAYOUT,
+                 ViewBeans.VIEW_TYPE_WIDGET_PATTERNLOCKVIEW,
+                 ViewBeans.VIEW_TYPE_WIDGET_CODEVIEW,
+                 ViewBeans.VIEW_TYPE_WIDGET_LOTTIEANIMATIONVIEW,
+                 ViewBeans.VIEW_TYPE_WIDGET_YOUTUBEPLAYERVIEW,
+                 ViewBeans.VIEW_TYPE_LAYOUT_TABLAYOUT,
+                 ViewBeans.VIEW_TYPE_LAYOUT_VIEWPAGER -> true; // it's necessary for the adapters, listeners...
+            default -> false;
+        };
     }
 
     /**

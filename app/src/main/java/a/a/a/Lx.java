@@ -34,7 +34,7 @@ public class Lx {
     /**
      * @return Content of a <code>build.gradle</code> file for the module ':app', with indentation
      */
-    public static String getBuildGradleString(int compileSdkVersion, int minSdkVersion, String targetSdkVersion, jq metadata) {
+    public static String getBuildGradleString(int compileSdkVersion, int minSdkVersion, String targetSdkVersion, jq metadata, boolean isViewBindingEnabled) {
         StringBuilder content = new StringBuilder("plugins {\r\n" +
                 "id 'com.android.application'\r\n" +
                 "}\r\n" +
@@ -75,8 +75,13 @@ public class Lx {
                 .append("minifyEnabled false\r\n")
                 .append("proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n")
                 .append("}\r\n")
-                .append("}\r\n")
-                .append("}\r\n")
+                .append("}\r\n");
+
+        if (isViewBindingEnabled) {
+            content.append("buildFeatures {\r\n viewBinding true\r\n}\r\n");
+        }
+
+        content.append("}\r\n")
                 .append("\r\n")
                 .append("dependencies {\r\n")
                 .append("implementation fileTree(dir: 'libs', include: ['*.jar'])\r\n");
@@ -251,7 +256,9 @@ public class Lx {
      * @param widgetName The list widget's name
      * @return The adapter's class name (e.g. List_filesAdapter from list_files)
      */
-    public static String a(String widgetName) {
+    public static String a(String widgetName, boolean isViewBindingEnabled) {
+        if (isViewBindingEnabled)
+            widgetName = ViewBindingBuilder.generateParameterFromId(widgetName);
         return widgetName.substring(0, 1).toUpperCase() +
                 widgetName.substring(1) +
                 "Adapter";
@@ -604,7 +611,7 @@ public class Lx {
                             fieldDeclaration = "";
                             break;
                         case "FragmentStatePagerAdapter":
-                            fieldDeclaration += " " + a(typeInstanceName + "Fragment") + " " + typeInstanceName + ";";
+                            fieldDeclaration += " " + a(typeInstanceName + "Fragment", false) + " " + typeInstanceName + ";";
                             break;
                         case "RewardedVideoAd":
                             fieldDeclaration += " RewardedAd " + typeInstanceName + ";";
@@ -797,7 +804,7 @@ public class Lx {
      * @return Code of an adapter for a ListView
      */
     public static String getListAdapterCode(Ox ox, String widgetName, String itemResourceName, ArrayList<ViewBean> views, String onBindCustomViewLogic, boolean isViewBindingEnabled) {
-        String className = a(widgetName);
+        String className = a(widgetName, isViewBindingEnabled);
 
         String initializers = "";
         StringBuilder initializersBuilder = new StringBuilder(initializers);
@@ -1210,7 +1217,7 @@ public class Lx {
                 return componentName + " = new TimePickerDialog(this, " + componentName + "_listener, Calendar.HOUR_OF_DAY, Calendar.MINUTE, false);";
 
             case "FragmentStatePagerAdapter":
-                return componentName + " = new " + a(componentName + "Fragment") + "(getApplicationContext(), getSupportFragmentManager());";
+                return componentName + " = new " + a(componentName + "Fragment", false) + "(getApplicationContext(), getSupportFragmentManager());";
 
             case "Videos":
                 return "file_" + componentName + " = FileUtil.createNewPictureFile(getApplicationContext());\r\n"
@@ -3145,7 +3152,7 @@ public class Lx {
     }
 
     public static String pagerAdapter(Ox ox, String pagerName, String pagerItemLayoutName, ArrayList<ViewBean> pagerItemViews, String onBindCustomViewLogic, boolean isViewBindingEnabled) {
-        String adapterName = a(pagerName);
+        String adapterName = a(pagerName, isViewBindingEnabled);
 
         String viewsInitializer = "";
         StringBuilder viewInitBuilder = new StringBuilder(viewsInitializer);
@@ -3218,6 +3225,12 @@ public class Lx {
                     onBindCustomViewLogic + "\r\n";
         }
 
+        if (isViewBindingEnabled) {
+            baseCode += """
+                    View _view = binding.getRoot();\r
+                    """;
+        }
+
         return baseCode +
                 "\r\n" +
                 "_container.addView(_view);\r\n" +
@@ -3227,7 +3240,7 @@ public class Lx {
     }
 
     public static String recyclerViewAdapter(Ox ox, String recyclerViewName, String itemLayoutName, ArrayList<ViewBean> itemViews, String onBindCustomViewLogic, boolean isViewBindingEnabled) {
-        String adapterName = a(recyclerViewName);
+        String adapterName = a(recyclerViewName, isViewBindingEnabled);
         String viewsInitializer = "";
         StringBuilder viewInitBuilder = new StringBuilder(viewsInitializer);
         for (ViewBean bean : itemViews) {

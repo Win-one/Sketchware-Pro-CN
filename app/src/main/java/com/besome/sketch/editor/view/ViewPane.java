@@ -90,6 +90,7 @@ import dev.aldi.sayuti.editor.view.item.ItemPatternLockView;
 import dev.aldi.sayuti.editor.view.item.ItemViewPager;
 import dev.aldi.sayuti.editor.view.item.ItemWaveSideBar;
 import dev.aldi.sayuti.editor.view.item.ItemYoutubePlayer;
+
 import mod.agus.jcoderz.beans.ViewBeans;
 import mod.agus.jcoderz.editor.view.item.ItemAnalogClock;
 import mod.agus.jcoderz.editor.view.item.ItemAutoCompleteTextView;
@@ -103,6 +104,7 @@ import mod.agus.jcoderz.editor.view.item.ItemTimePicker;
 import mod.agus.jcoderz.editor.view.item.ItemVideoView;
 import mod.bobur.XmlToSvgConverter;
 import mod.hey.studios.util.ProjectFile;
+
 import pro.sketchware.R;
 import pro.sketchware.managers.inject.InjectRootLayoutManager;
 import pro.sketchware.utility.FilePathUtil;
@@ -116,7 +118,6 @@ import pro.sketchware.utility.SvgUtils;
 public class ViewPane extends RelativeLayout {
     private Context context;
     private ViewGroup rootLayout;
-    private ViewBean rootBean;
     private int b = 99;
     private ArrayList<ViewInfo> viewInfos = new ArrayList<>();
     private ViewInfo viewInfo;
@@ -316,8 +317,8 @@ public class ViewPane extends RelativeLayout {
         updateItemView(item, viewBean);
         return item;
     }
-
-    private View getUnknownItemView(final ViewBean bean) {
+    
+    private final View getUnknownItemView(final ViewBean bean) {
         bean.type = ViewBean.VIEW_TYPE_LAYOUT_LINEAR;
         return new ItemLinearLayout(context);
     }
@@ -325,9 +326,6 @@ public class ViewPane extends RelativeLayout {
     public void updateRootLayout(String sc_id, String fileName) {
         InjectRootLayoutManager manager = new InjectRootLayoutManager(sc_id);
         var currentBean = manager.toBean(fileName);
-        if (rootBean == null) {
-            rootBean = currentBean.clone();
-        }
         View rootView = createItemView(currentBean);
         if (rootView instanceof sy sy) {
             sy.setFixed(true);
@@ -337,11 +335,11 @@ public class ViewPane extends RelativeLayout {
         } else {
             rootLayout = (ViewGroup) rootView;
         }
-        if (!currentBean.isEqual(rootBean)) {
-            rootBean = currentBean;
-            rootLayout = (ViewGroup) rootView;
+        if (rootLayout instanceof sy sy) {
+            if (!currentBean.isEqual(sy.getBean())) {
+                rootLayout = (ViewGroup) rootView;
+            }
         }
-        rootLayout.setBackgroundColor(0xffeeeeee);
         addView(rootLayout);
     }
 
@@ -404,6 +402,7 @@ public class ViewPane extends RelativeLayout {
         view.setTranslationY(wB.a(getContext(), viewBean.translationY));
         view.setScaleX(viewBean.scaleX);
         view.setScaleY(viewBean.scaleY);
+        view.setEnabled(viewBean.enabled != 0);
         String backgroundResource = viewBean.layout.backgroundResource;
         if (backgroundResource != null) {
             try {
@@ -649,7 +648,11 @@ public class ViewPane extends RelativeLayout {
             viewBean.preParent = viewBean.parent;
             viewBean.parent = "root";
             viewBean.preParentType = viewBean.parentType;
-            viewBean.parentType = rootBean.type;
+            if (rootLayout instanceof sy sy) {
+                viewBean.parentType = sy.getBean().type;
+            } else {
+                viewBean.parentType = ViewBean.VIEW_TYPE_LAYOUT_LINEAR;
+            }
             viewBean.index = -1;
         }
     }
@@ -726,23 +729,15 @@ public class ViewPane extends RelativeLayout {
         return result;
     }
 
-    private Rect getRectFor(View view) {
-        var rect = new Rect();
-        view.getGlobalVisibleRect(rect);
-        int scaledWidth = (int) (view.getWidth() * getScaleX());
-        int scaledHeight = (int) (view.getHeight() * getScaleY());
-        rect.right = rect.left + scaledWidth;
-        rect.bottom = rect.top + scaledHeight;
-        return rect;
-    }
-
     private void a(ViewBean view, ItemLinearLayout linearLayout) {
         float scaleX = getScaleX();
         float scaleY = getScaleY();
-        Rect parentRect = getRectFor(linearLayout);
+        int[] locationOnScreen = new int[2];
+        linearLayout.getLocationOnScreen(locationOnScreen);
         int layoutGravity = linearLayout.getLayoutGravity();
         int horizontalGravity = layoutGravity & Gravity.FILL_HORIZONTAL;
         int verticalGravity = layoutGravity & Gravity.FILL_VERTICAL;
+        Rect parentRect = new Rect(locationOnScreen[0], locationOnScreen[1], ((int) (linearLayout.getWidth() * getScaleX())) + locationOnScreen[0], ((int) (linearLayout.getHeight() * getScaleY())) + locationOnScreen[1]);
         addViewInfo(parentRect, linearLayout, -1, calculateViewDepth(linearLayout));
 
         int parentWidth = (int) (linearLayout.getMeasuredWidth() * scaleX);
@@ -754,7 +749,9 @@ public class ViewPane extends RelativeLayout {
         for (int i = 0; i < linearLayout.getChildCount(); i++) {
             View child = linearLayout.getChildAt(i);
             if (child != null && child.getTag() != null && (view == null || view.id == null || !child.getTag().equals(view.id)) && child.getVisibility() == View.VISIBLE) {
-                Rect childRect = getRectFor(child);
+                int[] childLocationOnScreen = new int[2];
+                linearLayout.getLocationOnScreen(childLocationOnScreen);
+                Rect childRect = new Rect();
                 var layoutParams = (LinearLayout.LayoutParams) child.getLayoutParams();
                 int leftMargin = layoutParams.leftMargin;
                 int rightMargin = layoutParams.rightMargin;
@@ -766,7 +763,7 @@ public class ViewPane extends RelativeLayout {
                     if (verticalGravity == Gravity.CENTER_VERTICAL) {
                         int childTopY;
                         if (i == 0) {
-                            childTopY = childRect.top - (int) (topMargin * scaleY);
+                            childTopY = childLocationOnScreen[1] - (int) (topMargin * scaleY);
                             final int parentLeft = parentRect.left;
                             addViewInfo(
                                     new Rect(
@@ -811,7 +808,7 @@ public class ViewPane extends RelativeLayout {
                 } else {
                     if (horizontalGravity == Gravity.CENTER_HORIZONTAL) {
                         if (i == 0) {
-                            int childStartX = childRect.left - (int) (leftMargin * scaleX);
+                            int childStartX = childLocationOnScreen[0] - (int) (leftMargin * scaleX);
                             int parentTop = parentRect.top;
                             addViewInfo(
                                     new Rect(
@@ -866,11 +863,22 @@ public class ViewPane extends RelativeLayout {
                 }
                 childIndex++;
             }
+
+
+
         }
     }
 
     private void addDroppableForViewGroup(ViewBean viewBean, ViewGroup viewGroup) {
-        addViewInfo(getRectFor(viewGroup), viewGroup, -1, calculateViewDepth(viewGroup));
+        int[] viewLocationOnScreen = new int[2];
+        viewGroup.getLocationOnScreen(viewLocationOnScreen);
+        int xCoordinate = viewLocationOnScreen[0];
+        int yCoordinate = viewLocationOnScreen[1];
+        addViewInfo(new Rect(xCoordinate, yCoordinate,
+                        ((int) (viewGroup.getWidth() * getScaleX())) + xCoordinate,
+                        ((int) (viewGroup.getHeight() * getScaleY())) + yCoordinate),
+                viewGroup, -1, calculateViewDepth(viewGroup)
+        );
         for (int i = 0; i < viewGroup.getChildCount(); i++) {
             View childAt = viewGroup.getChildAt(i);
             if (childAt != null && childAt.getTag() != null && ((viewBean == null || viewBean.id == null || !childAt.getTag().equals(viewBean.id)) && childAt.getVisibility() == View.VISIBLE)) {

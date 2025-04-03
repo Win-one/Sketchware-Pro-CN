@@ -48,6 +48,7 @@ public class LayoutPreviewActivity extends BaseAppCompatActivity {
         var sc_id = getIntent().getStringExtra("sc_id");
         pane = binding.pane;
         pane.setScId(sc_id);
+        pane.updateRootLayout(sc_id, getIntent().getStringExtra("title"));
         pane.setVerticalScrollBarEnabled(true);
         pane.setResourceManager(jC.d(sc_id));
         UI.addSystemWindowInsetToPadding(binding.pane, false, false, false, true);
@@ -71,7 +72,11 @@ public class LayoutPreviewActivity extends BaseAppCompatActivity {
     private sy loadView(ViewBean view) {
         var itemView = pane.createItemView(view);
         pane.addViewAndUpdateIndex(itemView);
-        return (sy) itemView;
+        if (itemView instanceof sy sy) {
+            sy.setFixed(true);
+            return sy;
+        }
+        return null;
     }
 
     private sy loadViews(ArrayList<ViewBean> views) {

@@ -266,24 +266,12 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
 
     private void initializeAppBundleExportViews() {
         export_aab_button.setOnClickListener(view -> {
-            if (BuildConfig.FLAVOR.equals(BuildConfig.FLAVOR_NAME_WITHOUT_AABS)) {
-                aB dialog = new aB(this);
-                dialog.a(R.drawable.break_warning_96_red);
-                dialog.b(getString(R.string.can_t_generate_app_bundle));
-                dialog.a(getString(R.string.this_sketchware_pro_version_doesn_t_support_building_aabs) +
-                        getString(R.string.android_7_1_1_and_earlier_use_sketchware_pro) + BuildConfig.VERSION_NAME_WITHOUT_FLAVOR + "-" +
-                        BuildConfig.FLAVOR_NAME_WITH_AABS + getString(R.string.instead));
-                dialog.b(Helper.getResString(R.string.common_word_close), Helper.getDialogDismissListener(dialog));
-                dialog.show();
-                return;
-            }
-
             aB confirmationDialog = new aB(this);
-            confirmationDialog.b(getString(R.string.important_note));
-            confirmationDialog.a(getString(R.string.the_generated_aab_file_must_be_signed));
+            confirmationDialog.b("Important note");
+            confirmationDialog.a("The generated .aab file must be signed.\nCopy your keystore to /Internal storage/sketchware/keystore/release_key.jks and enter the alias' password.");
             confirmationDialog.a(R.drawable.ic_mtrl_info);
 
-            confirmationDialog.b(getString(R.string.common_word_understood), v -> {
+            confirmationDialog.b("Understood", v -> {
                 showAabSigningDialog();
                 confirmationDialog.dismiss();
             });
@@ -293,7 +281,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
 
     private void showAabSigningDialog() {
         GetKeyStoreCredentialsDialog credentialsDialog = new GetKeyStoreCredentialsDialog(this,
-                R.drawable.ic_mtrl_key, getString(R.string.sign_outputted_aab), getString(R.string.fill_in_the_keystore_details_to_sign_the_aab));
+                R.drawable.ic_mtrl_key, "Sign outputted AAB", "Fill in the keystore details to sign the AAB.");
         credentialsDialog.setListener(credentials -> {
             BuildingAsyncTask task = new BuildingAsyncTask(this);
             task.enableAppBundleBuild();
@@ -346,7 +334,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
 
         sign_apk_button.setOnClickListener(view -> {
             aB confirmationDialog = new aB(this);
-            confirmationDialog.b(getString(R.string.important_note));
+            confirmationDialog.b("Important note");
             confirmationDialog.a("""
                     To sign an APK, you need a keystore. Use your already created one, and copy it to \
                     /Internal storage/sketchware/keystore/release_key.jks and enter the alias's password.
@@ -355,7 +343,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
                     use a 3rd-party tool (for now).""");
             confirmationDialog.a(R.drawable.ic_mtrl_info);
 
-            confirmationDialog.b(getString(R.string.common_word_understood), v -> {
+            confirmationDialog.b("Understood", v -> {
                 showApkSigningDialog();
                 confirmationDialog.dismiss();
             });
@@ -366,9 +354,9 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
     private void showApkSigningDialog() {
         GetKeyStoreCredentialsDialog credentialsDialog = new GetKeyStoreCredentialsDialog(this,
                 R.drawable.ic_mtrl_key,
-                getString(R.string.sign_an_apk),
-                getString(R.string.fill_in_the_keystore_details_to_sign_the_apk) +
-                        getString(R.string.if_you_don_t_have_a_keystore_you_can_use_a_test_key));
+                "Sign an APK",
+                "Fill in the keystore details to sign the APK. " +
+                        "If you don't have a keystore, you can use a test key.");
         credentialsDialog.setListener(credentials -> {
             sign_apk_button.setVisibility(View.GONE);
             sign_apk_output_stage.setVisibility(View.GONE);
@@ -480,7 +468,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
             String sc_id = activity.get().sc_id;
 
             try {
-                publishProgress(Helper.getResString(R.string.deleting_temporary_files));
+                publishProgress("Deleting temporary files...");
                 FileUtil.deleteFile(project_metadata.projectMyscPath);
 
                 publishProgress(Helper.getResString(R.string.design_run_title_ready_to_build));
@@ -506,7 +494,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
                 File outputFile = new File(getCorrectResultFilename(project_metadata.releaseApkPath));
                 if (outputFile.exists()) {
                     if (!outputFile.delete()) {
-                        throw new IllegalStateException(Helper.getResString(R.string.couldn_t_delete_file) + outputFile.getAbsolutePath());
+                        throw new IllegalStateException("Couldn't delete file " + outputFile.getAbsolutePath());
                     }
                 }
                 project_metadata.c(a);
@@ -762,7 +750,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
             if (buildingAppBundle && new File(Environment.getExternalStorageDirectory(), "sketchware" + File.separator + "signed_aab" + File.separator + aabFilename).exists()) {
                 aB dialog = new aB(activity.get());
                 dialog.a(R.drawable.open_box_48);
-                dialog.b(Helper.getResString(R.string.finished_exporting_aab));
+                dialog.b("Finished exporting AAB");
                 dialog.a("You can find the generated, signed AAB file at:\n" +
                         "/Internal storage/sketchware/signed_aab/" + aabFilename);
                 dialog.b(Helper.getResString(R.string.common_word_ok), Helper.getDialogDismissListener(dialog));
