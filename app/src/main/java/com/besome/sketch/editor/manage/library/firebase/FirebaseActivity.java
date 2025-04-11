@@ -18,9 +18,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.besome.sketch.beans.ProjectLibraryBean;
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import a.a.a.GB;
-import a.a.a.aB;
 import a.a.a.bB;
 import a.a.a.iC;
 import a.a.a.kv;
@@ -152,7 +152,6 @@ public class FirebaseActivity extends BaseAppCompatActivity implements View.OnCl
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if (stepNumber > STEP_1) {
             setStep(--stepNumber);
         } else {
@@ -278,19 +277,19 @@ public class FirebaseActivity extends BaseAppCompatActivity implements View.OnCl
     }
 
     private void showGetChromeDialog() {
-        aB dialog = new aB(this);
-        dialog.a(R.drawable.chrome_96);
-        dialog.b(getTranslatedString(R.string.title_compatible_chrome_browser));
-        dialog.a(getTranslatedString(R.string.message_compatible_chrome_brower));
-        dialog.b(getTranslatedString(R.string.common_word_ok), v -> {
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
+        dialog.setIcon(R.drawable.chrome_96);
+        dialog.setTitle(getTranslatedString(R.string.title_compatible_chrome_browser));
+        dialog.setMessage(getTranslatedString(R.string.message_compatible_chrome_brower));
+        dialog.setPositiveButton(getTranslatedString(R.string.common_word_ok), (v, which) -> {
             if (!mB.a()) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("market://details?id=com.android.chrome"));
                 startActivity(intent);
-                dialog.dismiss();
+                v.dismiss();
             }
         });
-        dialog.a(getTranslatedString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
+        dialog.setNegativeButton(getTranslatedString(R.string.common_word_cancel), null);
         dialog.show();
     }
 }

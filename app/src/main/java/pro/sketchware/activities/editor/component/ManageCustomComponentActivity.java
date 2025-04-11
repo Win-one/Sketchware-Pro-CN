@@ -8,6 +8,8 @@ import android.os.Environment;
 import android.os.Parcelable;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -28,7 +30,7 @@ import com.github.angads25.filepicker.model.DialogConfigs;
 import com.github.angads25.filepicker.model.DialogProperties;
 import com.github.angads25.filepicker.view.FilePickerDialog;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.gson.Gson;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -38,7 +40,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import a.a.a.aB;
 import a.a.a.wq;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.components.ComponentsHandler;
@@ -49,12 +50,10 @@ import pro.sketchware.utility.SketchwareUtil;
 
 public class ManageCustomComponentActivity extends BaseAppCompatActivity {
 
-    private List<HashMap<String, Object>> componentsList = new ArrayList<>();
-
     private static final String COMPONENT_EXPORT_DIR = wq.getExtraDataExport() + "/components/";
     private static final String COMPONENT_DIR = wq.getCustomComponent();
-
-    private LinearLayout noContentLayout;
+    private List<HashMap<String, Object>> componentsList = new ArrayList<>();
+    private TextView tv_guide;
     private RecyclerView componentView;
 
     @Override
@@ -68,16 +67,12 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
 
     private void init() {
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-        toolbar.setOnMenuItemClickListener(item -> {
-            int itemId = item.getItemId();
-            if (itemId == R.id.import_component_menus) {
-                showFilePickerDialog();
-                return true;
-            }
-            return false;
-        });
-        noContentLayout = findViewById(R.id.noContentLayout);
+
+        tv_guide = findViewById(R.id.tv_guide);
         componentView = findViewById(R.id.list);
 
         findViewById(R.id.fab).setOnClickListener(_view ->
@@ -91,6 +86,21 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0, 0, 0, "Import");
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == 0) {
+            showFilePickerDialog();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
         ComponentsHandler.refreshCachedCustomComponents();
@@ -100,7 +110,7 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
         if (FileUtil.isExistFile(COMPONENT_DIR)) {
             readComponents(COMPONENT_DIR);
         } else {
-            noContentLayout.setVisibility(View.VISIBLE);
+            tv_guide.setVisibility(View.VISIBLE);
             componentView.setVisibility(View.GONE);
         }
     }
@@ -114,10 +124,10 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
             componentView.getLayoutManager().onRestoreInstanceState(state);
             adapter.notifyDataSetChanged();
             componentView.setVisibility(View.VISIBLE);
-            noContentLayout.setVisibility(View.GONE);
+            tv_guide.setVisibility(View.GONE);
             return;
         }
-        noContentLayout.setVisibility(View.VISIBLE);
+        tv_guide.setVisibility(View.VISIBLE);
         componentView.setVisibility(View.GONE);
     }
 
@@ -133,7 +143,7 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
 
         FilePickerDialog pickerDialog = new FilePickerDialog(this, properties, R.style.RoundedCornersDialog);
 
-        pickerDialog.setTitle(R.string.select_json_selector_file);
+        pickerDialog.setTitle("Select .json selector file");
         pickerDialog.setDialogSelectionListener(selections -> selectComponentToImport(selections[0]));
 
         pickerDialog.show();
@@ -151,8 +161,8 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
                 .map(component -> (String) component.get("name"))
                 .collect(Collectors.toList());
         if (componentNames.size() > 1) {
-            var dialog = new aB(this);
-            dialog.b(Helper.getResString(R.string.logic_editor_title_select_component));
+            MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
+            dialog.setTitle(Helper.getResString(R.string.logic_editor_title_select_component));
             ArrayList<Integer> selectedPositions = new ArrayList<>();
             var listView = new ListView(this);
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, componentNames);
@@ -169,8 +179,8 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
                     selectedPositions.remove(Integer.valueOf(position));
                 }
             });
-            dialog.a(listView);
-            dialog.b(Helper.getResString(R.string.common_word_import), v -> {
+            dialog.setView(listView);
+            dialog.setPositiveButton(Helper.getResString(R.string.common_word_import), (v, which) -> {
                 for (int position : selectedPositions) {
                     var component = components.get(position);
                     if (position != -1 && ComponentsHandler.isValidComponent(component)) {
@@ -181,9 +191,9 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
                 }
                 FileUtil.writeFile(COMPONENT_DIR, getGson().toJson(componentsList));
                 readSettings();
-                dialog.dismiss();
+                v.dismiss();
             });
-            dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
+            dialog.setNegativeButton(Helper.getResString(R.string.common_word_cancel), null);
             dialog.show();
         } else {
             var component = components.get(0);
@@ -204,18 +214,18 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
 
     private void export(int position) {
         String componentName = componentsList.get(position).get("name").toString();
-        var dialog = new aB(this);
-        dialog.b(Helper.getResString(R.string.common_word_export));
-        dialog.a(Helper.getResString(R.string.developer_tools_component_message_export, componentName));
-        dialog.a(R.drawable.export_96);
-        dialog.b(Helper.getResString(R.string.common_word_yes), v -> {
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
+        dialog.setTitle(Helper.getResString(R.string.common_word_export));
+        dialog.setMessage(Helper.getResString(R.string.developer_tools_component_message_export, componentName));
+        dialog.setIcon(R.drawable.export_96);
+        dialog.setPositiveButton(Helper.getResString(R.string.common_word_yes), (v, which) -> {
             String fileName = componentName + ".json";
             String filePath = new File(COMPONENT_EXPORT_DIR, fileName).getAbsolutePath();
             FileUtil.writeFile(filePath, getGson().toJson(List.of(componentsList.get(position))));
             SketchwareUtil.toast(Helper.getResString(R.string.developer_tools_component_success_message_export, filePath));
-            dialog.dismiss();
+            v.dismiss();
         });
-        dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
+        dialog.setNegativeButton(Helper.getResString(R.string.common_word_cancel), null);
         dialog.show();
     }
 
@@ -331,7 +341,7 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
                 onDoneInitializingViews();
                 root.setOnClickListener(v -> {
                     Intent intent = new Intent(getApplicationContext(), AddCustomComponentActivity.class);
-                    intent.putExtra("pos", (int) getLayoutPosition());
+                    intent.putExtra("pos", getLayoutPosition());
                     startActivity(intent);
                 });
                 setOnClickCollapseConfig(v -> v != root);

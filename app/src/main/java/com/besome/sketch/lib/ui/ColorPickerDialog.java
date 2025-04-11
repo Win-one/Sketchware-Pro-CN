@@ -1,4 +1,4 @@
-package a.a.a;
+package com.besome.sketch.lib.ui;
 
 import static pro.sketchware.activities.coloreditor.ColorEditorActivity.getColorValue;
 
@@ -19,8 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.besome.sketch.beans.ColorBean;
 import com.besome.sketch.editor.view.ColorGroupItem;
-import pro.sketchware.R;
-import pro.sketchware.databinding.ColorPickerBinding;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -31,50 +30,67 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import pro.sketchware.utility.FileUtil;
+import a.a.a.DB;
+import a.a.a.GB;
+import a.a.a.bB;
+import a.a.a.sq;
+import a.a.a.xB;
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
+import pro.sketchware.databinding.ColorPickerBinding;
+import pro.sketchware.lib.validator.ColorInputValidator;
+import pro.sketchware.utility.FileUtil;
 
-public class Zx extends PopupWindow {
+public class ColorPickerDialog extends PopupWindow {
 
+    private static String sc_id;
     private final ArrayList<ColorBean> colorList = new ArrayList<>();
     private final ArrayList<ColorBean[]> colorGroups = new ArrayList<>();
     private final ArrayList<HashMap<String, Object>> color_res_list = new ArrayList<>();
     private final ColorPickerBinding binding;
     private b colorPickerCallback;
-    private XB colorValidator;
+    private ColorInputValidator colorValidator;
     private int k;
     private int l;
     private int m = -1;
     private DB colorPref;
     private Activity activity;
-    private static String sc_id;
 
 
-    public Zx(Activity activity, int var3, boolean isTransparentColor, boolean isNoneColor) {
+    public ColorPickerDialog(Activity activity, int var3, boolean isTransparentColor, boolean isNoneColor) {
         super(activity);
         binding = ColorPickerBinding.inflate(activity.getLayoutInflater());
         initialize(activity, var3, isTransparentColor, isNoneColor);
     }
 
-    public Zx(Activity activity, int var3, boolean isTransparentColor, boolean isNoneColor, String scId) {
+    public ColorPickerDialog(Activity activity, int var3, boolean isTransparentColor, boolean isNoneColor, String scId) {
         super(activity);
         binding = ColorPickerBinding.inflate(activity.getLayoutInflater());
         sc_id = scId;
         initialize(activity, var3, isTransparentColor, isNoneColor);
     }
 
+    public static boolean isValidHexColor(String colorStr) {
+        if (colorStr == null) {
+            return false;
+        }
+        Pattern pattern = Pattern.compile("^#([a-fA-F0-9]*)");
+        Matcher matcher = pattern.matcher(colorStr);
+        return matcher.matches();
+    }
+
     private void deleteAllSavedColors() {
-        aB dialog = new aB(activity);
-        dialog.a(R.drawable.delete_96);
-        dialog.b(xB.b().a(activity, R.string.picker_color_title_delete_all_custom_color));
-        dialog.a(xB.b().a(activity, R.string.picker_color_message_delete_all_custom_color));
-        dialog.b(xB.b().a(activity, R.string.common_word_delete), v -> {
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(activity);
+        dialog.setIcon(R.drawable.delete_96);
+        dialog.setTitle(xB.b().a(activity, R.string.picker_color_title_delete_all_custom_color));
+        dialog.setMessage(xB.b().a(activity, R.string.picker_color_message_delete_all_custom_color));
+        dialog.setPositiveButton(xB.b().a(activity, R.string.common_word_delete), (v, which) -> {
             colorPref.a();
             colorGroups.set(0, getSavedColorBeans());
             notifyChanges();
-            dialog.dismiss();
+            v.dismiss();
         });
-        dialog.a(xB.b().a(activity, R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
+        dialog.setNegativeButton(xB.b().a(activity, R.string.common_word_cancel), null);
         dialog.show();
     }
 
@@ -114,7 +130,7 @@ public class Zx extends PopupWindow {
 
         binding.tiCustomColor.setHint(xB.b().a(activity, R.string.picker_color_hint_enter_hex_color_code));
 
-        colorValidator = new XB(activity, binding.tiCustomColor, binding.tvCustomColor);
+        colorValidator = new ColorInputValidator(activity, binding.tiCustomColor, binding.tvCustomColor);
         binding.etCustomColor.setPrivateImeOptions("defaultInputmode=english;");
         binding.tvAddColor.setText(xB.b().a(activity, R.string.common_word_add).toUpperCase());
         binding.tvAddColor.setOnClickListener(view -> {
@@ -180,16 +196,16 @@ public class Zx extends PopupWindow {
     }
 
     private void showColorRemoveDialog(String color) {
-        aB dialog = new aB(activity);
-        dialog.a(R.drawable.delete_96);
-        dialog.b(xB.b().a(activity, R.string.picker_color_title_delete_custom_color));
-        dialog.a(xB.b().a(activity, R.string.picker_color_message_delete_custom_color));
-        dialog.b(xB.b().a(activity, R.string.common_word_delete), v -> {
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(activity);
+        dialog.setIcon(R.drawable.delete_96);
+        dialog.setTitle(xB.b().a(activity, R.string.picker_color_title_delete_custom_color));
+        dialog.setMessage(xB.b().a(activity, R.string.picker_color_message_delete_custom_color));
+        dialog.setPositiveButton(xB.b().a(activity, R.string.common_word_delete), (v, which) -> {
             removeSavedColor(color);
             notifyChanges();
-            dialog.dismiss();
+            v.dismiss();
         });
-        dialog.a(xB.b().a(activity, R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
+        dialog.setNegativeButton(xB.b().a(activity, R.string.common_word_cancel), null);
         dialog.show();
     }
 
@@ -301,7 +317,6 @@ public class Zx extends PopupWindow {
         return colorBeansResult;
     }
 
-
     private ColorBean[] geColorResBeans() {
         ColorBean[] colorBeansResult;
         String clrsPath = FileUtil.getExternalStorageDir().concat("/.sketchware/data/").concat(sc_id.concat("/files/resource/values/colors.xml"));
@@ -377,15 +392,6 @@ public class Zx extends PopupWindow {
             }
         } catch (Exception ignored) {
         }
-    }
-
-     public static boolean isValidHexColor(String colorStr) {
-        if (colorStr == null) {
-            return false;
-        }
-        Pattern pattern = Pattern.compile("^#([a-fA-F0-9]*)");
-        Matcher matcher = pattern.matcher(colorStr);
-        return matcher.matches();
     }
 
     private void smoothScrollToCurrentItem() {

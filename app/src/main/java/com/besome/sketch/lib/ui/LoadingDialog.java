@@ -1,4 +1,4 @@
-package a.a.a;
+package com.besome.sketch.lib.ui;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -8,15 +8,15 @@ import android.widget.TextView;
 import androidx.core.view.WindowCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
-import pro.sketchware.R;
 
 import mod.hey.studios.util.Helper;
+import pro.sketchware.R;
 
-public class ZA extends Dialog {
+public class LoadingDialog extends Dialog {
 
     private final LottieAnimationView animationView;
 
-    public ZA(Context context) {
+    public LoadingDialog(Context context) {
         super(context, R.style.progress);
         setContentView(R.layout.progress);
         animationView = findViewById(R.id.anim_sketchware);

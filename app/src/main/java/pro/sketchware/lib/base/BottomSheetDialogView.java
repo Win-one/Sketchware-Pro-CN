@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.button.MaterialButton;
 
+import pro.sketchware.R;
 import pro.sketchware.databinding.ViewBottomSheetDialogBinding;
 
 public class BottomSheetDialogView extends BottomSheetDialog {
@@ -23,7 +24,7 @@ public class BottomSheetDialogView extends BottomSheetDialog {
     public void show() {
         super.show();
         if (getWindow() != null) {
-            getWindow().findViewById(com.google.android.material.R.id.design_bottom_sheet)
+            getWindow().findViewById(R.id.design_bottom_sheet)
                     .setBackgroundResource(android.R.color.transparent);
         }
     }

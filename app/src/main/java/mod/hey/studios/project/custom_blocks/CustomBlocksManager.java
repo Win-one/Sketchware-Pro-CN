@@ -17,8 +17,6 @@ import a.a.a.hC;
 import a.a.a.jC;
 import a.a.a.kq;
 import mod.hey.studios.editor.manage.block.ExtraBlockInfo;
-import mod.hey.studios.util.Helper;
-import pro.sketchware.R;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
 
@@ -36,15 +34,15 @@ public class CustomBlocksManager {
     public ArrayList<BlockBean> getUsedBlocks() {
         return blocks;
     }
-    
+
     public ExtraBlockInfo getExtraBlockInfo(String name) {
         return getExtraBlockInfoByName(name).orElse(null);
     }
-    
+
     public boolean contains(String name) {
         return getExtraBlockInfoByName(name).isPresent();
     }
-    
+
     private Optional<ExtraBlockInfo> getExtraBlockInfoByName(String name) {
         if (custom_blocks != null && !custom_blocks.isEmpty()) {
             for (ExtraBlockInfo info : custom_blocks) {
@@ -68,8 +66,8 @@ public class CustomBlocksManager {
             for (Map.Entry<String, ArrayList<BlockBean>> entry : ec.b(bean.getJavaName()).entrySet()) {
                 for (BlockBean block : entry.getValue()) {
                     if (!(block.opCode.equals("definedFunc")
-                        || block.opCode.equals("getVar")
-                        || block.opCode.equals("getArg"))) {
+                            || block.opCode.equals("getVar")
+                            || block.opCode.equals("getArg"))) {
                         if (kq.a(block.opCode, block.type) == -7711273) {
                             if (!usedBlocks.contains(block.opCode)) {
                                 usedBlocks.add(block.opCode);
@@ -81,7 +79,7 @@ public class CustomBlocksManager {
                 }
             }
         }
-        
+
         File customBlocksConfig = new File(Environment.getExternalStorageDirectory(),
                 ".sketchware/data/" + sc_id + "/custom_blocks");
         if (customBlocksConfig.exists()) {
@@ -91,20 +89,21 @@ public class CustomBlocksManager {
                         new TypeToken<ArrayList<ExtraBlockInfo>>() {
                         }.getType());
             } catch (Exception e) {
-                SketchwareUtil.toastError(Helper.getResString(R.string.failed_to_get_custom_blocks) + e.getMessage());
+                SketchwareUtil.toastError("Failed to get Custom Blocks : " + e.getMessage());
             }
         }
-        
+
     }
 
     public String getCustomBlockCode(String opCode) {
         try {
-            for (ExtraBlockInfo info :custom_blocks) {
+            for (ExtraBlockInfo info : custom_blocks) {
                 if (info.getName().equals(opCode)) {
                     return info.getCode();
                 }
             }
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
         return "";
     }
 
@@ -115,7 +114,8 @@ public class CustomBlocksManager {
                     return info.getSpec2();
                 }
             }
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
         return "";
     }
 

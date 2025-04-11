@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import a.a.a.jC;
 import a.a.a.mB;
 import a.a.a.sy;
-import pro.sketchware.R;
 import pro.sketchware.databinding.ActivityLayoutPreviewBinding;
 import pro.sketchware.tools.ViewBeanParser;
 import pro.sketchware.utility.SketchwareUtil;
@@ -24,7 +23,7 @@ public class LayoutPreviewActivity extends BaseAppCompatActivity {
     private ActivityLayoutPreviewBinding binding;
 
     private ViewPane pane;
-    
+
     private String content;
 
     @Override
@@ -35,7 +34,7 @@ public class LayoutPreviewActivity extends BaseAppCompatActivity {
         setContentView(binding.getRoot());
         var toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.layout_preview);
+        getSupportActionBar().setTitle("Layout Preview");
         getSupportActionBar().setSubtitle(getIntent().getStringExtra("title"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
@@ -65,7 +64,7 @@ public class LayoutPreviewActivity extends BaseAppCompatActivity {
                 SketchwareUtil.toastError(e.toString());
             }
         } else {
-            SketchwareUtil.toastError(getString(R.string.content_is_null));
+            SketchwareUtil.toastError("content is null");
         }
     }
 

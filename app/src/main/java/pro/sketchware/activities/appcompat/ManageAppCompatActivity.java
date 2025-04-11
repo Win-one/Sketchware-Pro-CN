@@ -130,10 +130,12 @@ public class ManageAppCompatActivity extends BaseAppCompatActivity {
                     }
 
                     @Override
-                    public void onTabReselected(TabLayout.Tab tab) {}
+                    public void onTabReselected(TabLayout.Tab tab) {
+                    }
 
                     @Override
-                    public void onTabUnselected(TabLayout.Tab tab) {}
+                    public void onTabUnselected(TabLayout.Tab tab) {
+                    }
                 });
         List<String> appCompats = new ArrayList<>();
         initializeProjectBean();

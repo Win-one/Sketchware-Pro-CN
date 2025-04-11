@@ -4,8 +4,8 @@ import static mod.bobur.StringEditorActivity.convertXmlToListMap;
 import static mod.bobur.StringEditorActivity.isXmlStringsContains;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -53,7 +53,6 @@ import a.a.a.Jx;
 import a.a.a.Kw;
 import a.a.a.OB;
 import a.a.a.SB;
-import a.a.a.aB;
 import a.a.a.jC;
 import a.a.a.lC;
 import a.a.a.mB;
@@ -201,9 +200,9 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
     }
 
     private void showViewIdDialog() {
-        aB dialog = new aB((Activity) getContext());
-        dialog.b(Helper.getText(tvName));
-        dialog.a(icon);
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(getContext());
+        dialog.setTitle(Helper.getText(tvName));
+        dialog.setIcon(icon);
 
         PropertyPopupInputTextBinding binding = PropertyPopupInputTextBinding.inflate(LayoutInflater.from(getContext()));
 
@@ -212,15 +211,15 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
         binding.edInput.setSingleLine();
         PropertyNameValidator validator = new PropertyNameValidator(context, binding.tiInput, uq.b, uq.a(), jC.a(sc_id).a(projectFileBean), value);
         validator.a(value);
-        dialog.a(binding.getRoot());
-        dialog.b(Helper.getResString(R.string.common_word_save), v -> {
+        dialog.setView(binding.getRoot());
+        dialog.setPositiveButton(Helper.getResString(R.string.common_word_save), (v, which) -> {
             if (validator.b()) {
                 setValue(Helper.getText(binding.edInput));
                 if (valueChangeListener != null) valueChangeListener.a(key, value);
-                dialog.dismiss();
+                v.dismiss();
             }
         });
-        dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
+        dialog.setNegativeButton(Helper.getResString(R.string.common_word_cancel), null);
         dialog.show();
     }
 
@@ -230,9 +229,9 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
     }
 
     private void showNumberInputDialog() {
-        aB dialog = new aB((Activity) getContext());
-        dialog.b(Helper.getText(tvName));
-        dialog.a(icon);
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(getContext());
+        dialog.setTitle(Helper.getText(tvName));
+        dialog.setIcon(icon);
 
         PropertyPopupInputTextBinding binding = PropertyPopupInputTextBinding.inflate(LayoutInflater.from(getContext()));
         binding.tiInput.setHint(String.format(Helper.getResString(R.string.property_enter_value), Helper.getText(tvName)));
@@ -243,22 +242,22 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
         MinMaxInputValidator validator = new MinMaxInputValidator(context, binding.tiInput, 0,
                 (key.equals("property_max") || key.equals("property_progress")) ? 0x7fffffff : 999);
 
-        dialog.a(binding.getRoot());
-        dialog.b(Helper.getResString(R.string.common_word_save), v -> {
+        dialog.setView(binding.getRoot());
+        dialog.setPositiveButton(Helper.getResString(R.string.common_word_save), (v, which) -> {
             if (validator.b()) {
                 setValue(Helper.getText(binding.edInput));
                 if (valueChangeListener != null) valueChangeListener.a(key, value);
-                dialog.dismiss();
+                v.dismiss();
             }
         });
-        dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
+        dialog.setNegativeButton(Helper.getResString(R.string.common_word_cancel), null);
         dialog.show();
     }
 
     private void showTextInputDialog(int maxValue, boolean isInject) {
-        aB dialog = new aB((Activity) getContext());
-        dialog.b(Helper.getText(tvName));
-        dialog.a(icon);
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(getContext());
+        dialog.setTitle(Helper.getText(tvName));
+        dialog.setIcon(icon);
 
         PropertyPopupInputTextBinding binding = PropertyPopupInputTextBinding.inflate(LayoutInflater.from(getContext()));
 
@@ -278,9 +277,8 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
             binding.tiAutoCompleteInput.setVisibility(View.VISIBLE);
             binding.tiInput.setVisibility(View.GONE);
 
-            dialog.a(binding.getRoot());
-            dialog.setDismissOnDefaultButtonClick(false);
-            dialog.configureDefaultButton(Helper.getResString(R.string.strings_xml), v -> {
+            dialog.setView(binding.getRoot());
+            dialog.setNeutralButton(Helper.getResString(R.string.strings_xml), (v, which) -> {
                 binding.edTiAutoCompleteInput.setText(stringsStart);
                 binding.edTiAutoCompleteInput.setSelection(stringsStart.length());
                 binding.edTiAutoCompleteInput.requestFocus();
@@ -290,9 +288,10 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
         }
 
         lengthValidator.a(value);
-        dialog.a(binding.getRoot());
-        dialog.b(Helper.getResString(R.string.common_word_save), v -> handleSave(lengthValidator, binding.edInput, binding.edTiAutoCompleteInput, binding.tiAutoCompleteInput, isInject, dialog));
-        dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
+        dialog.setView(binding.getRoot());
+        dialog.setPositiveButton(Helper.getResString(R.string.common_word_save), (v, which) ->
+                handleSave(lengthValidator, binding.edInput, binding.edTiAutoCompleteInput, binding.tiAutoCompleteInput, isInject, v));
+        dialog.setNegativeButton(Helper.getResString(R.string.common_word_cancel), null);
         dialog.show();
     }
 
@@ -318,7 +317,7 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
 
     private void handleSave(SB lengthValidator, EditText input,
                             MaterialAutoCompleteTextView autoCompleteTextView, TextInputLayout textAutoCompleteInput,
-                            boolean isInject, aB dialog) {
+                            boolean isInject, DialogInterface dialog) {
         if (lengthValidator.b() && textAutoCompleteInput.getError() == null) {
             if (isInject) {
                 setValue(Helper.getText(input));
@@ -381,9 +380,9 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
     }
 
     private void showNumberDecimalInputDialog(int minValue, int maxValue) {
-        aB dialog = new aB((Activity) getContext());
-        dialog.b(Helper.getText(tvName));
-        dialog.a(icon);
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(getContext());
+        dialog.setTitle(Helper.getText(tvName));
+        dialog.setIcon(icon);
 
         PropertyPopupInputTextBinding binding = PropertyPopupInputTextBinding.inflate(LayoutInflater.from(getContext()));
         binding.tiInput.setHint(String.format(Helper.getResString(R.string.property_enter_value), Helper.getText(tvName)));
@@ -396,22 +395,22 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
 
         OB validator = new OB(context, binding.tiInput, minValue, maxValue);
 
-        dialog.a(binding.getRoot());
-        dialog.b(Helper.getResString(R.string.common_word_save), v -> {
+        dialog.setView(binding.getRoot());
+        dialog.setPositiveButton(Helper.getResString(R.string.common_word_save), (v, which) -> {
             if (validator.b()) {
                 setValue(Helper.getText(binding.edInput));
                 if (valueChangeListener != null) valueChangeListener.a(key, value);
-                dialog.dismiss();
+                v.dismiss();
             }
         });
-        dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
+        dialog.setNegativeButton(Helper.getResString(R.string.common_word_cancel), null);
         dialog.show();
     }
 
     private void showAutoCompleteDialog() {
-        aB dialog = new aB((Activity) getContext());
-        dialog.b(Helper.getText(tvName));
-        dialog.a(icon);
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(getContext());
+        dialog.setTitle(Helper.getText(tvName));
+        dialog.setIcon(icon);
 
         PropertyPopupInputTextBinding binding = PropertyPopupInputTextBinding.inflate(LayoutInflater.from(getContext()));
         MaterialAutoCompleteTextView input = binding.edTiAutoCompleteInput;
@@ -422,15 +421,15 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
         binding.tiAutoCompleteInput.setVisibility(View.VISIBLE);
         SB lengthValidator = new SB(context, binding.tiInput, 0, 99);
         lengthValidator.a(value);
-        dialog.a(binding.getRoot());
-        dialog.b(Helper.getResString(R.string.common_word_save), v -> {
+        dialog.setView(binding.getRoot());
+        dialog.setPositiveButton(Helper.getResString(R.string.common_word_save), (v, which) -> {
             if (lengthValidator.b()) {
                 setValue(Helper.getText(input));
                 if (valueChangeListener != null) valueChangeListener.a(key, value);
-                dialog.dismiss();
+                v.dismiss();
             }
         });
-        dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
+        dialog.setNegativeButton(Helper.getResString(R.string.common_word_cancel), null);
         dialog.show();
     }
 
@@ -828,6 +827,7 @@ public class PropertyInputItem extends RelativeLayout implements View.OnClickLis
                 };
         private Map<String, String> attributes;
         private ItemClickListener listener;
+
         public AttributesAdapter() {
             super(DIFF_CALLBACK);
         }

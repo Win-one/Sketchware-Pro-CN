@@ -45,7 +45,6 @@ import mod.hey.studios.editor.manage.block.v2.BlockLoader;
 import mod.hey.studios.project.custom_blocks.CustomBlocksManager;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.activities.tools.ConfigActivity;
-import pro.sketchware.R;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
 
@@ -299,7 +298,7 @@ public class BackupFactory {
                 finalFileName = finalFileName.replaceFirst(Pattern.quote(Objects.requireNonNull(matcher.group(0))), getFormattedDateFrom(matcher.group(1)));
             }
         } catch (Exception ignored) {
-            SketchwareUtil.toastError(Helper.getResString(R.string.failed_to_parse_custom_filename_for_backup_using_default));
+            SketchwareUtil.toastError("Failed To Parse Custom Filename For Backup. Using default");
             // Example name: InternalDemo v1.0 (com.jbk.internal.demo, 1) 2021-12-31T125827
             finalFileName = projectNameOnly + " v" + versionName + " (" + pkgName + ", " + versionCode + ") " + getFormattedDateFrom("yyyy-M-dd'T'HHmmss");
         }
@@ -384,7 +383,7 @@ public class BackupFactory {
         // Find custom blocks used and include them in the backup
         if (backupCustomBlocks) {
             CustomBlocksManager cbm = new CustomBlocksManager(sc_id);
-            
+
             Set<ExtraBlockInfo> blocks = new HashSet<>();
             Set<String> block_names = new HashSet<>();
             for (BlockBean bean : cbm.getUsedBlocks()) {

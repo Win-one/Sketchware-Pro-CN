@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.besome.sketch.beans.MoreBlockCollectionBean;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 
-import a.a.a.aB;
 import mod.hey.studios.util.Helper;
 import mod.jbk.util.BlockUtil;
 import pro.sketchware.R;
@@ -23,7 +23,7 @@ import pro.sketchware.databinding.ManageCollectionPopupImportMoreBlockListItemBi
 import pro.sketchware.databinding.SearchWithRecyclerViewBinding;
 import pro.sketchware.utility.SketchwareUtil;
 
-public class MoreblockImporterDialog extends aB {
+public class MoreblockImporterDialog extends MaterialAlertDialogBuilder {
 
     private final ArrayList<MoreBlockCollectionBean> moreBlockCollectionList;
     private final MoreBlockAdapter adapter;
@@ -31,20 +31,22 @@ public class MoreblockImporterDialog extends aB {
     public MoreblockImporterDialog(Activity activity, ArrayList<MoreBlockCollectionBean> beanList, CallBack callback) {
         super(activity);
 
-        SearchWithRecyclerViewBinding binding = SearchWithRecyclerViewBinding.inflate(getLayoutInflater());
+        SearchWithRecyclerViewBinding binding = SearchWithRecyclerViewBinding.inflate(LayoutInflater.from(getContext()));
 
         moreBlockCollectionList = new ArrayList<>(beanList);
         adapter = new MoreBlockAdapter(moreBlockCollectionList);
 
-        b(Helper.getResString(R.string.select_a_more_block));
-        a(R.drawable.more_block_96dp);
+        setTitle("Select a more block");
+        setIcon(R.drawable.more_block_96dp);
 
         binding.searchInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -56,19 +58,19 @@ public class MoreblockImporterDialog extends aB {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         binding.recyclerView.setAdapter(adapter);
 
-        b(Helper.getResString(R.string.common_word_select), v -> {
+        setPositiveButton(Helper.getResString(R.string.common_word_select), (v, which) -> {
             MoreBlockCollectionBean selectedBean = adapter.getSelectedItem();
 
             if (selectedBean == null) {
-                SketchwareUtil.toastError(Helper.getResString(R.string.select_a_more_block));
+                SketchwareUtil.toastError("Select a more block");
             } else {
                 callback.onSelected(selectedBean);
-                dismiss();
+                v.dismiss();
             }
         });
 
-        a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(this));
-        a(binding.getRoot());
+        setNegativeButton(Helper.getResString(R.string.common_word_cancel), null);
+        setView(binding.getRoot());
     }
 
     private void filterList(String query, ArrayList<MoreBlockCollectionBean> beanList) {

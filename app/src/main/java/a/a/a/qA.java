@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.activity.OnBackPressedDispatcher;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
@@ -17,7 +15,6 @@ import com.google.android.material.transition.MaterialSharedAxis;
 
 import dev.chrisbanes.insetter.Insetter;
 import pro.sketchware.R;
-import pro.sketchware.SketchApplication;
 
 public class qA extends Fragment {
 
@@ -50,22 +47,20 @@ public class qA extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         a = getActivity();
-        if (a != null) {
-            b = a.getApplicationContext();
-        }
+        b = a.getApplicationContext();
         setEnterTransition(new MaterialSharedAxis(MaterialSharedAxis.X, true));
         setReturnTransition(new MaterialSharedAxis(MaterialSharedAxis.X, false));
         setExitTransition(new MaterialSharedAxis(MaterialSharedAxis.X, true));
         setReenterTransition(new MaterialSharedAxis(MaterialSharedAxis.X, false));
     }
-    
+
     public void openFragment(Fragment fragment) {
         getParentFragmentManager().beginTransaction()
-            .replace(R.id.settings_fragment_container, fragment)
-            .addToBackStack(null)
-            .commit();
+                .replace(R.id.settings_fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
-    
+
     public void configureToolbar(MaterialToolbar toolbar) {
         final OnBackPressedDispatcher onBackPressedDispatcher = requireActivity().getOnBackPressedDispatcher();
         toolbar.setNavigationOnClickListener(v -> {
@@ -75,22 +70,8 @@ public class qA extends Fragment {
 
     public void handleInsetts(View root) {
         Insetter.builder()
-            .padding(WindowInsetsCompat.Type.navigationBars())
-            .applyToView(root);
+                .padding(WindowInsetsCompat.Type.navigationBars())
+                .applyToView(root);
     }
 
-    @Nullable
-    @Override
-    public Context getContext() {
-        if (a == null) {
-            return SketchApplication.getInstance();
-        }
-        return a;
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        a = getActivity();
-    }
 }

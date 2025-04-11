@@ -84,7 +84,7 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(view -> onBackPressed());
-        ((ViewGroup) background).addView(toolbar, 0);
+        background.addView(toolbar, 0);
 
         fab_button.setOnClickListener(v -> {
             Object paletteColor = pallet_list.get(palette - 9).get("color");

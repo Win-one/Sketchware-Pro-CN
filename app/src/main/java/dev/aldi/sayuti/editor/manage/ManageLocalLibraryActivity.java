@@ -40,7 +40,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import a.a.a.MA;
 import a.a.a.mB;
 import mod.hey.studios.build.BuildSettings;
-
 import mod.hey.studios.util.Helper;
 import pro.sketchware.R;
 import pro.sketchware.databinding.ManageLocallibrariesBinding;
@@ -57,12 +56,8 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
     private ManageLocallibrariesBinding binding;
     private String scId;
 
-    private LibraryAdapter adapter = new LibraryAdapter();
-    private SearchAdapter searchAdapter = new SearchAdapter();
-
-    private interface OnLocalLibrarySelectedStateChangedListener {
-        void invoke(LocalLibrary library);
-    }
+    private final LibraryAdapter adapter = new LibraryAdapter();
+    private final SearchAdapter searchAdapter = new SearchAdapter();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -251,6 +246,21 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
         });
     }
 
+    private boolean isUsedLibrary(String libraryName) {
+        if (!notAssociatedWithProject) {
+            for (Map<String, Object> libraryMap : projectUsedLibs) {
+                if (libraryName.equals(libraryMap.get("name").toString())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private interface OnLocalLibrarySelectedStateChangedListener {
+        void invoke(LocalLibrary library);
+    }
+
     private static class LoadLocalLibrariesTask extends MA {
         private final WeakReference<ManageLocalLibraryActivity> activity;
 
@@ -278,17 +288,6 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
                 e.printStackTrace();
             }
         }
-    }
-
-    private boolean isUsedLibrary(String libraryName) {
-        if (!notAssociatedWithProject) {
-            for (Map<String, Object> libraryMap : projectUsedLibs) {
-                if (libraryName.equals(libraryMap.get("name").toString())) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.ViewHolder> {
@@ -358,7 +357,7 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
         }
 
         private void toggleLocalLibrary(MaterialCardView card, LocalLibrary library,
-                @Nullable OnLocalLibrarySelectedStateChangedListener onLocalLibrarySelectedStateChangedListener) {
+                                        @Nullable OnLocalLibrarySelectedStateChangedListener onLocalLibrarySelectedStateChangedListener) {
             library.setSelected(!library.isSelected());
             bindSelectedState(card, library);
             if (onLocalLibrarySelectedStateChangedListener != null) {
@@ -414,14 +413,14 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
             rewriteLocalLibFile(scId, new Gson().toJson(projectUsedLibs));
         }
 
+        public List<LocalLibrary> getLocalLibraries() {
+            return localLibraries;
+        }
+
         public void setLocalLibraries(List<LocalLibrary> localLibraries) {
             this.localLibraries.clear();
             this.localLibraries.addAll(localLibraries);
             notifyDataSetChanged();
-        }
-
-        public List<LocalLibrary> getLocalLibraries() {
-            return localLibraries;
         }
 
         static class ViewHolder extends RecyclerView.ViewHolder {

@@ -1,7 +1,7 @@
 package pro.sketchware.activities.editor.command;
 
-import static pro.sketchware.utility.SketchwareUtil.getDip;
 import static pro.sketchware.utility.GsonUtils.getGson;
+import static pro.sketchware.utility.SketchwareUtil.getDip;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -53,23 +53,43 @@ import pro.sketchware.utility.UI;
 
 public class ManageXMLCommandActivity extends BaseAppCompatActivity {
 
+    private static final String[] COMMANDS_ACTION = {
+            "insert", "add", "replace", "find-replace", "find-replace-first", "find-replace-all"
+    };
     private ManageXmlCommandBinding binding;
     private String sc_id;
-
     private String commandPath;
-
     private XMLCommandAdapter adapter;
-
     private ProjectSettings settings;
-
-    private static final String[] COMMANDS_ACTION = {
-        "insert", "add", "replace", "find-replace", "find-replace-first", "find-replace-all"
-    };
-
     private ArrayList<HashMap<String, Object>> commands = new ArrayList<>();
     private ArrayList<String> xmlFiles;
 
     private hC projectFile;
+
+    public static void fetchXMLCommand(Context context, String sc_id) {
+        var path = wq.b(sc_id) + "/command";
+        if (FileUtil.isExistFile(path)) {
+            return;
+        }
+        var yq = new yq(context, sc_id);
+        var projectLibraryManager = jC.c(sc_id);
+        var projectFileManager = jC.b(sc_id);
+        var projectDataManager = jC.a(sc_id);
+        yq.a(projectLibraryManager, projectFileManager, projectDataManager, false);
+        CommandBlock.x();
+        ArrayList<ProjectFileBean> files = new ArrayList<>(projectFileManager.b());
+        files.addAll(new ArrayList<>(projectFileManager.c()));
+        for (ProjectFileBean file : files) {
+            CommandBlock.CBForXml(new Jx(yq.N, file, projectDataManager).generateCode(false));
+        }
+        String commandPath = FileUtil.getExternalStorageDir().concat("/.sketchware/temp/commands");
+        if (FileUtil.isExistFile(commandPath)) {
+            FileUtil.copyFile(commandPath, path);
+            CommandBlock.x();
+        } else {
+            FileUtil.writeFile(path, "[]");
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -253,10 +273,9 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
                     map.put("after", Integer.parseInt(Helper.getText(binding.front)));
                     map.put("before", Integer.parseInt(Helper.getText(binding.backend)));
                     map.put("command", Helper.getText(binding.command));
-                    StringBuilder inputBuilder = new StringBuilder();
-                    inputBuilder.append(">").append(xmlName).append("\n");
-                    inputBuilder.append(Helper.getText(binding.changes));
-                    map.put("input", inputBuilder.toString());
+                    String inputBuilder = ">" + xmlName + "\n" +
+                            Helper.getText(binding.changes);
+                    map.put("input", inputBuilder);
                     if (edit) {
                         if (position != -1) {
                             commands.set(position, map);
@@ -397,30 +416,5 @@ public class ManageXMLCommandActivity extends BaseAppCompatActivity {
     public void onSaveInstanceState(Bundle outState) {
         outState.putString("sc_id", sc_id);
         super.onSaveInstanceState(outState);
-    }
-
-    public static void fetchXMLCommand(Context context, String sc_id) {
-        var path = wq.b(sc_id) + "/command";
-        if (FileUtil.isExistFile(path)) {
-            return;
-        }
-        var yq = new yq(context, sc_id);
-        var projectLibraryManager = jC.c(sc_id);
-        var projectFileManager = jC.b(sc_id);
-        var projectDataManager = jC.a(sc_id);
-        yq.a(projectLibraryManager, projectFileManager, projectDataManager, false);
-        CommandBlock.x();
-        ArrayList<ProjectFileBean> files = new ArrayList<>(projectFileManager.b());
-        files.addAll(new ArrayList<>(projectFileManager.c()));
-        for (ProjectFileBean file : files) {
-            CommandBlock.CBForXml(new Jx(yq.N, file, projectDataManager).generateCode(false));
-        }
-        String commandPath = FileUtil.getExternalStorageDir().concat("/.sketchware/temp/commands");
-        if (FileUtil.isExistFile(commandPath)) {
-            FileUtil.copyFile(commandPath, path);
-            CommandBlock.x();
-        } else {
-            FileUtil.writeFile(path, "[]");
-        }
     }
 }

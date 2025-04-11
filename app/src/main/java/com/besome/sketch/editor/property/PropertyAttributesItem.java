@@ -1,7 +1,6 @@
 package com.besome.sketch.editor.property;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +28,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import a.a.a.Kw;
-import a.a.a.aB;
 import a.a.a.mB;
 import a.a.a.wB;
 import mod.hey.studios.util.Helper;
@@ -42,19 +40,6 @@ import pro.sketchware.utility.relativelayout.CircularDependencyDetector;
 
 @SuppressLint("ViewConstructor")
 public class PropertyAttributesItem extends LinearLayout implements View.OnClickListener {
-    private String key = "";
-    private HashMap<String, String> value = new HashMap<>();
-    private TextView tvName;
-    private TextView tvValue;
-    private View propertyItem;
-    private View propertyMenuItem;
-    private ImageView imgLeftIcon;
-    private int icon;
-    private Kw valueChangeListener;
-    private ViewBean bean;
-    private List<String> ids = new ArrayList<>();
-    private final ArrayList<ViewBean> beans = new ArrayList<>();
-
     private static final String[] PARENT_RELATIVE = {
             "android:layout_centerInParent",
             "android:layout_centerVertical",
@@ -79,7 +64,6 @@ public class PropertyAttributesItem extends LinearLayout implements View.OnClick
             "android:layout_alignParentBottom",
             "android:layout_alignBaseline"
     };
-
     public static List<String> RELATIVE_IDS = Arrays.asList(
             "android:layout_alignStart",
             "android:layout_alignLeft",
@@ -93,6 +77,18 @@ public class PropertyAttributesItem extends LinearLayout implements View.OnClick
             "android:layout_toRightOf",
             "android:layout_above",
             "android:layout_below");
+    private final ArrayList<ViewBean> beans = new ArrayList<>();
+    private String key = "";
+    private HashMap<String, String> value = new HashMap<>();
+    private TextView tvName;
+    private TextView tvValue;
+    private View propertyItem;
+    private View propertyMenuItem;
+    private ImageView imgLeftIcon;
+    private int icon;
+    private Kw valueChangeListener;
+    private ViewBean bean;
+    private List<String> ids = new ArrayList<>();
 
     public PropertyAttributesItem(Context context, boolean z) {
         super(context);
@@ -128,7 +124,7 @@ public class PropertyAttributesItem extends LinearLayout implements View.OnClick
                 ((TextView) findViewById(R.id.tv_title)).setText(Helper.getResString(identifier));
                 return;
             }
-            tvValue.setText(R.string.configure_parent_attributes);
+            tvValue.setText("Configure parent attributes");
             imgLeftIcon.setImageResource(icon);
         }
     }
@@ -195,13 +191,13 @@ public class PropertyAttributesItem extends LinearLayout implements View.OnClick
                 }
             }
             new MaterialAlertDialogBuilder(getContext())
-                    .setTitle(R.string.choose_an_attributes)
+                    .setTitle("Choose an attributes")
                     .setAdapter(
                             new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, list), (d, w) -> {
                                 var attr = list.get(w);
                                 if (RELATIVE_IDS.contains(attr)) {
                                     new MaterialAlertDialogBuilder(getContext())
-                                            .setTitle(R.string.choose_an_id)
+                                            .setTitle("Choose an id")
                                             .setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, ids), (d2, w2) -> {
                                                 var id = ids.get(w2);
                                                 if (new CircularDependencyDetector(beans, bean).isLegalAttribute(id, attr)) {
@@ -213,7 +209,7 @@ public class PropertyAttributesItem extends LinearLayout implements View.OnClick
                                                     SketchwareUtil.toastError("IllegalStateException : Circular dependencies cannot exist in RelativeLayout");
                                                 }
                                             })
-                                            .setNegativeButton(R.string.common_word_cancel, (d2, which) -> d.dismiss())
+                                            .setNegativeButton("Cancel", (d2, which) -> d.dismiss())
                                             .show();
                                 } else {
                                     value.put(attr, "false");
@@ -222,7 +218,7 @@ public class PropertyAttributesItem extends LinearLayout implements View.OnClick
                                     adapter.submitList(new ArrayList<>(value.keySet()));
                                 }
                             })
-                    .setNegativeButton(R.string.common_word_cancel, (d, which) -> d.dismiss())
+                    .setNegativeButton("Cancel", (d, which) -> d.dismiss())
                     .show();
         });
     }
@@ -291,7 +287,7 @@ public class PropertyAttributesItem extends LinearLayout implements View.OnClick
                     var filteredIds = new ArrayList<>(ids);
                     filteredIds.remove(value.get(attr));
                     new MaterialAlertDialogBuilder(getContext())
-                            .setTitle(R.string.choose_an_id)
+                            .setTitle("Choose an id")
                             .setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, filteredIds), (d, w) -> {
                                 var id = filteredIds.get(w);
                                 value.put(attr, id);
@@ -299,21 +295,21 @@ public class PropertyAttributesItem extends LinearLayout implements View.OnClick
                                 if (valueChangeListener != null)
                                     valueChangeListener.a(key, value);
                             })
-                            .setNegativeButton(R.string.common_word_cancel, (d, which) -> d.dismiss())
+                            .setNegativeButton("Cancel", (d, which) -> d.dismiss())
                             .show();
                 });
                 itemView.setOnLongClickListener(v -> {
-                    var dialog = new aB((Activity) getContext());
-                    dialog.b(Helper.getResString(R.string.common_word_delete));
-                    dialog.a(Helper.getResString(R.string.are_you_sure_you_want_to_delete) + attr + "?");
-                    dialog.b(Helper.getResString(R.string.common_word_yes), view -> {
+                    MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(getContext());
+                    dialog.setTitle("Delete");
+                    dialog.setMessage("Are you sure you want to delete " + attr + "?");
+                    dialog.setPositiveButton("Yes", (view, which) -> {
                         value.remove(attr);
                         if (valueChangeListener != null)
                             valueChangeListener.a(key, value);
                         submitList(new ArrayList<>(value.keySet()));
-                        dialog.dismiss();
+                        view.dismiss();
                     });
-                    dialog.a(Helper.getResString(R.string.common_word_no), view -> dialog.dismiss());
+                    dialog.setNegativeButton("No", (view, which) -> view.dismiss());
                     dialog.show();
                     return true;
                 });
@@ -339,18 +335,18 @@ public class PropertyAttributesItem extends LinearLayout implements View.OnClick
                     if (valueChangeListener != null) valueChangeListener.a(key, value);
                 });
                 itemView.setOnLongClickListener(v -> {
-                    var dialog = new aB((Activity) getContext());
-                    dialog.b(Helper.getResString(R.string.common_word_delete));
-                    dialog.a(Helper.getResString(R.string.are_you_sure_you_want_to_delete) + attr + "?");
-                    dialog.b(Helper.getResString(R.string.common_word_yes), view -> {
+                    MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(getContext());
+                    dialog.setTitle("Delete");
+                    dialog.setMessage("Are you sure you want to delete " + attr + "?");
+                    dialog.setPositiveButton("Yes", (view, which) -> {
                         value.remove(attr);
                         if (valueChangeListener != null)
                             valueChangeListener.a(key, value);
                         submitList(new ArrayList<>(value.keySet()));
-                        dialog.dismiss();
+                        view.dismiss();
                     });
 
-                    dialog.a(Helper.getResString(R.string.common_word_no), view -> dialog.dismiss());
+                    dialog.setNegativeButton("No", (view, which) -> view.dismiss());
                     dialog.show();
                     return true;
                 });

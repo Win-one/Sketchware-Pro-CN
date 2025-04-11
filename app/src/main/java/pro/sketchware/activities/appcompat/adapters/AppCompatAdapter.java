@@ -38,12 +38,11 @@ public class AppCompatAdapter
                     return true;
                 }
             };
+    private ItemClickListener<Pair<View, HashMap<String, Object>>> listener;
 
     public AppCompatAdapter() {
         super(DIFF_CALLBACK);
     }
-
-    private ItemClickListener<Pair<View, HashMap<String, Object>>> listener;
 
     public void setOnItemClickListener(
             ItemClickListener<Pair<View, HashMap<String, Object>>> listener) {

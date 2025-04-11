@@ -22,7 +22,7 @@ import mod.hey.studios.util.Helper;
 import mod.jbk.util.LogUtil;
 import pro.sketchware.R;
 import pro.sketchware.databinding.ManageFontAddBinding;
-import pro.sketchware.lib.validator.WB2;
+import pro.sketchware.lib.validator.FontNameValidator;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
 
@@ -34,7 +34,7 @@ public class AddFontActivity extends BaseDialogActivity implements View.OnClickL
     private boolean validFontPicked;
     private boolean fromCollectionPage;
     private String sc_id;
-    private WB2 fontNameValidator;
+    private FontNameValidator fontNameValidator;
 
     private ManageFontAddBinding binding;
 
@@ -59,7 +59,7 @@ public class AddFontActivity extends BaseDialogActivity implements View.OnClickL
         r.setOnClickListener(this);
         s.setOnClickListener(this);
 
-        fontNameValidator = new WB2(this, binding.tiInput, uq.b, intent.getStringArrayListExtra("font_names"));
+        fontNameValidator = new FontNameValidator(this, binding.tiInput, uq.b, intent.getStringArrayListExtra("font_names"));
         if (intent.getIntExtra("request_code", -1) == 272) {
             e(Helper.getResString(R.string.design_manager_font_title_edit_font));
             binding.edInput.setText(((ProjectResourceBean) intent.getParcelableExtra("resource_bean")).resName);
@@ -134,7 +134,7 @@ public class AddFontActivity extends BaseDialogActivity implements View.OnClickL
                 try {
                     Typeface typeface = Typeface.createFromFile(tempFontFile);
                     if (typeface.equals(Typeface.DEFAULT)) {
-                        SketchwareUtil.toastError(getString(R.string.warning_font_doesn_t_seem_to_be_valid));
+                        SketchwareUtil.toastError("Warning: Font doesn't seem to be valid");
                         return;
                     }
                     validFontPicked = true;
@@ -149,11 +149,11 @@ public class AddFontActivity extends BaseDialogActivity implements View.OnClickL
                     e.printStackTrace();
                     validFontPicked = false;
                     binding.fontPreviewView.setVisibility(View.GONE);
-                    SketchwareUtil.toast(Helper.getResString(R.string.couldn_t_load_font) + e.getMessage());
+                    SketchwareUtil.toast("Couldn't load font: " + e.getMessage());
                     LogUtil.e("AddFontActivity", "Failed to load font", e);
                 }
             }, e -> {
-                SketchwareUtil.toastError(getString(R.string.error_while_loading_font) + e.getMessage());
+                SketchwareUtil.toastError("Error while loading font: " + e.getMessage());
                 e.printStackTrace();
                 LogUtil.e("AddFontActivity", "Failed to load font", e);
             });
@@ -170,7 +170,7 @@ public class AddFontActivity extends BaseDialogActivity implements View.OnClickL
         }
     }
 
-    private boolean isFontValid(WB2 wb) {
+    private boolean isFontValid(FontNameValidator wb) {
         if (wb != null && !wb.b()) {
             return false;
         }

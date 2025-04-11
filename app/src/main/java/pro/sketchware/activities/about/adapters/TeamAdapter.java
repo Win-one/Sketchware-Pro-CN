@@ -4,7 +4,6 @@ import static pro.sketchware.utility.UI.advancedCorners;
 import static pro.sketchware.utility.UI.loadImageFromUrl;
 import static pro.sketchware.utility.UI.rippleRound;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,10 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.color.MaterialColors;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 
-import a.a.a.aB;
 import a.a.a.mB;
 import mod.hey.studios.util.Helper;
 import pro.sketchware.R;
@@ -80,11 +79,11 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
         int activeBackgroundColor;
         int activeBackgroundTextColor;
         if (member.isActive()) {
-            holder.binding.tvStatus.setText(R.string.active);
+            holder.binding.tvStatus.setText("Active");
             activeBackgroundColor = MaterialColors.getColor(holder.binding.tvStatus, R.attr.colorCoolGreenContainer);
             activeBackgroundTextColor = MaterialColors.getColor(holder.binding.tvStatus, R.attr.colorOnCoolGreenContainer);
         } else {
-            holder.binding.tvStatus.setText(R.string.inactive);
+            holder.binding.tvStatus.setText("Inactive");
             activeBackgroundColor = MaterialColors.getColor(holder.binding.tvStatus, R.attr.colorAmberContainer);
             activeBackgroundTextColor = MaterialColors.getColor(holder.binding.tvStatus, R.attr.colorOnAmberContainer);
         }
@@ -109,19 +108,19 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
     }
 
     private void showGoogleChromeNotice(Context context) {
-        aB dialog = new aB((Activity) context);
-        dialog.a(R.drawable.chrome_96);
-        dialog.b(Helper.getResString(R.string.title_compatible_chrome_browser));
-        dialog.a(Helper.getResString(R.string.message_compatible_chrome_brower));
-        dialog.b(Helper.getResString(R.string.common_word_ok), v -> {
+        MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(context);
+        dialog.setIcon(R.drawable.chrome_96);
+        dialog.setTitle(Helper.getResString(R.string.title_compatible_chrome_browser));
+        dialog.setMessage(Helper.getResString(R.string.message_compatible_chrome_brower));
+        dialog.setPositiveButton(Helper.getResString(R.string.common_word_ok), (v, which) -> {
             if (!mB.a()) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("market://details?id=com.android.chrome"));
                 context.startActivity(intent);
-                dialog.dismiss();
+                v.dismiss();
             }
         });
-        dialog.a(Helper.getResString(R.string.common_word_cancel), Helper.getDialogDismissListener(dialog));
+        dialog.setNegativeButton(Helper.getResString(R.string.common_word_cancel), null);
         dialog.show();
     }
 

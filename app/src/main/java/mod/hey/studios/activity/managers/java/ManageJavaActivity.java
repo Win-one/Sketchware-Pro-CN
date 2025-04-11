@@ -96,13 +96,12 @@ public class ManageJavaActivity extends BaseAppCompatActivity {
                     "}\n";
 
     private final ArrayList<String> currentTree = new ArrayList<>();
+    ManageFileBinding binding;
     private String current_path;
     private FilePathUtil fpu;
     private FileResConfig frc;
     private String sc_id;
     private FilesAdapter filesAdapter;
-
-    ManageFileBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -24,7 +23,6 @@ import mod.hey.studios.util.CompileLogHelper;
 import mod.hey.studios.util.Helper;
 import mod.jbk.diagnostic.CompileErrorSaver;
 import mod.jbk.util.AddMarginOnApplyWindowInsetsListener;
-import pro.sketchware.R;
 import pro.sketchware.databinding.CompileLogBinding;
 import pro.sketchware.utility.SketchwareUtil;
 
@@ -54,9 +52,9 @@ public class CompileLogActivity extends BaseAppCompatActivity {
         binding.topAppBar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
 
         if (getIntent().getBooleanExtra("showingLastError", false)) {
-            binding.topAppBar.setTitle(R.string.last_compile_log);
+            binding.topAppBar.setTitle("Last compile log");
         } else {
-            binding.topAppBar.setTitle(R.string.compile_log);
+            binding.topAppBar.setTitle("Compile log");
         }
 
         String sc_id = getIntent().getStringExtra("sc_id");
@@ -72,31 +70,35 @@ public class CompileLogActivity extends BaseAppCompatActivity {
                 if (compileErrorSaver.logFileExists()) {
                     compileErrorSaver.deleteSavedLogs();
                     getIntent().removeExtra("error");
-                    SketchwareUtil.toast(getString(R.string.compile_logs_have_been_cleared));
+                    SketchwareUtil.toast("Compile logs have been cleared.");
                 } else {
-                    SketchwareUtil.toast(getString(R.string.no_compile_logs_found));
+                    SketchwareUtil.toast("No compile logs found.");
                 }
 
                 setErrorText();
             });
         }
 
+        final String wrapTextLabel = "Wrap text";
+        final String monospacedFontLabel = "Monospaced font";
+        final String fontSizeLabel = "Font size";
+
         PopupMenu options = new PopupMenu(this, binding.formatButton);
-        options.getMenu().add(Menu.NONE, 0, Menu.NONE, getString(R.string.wrap_text)).setCheckable(true).setChecked(getWrappedTextPreference());
-        options.getMenu().add(Menu.NONE, 1, Menu.NONE, getString(R.string.monospaced_font)).setCheckable(true).setChecked(getMonospacedFontPreference());
-        options.getMenu().add(Menu.NONE, 2, Menu.NONE, getString(R.string.font_size));
+        options.getMenu().add(wrapTextLabel).setCheckable(true).setChecked(getWrappedTextPreference());
+        options.getMenu().add(monospacedFontLabel).setCheckable(true).setChecked(getMonospacedFontPreference());
+        options.getMenu().add(fontSizeLabel);
 
         options.setOnMenuItemClickListener(menuItem -> {
-            switch (menuItem.getItemId()) {
-                case 0 -> {
+            switch (menuItem.getTitle().toString()) {
+                case wrapTextLabel -> {
                     menuItem.setChecked(!menuItem.isChecked());
                     toggleWrapText(menuItem.isChecked());
                 }
-                case 1 -> {
+                case monospacedFontLabel -> {
                     menuItem.setChecked(!menuItem.isChecked());
                     toggleMonospacedText(menuItem.isChecked());
                 }
-                case 2 -> changeFontSizeDialog();
+                case fontSizeLabel -> changeFontSizeDialog();
                 default -> {
                     return false;
                 }
@@ -190,9 +192,9 @@ public class CompileLogActivity extends BaseAppCompatActivity {
                 Gravity.CENTER));
 
         new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.select_font_size)
+                .setTitle("Select font size")
                 .setView(layout)
-                .setPositiveButton(R.string.common_word_save, (dialog, which) -> {
+                .setPositiveButton("Save", (dialog, which) -> {
                     logViewerPreferences.edit().putInt(PREFERENCE_FONT_SIZE, picker.getValue()).apply();
 
                     binding.tvCompileLog.setTextSize((float) picker.getValue());

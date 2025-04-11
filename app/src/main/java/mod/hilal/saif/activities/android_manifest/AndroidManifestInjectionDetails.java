@@ -1,7 +1,7 @@
 package mod.hilal.saif.activities.android_manifest;
 
-import static pro.sketchware.utility.SketchwareUtil.getDip;
 import static pro.sketchware.utility.GsonUtils.getGson;
+import static pro.sketchware.utility.SketchwareUtil.getDip;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -120,7 +120,7 @@ public class AndroidManifestInjectionDetails extends BaseAppCompatActivity {
                         ActComponentsDialog acd = new ActComponentsDialog(this, src_id, activityName);
                         acd.show();
                         return true;
-                    default: 
+                    default:
                         return false;
                 }
             });
