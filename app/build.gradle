@@ -139,7 +139,7 @@ dependencies {
 
     implementation "com.github.Cosmic-Ide:DependencyResolver:290880eb6c"
 
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.0'
 
     implementation "org.eclipse.jdt:ecj:3.39.0"
 

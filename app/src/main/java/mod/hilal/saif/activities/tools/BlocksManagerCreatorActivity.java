@@ -237,7 +237,7 @@ public class BlocksManagerCreatorActivity extends BaseAppCompatActivity {
                 (int) SketchwareUtil.getDip(8),
                 0
         );
-        textView.setTextColor(MaterialColors.getColor(textView, R.attr.colorPrimary));
+        textView.setTextColor(MaterialColors.getColor(textView, androidx.appcompat.R.attr.colorPrimary));
         textView.setText(name);
         textView.setTextSize(14.0f);
         textView.setTypeface(Typeface.DEFAULT_BOLD);

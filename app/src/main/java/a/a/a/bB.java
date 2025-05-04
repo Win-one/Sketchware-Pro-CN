@@ -32,7 +32,7 @@ public class bB {
             CustomToastBinding binding = CustomToastBinding.inflate(LayoutInflater.from(themedContext));
 
             if (toastType == TOAST_WARNING) {
-                int errorColor = ThemeUtils.getColor(binding.getRoot(), R.attr.colorError);
+                int errorColor = ThemeUtils.getColor(binding.getRoot(), androidx.appcompat.R.attr.colorError);
 
                 binding.cardView.setCardBackgroundColor(ContextCompat.getColor(themedContext, R.color.color_error_bg));
                 binding.cardView.setStrokeColor(errorColor);

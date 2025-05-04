@@ -33,7 +33,7 @@ public class CollapsibleEventLayout extends CollapsibleLayout<CollapsibleButton>
         CollapsibleButton reset = CollapsibleButton.create(context, 0, R.drawable.ic_mtrl_reset, R.string.common_word_reset);
 
         delete = CollapsibleButton.create(context, 1, R.drawable.ic_mtrl_delete, R.string.common_word_delete);
-        var colorError = MaterialColors.getColor(delete, R.attr.colorError);
+        var colorError = MaterialColors.getColor(delete, androidx.appcompat.R.attr.colorError);
         var iconFilter = new PorterDuffColorFilter(colorError, PorterDuff.Mode.SRC_ATOP);
         delete.getLabel().setTextColor(colorError);
         delete.getIcon().setColorFilter(iconFilter);

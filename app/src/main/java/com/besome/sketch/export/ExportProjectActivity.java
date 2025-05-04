@@ -266,11 +266,11 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
     private void initializeAppBundleExportViews() {
         export_aab_button.setOnClickListener(view -> {
             MaterialAlertDialogBuilder confirmationDialog = new MaterialAlertDialogBuilder(this);
-            confirmationDialog.setTitle("Important note");
-            confirmationDialog.setMessage("The generated .aab file must be signed.\nCopy your keystore to /Internal storage/sketchware/keystore/release_key.jks and enter the alias' password.");
+            confirmationDialog.setTitle(R.string.important_note);
+            confirmationDialog.setMessage(R.string.the_generated_aab_file_must_be_signed);
             confirmationDialog.setIcon(R.drawable.ic_mtrl_info);
 
-            confirmationDialog.setPositiveButton("Understood", (v, which) -> {
+            confirmationDialog.setPositiveButton(R.string.common_word_understood, (v, which) -> {
                 showAabSigningDialog();
                 v.dismiss();
             });
@@ -280,7 +280,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
 
     private void showAabSigningDialog() {
         GetKeyStoreCredentialsDialog credentialsDialog = new GetKeyStoreCredentialsDialog(this,
-                R.drawable.ic_mtrl_key, "Sign outputted AAB", "Fill in the keystore details to sign the AAB.");
+                R.drawable.ic_mtrl_key, getString(R.string.sign_outputted_aab), getString(R.string.fill_in_the_keystore_details_to_sign_the_aab));
         credentialsDialog.setListener(credentials -> {
             BuildingAsyncTask task = new BuildingAsyncTask(this);
             task.enableAppBundleBuild();
@@ -333,7 +333,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
 
         sign_apk_button.setOnClickListener(view -> {
             MaterialAlertDialogBuilder confirmationDialog = new MaterialAlertDialogBuilder(this);
-            confirmationDialog.setTitle("Important note");
+            confirmationDialog.setTitle(R.string.important_note);
             confirmationDialog.setMessage("""
                     To sign an APK, you need a keystore. Use your already created one, and copy it to \
                     /Internal storage/sketchware/keystore/release_key.jks and enter the alias's password.
@@ -342,7 +342,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
                     use a 3rd-party tool (for now).""");
             confirmationDialog.setIcon(R.drawable.ic_mtrl_info);
 
-            confirmationDialog.setPositiveButton("Understood", (v, which) -> {
+            confirmationDialog.setPositiveButton(R.string.common_word_understood, (v, which) -> {
                 showApkSigningDialog();
                 v.dismiss();
             });
@@ -353,9 +353,9 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
     private void showApkSigningDialog() {
         GetKeyStoreCredentialsDialog credentialsDialog = new GetKeyStoreCredentialsDialog(this,
                 R.drawable.ic_mtrl_key,
-                "Sign an APK",
-                "Fill in the keystore details to sign the APK. " +
-                        "If you don't have a keystore, you can use a test key.");
+                getString(R.string.sign_an_apk),
+                getString(R.string.fill_in_the_keystore_details_to_sign_the_apk)+
+                        getString(R.string.if_you_don_t_have_a_keystore_you_can_use_a_test_key));
         credentialsDialog.setListener(credentials -> {
             sign_apk_button.setVisibility(View.GONE);
             sign_apk_output_stage.setVisibility(View.GONE);
@@ -467,7 +467,7 @@ public class ExportProjectActivity extends BaseAppCompatActivity {
             String sc_id = activity.get().sc_id;
 
             try {
-                publishProgress("Deleting temporary files...");
+                publishProgress(Helper.getResString(R.string.deleting_temporary_files));
                 FileUtil.deleteFile(project_metadata.projectMyscPath);
 
                 publishProgress(Helper.getResString(R.string.design_run_title_ready_to_build));
