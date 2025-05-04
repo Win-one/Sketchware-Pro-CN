@@ -186,7 +186,7 @@ public class ManageAssetsActivity extends BaseAppCompatActivity {
         dialog.show();
     }
 
-    private void showRenameDialog(final int position) {
+    private void showRenameDialog(int position) {
         DialogInputLayoutBinding dialogBinding = DialogInputLayoutBinding.inflate(getLayoutInflater());
 
         var inputText = dialogBinding.inputText;
@@ -213,7 +213,7 @@ public class ManageAssetsActivity extends BaseAppCompatActivity {
         inputText.requestFocus();
     }
 
-    private void showDeleteDialog(final int position) {
+    private void showDeleteDialog(int position) {
         new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.common_word_delete + assetsAdapter.getFileName(position) + "?")
                 .setMessage(R.string.are_you_sure_you_want_to_delete_this + (assetsAdapter.isFolder(position) ? "folder" : "file") + "? "

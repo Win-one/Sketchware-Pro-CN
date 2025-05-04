@@ -127,7 +127,7 @@ public class Hx {
 
     public void addLifecycleEvent(String eventName, String viewType, String viewId) {
         if (!activityLifecycleEvents.containsKey(eventName)) {
-            activityLifecycleEvents.put(eventName, Lx.getDefaultActivityLifecycleCode(eventName, viewType, isViewBindingEnabled ? ViewBindingBuilder.generateParameterFromId(viewId) : viewId));
+            activityLifecycleEvents.put(eventName, Lx.getDefaultActivityLifecycleCode(eventName, viewType, isViewBindingEnabled ? "binding." + ViewBindingBuilder.generateParameterFromId(viewId) : viewId));
         }
     }
 
@@ -409,7 +409,7 @@ public class Hx {
                 }
 
                 if (d.b) {
-                    this.hx.imports.addAll(mq.d(d.a));
+                    hx.imports.addAll(mq.d(d.a));
                 }
             }
         }
