@@ -2536,7 +2536,6 @@ Please try again later"</string>
     <string name="select_a_resource_file">Select a resource file</string>
     <string name="couldn_t_import_resource">Couldn\'t import resource! [</string>
     <string name="renaming_failed">Renaming failed</string>
-    <string name="common_word_deleted">Deleted</string>
     <string name="only_xml_files_can_be_edited">Only XML files can be edited</string>
     <string name="add_to_androidmanifest">Add to AndroidManifest</string>
     <string name="select_local_libraries">Select Local libraries</string>

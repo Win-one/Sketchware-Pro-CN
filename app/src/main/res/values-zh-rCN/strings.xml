@@ -2840,7 +2840,7 @@
     <string name="select_a_resource_file">选择资源文件</string>
     <string name="couldn_t_import_resource">无法导入资源![</string>
     <string name="renaming_failed">重命名失败</string>
-    <string name="common_word_deleted">已删除</string>
+    <string name="common_word_deleted">已删除!</string>
     <string name="only_xml_files_can_be_edited">只能编辑XML文件</string>
     <string name="add_to_androidmanifest">添加到AndroidManifest</string>
     <string name="select_local_libraries">选择本地库</string>
@@ -3210,4 +3210,6 @@
     <string name="couldn_t_parse_app_settings_restoring_defaults">无法解析系统设置!恢复默认值.</string>
     <string name="successfully_exported_event_to">已成功将事件导出到:\n</string>
     <string name="block_name">块名称</string>
+    <string name="view_widget_delete_title">删除部件</string>
+    <string name="view_widget_delete_description">是否确实要删除此视图及其子元素?\n如有必要,您可以撤消此作</string>
 </resources>
