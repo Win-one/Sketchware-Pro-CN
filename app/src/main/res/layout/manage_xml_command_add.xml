@@ -27,6 +27,7 @@
 
         <Button
             android:id="@+id/positive"
+            style="@style/Widget.Material3Expressive.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -44,10 +45,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_xml_name"
+                style="@style/Widget.SketchwarePro.TextInputLayout.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                style="@style/TextDropDownLayoutStyle">
+                android:layout_marginVertical="4dp">
 
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/xml_name"
@@ -72,10 +73,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_command"
+                style="@style/Widget.SketchwarePro.TextInputLayout.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="4dp"
-                style="@style/TextDropDownLayoutStyle">
+                android:layout_marginVertical="4dp">
 
                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/command"

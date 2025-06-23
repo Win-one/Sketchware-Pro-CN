@@ -48,7 +48,7 @@
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
                         android:src="@drawable/default_icon"
-                        app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+                        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full" />
                 </FrameLayout>
 
                 <TextView
@@ -215,7 +215,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:gravity="center"
-                            android:text="@string/common_word_project_information_version_code"
+                            android:text="Version code"
                             android:textSize="12sp" />
                     </LinearLayout>
 
@@ -256,7 +256,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:gravity="center"
-                            android:text="@string/myprojects_settings_version_control_title_name"
+                            android:text="Version name"
                             android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -270,27 +270,24 @@
         android:layout_gravity="bottom"
         android:background="?attr/colorSurface"
         android:orientation="horizontal"
-        android:paddingBottom="12dp">
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp">
 
         <Button
             android:id="@+id/cancel"
-            app:backgroundTint="?attr/colorAccent"
+            style="@style/Widget.Material3Expressive.Button.TonalButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_weight="1"
-            android:text="@string/common_word_cancel"
-            android:textSize="@dimen/text_size_button_material" />
+            android:text="@string/common_word_cancel" />
 
         <Button
             android:id="@+id/ok_button"
+            style="@style/Widget.Material3Expressive.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
             android:layout_weight="1"
-            android:text="@string/myprojects_list_menu_title_create_a_new_project"
-            android:textSize="@dimen/text_size_button_material" />
+            android:text="@string/common_word_create" />
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

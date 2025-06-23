@@ -375,7 +375,7 @@ public class yq {
             )).replaceAll(packageName);
             if (applyMultiDex) {
                 sketchApplicationFileContent = sketchApplicationFileContent.replaceAll(
-                        "Application \\{", "androidx.multidex.MultiDexApplication \\{");
+                        "Application \\{", "androidx.multidex.MultiDexApplication {");
             }
             if (logcatEnabled) {
                 sketchApplicationFileContent = sketchApplicationFileContent.replace(
@@ -664,7 +664,7 @@ public class yq {
             XmlBuilder externalPathTag = new XmlBuilder("external-path");
             externalPathTag.addAttribute("", "name", "external_files");
             externalPathTag.addAttribute("", "path", ".");
-            pathsTag.a(externalPathTag);
+            pathsTag.addChildNode(externalPathTag);
             srcCodeBeans.add(new SrcCodeBean("provider_paths.xml",
                     CommandBlock.applyCommands("xml/provider_paths.xml", pathsTag.toCode())));
         }
@@ -873,12 +873,16 @@ public class yq {
             }
         }
 
-        if (filename.equals("strings.xml")) {
-            return getXMLString();
-        } else if (filename.equals("colors.xml")) {
-            return getXMLColor();
-        } else if (filename.equals("styles.xml")) {
-            return getXMLStyle();
+        switch (filename) {
+            case "strings.xml" -> {
+                return getXMLString();
+            }
+            case "colors.xml" -> {
+                return getXMLColor();
+            }
+            case "styles.xml" -> {
+                return getXMLStyle();
+            }
         }
 
         if (isManifestFile) {

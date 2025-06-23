@@ -4,7 +4,6 @@ import static pro.sketchware.utility.GsonUtils.getGson;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Parcelable;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -19,16 +18,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.besome.sketch.lib.base.CollapsibleViewHolder;
 import com.besome.sketch.lib.ui.CollapsibleButton;
-import com.github.angads25.filepicker.model.DialogConfigs;
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -41,6 +36,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import a.a.a.wq;
+import dev.pranav.filepicker.FilePickerCallback;
+import dev.pranav.filepicker.FilePickerDialogFragment;
+import dev.pranav.filepicker.FilePickerOptions;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.components.ComponentsHandler;
 import mod.jbk.util.OldResourceIdMapper;
@@ -53,12 +51,12 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
     private static final String COMPONENT_EXPORT_DIR = wq.getExtraDataExport() + "/components/";
     private static final String COMPONENT_DIR = wq.getCustomComponent();
     private List<HashMap<String, Object>> componentsList = new ArrayList<>();
-    private LinearLayout noContentLayout;
+    private TextView tv_guide;
     private RecyclerView componentView;
 
     @Override
     public void onCreate(Bundle _savedInstanceState) {
-        EdgeToEdge.enable(this);
+        enableEdgeToEdgeNoContrast();
         super.onCreate(_savedInstanceState);
         setContentView(R.layout.manage_custom_component);
         handleInsetts(findViewById(R.id.root));
@@ -67,16 +65,12 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
 
     private void init() {
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
-        toolbar.setOnMenuItemClickListener(item -> {
-            int itemId = item.getItemId();
-            if (itemId == R.id.import_component_menus) {
-                showFilePickerDialog();
-                return true;
-            }
-            return false;
-        });
-        noContentLayout = findViewById(R.id.noContentLayout);
+
+        tv_guide = findViewById(R.id.tv_guide);
         componentView = findViewById(R.id.list);
 
         findViewById(R.id.fab).setOnClickListener(_view ->
@@ -90,6 +84,21 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0, 0, 0, "Import");
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == 0) {
+            showFilePickerDialog();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
         ComponentsHandler.refreshCachedCustomComponents();
@@ -99,7 +108,7 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
         if (FileUtil.isExistFile(COMPONENT_DIR)) {
             readComponents(COMPONENT_DIR);
         } else {
-            noContentLayout.setVisibility(View.VISIBLE);
+            tv_guide.setVisibility(View.VISIBLE);
             componentView.setVisibility(View.GONE);
         }
     }
@@ -113,29 +122,28 @@ public class ManageCustomComponentActivity extends BaseAppCompatActivity {
             componentView.getLayoutManager().onRestoreInstanceState(state);
             adapter.notifyDataSetChanged();
             componentView.setVisibility(View.VISIBLE);
-            noContentLayout.setVisibility(View.GONE);
+            tv_guide.setVisibility(View.GONE);
             return;
         }
-        noContentLayout.setVisibility(View.VISIBLE);
+        tv_guide.setVisibility(View.VISIBLE);
         componentView.setVisibility(View.GONE);
     }
 
     private void showFilePickerDialog() {
-        DialogProperties properties = new DialogProperties();
+        FilePickerOptions options = new FilePickerOptions();
+        options.setTitle("Select .json selector file");
+        options.setExtensions(new String[]{"json"});
 
-        properties.selection_mode = DialogConfigs.SINGLE_MODE;
-        properties.selection_type = DialogConfigs.FILE_SELECT;
-        properties.root = Environment.getExternalStorageDirectory();
-        properties.error_dir = Environment.getExternalStorageDirectory();
-        properties.offset = Environment.getExternalStorageDirectory();
-        properties.extensions = new String[]{"json"};
+        FilePickerCallback callback = new FilePickerCallback() {
+            @Override
+            public void onFileSelected(File file) {
+                selectComponentToImport(file.getAbsolutePath());
+            }
+        };
 
-        FilePickerDialog pickerDialog = new FilePickerDialog(this, properties, R.style.RoundedCornersDialog);
+        FilePickerDialogFragment pickerDialog = new FilePickerDialogFragment(options, callback);
 
-        pickerDialog.setTitle(R.string.select_json_selector_file);
-        pickerDialog.setDialogSelectionListener(selections -> selectComponentToImport(selections[0]));
-
-        pickerDialog.show();
+        pickerDialog.show(getSupportFragmentManager(), "filePickerDialog");
     }
 
     private void selectComponentToImport(String path) {

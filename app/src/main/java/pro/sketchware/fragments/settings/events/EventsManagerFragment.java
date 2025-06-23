@@ -13,8 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.Gson;
 
@@ -24,6 +22,9 @@ import java.util.Collections;
 import java.util.HashMap;
 
 import a.a.a.qA;
+import dev.pranav.filepicker.FilePickerCallback;
+import dev.pranav.filepicker.FilePickerDialogFragment;
+import dev.pranav.filepicker.FilePickerOptions;
 import mod.hey.studios.util.Helper;
 import pro.sketchware.R;
 import pro.sketchware.databinding.DialogAddNewListenerBinding;
@@ -50,7 +51,7 @@ public class EventsManagerFragment extends qA {
                 }
             }
         }
-        return Helper.getResString(R.string.events) + eventAmount;
+        return "Events: " + eventAmount;
     }
 
     @Override
@@ -101,9 +102,9 @@ public class EventsManagerFragment extends qA {
         }
 
         var dialog = new MaterialAlertDialogBuilder(requireContext())
-                .setTitle(existingListener == null ? getString(R.string.new_listener) : getString(R.string.edit_listener))
+                .setTitle(existingListener == null ? "New Listener" : "Edit Listener")
                 .setView(listenerBinding.getRoot())
-                .setPositiveButton(R.string.common_word_save, (di, i) -> {
+                .setPositiveButton("Save", (di, i) -> {
                     String listenerName = Helper.getText(listenerBinding.listenerName);
                     if (!listenerName.isEmpty()) {
                         HashMap<String, Object> hashMap = existingListener != null ? existingListener : new HashMap<>();
@@ -121,10 +122,10 @@ public class EventsManagerFragment extends qA {
                         addListenerItem();
                         di.dismiss();
                     } else {
-                        SketchwareUtil.toastError(Helper.getResString(R.string.invalid_name));
+                        SketchwareUtil.toastError("Invalid name!");
                     }
                 })
-                .setNegativeButton(R.string.common_word_cancel, (di, i) -> di.dismiss()).create();
+                .setNegativeButton("Cancel", (di, i) -> di.dismiss()).create();
         dialog.show();
     }
 
@@ -139,32 +140,32 @@ public class EventsManagerFragment extends qA {
     }
 
     private void showImportEventsDialog() {
-        DialogProperties dialogProperties = new DialogProperties();
-        dialogProperties.selection_mode = 0;
-        dialogProperties.selection_type = 0;
-        File file = new File(FileUtil.getExternalStorageDir());
-        dialogProperties.root = file;
-        dialogProperties.error_dir = file;
-        dialogProperties.offset = file;
-        dialogProperties.extensions = null;
-        FilePickerDialog filePickerDialog = new FilePickerDialog(requireContext(), dialogProperties, R.style.RoundedCornersDialog);
-        filePickerDialog.setTitle(R.string.select_a_txt_file);
-        filePickerDialog.setDialogSelectionListener(selections -> {
-            if (FileUtil.readFile(selections[0]).isEmpty()) {
-                SketchwareUtil.toastError(Helper.getResString(R.string.the_selected_file_is_empty));
-            } else if (FileUtil.readFile(selections[0]).equals("[]")) {
-                SketchwareUtil.toastError(Helper.getResString(R.string.the_selected_file_is_empty));
-            } else {
-                try {
-                    String[] split = FileUtil.readFile(selections[0]).split("\n");
-                    importEvents(new Gson().fromJson(split[0], Helper.TYPE_MAP_LIST),
-                            new Gson().fromJson(split[1], Helper.TYPE_MAP_LIST));
-                } catch (Exception e) {
-                    SketchwareUtil.toastError(Helper.getResString(R.string.invalid_file));
+        FilePickerOptions options = new FilePickerOptions();
+        options.setTitle("Select a .txt file");
+        options.setExtensions(new String[]{".txt"});
+
+        FilePickerCallback callback = new FilePickerCallback() {
+            @Override
+            public void onFileSelected(File file) {
+                if (FileUtil.readFile(file.getAbsolutePath()).isEmpty()) {
+                    SketchwareUtil.toastError("The selected file is empty!");
+                } else if (FileUtil.readFile(file.getAbsolutePath()).equals("[]")) {
+                    SketchwareUtil.toastError("The selected file is empty!");
+                } else {
+                    try {
+                        String[] split = FileUtil.readFile(file.getAbsolutePath()).split("\n");
+                        importEvents(new Gson().fromJson(split[0], Helper.TYPE_MAP_LIST),
+                                new Gson().fromJson(split[1], Helper.TYPE_MAP_LIST));
+                    } catch (Exception e) {
+                        SketchwareUtil.toastError("Invalid file");
+                    }
                 }
             }
-        });
-        filePickerDialog.show();
+
+        };
+        FilePickerDialogFragment filePickerDialog = new FilePickerDialogFragment(options, callback);
+
+        filePickerDialog.show(getChildFragmentManager(), "filePickerDialog");
     }
 
     private void importEvents(ArrayList<HashMap<String, Object>> data, ArrayList<HashMap<String, Object>> data2) {
@@ -177,7 +178,7 @@ public class EventsManagerFragment extends qA {
         listMap.addAll(data);
         FileUtil.writeFile(EventsManagerConstants.LISTENERS_FILE.getAbsolutePath(), new Gson().toJson(listMap));
         refreshList();
-        SketchwareUtil.toast(Helper.getResString(R.string.successfully_imported_events));
+        SketchwareUtil.toast("Successfully imported events");
     }
 
     private void exportListener(int p) {
@@ -195,7 +196,7 @@ public class EventsManagerFragment extends qA {
             }
         }
         FileUtil.writeFile(concat + ex.get(0).get("name").toString() + ".txt", new Gson().toJson(ex) + "\n" + new Gson().toJson(ex2));
-        SketchwareUtil.toast(getString(R.string.successfully_exported_event_to) +
+        SketchwareUtil.toast("Successfully exported event to:\n" +
                 "/Internal storage/.sketchware/data/system/export/events", Toast.LENGTH_LONG);
     }
 
@@ -206,7 +207,7 @@ public class EventsManagerFragment extends qA {
         }
         FileUtil.writeFile(new File(EventsManagerConstants.EVENT_EXPORT_LOCATION, "All_Events.txt").getAbsolutePath(),
                 new Gson().toJson(listMap) + "\n" + new Gson().toJson(events));
-        SketchwareUtil.toast(getString(R.string.successfully_exported_event_to) +
+        SketchwareUtil.toast("Successfully exported events to:\n" +
                 "/Internal storage/.sketchware/data/system/export/events", Toast.LENGTH_LONG);
     }
 
@@ -269,7 +270,7 @@ public class EventsManagerFragment extends qA {
             holder.itemView.setOnLongClickListener(v -> {
                 new MaterialAlertDialogBuilder(context)
                         .setTitle(name)
-                        .setItems(new String[]{getString(R.string.common_word_edit), getString(R.string.common_word_export), getString(R.string.common_word_delete)}, (dialog, which) -> {
+                        .setItems(new String[]{"Edit", "Export", "Delete"}, (dialog, which) -> {
                             switch (which) {
                                 case 0:
                                     showEditListenerDialog(position);
@@ -279,14 +280,14 @@ public class EventsManagerFragment extends qA {
                                     break;
                                 case 2:
                                     new MaterialAlertDialogBuilder(context)
-                                            .setTitle(R.string.delete_listener)
-                                            .setMessage(R.string.are_you_sure_you_want_to_delete_this_item)
-                                            .setPositiveButton(R.string.common_word_yes, (di, i) -> {
+                                            .setTitle("Delete listener")
+                                            .setMessage("Are you sure you want to delete this item?")
+                                            .setPositiveButton("Yes", (di, i) -> {
                                                 deleteRelatedEvents(name);
                                                 deleteItem(position);
                                                 di.dismiss();
                                             })
-                                            .setNegativeButton(R.string.common_word_no, (di, i) -> di.dismiss())
+                                            .setNegativeButton("No", (di, i) -> di.dismiss())
                                             .show();
                                     break;
                             }

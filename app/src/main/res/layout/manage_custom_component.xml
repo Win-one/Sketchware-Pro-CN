@@ -1,8 +1,8 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root"
     android:layout_width="match_parent"
+    android:id="@+id/root"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
@@ -21,15 +21,15 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
+                android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:menu="@menu/component_menu"
-                app:navigationIcon="@drawable/abc_ic_ab_back_material"
+                app:navigationIcon="?attr/homeAsUpIndicator"
+                app:menu="@menu/events_manager_menu"
                 app:title="@string/developer_tools_component_manager" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="16dp"
@@ -43,43 +43,19 @@
             android:paddingBottom="30dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/manage_custom_component_list_item" />
-    </androidx.core.widget.NestedScrollView>
-
-    <LinearLayout
-        android:id="@+id/noContentLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?android:colorBackground"
-        android:fitsSystemWindows="false"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingHorizontal="16dp"
-        android:paddingBottom="100dp"
-        android:visibility="gone"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:src="@drawable/img_nocontent" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:id="@+id/tv_guide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/no_component_available"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
+            android:padding="8dp"
             android:text="@string/developer_tools_component_description_guide_add_component"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
+    </RelativeLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -91,5 +67,5 @@
         android:layout_marginBottom="32dp"
         android:src="@drawable/ic_mtrl_add"
         app:elevation="6dp"
-        app:fabSize="normal" />
+        app:fabSize="normal"  />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

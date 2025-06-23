@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,9 +26,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
-import com.github.angads25.filepicker.model.DialogConfigs;
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.JsonParseException;
 
@@ -37,9 +33,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import dev.pranav.filepicker.FilePickerCallback;
+import dev.pranav.filepicker.FilePickerDialogFragment;
+import dev.pranav.filepicker.FilePickerOptions;
 import mod.hey.studios.util.Helper;
 import pro.sketchware.R;
 import pro.sketchware.utility.FileUtil;
@@ -96,37 +94,37 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                 intent.putExtra("pallet", String.valueOf(palette));
                 startActivity(intent);
             } else {
-                SketchwareUtil.toastError(Helper.getResString(R.string.invalid_color_of_palette) + (palette - 9));
+                SketchwareUtil.toastError("Invalid color of palette #" + (palette - 9));
             }
         });
     }
 
     public void openFileExplorerImport() {
-        DialogProperties properties = new DialogProperties();
-        properties.selection_mode = DialogConfigs.SINGLE_MODE;
-        properties.selection_type = DialogConfigs.FILE_SELECT;
-        File externalStorageDir = Environment.getExternalStorageDirectory();
-        properties.root = externalStorageDir;
-        properties.error_dir = externalStorageDir;
-        properties.offset = externalStorageDir;
-        properties.extensions = new String[]{"json"};
-        FilePickerDialog filePickerDialog = new FilePickerDialog(this, properties, R.style.RoundedCornersDialog);
-        filePickerDialog.setTitle(R.string.select_a_json_file);
-        filePickerDialog.setDialogSelectionListener(selections -> {
-            if (FileUtil.readFile(selections[0]).isEmpty()) {
-                SketchwareUtil.toastError(Helper.getResString(R.string.the_selected_file_is_empty));
-            } else if (FileUtil.readFile(selections[0]).equals("[]")) {
-                SketchwareUtil.toastError(Helper.getResString(R.string.the_selected_file_is_empty));
-            } else {
-                try {
-                    ArrayList<HashMap<String, Object>> readMap = getGson().fromJson(FileUtil.readFile(selections[0]), Helper.TYPE_MAP_LIST);
-                    _importBlocks(readMap);
-                } catch (JsonParseException e) {
-                    SketchwareUtil.toastError(Helper.getResString(R.string.invalid_json_file));
+        FilePickerOptions options = new FilePickerOptions();
+        options.setExtensions(new String[]{"json"});
+        options.setTitle("Select a JSON file");
+
+        FilePickerCallback callback = new FilePickerCallback() {
+            @Override
+            public void onFileSelected(File file) {
+                if (FileUtil.readFile(file.getAbsolutePath()).isEmpty()) {
+                    SketchwareUtil.toastError("The selected file is empty!");
+                } else if (FileUtil.readFile(file.getAbsolutePath()).equals("[]")) {
+                    SketchwareUtil.toastError("The selected file is empty!");
+                } else {
+                    try {
+                        ArrayList<HashMap<String, Object>> readMap = getGson().fromJson(FileUtil.readFile(file.getAbsolutePath()), Helper.TYPE_MAP_LIST);
+                        _importBlocks(readMap);
+                    } catch (JsonParseException e) {
+                        SketchwareUtil.toastError("Invalid JSON file");
+                    }
                 }
             }
-        });
-        filePickerDialog.show();
+        };
+
+        FilePickerDialogFragment dialog = new FilePickerDialogFragment(options, callback);
+
+        dialog.show(getSupportFragmentManager(), "filePickerDialog");
     }
 
     @Override
@@ -146,7 +144,6 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         if (mode.equals("editor")) {
             mode = "normal";
             Parcelable savedState = block_list.onSaveInstanceState();
@@ -165,11 +162,11 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
         menu.clear();
         if (Integer.parseInt(getIntent().getStringExtra("position")) != -1) {
             if (mode.equals("normal")) {
-                menu.add(Menu.NONE, 0, Menu.NONE, "Swap").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_swap_vertical)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-                menu.add(Menu.NONE, 1, Menu.NONE, R.string.common_word_import);
-                menu.add(Menu.NONE, 2, Menu.NONE, R.string.common_word_export);
+                menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Swap").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_swap_vertical)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Import");
+                menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Export");
             } else {
-                menu.add(Menu.NONE, 3, Menu.NONE, "Swap").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_save)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Swap").setIcon(AppCompatResources.getDrawable(this, R.drawable.ic_mtrl_save)).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
             }
         }
         return true;
@@ -177,8 +174,9 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case 0:
+        String title = menuItem.getTitle().toString();
+        switch (title) {
+            case "Swap":
                 if (mode.equals("normal")) {
                     mode = "editor";
                     fabButtonVisibility(false);
@@ -193,18 +191,18 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                 onCreateOptionsMenu(toolbar.getMenu());
                 break;
 
-            case 1:
+            case "Import":
                 openFileExplorerImport();
                 break;
 
-            case 2:
+            case "Export":
                 Object paletteName = pallet_list.get(palette - 9).get("name");
                 if (paletteName instanceof String) {
                     String exportTo = new File(BLOCK_EXPORT_PATH, paletteName + ".json").getAbsolutePath();
                     FileUtil.writeFile(exportTo, getGson().toJson(filtered_list));
-                    SketchwareUtil.toast(Helper.getResString(R.string.successfully_exported_blocks_to) + exportTo, Toast.LENGTH_LONG);
+                    SketchwareUtil.toast("Successfully exported blocks to:\n" + exportTo, Toast.LENGTH_LONG);
                 } else {
-                    SketchwareUtil.toastError(Helper.getResString(R.string.invalid_name_of_palette) + (palette - 9));
+                    SketchwareUtil.toastError("Invalid name of palette #" + (palette - 9));
                 }
                 break;
 
@@ -220,13 +218,13 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
         blocks_path = getIntent().getStringExtra("dirB");
         _refreshLists();
         if (palette == -1) {
-            Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.recycle_bin);
+            getSupportActionBar().setTitle("Recycle Bin");
             fab_button.setVisibility(View.GONE);
         } else {
             Object paletteName = pallet_list.get(palette - 9).get("name");
 
             if (paletteName instanceof String) {
-                Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.manage_block);
+                getSupportActionBar().setTitle("Manage Block");
                 getSupportActionBar().setSubtitle((String) paletteName);
             }
         }
@@ -291,7 +289,7 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                         filtered_list.add(block);
                     }
                 } catch (NumberFormatException e) {
-                    SketchwareUtil.toastError(Helper.getResString(R.string.invalid_palette_entry_in_block) + (i + 1));
+                    SketchwareUtil.toastError("Invalid palette entry in block #" + (i + 1));
                 }
             }
         }
@@ -311,15 +309,15 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
         if (palette == -1) {
             PopupMenu popupMenu = new PopupMenu(this, view);
             Menu menu = popupMenu.getMenu();
-            menu.add(Menu.NONE, 4, Menu.NONE, R.string.delete_permanently);
-            menu.add(Menu.NONE, 5, Menu.NONE, R.string.common_word_restore);
+            menu.add("Delete permanently");
+            menu.add("Restore");
             popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()) {
-                    case 4:
+                switch (item.getTitle().toString()) {
+                    case "Delete permanently":
                         _deleteBlock(position);
                         break;
 
-                    case 5:
+                    case "Restore":
                         _changePallette(position);
                         break;
 
@@ -333,17 +331,17 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
         }
         PopupMenu popupMenu = new PopupMenu(this, view);
         Menu menu = popupMenu.getMenu();
-        menu.add(Menu.NONE, 6, Menu.NONE, R.string.insert_above);
-        menu.add(Menu.NONE, 7, Menu.NONE, R.string.common_word_delete);
-        menu.add(Menu.NONE, 8, Menu.NONE, R.string.duplicate);
-        menu.add(Menu.NONE, 9, Menu.NONE, R.string.move_to_palette);
+        menu.add("Insert above");
+        menu.add("Delete");
+        menu.add("Duplicate");
+        menu.add("Move to palette");
         popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case 8:
+            switch (item.getTitle().toString()) {
+                case "Duplicate":
                     _duplicateBlock(position);
                     break;
 
-                case 6:
+                case "Insert above":
                     Object paletteColor = pallet_list.get(palette - 9).get("color");
                     if (paletteColor instanceof String) {
                         Intent intent = new Intent(getApplicationContext(), BlocksManagerCreatorActivity.class);
@@ -353,21 +351,21 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                         intent.putExtra("pos", String.valueOf(position));
                         startActivity(intent);
                     } else {
-                        SketchwareUtil.toastError(getString(R.string.invalid_color_of_palette) + (palette - 9));
+                        SketchwareUtil.toastError("Invalid color of palette #" + (palette - 9));
                     }
                     break;
 
-                case 9:
+                case "Move to palette":
                     _changePallette(position);
                     break;
 
-                case 7:
+                case "Delete":
                     new MaterialAlertDialogBuilder(this)
-                            .setTitle(R.string.delete_block)
-                            .setMessage(R.string.are_you_sure_you_want_to_delete_this_block)
-                            .setPositiveButton(R.string.recycle_bin, (dialog, which) -> _moveToRecycleBin(position))
+                            .setTitle("Delete block?")
+                            .setMessage("Are you sure you want to delete this block?")
+                            .setPositiveButton("Recycle bin", (dialog, which) -> _moveToRecycleBin(position))
                             .setNegativeButton(R.string.common_word_cancel, null)
-                            .setNeutralButton(R.string.delete_permanently, (dialog, which) -> _deleteBlock(position))
+                            .setNeutralButton("Delete permanently", (dialog, which) -> _deleteBlock(position))
                             .show();
                     break;
 
@@ -416,7 +414,7 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
             if (name instanceof String) {
                 paletteNames.add((String) name);
             } else {
-                SketchwareUtil.toastError(Helper.getResString(R.string.invalid_name_of_custom_block_palette) + (j + 1));
+                SketchwareUtil.toastError("Invalid name of Custom Block palette #" + (j + 1));
             }
         }
 
@@ -424,9 +422,9 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                 .setNegativeButton(R.string.common_word_cancel, null);
         if (palette == -1) {
             AtomicInteger restoreToChoice = new AtomicInteger(-1);
-            builder.setTitle(R.string.restore_to)
+            builder.setTitle("Restore to")
                     .setSingleChoiceItems(paletteNames.toArray(new String[0]), -1, (dialog, which) -> restoreToChoice.set(which))
-                    .setPositiveButton(R.string.common_word_restore, (dialog, which) -> {
+                    .setPositiveButton("Restore", (dialog, which) -> {
                         if (restoreToChoice.get() != -1) {
                             all_blocks_list.get(position).put("palette", String.valueOf(restoreToChoice.get() + 9));
                             Collections.swap(all_blocks_list, position, all_blocks_list.size() - 1);
@@ -436,9 +434,9 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                     });
         } else {
             AtomicInteger moveToChoice = new AtomicInteger(palette - 9);
-            builder.setTitle(R.string.move_to)
+            builder.setTitle("Move to")
                     .setSingleChoiceItems(paletteNames.toArray(new String[0]), palette - 9, (dialog, which) -> moveToChoice.set(which))
-                    .setPositiveButton(R.string.common_word_move, (dialog, which) -> {
+                    .setPositiveButton("Move", (dialog, which) -> {
                         all_blocks_list.get(position).put("palette", String.valueOf(moveToChoice.get() + 9));
                         Collections.swap(all_blocks_list, position, all_blocks_list.size() - 1);
                         FileUtil.writeFile(blocks_path, getGson().toJson(all_blocks_list));
@@ -458,11 +456,11 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                 if (blockName instanceof String) {
                     names.add((String) blockName);
                 } else {
-                    SketchwareUtil.toastError(Helper.getResString(R.string.invalid_name_entry_of_custom_block) + (i + 1) + Helper.getResString(R.string.in_blocks_to_import));
+                    SketchwareUtil.toastError("Invalid name entry of Custom Block #" + (i + 1) + " in Blocks to import");
                 }
             }
             MaterialAlertDialogBuilder import_dialog = new MaterialAlertDialogBuilder(this);
-            import_dialog.setTitle(R.string.import_blocks)
+            import_dialog.setTitle("Import blocks")
                     .setMultiChoiceItems(names.toArray(new CharSequence[0]), null, (dialog, which, isChecked) -> {
                         if (isChecked) {
                             toAdd.add(which);
@@ -470,7 +468,7 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                             toAdd.remove((Integer) which);
                         }
                     })
-                    .setPositiveButton(R.string.common_word_import, (dialog, which) -> {
+                    .setPositiveButton("Import", (dialog, which) -> {
                         for (int i = 0; i < blocks.size(); i++) {
                             if (toAdd.contains(i)) {
                                 HashMap<String, Object> map = blocks.get(i);
@@ -480,9 +478,9 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                         }
                         FileUtil.writeFile(blocks_path, getGson().toJson(all_blocks_list));
                         _refreshLists();
-                        SketchwareUtil.toast(Helper.getResString(R.string.imported_successfully));
+                        SketchwareUtil.toast("Imported successfully");
                     })
-                    .setNegativeButton(R.string.common_word_reverse, (dialog, which) -> {
+                    .setNegativeButton("Reverse", (dialog, which) -> {
                         for (int i = 0; i < blocks.size(); i++) {
                             if (!toAdd.contains(i)) {
                                 HashMap<String, Object> map = blocks.get(i);
@@ -492,9 +490,9 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                         }
                         FileUtil.writeFile(blocks_path, getGson().toJson(all_blocks_list));
                         _refreshLists();
-                        SketchwareUtil.toast(Helper.getResString(R.string.imported_successfully));
+                        SketchwareUtil.toast("Imported successfully");
                     })
-                    .setNeutralButton(R.string.common_word_all, (dialog, which) -> {
+                    .setNeutralButton("All", (dialog, which) -> {
                         for (int i = 0; i < blocks.size(); i++) {
                             HashMap<String, Object> map = blocks.get(i);
                             map.put("palette", String.valueOf(palette));
@@ -502,11 +500,11 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                         }
                         FileUtil.writeFile(blocks_path, getGson().toJson(all_blocks_list));
                         _refreshLists();
-                        SketchwareUtil.toast(Helper.getResString(R.string.imported_successfully));
+                        SketchwareUtil.toast("Imported successfully");
                     })
                     .show();
         } catch (Exception e) {
-            SketchwareUtil.toastError(getString(R.string.an_error_occurred) + e.getMessage() + "]");
+            SketchwareUtil.toastError("An error occurred! [" + e.getMessage() + "]");
         }
     }
 
@@ -571,7 +569,7 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                 spec.setHint("");
             } else {
                 name.setText("");
-                name.setHint(R.string.invalid_block_name_entry);
+                name.setHint("(Invalid block name entry)");
             }
 
             Object blockSpec = block.get("spec");
@@ -580,7 +578,7 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                 spec.setHint("");
             } else {
                 spec.setText("");
-                spec.setHint(R.string.invalid_block_spec_entry);
+                spec.setHint("(Invalid block spec entry)");
             }
 
             Object blockType = block.get("type");
@@ -627,14 +625,14 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                         try {
                             color = Color.parseColor((String) blockColor);
                         } catch (IllegalArgumentException e) {
-                            SketchwareUtil.toastError(getString(R.string.invalid_color_entry_in_block) + (position + 1));
+                            SketchwareUtil.toastError("Invalid color entry in block #" + (position + 1));
                         }
 
                         if (color != -1) {
                             spec.getBackground().setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
                         }
                     } else {
-                        SketchwareUtil.toastError(getString(R.string.invalid_color_entry_in_block) + (position + 1));
+                        SketchwareUtil.toastError("Invalid color entry in block #" + (position + 1));
                     }
                 } else {
                     HashMap<String, Object> paletteObject = pallet_list.get(palette - 9);
@@ -647,7 +645,7 @@ public class BlocksManagerDetailsActivity extends BaseAppCompatActivity {
                                     PorterDuff.Mode.MULTIPLY
                             ));
                         } catch (IllegalArgumentException e) {
-                            SketchwareUtil.toastError(getString(R.string.invalid_color_in_custom_block_palette) + (palette - 8));
+                            SketchwareUtil.toastError("Invalid color in Custom Block palette #" + (palette - 8));
                         }
                     }
                 }

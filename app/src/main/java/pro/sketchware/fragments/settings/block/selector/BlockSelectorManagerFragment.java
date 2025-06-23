@@ -1,12 +1,10 @@
 package pro.sketchware.fragments.settings.block.selector;
 
 import static mod.hey.studios.util.Helper.addBasicTextChangedListener;
-import static mod.hey.studios.util.Helper.getResString;
 import static pro.sketchware.utility.GsonUtils.getGson;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +13,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import com.github.angads25.filepicker.model.DialogConfigs;
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.gson.JsonElement;
@@ -33,6 +28,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import a.a.a.qA;
+import dev.pranav.filepicker.FilePickerCallback;
+import dev.pranav.filepicker.FilePickerDialogFragment;
+import dev.pranav.filepicker.FilePickerOptions;
 import mod.hey.studios.util.Helper;
 import pro.sketchware.R;
 import pro.sketchware.databinding.DialogBlockConfigurationBinding;
@@ -100,8 +98,8 @@ public class BlockSelectorManagerFragment extends qA {
 
     private void showCreateEditDialog(int index, boolean isEdit) {
         DialogBlockConfigurationBinding dialogBinding = DialogBlockConfigurationBinding.inflate(LayoutInflater.from(requireContext()));
-        dialogBinding.tilPalettesPath.setHint(R.string.selector_name);
-        dialogBinding.tilBlocksPath.setHint(R.string.selector_title);
+        dialogBinding.tilPalettesPath.setHint("Selector name");
+        dialogBinding.tilBlocksPath.setHint("Selector title (ex: Select View:)");
 
         if (isEdit) {
             dialogBinding.palettesPath.setText(selectors.get(index).getName());
@@ -110,7 +108,7 @@ public class BlockSelectorManagerFragment extends qA {
 
         addBasicTextChangedListener(dialogBinding.palettesPath, str -> {
             if (itemAlreadyExists(str)) {
-                dialogBinding.tilPalettesPath.setError(Helper.getResString(R.string.an_item_with_this_name_already_exists));
+                dialogBinding.tilPalettesPath.setError("An item with this name already exists");
             } else {
                 dialogBinding.tilPalettesPath.setError(null);
             }
@@ -118,22 +116,22 @@ public class BlockSelectorManagerFragment extends qA {
 
         if ("typeview".equals(Objects.requireNonNull(dialogBinding.palettesPath.getText()).toString())) {
             dialogBinding.palettesPath.setEnabled(false);
-            dialogBinding.tilPalettesPath.setOnClickListener(v -> SketchwareUtil.toast(Helper.getResString(R.string.you_cannot_change_the_name_of_this_selector)));
+            dialogBinding.tilPalettesPath.setOnClickListener(v -> SketchwareUtil.toast("You cannot change the name of this selector"));
         }
 
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(requireActivity());
-        dialog.setTitle(!isEdit ? getString(R.string.new_selector) : getString(R.string.edit_selector));
+        dialog.setTitle(!isEdit ? "New selector" : "Edit selector");
         dialog.setView(dialogBinding.getRoot());
-        dialog.setPositiveButton(!isEdit ? getString(R.string.common_word_create) : getString(R.string.common_word_save), (v, which) -> {
+        dialog.setPositiveButton(!isEdit ? "Create" : "Save", (v, which) -> {
             String selectorName = Helper.getText(dialogBinding.palettesPath);
             String selectorTitle = Objects.requireNonNull(dialogBinding.blocksPath.getText()).toString();
 
             if (selectorName.isEmpty()) {
-                SketchwareUtil.toast(Helper.getResString(R.string.please_type_the_selector_s_name));
+                SketchwareUtil.toast("Please type the selector's name");
                 return;
             }
             if (selectorTitle.isEmpty()) {
-                SketchwareUtil.toast(Helper.getResString(R.string.please_type_the_selector_s_title));
+                SketchwareUtil.toast("Please type the selector's title");
                 return;
             }
             if (!isEdit) {
@@ -146,12 +144,12 @@ public class BlockSelectorManagerFragment extends qA {
                             )
                     );
                 } else {
-                    SketchwareUtil.toast(Helper.getResString(R.string.an_item_with_this_name_already_exists));
+                    SketchwareUtil.toast("An item with this name already exists");
                 }
             } else {
                 selectors.set(index, new Selector(
-                        selectorName,
                         selectorTitle,
+                        selectorName,
                         selectors.get(index).getData()
                 ));
             }
@@ -159,14 +157,14 @@ public class BlockSelectorManagerFragment extends qA {
             adapter.notifyDataSetChanged();
             v.dismiss();
         });
-        dialog.setNegativeButton(R.string.common_word_cancel, (v, which) -> v.dismiss());
+        dialog.setNegativeButton("Cancel", (v, which) -> v.dismiss());
         dialog.show();
     }
 
     private void showActionsDialog(int index) {
         DialogSelectorActionsBinding dialogBinding = DialogSelectorActionsBinding.inflate(LayoutInflater.from(requireContext()));
         AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity()).create();
-        dialog.setTitle(R.string.actions);
+        dialog.setTitle("Actions");
         dialog.setView(dialogBinding.getRoot());
 
         dialogBinding.edit.setOnClickListener(v -> {
@@ -183,7 +181,7 @@ public class BlockSelectorManagerFragment extends qA {
         dialogBinding.delete.setOnClickListener(v -> {
             dialog.dismiss();
             showConfirmationDialog(
-                    getResString(R.string.are_you_sure_you_want_to_delete_this_selector),
+                    "Are you sure you want to delete this selector?",
                     confirmDialog -> {
                         selectors.remove(index);
                         saveAllSelectors();
@@ -202,10 +200,10 @@ public class BlockSelectorManagerFragment extends qA {
             CancelListener onCancel
     ) {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(requireActivity());
-        dialog.setTitle(R.string.attention);
+        dialog.setTitle("Attention");
         dialog.setMessage(message);
-        dialog.setPositiveButton(R.string.common_word_yes, (v, which) -> onConfirm.onConfirm(v));
-        dialog.setNegativeButton(R.string.common_word_cancel, (v, which) -> onCancel.onCancel(v));
+        dialog.setPositiveButton("Yes", (v, which) -> onConfirm.onConfirm(v));
+        dialog.setNegativeButton("Cancel", (v, which) -> onCancel.onCancel(v));
         dialog.setCancelable(false);
         dialog.show();
     }
@@ -220,7 +218,7 @@ public class BlockSelectorManagerFragment extends qA {
             } else if (item.getItemId() == R.id.export_all_block_selector_menus) {
                 saveAllSelectors(
                         BlockSelectorConsts.EXPORT_FILE.getAbsolutePath(),
-                        getResString(R.string.exported_in) + BlockSelectorConsts.EXPORT_FILE.getAbsolutePath()
+                        "Exported in " + BlockSelectorConsts.EXPORT_FILE.getAbsolutePath()
                 );
                 return true;
             }
@@ -229,25 +227,25 @@ public class BlockSelectorManagerFragment extends qA {
     }
 
     private void showImportSelectorDialog() {
-        DialogProperties properties = new DialogProperties();
+        FilePickerOptions options = new FilePickerOptions();
+        options.setTitle("Select .json selector file");
+        options.setExtensions(new String[]{"json"});
 
-        properties.selection_mode = DialogConfigs.SINGLE_MODE;
-        properties.selection_type = DialogConfigs.FILE_SELECT;
-        properties.root = Environment.getExternalStorageDirectory();
-        properties.error_dir = Environment.getExternalStorageDirectory();
-        properties.offset = Environment.getExternalStorageDirectory();
-        properties.extensions = new String[]{"json"};
+        FilePickerCallback callback = new FilePickerCallback() {
+            @Override
+            public void onFileSelected(File file) {
+                handleToImportFile(file);
+            }
 
-        FilePickerDialog pickerDialog = new FilePickerDialog(requireContext(), properties, R.style.RoundedCornersDialog);
+        };
 
-        pickerDialog.setTitle(R.string.select_json_selector_file);
-        pickerDialog.setDialogSelectionListener(selections -> handleToImportFile(new File(selections[0])));
+        FilePickerDialogFragment pickerDialog = new FilePickerDialogFragment(options, callback);
 
-        pickerDialog.show();
+        pickerDialog.show(getChildFragmentManager(), "file_picker_dialog");
     }
 
     private void saveAllSelectors() {
-        saveAllSelectors(BlockSelectorConsts.BLOCK_SELECTORS_FILE.getAbsolutePath(), getResString(R.string.common_word_saved));
+        saveAllSelectors(BlockSelectorConsts.BLOCK_SELECTORS_FILE.getAbsolutePath(), "Saved");
     }
 
     private void saveAllSelectors(String path, String message) {
@@ -264,7 +262,7 @@ public class BlockSelectorManagerFragment extends qA {
                 path,
                 getGson().toJson(selector)
         );
-        SketchwareUtil.toast(getResString(R.string.exported_in) + path);
+        SketchwareUtil.toast("Exported in " + path);
     }
 
     private void handleToImportFile(File file) {
@@ -277,7 +275,7 @@ public class BlockSelectorManagerFragment extends qA {
                     saveAllSelectors();
                     adapter.notifyDataSetChanged();
                 } else {
-                    SketchwareUtil.toastError(Helper.getResString(R.string.make_sure_you_select_a_file));
+                    SketchwareUtil.toastError("Make sure you select a file that contains selector item(s).");
                 }
             } else {
                 List<Selector> selectorsN = getSelectorsFromFile(file);
@@ -286,12 +284,12 @@ public class BlockSelectorManagerFragment extends qA {
                     saveAllSelectors();
                     adapter.notifyDataSetChanged();
                 } else {
-                    SketchwareUtil.toastError(Helper.getResString(R.string.make_sure_you_select_a_file));
+                    SketchwareUtil.toastError("Make sure you select a file that contains selector item(s).");
                 }
             }
         } catch (Exception e) {
             Log.e(BlockSelectorConsts.TAG, e.toString());
-            SketchwareUtil.toastError(Helper.getResString(R.string.make_sure_you_select_a_file));
+            SketchwareUtil.toastError("Make sure you select a file that contains a selector item(s).");
         }
     }
 
@@ -301,7 +299,7 @@ public class BlockSelectorManagerFragment extends qA {
             return getGson().fromJson(json, Selector.class);
         } catch (Exception e) {
             Log.e(BlockSelectorConsts.TAG, e.toString());
-            SketchwareUtil.toastError(Helper.getResString(R.string.an_error_occurred_while_trying_to_get_the_selector));
+            SketchwareUtil.toastError("An error occurred while trying to get the selector");
             return null;
         }
     }
@@ -314,7 +312,7 @@ public class BlockSelectorManagerFragment extends qA {
             return getGson().fromJson(json, itemListType);
         } catch (Exception e) {
             Log.e(BlockSelectorConsts.TAG, e.toString());
-            SketchwareUtil.toastError(Helper.getResString(R.string.an_error_occurred_while_trying_to_get_the_selector));
+            SketchwareUtil.toastError("An error occurred while trying to get the selectors");
             return null;
         }
     }

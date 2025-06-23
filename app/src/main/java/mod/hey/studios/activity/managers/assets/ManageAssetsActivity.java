@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,24 +13,27 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.PopupMenu;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.bumptech.glide.Glide;
-import com.github.angads25.filepicker.model.DialogConfigs;
-import com.github.angads25.filepicker.model.DialogProperties;
-import com.github.angads25.filepicker.view.FilePickerDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
+import dev.pranav.filepicker.FilePickerCallback;
+import dev.pranav.filepicker.FilePickerDialogFragment;
+import dev.pranav.filepicker.FilePickerOptions;
+import dev.pranav.filepicker.SelectionMode;
 import mod.hey.studios.code.SrcCodeEditor;
 import mod.hey.studios.util.Helper;
 import pro.sketchware.R;
@@ -55,7 +57,7 @@ public class ManageAssetsActivity extends BaseAppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        EdgeToEdge.enable(this);
+        enableEdgeToEdgeNoContrast();
         super.onCreate(savedInstanceState);
         binding = ManageFileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -105,7 +107,7 @@ public class ManageAssetsActivity extends BaseAppCompatActivity {
         )) {
             super.onBackPressed();
         } else {
-            current_path = current_path.substring(0, current_path.lastIndexOf(DialogConfigs.DIRECTORY_SEPERATOR));
+            current_path = current_path.substring(0, current_path.lastIndexOf(File.separator));
             refresh();
         }
     }
@@ -117,10 +119,10 @@ public class ManageAssetsActivity extends BaseAppCompatActivity {
 
         var dialog = new MaterialAlertDialogBuilder(this)
                 .setView(dialogBinding.getRoot())
-                .setTitle(R.string.create_new)
-                .setMessage(R.string.if_you_re_creating_a_file_make_sure_to_add_an_extension)
-                .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
-                .setPositiveButton(R.string.common_word_create, null)
+                .setTitle("Create new")
+                .setMessage("If you're creating a file, make sure to add an extension.")
+                .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton("Create", null)
                 .create();
 
         dialog.setOnShowListener(dialogInterface -> {
@@ -129,7 +131,7 @@ public class ManageAssetsActivity extends BaseAppCompatActivity {
                 String editable = Helper.getText(inputText).trim();
 
                 if (editable.isEmpty()) {
-                    SketchwareUtil.toastError(getString(R.string.invalid_name));
+                    SketchwareUtil.toastError("Invalid name");
                     return;
                 }
 
@@ -139,12 +141,12 @@ public class ManageAssetsActivity extends BaseAppCompatActivity {
                 } else if (checkedChipId == R.id.chip_folder) {
                     FileUtil.makeDir(new File(current_path, editable).getAbsolutePath());
                 } else {
-                    SketchwareUtil.toast(getString(R.string.select_a_file_type));
+                    SketchwareUtil.toast("Select a file type");
                     return;
                 }
 
                 refresh();
-                SketchwareUtil.toast(getString(R.string.file_was_created_successfully));
+                SketchwareUtil.toast("File was created successfully");
                 dialogInterface.dismiss();
             });
         });
@@ -160,30 +162,26 @@ public class ManageAssetsActivity extends BaseAppCompatActivity {
     }
 
     private void showImportDialog() {
-        DialogProperties properties = new DialogProperties();
+        FilePickerOptions options = new FilePickerOptions();
+        options.setSelectionMode(SelectionMode.BOTH);
+        options.setMultipleSelection(true);
+        options.setTitle("Select an asset file");
 
-        properties.selection_mode = DialogConfigs.MULTI_MODE;
-        properties.selection_type = DialogConfigs.FILE_AND_DIR_SELECT;
-        properties.root = Environment.getExternalStorageDirectory();
-        properties.error_dir = Environment.getExternalStorageDirectory();
-        properties.offset = Environment.getExternalStorageDirectory();
-        properties.extensions = null;
-
-        FilePickerDialog dialog = new FilePickerDialog(this, properties, R.style.RoundedCornersDialog);
-        dialog.setTitle(R.string.select_an_asset_file);
-        dialog.setDialogSelectionListener(selections -> {
-            for (String path : selections) {
-                File file = new File(path);
-                try {
-                    FileUtil.copyDirectory(file, new File(current_path, file.getName()));
-                    refresh();
-                } catch (IOException e) {
-                    SketchwareUtil.toastError(getString(R.string.couldn_t_import_file) + e.getMessage() + "]");
+        FilePickerCallback callback = new FilePickerCallback() {
+            @Override
+            public void onFilesSelected(@NotNull List<? extends File> files) {
+                for (File file : files) {
+                    try {
+                        FileUtil.copyDirectory(file, new File(current_path, file.getName()));
+                        refresh();
+                    } catch (IOException e) {
+                        SketchwareUtil.toastError("Couldn't import file! [" + e.getMessage() + "]");
+                    }
                 }
             }
-        });
+        };
 
-        dialog.show();
+        new FilePickerDialogFragment(options, callback).show(getSupportFragmentManager(), "filePicker");
     }
 
     private void showRenameDialog(int position) {
@@ -192,14 +190,14 @@ public class ManageAssetsActivity extends BaseAppCompatActivity {
         var inputText = dialogBinding.inputText;
 
         var dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.common_word_rename + assetsAdapter.getFileName(position))
+                .setTitle("Rename " + assetsAdapter.getFileName(position))
                 .setView(dialogBinding.getRoot())
-                .setNegativeButton(R.string.common_word_cancel, (dialogInterface, i) -> dialogInterface.dismiss())
-                .setPositiveButton(R.string.common_word_rename, (dialogInterface, i) -> {
+                .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
+                .setPositiveButton("Rename", (dialogInterface, i) -> {
                     if (!Helper.getText(inputText).isEmpty()) {
                         FileUtil.renameFile(assetsAdapter.getItem(position), new File(current_path, Helper.getText(inputText)).getAbsolutePath());
                         refresh();
-                        SketchwareUtil.toast(getString(R.string.renamed_successfully));
+                        SketchwareUtil.toast("Renamed successfully");
                     }
                     dialogInterface.dismiss();
                 })
@@ -215,13 +213,13 @@ public class ManageAssetsActivity extends BaseAppCompatActivity {
 
     private void showDeleteDialog(int position) {
         new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.common_word_delete + assetsAdapter.getFileName(position) + "?")
-                .setMessage(R.string.are_you_sure_you_want_to_delete_this + (assetsAdapter.isFolder(position) ? "folder" : "file") + "? "
-                        + R.string.this_action_cannot_be_undone)
+                .setTitle("Delete " + assetsAdapter.getFileName(position) + "?")
+                .setMessage("Are you sure you want to delete this " + (assetsAdapter.isFolder(position) ? "folder" : "file") + "? "
+                        + "This action cannot be undone.")
                 .setPositiveButton(R.string.common_word_delete, (dialog, which) -> {
                     FileUtil.deleteFile(assetsAdapter.getItem(position));
                     refresh();
-                    SketchwareUtil.toast(getString(R.string.deleted_successfully));
+                    SketchwareUtil.toast("Deleted successfully");
                 })
                 .setNegativeButton(R.string.common_word_cancel, null)
                 .create()
@@ -303,11 +301,11 @@ public class ManageAssetsActivity extends BaseAppCompatActivity {
                 PopupMenu popupMenu = new PopupMenu(holder.itemView.getContext(), v);
 
                 if (!isFolder(position)) {
-                    popupMenu.getMenu().add(0, 0, 0, R.string.common_word_edit);
+                    popupMenu.getMenu().add(0, 0, 0, "Edit");
                 }
 
-                popupMenu.getMenu().add(0, 1, 0, R.string.common_word_rename);
-                popupMenu.getMenu().add(0, 2, 0, R.string.common_word_delete);
+                popupMenu.getMenu().add(0, 1, 0, "Rename");
+                popupMenu.getMenu().add(0, 2, 0, "Delete");
 
                 popupMenu.setOnMenuItemClickListener(itemMenu -> {
                     switch (itemMenu.getItemId()) {
@@ -336,7 +334,7 @@ public class ManageAssetsActivity extends BaseAppCompatActivity {
 
         public String getFileName(int position) {
             String item = getItem(position);
-            return item.substring(item.lastIndexOf(DialogConfigs.DIRECTORY_SEPERATOR) + 1);
+            return item.substring(item.lastIndexOf(File.separator) + 1);
         }
 
         public boolean isFolder(int position) {

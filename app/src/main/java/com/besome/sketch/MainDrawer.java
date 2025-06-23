@@ -8,6 +8,8 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
@@ -16,7 +18,6 @@ import androidx.annotation.StringRes;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.besome.sketch.help.ProgramInfoActivity;
-import com.besome.sketch.help.SystemSettingActivity;
 import com.besome.sketch.tools.NewKeyStoreActivity;
 import com.google.android.material.navigation.NavigationView;
 
@@ -26,7 +27,7 @@ import dev.chrisbanes.insetter.Side;
 import mod.hilal.saif.activities.tools.AppSettings;
 import pro.sketchware.R;
 import pro.sketchware.activities.about.AboutActivity;
-import pro.sketchware.activities.settings.SettingsActivity;
+import pro.sketchware.utility.UI;
 
 public class MainDrawer extends NavigationView {
     private static final int DEF_STYLE_RES = R.style.Widget_SketchwarePro_NavigationView_Main;
@@ -36,7 +37,7 @@ public class MainDrawer extends NavigationView {
     }
 
     public MainDrawer(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, com.google.android.material.R.attr.navigationViewStyle);
+        this(context, attrs, R.attr.navigationViewStyle);
     }
 
     public MainDrawer(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -45,12 +46,15 @@ public class MainDrawer extends NavigationView {
 
         var layoutDirection = context.getResources().getConfiguration().getLayoutDirection();
         Insetter.builder()
-                .margin(WindowInsetsCompat.Type.navigationBars(),
+                .margin(WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.navigationBars(),
                         Side.create(layoutDirection == LAYOUT_DIRECTION_LTR,
                                 false, layoutDirection == LAYOUT_DIRECTION_RTL, false))
                 .applyToView(this);
 
-        inflateHeaderView(R.layout.main_drawer_header);
+        ViewGroup headerView = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.main_drawer_header, null);
+        headerView.findViewById(R.id.status_bar_overlapper).setMinimumHeight(UI.getStatusBarHeight(context));
+
+        addHeaderView(headerView);
         inflateMenu(R.menu.main_drawer_menu);
         setNavigationItemSelectedListener(item -> {
             initializeSocialLinks(item.getItemId());
@@ -93,21 +97,7 @@ public class MainDrawer extends NavigationView {
             Intent intent = new Intent(activity, ProgramInfoActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             activity.startActivityForResult(intent, 105);
-        } else if (id == R.id.system_settings) {
-            Intent intent = new Intent(activity, SystemSettingActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            activity.startActivity(intent);
-        } else if (id == R.id.language_settings) {
-            Intent intent = new Intent(activity, SettingsActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            intent.putExtra("fragment_tag", SettingsActivity.SETTINGS_LANGUAGE_FRAGMENT);
-            activity.startActivity(intent);
-        } else if (id == R.id.appearance_settings) {
-            Intent intent = new Intent(activity, SettingsActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            intent.putExtra("fragment_tag", SettingsActivity.SETTINGS_APPEARANCE_FRAGMENT);
-            activity.startActivity(intent);
-        } else if (id == R.id.developer_tools) {
+        } else if (id == R.id.app_settings) {
             Intent intent = new Intent(activity, AppSettings.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             activity.startActivity(intent);
