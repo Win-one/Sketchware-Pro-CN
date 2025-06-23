@@ -207,7 +207,7 @@ public class BlocksManager extends BaseAppCompatActivity {
     private void showBlockConfigurationDialog() {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
         dialog.setIcon(R.drawable.ic_folder_48dp);
-        dialog.setTitle("Block configuration");
+        dialog.setTitle(getString(R.string.block_configuration));
 
         DialogBlockConfigurationBinding dialogBinding = DialogBlockConfigurationBinding.inflate(getLayoutInflater());
 
@@ -227,7 +227,7 @@ public class BlocksManager extends BaseAppCompatActivity {
 
         dialog.setNegativeButton(Helper.getResString(R.string.common_word_cancel), null);
 
-        dialog.setNeutralButton("Defaults", (view, which) -> {
+        dialog.setNeutralButton(R.string.common_word_default, (view, which) -> {
             ConfigActivity.setSetting(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH, ConfigActivity.getDefaultValue(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_PALETTE_FILE_PATH));
             ConfigActivity.setSetting(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_BLOCK_FILE_PATH, ConfigActivity.getDefaultValue(ConfigActivity.SETTING_BLOCKMANAGER_DIRECTORY_BLOCK_FILE_PATH));
 
@@ -313,7 +313,7 @@ public class BlocksManager extends BaseAppCompatActivity {
         }
 
         binding.paletteRecycler.setAdapter(new PaletteAdapter(pallet_listmap));
-        binding.recycleSub.setText("Blocks: " + (long) (getN(-1)));
+        binding.recycleSub.setText(getString(R.string.blocks) + (long) (getN(-1)));
         refreshCount();
     }
 
@@ -331,7 +331,7 @@ public class BlocksManager extends BaseAppCompatActivity {
 
     private void refreshCount() {
         if (pallet_listmap.isEmpty()) {
-            binding.paletteCount.setText("No palettes");
+            binding.paletteCount.setText(R.string.no_palettes);
         } else {
             binding.paletteCount.setText(pallet_listmap.size() + " Palettes");
         }
@@ -347,10 +347,10 @@ public class BlocksManager extends BaseAppCompatActivity {
         });
         view.setOnLongClickListener(v -> {
             new MaterialAlertDialogBuilder(this)
-                    .setTitle("Recycle bin")
-                    .setMessage("Are you sure you want to empty the recycle bin? " +
-                            "Blocks inside will be deleted PERMANENTLY, you CANNOT recover them!")
-                    .setPositiveButton("Empty", (dialog, which) -> emptyRecyclebin())
+                    .setTitle(getString(R.string.recycle_bin))
+                    .setMessage(getString(R.string.are_you_sure_you_want_to_empty_the_recycle_bin) +
+                            getString(R.string.blocks_inside_will_be_deleted_permanently_you_cannot_recover_them))
+                    .setPositiveButton(getString(R.string.common_word_apply), (dialog, which) -> emptyRecyclebin())
                     .setNegativeButton(R.string.common_word_cancel, null)
                     .show();
             return true;
@@ -436,7 +436,7 @@ public class BlocksManager extends BaseAppCompatActivity {
     private void showPaletteDialog(boolean isEditing, Integer oldPosition, String oldName, String oldColor, Integer insertAtPosition) {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
         dialog.setIcon(R.drawable.icon_style_white_96);
-        dialog.setTitle(!isEditing ? "Create a new palette" : "Edit palette");
+        dialog.setTitle(!isEditing ? getString(R.string.create_a_new_palette) : getString(R.string.edit_palette));
 
         dialogBinding = DialogPaletteBinding.inflate(getLayoutInflater());
 
@@ -468,14 +468,14 @@ public class BlocksManager extends BaseAppCompatActivity {
             String colorInput = Objects.requireNonNull(dialogBinding.colorEditText.getText()).toString();
 
             if (nameInput.isEmpty()) {
-                SketchwareUtil.toast("Name cannot be empty", Toast.LENGTH_SHORT);
+                SketchwareUtil.toast(getString(R.string.name_cannot_be_empty), Toast.LENGTH_SHORT);
                 return;
             }
             // add hash for the color 
             colorInput = "#" + colorInput;
 
             if (!PropertiesUtil.isHexColor(colorInput)) {
-                SketchwareUtil.toast("Please enter a valid HEX color", Toast.LENGTH_SHORT);
+                SketchwareUtil.toast(getString(R.string.please_enter_a_valid_hex_color), Toast.LENGTH_SHORT);
                 return;
             }
 
@@ -569,35 +569,32 @@ public class BlocksManager extends BaseAppCompatActivity {
 
             holder.itemView.setVisibility(View.VISIBLE);
             holder.itemBinding.title.setText(Objects.requireNonNull(pallet_listmap.get(position).get("name")).toString());
-            holder.itemBinding.sub.setText("Blocks: " + (long) (getN(position + 9)));
+            holder.itemBinding.sub.setText(getString(R.string.blocks) + (long) (getN(position + 9)));
             holder.itemBinding.color.setBackgroundColor(backgroundColor);
             holder.itemBinding.dragHandler.setVisibility(View.VISIBLE);
-            binding.recycleSub.setText("Blocks: " + (long) (getN(-1)));
+            binding.recycleSub.setText(getString(R.string.blocks) + (long) (getN(-1)));
 
             holder.itemBinding.backgroundCard.setOnLongClickListener(v -> {
-                final String edit = "Edit";
-                final String delete = "Delete";
-                final String insert = "Insert";
 
                 PopupMenu popup = new PopupMenu(BlocksManager.this, holder.itemBinding.color);
                 Menu menu = popup.getMenu();
-                menu.add(edit);
-                menu.add(delete);
-                menu.add(insert);
+                menu.add(Menu.NONE, 1, Menu.NONE, R.string.common_word_edit);
+                menu.add(Menu.NONE, 2, Menu.NONE, R.string.common_word_delete);
+                menu.add(Menu.NONE, 3, Menu.NONE, R.string.insert);
                 popup.setOnMenuItemClickListener(item -> {
                     int pos = holder.getAbsoluteAdapterPosition();
-                    switch (Objects.requireNonNull(item.getTitle()).toString()) {
-                        case edit:
+                    switch (item.getItemId()) {
+                        case 1:
                             showPaletteDialog(true, pos,
                                     Objects.requireNonNull(pallet_listmap.get(pos).get("name")).toString(),
                                     Objects.requireNonNull(pallet_listmap.get(pos).get("color")).toString(), null);
                             break;
 
-                        case delete:
+                        case 2:
                             new MaterialAlertDialogBuilder(BlocksManager.this)
                                     .setTitle(Objects.requireNonNull(pallet_listmap.get(pos).get("name")).toString())
-                                    .setMessage("Remove all blocks related to this palette?")
-                                    .setPositiveButton("Remove permanently", (dialog, which) -> {
+                                    .setMessage(R.string.remove_all_blocks_related_to_this_palette)
+                                    .setPositiveButton(R.string.remove_permanently, (dialog, which) -> {
                                         palettes.remove(pos);
                                         notifyItemRemoved(pos);
                                         FileUtil.writeFile(pallet_dir, getGson().toJson(pallet_listmap));
@@ -617,7 +614,7 @@ public class BlocksManager extends BaseAppCompatActivity {
                                     }).show();
                             break;
 
-                        case insert:
+                        case 3:
                             showPaletteDialog(false, null, null, null, position);
                             break;
 
