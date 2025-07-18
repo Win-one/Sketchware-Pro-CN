@@ -489,12 +489,12 @@ public class ViewProperty extends LinearLayout implements Kw {
 
         private void configure(int imageResId, int propertyNameResId) {
             propertyMenuItem.setVisibility(VISIBLE);
-            propertyMenuItem.setCardBackgroundColor(MaterialColors.getColor(this, com.google.android.material.R.attr.colorPrimaryContainer));
+            propertyMenuItem.setCardBackgroundColor(MaterialColors.getColor(this, R.attr.colorPrimaryContainer));
+            propertyMenuItem.setOnClickListener(this);
             icon.setImageResource(imageResId);
-            icon.setColorFilter(MaterialColors.getColor(this, com.google.android.material.R.attr.colorOnPrimaryContainer), PorterDuff.Mode.SRC_ATOP);
+            icon.setColorFilter(MaterialColors.getColor(this, R.attr.colorOnPrimaryContainer), PorterDuff.Mode.SRC_ATOP);
             title.setText(Helper.getResString(propertyNameResId));
-            title.setTextColor(MaterialColors.getColor(this, com.google.android.material.R.attr.colorOnPrimaryContainer));
-            setOnClickListener(this);
+            title.setTextColor(MaterialColors.getColor(this, R.attr.colorOnPrimaryContainer));
         }
 
         private void setView(ViewBean viewBean) {
