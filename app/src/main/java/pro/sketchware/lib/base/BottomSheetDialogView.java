@@ -24,7 +24,7 @@ public class BottomSheetDialogView extends BottomSheetDialog {
     public void show() {
         super.show();
         if (getWindow() != null) {
-            getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundResource(android.R.color.transparent);
+            getWindow().findViewById(com.google.android.material.R.id.design_bottom_sheet).setBackgroundResource(android.R.color.transparent);
         }
     }
 
