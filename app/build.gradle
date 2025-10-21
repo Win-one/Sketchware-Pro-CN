@@ -109,6 +109,7 @@ dependencies {
     implementation "$editorGroupId:language-textmate"
 
     implementation "de.hdodenhof:circleimageview:3.1.0"
+    implementation 'com.github.getActivity:MultiLanguages:9.5'
 
     implementation 'io.coil-kt:coil:2.0.0'
     implementation 'io.coil-kt:coil-svg:2.0.0'

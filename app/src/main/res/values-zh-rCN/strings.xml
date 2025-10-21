@@ -3212,4 +3212,32 @@
     <string name="block_name">块名称</string>
     <string name="view_widget_delete_title">删除部件</string>
     <string name="view_widget_delete_description">是否确实要删除此视图及其子元素?\n如有必要,您可以撤消此作</string>
+    <string name="common_word_select_variant">选择变量</string>
+    <string name="common_word_change_variant">更改变量</string>
+    <string name="common_word_create_variant">创建新变量</string>
+    <string name="common_word_import_variant">从默认变量导入</string>
+    <string name="design_actionbar_title_manager_resources">资源编辑器</string>
+    <string name="resource_manager_no_list_title">此处没有%s</string>
+    <string name="resource_manager_no_list_body">您这里还没有任何%s,请尝试创建一个.</string>
+    <string name="design_library_material_3_description">启用Material 3将在应用程序中启用最新的 Material You设计原则,提供更现代,更具视觉吸引力的界面,包括可自定义的组件和高级主题选项.</string>
+    <string name="design_library_material_3_enable_warning">请注意,启用此库可能会对应用程序的整体设计和外观产生影响, 特别是如果它是一个较旧的项目.建议在激活之前验证更改并确保与当前设置的兼容性.</string>
+    <string name="design_library_material_3_theme_mode_description">
+选择主题模式可以让您个性化应用程序的外观,注意:\n
+1. 选择“DayNight”主题以获得根据系统设置在“浅色”和“深色”之间自动切换的自适应体验\n
+2. 此设置也会影响EditorView,例如：启用DayNight后,编辑器颜色将遵循系统的主题,并相应地在浅色和深色之间切换.
+</string>
+    <string name="design_library_dynamic_colors_description">启用动态颜色允许应用根据用户的系统偏好调整其配色方案, 创造无缝和个性化的体验,反映用户选择的主题和外观.</string>
+    <string name="design_library_title_material3">Material3管理</string>
+    <string name="design_library_appcompat_need_m3_disable">当使用Material3和动态颜色时,您无法禁用AppCompat库.</string>
+    <string name="settings_appearance_description">更改素描软件外观</string>
+    <string name="text_title_menu_resource_editor">资源编辑器</string>
+    <string name="text_subtitle_menu_resource_editor">编辑资源文件</string>
+    <string name="resources_manager_xml_load_failed_message">\“%s\” 中的数据加载失败 \n请打开代码编辑器以手动修复问题</string>
+    <string name="resources_manager_xml_load_failed_title">数据加载失败</string>
+    <string name="resources_manager_xml_important_note_title">重要提示 :</string>
+    <string name="resources_manager_xml_important_note_message_strings">更改“app_name”值将直接影响此项目的应用程序名称</string>
+    <string name="resources_manager_xml_important_note_message_colors">更改原色将影响应用程序的视觉主题,包括按钮和突出显示</string>
+    <string name="resources_editor_unsaved_changes_message">您在 \“%s\”\n中有未保存的更改\n是否要在退出之前保存更改?</string>
+    <string name="resources_editor_unsaved_changes_message_variant_change">\“%s\”中有未保存的更改\n是否要在更改变体之前保存更改?</string>
+
 </resources>
