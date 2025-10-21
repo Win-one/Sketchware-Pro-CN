@@ -13,12 +13,12 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 
 import com.besome.sketch.beans.ViewBean;
+import com.besome.sketch.editor.view.ItemView;
+import com.besome.sketch.editor.view.ScrollContainer;
 
-import a.a.a.sy;
-import a.a.a.ty;
 import a.a.a.wB;
 
-public class ItemHorizontalScrollView extends FrameLayout implements sy, ty {
+public class ItemHorizontalScrollView extends FrameLayout implements ItemView, ScrollContainer {
 
     private final Rect rect = new Rect();
     private ViewBean viewBean;
@@ -218,17 +218,17 @@ public class ItemHorizontalScrollView extends FrameLayout implements sy, ty {
     }
 
     @Override
-    public void setChildScrollEnabled(boolean isEnabled) {
+    public void setChildScrollEnabled(boolean scrollEnabled) {
         for (int i = 0; i < getChildCount(); i++) {
             KeyEvent.Callback firstChild = getChildAt(i);
-            if (firstChild instanceof ty) {
-                ((ty) firstChild).setChildScrollEnabled(isEnabled);
+            if (firstChild instanceof ScrollContainer) {
+                ((ScrollContainer) firstChild).setChildScrollEnabled(scrollEnabled);
             }
             if (firstChild instanceof ItemHorizontalScrollView) {
-                ((ItemHorizontalScrollView) firstChild).setScrollEnabled(isEnabled);
+                ((ItemHorizontalScrollView) firstChild).setScrollEnabled(scrollEnabled);
             }
             if (firstChild instanceof ItemVerticalScrollView) {
-                ((ItemVerticalScrollView) firstChild).setScrollEnabled(isEnabled);
+                ((ItemVerticalScrollView) firstChild).setScrollEnabled(scrollEnabled);
             }
         }
     }
@@ -243,12 +243,12 @@ public class ItemHorizontalScrollView extends FrameLayout implements sy, ty {
     }
 
     @Override
-    public void a() {
+    public void reindexChildren() {
         int i = 0;
         for (int j = 0; j < getChildCount(); j++) {
             KeyEvent.Callback firstChild = getChildAt(j);
-            if (firstChild instanceof sy) {
-                ((sy) firstChild).getBean().index = i;
+            if (firstChild instanceof ItemView) {
+                ((ItemView) firstChild).getBean().index = i;
                 i++;
             }
         }

@@ -8,14 +8,14 @@ import android.view.MotionEvent;
 import android.widget.SearchView;
 
 import com.besome.sketch.beans.ViewBean;
+import com.besome.sketch.editor.view.ItemView;
 
-import a.a.a.sy;
 import a.a.a.wB;
 
-public class ItemSearchView extends SearchView implements sy {
+public class ItemSearchView extends SearchView implements ItemView {
 
     private final Paint paint;
-    private final int paddingFactor;
+    private final int dip;
     private final Rect rect;
     private ViewBean viewBean;
     private boolean hasSelection;
@@ -23,7 +23,7 @@ public class ItemSearchView extends SearchView implements sy {
 
     public ItemSearchView(Context context) {
         super(context);
-        paddingFactor = (int) wB.a(context, 1.0f);
+        dip = (int) wB.a(context, 1.0f);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(0x9599d5d0);
         rect = new Rect();
@@ -75,7 +75,7 @@ public class ItemSearchView extends SearchView implements sy {
 
     @Override
     public void setPadding(int left, int top, int right, int bottom) {
-        super.setPadding(left * paddingFactor, top * paddingFactor, right * paddingFactor, paddingFactor * bottom);
+        super.setPadding(left * dip, top * dip, right * dip, dip * bottom);
     }
 
     @Override

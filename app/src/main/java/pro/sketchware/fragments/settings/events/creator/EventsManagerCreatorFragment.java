@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,17 +65,45 @@ public class EventsManagerCreatorFragment extends qA {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentEventsManagerCreatorBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
+        return binding.getRoot();
+    }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         setToolbar();
         getViewsById();
         setupViews();
 
-        if (isEdit) {
-            fillUp();
+        if (isEdit) fillUp();
+
+        {
+            View view1 = binding.appBarLayout;
+            int left = view1.getPaddingLeft();
+            int top = view1.getPaddingTop();
+            int right = view1.getPaddingRight();
+            int bottom = view1.getPaddingBottom();
+
+            ViewCompat.setOnApplyWindowInsetsListener(view1, (v, i) -> {
+                Insets insets = i.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+                v.setPadding(left + insets.left, top + insets.top, right + insets.right, bottom + insets.bottom);
+                return i;
+            });
         }
-        binding.toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
-        return view;
+
+        {
+            View view1 = binding.content;
+            int left = view1.getPaddingLeft();
+            int top = view1.getPaddingTop();
+            int right = view1.getPaddingRight();
+            int bottom = view1.getPaddingBottom();
+
+            ViewCompat.setOnApplyWindowInsetsListener(view1, (v, i) -> {
+                Insets insets = i.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.ime() | WindowInsetsCompat.Type.displayCutout());
+                v.setPadding(left + insets.left, top, right + insets.right, bottom + insets.bottom);
+                return i;
+            });
+        }
     }
 
     private void fillUp() {
@@ -124,11 +154,11 @@ public class EventsManagerCreatorFragment extends qA {
 
     private void save() {
         if (!filledIn()) {
-            SketchwareUtil.toast(getString(R.string.some_required_fields_are_empty));
+            SketchwareUtil.toast("Some required fields are empty!");
             return;
         }
         if (!OldResourceIdMapper.isValidIconId(Helper.getText(binding.eventsCreatorIcon))) {
-            binding.eventsCreatorIconTil.setError(getString(R.string.invalid_icon_id));
+            binding.eventsCreatorIconTil.setError("Invalid icon ID");
             binding.eventsCreatorIcon.requestFocus();
             return;
         }
@@ -159,7 +189,7 @@ public class EventsManagerCreatorFragment extends qA {
             arrayList.add(hashMap);
         }
         FileUtil.writeFile(concat, getGson().toJson(arrayList));
-        SketchwareUtil.toast(getString(R.string.common_word_saved));
+        SketchwareUtil.toast("Saved");
         getParentFragmentManager().popBackStack();
     }
 
@@ -177,15 +207,16 @@ public class EventsManagerCreatorFragment extends qA {
     }
 
     private void setToolbar() {
+        configureToolbar(binding.toolbar);
+
         if (isEdit) {
-            binding.toolbar.setTitle(event_name);
+            binding.toolbar.setTitle("Event Properties");
+            binding.toolbar.setSubtitle(event_name);
         } else if (isActivityEvent) {
-            binding.toolbar.setTitle(R.string.create_a_new_activity_event);
+            binding.toolbar.setTitle("New Activity Event");
         } else {
-            binding.toolbar.setTitle(lisName + getString(R.string.create_a_new_event));
+            binding.toolbar.setTitle("New Event");
+            binding.toolbar.setSubtitle(lisName);
         }
-        binding.toolbar.setNavigationOnClickListener(view -> {
-            getParentFragmentManager().popBackStack();
-        });
     }
 }

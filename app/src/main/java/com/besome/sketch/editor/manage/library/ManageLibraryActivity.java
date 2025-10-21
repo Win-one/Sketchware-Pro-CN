@@ -7,9 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -28,6 +26,8 @@ import com.besome.sketch.lib.base.BaseAppCompatActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 import a.a.a.MA;
 import a.a.a.jC;
@@ -62,9 +62,20 @@ public class ManageLibraryActivity extends BaseAppCompatActivity implements View
     private String originalAdmobUseYn = "N";
     private String originalGoogleMapUseYn = "N";
 
-    private TextView externalLib;
+    private final List<LibraryItemView> libraryItems = new ArrayList<>();
 
-    private void addLibraryItem(@Nullable ProjectLibraryBean libraryBean) {
+    private LibraryCategoryView addCategoryItem(String text) {
+        LibraryCategoryView libraryCategoryView = new LibraryCategoryView(this);
+        libraryCategoryView.setTitle(text);
+        libraryItemLayout.addView(libraryCategoryView);
+        return libraryCategoryView;
+    }
+
+    private void addLibraryItem(@Nullable ProjectLibraryBean libraryBean, LibraryCategoryView parent) {
+        addLibraryItem(libraryBean, parent, true);
+    }
+
+    private void addLibraryItem(@Nullable ProjectLibraryBean libraryBean, LibraryCategoryView parent, boolean addDivider) {
         LibraryItemView libraryItemView;
         libraryItemView = new LibraryItemView(this);
         libraryItemView.setTag(libraryBean != null ? libraryBean.libType : null);
@@ -74,17 +85,16 @@ public class ManageLibraryActivity extends BaseAppCompatActivity implements View
 
         if (libraryBean.libType == ProjectLibraryBean.PROJECT_LIB_TYPE_LOCAL_LIB || libraryBean.libType == ProjectLibraryBean.PROJECT_LIB_TYPE_NATIVE_LIB) {
             libraryItemView.setHideEnabled();
-            if (externalLib == null) {
-                externalLib = findViewById(R.id.external_lib);
-                externalLib.setText("External libraries");
-                ((ViewGroup) externalLib.getParent()).removeView(externalLib);
-                libraryItemLayout.addView(externalLib);
-            }
         }
-        libraryItemLayout.addView(libraryItemView);
+        parent.addLibraryItem(libraryItemView, addDivider);
+        libraryItems.add(libraryItemView);
     }
 
-    private void addCustomLibraryItem(int type) {
+    private void addCustomLibraryItem(int type, LibraryCategoryView parent) {
+        addCustomLibraryItem(type, parent, true);
+    }
+
+    private void addCustomLibraryItem(int type, LibraryCategoryView parent, boolean addDivider) {
         LibraryItemView libraryItemView;
         if (type == ProjectLibraryBean.PROJECT_LIB_TYPE_EXCLUDE_BUILTIN_LIBRARIES) {
             libraryItemView = new ExcludeBuiltInLibrariesLibraryItemView(this, sc_id);
@@ -96,14 +106,8 @@ public class ManageLibraryActivity extends BaseAppCompatActivity implements View
         libraryItemView.setTag(type);
         //noinspection ConstantConditions since the variant if it's nullable handles nulls correctly
         libraryItemView.setOnClickListener(this);
-
-        if (type == ProjectLibraryBean.PROJECT_LIB_TYPE_EXCLUDE_BUILTIN_LIBRARIES) {
-            TextView title = findViewById(R.id.title);
-            title.setText("Advanced");
-            ((ViewGroup) title.getParent()).removeView(title);
-            libraryItemLayout.addView(title);
-        }
-        libraryItemLayout.addView(libraryItemView);
+        parent.addLibraryItem(libraryItemView, addDivider);
+        libraryItems.add(libraryItemView);
     }
 
     private void toCompatActivity(ProjectLibraryBean compatLibraryBean, ProjectLibraryBean firebaseLibraryBean) {
@@ -127,17 +131,14 @@ public class ManageLibraryActivity extends BaseAppCompatActivity implements View
             }
         }
 
-        for (int i = 0; i < libraryItemLayout.getChildCount(); i++) {
-            View child = libraryItemLayout.getChildAt(i);
-            if (child instanceof ExcludeBuiltInLibrariesLibraryItemView libraryItemView) {
-                libraryItemView.setData(null);
-            }
-            if (child instanceof Material3LibraryItemView libraryItemView) {
-                libraryItemView.setData(compatLibraryBean);
-            } else if (child instanceof LibraryItemView libraryItemView) {
-                if (libraryBean != null && libraryBean.libType == (Integer) libraryItemView.getTag()) {
-                    libraryItemView.setData(libraryBean);
-                }
+        for (LibraryItemView itemView : libraryItems) {
+            Object tag = itemView.getTag();
+            if (itemView instanceof ExcludeBuiltInLibrariesLibraryItemView) {
+                itemView.setData(null);
+            } else if (itemView instanceof Material3LibraryItemView) {
+                itemView.setData(compatLibraryBean);
+            } else if (tag instanceof Integer && libraryBean != null && ((Integer) tag) == libraryBean.libType) {
+                itemView.setData(libraryBean);
             }
         }
     }
@@ -278,15 +279,19 @@ public class ManageLibraryActivity extends BaseAppCompatActivity implements View
                     case ProjectLibraryBean.PROJECT_LIB_TYPE_GOOGLE_MAP:
                         toGoogleMapActivity(googleMapLibraryBean);
                         break;
+
                     case ProjectLibraryBean.PROJECT_LIB_TYPE_LOCAL_LIB:
                         launchActivity(ManageLocalLibraryActivity.class);
                         break;
+
                     case ProjectLibraryBean.PROJECT_LIB_TYPE_NATIVE_LIB:
                         launchActivity(ManageNativelibsActivity.class);
                         break;
+
                     case ProjectLibraryBean.PROJECT_LIB_TYPE_EXCLUDE_BUILTIN_LIBRARIES:
                         launchCustomActivity(ExcludeBuiltInLibrariesActivity.class);
                         break;
+
                     case ProjectLibraryBean.PROJECT_LIB_TYPE_MATERIAL3:
                         toMaterial3Activity();
                 }
@@ -324,12 +329,12 @@ public class ManageLibraryActivity extends BaseAppCompatActivity implements View
         });
 
         UI.addSystemWindowInsetToPadding(libraryItemLayout, false, false, false, true);
-
     }
 
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+
         if (savedInstanceState == null) {
             compatLibraryBean = jC.c(sc_id).c();
             if (compatLibraryBean == null) {
@@ -365,15 +370,19 @@ public class ManageLibraryActivity extends BaseAppCompatActivity implements View
             originalGoogleMapUseYn = savedInstanceState.getString("originalGoogleMapUseYn");
         }
 
-        addLibraryItem(compatLibraryBean);
-        addCustomLibraryItem(ProjectLibraryBean.PROJECT_LIB_TYPE_MATERIAL3);
-        addLibraryItem(firebaseLibraryBean);
-        addLibraryItem(admobLibraryBean);
-        addLibraryItem(googleMapLibraryBean);
-        addLibraryItem(new ProjectLibraryBean(ProjectLibraryBean.PROJECT_LIB_TYPE_LOCAL_LIB));
-        addLibraryItem(new ProjectLibraryBean(ProjectLibraryBean.PROJECT_LIB_TYPE_NATIVE_LIB));
-        // Exclude built-in libraries
-        addCustomLibraryItem(ProjectLibraryBean.PROJECT_LIB_TYPE_EXCLUDE_BUILTIN_LIBRARIES);
+        LibraryCategoryView basicCategory = addCategoryItem(null);
+        addLibraryItem(compatLibraryBean, basicCategory);
+        addCustomLibraryItem(ProjectLibraryBean.PROJECT_LIB_TYPE_MATERIAL3, basicCategory);
+        addLibraryItem(firebaseLibraryBean, basicCategory);
+        addLibraryItem(admobLibraryBean, basicCategory);
+        addLibraryItem(googleMapLibraryBean, basicCategory, false);
+
+        LibraryCategoryView externalCategory = addCategoryItem("External libraries");
+        addLibraryItem(new ProjectLibraryBean(ProjectLibraryBean.PROJECT_LIB_TYPE_LOCAL_LIB), externalCategory);
+        addLibraryItem(new ProjectLibraryBean(ProjectLibraryBean.PROJECT_LIB_TYPE_NATIVE_LIB), externalCategory, false);
+
+        LibraryCategoryView advancedCategory = addCategoryItem("Advanced");
+        addCustomLibraryItem(ProjectLibraryBean.PROJECT_LIB_TYPE_EXCLUDE_BUILTIN_LIBRARIES, advancedCategory, false);
     }
 
     @Override
@@ -434,7 +443,6 @@ public class ManageLibraryActivity extends BaseAppCompatActivity implements View
         public void a(String idk) {
             activity.get().h();
         }
-
 
         @Override
         public void b() {

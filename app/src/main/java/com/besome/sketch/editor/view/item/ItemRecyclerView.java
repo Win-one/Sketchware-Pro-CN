@@ -15,19 +15,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.besome.sketch.beans.ViewBean;
 import com.besome.sketch.editor.view.EditorListItem;
+import com.besome.sketch.editor.view.ItemView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import a.a.a.sy;
 import a.a.a.wB;
 import pro.sketchware.utility.PropertiesUtil;
 
-public class ItemRecyclerView extends RecyclerView implements sy, EditorListItem {
+public class ItemRecyclerView extends RecyclerView implements ItemView, EditorListItem {
 
     private final Paint paint;
     private final Rect rect;
-    private final float paddingFactor;
+    private final float dip;
     private boolean hasSelection;
     private boolean hasFixed;
     private ViewBean viewBean;
@@ -38,7 +38,7 @@ public class ItemRecyclerView extends RecyclerView implements sy, EditorListItem
         super(context);
         setMinimumWidth((int) wB.a(context, 32.0F));
         setMinimumHeight((int) wB.a(context, 32.0F));
-        paddingFactor = wB.a(context, 1.0f);
+        dip = wB.a(context, 1.0f);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStrokeWidth(wB.a(getContext(), 2.0f));
         rect = new Rect();
@@ -90,7 +90,7 @@ public class ItemRecyclerView extends RecyclerView implements sy, EditorListItem
     }
 
     @Override
-    public void onDraw(Canvas canvas) {
+    public void onDraw(@NonNull Canvas canvas) {
         if (hasSelection) {
             paint.setColor(0x9599d5d0);
             rect.set(0, 0, getMeasuredWidth(), getMeasuredHeight());
@@ -111,7 +111,7 @@ public class ItemRecyclerView extends RecyclerView implements sy, EditorListItem
 
     @Override
     public void setPadding(int left, int top, int right, int bottom) {
-        super.setPadding((int) (left * paddingFactor), (int) (top * paddingFactor), (int) (right * paddingFactor), (int) (bottom * paddingFactor));
+        super.setPadding((int) (left * dip), (int) (top * dip), (int) (right * dip), (int) (bottom * dip));
     }
 
     private static class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder> {

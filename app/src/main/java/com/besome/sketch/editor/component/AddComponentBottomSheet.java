@@ -80,7 +80,6 @@ public class AddComponentBottomSheet extends BottomSheetDialogFragment {
         componentList.add(new ComponentBean(ComponentBean.COMPONENT_TYPE_TIME_PICKER_DIALOG));
         componentList.add(new ComponentBean(ComponentBean.COMPONENT_TYPE_NOTIFICATION));
         componentList.add(new ComponentBean(ComponentBean.COMPONENT_TYPE_FRAGMENT_ADAPTER));
-        componentList.add(new ComponentBean(ComponentBean.COMPONENT_TYPE_ONESIGNAL));
 
         // Ads
         componentList.add(new ComponentBean(ComponentBean.COMPONENT_TYPE_INTERSTITIAL_AD));
@@ -108,9 +107,7 @@ public class AddComponentBottomSheet extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(getContext());
-        flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
-        flexboxLayoutManager.setFlexWrap(FlexWrap.WRAP);
+        FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(getContext(), FlexDirection.ROW, FlexWrap.WRAP);
         flexboxLayoutManager.setJustifyContent(JustifyContent.SPACE_BETWEEN);
         flexboxLayoutManager.setAlignItems(AlignItems.CENTER);
 
@@ -152,7 +149,7 @@ public class AddComponentBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void showAddComponentDialog(ComponentBean componentBean) {
-        InnerAddComponentBottomSheet innerAddComponentBottomSheet = InnerAddComponentBottomSheet.newInstance(sc_id, projectFileBean, componentBean, (sheet) -> {
+        InnerAddComponentBottomSheet innerAddComponentBottomSheet = InnerAddComponentBottomSheet.newInstance(sc_id, projectFileBean, componentBean, sheet -> {
             sheet.dismiss();
             dismiss();
             onComponentCreateListener.invoke();

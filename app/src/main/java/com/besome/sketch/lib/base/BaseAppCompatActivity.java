@@ -15,7 +15,6 @@ import android.view.View;
 import androidx.activity.EdgeToEdge;
 import androidx.activity.SystemBarStyle;
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -27,7 +26,6 @@ import java.util.ArrayList;
 
 import a.a.a.MA;
 import a.a.a.lC;
-import a.a.a.xB;
 import dev.chrisbanes.insetter.Insetter;
 import pro.sketchware.dialogs.ProgressDialog;
 
@@ -118,10 +116,6 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity {
         lC.a(getApplicationContext(), false);
         progressDialog = new ProgressDialog(this);
         mAnalytics = FirebaseAnalytics.getInstance(this);
-    }
-
-    public final String getTranslatedString(@StringRes int resId) {
-        return xB.b().a(getApplicationContext(), resId);
     }
 
     @Override

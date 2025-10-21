@@ -63,7 +63,6 @@ public class br extends qA implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FrComponentListBinding.inflate(inflater, container, false);
         initialize();
-        setHasOptionsMenu(true);
         if (savedInstanceState != null) {
             sc_id = savedInstanceState.getString("sc_id");
         } else {
@@ -90,7 +89,7 @@ public class br extends qA implements View.OnClickListener {
     private void initialize() {
         binding.componentList.setHasFixedSize(true);
         binding.emptyMessage.setVisibility(View.GONE);
-        binding.emptyMessage.setText(xB.b().a(requireContext(), R.string.component_message_no_components));
+        binding.emptyMessage.setText(R.string.component_message_no_components);
         binding.componentList.setLayoutManager(new LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false));
         adapter = new Adapter();
         binding.componentList.setAdapter(adapter);
@@ -154,7 +153,7 @@ public class br extends qA implements View.OnClickListener {
                 binding.componentOption
                         .getDeleteButton()
                         .getLabel()
-                        .setText(xB.b().a(requireContext(), R.string.component_context_menu_title_delete_component));
+                        .setText(R.string.component_context_menu_title_delete_component);
                 binding.componentOption.setButtonOnClickListener(v -> {
                     int lastSelectedItem = getLayoutPosition();
                     ComponentBean bean =
@@ -222,7 +221,7 @@ public class br extends qA implements View.OnClickListener {
                 ArrayList<EventBean> addedEvents =
                         jC.a(sc_id).a(projectFile.getJavaName(), componentBean);
                 ArrayList<String> availableEvents =
-                        new ArrayList<>(Arrays.asList(oq.a(componentBean.getClassInfo())));
+                        new ArrayList<>(Arrays.asList(oq.getComponentEventsForClass(componentBean.getClassInfo())));
 
                 binding.eventsPreview.removeAllViews();
                 binding.eventsPreview.setAlpha(1.0f);
@@ -264,7 +263,7 @@ public class br extends qA implements View.OnClickListener {
                                             ViewGroup.LayoutParams.WRAP_CONTENT);
                             layoutParams.setMargins(0, 0, (int) wB.a(requireContext(), 4.0f), 0);
                             previewBinding.getRoot().setLayoutParams(layoutParams);
-                            previewBinding.icon.setImageResource(oq.a(event.eventName));
+                            previewBinding.icon.setImageResource(oq.getEventIconResource(event.eventName));
                             previewBinding.iconBg.setBackgroundResource(
                                     R.drawable.circle_bg_surface);
                             binding.eventsPreview.addView(previewBinding.getRoot());
@@ -281,7 +280,7 @@ public class br extends qA implements View.OnClickListener {
                                         ViewGroup.LayoutParams.WRAP_CONTENT);
                         layoutParams2.setMargins(0, 0, (int) wB.a(requireContext(), 4.0f), 0);
                         previewBinding.getRoot().setLayoutParams(layoutParams2);
-                        previewBinding.icon.setImageResource(oq.a(eventName));
+                        previewBinding.icon.setImageResource(oq.getEventIconResource(eventName));
                         ColorMatrix colorMatrix = new ColorMatrix();
                         colorMatrix.setSaturation(0.0f);
                         previewBinding.icon.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
@@ -381,7 +380,7 @@ public class br extends qA implements View.OnClickListener {
                     var event = getItem(position);
                     holder.button.onEventAdded();
                     holder.button.getName().setText(event.eventName);
-                    holder.button.getIcon().setImageResource(oq.a(event.eventName));
+                    holder.button.getIcon().setImageResource(oq.getEventIconResource(event.eventName));
                     holder.button.setClickListener(v -> {
                         if (!mB.a()) {
                             openEvent(event.targetId, event.eventName, event.eventName);
@@ -424,13 +423,13 @@ public class br extends qA implements View.OnClickListener {
                     var eventName = getItem(position);
                     holder.button.onEventAvailableToAdd();
                     holder.button.getName().setText(eventName);
-                    holder.button.getIcon().setImageResource(oq.a(eventName));
+                    holder.button.getIcon().setImageResource(oq.getEventIconResource(eventName));
                     holder.button.setClickListener(v -> {
                         if (!mB.a()) {
                             var component = components.get(getLayoutPosition());
                             var event = new EventBean(EventBean.EVENT_TYPE_COMPONENT, component.type, component.componentId, eventName);
                             jC.a(sc_id).a(projectFile.getJavaName(), event);
-                            bB.a(requireContext(), xB.b().a(requireContext(), R.string.event_message_new_event), 0).show();
+                            bB.a(requireContext(), requireContext().getString(R.string.event_message_new_event), 0).show();
                             holder.button.onEventAdded();
                             if (listener != null) {
                                 listener.onEventClick(event);

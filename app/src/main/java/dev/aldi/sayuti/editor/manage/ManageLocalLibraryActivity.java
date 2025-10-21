@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import a.a.a.MA;
 import a.a.a.mB;
@@ -63,29 +62,76 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
         binding = ManageLocallibrariesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        AtomicInteger existingBottomMargin = new AtomicInteger(-1);
+        {
+            View view1 = binding.searchBar;
+            ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) view1.getLayoutParams();
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.downloadLibraryButton, (view, insets) -> {
-            Insets navigationBarsInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+            int end = lp.getMarginEnd();
+            int start = lp.getMarginStart();
 
-            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            ViewCompat.setOnApplyWindowInsetsListener(view1, (v, i) -> {
+                Insets insets = i.getInsets(WindowInsetsCompat.Type.displayCutout());
+                lp.setMarginEnd(end + insets.right);
+                lp.setMarginStart(start + insets.left);
+                v.setLayoutParams(lp);
+                return i;
+            });
+        }
 
-            if (existingBottomMargin.get() == -1) {
-                existingBottomMargin.set(params.bottomMargin);
-            }
+        {
+            View view1 = binding.contextualToolbarContainer;
+            int left = view1.getPaddingLeft();
+            int top = view1.getPaddingTop();
+            int right = view1.getPaddingRight();
+            int bottom = view1.getPaddingBottom();
 
-            params.bottomMargin = existingBottomMargin.get() + navigationBarsInsets.bottom;
-            view.setLayoutParams(params);
+            ViewCompat.setOnApplyWindowInsetsListener(view1, (v, i) -> {
+                Insets insets = i.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+                v.setPadding(left + insets.left, top + insets.top, right + insets.right, bottom);
+                return i;
+            });
+        }
 
-            return WindowInsetsCompat.CONSUMED;
-        });
+        {
+            View view1 = binding.librariesList;
+            int left = view1.getPaddingLeft();
+            int top = view1.getPaddingTop();
+            int right = view1.getPaddingRight();
+            int bottom = view1.getPaddingBottom();
 
+            ViewCompat.setOnApplyWindowInsetsListener(view1, (v, i) -> {
+                Insets insets = i.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+                v.setPadding(left + insets.left, top, right + insets.right, bottom + insets.bottom);
+                return i;
+            });
+        }
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.contextualToolbarContainer, (v, windowInsets) -> {
-            var insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(insets.left, insets.top, insets.right, 0);
-            return windowInsets;
-        });
+        {
+            View view1 = binding.searchList;
+            int left = view1.getPaddingLeft();
+            int top = view1.getPaddingTop();
+            int right = view1.getPaddingRight();
+            int bottom = view1.getPaddingBottom();
+
+            ViewCompat.setOnApplyWindowInsetsListener(view1, (v, i) -> {
+                Insets insets = i.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+                v.setPadding(left + insets.left, top, right + insets.right, bottom + insets.bottom);
+                return i;
+            });
+        }
+
+        {
+            View view1 = binding.downloadLibraryButton;
+            ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) view1.getLayoutParams();
+            int bottom = lp.bottomMargin;
+
+            ViewCompat.setOnApplyWindowInsetsListener(view1, (v, i) -> {
+                Insets insets = i.getInsets(WindowInsetsCompat.Type.systemBars());
+                lp.bottomMargin = bottom + insets.bottom;
+                v.setLayoutParams(lp);
+                return i;
+            });
+        }
 
         if (getIntent().hasExtra("sc_id")) {
             scId = Objects.requireNonNull(getIntent().getStringExtra("sc_id"));
@@ -107,7 +153,7 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
         binding.librariesList.setAdapter(adapter);
         binding.searchList.setAdapter(searchAdapter);
 
-        binding.topAppBar.setNavigationOnClickListener(v -> {
+        binding.searchBar.setNavigationOnClickListener(v -> {
             if (!mB.a()) {
                 onBackPressed();
             }
@@ -126,7 +172,7 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
                     deleteSelectedLocalLibraries(scId, adapter.getLocalLibraries(), projectUsedLibs);
                     runOnUiThread(() -> {
                         h();
-                        SketchwareUtil.toast(getString(R.string.deleted_successfully));
+                        SketchwareUtil.toast("Deleted successfully");
                         adapter.isSelectionModeEnabled = false;
                         adapter.notifyDataSetChanged();
                         collapseContextualToolbar();
@@ -175,9 +221,7 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
 
     private void runLoadLocalLibrariesTask() {
         k();
-        new Handler().postDelayed(() -> {
-            new LoadLocalLibrariesTask(this).execute();
-        }, 500L);
+        new Handler().postDelayed(() -> new LoadLocalLibrariesTask(this).execute(), 500L);
     }
 
     private List<LocalLibrary> getAdapterLocalLibraries() {
@@ -254,7 +298,7 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
         return false;
     }
 
-    private interface OnLocalLibrarySelectedStateChangedListener {
+    public interface OnLocalLibrarySelectedStateChangedListener {
         void invoke(LocalLibrary library);
     }
 
@@ -329,9 +373,7 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
             binding.materialSwitch.setChecked(false);
             if (!notAssociatedWithProject) {
 
-                binding.materialSwitch.setOnClickListener(v -> {
-                    onItemClicked(binding, library.getName());
-                });
+                binding.materialSwitch.setOnClickListener(v -> onItemClicked(binding, library.getName()));
 
                 for (Map<String, Object> libraryMap : projectUsedLibs) {
                     if (library.getName().equals(libraryMap.get("name").toString())) {
@@ -362,11 +404,9 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
             }
             if (library.isSelected() && isUsedLibrary(library.getName())) {
                 new MaterialAlertDialogBuilder(ManageLocalLibraryActivity.this)
-                        .setTitle(R.string.common_word_warning)
-                        .setMessage(getString(R.string.this_library) + library.getName() + getString(R.string.already_used_in_your_project))
-                        .setPositiveButton(Helper.getResString(R.string.common_word_yes), (dialog, which) -> {
-                            dialog.dismiss();
-                        })
+                        .setTitle("Warning")
+                        .setMessage("This library \"" + library.getName() + "\" already used in your project, removing it may break your project\rDo you want to continue removing it?")
+                        .setPositiveButton(Helper.getResString(R.string.common_word_yes), (dialog, which) -> dialog.dismiss())
                         .setNegativeButton(Helper.getResString(R.string.common_word_cancel), (dialog, which) -> {
                             toggleLocalLibrary(card, library, onLocalLibrarySelectedStateChangedListener);
                             dialog.dismiss();
@@ -420,7 +460,7 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
             notifyDataSetChanged();
         }
 
-        static class ViewHolder extends RecyclerView.ViewHolder {
+        public static class ViewHolder extends RecyclerView.ViewHolder {
             private final ViewItemLocalLibBinding binding;
 
             public ViewHolder(@NonNull ViewItemLocalLibBinding binding) {
@@ -452,9 +492,7 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
             binding.materialSwitch.setChecked(false);
             if (!notAssociatedWithProject) {
 
-                binding.getRoot().setOnClickListener(v -> {
-                    binding.materialSwitch.performClick();
-                });
+                binding.getRoot().setOnClickListener(v -> binding.materialSwitch.performClick());
 
                 binding.materialSwitch.setOnClickListener(v -> {
                     onItemClicked(binding, library.getName());
@@ -521,7 +559,7 @@ public class ManageLocalLibraryActivity extends BaseAppCompatActivity {
             notifyDataSetChanged();
         }
 
-        static class ViewHolder extends RecyclerView.ViewHolder {
+        public static class ViewHolder extends RecyclerView.ViewHolder {
             private final ViewItemLocalLibSearchBinding binding;
 
             public ViewHolder(@NonNull ViewItemLocalLibSearchBinding binding) {

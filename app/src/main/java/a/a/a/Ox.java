@@ -285,12 +285,12 @@ public class Ox {
     }
 
     private void writeWidget(XmlBuilder nx, ViewBean viewBean) {
-        viewBean.getClassInfo().a();
+        viewBean.getClassInfo().getClassName();
         String convert = viewBean.convert;
         var injectHandler = new InjectAttributeHandler(viewBean);
         Set<String> toNotAdd = readAttributesToReplace(viewBean);
 
-        XmlBuilder widgetTag = convert.isEmpty() ? new XmlBuilder(viewBean.getClassInfo().a()) :
+        XmlBuilder widgetTag = convert.isEmpty() ? new XmlBuilder(viewBean.getClassInfo().getClassName()) :
                 new XmlBuilder(convert.replaceAll(" ", ""));
         if (convert.equals("include")) {
             if (!toNotAdd.contains("layout") && !injectHandler.contains("layout")) {
@@ -768,7 +768,7 @@ public class Ox {
                 nx.addAttribute("android", "textStyle", "bold|italic");
             }
         }
-        if (viewBean.text.textColor != 0) {
+        if (viewBean.text.textColor != 0xffffff) {
             if (!hasAttr("textColor", viewBean) && !toNotAdd.contains("android:textColor") && !injectHandler.contains("textColor") && viewBean.text.resTextColor != null) {
                 if (viewBean.text.resTextColor.startsWith("?") || viewBean.text.resTextColor.startsWith("@color/")) {
                     nx.addAttribute("android", "textColor", viewBean.text.resTextColor);
@@ -791,7 +791,7 @@ public class Ox {
                         nx.addAttribute("android", "hint", escapeXML(hint));
                     }
                 }
-                if (viewBean.text.hintColor != 0) {
+                if (viewBean.text.hintColor != 0xffffff) {
                     if (!hasAttr("textColorHint", viewBean) && !toNotAdd.contains("android:textColorHint") && (viewBean.text.resHintColor != null)) {
                         if (viewBean.text.resHintColor.startsWith("?") || viewBean.text.resHintColor.startsWith("@color/")) {
                             nx.addAttribute("android", "textColorHint", viewBean.text.resHintColor);

@@ -10,18 +10,18 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 
 import com.besome.sketch.beans.ViewBean;
+import com.besome.sketch.editor.view.ItemView;
 
-import a.a.a.sy;
 import a.a.a.wB;
 import pro.sketchware.R;
 
-public class ItemProgressBar extends LinearLayout implements sy {
+public class ItemProgressBar extends LinearLayout implements ItemView {
 
     private ViewBean viewBean;
     private boolean isSelected;
     private boolean isFixed;
     private Paint paint;
-    private float paddingFactor;
+    private float dip;
     private ImageView imageView;
 
     public ItemProgressBar(Context context) {
@@ -30,7 +30,7 @@ public class ItemProgressBar extends LinearLayout implements sy {
     }
 
     private void initialize(Context context) {
-        paddingFactor = wB.a(context, 1.0F);
+        dip = wB.a(context, 1.0F);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(0x9599d5d0);
         setDrawingCacheEnabled(true);
@@ -86,21 +86,21 @@ public class ItemProgressBar extends LinearLayout implements sy {
 
     @Override
     public void setPadding(int left, int top, int right, int bottom) {
-        super.setPadding((int) (left * paddingFactor),
-                (int) (top * paddingFactor),
-                (int) (right * paddingFactor),
-                (int) (bottom * paddingFactor));
+        super.setPadding((int) (left * dip),
+                (int) (top * dip),
+                (int) (right * dip),
+                (int) (bottom * dip));
     }
 
     public void setProgressBarStyle(String progressBarStyle) {
         if ("?android:progressBarStyle".equals(progressBarStyle)) {
             imageView.setImageResource(R.drawable.progressbar_circle_48dp);
-            imageView.getLayoutParams().width = (int) (paddingFactor * 30F);
-            imageView.getLayoutParams().height = (int) (paddingFactor * 30F);
+            imageView.getLayoutParams().width = (int) (dip * 30F);
+            imageView.getLayoutParams().height = (int) (dip * 30F);
         } else if ("?android:progressBarStyleHorizontal".equals(progressBarStyle)) {
             imageView.setImageResource(R.drawable.progressbar_horizontal_48dp);
-            imageView.getLayoutParams().width = (int) (paddingFactor * 320F);
-            imageView.getLayoutParams().height = (int) (paddingFactor * 30F);
+            imageView.getLayoutParams().width = (int) (dip * 320F);
+            imageView.getLayoutParams().height = (int) (dip * 30F);
         }
     }
 }

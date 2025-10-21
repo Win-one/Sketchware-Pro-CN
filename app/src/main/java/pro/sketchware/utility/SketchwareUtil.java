@@ -175,7 +175,7 @@ public class SketchwareUtil {
     }
 
     public static void sortListMap(ArrayList<HashMap<String, Object>> listMap, String key, boolean isNumber, boolean ascending) {
-        Collections.sort(listMap, new Comparator<HashMap<String, Object>>() {
+        Collections.sort(listMap, new Comparator<>() {
             @Override
             public int compare(HashMap<String, Object> _compareMap1, HashMap<String, Object> _compareMap2) {
                 if (isNumber) {
@@ -188,9 +188,9 @@ public class SketchwareUtil {
                     }
                 } else {
                     if (ascending) {
-                        return (_compareMap1.get(key).toString()).compareTo(_compareMap2.get(key).toString());
+                        return _compareMap1.get(key).toString().compareTo(_compareMap2.get(key).toString());
                     } else {
-                        return (_compareMap2.get(key).toString()).compareTo(_compareMap1.get(key).toString());
+                        return _compareMap2.get(key).toString().compareTo(_compareMap1.get(key).toString());
                     }
                 }
             }

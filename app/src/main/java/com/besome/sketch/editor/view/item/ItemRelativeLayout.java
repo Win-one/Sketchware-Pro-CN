@@ -7,13 +7,15 @@ import android.graphics.Rect;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.besome.sketch.beans.ViewBean;
+import androidx.annotation.NonNull;
 
-import a.a.a.sy;
-import a.a.a.ty;
+import com.besome.sketch.beans.ViewBean;
+import com.besome.sketch.editor.view.ItemView;
+import com.besome.sketch.editor.view.ScrollContainer;
+
 import a.a.a.wB;
 
-public class ItemRelativeLayout extends RelativeLayout implements sy, ty {
+public class ItemRelativeLayout extends RelativeLayout implements ItemView, ScrollContainer {
 
     private ViewBean viewBean = null;
     private boolean isSelected = false;
@@ -28,10 +30,10 @@ public class ItemRelativeLayout extends RelativeLayout implements sy, ty {
     }
 
     @Override
-    public void a() {
+    public void reindexChildren() {
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
-            if (child instanceof sy editorItem) {
+            if (child instanceof ItemView editorItem) {
                 editorItem.getBean().index = i;
             }
         }
@@ -91,7 +93,7 @@ public class ItemRelativeLayout extends RelativeLayout implements sy, ty {
     }
 
     @Override
-    public void onDraw(Canvas canvas) {
+    public void onDraw(@NonNull Canvas canvas) {
         if (!isFixed) {
             if (isSelected) {
                 paint.setColor(0x9599d5d0);
@@ -113,19 +115,19 @@ public class ItemRelativeLayout extends RelativeLayout implements sy, ty {
     }
 
     @Override
-    public void setChildScrollEnabled(boolean childScrollEnabled) {
+    public void setChildScrollEnabled(boolean scrollEnabled) {
         for (int i = 0; i < getChildCount(); ++i) {
             View child = getChildAt(i);
-            if (child instanceof ty) {
-                ((ty) child).setChildScrollEnabled(childScrollEnabled);
+            if (child instanceof ScrollContainer) {
+                ((ScrollContainer) child).setChildScrollEnabled(scrollEnabled);
             }
 
             if (child instanceof ItemHorizontalScrollView) {
-                ((ItemHorizontalScrollView) child).setScrollEnabled(childScrollEnabled);
+                ((ItemHorizontalScrollView) child).setScrollEnabled(scrollEnabled);
             }
 
             if (child instanceof ItemVerticalScrollView) {
-                ((ItemVerticalScrollView) child).setScrollEnabled(childScrollEnabled);
+                ((ItemVerticalScrollView) child).setScrollEnabled(scrollEnabled);
             }
         }
     }

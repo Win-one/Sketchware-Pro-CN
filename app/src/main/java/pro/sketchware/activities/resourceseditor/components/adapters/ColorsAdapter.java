@@ -20,14 +20,14 @@ import pro.sketchware.utility.PropertiesUtil;
 public class ColorsAdapter extends RecyclerView.Adapter<ColorsAdapter.ViewHolder> {
 
     private final ArrayList<ColorModel> originalData;
-    private ArrayList<ColorModel> filteredData;
     private final HashMap<Integer, String> notesMap;
     private final ResourcesEditorActivity activity;
     private final ColorsEditorManager colorsEditorManager;
+    private ArrayList<ColorModel> filteredData;
 
     public ColorsAdapter(ColorsEditorManager colorsEditorManager, ArrayList<ColorModel> filteredData, ResourcesEditorActivity activity, HashMap<Integer, String> notesMap) {
         this.colorsEditorManager = colorsEditorManager;
-        this.originalData = new ArrayList<>(filteredData);
+        originalData = new ArrayList<>(filteredData);
         this.filteredData = filteredData;
         this.activity = activity;
         this.notesMap = notesMap;
@@ -46,13 +46,13 @@ public class ColorsAdapter extends RecyclerView.Adapter<ColorsAdapter.ViewHolder
         String colorName = colorModel.getColorName();
         String colorValue = colorModel.getColorValue();
         if (notesMap.containsKey(position)) {
-            holder.itemBinding.tvTitle.setHint(notesMap.get(position));
+            holder.itemBinding.tvTitle.setText(notesMap.get(position));
             holder.itemBinding.tvTitle.setVisibility(View.VISIBLE);
         } else {
             holder.itemBinding.tvTitle.setVisibility(View.GONE);
         }
 
-        holder.itemBinding.title.setHint(colorName);
+        holder.itemBinding.title.setText(colorName);
         holder.itemBinding.sub.setText(colorValue);
 
         holder.itemBinding.color.setBackgroundColor(PropertiesUtil.parseColor(colorsEditorManager.getColorValue(activity.getApplicationContext(), colorValue, 4, activity.variant.contains("night"))));

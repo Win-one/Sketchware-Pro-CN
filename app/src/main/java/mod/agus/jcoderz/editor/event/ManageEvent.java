@@ -6,13 +6,14 @@ import a.a.a.Gx;
 import a.a.a.Lx;
 import mod.hilal.saif.events.EventsHandler;
 import pro.sketchware.R;
+import pro.sketchware.blocks.generator.components.analyzers.BlockReturnAnalyzer;
 
 public class ManageEvent {
 
     /**
-     * Used in {@link a.a.a.oq#c(Gx)} to retrieve extra Events of Components.
+     * Used in {@link a.a.a.oq#getEventsForClass(Gx)} to retrieve extra Events of Components.
      */
-    public static void a(Gx gx, ArrayList<String> events) {
+    public static void addExtraEvents(Gx gx, ArrayList<String> events) {
         if (gx.a("RatingBar")) {
             events.add("onRatingChanged");
         }
@@ -75,9 +76,10 @@ public class ManageEvent {
     }
 
     /**
-     * Used in {@link a.a.a.oq#b(Gx)} to get extra listeners for Components and Widgets.
+     * Used in {@link a.a.a.oq#getListenersForClass(Gx)}
+     * to get extra listeners for Components and Widgets.
      */
-    public static void b(Gx gx, ArrayList<String> listeners) {
+    public static void addExtraListeners(Gx gx, ArrayList<String> listeners) {
         if (gx.a("RatingBar")) {
             listeners.add("OnRatingBarChangeListener");
         }
@@ -147,26 +149,16 @@ public class ManageEvent {
         if (gx.a("FirebasePhoneAuth")) {
             listeners.add("OnVerificationStateChangedListener");
         }
-        if (gx.a("FirebaseDynamicLink")) {
-            listeners.add("OnSuccessListener");
-            listeners.add("OnFailureListener");
-        }
         if (gx.a("FirebaseCloudMessage")) {
             listeners.add("OnCompleteListenerFCM");
-        }
-        if (gx.a("FBAdsBanner")) {
-            listeners.add("FBAdsBanner_AdListener");
-        }
-        if (gx.a("FBAdsInterstitial")) {
-            listeners.add("FBAdsInterstitial_InterstitialAdListener");
         }
         EventsHandler.addListeners(gx, listeners);
     }
 
     /**
-     * Used in {@link a.a.a.oq#b(String)} to get extra listeners' Events.
+     * Used in {@link a.a.a.oq#getEventsForListener(String)} to get extra listeners' Events.
      */
-    public static void c(String eventName, ArrayList<String> list) {
+    public static void addEventsForListener(String eventName, ArrayList<String> list) {
         switch (eventName) {
             case "rewardedAdLoadCallback":
                 list.add("onRewardAdLoaded");
@@ -277,15 +269,6 @@ public class ManageEvent {
                 list.add("onLetterSelected");
                 return;
 
-            case "FBAdsInterstitial_InterstitialAdListener":
-                list.add("FBAdsInterstitial_onError");
-                list.add("FBAdsInterstitial_onAdLoaded");
-                list.add("FBAdsInterstitial_onAdClicked");
-                list.add("FBAdsInterstitial_onLoggingImpression");
-                list.add("FBAdsInterstitial_onInterstitialDisplayed");
-                list.add("FBAdsInterstitial_onInterstitialDismissed");
-                return;
-
             case "OnRatingBarChangeListener":
                 list.add("onRatingChanged");
                 return;
@@ -311,13 +294,6 @@ public class ManageEvent {
                 list.add("onPatternLockCleared");
                 return;
 
-            case "FBAdsBanner_AdListener":
-                list.add("FBAdsBanner_onError");
-                list.add("FBAdsBanner_onAdLoaded");
-                list.add("FBAdsBanner_onAdClicked");
-                list.add("FBAdsBanner_onLoggingImpression");
-                return;
-
             case "OnGridItemLongClickListener":
                 list.add("onItemLongClicked");
                 return;
@@ -331,11 +307,9 @@ public class ManageEvent {
         }
     }
 
-    public static int d(String str) {
+    public static int getDrawableForEvent(String str) {
         return switch (str) {
             case "onUpdateProfileComplete" -> R.drawable.ic_mtrl_user_edit;
-            case "FBAdsBanner_onLoggingImpression", "FBAdsInterstitial_onLoggingImpression" ->
-                    R.drawable.event_fbads_impression;
             case "onEmailVerificationSent" -> R.drawable.ic_mtrl_sms_check;
             case "onDateChanged", "onDateSet" -> R.drawable.ic_mtrl_date_changed;
             case "onFailureLink" -> R.drawable.ic_mtrl_link_fail;
@@ -352,8 +326,6 @@ public class ManageEvent {
             case "onSuccessLink" -> R.drawable.ic_mtrl_link_check;
             case "onPatternLockCleared", "onPatternLockProgress", "onPatternLockStarted",
                  "onPatternLockComplete" -> R.drawable.ic_mtrl_pattern;
-            case "FBAdsInterstitial_onAdClicked", "FBAdsBanner_onAdClicked" ->
-                    R.drawable.event_fbads_click;
             case "onAccountPickerCancelled" -> R.drawable.ic_mtrl_user_delete;
             case "onVerificationFailed" -> R.drawable.ic_mtrl_gpp_bad;
             case "onGoogleSignIn" -> R.drawable.event_google_signin;
@@ -361,18 +333,13 @@ public class ManageEvent {
             case "onFragmentAdded" -> R.drawable.ic_mtrl_viewpager;
             case "onTimeSet", "onTimeChanged" -> R.drawable.ic_mtrl_timer;
             case "signInWithPhoneAuthComplete", "onCodeSent" -> R.drawable.ic_mtrl_email_sent;
-            case "FBAdsInterstitial_onInterstitialDismissed" -> R.drawable.event_fbads_dismiss;
             case "onRatingChanged" -> R.drawable.ic_mtrl_star;
-            case "FBAdsInterstitial_onInterstitialDisplayed" -> R.drawable.event_fbads_displayed;
             case "onLetterSelected" -> R.drawable.ic_mtrl_abc_click;
             case "onScrollChanged", "onPageChanged", "onPageScrolled", "onRecyclerScrolled",
                  "onRecyclerScrollChanged", "onNavigationItemSelected", "onScrolled",
                  "onTabUnselected", "onPageSelected", "onTabSelected", "onTabReselected" ->
                     R.drawable.ic_mtrl_touch_long;
             case "onPrepared" -> R.drawable.ic_mtrl_vid_prepared;
-            case "FBAdsInterstitial_onError", "FBAdsBanner_onError" -> R.drawable.event_fbads_error;
-            case "FBAdsInterstitial_onAdLoaded", "FBAdsBanner_onAdLoaded" ->
-                    R.drawable.event_fbads_loaded;
             case "onTabAdded" -> R.drawable.ic_mtrl_post_added;
             case "onCompleteRegister" -> R.drawable.ic_mtrl_user_register_complete;
             case "onUpdatePasswordComplete" -> R.drawable.ic_mtrl_password;
@@ -384,10 +351,8 @@ public class ManageEvent {
     /**
      * @return Descriptions for Events added by Agus
      */
-    public static String e(String eventName) {
+    public static String getEventDescription(String eventName) {
         return switch (eventName) {
-            case "FBAdsBanner_onLoggingImpression", "FBAdsInterstitial_onLoggingImpression" ->
-                    "onLoggingImpression";
             case "onScrolled", "onRecyclerScrolled" -> "onScroll";
             case "onFailureLink" -> "onFailure";
             case "onSaveInstanceState" -> "On activity save instance state";
@@ -401,14 +366,9 @@ public class ManageEvent {
             case "onAccountPickerCancelled" -> "onAccountCancelled";
             case "onFragmentAdded" -> "Return Fragment";
             case "onPageChanged" -> "onPageScrollStateChanged";
-            case "FBAdsInterstitial_onInterstitialDismissed" -> "onInterstitialDismissed";
-            case "FBAdsInterstitial_onInterstitialDisplayed" -> "onInterstitialDisplayed";
             case "onOptionsItemSelected" -> "On options menu selected";
-            case "onBannerAdClicked", "FBAdsBanner_onAdClicked", "FBAdsInterstitial_onAdClicked" ->
-                    "onAdClicked";
-            case "FBAdsBanner_onError", "FBAdsInterstitial_onError" -> "onError";
-            case "onBannerAdLoaded", "FBAdsBanner_onAdLoaded", "FBAdsInterstitial_onAdLoaded" ->
-                    "onAdLoaded";
+            case "onBannerAdClicked" -> "onAdClicked";
+            case "onBannerAdLoaded" -> "onAdLoaded";
             case "onTabAdded" -> "Return Title";
             case "onCompleteRegister" -> "onComplete";
             case "onBannerAdFailedToLoad", "onInterstitialAdFailedToLoad" -> "onAdFailedToLoad";
@@ -443,11 +403,6 @@ public class ManageEvent {
                     "final String _errorMessage = _param1.getException() != null ? _param1.getException().getMessage() : \"\";\r\n" +
                     eventLogic + "\r\n" +
                     "}";
-            case "FBAdsBanner_onLoggingImpression", "FBAdsInterstitial_onLoggingImpression" ->
-                    "@Override\r\n" +
-                            "public void onLoggingImpression(Ad ad) {\r\n" +
-                            eventLogic + "\r\n" +
-                            "}";
             case "onScrolled" -> "@Override\r\n" +
                     "public void onScroll(AbsListView abs, int _firstVisibleItem, int _visibleItemCount, int _totalItemCount) {\r\n" +
                     eventLogic + "\r\n" +
@@ -524,18 +479,9 @@ public class ManageEvent {
                     "super.onScrolled(recyclerView, _offsetX, _offsetY);\r\n" +
                     eventLogic + "\r\n" +
                     "}";
-            case "onSuccessLink" -> "@Override\r\n" +
-                    "public void onSuccess(PendingDynamicLinkData _pendingDynamicLinkData) {\r\n" +
-                    "final String _link = _pendingDynamicLinkData != null ? _pendingDynamicLinkData.getLink().toString() : \"\";\r\n" +
-                    eventLogic + "\r\n" +
-                    "}";
             case "onPatternLockCleared" -> "@Override\r\n" +
                     "public void onCleared() {\r\n" +
                     eventLogic + "\n" +
-                    "}";
-            case "FBAdsInterstitial_onAdClicked" -> "@Override\r\n" +
-                    "public void onAdClicked(Ad ad) {\r\n" +
-                    eventLogic + "\r\n" +
                     "}";
             case "onPageScrolled" -> "@Override\r\n" +
                     "public void onPageScrolled(int _position, float _positionOffset, int _positionOffsetPixels) {\r\n" +
@@ -552,12 +498,12 @@ public class ManageEvent {
                     "final String _errorMessage = task.getException() != null ? task.getException().getMessage() : \"\";\r\n" +
                     eventLogic + "\r\n" +
                     "}";
-            case "onFragmentAdded" -> //noinspection DuplicateExpressions
-                    "@Override\r\n" +
-                            "public Fragment getItem(int _position) {\r\n" +
-                            (!eventLogic.isEmpty() ? eventLogic + "\r\n" :
-                                    "return null;\r\n") +
-                            "}";
+            case "onFragmentAdded" -> buildMethodWithFallbackReturn("""
+                    @Override
+                    public Fragment getItem(int _position) {
+                        %s
+                    }
+                    """, eventLogic, "new Fragment()");
             case "onTimeSet" -> "@Override\r\n" +
                     "public void onTimeSet(TimePicker _timePicker, int _hour, int _minute) {\r\n" +
                     eventLogic + "\r\n" +
@@ -572,16 +518,8 @@ public class ManageEvent {
                     "final String _errorMessage = task.getException() != null ? task.getException().getMessage() : \"\";\r\n" +
                     eventLogic + "\r\n" +
                     "}";
-            case "FBAdsInterstitial_onInterstitialDismissed" -> "@Override\r\n" +
-                    "public void onInterstitialDismissed(Ad ad) {\r\n" +
-                    eventLogic + "\r\n" +
-                    "}";
             case "onRatingChanged" -> "@Override\r\n" +
                     "public void onRatingChanged(RatingBar _ratingBar, float _value, boolean _fromUser) {\r\n" +
-                    eventLogic + "\r\n" +
-                    "}";
-            case "FBAdsInterstitial_onInterstitialDisplayed" -> "@Override\r\n" +
-                    "public void onInterstitialDisplayed(Ad ad) {\r\n" +
                     eventLogic + "\r\n" +
                     "}";
             case "onPatternLockProgress" -> "@Override\r\n" +
@@ -626,10 +564,6 @@ public class ManageEvent {
                     "public void onPageSelected(int _position) {\r\n" +
                     eventLogic + "\r\n" +
                     "}";
-            case "FBAdsBanner_onAdClicked" -> "@Override\r\n" +
-                    "public void onAdClicked(Ad ad) {\r\n" +
-                    eventLogic + "\r\n" +
-                    "}";
             case "onPrepared" -> "@Override\r\n" +
                     "public void onPrepared(MediaPlayer _mediaPlayer) {\r\n" +
                     eventLogic + "\r\n" +
@@ -639,20 +573,12 @@ public class ManageEvent {
                     eventLogic + "\r\n" +
                     "return true;\r\n" +
                     "}";
-            case "FBAdsBanner_onError", "FBAdsInterstitial_onError" -> "@Override\r\n" +
-                    "public void onError(Ad ad, AdError adError) {\r\n" +
-                    "final String _errorMsg = adError.getErrorMessage() != null ? adError.getErrorMessage() : \"\";\r\n" +
-                    eventLogic + "\r\n" +
-                    "}";
-            case "FBAdsInterstitial_onAdLoaded", "FBAdsBanner_onAdLoaded" -> "@Override\r\n" +
-                    "public void onAdLoaded(Ad ad) {\r\n" +
-                    eventLogic + "\r\n" +
-                    "}";
-            case "onTabAdded" -> "@Override\r\n" +
-                    "public CharSequence getPageTitle(int _position) {\r\n" +
-                    (!eventLogic.isEmpty() ? eventLogic + "\r\n" :
-                            "return \"\";\r\n") +
-                    "}";
+            case "onTabAdded" -> buildMethodWithFallbackReturn("""
+                    @Override
+                    public CharSequence getPageTitle(int _position) {
+                        %s
+                    }
+                    """, eventLogic, "\"\"");
             case "onCompleteRegister" -> "@Override\r\n" +
                     "public void onComplete(Task<InstanceIdResult> task) {\r\n" +
                     "final boolean _success = task.isSuccessful();\r\n" +
@@ -810,10 +736,6 @@ public class ManageEvent {
                     targetId + "_updatePasswordListener = new OnCompleteListener<Void>() {\r\n" +
                             listenerLogic + "\r\n" +
                             "};";
-            case "OnSuccessListener" ->
-                    targetId + "_onSuccessLink = new OnSuccessListener<PendingDynamicLinkData>() {\r\n" +
-                            listenerLogic + "\r\n" +
-                            "};";
             case "OnGridItemClickListener" ->
                     targetId + ".setOnItemClickListener(new AdapterView.OnItemClickListener() {\r\n" +
                             listenerLogic + "\r\n" +
@@ -862,10 +784,6 @@ public class ManageEvent {
                     targetId + ".setOnLetterSelectedListener(new WaveSideBar.OnLetterSelectedListener() {\r\n" +
                             listenerLogic + "\r\n" +
                             "});";
-            case "FBAdsInterstitial_InterstitialAdListener" ->
-                    targetId + "_InterstitialAdListener = new InterstitialAdListener() {\r\n" +
-                            listenerLogic + "\r\n" +
-                            "};";
             case "OnRatingBarChangeListener" ->
                     targetId + ".setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {\r\n" +
                             listenerLogic + "\r\n" +
@@ -887,9 +805,6 @@ public class ManageEvent {
                     targetId + ".addPatternLockListener(new PatternLockViewListener() {\r\n" +
                             listenerLogic + "\r\n" +
                             "});";
-            case "FBAdsBanner_AdListener" -> targetId + "_AdListener = new AdListener() {\r\n" +
-                    listenerLogic + "\r\n" +
-                    "};";
             case "OnGridItemLongClickListener" ->
                     targetId + ".setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {\r\n" +
                             listenerLogic + "\r\n" +
@@ -953,7 +868,6 @@ public class ManageEvent {
                  "onFragmentAdded" -> "%d.position";
             case "onLetterSelected" -> "%s.index";
             case "onPageSelected" -> "%m.listMap.data %d.position";
-            case "FBAdsInterstitial_onError", "FBAdsBanner_onError" -> "%s.errorMsg";
             case "onCompleteRegister" -> "%b.success %s.token %s.errorMessage";
             case "onCodeSent" -> "%s.verificationId %m.FirebasePhoneAuth.token";
             case "onTimeChanged" -> "%d.hour %d.minute";
@@ -964,7 +878,7 @@ public class ManageEvent {
         };
     }
 
-    public static void h(Gx gx, ArrayList<String> list) {
+    public static void addExtraComponentEvents(Gx gx, ArrayList<String> list) {
         if (gx.a("RewardedVideoAd")) {
             list.add("onRewardAdLoaded");
             list.add("onRewardAdFailedToLoad");
@@ -997,26 +911,8 @@ public class ManageEvent {
             list.add("onVerificationFailed");
             list.add("onCodeSent");
         }
-        if (gx.a("FirebaseDynamicLink")) {
-            list.add("onSuccessLink");
-            list.add("onFailureLink");
-        }
         if (gx.a("FirebaseCloudMessage")) {
             list.add("onCompleteRegister");
-        }
-        if (gx.a("FBAdsBanner")) {
-            list.add("FBAdsBanner_onError");
-            list.add("FBAdsBanner_onAdLoaded");
-            list.add("FBAdsBanner_onAdClicked");
-            list.add("FBAdsBanner_onLoggingImpression");
-        }
-        if (gx.a("FBAdsInterstitial")) {
-            list.add("FBAdsInterstitial_onError");
-            list.add("FBAdsInterstitial_onAdLoaded");
-            list.add("FBAdsInterstitial_onAdClicked");
-            list.add("FBAdsInterstitial_onLoggingImpression");
-            list.add("FBAdsInterstitial_onInterstitialDisplayed");
-            list.add("FBAdsInterstitial_onInterstitialDismissed");
         }
         if (gx.a("FirebaseGoogleLogin")) {
             list.add("onAccountPicker");
@@ -1059,12 +955,6 @@ public class ManageEvent {
             case "onFragmentAdded" -> "Fragment getItem %d.position";
             case "onTimeSet" -> "When " + targetId + " " + eventName + " %d.hour %d.minute";
             case "onPageChanged" -> "When " + targetId + " onPageScrollStateChanged %d.scrollState";
-            case "FBAdsBanner_onAdClicked", "FBAdsBanner_onAdLoaded",
-                 "FBAdsBanner_onLoggingImpression", "FBAdsInterstitial_onAdClicked",
-                 "FBAdsInterstitial_onAdLoaded", "FBAdsInterstitial_onLoggingImpression",
-                 "FBAdsInterstitial_onInterstitialDismissed",
-                 "FBAdsInterstitial_onInterstitialDisplayed" ->
-                    targetId + ": " + eventName.split("_")[1];
             case "onRatingChanged" -> "When " + targetId + " " + eventName + " %d.value";
             case "onPatternLockProgress", "onPatternLockComplete" ->
                     "When " + targetId + " " + eventName + " %m.listStr.pattern";
@@ -1072,8 +962,6 @@ public class ManageEvent {
             case "onTabSelected", "onTabUnselected", "onTabReselected", "onPageSelected" ->
                     targetId + ": " + eventName + " %d.position";
             case "onLetterSelected" -> "When " + targetId + " " + eventName + " %s.index";
-            case "FBAdsInterstitial_onError", "FBAdsBanner_onError" ->
-                    targetId + ": onError %s.errorMsg";
             case "onTabAdded" -> "CharSequence getPageTitle %d.position";
             case "onCompleteRegister" ->
                     "When " + targetId + " " + eventName + " %b.success %s.token %s.errorMessage";
@@ -1095,4 +983,19 @@ public class ManageEvent {
             default -> EventsHandler.getSpec(targetId, eventName);
         };
     }
+
+    public static String buildMethodWithFallbackReturn(String template, String logicCode, String returnValue) {
+        String fallbackReturn = String.format("return %s;", returnValue);
+        String finalCode;
+
+        if (logicCode.isEmpty()) {
+            finalCode = fallbackReturn;
+        } else {
+            boolean missingReturn = new BlockReturnAnalyzer().hasAnyMissingReturn(logicCode);
+            finalCode = missingReturn ? logicCode + "\r\n" + fallbackReturn : logicCode;
+        }
+
+        return String.format(template, finalCode);
+    }
+
 }

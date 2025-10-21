@@ -1,8 +1,8 @@
 package mod.agus.jcoderz.editor.library;
 
-import a.a.a.BuiltInLibraryManager;
 import mod.agus.jcoderz.handle.component.ConstVarComponent;
 import mod.jbk.build.BuiltInLibraries;
+import pro.sketchware.util.library.BuiltInLibraryManager;
 
 public class ExtLibSelected {
 
@@ -16,21 +16,14 @@ public class ExtLibSelected {
         if (component.isFCMUsed) {
             kp.addLibrary(BuiltInLibraries.FIREBASE_MESSAGING);
         }
-        if (component.isOneSignalUsed) {
-            kp.addLibrary(BuiltInLibraries.ONESIGNAL);
-            kp.addLibrary(BuiltInLibraries.PLAY_SERVICES_GCM);
-        }
-        if (component.isFBAdsUsed) {
-            kp.addLibrary(BuiltInLibraries.FACEBOOK_ADS_AUDIENCE_NETWORK_SDK);
-        }
         if (component.isLottieUsed) {
             kp.addLibrary(BuiltInLibraries.LOTTIE);
         }
         if (component.isYoutubePlayerUsed) {
-            kp.addLibrary(BuiltInLibraries.YOUTUBE_PLAYER);
+            kp.addLibrary(BuiltInLibraries.ANDROID_YOUTUBE_PLAYER);
         }
         if (component.isCircleImageViewUsed) {
-            kp.addLibrary(BuiltInLibraries.CIRCLE_IMAGEVIEW);
+            kp.addLibrary(BuiltInLibraries.CIRCLEIMAGEVIEW);
         }
         if (component.isFBGoogleUsed) {
             kp.addLibrary(BuiltInLibraries.PLAY_SERVICES_AUTH);
@@ -39,13 +32,16 @@ public class ExtLibSelected {
             kp.addLibrary(BuiltInLibraries.OTPVIEW);
         }
         if (component.isCodeViewUsed) {
-            kp.addLibrary(BuiltInLibraries.CODE_VIEW);
+            kp.addLibrary(BuiltInLibraries.CODEVIEW);
         }
         if (component.isPatternLockViewUsed) {
             kp.addLibrary(BuiltInLibraries.PATTERN_LOCK_VIEW);
         }
         if (component.isWaveSideBarUsed) {
             kp.addLibrary(BuiltInLibraries.WAVE_SIDE_BAR);
+        }
+        if (component.isSwipeRefreshLayoutUsed) {
+            kp.addLibrary(BuiltInLibraries.ANDROIDX_SWIPEREFRESHLAYOUT);
         }
     }
 }

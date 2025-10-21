@@ -9,11 +9,11 @@ import android.view.Gravity;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.besome.sketch.beans.ViewBean;
+import com.besome.sketch.editor.view.ItemView;
 
-import a.a.a.sy;
 import a.a.a.wB;
 
-public class ItemMapView extends AppCompatTextView implements sy {
+public class ItemMapView extends AppCompatTextView implements ItemView {
 
     public ViewBean viewBean;
 
@@ -23,7 +23,7 @@ public class ItemMapView extends AppCompatTextView implements sy {
 
     public Paint paint;
 
-    public float oneDp;
+    public float dip;
 
     public ItemMapView(Context context) {
         super(context);
@@ -34,7 +34,7 @@ public class ItemMapView extends AppCompatTextView implements sy {
         setGravity(Gravity.CENTER);
         setTypeface(null, Typeface.BOLD);
         setText("MapView");
-        oneDp = wB.a(context, 1.0f);
+        dip = wB.a(context, 1.0f);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(0x9599d5d0);
         setDrawingCacheEnabled(true);
@@ -80,7 +80,6 @@ public class ItemMapView extends AppCompatTextView implements sy {
 
     @Override
     public void setPadding(int left, int top, int right, int bottom) {
-        float f = oneDp;
-        super.setPadding((int) (left * f), (int) (top * f), (int) (right * f), (int) (bottom * f));
+        super.setPadding((int) (left * dip), (int) (top * dip), (int) (right * dip), (int) (bottom * dip));
     }
 }

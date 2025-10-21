@@ -36,13 +36,13 @@ import pro.sketchware.utility.SketchwareUtil;
 public class StringsAdapter extends RecyclerView.Adapter<StringsAdapter.ViewHolder> {
 
     private final ArrayList<HashMap<String, Object>> originalData;
-    private ArrayList<HashMap<String, Object>> filteredData;
     private final ResourcesEditorActivity activity;
     private final HashMap<Integer, String> notesMap;
+    private ArrayList<HashMap<String, Object>> filteredData;
 
     public StringsAdapter(ResourcesEditorActivity activity, ArrayList<HashMap<String, Object>> data, HashMap<Integer, String> notesMap) {
-        this.originalData = new ArrayList<>(data);
-        this.filteredData = data;
+        originalData = new ArrayList<>(data);
+        filteredData = data;
         this.activity = activity;
         this.notesMap = notesMap;
     }
@@ -59,7 +59,7 @@ public class StringsAdapter extends RecyclerView.Adapter<StringsAdapter.ViewHold
         HashMap<String, Object> item = filteredData.get(position);
         String key = (String) item.get("key");
         String text = (String) item.get("text");
-        holder.binding.title.setHint(key);
+        holder.binding.title.setText(key);
         holder.binding.sub.setText(text);
 
         if (notesMap.containsKey(position)) {
@@ -143,15 +143,6 @@ public class StringsAdapter extends RecyclerView.Adapter<StringsAdapter.ViewHold
         return filteredData.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        PalletCustomviewBinding binding;
-
-        public ViewHolder(PalletCustomviewBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
-    }
-
     public void filter(String query) {
         if (query == null || query.isEmpty()) {
             filteredData = new ArrayList<>(originalData);
@@ -160,7 +151,7 @@ public class StringsAdapter extends RecyclerView.Adapter<StringsAdapter.ViewHold
             for (HashMap<String, Object> item : originalData) {
                 String key = (String) item.get("key");
                 String text = (String) item.get("text");
-                if ((key != null && key.toLowerCase().contains(query)) || (text != null && text.toLowerCase().contains(query))) {
+                if (key != null && key.toLowerCase().contains(query) || text != null && text.toLowerCase().contains(query)) {
                     filteredData.add(item);
                 }
             }
@@ -183,7 +174,7 @@ public class StringsAdapter extends RecyclerView.Adapter<StringsAdapter.ViewHold
         for (String javaFileName : getAllJavaFileNames(projectScId)) {
             for (Map.Entry<String, ArrayList<BlockBean>> entry : projectDataManager.b(javaFileName).entrySet()) {
                 for (BlockBean block : entry.getValue()) {
-                    if ((block.opCode.equals("getResStr") && block.spec.equals(key)) || (block.opCode.equals("getResString") && block.parameters.get(0).equals("R.string." + key))) {
+                    if (block.opCode.equals("getResStr") && block.spec.equals(key) || block.opCode.equals("getResString") && block.parameters.get(0).equals("R.string." + key)) {
                         return true;
                     }
                 }
@@ -201,5 +192,14 @@ public class StringsAdapter extends RecyclerView.Adapter<StringsAdapter.ViewHold
             }
         }
         return false;
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        PalletCustomviewBinding binding;
+
+        public ViewHolder(PalletCustomviewBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
     }
 }

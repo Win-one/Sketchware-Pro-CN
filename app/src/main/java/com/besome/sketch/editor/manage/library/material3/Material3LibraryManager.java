@@ -20,24 +20,24 @@ public class Material3LibraryManager {
     private final Context context;
 
     public Material3LibraryManager(String sc_id) {
-        this.isEditingState = false;
-        this.appCombatLibraryBean = jC.c(sc_id).c();
-        this.isAppCompatEnabled = appCombatLibraryBean.isEnabled();
-        this.context = getContext();
+        isEditingState = false;
+        appCombatLibraryBean = jC.c(sc_id).c();
+        isAppCompatEnabled = appCombatLibraryBean.isEnabled();
+        context = getContext();
     }
 
     public Material3LibraryManager(Context context, String sc_id) {
         this.context = context;
-        this.isEditingState = false;
-        this.appCombatLibraryBean = jC.c(sc_id).c();
-        this.isAppCompatEnabled = appCombatLibraryBean.isEnabled();
+        isEditingState = false;
+        appCombatLibraryBean = jC.c(sc_id).c();
+        isAppCompatEnabled = appCombatLibraryBean.isEnabled();
     }
 
     public Material3LibraryManager(ProjectLibraryBean projectLibraryBean) {
-        this.context = getContext();
-        this.isEditingState = true;
-        this.appCombatLibraryBean = projectLibraryBean;
-        this.isAppCompatEnabled = projectLibraryBean.isEnabled();
+        context = getContext();
+        isEditingState = true;
+        appCombatLibraryBean = projectLibraryBean;
+        isAppCompatEnabled = projectLibraryBean.isEnabled();
     }
 
     public boolean isAppCompatEnabled() {
@@ -53,7 +53,7 @@ public class Material3LibraryManager {
     }
 
     public String getTheme() {
-        return (isMaterial3Enabled() || isEditingState) ? safeGetString("theme") : "DayNight";
+        return isMaterial3Enabled() || isEditingState ? safeGetString("theme") : "DayNight";
     }
 
     private String safeGetString(String key) {
@@ -79,9 +79,7 @@ public class Material3LibraryManager {
         if (!isMaterial3Enabled()) {
             return R.style.ThemeOverlay_SketchwarePro_ViewEditor;
         }
-
-        boolean isDark = getTheme().equals("Dark") ||
-                (!getTheme().equals("Light") && ThemeUtils.isDarkThemeEnabled(context));
+        boolean isDark = canUseNightVariantColors();
 
         if (isDynamicColorsEnabled()) {
             return isDark
@@ -100,7 +98,7 @@ public class Material3LibraryManager {
         }
 
         return getTheme().equals("Dark") ||
-                (!getTheme().equals("Light") && ThemeUtils.isDarkThemeEnabled(context));
+                !getTheme().equals("Light") && ThemeUtils.isDarkThemeEnabled(context);
     }
 
     public ProjectLibraryBean getAppCombatLibraryBean() {

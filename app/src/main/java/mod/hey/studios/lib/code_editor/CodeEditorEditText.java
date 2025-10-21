@@ -22,7 +22,6 @@ public class CodeEditorEditText extends androidx.appcompat.widget.AppCompatEditT
     private final Context context;
     private Rect lineBounds;
     private Paint highlightPaint;
-    private int lineNumber;
     private Rect rect;
     private Paint paint;
 
@@ -92,7 +91,7 @@ public class CodeEditorEditText extends androidx.appcompat.widget.AppCompatEditT
     @Override
     protected void onDraw(Canvas canvas) {
         if (lineHighlightEnabled) {
-            lineNumber = getLayout().getLineForOffset(getSelectionStart());
+            int lineNumber = getLayout().getLineForOffset(getSelectionStart());
             getLineBounds(lineNumber, lineBounds);
 
             canvas.drawRect(lineBounds, highlightPaint);

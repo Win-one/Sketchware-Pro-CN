@@ -16,6 +16,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.transition.AutoTransition;
 import androidx.transition.TransitionManager;
 
@@ -26,7 +27,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -51,6 +54,7 @@ import pro.sketchware.databinding.MyprojectSettingBinding;
 import pro.sketchware.lib.validator.AppNameValidator;
 import pro.sketchware.lib.validator.PackageNameValidator;
 import pro.sketchware.utility.FileUtil;
+import pro.sketchware.utility.SketchwareUtil;
 
 public class MyProjectSettingActivity extends BaseAppCompatActivity implements View.OnClickListener {
 
@@ -71,6 +75,8 @@ public class MyProjectSettingActivity extends BaseAppCompatActivity implements V
     private boolean isIconAdaptive;
     private Bitmap icon;
     private String sc_id;
+
+    private ThemePresetAdapter themePresetAdapter;
 
     public static void saveBitmapTo(Bitmap bitmap, String path) {
         try (FileOutputStream fileOutputStream = new FileOutputStream(path)) {
@@ -96,12 +102,15 @@ public class MyProjectSettingActivity extends BaseAppCompatActivity implements V
         binding.verCode.setSelected(true);
         binding.verName.setSelected(true);
 
+
         binding.appIconLayout.setOnClickListener(this);
         binding.verCodeHolder.setOnClickListener(this);
         binding.verNameHolder.setOnClickListener(this);
         binding.imgThemeColorHelp.setOnClickListener(this);
         binding.okButton.setOnClickListener(this);
         binding.cancel.setOnClickListener(this);
+
+        initializeThemePresets();
 
         binding.tilAppName.setHint(Helper.getResString(R.string.myprojects_settings_hint_enter_application_name));
         binding.tilPackageName.setHint(Helper.getResString(R.string.myprojects_settings_hint_enter_package_name));
@@ -112,7 +121,7 @@ public class MyProjectSettingActivity extends BaseAppCompatActivity implements V
         projectNameValidator = new VB(getApplicationContext(), binding.tilProjectName);
         binding.tilPackageName.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
-                if (!shownPackageNameChangeWarning && !Helper.getText(((EditText) v)).trim().contains("com.my.newproject")) {
+                if (!shownPackageNameChangeWarning && !Helper.getText((EditText) v).trim().contains("com.my.newproject")) {
                     showPackageNameChangeWarning();
                 }
             }
@@ -358,20 +367,21 @@ public class MyProjectSettingActivity extends BaseAppCompatActivity implements V
 
     private void pickColor(View anchorView, int colorIndex) {
         ColorPickerDialog colorPickerDialog = new ColorPickerDialog(this, projectThemeColors[colorIndex], false, false);
-        colorPickerDialog.a((new ColorPickerDialog.b() {
+        colorPickerDialog.a(new ColorPickerDialog.b() {
             @Override
             public void a(int var1) {
                 projectThemeColors[colorIndex] = var1;
                 syncThemeColors();
+                themePresetAdapter.unselectThePreviousTheme(-1);
             }
 
             @Override
             public void a(String var1, int var2) {
                 projectThemeColors[colorIndex] = var2;
                 syncThemeColors();
+                themePresetAdapter.unselectThePreviousTheme(-1);
             }
-        }
-        ));
+        });
         colorPickerDialog.showAtLocation(anchorView, Gravity.CENTER, 0, 0);
     }
 
@@ -431,6 +441,43 @@ public class MyProjectSettingActivity extends BaseAppCompatActivity implements V
         var autoTransition = new AutoTransition();
         autoTransition.setDuration((short) 200);
         TransitionManager.beginDelayedTransition((ViewGroup) view, autoTransition);
+    }
+
+    private void initializeThemePresets() {
+        List<ThemeManager.ThemePreset> themePresets = Arrays.asList(ThemeManager.getThemePresets());
+
+        themePresetAdapter = new ThemePresetAdapter(this, themePresets, (theme, position) -> applyTheme(theme));
+
+        binding.btnGenerateRandomTheme.setOnClickListener(v -> {
+            themePresetAdapter.unselectThePreviousTheme(-1);
+            generateRandomTheme();
+        });
+
+        binding.btnReset.setOnClickListener(v -> {
+            applyTheme(ThemeManager.getDefault());
+        });
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        binding.layoutThemePresets.setLayoutManager(layoutManager);
+
+        binding.layoutThemePresets.setAdapter(themePresetAdapter);
+    }
+
+    private void generateRandomTheme() {
+        ThemeManager.ThemePreset randomTheme = ThemeManager.generateRandomTheme();
+        applyTheme(randomTheme);
+
+        SketchwareUtil.toast(Helper.getResString(R.string.theme_random_generated));
+    }
+
+    private void applyTheme(ThemeManager.ThemePreset theme) {
+        projectThemeColors[0] = theme.colorAccent;
+        projectThemeColors[1] = theme.colorPrimary;
+        projectThemeColors[2] = theme.colorPrimaryDark;
+        projectThemeColors[3] = theme.colorControlHighlight;
+        projectThemeColors[4] = theme.colorControlNormal;
+
+        syncThemeColors();
     }
 
     private static class ThemeColorView extends LinearLayout {

@@ -8,15 +8,14 @@ import android.graphics.Rect;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.besome.sketch.beans.ViewBean;
+import com.besome.sketch.editor.view.ItemView;
 
-import a.a.a.sy;
 import a.a.a.wB;
-import a.a.a.xB;
 import pro.sketchware.R;
 
-public class ItemSignInButton extends AppCompatButton implements sy {
+public class ItemSignInButton extends AppCompatButton implements ItemView {
     private final Paint paint;
-    private final float paddingFactor;
+    private final float dip;
     private final Rect rect;
     private final Context context;
     private ViewBean viewBean;
@@ -28,7 +27,7 @@ public class ItemSignInButton extends AppCompatButton implements sy {
     public ItemSignInButton(Context context) {
         super(context);
         this.context = context;
-        paddingFactor = wB.a(context, 1.0f);
+        dip = wB.a(context, 1.0f);
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(0x9599d5d0);
         rect = new Rect();
@@ -57,7 +56,7 @@ public class ItemSignInButton extends AppCompatButton implements sy {
         int resSize = size.getText();
         String text = "";
         if (resSize != 0) {
-            text = xB.b().a(context, resSize);
+            text = context.getString(resSize);
         }
         int color = scheme.getTextColor();
         int background = scheme.getBackgroundResource();
@@ -110,7 +109,7 @@ public class ItemSignInButton extends AppCompatButton implements sy {
 
     @Override
     public void setPadding(int left, int top, int right, int bottom) {
-        super.setPadding((int) (left * paddingFactor), (int) (top * paddingFactor), (int) (right * paddingFactor), (int) (bottom * paddingFactor));
+        super.setPadding((int) (left * dip), (int) (top * dip), (int) (right * dip), (int) (bottom * dip));
     }
 
     public enum ButtonSize {

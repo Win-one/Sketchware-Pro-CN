@@ -74,7 +74,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="16dp"
-                    android:paddingVertical="12dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="8dp"
                     android:singleLine="true"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     tools:text="Building your awesome app..." />
@@ -83,6 +84,8 @@
                     android:id="@+id/progress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="2dp"
                     android:indeterminate="false"
                     android:progress="0"
                     app:trackStopIndicatorSize="0dp" />
@@ -143,23 +146,30 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <Button
-                    android:id="@+id/btn_run"
-                    style="@style/Widget.Material3Expressive.Button.IconButton.Filled"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
-                    android:paddingHorizontal="8dp"
-                    app:icon="@drawable/ic_mtrl_run" />
-
-                <Button
-                    android:id="@+id/btn_options"
-                    style="@style/Widget.Material3Expressive.Button.IconButton.Tonal"
+                <com.google.android.material.button.MaterialSplitButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:paddingHorizontal="8dp"
-                    app:icon="@drawable/ic_tune_24" />
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_run"
+                        style="?attr/materialSplitButtonLeadingFilledStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Run"
+                        app:icon="@drawable/ic_mtrl_run" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_options"
+                        style="?attr/materialSplitButtonIconFilledStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:icon="@drawable/m3_split_button_chevron_avd"
+                        app:iconSize="24dp" />
+
+                </com.google.android.material.button.MaterialSplitButton>
             </LinearLayout>
         </LinearLayout>
 

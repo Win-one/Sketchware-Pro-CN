@@ -8,14 +8,13 @@ import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
 
 public class LogicEditorScrollView extends FrameLayout {
-    private float a = 0;
-    private float b = 0;
+    private float offsetX = 0;
+    private float offsetY = 0;
     private int scaledTouchSlop = 0;
-    private boolean d = false;
+    private boolean isDragged = false;
     private boolean scrollEnabled = true;
-    private boolean useScroll = true;
-    private float g = -1;
-    private float h = -1;
+    private float lastPosX = -1;
+    private float lastPosY = -1;
 
     public LogicEditorScrollView(Context context) {
         this(context, null);
@@ -36,11 +35,10 @@ public class LogicEditorScrollView extends FrameLayout {
 
     @Override
     public void addView(View child) {
-        if (getChildCount() <= 1) {
-            super.addView(child);
-            return;
+        if (getChildCount() > 1) {
+            throw new IllegalStateException("BothDirectionScrollView should have child View only one");
         }
-        throw new IllegalStateException("BothDirectionScrollView should have child View only one");
+        super.addView(child);
     }
 
     public boolean getScrollEnabled() {
@@ -51,70 +49,61 @@ public class LogicEditorScrollView extends FrameLayout {
         scrollEnabled = z;
     }
 
-    public boolean getUseScroll() {
-        return useScroll;
-    }
-
-    public void setUseScroll(boolean z) {
-        useScroll = z;
-    }
-
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (!a()) {
+        if (!isPossibleScroll()) {
             return false;
         }
         int action = ev.getAction();
-        if (action == 2 && d) {
+        if (action == MotionEvent.ACTION_MOVE && isDragged) {
             return true;
         }
         float x = ev.getX();
         float y = ev.getY();
-        if (action == 0) {
-            a = x;
-            b = y;
-            d = false;
-        } else if (action == 1) {
-            d = false;
-        } else if (action == 2) {
-            int abs = (int) Math.abs(a - x);
-            int abs2 = (int) Math.abs(b - y);
-            int i = scaledTouchSlop;
-            if (abs > i || abs2 > i) {
-                d = true;
+        if (action == MotionEvent.ACTION_DOWN) {
+            offsetX = x;
+            offsetY = y;
+            isDragged = false;
+        } else if (action == MotionEvent.ACTION_UP) {
+            isDragged = false;
+        } else if (action == MotionEvent.ACTION_MOVE) {
+            int abs = (int) Math.abs(offsetX - x);
+            int abs2 = (int) Math.abs(offsetY - y);
+            if (abs > scaledTouchSlop || abs2 > scaledTouchSlop) {
+                isDragged = true;
             }
         }
-        return d;
+        return isDragged;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int min;
         int i = 0;
-        if (!a()) {
+        if (!isPossibleScroll()) {
             return false;
         }
         View child = getChildAt(0);
         int action = event.getAction();
         float x = event.getX();
         float y = event.getY();
-        if (action == 0) {
-            g = x;
-            h = y;
-        } else if (action == 1) {
-            g = -1.0f;
-            h = -1.0f;
-        } else if (action == 2) {
-            if (g < 0.0f) {
-                g = x;
+        if (action == MotionEvent.ACTION_DOWN) {
+            lastPosX = x;
+            lastPosY = y;
+        } else if (action == MotionEvent.ACTION_UP) {
+            lastPosX = -1.0f;
+            lastPosY = -1.0f;
+        } else if (action == MotionEvent.ACTION_MOVE) {
+            if (lastPosX < 0.0f) {
+                lastPosX = x;
             }
-            if (h < 0.0f) {
-                h = y;
+            if (lastPosY < 0.0f) {
+                lastPosY = y;
             }
-            int i2 = (int) (g - x);
-            int i3 = (int) (h - y);
-            g = x;
-            h = y;
+            int i2 = (int) (lastPosX - x);
+            int i3 = (int) (lastPosY - y);
+            lastPosX = x;
+            lastPosY = y;
             if (i2 <= 0) {
                 if (getScrollX() <= 0) {
                     i2 = 0;
@@ -142,11 +131,14 @@ public class LogicEditorScrollView extends FrameLayout {
         return true;
     }
 
-    private boolean a() {
-        if (getChildCount() <= 0 || !useScroll || !scrollEnabled) {
+    private boolean isPossibleScroll() {
+        if (getChildCount() <= 0 || !scrollEnabled) {
             return false;
         }
-        View childAt = getChildAt(0);
-        return getWidth() < (childAt.getWidth() + getPaddingLeft()) + getPaddingRight() || getHeight() < (childAt.getHeight() + getPaddingTop()) + getPaddingBottom();
+        View firstView = getChildAt(0);
+        int width = firstView.getWidth();
+        int height = firstView.getHeight();
+        if (getWidth() < getPaddingLeft() + width + getPaddingRight()) return true;
+        return getHeight() < getPaddingTop() + height + getPaddingBottom();
     }
 }

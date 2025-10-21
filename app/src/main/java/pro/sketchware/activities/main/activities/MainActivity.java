@@ -1,8 +1,8 @@
 package pro.sketchware.activities.main.activities;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.Uri;
@@ -30,9 +30,9 @@ import androidx.fragment.app.FragmentTransaction;
 import com.besome.sketch.lib.base.BasePermissionAppCompatActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.FirebaseApp;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,15 +40,10 @@ import java.util.Objects;
 
 import a.a.a.DB;
 import a.a.a.GB;
-import a.a.a.oB;
-import a.a.a.sB;
-import a.a.a.wq;
-import a.a.a.xB;
 import mod.hey.studios.project.backup.BackupFactory;
 import mod.hey.studios.project.backup.BackupRestoreManager;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.activities.tools.ConfigActivity;
-import mod.jbk.util.LogUtil;
 import mod.tyron.backup.SingleCopyTask;
 import pro.sketchware.R;
 import pro.sketchware.activities.about.AboutActivity;
@@ -56,6 +51,7 @@ import pro.sketchware.activities.main.fragments.projects.ProjectsFragment;
 import pro.sketchware.activities.main.fragments.projects_store.ProjectsStoreFragment;
 import pro.sketchware.databinding.MainBinding;
 import pro.sketchware.lib.base.BottomSheetDialogView;
+import pro.sketchware.utility.DataResetter;
 import pro.sketchware.utility.FileUtil;
 import pro.sketchware.utility.SketchwareUtil;
 import pro.sketchware.utility.UI;
@@ -79,6 +75,14 @@ public class MainActivity extends BasePermissionAppCompatActivity {
     private Fragment activeFragment;
     @IdRes
     private int currentNavItemId = R.id.item_projects;
+
+    private static boolean isFirebaseInitialized(Context context) {
+        try {
+            return FirebaseApp.getApps(context) != null && !FirebaseApp.getApps(context).isEmpty();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     @Override
     // onRequestPermissionsResult but for Storage access only, and only when granted
@@ -119,7 +123,7 @@ public class MainActivity extends BasePermissionAppCompatActivity {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case 105:
-                    sB.a(this, data.getBooleanExtra("onlyConfig", true));
+                    DataResetter.a(this, data.getBooleanExtra("onlyConfig", true));
                     break;
 
                 case 111:
@@ -155,7 +159,6 @@ public class MainActivity extends BasePermissionAppCompatActivity {
         super.onCreate(savedInstanceState);
         enableEdgeToEdgeNoContrast();
 
-        tryLoadingCustomizedAppStrings();
         binding = MainBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
@@ -220,7 +223,7 @@ public class MainActivity extends BasePermissionAppCompatActivity {
                     }
 
                     @Override
-                    public void onCopyPostExecute(String path, boolean wasSuccessful, String reason) {
+                    public void onCopyPostExecute(@NonNull String path, boolean wasSuccessful, @NonNull String reason) {
                         if (wasSuccessful) {
                             BackupRestoreManager manager = new BackupRestoreManager(MainActivity.this, projectsFragment);
 
@@ -374,12 +377,6 @@ public class MainActivity extends BasePermissionAppCompatActivity {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        xB.b().a();
-    }
-
-    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
@@ -474,36 +471,6 @@ public class MainActivity extends BasePermissionAppCompatActivity {
             storageAccessDenied.setActionTextColor(Color.YELLOW);
             storageAccessDenied.show();
         }
-    }
-
-    //This is annoying Please remove/togglize it
-    private void tryLoadingCustomizedAppStrings() {
-        // Refresh extracted provided strings file if necessary
-        oB oB = new oB();
-        try {
-            File extractedStringsProvidedXml = new File(wq.m());
-            if (oB.a(getApplicationContext(), "localization/strings.xml") != (extractedStringsProvidedXml.exists() ? extractedStringsProvidedXml.length() : 0)) {
-                oB.a(extractedStringsProvidedXml);
-                oB.a(getApplicationContext(), "localization/strings.xml", wq.m());
-            }
-        } catch (Exception e) {
-            String message = "Couldn't extract default strings to storage";
-            SketchwareUtil.toastError(message + ": " + e.getMessage());
-            LogUtil.e("MainActivity", message, e);
-        }
-
-        // Actual loading part
-        if (xB.b().b(getApplicationContext())) {
-            SketchwareUtil.toast(Helper.getResString(R.string.message_strings_xml_loaded));
-        }
-    }
-    
-    private static boolean isFirebaseInitialized(Context context) {
-    	try {
-	    	return FirebaseApp.getApps(context) != null && !FirebaseApp.getApps(context).isEmpty();
-    	} catch (Exception e) {
-	    	return false;
-    	}
     }
 
 }

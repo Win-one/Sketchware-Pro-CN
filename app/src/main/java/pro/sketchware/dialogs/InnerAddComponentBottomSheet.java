@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import com.besome.sketch.beans.ComponentBean;
 import com.besome.sketch.beans.ProjectFileBean;
@@ -29,7 +28,6 @@ import a.a.a.bB;
 import a.a.a.jC;
 import a.a.a.mB;
 import a.a.a.uq;
-import a.a.a.xB;
 import mod.hey.studios.util.Helper;
 import mod.hilal.saif.components.ComponentsHandler;
 import pro.sketchware.R;
@@ -166,10 +164,6 @@ public class InnerAddComponentBottomSheet extends BottomSheetDialogFragment {
         onSaveClickListener = null;
     }
 
-    public final String getTranslatedString(@StringRes int resId) {
-        return xB.b().a(getContext(), resId);
-    }
-
     private void setOnSaveClickListener(OnSaveClickListener onSaveClickListener) {
         this.onSaveClickListener = onSaveClickListener;
     }
@@ -179,14 +173,14 @@ public class InnerAddComponentBottomSheet extends BottomSheetDialogFragment {
 
         List<String> mimeTypes = Arrays.asList("*/*", "image/*", "audio/*", "text/*");
         List<String> mimeTypeLabels = Arrays.asList(
-                getTranslatedString(R.string.component_file_picker_title_select_mime_type_all_files),
-                getTranslatedString(R.string.component_file_picker_title_select_mime_type_image_files),
-                getTranslatedString(R.string.component_file_picker_title_select_mime_type_audio_files),
-                getTranslatedString(R.string.component_file_picker_title_select_mime_type_text_files)
+                getString(R.string.component_file_picker_title_select_mime_type_all_files),
+                getString(R.string.component_file_picker_title_select_mime_type_image_files),
+                getString(R.string.component_file_picker_title_select_mime_type_audio_files),
+                getString(R.string.component_file_picker_title_select_mime_type_text_files)
         );
 
         new MaterialAlertDialogBuilder(getContext())
-                .setTitle(getTranslatedString(R.string.component_file_picker_title_select_mime_type))
+                .setTitle(R.string.component_file_picker_title_select_mime_type)
                 .setSingleChoiceItems(mimeTypeLabels.toArray(new String[0]), selectedMime.get(), (dialog, which) -> selectedChoice.set(which))
                 .setPositiveButton(R.string.common_word_select, (dialog, which) -> {
                     String selectedMimeType = mimeTypes.get(selectedChoice.get());
@@ -237,14 +231,6 @@ public class InnerAddComponentBottomSheet extends BottomSheetDialogFragment {
 
             case ComponentBean.COMPONENT_TYPE_FRAGMENT_ADAPTER:
                 if (jC.c(scId).c().useYn.equals(ProjectLibraryBean.LIB_USE_N)) {
-                    bB.b(getContext(), Helper.getResString(R.string.design_library_guide_setup_first), bB.TOAST_WARNING).show();
-                    return false;
-                }
-                jC.a(scId).a(projectFileBean.getJavaName(), componentType, componentId);
-                break;
-
-            case ComponentBean.COMPONENT_TYPE_FIREBASE_DYNAMIC_LINKS:
-                if (jC.c(scId).d().useYn.equals(ProjectLibraryBean.LIB_USE_N)) {
                     bB.b(getContext(), Helper.getResString(R.string.design_library_guide_setup_first), bB.TOAST_WARNING).show();
                     return false;
                 }

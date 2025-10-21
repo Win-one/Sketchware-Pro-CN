@@ -2,11 +2,11 @@ package mod.hey.studios.compiler.kotlin;
 
 import java.io.File;
 
-import a.a.a.BuiltInLibraryManager;
 import a.a.a.ProjectBuilder;
 import a.a.a.yq;
 import mod.jbk.build.BuildProgressReceiver;
 import mod.jbk.build.BuiltInLibraries;
+import pro.sketchware.util.library.BuiltInLibraryManager;
 import pro.sketchware.utility.FileUtil;
 
 public class KotlinCompilerBridge {
@@ -19,7 +19,7 @@ public class KotlinCompilerBridge {
 
     public static void maybeAddKotlinBuiltInLibraryDependenciesIfPossible(ProjectBuilder builder, BuiltInLibraryManager builtInLibraryManager) {
         if (KotlinCompilerUtil.areAnyKtFilesPresent(builder)) {
-            builtInLibraryManager.addLibrary(BuiltInLibraries.KOTLIN_STDLIB);
+            builtInLibraryManager.addLibrary(BuiltInLibraries.JETBRAINS_KOTLIN_STDLIB);
         }
     }
 

@@ -53,12 +53,12 @@ public class ExtraPaletteBlock {
 
     public ExtraPaletteBlock(LogicEditorActivity logicEditorActivity, Boolean isViewBindingEnabled) {
         logicEditor = logicEditorActivity;
-        eventName = logicEditorActivity.D;
+        eventName = logicEditorActivity.eventName;
 
         projectFile = logicEditor.M;
         javaName = projectFile.getJavaName();
         xmlName = projectFile.getXmlName();
-        sc_id = logicEditor.B;
+        sc_id = logicEditor.scId;
         this.isViewBindingEnabled = isViewBindingEnabled;
 
         frc = new FileResConfig(sc_id);
@@ -81,10 +81,10 @@ public class ExtraPaletteBlock {
         }
         if (eventName.equals("onBindCustomView")) {
             var eC = jC.a(sc_id);
-            var view = eC.c(xmlName, logicEditor.C);
+            var view = eC.c(xmlName, logicEditor.id);
             if (view == null) {
                 // in case the View's in a Drawer
-                view = eC.c("_drawer_" + xmlName, logicEditor.C);
+                view = eC.c("_drawer_" + xmlName, logicEditor.id);
             }
             String customView = view.customView;
             if (customView != null && !customView.isEmpty()) {
@@ -112,23 +112,17 @@ public class ExtraPaletteBlock {
         return switch (str) {
             case "circleimageview" ->
                     jC.a(sc_id).g(xmlName, ViewBeans.VIEW_TYPE_WIDGET_CIRCLEIMAGEVIEW, str2);
-            case "onesignal" ->
-                    jC.a(sc_id).d(javaName, ComponentBean.COMPONENT_TYPE_ONESIGNAL, str2);
             case "asynctask" -> jC.a(sc_id).d(javaName, 36, str2);
             case "otpview" -> jC.a(sc_id).g(xmlName, ViewBeans.VIEW_TYPE_WIDGET_OTPVIEW, str2);
             case "lottie" ->
                     jC.a(sc_id).g(xmlName, ViewBeans.VIEW_TYPE_WIDGET_LOTTIEANIMATIONVIEW, str2);
             case "phoneauth" ->
                     jC.a(sc_id).d(javaName, ComponentBean.COMPONENT_TYPE_FIREBASE_AUTH_PHONE, str2);
-            case "fbadbanner" ->
-                    jC.a(sc_id).d(javaName, ComponentBean.COMPONENT_TYPE_FACEBOOK_ADS_BANNER, str2);
             case "codeview" -> jC.a(sc_id).g(xmlName, ViewBeans.VIEW_TYPE_WIDGET_CODEVIEW, str2);
             case "recyclerview" ->
                     jC.a(sc_id).g(xmlName, ViewBeans.VIEW_TYPE_WIDGET_RECYCLERVIEW, str2);
             case "googlelogin" ->
                     jC.a(sc_id).d(javaName, ComponentBean.COMPONENT_TYPE_FIREBASE_AUTH_GOOGLE_LOGIN, str2);
-            case "dynamiclink" ->
-                    jC.a(sc_id).d(javaName, ComponentBean.COMPONENT_TYPE_FIREBASE_DYNAMIC_LINKS, str2);
             case "youtubeview" ->
                     jC.a(sc_id).g(xmlName, ViewBeans.VIEW_TYPE_WIDGET_YOUTUBEPLAYERVIEW, str2);
             case "signinbutton" ->
@@ -136,8 +130,6 @@ public class ExtraPaletteBlock {
             case "cardview" -> jC.a(sc_id).g(xmlName, ViewBeans.VIEW_TYPE_LAYOUT_CARDVIEW, str2);
             case "radiogroup" ->
                     jC.a(sc_id).g(xmlName, ViewBeans.VIEW_TYPE_LAYOUT_RADIOGROUP, str2);
-            case "fbadinterstitial" ->
-                    jC.a(sc_id).d(javaName, ComponentBean.COMPONENT_TYPE_FACEBOOK_ADS_INTERSTITIAL, str2);
             case "textinputlayout" ->
                     jC.a(sc_id).g(xmlName, ViewBeans.VIEW_TYPE_LAYOUT_TEXTINPUTLAYOUT, str2);
             case "collapsingtoolbar" ->
@@ -254,7 +246,7 @@ public class ExtraPaletteBlock {
 
     private void blockCustomViews() {
         if (eventName.equals("onBindCustomView")) {
-            String viewId = logicEditor.C;
+            String viewId = logicEditor.id;
             var eC = jC.a(sc_id);
             ViewBean viewBean = eC.c(xmlName, viewId);
             if (viewBean == null) {
@@ -407,8 +399,6 @@ public class ExtraPaletteBlock {
                 StringsEditorManager stringsEditorManager = new StringsEditorManager();
                 stringsEditorManager.convertXmlStringsToListMap(FileUtil.readFileIfExist(filePath), StringsListMap);
 
-                logicEditor.b("Add new String", "XmlString.Add");
-                logicEditor.b("Remove String(s)", "XmlString.remove");
                 logicEditor.b("Open Resources editor", "openResourcesEditor");
 
                 logicEditor.a("s", "getResString");
@@ -1087,9 +1077,6 @@ public class ExtraPaletteBlock {
                     logicEditor.a(" ", "firebaseauthSignInAnonymously");
                     logicEditor.a(" ", "firebaseauthResetPassword");
                     logicEditor.a(" ", "firebaseauthSignOutUser");
-                }
-                if (extraBlocks.isComponentUsed(ComponentBean.COMPONENT_TYPE_FIREBASE_DYNAMIC_LINKS)) {
-                    logicEditor.a(" ", "setDynamicLinkDataHost");
                 }
                 if (extraBlocks.isComponentUsed(ComponentBean.COMPONENT_TYPE_GYROSCOPE)) {
                     logicEditor.a("Gyroscope", getTitleBgColor());

@@ -65,7 +65,6 @@ public class ImportIconActivity extends BaseAppCompatActivity implements IconAda
     private static final String ICON_TYPE_TWO_TONE = "twotone";
     private static final String ICON_TYPE_ROUND = "round";
     private static final String ICON_TYPE_BASELINE = "baseline";
-    private final int ITEMS_PER_PAGE = 40;
     private String iconName;
     private WB iconNameValidator;
     private MenuItem search;
@@ -100,10 +99,8 @@ public class ImportIconActivity extends BaseAppCompatActivity implements IconAda
     private boolean isLoading = false;
     private boolean isLastPage = false;
 
-    private ColorPickerDialog colorpicker;
-
     private int getGridLayoutColumnCount() {
-        return ((int) (getResources().getDisplayMetrics().widthPixels / getResources().getDisplayMetrics().density)) / 80;
+        return (int) (getResources().getDisplayMetrics().widthPixels / getResources().getDisplayMetrics().density) / 80;
     }
 
     private boolean doExtractedIconsExist() {
@@ -129,12 +126,12 @@ public class ImportIconActivity extends BaseAppCompatActivity implements IconAda
         binding = ImportIconBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        colorpicker = new ColorPickerDialog(this, 0xFF9E9E9E, false, false);
+        ColorPickerDialog colorpicker = new ColorPickerDialog(this, 0xFF9E9E9E, false, false);
         svgUtils = new SvgUtils(this);
         Toolbar toolbar = binding.toolbar.toolbar;
         binding.toolbar.layoutMainLogo.setVisibility(View.GONE);
         setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle(getTranslatedString(R.string.design_manager_icon_actionbar_title));
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.design_manager_icon_actionbar_title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         toolbar.setNavigationOnClickListener(v -> {
@@ -241,6 +238,7 @@ public class ImportIconActivity extends BaseAppCompatActivity implements IconAda
     }
 
     private void loadMoreItems() {
+        int ITEMS_PER_PAGE = 40;
         int start = currentPage * ITEMS_PER_PAGE;
         int end = Math.min(start + ITEMS_PER_PAGE, allIconPaths.size());
 
@@ -332,7 +330,7 @@ public class ImportIconActivity extends BaseAppCompatActivity implements IconAda
                     }
                 }
             });
-            colorPicker.materialColorAttr((attr, attrId) -> {
+            colorPicker.materialColorAttr((attr, attrColor) -> {
                 attr = "?attr/" + attr;
                 selected_color = PropertiesUtil.parseColor(new ColorsEditorManager().getColorValue(getApplicationContext(), attr, 3));
                 selected_color_hex = attr;
@@ -493,10 +491,7 @@ public class ImportIconActivity extends BaseAppCompatActivity implements IconAda
         public void a() {
             var activity = this.activity.get();
             activity.h();
-            int oldPosition = activity.selectedIconPosition;
             activity.selectedIconPosition = -1;
-            activity.adapter.notifyItemChanged(oldPosition);
-            activity.adapter.submitList(activity.icons);
         }
 
         @Override

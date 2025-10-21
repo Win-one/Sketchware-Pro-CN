@@ -3,7 +3,7 @@ package mod.hilal.saif.activities.android_manifest;
 import static pro.sketchware.utility.GsonUtils.getGson;
 import static pro.sketchware.utility.SketchwareUtil.getDip;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -19,8 +19,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import mod.hey.studios.code.SrcCodeEditor;
 import mod.hey.studios.util.Helper;
-import mod.hilal.saif.android_manifest.ActComponentsDialog;
 import mod.remaker.view.CustomAttributeView;
 import pro.sketchware.R;
 import pro.sketchware.databinding.ActivityManageCustomAttributeBinding;
@@ -98,27 +98,27 @@ public class AndroidManifestInjectionDetails extends BaseAppCompatActivity {
         }
     }
 
-    @SuppressLint("NonConstantResourceId")
     private void setToolbar() {
-        String activity = getString(R.string.attributes_for_all_activities);
-        String attributes = getString(R.string.application_attributes);
-        String permissions = getString(R.string.application_permissions);
         String str = switch (type) {
-            case "all" -> activity;
-            case "application" -> attributes;
-            case "permission" -> permissions;
+            case "all" -> "Attributes for all activities";
+            case "application" -> "Application Attributes";
+            case "permission" -> "Application Permissions";
             default -> activityName;
         };
         binding.toolbar.setTitle(str);
 
         binding.toolbar.setNavigationOnClickListener(Helper.getBackPressedClickListener(this));
 
-        if (!str.equals(activity) && !str.equals(attributes) && !str.equals(permissions)) {
+        if (!str.equals("Attributes for all activities") && !str.equals("Application Attributes") && !str.equals("Application Permissions")) {
             binding.toolbar.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
                     case R.id.asd_components:
-                        ActComponentsDialog acd = new ActComponentsDialog(this, src_id, activityName);
-                        acd.show();
+                        Intent intent = new Intent(this, SrcCodeEditor.class);
+                        intent.putExtra(SrcCodeEditor.FLAG_FROM_ANDROID_MANIFEST, true);
+                        intent.putExtra("title", activityName + " Components");
+                        intent.putExtra("sc_id", src_id);
+                        intent.putExtra("activity_name", activityName);
+                        startActivity(intent);
                         return true;
                     default:
                         return false;
@@ -131,7 +131,7 @@ public class AndroidManifestInjectionDetails extends BaseAppCompatActivity {
 
     private void showDial(int pos) {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
-        dialog.setTitle(R.string.edit_value);
+        dialog.setTitle("Edit Value");
         DialogCreateNewFileLayoutBinding attributeBinding = DialogCreateNewFileLayoutBinding.inflate(getLayoutInflater());
         attributeBinding.chipGroupTypes.setVisibility(View.GONE);
         dialog.setView(attributeBinding.getRoot());
@@ -148,7 +148,7 @@ public class AndroidManifestInjectionDetails extends BaseAppCompatActivity {
 
     private void showAddDial() {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this);
-        dialog.setTitle(type.equals("permission") ? getString(R.string.add_new_permission) : getString(R.string.add_new_attribute));
+        dialog.setTitle(type.equals("permission") ? "Add new permission" : "Add new attribute");
         CustomDialogAttributeBinding attributeBinding = CustomDialogAttributeBinding.inflate(getLayoutInflater());
         dialog.setView(attributeBinding.getRoot());
         if (type.equals("permission")) {
@@ -225,7 +225,7 @@ public class AndroidManifestInjectionDetails extends BaseAppCompatActivity {
 
             try {
                 int violet = ThemeUtils.getColor(attributeView, R.attr.colorViolet);
-                int onSurface = ThemeUtils.getColor(attributeView, com.google.android.material.R.attr.colorOnSurface);
+                int onSurface = ThemeUtils.getColor(attributeView, R.attr.colorOnSurface);
                 int green = ThemeUtils.getColor(attributeView, R.attr.colorGreen);
 
                 SpannableString spannableString = new SpannableString((String) _data.get(position).get("value"));
@@ -241,8 +241,8 @@ public class AndroidManifestInjectionDetails extends BaseAppCompatActivity {
             attributeView.setOnClickListener(v -> showDial(position));
             attributeView.setOnLongClickListener(v -> {
                 new MaterialAlertDialogBuilder(AndroidManifestInjectionDetails.this)
-                        .setTitle(R.string.delete_this_attribute)
-                        .setMessage(getString(R.string.this_action_cannot_be_undone))
+                        .setTitle("Delete this attribute?")
+                        .setMessage("This action cannot be undone.")
                         .setPositiveButton(R.string.common_word_delete, (dialog, which) -> {
                             listMap.remove(position);
                             applyChange();

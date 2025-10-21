@@ -101,9 +101,12 @@ public class ProjectPreviewActivity extends BaseAppCompatActivity {
             int[] location = new int[2];
             binding.author.getLocationOnScreen(location);
 
-            if (location[1] + binding.author.getHeight() + UI.getStatusBarHeight(ProjectPreviewActivity.this) < binding.toolbar.getHeight()) {
+            if (location[1] + binding.author.getHeight() + UI.getStatusBarHeight(this) < binding.toolbar.getHeight()) {
                 if (isTitleContainerShown) return;
                 isTitleContainerShown = true;
+
+                binding.toolbarTitleContainer.setVisibility(View.VISIBLE);
+                binding.toolbarTitleContainer.setTranslationY(24f);
 
                 binding.topScrim.animate().alpha(1f).setDuration(TITLE_CONTAINER_FADE_DURATION).start();
                 binding.toolbarTitleContainer.animate()
@@ -111,7 +114,6 @@ public class ProjectPreviewActivity extends BaseAppCompatActivity {
                         .translationY(0f)
                         .setInterpolator(new LinearInterpolator())
                         .setDuration(TITLE_CONTAINER_FADE_DURATION)
-                        .withStartAction(() -> binding.toolbarTitleContainer.setVisibility(View.VISIBLE))
                         .start();
             } else {
                 if (!isTitleContainerShown) return;
@@ -123,7 +125,6 @@ public class ProjectPreviewActivity extends BaseAppCompatActivity {
                         .alpha(0f)
                         .setInterpolator(new LinearInterpolator())
                         .setDuration(TITLE_CONTAINER_FADE_DURATION)
-                        .withEndAction(() -> binding.toolbarTitleContainer.setVisibility(View.INVISIBLE))
                         .start();
             }
         });

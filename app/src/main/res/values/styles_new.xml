@@ -30,7 +30,6 @@
 
     <style name="Widget.SketchwarePro.Toolbar.SmallText" parent="Widget.Material3Expressive.Toolbar.OnSurface">
         <item name="titleTextAppearance">?attr/textAppearanceBodyLarge</item>
-        <item name="subtitleTextAppearance">?attr/textAppearanceBodyMedium</item>
     </style>
 
     <style name="Widget.SketchwarePro.NavigationView.Main" parent="Widget.Material3.NavigationView">
@@ -133,8 +132,10 @@
     </style>
 
     <style name="TextAppearance.SketchwarePro.Chip" parent="TextAppearance.SketchwarePro.BodyMedium">
-        <item name="android:fontFamily">@font/gilroy</item>
-        <item name="fontFamily">@font/gilroy</item>
+    </style>
+
+    <style name="TextAppearance.SketchwarePro.BodyLargeEmphasized" parent="TextAppearance.SketchwarePro.BodyLarge">
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ThemeOverlay.SketchwarePro.Chip.ProjectPreview" parent="">

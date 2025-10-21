@@ -208,7 +208,6 @@ public class Jx {
             if (isBottomDialogFragment) {
                 addImport("com.google.android.material.bottomsheet.BottomSheetDialogFragment");
             }
-            addImport("com.google.android.material.color.MaterialColors");
         } else {
             addImport("android.app.Fragment");
             addImport("android.app.FragmentManager");
@@ -576,21 +575,7 @@ public class Jx {
                 sb.append(EOL);
             }
         }
-        if (new Material3LibraryManager(sc_id).isMaterial3Enabled()) {
-            String contextReference;
-            if (isFragment || isDialogFragment || isBottomDialogFragment) {
-                contextReference = "getContext()";
-            } else {
-                contextReference = "this";
-            }
-            sb.append(String.format("""
-                    
-                    private int getMaterialColor(int resourceId) {
-                    return MaterialColors.getColor(%s, resourceId, "getMaterialColor");
-                    }
-                    """, contextReference));
-        }
-        if (!isFragment && !settings.getValue(ProjectSettings.SETTING_DISABLE_OLD_METHODS, BuildSettings.SETTING_GENERIC_VALUE_FALSE)
+        if (!isFragment && !settings.getValue(ProjectSettings.SETTING_DISABLE_OLD_METHODS, BuildSettings.SETTING_GENERIC_VALUE_TRUE)
                 .equals(BuildSettings.SETTING_GENERIC_VALUE_TRUE)) {
             sb.append(getDeprecatedMethodsCode());
         }
@@ -637,7 +622,7 @@ public class Jx {
     private String getDrawerViewDeclarationAndAddImports(ViewBean viewBean) {
         String viewType = WIDGET_NAME_PATTERN.matcher(viewBean.convert).replaceAll("");
         if (viewType.isEmpty()) {
-            viewType = viewBean.getClassInfo().a();
+            viewType = viewBean.getClassInfo().getClassName();
         }
         addImports(mq.getImportsByTypeName(projectDataManager.a, viewType, null));
         return Lx.a(viewType, "_drawer_" + viewBean.id, Lx.AccessModifier.PRIVATE);
@@ -655,7 +640,7 @@ public class Jx {
     private String getViewDeclarationAndAddImports(ViewBean viewBean) {
         String viewType = WIDGET_NAME_PATTERN.matcher(viewBean.convert).replaceAll("");
         if (viewType.isEmpty()) {
-            viewType = viewBean.getClassInfo().a();
+            viewType = viewBean.getClassInfo().getClassName();
         }
         if (requireImports(viewBean)) {
             addImports(mq.getImportsByTypeName(projectDataManager.a, viewType, viewBean.convert));
@@ -864,7 +849,7 @@ public class Jx {
     private String getDrawerViewInitializer(ViewBean viewBean) {
         String replaceAll = WIDGET_NAME_PATTERN.matcher(viewBean.convert).replaceAll("");
         if (replaceAll.isEmpty()) {
-            replaceAll = viewBean.getClassInfo().a();
+            replaceAll = viewBean.getClassInfo().getClassName();
         }
         return Lx.getDrawerViewInitializer(replaceAll, viewBean.id, "_nav_view");
     }
@@ -892,7 +877,7 @@ public class Jx {
     private String getViewInitializer(ViewBean viewBean) {
         String replaceAll = WIDGET_NAME_PATTERN.matcher(viewBean.convert).replaceAll("");
         if (replaceAll.isEmpty()) {
-            replaceAll = viewBean.getClassInfo().a();
+            replaceAll = viewBean.getClassInfo().getClassName();
         }
         if (projectFileBean.fileName.contains("_fragment")) {
             return Lx.getViewInitializer(replaceAll, viewBean.id, true, isViewBindingEnabled);
@@ -1045,7 +1030,7 @@ public class Jx {
 
     private void addFieldsDeclaration() {
         String javaName = projectFileBean.getJavaName();
-        for (Pair<Integer, String> next : projectDataManager.k(javaName)) {
+        for (Pair<Integer, String> next : new ArrayList<>(projectDataManager.k(javaName))) {
             int variableId = next.first;
             String variableValue = next.second;
             if (variableId == 9) {

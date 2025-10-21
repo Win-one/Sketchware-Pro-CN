@@ -26,7 +26,7 @@ public class StylesAdapter extends RecyclerView.Adapter<StylesAdapter.StyleViewH
 
     public StylesAdapter(ArrayList<StyleModel> stylesList, Fragment fragment, HashMap<Integer, String> notesMap) {
         this.stylesList = stylesList;
-        this.originalList = new ArrayList<>(stylesList);
+        originalList = new ArrayList<>(stylesList);
         this.notesMap = notesMap;
         this.fragment = fragment;
     }
@@ -72,7 +72,7 @@ public class StylesAdapter extends RecyclerView.Adapter<StylesAdapter.StyleViewH
         }
 
         public void bind(StyleModel style) {
-            binding.title.setHint(style.getStyleName());
+            binding.title.setText(style.getStyleName());
             if (style.getParent().isEmpty()) {
                 binding.sub.setText("No Parent");
             } else {

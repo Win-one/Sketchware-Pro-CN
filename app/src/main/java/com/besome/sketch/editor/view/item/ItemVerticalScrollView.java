@@ -9,13 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.besome.sketch.beans.ViewBean;
+import androidx.annotation.NonNull;
 
-import a.a.a.sy;
-import a.a.a.ty;
+import com.besome.sketch.beans.ViewBean;
+import com.besome.sketch.editor.view.ItemView;
+import com.besome.sketch.editor.view.ScrollContainer;
+
 import a.a.a.wB;
 
-public class ItemVerticalScrollView extends FrameLayout implements sy, ty {
+public class ItemVerticalScrollView extends FrameLayout implements ItemView, ScrollContainer {
 
     private final Rect g = new Rect();
     private final Rect rect = new Rect();
@@ -79,15 +81,15 @@ public class ItemVerticalScrollView extends FrameLayout implements sy, ty {
     }
 
     @Override
-    public void a() {
+    public void reindexChildren() {
         int var1 = 0;
 
         int var4;
         for (int var2 = 0; var1 < getChildCount(); var2 = var4) {
             View var3 = getChildAt(var1);
             var4 = var2;
-            if (var3 instanceof sy) {
-                ((sy) var3).getBean().index = var2;
+            if (var3 instanceof ItemView) {
+                ((ItemView) var3).getBean().index = var2;
                 var4 = var2 + 1;
             }
 
@@ -106,7 +108,7 @@ public class ItemVerticalScrollView extends FrameLayout implements sy, ty {
         setDrawingCacheEnabled(true);
         setMinimumWidth((int) wB.a(var1, 32.0F));
         setMinimumHeight((int) wB.a(var1, 32.0F));
-        paint = new Paint(1);
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStrokeWidth(wB.a(getContext(), 2.0F));
     }
 
@@ -195,7 +197,7 @@ public class ItemVerticalScrollView extends FrameLayout implements sy, ty {
     }
 
     @Override
-    public void onDraw(Canvas canvas) {
+    public void onDraw(@NonNull Canvas canvas) {
         if (!isFixed) {
             int scrollX = getScrollX();
             int measuredWidthX = getScrollX() + getMeasuredWidth();
@@ -298,19 +300,19 @@ public class ItemVerticalScrollView extends FrameLayout implements sy, ty {
     }
 
     @Override
-    public void setChildScrollEnabled(boolean childScrollEnabled) {
+    public void setChildScrollEnabled(boolean scrollEnabled) {
         for (int i = 0; i < getChildCount(); ++i) {
             View child = getChildAt(i);
-            if (child instanceof ty) {
-                ((ty) child).setChildScrollEnabled(childScrollEnabled);
+            if (child instanceof ScrollContainer) {
+                ((ScrollContainer) child).setChildScrollEnabled(scrollEnabled);
             }
 
             if (child instanceof ItemHorizontalScrollView) {
-                ((ItemHorizontalScrollView) child).setScrollEnabled(childScrollEnabled);
+                ((ItemHorizontalScrollView) child).setScrollEnabled(scrollEnabled);
             }
 
             if (child instanceof ItemVerticalScrollView) {
-                ((ItemVerticalScrollView) child).setScrollEnabled(childScrollEnabled);
+                ((ItemVerticalScrollView) child).setScrollEnabled(scrollEnabled);
             }
         }
     }
