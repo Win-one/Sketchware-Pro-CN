@@ -37,7 +37,7 @@ public class LibraryItemView extends FrameLayout {
 
         setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        int dividerColor = ThemeUtils.isDarkThemeEnabled(context) ? R.attr.colorSurfaceContainerHighest : R.attr.colorOutlineVariant;
+        int dividerColor = ThemeUtils.isDarkThemeEnabled(context) ? com.google.android.material.R.attr.colorSurfaceContainerHighest : com.google.android.material.R.attr.colorOutlineVariant;
         divider.setDividerColor(ThemeUtils.getColor(context, dividerColor));
     }
 

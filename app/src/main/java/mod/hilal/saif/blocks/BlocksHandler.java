@@ -2832,6 +2832,6 @@ public class BlocksHandler {
     }
 
     private static @ColorInt int getTitleBgColor(LogicEditorActivity logicEditorActivity) {
-        return ThemeUtils.getColor(logicEditorActivity, ThemeUtils.isDarkThemeEnabled(logicEditorActivity) ? R.attr.colorSurfaceContainerHigh : R.attr.colorSurfaceInverse);
+        return ThemeUtils.getColor(logicEditorActivity, ThemeUtils.isDarkThemeEnabled(logicEditorActivity) ? com.google.android.material.R.attr.colorSurfaceContainerHigh : com.google.android.material.R.attr.colorSurfaceInverse);
     }
 }

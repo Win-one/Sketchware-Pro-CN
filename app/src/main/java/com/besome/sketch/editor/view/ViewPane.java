@@ -234,7 +234,7 @@ public class ViewPane extends RelativeLayout {
         if (viewEditorThemeOverlay == R.style.ThemeOverlay_SketchwarePro_ViewEditor) {
             setBackgroundColor(Color.WHITE);
         } else if (isPreviewMode) {
-            setBackgroundColor(ThemeUtils.getColor(context, R.attr.colorSurface));
+            setBackgroundColor(ThemeUtils.getColor(context, com.google.android.material.R.attr.colorSurface));
         } else {
             setBackground(AppCompatResources.getDrawable(context, R.drawable.bg_view_pane));
         }

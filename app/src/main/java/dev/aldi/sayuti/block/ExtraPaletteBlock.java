@@ -212,7 +212,7 @@ public class ExtraPaletteBlock {
                 };
                 logicEditor.a(variableName, type, variableType, "getVar").setTag(variable);
             } else {
-                logicEditor.a("Invalid: " + variable, getColor(logicEditor, R.attr.colorError));
+                logicEditor.a("Invalid: " + variable, getColor(logicEditor, androidx.appcompat.R.attr.colorError));
             }
         }
         BlocksHandler.primaryBlocksA(
@@ -363,7 +363,7 @@ public class ExtraPaletteBlock {
                     if (variableName != null) {
                         logicEditor.a(variableName, "l", "List", "getVar").setTag(name);
                     } else {
-                        logicEditor.a("Invalid: " + name, getColor(logicEditor, R.attr.colorError));
+                        logicEditor.a("Invalid: " + name, getColor(logicEditor, androidx.appcompat.R.attr.colorError));
                     }
                 }
             }
@@ -1246,6 +1246,6 @@ public class ExtraPaletteBlock {
     }
 
     private @ColorInt int getTitleBgColor() {
-        return getColor(logicEditor, isDarkThemeEnabled(logicEditor) ? R.attr.colorSurfaceContainerHigh : R.attr.colorSurfaceInverse);
+        return getColor(logicEditor, isDarkThemeEnabled(logicEditor) ? com.google.android.material.R.attr.colorSurfaceContainerHigh : com.google.android.material.R.attr.colorSurfaceInverse);
     }
 }

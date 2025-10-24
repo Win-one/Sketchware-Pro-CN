@@ -76,7 +76,7 @@ public class PaletteBlock extends LinearLayout {
         var params = getLayoutParams(30.0F);
         params.setMargins(0, 0, (int) (f * 4), (int) (f * 6));
         cardView.setLayoutParams(params);
-        cardView.setCardBackgroundColor(getColor(context, isDarkThemeEnabled(context) ? R.attr.colorSurfaceContainerHigh : R.attr.colorSurfaceContainerHighest));
+        cardView.setCardBackgroundColor(getColor(context, isDarkThemeEnabled(context) ? com.google.android.material.R.attr.colorSurfaceContainerHigh : com.google.android.material.R.attr.colorSurfaceContainerHighest));
         cardView.addView(textView);
 
         binding.actionsContainer.addView(cardView);
@@ -98,7 +98,7 @@ public class PaletteBlock extends LinearLayout {
 
         TextView textView = new TextView(context);
         textView.setText(title);
-        textView.setTextColor(getColor(context, isDarkThemeEnabled(context) ? R.attr.colorOnSurface : R.attr.colorOnSurfaceInverse));
+        textView.setTextColor(getColor(context, isDarkThemeEnabled(context) ? com.google.android.material.R.attr.colorOnSurface : com.google.android.material.R.attr.colorOnSurfaceInverse));
         textView.setTextSize(10.0F);
         textView.setGravity(Gravity.CENTER | Gravity.LEFT);
         textView.setPadding((int) (f * 12.0F), 0, (int) (f * 12.0F), 0);
@@ -109,7 +109,7 @@ public class PaletteBlock extends LinearLayout {
 
     public void addDeprecatedBlock(String message, String type, String opCode) {
         if (message != null && !message.isEmpty()) {
-            a(message, getColor(context, isDarkThemeEnabled(context) ? R.attr.colorSurfaceContainerHigh : R.attr.colorSurfaceInverse));
+            a(message, getColor(context, isDarkThemeEnabled(context) ? com.google.android.material.R.attr.colorSurfaceContainerHigh : com.google.android.material.R.attr.colorSurfaceInverse));
         }
         Ts blockView = a("", type, opCode);
         blockView.e = 0xFFBDBDBD;

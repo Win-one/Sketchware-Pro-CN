@@ -78,7 +78,7 @@ public class DesignDrawer extends LinearLayout {
                 .build();
 
         MaterialShapeDrawable background = new MaterialShapeDrawable(shape);
-        background.setFillColor(ColorStateList.valueOf(ThemeUtils.getColor(context, R.attr.colorSurfaceContainerLow)));
+        background.setFillColor(ColorStateList.valueOf(ThemeUtils.getColor(context, com.google.android.material.R.attr.colorSurfaceContainerLow)));
         background.initializeElevationOverlay(context);
         setBackground(background);
         setElevation(3f);

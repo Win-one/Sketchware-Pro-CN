@@ -329,7 +329,7 @@ public class ViewSelectorActivity extends BaseAppCompatActivity {
                 String xmlName = projectFileBean.getXmlName();
                 if (currentXml.equals(xmlName)) {
                     viewHolder.itemBinding.cardView.setStrokeColor(
-                            ThemeUtils.getColor(ViewSelectorActivity.this, R.attr.colorPrimary));
+                            ThemeUtils.getColor(ViewSelectorActivity.this, androidx.appcompat.R.attr.colorPrimary));
                     viewHolder.itemBinding.cardView.setStrokeWidth(SketchwareUtil.dpToPx(3f));
                 } else {
                     viewHolder.itemBinding.cardView.setStrokeWidth(SketchwareUtil.dpToPx(0f));
@@ -346,7 +346,7 @@ public class ViewSelectorActivity extends BaseAppCompatActivity {
                 ProjectFileBean customView = jC.b(sc_id).c().get(position);
                 if (currentXml.equals(customView.getXmlName())) {
                     viewHolder.itemBinding.cardView.setStrokeColor(
-                            ThemeUtils.getColor(ViewSelectorActivity.this, R.attr.colorPrimary));
+                            ThemeUtils.getColor(ViewSelectorActivity.this, androidx.appcompat.R.attr.colorPrimary));
                     viewHolder.itemBinding.cardView.setStrokeWidth(SketchwareUtil.dpToPx(3f));
                 } else {
                     viewHolder.itemBinding.cardView.setStrokeWidth(SketchwareUtil.dpToPx(0f));

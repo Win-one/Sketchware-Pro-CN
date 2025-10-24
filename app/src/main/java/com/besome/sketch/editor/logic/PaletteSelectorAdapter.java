@@ -65,8 +65,8 @@ public class PaletteSelectorAdapter extends RecyclerView.Adapter<PaletteSelector
         holder.binding.bg.setBackgroundColor(color);
         holder.binding.tvCategory.setTextColor(
                 position == selectedPosition ?
-                        isColorLight(color) ? getColor(context, R.attr.colorOnSurface) : getColor(context, R.attr.colorOnSurfaceInverse)
-                        : getColor(context, R.attr.colorOnSurface));
+                        isColorLight(color) ? getColor(context, com.google.android.material.R.attr.colorOnSurface) : getColor(context, com.google.android.material.R.attr.colorOnSurfaceInverse)
+                        : getColor(context, com.google.android.material.R.attr.colorOnSurface));
         holder.binding.bg.getLayoutParams().width = position == selectedPosition ? ViewGroup.LayoutParams.MATCH_PARENT : (int) wB.a(context, 4f);
 
         holder.itemView.setOnClickListener(v -> {
