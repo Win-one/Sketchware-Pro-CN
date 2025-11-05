@@ -3,45 +3,37 @@
     <item
         android:id="@+id/about_team"
         android:icon="@drawable/ic_mtrl_team"
-        android:title="@string/about_the_team" />
+        android:title="About the team" />
 
     <item
         android:id="@+id/changelog"
         android:icon="@drawable/ic_mtrl_update"
-        android:title="@string/changelog" />
+        android:title="Changelog" />
 
     <item
         android:id="@+id/program_info"
         android:icon="@drawable/ic_sketchware_24"
-        android:title="@string/app_information" />
-
-
-    <item
-        android:id="@+id/system_settings"
-        android:icon="@drawable/ic_mtrl_settings"
-        android:title="@string/system_settings" />
-
-    <item
-        android:id="@+id/language_settings"
-        android:icon="@drawable/ic_language_24"
-        android:title="@string/language_settings" />
-
-    <item
-        android:id="@+id/appearance_settings"
-        android:icon="@drawable/ic_mtrl_palette"
-        android:title="@string/appearance_settings" />
-
-    <item
-        android:id="@+id/developer_tools"
-        android:icon="@drawable/ic_mtrl_terminal"
-        android:title="@string/developer_tools" />
+        android:title="App information" />
 
     <item
         android:id="@+id/create_release_keystore"
         android:icon="@drawable/ic_mtrl_key"
-        android:title="@string/create_keystore" />
+        android:title="Create keystore" />
 
-    <item android:title="@string/related_links">
+    <item
+        android:id="@+id/app_settings"
+        android:icon="@drawable/ic_mtrl_settings"
+        android:title="Settings" />
+    <item android:title="Apps">
+        <menu>
+            <item
+                android:id="@+id/app_sw_assist"
+                android:icon="@drawable/swassist_logo"
+                android:title="SwAssist" />
+        </menu>
+    </item>
+
+    <item android:title="Related links">
         <menu>
             <item
                 android:id="@+id/social_discord"
