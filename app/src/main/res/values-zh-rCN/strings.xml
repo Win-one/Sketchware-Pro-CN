@@ -2862,7 +2862,7 @@
     <string name="built_in_libraries_excluded">%1$d/%2$d个内置库被排除</string>
     <string name="theme_settings">主题设置</string>
     <string name="choose_how_your_app_looks">选择应用的外观</string>
-    <string name="follow_system_theme_settings">遵循系统主题设置</string>
+    <string name="follow_system_theme_settings">跟随系统主题设置</string>
     <string name="property_parent_attr">父属性</string>
     <string name="find_replace"><![CDATA[查找和替换]]></string>
     <string name="word_wrap">自动换行</string>
@@ -2906,7 +2906,7 @@
     <string name="please_enter_a_valid_hex_color">请输入有效的十六进制颜色</string>
     <string name="couldn_t_extract_default_strings_to_storage">无法将默认字符串提取到存储中</string>
     <string name="choose_what_your_app_language">选择应用的语言</string>
-    <string name="follow_system_language_settings">遵循系统语言设置</string>
+    <string name="follow_system_language_settings">跟随系统语言设置</string>
     <string name="sort_by_project_name">按名称排序</string>
     <string name="sort_by_id">按序号排序</string>
     <string name="ascending_a_z">升序(A-Z)</string>
@@ -3239,5 +3239,10 @@
     <string name="resources_manager_xml_important_note_message_colors">更改原色将影响应用程序的视觉主题,包括按钮和突出显示</string>
     <string name="resources_editor_unsaved_changes_message">您在 \“%s\”\n中有未保存的更改\n是否要在退出之前保存更改?</string>
     <string name="resources_editor_unsaved_changes_message_variant_change">\“%s\”中有未保存的更改\n是否要在更改变体之前保存更改?</string>
+    <string name="common_word_managers">管理</string>
+    <string name="search_for_projects">搜索项目...</string>
+    <string name="common_word_projects">项目</string>
+    <string name="common_word_general">常规</string>
+    <string name="system_default">系统默认</string>
 
 </resources>

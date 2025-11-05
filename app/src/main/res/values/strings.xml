@@ -2930,6 +2930,11 @@ Please try again later"</string>
     <string name="save_to_collection">Save to collection</string>
     <string name="unknown_attr">Unknown Attribute</string>
     <string name="attr_already_exist">This attribute already exists</string>
+    <string name="common_word_managers">Managers</string>
+    <string name="search_for_projects">Search for projects...</string>
+    <string name="common_word_projects">Projects</string>
+    <string name="common_word_general">General</string>
+    <string name="system_default">System default</string>
 
 
 </resources>

@@ -148,9 +148,9 @@ public class EventsManagerFragment extends qA {
         }
 
         var dialog = new MaterialAlertDialogBuilder(requireContext())
-                .setTitle(existingListener == null ? "New Listener" : "Edit Listener")
+                .setTitle(existingListener == null ? getString(R.string.new_listener) : getString(R.string.edit_listener))
                 .setView(listenerBinding.getRoot())
-                .setPositiveButton("Save", (di, i) -> {
+                .setPositiveButton(getString(R.string.common_word_save), (di, i) -> {
                     String listenerName = Helper.getText(listenerBinding.listenerName);
                     if (!listenerName.isEmpty()) {
                         HashMap<String, Object> hashMap = existingListener != null ? existingListener : new HashMap<>();
@@ -171,7 +171,7 @@ public class EventsManagerFragment extends qA {
                         SketchwareUtil.toastError("Invalid name!");
                     }
                 })
-                .setNegativeButton("Cancel", (di, i) -> di.dismiss()).create();
+                .setNegativeButton(getString(R.string.common_word_cancel), (di, i) -> di.dismiss()).create();
         dialog.show();
     }
 
