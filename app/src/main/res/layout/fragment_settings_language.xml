@@ -122,16 +122,9 @@
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="100dp"
-                            android:layout_height="120dp"
-                            android:background="@drawable/img_preview_light_theme"
-                            app:shapeAppearance="?attr/shapeAppearanceCornerMedium" />
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
                             android:text="@string/chinese"
                             android:textAppearance="?attr/textAppearanceBodyLarge" />
 
@@ -148,7 +141,7 @@
                     android:id="@+id/language_english"
                     style="?attr/materialCardViewFilledStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:checkable="true"
                     android:clickable="true"
@@ -162,16 +155,9 @@
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="100dp"
-                            android:layout_height="120dp"
-                            android:background="@drawable/img_preview_dark_theme"
-                            app:shapeAppearance="?attr/shapeAppearanceCornerMedium" />
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
                             android:text="@string/english"
                             android:textAppearance="?attr/textAppearanceBodyLarge" />
 

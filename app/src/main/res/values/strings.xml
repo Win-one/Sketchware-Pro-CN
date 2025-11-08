@@ -2936,6 +2936,8 @@ Please try again later"</string>
     <string name="common_word_general">General</string>
     <string name="system_default">System default</string>
     <string name="link_sw_assist">https://play.google.com/store/apps/details?id=com.w3wide.swassist</string>
+    <string name="get_your_projects_in_a_couple_of_clicks">Get your projects in a couple of clicks</string>
+    <string name="common_word_empty">Empty</string>
 
 
 </resources>

@@ -3244,5 +3244,18 @@
     <string name="common_word_projects">项目</string>
     <string name="common_word_general">常规</string>
     <string name="system_default">系统默认</string>
+    <string name="picker_color_title_delete_custom_attr">删除自定义属性</string>
+
+    <string name="theme_section_title">主题预设 </string>
+    <string name="theme_section_description">从预定义的主题中选择或生成一个随机主题</string>
+    <string name="theme_generate_random">随机生成</string>
+    <string name="theme_random_generated">随机生成主题</string>
+
+    <string name="save_to_collection">保存到收藏</string>
+    <string name="unknown_attr">未知属性</string>
+    <string name="attr_already_exist">此属性已存在</string>
+    <string name="link_sw_assist">https://play.google.com/store/apps/details?id=com.w3wide.swassist</string>
+    <string name="get_your_projects_in_a_couple_of_clicks">只需点击几下即可获取您的项目</string>
+    <string name="common_word_empty">清空</string>
 
 </resources>

@@ -123,8 +123,8 @@ public class BlockSelectorManagerFragment extends qA {
 
     private void showCreateEditDialog(int index, boolean isEdit) {
         DialogBlockConfigurationBinding dialogBinding = DialogBlockConfigurationBinding.inflate(LayoutInflater.from(requireContext()));
-        dialogBinding.tilPalettesPath.setHint("Selector name");
-        dialogBinding.tilBlocksPath.setHint("Selector title (ex: Select View:)");
+        dialogBinding.tilPalettesPath.setHint(getString(R.string.selector_name));
+        dialogBinding.tilBlocksPath.setHint(getString(R.string.selector_title));
 
         if (isEdit) {
             dialogBinding.palettesPath.setText(selectors.get(index).getName());
@@ -133,7 +133,7 @@ public class BlockSelectorManagerFragment extends qA {
 
         addBasicTextChangedListener(dialogBinding.palettesPath, str -> {
             if (itemAlreadyExists(str)) {
-                dialogBinding.tilPalettesPath.setError("An item with this name already exists");
+                dialogBinding.tilPalettesPath.setError(getString(R.string.an_item_with_this_name_already_exists));
             } else {
                 dialogBinding.tilPalettesPath.setError(null);
             }
@@ -141,29 +141,30 @@ public class BlockSelectorManagerFragment extends qA {
 
         if ("typeview".equals(Objects.requireNonNull(dialogBinding.palettesPath.getText()).toString())) {
             dialogBinding.palettesPath.setEnabled(false);
-            dialogBinding.tilPalettesPath.setOnClickListener(v -> SketchwareUtil.toast("You cannot change the name of this selector"));
+            dialogBinding.tilPalettesPath.setOnClickListener(v -> SketchwareUtil.toast(getString(R.string.you_cannot_change_the_name_of_this_selector)));
         }
 
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(requireActivity());
-        dialog.setTitle(!isEdit ? "New selector" : "Edit selector");
+        dialog.setTitle(!isEdit ? getString(R.string.new_selector) : getString(R.string.edit_selector));
+        dialog.setIcon(R.drawable.ic_mtrl_pull_down);
         dialog.setView(dialogBinding.getRoot());
-        dialog.setPositiveButton(!isEdit ? "Create" : "Save", (v, which) -> {
+        dialog.setPositiveButton(!isEdit ? getString(R.string.common_word_create) : getString(R.string.common_word_save), (v, which) -> {
             String selectorName = Helper.getText(dialogBinding.palettesPath);
             String selectorTitle = Objects.requireNonNull(dialogBinding.blocksPath.getText()).toString();
 
             if (selectorName.isEmpty()) {
-                SketchwareUtil.toast("Please type the selector's name");
+                SketchwareUtil.toast(getString(R.string.please_type_the_selector_s_name));
                 return;
             }
             if (selectorTitle.isEmpty()) {
-                SketchwareUtil.toast("Please type the selector's title");
+                SketchwareUtil.toast(getString(R.string.please_type_the_selector_s_title));
                 return;
             }
             if (!isEdit) {
                 if (!itemAlreadyExists(selectorName)) {
                     selectors.add(new Selector(selectorTitle, selectorName, new ArrayList<>()));
                 } else {
-                    SketchwareUtil.toast("An item with this name already exists");
+                    SketchwareUtil.toast(getString(R.string.an_item_with_this_name_already_exists));
                 }
             } else {
                 selectors.set(index, new Selector(selectorTitle, selectorName, selectors.get(index).getData()));
@@ -172,14 +173,14 @@ public class BlockSelectorManagerFragment extends qA {
             adapter.notifyDataSetChanged();
             v.dismiss();
         });
-        dialog.setNegativeButton("Cancel", (v, which) -> v.dismiss());
+        dialog.setNegativeButton(getString(R.string.common_word_cancel), (v, which) -> v.dismiss());
         dialog.show();
     }
 
     private void showActionsDialog(int index) {
         DialogSelectorActionsBinding dialogBinding = DialogSelectorActionsBinding.inflate(LayoutInflater.from(requireContext()));
         AlertDialog dialog = new MaterialAlertDialogBuilder(requireActivity()).create();
-        dialog.setTitle("Actions");
+        dialog.setTitle(getString(R.string.actions));
         dialog.setView(dialogBinding.getRoot());
 
         dialogBinding.edit.setOnClickListener(v -> {
@@ -195,7 +196,7 @@ public class BlockSelectorManagerFragment extends qA {
         }
         dialogBinding.delete.setOnClickListener(v -> {
             dialog.dismiss();
-            showConfirmationDialog("Are you sure you want to delete this selector?", confirmDialog -> {
+            showConfirmationDialog(getString(R.string.are_you_sure_you_want_to_delete_this_selector), confirmDialog -> {
                 selectors.remove(index);
                 saveAllSelectors();
                 adapter.notifyDataSetChanged();
@@ -207,10 +208,10 @@ public class BlockSelectorManagerFragment extends qA {
 
     private void showConfirmationDialog(String message, ConfirmListener onConfirm, CancelListener onCancel) {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(requireActivity());
-        dialog.setTitle("Attention");
+        dialog.setTitle(getString(R.string.attention));
         dialog.setMessage(message);
-        dialog.setPositiveButton("Yes", (v, which) -> onConfirm.onConfirm(v));
-        dialog.setNegativeButton("Cancel", (v, which) -> onCancel.onCancel(v));
+        dialog.setPositiveButton(getString(R.string.common_word_yes), (v, which) -> onConfirm.onConfirm(v));
+        dialog.setNegativeButton(getString(R.string.common_word_cancel), (v, which) -> onCancel.onCancel(v));
         dialog.setCancelable(false);
         dialog.show();
     }

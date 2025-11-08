@@ -86,6 +86,7 @@ dependencies {
     implementation libs.bundles.ui
 
     implementation libs.bundles.image
+    implementation libs.multilanguages
 
     implementation platform(libs.sora.editor)
     implementation libs.bundles.editor.and.lang

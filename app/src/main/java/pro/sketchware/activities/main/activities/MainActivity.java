@@ -229,10 +229,10 @@ public class MainActivity extends BasePermissionAppCompatActivity {
 
                             if (BackupFactory.zipContainsFile(path, "local_libs")) {
                                 new MaterialAlertDialogBuilder(MainActivity.this)
-                                        .setTitle("Warning")
+                                        .setTitle(R.string.common_word_warning)
                                         .setMessage(BackupRestoreManager.getRestoreIntegratedLocalLibrariesMessage(false, -1, -1, null))
-                                        .setPositiveButton("Copy", (dialog, which) -> manager.doRestore(path, true))
-                                        .setNegativeButton("Don't copy", (dialog, which) -> manager.doRestore(path, false))
+                                        .setPositiveButton(getString(R.string.common_word_copy), (dialog, which) -> manager.doRestore(path, true))
+                                        .setNegativeButton(getString(R.string.don_t_copy), (dialog, which) -> manager.doRestore(path, false))
                                         .setNeutralButton(R.string.common_word_cancel, null)
                                         .show();
                             } else {
@@ -259,7 +259,7 @@ public class MainActivity extends BasePermissionAppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    bottomSheetDialog.setPositiveButtonText("View changes");
+                    bottomSheetDialog.setPositiveButtonText(getString(R.string.view_changes));
                     bottomSheetDialog.getPositiveButton().setEnabled(true);
                 }
             };
@@ -366,7 +366,7 @@ public class MainActivity extends BasePermissionAppCompatActivity {
                 
                 You can view all changes whenever you want at the About Sketchware Pro screen.""");
 
-        bottomSheetDialog.setPositiveButton("View changes", (dialog, which) -> {
+        bottomSheetDialog.setPositiveButton(getString(R.string.view_changes), (dialog, which) -> {
             ConfigActivity.setSetting(ConfigActivity.SETTING_CRITICAL_UPDATE_REMINDER, true);
             Intent launcher = new Intent(this, AboutActivity.class);
             launcher.putExtra("select", "changelog");
@@ -425,8 +425,8 @@ public class MainActivity extends BasePermissionAppCompatActivity {
                     FileUtil.requestAllFilesAccessPermission(this);
                     v.dismiss();
                 });
-                dialog.setNegativeButton("Skip", null);
-                dialog.setNeutralButton("Don't show anymore", (v, which) -> {
+                dialog.setNegativeButton(getString(R.string.common_word_skip), null);
+                dialog.setNeutralButton(getString(R.string.don_t_show_anymore), (v, which) -> {
                     try {
                         if (!optOutFile.createNewFile())
                             throw new IOException("Failed to create file " + optOutFile);
